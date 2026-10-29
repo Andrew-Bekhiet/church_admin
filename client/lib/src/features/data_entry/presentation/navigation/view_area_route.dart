@@ -10,6 +10,9 @@ class ViewAreaRoute extends HomeChildRoute {
   String get path => routePath;
 
   @override
+  Json get analyticsProperties => {'area_id': id};
+
+  @override
   List<Object?> get props => [id, area];
 
   const ViewAreaRoute({required this.id, this.area});

@@ -10,6 +10,9 @@ class ViewGroupRoute extends HomeChildRoute {
   String get path => routePath;
 
   @override
+  Json get analyticsProperties => {'group_id': id};
+
+  @override
   List<Object?> get props => [id, group];
 
   const ViewGroupRoute({required this.id, this.group});

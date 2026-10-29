@@ -45,9 +45,6 @@ class FakeFeatureFlagsRepo implements FeatureFlagsRepository {
   bool get enableSentry => true;
 
   @override
-  bool get enablePostHog => true;
-
-  @override
   bool get enablePostHogLogs => true;
 
   @override

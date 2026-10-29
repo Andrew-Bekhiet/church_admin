@@ -65,7 +65,9 @@ class _HomeAppBarState extends State<HomeAppBar> {
                 ),
                 child: HomeModeChip(
                   mode: homeState.mode,
-                  onPressed: context.read<HomeCubit>().switchMode,
+                  onPressed: () => context.read<HomeCubit>().switchMode(
+                    HomeModeSwitchEntry.appBarChip,
+                  ),
                 ),
               ),
             ],

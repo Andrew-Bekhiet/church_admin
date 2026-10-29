@@ -9,8 +9,10 @@ import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../fakes/fake_feature_flags_repo.dart';
+import '../../../fakes/fake_logging_service.dart';
 import '../../../fakes/mock_auth_bloc.dart';
 import '../../../fakes/mock_image_url_cache_service.dart';
+import '../../../fakes/recording_analytics_provider.dart';
 import 'fake_home_daily_data_repository.dart';
 import 'home_database_fixture.dart';
 import 'in_memory_user_preferences_service.dart';
@@ -39,6 +41,7 @@ class HomeScreenHarness {
   final RecordingUserPersistenceService persistence =
       RecordingUserPersistenceService();
   final RecordingShareService share = RecordingShareService();
+  final RecordingAnalyticsProvider analytics = RecordingAnalyticsProvider();
   final List<Object?> advancedSearchExtras = [];
 
   FakeHomeDailyDataRepository dailyData = FakeHomeDailyDataRepository();
@@ -225,6 +228,9 @@ class HomeScreenHarness {
       userPersistenceServiceProvider.overrideWithValue(persistence),
       userPreferencesServiceProvider.overrideWithValue(preferences),
       shareServiceProvider.overrideWithValue(share),
+      analyticsServiceProvider.overrideWithValue(
+        AnalyticsService([analytics], FakeLoggingService()),
+      ),
       imageUrlCacheServiceProvider.overrideWithValue(
         MockImageUrlCacheService(),
       ),

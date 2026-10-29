@@ -79,10 +79,27 @@ void main() {
       setUp: () =>
           fixture = HomeCubitFixture(lastHomeMode: HomeMode.churchData),
       build: () => fixture.buildCubit(),
-      act: (cubit) => cubit.switchMode(),
+      act: (cubit) => cubit.switchMode(HomeModeSwitchEntry.drawer),
       verify: (cubit) => expect(
         cubit.state.listTypeOf(HomeTab.services),
         ViewableObjectListType.grid,
+      ),
+    );
+
+    blocTest<HomeCubit, HomeState>(
+      'switching mode is tracked with where it was switched from',
+      build: () => fixture.buildCubit(),
+      act: (cubit) => cubit.switchMode(HomeModeSwitchEntry.appBarChip),
+      verify: (_) => expect(
+        fixture.analytics.trackedEvents.single,
+        isA<HomeModeSwitch>()
+            .having((event) => event.from, 'from', HomeMode.sundaySchool)
+            .having((event) => event.to, 'to', HomeMode.churchData)
+            .having(
+              (event) => event.entry,
+              'entry',
+              HomeModeSwitchEntry.appBarChip,
+            ),
       ),
     );
 
@@ -246,7 +263,7 @@ void main() {
       build: () => fixture.buildCubit(),
       act: (cubit) async {
         cubit.selectTab(2);
-        await cubit.changeMode(HomeMode.churchData);
+        await cubit.changeMode(HomeMode.churchData, HomeModeSwitchEntry.drawer);
       },
       wait: Duration.zero,
       verify: (cubit) {
@@ -262,7 +279,10 @@ void main() {
       build: () => fixture.buildCubit(),
       act: (cubit) async {
         cubit.selectTab(5);
-        await cubit.changeMode(HomeMode.sundaySchool);
+        await cubit.changeMode(
+          HomeMode.sundaySchool,
+          HomeModeSwitchEntry.drawer,
+        );
       },
       wait: Duration.zero,
       verify: (cubit) {
@@ -278,7 +298,10 @@ void main() {
       build: () => fixture.buildCubit(),
       act: (cubit) async {
         cubit.selectTab(3);
-        await cubit.changeMode(HomeMode.sundaySchool);
+        await cubit.changeMode(
+          HomeMode.sundaySchool,
+          HomeModeSwitchEntry.drawer,
+        );
       },
       wait: Duration.zero,
       verify: (cubit) => expect(cubit.state.currentTabIndex, 1),
@@ -289,7 +312,7 @@ void main() {
       build: () => fixture.buildCubit(),
       act: (cubit) async {
         cubit.selectTab(1);
-        await cubit.changeMode(HomeMode.churchData);
+        await cubit.changeMode(HomeMode.churchData, HomeModeSwitchEntry.drawer);
       },
       wait: Duration.zero,
       verify: (cubit) => expect(cubit.state.currentTabIndex, 1),
@@ -298,7 +321,8 @@ void main() {
     blocTest<HomeCubit, HomeState>(
       'from the summary stays on the summary',
       build: () => fixture.buildCubit(),
-      act: (cubit) => cubit.changeMode(HomeMode.churchData),
+      act: (cubit) =>
+          cubit.changeMode(HomeMode.churchData, HomeModeSwitchEntry.drawer),
       wait: Duration.zero,
       verify: (cubit) => expect(cubit.state.currentTabIndex, 0),
     );
@@ -306,7 +330,7 @@ void main() {
     blocTest<HomeCubit, HomeState>(
       'switching mode moves from sunday school to church data',
       build: () => fixture.buildCubit(),
-      act: (cubit) => cubit.switchMode(),
+      act: (cubit) => cubit.switchMode(HomeModeSwitchEntry.drawer),
       wait: Duration.zero,
       verify: (cubit) => expect(cubit.state.mode, HomeMode.churchData),
     );
@@ -315,8 +339,8 @@ void main() {
       'switching mode twice returns to sunday school',
       build: () => fixture.buildCubit(),
       act: (cubit) async {
-        await cubit.switchMode();
-        await cubit.switchMode();
+        await cubit.switchMode(HomeModeSwitchEntry.drawer);
+        await cubit.switchMode(HomeModeSwitchEntry.drawer);
       },
       wait: Duration.zero,
       verify: (cubit) => expect(cubit.state.mode, HomeMode.sundaySchool),
@@ -325,7 +349,8 @@ void main() {
     blocTest<HomeCubit, HomeState>(
       'remembers the new mode for the next start',
       build: () => fixture.buildCubit(),
-      act: (cubit) => cubit.changeMode(HomeMode.churchData),
+      act: (cubit) =>
+          cubit.changeMode(HomeMode.churchData, HomeModeSwitchEntry.drawer),
       wait: Duration.zero,
       verify: (_) =>
           expect(fixture.preferences.lastHomeMode, HomeMode.churchData),
@@ -355,6 +380,17 @@ void main() {
         expect(cubit.state.currentTab, HomeTab.services);
       },
     );
+
+    blocTest<HomeCubit, HomeState>(
+      'of the mode already active is not tracked as a mode switch',
+      build: () => fixture.buildCubit(),
+      act: (cubit) => cubit.openFirstTabOf(cubit.state.mode),
+      wait: Duration.zero,
+      verify: (_) => expect(
+        fixture.analytics.trackedEvents.whereType<HomeModeSwitch>(),
+        isEmpty,
+      ),
+    );
   });
 
   group('list type', () {
@@ -366,8 +402,8 @@ void main() {
         cubit
           ..selectTab(1)
           ..toggleListType();
-        await cubit.switchMode();
-        await cubit.switchMode();
+        await cubit.switchMode(HomeModeSwitchEntry.drawer);
+        await cubit.switchMode(HomeModeSwitchEntry.drawer);
       },
       wait: Duration.zero,
       verify: (cubit) => expect(
@@ -425,7 +461,7 @@ void main() {
       build: () => fixture.buildCubit(),
       act: (cubit) async {
         controllers.add(cubit.listControllerFor(cubit.state.tabs.last));
-        await cubit.changeMode(HomeMode.churchData);
+        await cubit.changeMode(HomeMode.churchData, HomeModeSwitchEntry.drawer);
         controllers.add(cubit.listControllerFor(cubit.state.tabs.last));
       },
       verify: (_) {
@@ -532,7 +568,7 @@ void main() {
       act: (cubit) async {
         cubit.selectTab(2);
         await pumpEventQueue();
-        await cubit.changeMode(HomeMode.churchData);
+        await cubit.changeMode(HomeMode.churchData, HomeModeSwitchEntry.drawer);
       },
       wait: Duration.zero,
       verify: (cubit) => expect(cubit.state.currentTabTotal, totals[Person]),

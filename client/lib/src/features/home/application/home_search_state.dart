@@ -16,7 +16,11 @@ final class HomeSearchLoading extends HomeSearchState {
   const HomeSearchLoading();
 }
 
-final class HomeSearchFound extends HomeSearchState {
+sealed class HomeSearchSettled extends HomeSearchState {
+  const HomeSearchSettled();
+}
+
+final class HomeSearchFound extends HomeSearchSettled {
   final List<HomeSearchSection> sections;
 
   @override
@@ -25,11 +29,11 @@ final class HomeSearchFound extends HomeSearchState {
   const HomeSearchFound(this.sections);
 }
 
-final class HomeSearchNothingFound extends HomeSearchState {
+final class HomeSearchNothingFound extends HomeSearchSettled {
   const HomeSearchNothingFound();
 }
 
-final class HomeSearchFailed extends HomeSearchState {
+final class HomeSearchFailed extends HomeSearchSettled {
   final Object error;
 
   @override

@@ -1,3 +1,4 @@
+export 'core/analytics.dart';
 export 'core/application.dart';
 export 'core/controllers.dart' show RouterRefreshStream;
 export 'core/graphql.dart';

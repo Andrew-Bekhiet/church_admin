@@ -14,7 +14,10 @@ abstract final class AppRouter {
     guards: const [AppRouteRedirects.guard],
     reevaluateOn: RouterRefreshStream.I,
     onTransition: _notifyExitedRoutes,
-    observers: () => LoggingService.I.navigatorObservers,
+    observers: () => [
+      ...LoggingService.I.navigatorObservers,
+      ...AnalyticsService.I.navigatorObservers,
+    ],
     codec: withUrls ? const StackToConfigCodec(AppRouteUrlCodec()) : null,
   );
 

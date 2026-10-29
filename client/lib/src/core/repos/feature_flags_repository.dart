@@ -19,7 +19,6 @@ class FeatureFlagsRepository {
   static const String maintenanceMessageKey = 'maintenanceMessage';
   static const String disabledRoutesKey = 'disabledRoutes';
   static const String enableSentryKey = 'enableSentry';
-  static const String enablePostHogKey = 'enablePostHog';
   static const String enablePostHogLogsKey = 'enablePostHogLogs';
   static const String sessionReplaySampleRateKey = 'sessionReplaySampleRate';
   static const String allowAddingCustomObjectsKey = 'allowAddingCustomObjects';
@@ -90,8 +89,6 @@ class FeatureFlagsRepository {
 
   bool get enableSentry => _remoteConfig.getBool(enableSentryKey);
 
-  bool get enablePostHog => _remoteConfig.getBool(enablePostHogKey);
-
   bool get enablePostHogLogs => _remoteConfig.getBool(enablePostHogLogsKey);
 
   double get sessionReplaySampleRate =>
@@ -99,7 +96,6 @@ class FeatureFlagsRepository {
 
   LoggingSettings get loggingSettings => LoggingSettings(
     enableSentry: enableSentry,
-    enablePostHog: enablePostHog,
     enablePostHogLogs: enablePostHogLogs,
     sessionReplaySampleRate: sessionReplaySampleRate,
   );
@@ -127,7 +123,6 @@ class FeatureFlagsRepository {
       isUnderMaintenanceKey: false,
       disabledRoutesKey: '',
       enableSentryKey: true,
-      enablePostHogKey: true,
       enablePostHogLogsKey: true,
       sessionReplaySampleRateKey: 1,
       enablePersonNationalIdKey: false,
