@@ -61,6 +61,7 @@ void main() {
       expect(repo.enableAccountClaimingByEmail, isTrue);
       expect(repo.enableDataChecks, isTrue);
       expect(repo.enableSentry, isTrue);
+      expect(repo.enableAnalytics, isFalse);
       expect(repo.latestVersion, Version.parse(packageInfo.version));
       expect(
         repo.downloadUrl,
@@ -74,6 +75,7 @@ void main() {
           fetchedValues: {
             FeatureFlagsRepository.enableAccountClaimingByEmailKey: false,
             FeatureFlagsRepository.downloadPageURLKey: 'https://download.url',
+            FeatureFlagsRepository.enableAnalyticsKey: true,
           },
         ),
         packageInfo: packageInfo,
@@ -83,6 +85,7 @@ void main() {
 
       expect(repo.enableAccountClaimingByEmail, isFalse);
       expect(repo.downloadUrl, Uri.parse('https://download.url'));
+      expect(repo.enableAnalytics, isTrue);
       expect(repo.enableDataChecks, isTrue);
     });
   });

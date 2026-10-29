@@ -58,5 +58,43 @@ void main() {
         expect(healthy.trackedEvents, [event]);
       },
     );
+
+    group('while analytics is disabled', () {
+      test('drops events, screens and identities', () async {
+        final provider = RecordingAnalyticsProvider();
+        final service = AnalyticsService(
+          [provider],
+          FakeLoggingService(),
+          isAnalyticsEnabled: () => false,
+        );
+
+        service
+          ..track(const SignInSubmit(AuthAttemptSucceeded()))
+          ..trackScreen('home');
+        await service.identify(null);
+        await pumpEventQueue();
+
+        expect(provider.trackedEvents, isEmpty);
+        expect(provider.trackedScreens, isEmpty);
+        expect(provider.identifiedUsers, isEmpty);
+      });
+
+      test('resumes tracking once analytics is enabled again', () {
+        var isEnabled = false;
+        final provider = RecordingAnalyticsProvider();
+        final service = AnalyticsService(
+          [provider],
+          FakeLoggingService(),
+          isAnalyticsEnabled: () => isEnabled,
+        );
+
+        const event = SignInSubmit(AuthAttemptSucceeded());
+        service.track(event);
+        isEnabled = true;
+        service.track(event);
+
+        expect(provider.trackedEvents, [event]);
+      });
+    });
   });
 }

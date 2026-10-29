@@ -7,32 +7,51 @@ class AnalyticsService {
   static AnalyticsService get I =>
       globalProviderContainer.read(analyticsServiceProvider);
 
+  static bool _alwaysEnabled() => true;
+
   final List<AnalyticsProvider> providers;
 
   final LoggingService _loggingService;
+
+  final bool Function() _isAnalyticsEnabled;
 
   late final List<NavigatorObserver> navigatorObservers = [
     AppRouteScreenObserver(this),
     ...providers.expand((provider) => provider.navigatorObservers),
   ];
 
-  AnalyticsService(this.providers, this._loggingService);
+  AnalyticsService(
+    this.providers,
+    this._loggingService, {
+    bool Function() isAnalyticsEnabled = _alwaysEnabled,
+  }) : _isAnalyticsEnabled = isAnalyticsEnabled;
 
   Future<void> initialize() =>
       _forEachProvider((provider) => provider.initialize());
 
   Future<void> identify(AnalyticsUser? user) =>
-      _forEachProvider((provider) => provider.identify(user));
+      _forEachProviderIfAnalyticsEnabled(
+        (provider) => provider.identify(user),
+      );
 
-  void track(AnalyticsEvent event) =>
-      unawaited(_forEachProvider((provider) => provider.track(event)));
+  void track(AnalyticsEvent event) => unawaited(
+    _forEachProviderIfAnalyticsEnabled((provider) => provider.track(event)),
+  );
 
   void trackScreen(String screenName, [Json properties = const {}]) =>
       unawaited(
-        _forEachProvider(
+        _forEachProviderIfAnalyticsEnabled(
           (provider) => provider.trackScreen(screenName, properties),
         ),
       );
+
+  Future<void> _forEachProviderIfAnalyticsEnabled(
+    Future<void> Function(AnalyticsProvider provider) action,
+  ) async {
+    if (!_isAnalyticsEnabled()) return;
+
+    await _forEachProvider(action);
+  }
 
   Future<void> _forEachProvider(
     Future<void> Function(AnalyticsProvider provider) action,
