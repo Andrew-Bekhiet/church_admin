@@ -67,7 +67,7 @@ class ListSelectionBar extends StatelessWidget implements PreferredSizeWidget {
       active.inOrderOf(_loaded).selected,
     );
 
-    AnalyticsService.I.track(BulkActionOpen(action, applicableItems));
+    AnalyticsService.I.track(BulkActionInvoke(action.key, applicableItems));
     unawaited(action.run(context, applicableItems));
   }
 }

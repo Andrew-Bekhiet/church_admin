@@ -303,7 +303,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      analytics.trackedEventsOf<BulkActionOpen>().map((e) => e.properties),
+      analytics.trackedEventsOf<BulkActionInvoke>().map((e) => e.properties),
       [
         {'action': 'show_names', 'entity_type': 'person', 'selected_count': 1},
       ],
@@ -352,7 +352,7 @@ void main() {
       findsOneWidget,
     );
     expect(
-      analytics.trackedEventsOf<BulkActionOpen>().single.properties,
+      analytics.trackedEventsOf<BulkActionInvoke>().single.properties,
       containsPair('selected_count', 1),
     );
   });

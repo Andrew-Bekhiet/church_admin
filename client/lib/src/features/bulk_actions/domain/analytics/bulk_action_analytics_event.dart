@@ -7,7 +7,7 @@ sealed class BulkActionAnalyticsEvent extends AnalyticsEvent {
   const BulkActionAnalyticsEvent();
 }
 
-final class BulkActionOpen extends BulkActionAnalyticsEvent {
+final class BulkActionInvoke extends BulkActionAnalyticsEvent {
   final String actionKey;
   final AnalyticsEntityType? entityType;
   final int selectedCount;
@@ -22,8 +22,7 @@ final class BulkActionOpen extends BulkActionAnalyticsEvent {
     'selected_count': selectedCount,
   };
 
-  BulkActionOpen(BulkAction action, Set<Object> selected)
-    : actionKey = action.key,
-      entityType = selected.map(AnalyticsEntityType.of).nonNulls.firstOrNull,
+  BulkActionInvoke(this.actionKey, Set<Object> selected)
+    : entityType = selected.map(AnalyticsEntityType.of).nonNulls.firstOrNull,
       selectedCount = selected.length;
 }
