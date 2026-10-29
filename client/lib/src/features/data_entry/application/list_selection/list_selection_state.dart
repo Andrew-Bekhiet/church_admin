@@ -49,6 +49,9 @@ final class ListSelectionActive extends ListSelectionState {
   ListSelectionActive including(Iterable<Viewable> items) =>
       ListSelectionActive([...selected, ...items]);
 
+  ListSelectionActive inOrderOf(Iterable<Viewable> items) =>
+      ListSelectionActive([...items.where(selected.contains), ...selected]);
+
   ListSelectionActive excluding(Iterable<Viewable> items) {
     final excluded = EqualitySet.from(ListSelectionState._byId, items);
 

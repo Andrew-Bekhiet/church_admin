@@ -409,6 +409,10 @@ final launcherServiceProvider = Provider<LauncherService>(
   (ref) => LauncherService(),
 );
 
+final bulkActionsRegistryProvider = Provider<BulkActionsRegistry>(
+  (ref) => const BulkActionsRegistry([]),
+);
+
 final locationParsingServiceProvider = Provider<LocationParsingService>(
   (ref) => const LocationParsingService(),
 );

@@ -193,57 +193,61 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
     await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
-          return Scaffold(
-            appBar: AppBar(
-              title: TitleSearchField(
-                searchStream: searchQuery,
-                title: const Text('النتائج'),
-              ),
-              actions: [
-                IconButton(
-                  icon: const Icon(Symbols.share),
-                  onPressed: () {
-                    controller.trackQueryShare();
-                    unawaited(
-                      globalProviderContainer
-                          .read(shareServiceProvider)
-                          .shareText(
-                            base64Encode(
-                              utf8.encode(
-                                jsonEncode(controller.query.toJson()),
-                              ),
-                            ),
-                          ),
-                    );
-                  },
-                ),
-              ],
-            ),
-            body: ViewableObjectList(
-              key: AdvancedSearchScreenKeys.resultsList,
-              objectsController: viewableObjectListController,
-              viewableObjectWidgetConfig: controller.orderBy.isNotEmpty
-                  ? ViewableObjectWidgetConfig(
-                      secondLineField: controller.orderBy.first.field,
-                    )
-                  : null,
-            ),
-            bottomNavigationBar: StreamBuilder<int?>(
-              stream: viewableObjectListController.totalCountStream,
-              builder: (context, snapshot) {
-                final totalCount = snapshot.data;
-
-                if (totalCount == null) return const SizedBox.shrink();
-
-                return BottomAppBar(
-                  child: Text(
-                    '$totalCount من ${controller.query.queryableType.label}',
-                    key: AdvancedSearchScreenKeys.resultsCount,
-                    style: Theme.of(context).textTheme.titleLarge,
-                    textAlign: TextAlign.center,
+          return ListSelectionHost(
+            child: Scaffold(
+              appBar: SelectionAwareAppBar(
+                child: AppBar(
+                  title: TitleSearchField(
+                    searchStream: searchQuery,
+                    title: const Text('النتائج'),
                   ),
-                );
-              },
+                  actions: [
+                    IconButton(
+                      icon: const Icon(Symbols.share),
+                      onPressed: () {
+                        controller.trackQueryShare();
+                        unawaited(
+                          globalProviderContainer
+                              .read(shareServiceProvider)
+                              .shareText(
+                                base64Encode(
+                                  utf8.encode(
+                                    jsonEncode(controller.query.toJson()),
+                                  ),
+                                ),
+                              ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              body: ViewableObjectList(
+                key: AdvancedSearchScreenKeys.resultsList,
+                objectsController: viewableObjectListController,
+                viewableObjectWidgetConfig: controller.orderBy.isNotEmpty
+                    ? ViewableObjectWidgetConfig(
+                        secondLineField: controller.orderBy.first.field,
+                      )
+                    : null,
+              ),
+              bottomNavigationBar: StreamBuilder<int?>(
+                stream: viewableObjectListController.totalCountStream,
+                builder: (context, snapshot) {
+                  final totalCount = snapshot.data;
+
+                  if (totalCount == null) return const SizedBox.shrink();
+
+                  return BottomAppBar(
+                    child: Text(
+                      '$totalCount من ${controller.query.queryableType.label}',
+                      key: AdvancedSearchScreenKeys.resultsCount,
+                      style: Theme.of(context).textTheme.titleLarge,
+                      textAlign: TextAlign.center,
+                    ),
+                  );
+                },
+              ),
             ),
           );
         },

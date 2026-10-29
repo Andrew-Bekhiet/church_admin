@@ -6,6 +6,7 @@ part 'package:church_admin/src/features/attendance/domain/analytics/attendance_a
 part 'package:church_admin/src/features/attendance/domain/analytics/kodas_analytics_event.dart';
 part 'package:church_admin/src/features/attendance/domain/analytics/meeting_analytics_event.dart';
 part 'package:church_admin/src/features/auth/domain/analytics/auth_analytics_event.dart';
+part 'package:church_admin/src/features/bulk_actions/domain/analytics/bulk_action_analytics_event.dart';
 part 'package:church_admin/src/features/contacts/domain/analytics/phone_contacts_editor_analytics_event.dart';
 part 'package:church_admin/src/features/data_analysis/domain/analytics/data_analysis_analytics_event.dart';
 part 'package:church_admin/src/features/data_checks/domain/analytics/data_check_analytics_event.dart';
