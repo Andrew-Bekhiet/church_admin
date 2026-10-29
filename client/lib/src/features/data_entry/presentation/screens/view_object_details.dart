@@ -180,7 +180,9 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
           if (widget.sliverPersistentHeaderDelegate != null)
             SliverPersistentHeader(
               pinned: true,
-              delegate: widget.sliverPersistentHeaderDelegate!,
+              delegate: SelectionAwarePersistentHeaderDelegate(
+                widget.sliverPersistentHeaderDelegate!,
+              ),
             ),
         ];
 
@@ -230,11 +232,9 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
             child: DefaultTabController(
               length: widget.childrenTypes.length,
               child: Scaffold(
-                body: ListSelectionBarOverlay(
-                  child: NotificationListener<ScrollEndNotification>(
-                    onNotification: _onScrollEnd,
-                    child: body,
-                  ),
+                body: NotificationListener<ScrollEndNotification>(
+                  onNotification: _onScrollEnd,
+                  child: body,
                 ),
                 bottomNavigationBar: widget.bottomNavBarBuilder != null
                     ? Builder(

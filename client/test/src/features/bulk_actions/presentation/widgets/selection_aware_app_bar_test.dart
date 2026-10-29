@@ -32,7 +32,32 @@ class ShowNamesBulkAction extends BulkAction<Person> {
       );
 }
 
+class TabsHeaderDelegate extends SliverPersistentHeaderDelegate {
+  @override
+  double get minExtent => kToolbarHeight - 6;
+
+  @override
+  double get maxExtent => kToolbarHeight * 1.2;
+
+  const TabsHeaderDelegate();
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) => const Text(
+    'التبويبات',
+    key: SelectionAwareAppBarTestKeys.tabsHeader,
+  );
+
+  @override
+  bool shouldRebuild(TabsHeaderDelegate oldDelegate) => false;
+}
+
 abstract final class SelectionAwareAppBarTestKeys {
+  static const Key tabsHeader = ValueKey('selection-aware-tabs-header');
+
   static Key itemFor(String id) => ValueKey('selection-aware-item-$id');
 }
 
@@ -69,7 +94,7 @@ void main() {
   Future<void> pumpScreenListing<T extends ViewableWithID>(
     WidgetTester tester,
     List<T> items, {
-    bool overlaysSelectionBar = false,
+    bool hasPinnedTabsHeader = false,
   }) async {
     selection = ListSelectionCubit();
     final typedListController = ViewableObjectListController<T>(
@@ -96,10 +121,23 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: ListSelectionHost(
-          child: overlaysSelectionBar
+          child: hasPinnedTabsHeader
               ? Scaffold(
-                  appBar: screenAppBar,
-                  body: ListSelectionBarOverlay(child: list),
+                  body: CustomScrollView(
+                    slivers: [
+                      const SliverAppBar(
+                        pinned: true,
+                        title: Text(screenTitle),
+                      ),
+                      const SliverPersistentHeader(
+                        pinned: true,
+                        delegate: SelectionAwarePersistentHeaderDelegate(
+                          TabsHeaderDelegate(),
+                        ),
+                      ),
+                      SliverFillRemaining(child: list),
+                    ],
+                  ),
                 )
               : Scaffold(
                   appBar: SelectionAwareAppBar(child: screenAppBar),
@@ -156,17 +194,48 @@ void main() {
     },
   );
 
-  testScreen('a screen with its own header overlays the selection bar on it', (
+  testScreen(
+    'long-pressing an item replaces a pinned tabs header with the count',
+    (
+      tester,
+    ) async {
+      await pumpScreenListing(tester, persons, hasPinnedTabsHeader: true);
+      expect(
+        find.byKey(SelectionAwareAppBarTestKeys.tabsHeader),
+        findsOneWidget,
+      );
+
+      await tester.longPress(
+        find.byKey(SelectionAwareAppBarTestKeys.itemFor(persons[0].id)),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(SelectionAwareAppBarTestKeys.tabsHeader), findsNothing);
+      expect(
+        find.descendant(
+          of: find.byKey(ListSelectionBarKeys.bar),
+          matching: find.text('1 محدد'),
+        ),
+        findsOneWidget,
+      );
+      expect(find.text(screenTitle), findsOneWidget);
+    },
+  );
+
+  testScreen('ending the selection brings back the pinned tabs header', (
     tester,
   ) async {
-    await pumpScreenListing(tester, persons, overlaysSelectionBar: true);
+    await pumpScreenListing(tester, persons, hasPinnedTabsHeader: true);
 
     await tester.longPress(
       find.byKey(SelectionAwareAppBarTestKeys.itemFor(persons[0].id)),
     );
     await tester.pumpAndSettle();
+    await tester.tap(find.byKey(ListSelectionBarKeys.closeButton));
+    await tester.pumpAndSettle();
 
-    expect(find.text('1 محدد'), findsOneWidget);
+    expect(find.byKey(SelectionAwareAppBarTestKeys.tabsHeader), findsOneWidget);
+    expect(find.byKey(ListSelectionBarKeys.bar), findsNothing);
   });
 
   testScreen('closing the selection bar ends the selection', (tester) async {

@@ -7,11 +7,16 @@ import 'package:material_ui/material_ui.dart';
 
 class ListSelectionBar extends StatelessWidget implements PreferredSizeWidget {
   final ViewableObjectListController list;
+  final double toolbarHeight;
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(toolbarHeight);
 
-  const ListSelectionBar({required this.list, super.key});
+  const ListSelectionBar({
+    required this.list,
+    this.toolbarHeight = kToolbarHeight,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +29,7 @@ class ListSelectionBar extends StatelessWidget implements PreferredSizeWidget {
         ListSelectionInactive() => const SizedBox.shrink(),
         final ListSelectionActive state => AppBar(
           key: ListSelectionBarKeys.bar,
+          toolbarHeight: toolbarHeight,
           backgroundColor: theme.colorScheme.primaryContainer,
           foregroundColor: onBarColor,
           titleTextStyle: theme.textTheme.titleLarge?.copyWith(
