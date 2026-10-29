@@ -203,6 +203,8 @@ final analyticsServiceProvider = Provider<AnalyticsService>(
   (ref) => AnalyticsService(
     [PostHogAnalyticsProvider(ref.watch(postHogClientProvider))],
     ref.watch(loggingServiceProvider),
+    isAnalyticsEnabled: () =>
+        !kDebugMode && ref.read(featureFlagsRepoProvider).enableAnalytics,
   ),
 );
 
