@@ -26,6 +26,7 @@ void main() {
         path: 'file.jpg',
         queryParameters: {
           'X-Goog-Date': DateTime.now()
+              .toUtc()
               .subtract(const Duration(minutes: 3))
               .toIso8601String(),
           'X-Goog-Expires': const Duration(minutes: 2).inSeconds.toString(),
@@ -37,6 +38,7 @@ void main() {
         path: 'file.jpg',
         queryParameters: {
           'X-Goog-Date': DateTime.now()
+              .toUtc()
               .subtract(const Duration(minutes: 1))
               .toIso8601String(),
           'X-Goog-Expires': const Duration(minutes: 2).inSeconds.toString(),
@@ -100,6 +102,7 @@ void main() {
         path: 'file.jpg',
         queryParameters: {
           'X-Goog-Date': DateTime.now()
+              .toUtc()
               .subtract(const Duration(minutes: 3))
               .toIso8601String(),
           'X-Goog-Expires': const Duration(minutes: 2).inSeconds.toString(),
@@ -111,6 +114,7 @@ void main() {
         path: 'file.jpg',
         queryParameters: {
           'X-Goog-Date': DateTime.now()
+              .toUtc()
               .subtract(const Duration(minutes: 1))
               .toIso8601String(),
           'X-Goog-Expires': const Duration(minutes: 2).inSeconds.toString(),
