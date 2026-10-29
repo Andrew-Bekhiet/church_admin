@@ -72,7 +72,10 @@ class ObjectMarkerWidget extends StatelessWidget {
                 : null,
             action: SnackBarAction(
               label: 'فتح',
-              onPressed: () => ViewableObjectService.I.onTap(object),
+              onPressed: () {
+                AnalyticsService.I.track(MapsMarkerDetailsOpen(object));
+                ViewableObjectService.I.onTap(object);
+              },
             ),
           ),
         );

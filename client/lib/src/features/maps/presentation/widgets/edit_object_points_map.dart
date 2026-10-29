@@ -90,12 +90,10 @@ class _EditObjectPointsMap<T extends ViewableWithID>
           ],
           resultObject.value,
         ),
-        onLongPress: (_) {
-          resultObject.value = widget.onModify(
-            points.where((e) => e != p).toList(),
-            resultObject.value,
-          );
-        },
+        onLongPress: (_) => resultObject.value = widget.onModify(
+          points.where((e) => e != p).toList(),
+          resultObject.value,
+        ),
       ),
       DragMarker(
         point: LatLng(
@@ -110,24 +108,26 @@ class _EditObjectPointsMap<T extends ViewableWithID>
           color: resultObject.value.color,
           icon: Symbols.add_circle_outline,
         ),
-        onDragStart: (_, newPoint) => resultObject.value = widget.onModify(
-          [
-            ...points
-                .mapIndexed(
-                  (i2, e) => i == i2
-                      ? [
-                          p,
-                          Point(
-                            newPoint.latitude,
-                            newPoint.longitude,
-                          ),
-                        ]
-                      : [e],
-                )
-                .expand((p) => p),
-          ],
-          resultObject.value,
-        ),
+        onDragStart: (_, newPoint) {
+          resultObject.value = widget.onModify(
+            [
+              ...points
+                  .mapIndexed(
+                    (i2, e) => i == i2
+                        ? [
+                            p,
+                            Point(
+                              newPoint.latitude,
+                              newPoint.longitude,
+                            ),
+                          ]
+                        : [e],
+                  )
+                  .expand((p) => p),
+            ],
+            resultObject.value,
+          );
+        },
         onDragUpdate: (_, newPoint) => resultObject.value = widget.onModify(
           [
             ...points.mapIndexed(
@@ -151,7 +151,7 @@ class _EditObjectPointsMap<T extends ViewableWithID>
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () => widget.onSaved(resultObject.value),
+            onPressed: _save,
             icon: const Icon(Symbols.save),
             tooltip: 'حفظ',
           ),
@@ -220,6 +220,10 @@ class _EditObjectPointsMap<T extends ViewableWithID>
         ),
       ),
     );
+  }
+
+  void _save() {
+    widget.onSaved(resultObject.value);
   }
 
   @override

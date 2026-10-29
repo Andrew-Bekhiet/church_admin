@@ -2,7 +2,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../fakes/fake_address_form_services.dart';
+import '../../../../fakes/fake_logging_service.dart';
 import '../../../../fakes/in_memory_families_dao.dart';
+import '../../../../fakes/recording_analytics_provider.dart';
 
 void main() {
   const shubra = Area(id: 'shubra', name: 'شبرا');
@@ -21,6 +23,9 @@ void main() {
     final controller = FamilyFormController(
       intent: intent,
       familiesDAO: InMemoryFamiliesDAO(),
+      analyticsService: AnalyticsService([
+        RecordingAnalyticsProvider(),
+      ], FakeLoggingService()),
       addressServices: FakeAddressFormServices.withNothingToSuggest(),
       currentUserId: 'me',
     );

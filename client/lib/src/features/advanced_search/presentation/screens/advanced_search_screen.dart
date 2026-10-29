@@ -30,10 +30,17 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
   void initState() {
     super.initState();
 
+    final hasInitialQuery = widget.initialQuery != null;
+    controller.trackOpen(
+      hasInitialQuery: hasInitialQuery,
+      isAutoExecuted: hasInitialQuery && widget.autoExecuteInitialQuery,
+    );
     if (widget.initialQuery != null) {
       controller.changeQuery(widget.initialQuery!);
       if (widget.autoExecuteInitialQuery) {
-        WidgetsBinding.instance.addPostFrameCallback((_) => _execute());
+        WidgetsBinding.instance.addPostFrameCallback(
+          (_) => _execute(isAutoExecuted: true),
+        );
       }
     }
   }
@@ -129,6 +136,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
               AdvancedSearchLimitField(
                 limitStream: controller.limitStream,
                 onChangeLimit: _onChangeLimit,
+                onClearLimit: controller.clearLimit,
               ),
               const Divider(),
               FilledButton.icon(
@@ -165,8 +173,12 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
 
   void _onChangeLimit(int? newLimit) => controller.changeLimit(newLimit);
 
-  Future<void> _execute() async {
+  Future<void> _execute({bool isAutoExecuted = false}) async {
+    controller.trackQuerySubmit(isAutoExecuted: isAutoExecuted);
     final searchQuery = BehaviorSubject<String?>.seeded(null);
+    final resultsSearchTracking = controller.trackResultsSearchesIn(
+      searchQuery,
+    );
 
     final paginatableStream = DatabaseService.I.advancedQueryParser
         .createPaginatableStream(controller.query, searchQuery);
@@ -190,15 +202,20 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
               actions: [
                 IconButton(
                   icon: const Icon(Symbols.share),
-                  onPressed: () => globalProviderContainer
-                      .read(shareServiceProvider)
-                      .shareText(
-                        base64Encode(
-                          utf8.encode(
-                            jsonEncode(controller.query.toJson()),
+                  onPressed: () {
+                    controller.trackQueryShare();
+                    unawaited(
+                      globalProviderContainer
+                          .read(shareServiceProvider)
+                          .shareText(
+                            base64Encode(
+                              utf8.encode(
+                                jsonEncode(controller.query.toJson()),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -233,6 +250,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
       ),
     );
 
+    await resultsSearchTracking.cancel();
     await viewableObjectListController.dispose();
     await searchQuery.close();
   }

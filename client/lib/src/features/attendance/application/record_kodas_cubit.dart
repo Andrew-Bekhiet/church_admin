@@ -4,6 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/attendance/application/attendance_undo_presenter.dart';
 import 'package:church_admin/src/features/attendance/application/live_records.dart';
 import 'package:church_admin/src/features/attendance/application/scaffold_attendance_undo_presenter.dart';
+import 'package:church_admin/src/features/attendance/application/undo_tracking_attendance_presenter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart' show DateUtils;
 
@@ -11,6 +12,7 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
   final HistoryDAO _historyDao;
   final MeetingsDAO _meetingsDao;
   final AttendanceUndoPresenter _presenter;
+  final AnalyticsService _analyticsService;
 
   final Map<String, bool> _savedShowKodasByMeetingId = {};
 
@@ -33,9 +35,11 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
     HistoryDAO? historyDao,
     MeetingsDAO? meetingsDao,
     AttendanceUndoPresenter? presenter,
+    AnalyticsService? analyticsService,
   }) : _historyDao = historyDao ?? DatabaseService.I.history,
        _meetingsDao = meetingsDao ?? DatabaseService.I.meetings,
        _presenter = presenter ?? const ScaffoldAttendanceUndoPresenter(),
+       _analyticsService = analyticsService ?? AnalyticsService.I,
        super(const RecordKodasHidden());
 
   void follow({required Meeting meeting, required DateTime day}) {
@@ -64,7 +68,10 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
         oldObject: previous,
       );
       if (saved == null) throw const KodasChangeRejectedException();
+
+      _trackColumnToggle(meeting, isVisible: visible, isSuccess: true);
     } catch (error, stackTrace) {
+      _trackColumnToggle(meeting, isVisible: visible, isSuccess: false);
       _logError(error, stackTrace);
       if (isClosed) return;
 
@@ -76,8 +83,10 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
 
   Future<void> toggleKodas(Person person) async {
     final day = _day;
+    final meeting = _meeting;
     final personId = person.id;
     if (day == null ||
+        meeting == null ||
         state is! RecordKodasReady ||
         _liveKodasRecords.isPending(personId)) {
       return;
@@ -93,6 +102,13 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
     );
     _emitReady();
 
+    final presenter = UndoTrackingAttendancePresenter(
+      _presenter,
+      (undoneChange) => _analyticsService.track(
+        KodasUndo(meeting, personId: personId, undoneChange: undoneChange),
+      ),
+    );
+    var isSaved = false;
     try {
       if (existing == null) {
         final recorded = await _historyDao.recordKodas(
@@ -100,8 +116,9 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
           day: day,
         );
 
+        isSaved = recorded != null;
         if (recorded != null) {
-          _presenter.showUndo(
+          presenter.showUndo(
             personName: person.name,
             change: AttendanceUndoableChange.kodasRecorded,
             onUndo: () => _historyDao.deleteKodas(kodasRecordId: recorded.id),
@@ -109,8 +126,9 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
         }
       } else {
         await _historyDao.deleteKodas(kodasRecordId: existing.id);
+        isSaved = true;
 
-        _presenter.showUndo(
+        presenter.showUndo(
           personName: person.name,
           change: AttendanceUndoableChange.kodasRemoved,
           onUndo: () => _historyDao.recordKodas(personId: personId, day: day),
@@ -123,12 +141,28 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
       _liveKodasRecords.rollbackOptimistic(personId);
       _presenter.showError('تعذر حفظ التناول، حاول مرة أخرى');
     } finally {
+      _analyticsService.track(
+        KodasPersonMark(
+          meeting,
+          personId: personId,
+          isRecorded: existing == null,
+          isSuccess: isSaved,
+        ),
+      );
       if (sessionId == _sessionId) {
         _liveKodasRecords.settle(personId);
         _emitReady();
       }
     }
   }
+
+  void _trackColumnToggle(
+    Meeting meeting, {
+    required bool isVisible,
+    required bool isSuccess,
+  }) => _analyticsService.track(
+    KodasColumnToggle(meeting, isVisible: isVisible, isSuccess: isSuccess),
+  );
 
   void _restartSession() {
     _sessionId++;

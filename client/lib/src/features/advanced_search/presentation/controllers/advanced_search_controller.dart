@@ -5,7 +5,13 @@ import 'package:collection/collection.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AdvancedSearchController {
+  static const Duration typingSettleDuration = Duration(milliseconds: 500);
+
+  final AnalyticsService _analyticsService;
+
   late final StreamSubscription<void> _configSubscription;
+
+  Timer? _typedEditSettling;
 
   final BehaviorSubject<AdvancedQuery> _query = BehaviorSubject.seeded(
     AdvancedQuery(
@@ -49,11 +55,41 @@ class AdvancedSearchController {
 
   List<OrderBy> get orderBy => _query.value.orderBy;
 
-  AdvancedSearchController() {
+  AdvancedSearchController({AnalyticsService? analyticsService})
+    : _analyticsService = analyticsService ?? AnalyticsService.I {
     _configSubscription = FeatureFlagsRepository.I.onConfigChanged.listen(
       (_) => changeQuery(query),
     );
   }
+
+  void trackOpen({
+    required bool hasInitialQuery,
+    required bool isAutoExecuted,
+  }) => _analyticsService.track(
+    AdvancedSearchOpen(
+      hasInitialQuery: hasInitialQuery,
+      isAutoExecuted: isAutoExecuted,
+    ),
+  );
+
+  void trackQuerySubmit({required bool isAutoExecuted}) =>
+      _analyticsService.track(
+        AdvancedSearchQuerySubmit(query, isAutoExecuted: isAutoExecuted),
+      );
+
+  void trackQueryShare() =>
+      _analyticsService.track(const AdvancedSearchQueryShare());
+
+  StreamSubscription<String> trackResultsSearchesIn(Stream<String?> searches) =>
+      searches
+          .debounceTime(typingSettleDuration)
+          .whereType<String>()
+          .where((search) => search.isNotEmpty)
+          .listen(
+            (search) => _analyticsService.track(
+              AdvancedSearchResultsSearchRun(queryLength: search.length),
+            ),
+          );
 
   void changeQuery(AdvancedQuery value) =>
       _query.add(value.withEnabledFields());
@@ -68,6 +104,7 @@ class AdvancedSearchController {
         ? defaultField
         : queryableType.orderableFields.firstOrNull;
 
+    _maybeTrackQueryableTypeChange(queryableType);
     changeQuery(
       AdvancedQuery(
         name: query.name,
@@ -91,6 +128,7 @@ class AdvancedSearchController {
       _checkFilterType(filter);
     }
 
+    _maybeTrackFilterEdit(filters, newFilters);
     changeQuery(query.copyWith(filters: newFilters));
   }
 
@@ -125,16 +163,27 @@ class AdvancedSearchController {
     changeFilters(filters.whereIndexed((i, e) => i != index).toList());
   }
 
-  void changeLimit(int? limit) => changeQuery(query.copyWith(limit: limit));
+  void changeLimit(int? limit) {
+    _maybeTrackLimitChange(this.limit, limit);
+    changeQuery(query.copyWith(limit: limit));
+  }
+
+  void clearLimit() {
+    _dropTypedEdit();
+    _trackQueryEdit();
+    changeQuery(query.copyWith(limit: null));
+  }
 
   void changeOrderBy(List<OrderBy> orderBy) =>
       changeQuery(query.copyWith(orderBy: orderBy));
 
   void addOrderBy(OrderBy newOrderBy) {
+    _trackQueryEdit();
     changeOrderBy([...orderBy, newOrderBy]);
   }
 
   void replaceOrderBy(int index, OrderBy newOrderBy) {
+    _maybeTrackOrderByReplacement(index, newOrderBy);
     changeOrderBy(
       orderBy
           .mapIndexed(
@@ -145,10 +194,77 @@ class AdvancedSearchController {
   }
 
   void removeOrderByAt(int index) {
+    _trackQueryEdit();
     changeOrderBy(orderBy.whereIndexed((i, e) => i != index).toList());
   }
 
+  void _trackQueryEdit() {
+    _analyticsService.track(const AdvancedSearchQueryEdit());
+  }
+
+  void _trackQueryEditOnceTypingSettles() {
+    _typedEditSettling?.cancel();
+    _typedEditSettling = Timer(typingSettleDuration, _trackQueryEdit);
+  }
+
+  void _dropTypedEdit() => _typedEditSettling?.cancel();
+
+  void _maybeTrackQueryableTypeChange(QueryableType next) {
+    if (next == selectedQueryableType) return;
+
+    _trackQueryEdit();
+  }
+
+  void _maybeTrackOrderByReplacement(int index, OrderBy replacement) {
+    if (orderBy.elementAtOrNull(index) == replacement) return;
+
+    _trackQueryEdit();
+  }
+
+  void _maybeTrackFilterEdit(List<Filter> previous, List<Filter> next) {
+    if (const ListEquality<Filter>().equals(previous, next)) return;
+
+    if (_isTypedValueEdit(previous, next)) {
+      _trackQueryEditOnceTypingSettles();
+
+      return;
+    }
+
+    _trackQueryEdit();
+  }
+
+  bool _isTypedValueEdit(List<Filter> previous, List<Filter> next) {
+    if (previous.length != next.length) return false;
+
+    final changedFilters = [
+      for (final (i, filter) in previous.indexed)
+        if (filter != next[i]) (filter, next[i]),
+    ];
+
+    return switch (changedFilters) {
+      [(final before, final after)] =>
+        before.field == after.field &&
+            before.operator == after.operator &&
+            (after.operator is StringOperator ||
+                after.operator is PhoneOperator),
+      _ => false,
+    };
+  }
+
+  void _maybeTrackLimitChange(int? previous, int? next) {
+    switch ((previous, next)) {
+      case (null, _?):
+        _trackQueryEdit();
+      case (final previous?, final typed?) when typed != previous:
+        _trackQueryEditOnceTypingSettles();
+      case (_?, null):
+        _dropTypedEdit();
+      default:
+    }
+  }
+
   Future<void> dispose() async {
+    _dropTypedEdit();
     await _configSubscription.cancel();
     await _query.close();
   }

@@ -9,6 +9,7 @@ sealed class PhoneContactsFormController extends AdvancedFormController {
   static bool _always() => true;
 
   final PhoneNumberService _phones;
+  final AnalyticsService _analyticsService;
   final String Function() _newKey;
   final bool Function() _canHaveFamilyNumbers;
   final Map<String, PhoneContactFormController> _familyContactsById = {};
@@ -59,6 +60,7 @@ sealed class PhoneContactsFormController extends AdvancedFormController {
   PhoneContactsFormController._({
     required List<PhoneContact> own,
     required List<FamilyPhoneContact> family,
+    required this._analyticsService,
     PhoneNumberService phones = const PhoneNumberService(),
     bool Function()? canHaveFamilyNumbers,
     String Function()? newKey,
@@ -84,17 +86,22 @@ sealed class PhoneContactsFormController extends AdvancedFormController {
     onValuesChanged.addListener(_recheckContactsEditedOrShowingAnError);
   }
 
-  void add(PhoneContactLabel label) => contacts.setValue([
-    ...contacts.fieldValue,
-    _attachedContact(
-      key: _newKey(),
-      input: '',
-      label: label,
-      isMainPhone:
-          label is FreePhoneContactLabel &&
-          contacts.fieldValue.none((contact) => contact.isMainPhone.fieldValue),
-    ),
-  ]);
+  void add(PhoneContactLabel label) {
+    final isAutoMain =
+        label is FreePhoneContactLabel &&
+        contacts.fieldValue.none((contact) => contact.isMainPhone.fieldValue);
+
+    _analyticsService.track(ContactsPhoneAdd(label, isAutoMain: isAutoMain));
+    contacts.setValue([
+      ...contacts.fieldValue,
+      _attachedContact(
+        key: _newKey(),
+        input: '',
+        label: label,
+        isMainPhone: isAutoMain,
+      ),
+    ]);
+  }
 
   void importNumbers(Iterable<({String label, String number})> numbers) =>
       contacts.setValue([
@@ -134,11 +141,21 @@ sealed class PhoneContactsFormController extends AdvancedFormController {
     PhoneContactFormController contact,
     PhoneContactLabel label,
   ) {
+    _maybeTrackLabelChange(contact, label);
     contact.label.setValue(label);
     contact.isMainPhone.setValue(
       label is FreePhoneContactLabel && contact.isMainPhone.fieldValue,
     );
     _validateIfFilledIn(contact);
+  }
+
+  void _maybeTrackLabelChange(
+    PhoneContactFormController contact,
+    PhoneContactLabel label,
+  ) {
+    if (contact.label.fieldValue == label) return;
+
+    _analyticsService.track(ContactsPhoneLabelChange(label));
   }
 
   void revalidateAfterFamilyAvailabilityChanged() =>
@@ -243,6 +260,7 @@ class PersonPhoneContactsFormController extends PhoneContactsFormController {
   PersonPhoneContactsFormController({
     required super.own,
     required super.family,
+    required super.analyticsService,
     super.phones,
     super.canHaveFamilyNumbers,
     super.newKey,
@@ -252,6 +270,7 @@ class PersonPhoneContactsFormController extends PhoneContactsFormController {
 class FamilyPhoneContactsFormController extends PhoneContactsFormController {
   FamilyPhoneContactsFormController({
     required List<FamilyPhoneContact> saved,
+    required super.analyticsService,
     super.phones,
     super.newKey,
   }) : super._(own: const [], family: saved);

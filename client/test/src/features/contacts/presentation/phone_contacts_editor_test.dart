@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../../../fakes/fake_logging_service.dart';
 import '../../../fakes/fake_person_types_dao.dart';
+import '../../../fakes/recording_analytics_provider.dart';
 import '../../../material_ui_test_app.dart';
 import '../../../utils.dart';
 
@@ -31,12 +33,19 @@ void main() {
     bool forFamily = false,
     VoidCallback? onImportFromContacts,
   }) async {
+    final analyticsService = AnalyticsService([
+      RecordingAnalyticsProvider(),
+    ], FakeLoggingService());
     final form =
         (forFamily
-              ? FamilyPhoneContactsFormController(saved: const [])
+              ? FamilyPhoneContactsFormController(
+                  saved: const [],
+                  analyticsService: analyticsService,
+                )
               : PersonPhoneContactsFormController(
                   own: own,
                   family: const [],
+                  analyticsService: analyticsService,
                   newKey: () => 'new',
                 ))
           ..setValidationMode(ValidationMode.onUserInteraction);

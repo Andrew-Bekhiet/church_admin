@@ -39,6 +39,7 @@ class PersonFormController extends AdvancedFormController {
     own: _startingPerson.contacts,
     family: _startingPerson.visibleFamilyContacts,
     canHaveFamilyNumbers: () => household.canHaveFamilyNumbers,
+    analyticsService: _analyticsService,
   );
   late final PersonHouseholdFormController household;
   late final PersonMembershipsFormController memberships;

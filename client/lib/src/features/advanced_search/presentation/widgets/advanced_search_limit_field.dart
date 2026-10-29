@@ -6,9 +6,11 @@ import 'package:material_ui/material_ui.dart';
 
 class AdvancedSearchLimitField extends StatelessWidget {
   final void Function(int?) onChangeLimit;
+  final VoidCallback onClearLimit;
   final Stream<int?> limitStream;
   const AdvancedSearchLimitField({
     required this.onChangeLimit,
+    required this.onClearLimit,
     required this.limitStream,
   });
 
@@ -23,7 +25,7 @@ class AdvancedSearchLimitField extends StatelessWidget {
             decoration: InputDecoration(
               labelText: 'الحد الأقصى',
               suffixIcon: IconButton(
-                onPressed: () => onChangeLimit(null),
+                onPressed: onClearLimit,
                 icon: const Icon(Symbols.clear),
               ),
             ),

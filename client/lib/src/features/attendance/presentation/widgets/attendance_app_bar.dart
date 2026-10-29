@@ -71,7 +71,7 @@ class AttendanceAppBar extends StatelessWidget {
       ),
       actions: [
         AttendanceOverflowMenu(
-          openAnalysis: () => _openAnalysis(context),
+          openAnalysis: () => _openAnalysis(context, cubit),
           sorting: sorting,
           grouping: grouping,
           streakWindowDays: streakWindowDays,
@@ -91,20 +91,30 @@ class AttendanceAppBar extends StatelessWidget {
       context,
       currentMeeting: meeting,
     );
-    if (selected != null) cubit.switchMeeting(selected);
+    if (selected == null) {
+      cubit.trackForCurrentMeeting(AttendanceMeetingSelectorDismiss.new);
+
+      return;
+    }
+
+    cubit.switchMeeting(selected);
   }
 
-  void _openAnalysis(BuildContext context) {
+  void _openAnalysis(BuildContext context, RecordAttendanceCubit cubit) {
     final selectedDay = DateUtils.dateOnly(selectedDate);
+    final rangePreset = selectedDay == DateUtils.dateOnly(DateTime.now())
+        ? TodayDateTimeRangePreset()
+        : CustomDateTimeRangePreset(
+            range: DateTimeRange(start: selectedDay, end: selectedDay),
+          );
 
+    cubit.trackForCurrentMeeting(
+      (meeting) => AttendanceAnalysisOpen(meeting, rangePreset),
+    );
     unawaited(
       MeetingsAnalysisRoute(
         title: 'احصائيات ${meeting.name}',
-        initialRangePreset: selectedDay == DateUtils.dateOnly(DateTime.now())
-            ? TodayDateTimeRangePreset()
-            : CustomDateTimeRangePreset(
-                range: DateTimeRange(start: selectedDay, end: selectedDay),
-              ),
+        initialRangePreset: rangePreset,
         subject: MeetingAnalysisSubject(meeting),
       ).push(context),
     );

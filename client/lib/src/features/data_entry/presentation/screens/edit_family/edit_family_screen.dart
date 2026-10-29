@@ -24,6 +24,7 @@ class _EditFamilyScreenState extends State<EditFamilyScreen> {
   late final FamilyFormController _form = FamilyFormController(
     intent: widget.intent,
     familiesDAO: DatabaseService.I.families,
+    analyticsService: AnalyticsService.I,
     addressServices: AddressFormServices.backedBy(
       DatabaseService.I,
       geocoder: Geocoder.I,
