@@ -4,14 +4,15 @@ import 'package:material_ui/material_ui.dart';
 
 class PlaceholderTextEditingController extends TextEditingController {
   static const int _firstPlaceholderCodeUnit = 0xE000;
-  static final RegExp _placeholderCharacter = RegExp(
-    r'[\u{E000}-\u{F8FF}]',
-    unicode: true,
-  );
-  static final RegExp _combiningMarksAfterPlaceholder = RegExp(
-    r'([\u{E000}-\u{F8FF}])\p{M}+',
-    unicode: true,
-  );
+
+  static String _placeholderCharacterPatternFor(List<FieldMetadata> fields) {
+    if (fields.isEmpty) return '(?!)';
+
+    final lastPlaceholderCodeUnit =
+        _firstPlaceholderCodeUnit + fields.length - 1;
+
+    return '[\\u{E000}-\\u{${lastPlaceholderCodeUnit.toRadixString(16)}}]';
+  }
 
   static TextEditingValue _withTokensAsPlaceholders(
     TextEditingValue value,
@@ -97,6 +98,8 @@ class PlaceholderTextEditingController extends TextEditingController {
   }
 
   final List<FieldMetadata> fields;
+  final RegExp _placeholderCharacter;
+  final RegExp _combiningMarksAfterPlaceholder;
 
   MessageTemplate get template => MessageTemplate(
     text: text.replaceAllMapped(
@@ -114,6 +117,14 @@ class PlaceholderTextEditingController extends TextEditingController {
 
   PlaceholderTextEditingController({required MessageTemplate template})
     : fields = template.fields,
+      _placeholderCharacter = RegExp(
+        _placeholderCharacterPatternFor(template.fields),
+        unicode: true,
+      ),
+      _combiningMarksAfterPlaceholder = RegExp(
+        '(${_placeholderCharacterPatternFor(template.fields)})\\p{M}+',
+        unicode: true,
+      ),
       super.fromValue(
         _withTokensAsPlaceholders(
           TextEditingValue(text: template.text),
@@ -149,7 +160,11 @@ class PlaceholderTextEditingController extends TextEditingController {
       );
     }
 
+    final composingRange = withComposing && value.isComposingRangeValid
+        ? value.composing
+        : TextRange.empty;
     final children = <InlineSpan>[];
+    var offset = 0;
     text.splitMapJoin(
       _placeholderCharacter,
       onMatch: (match) {
@@ -159,17 +174,49 @@ class PlaceholderTextEditingController extends TextEditingController {
             child: PlaceholderChip(label: _fieldShownAs(match[0])?.label ?? ''),
           ),
         );
+        offset += match[0]?.length ?? 0;
 
         return '';
       },
       onNonMatch: (plainText) {
-        children.add(TextSpan(text: plainText));
+        children.addAll(
+          _spansUnderliningComposing(plainText, offset, composingRange),
+        );
+        offset += plainText.length;
 
         return '';
       },
     );
 
     return TextSpan(style: style, children: children);
+  }
+
+  List<TextSpan> _spansUnderliningComposing(
+    String plainText,
+    int offset,
+    TextRange composingRange,
+  ) {
+    final composingStart = (composingRange.start - offset).clamp(
+      0,
+      plainText.length,
+    );
+    final composingEnd = (composingRange.end - offset).clamp(
+      0,
+      plainText.length,
+    );
+    final composesInsidePlainText =
+        composingRange.isValid && composingStart < composingEnd;
+
+    if (!composesInsidePlainText) return [TextSpan(text: plainText)];
+
+    return [
+      TextSpan(text: plainText.substring(0, composingStart)),
+      TextSpan(
+        text: plainText.substring(composingStart, composingEnd),
+        style: const TextStyle(decoration: TextDecoration.underline),
+      ),
+      TextSpan(text: plainText.substring(composingEnd)),
+    ];
   }
 
   FieldMetadata? _fieldShownAs(String? character) =>
@@ -182,13 +229,9 @@ class PlaceholderTextEditingController extends TextEditingController {
 
   TextEditingValue _sanitized(TextEditingValue value) {
     final withoutStrayCharacters = _replacingAll(
-      _replacingAll(
-        value,
-        _combiningMarksAfterPlaceholder,
-        (match) => match[1] ?? '',
-      ),
-      _placeholderCharacter,
-      (match) => _fieldShownAs(match[0]) != null ? match[0] ?? '' : '',
+      value,
+      _combiningMarksAfterPlaceholder,
+      (match) => match[1] ?? '',
     );
 
     final composing = withoutStrayCharacters.composing;

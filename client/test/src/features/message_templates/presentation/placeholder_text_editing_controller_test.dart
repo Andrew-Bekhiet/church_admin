@@ -26,11 +26,22 @@ void main() {
     expect(controller.template.text, stored);
   });
 
-  test('each placeholder takes a single character while editing', () {
+  test('deleting the character before a placeholder removes it whole', () {
     final controller = controllerWith('يا {name}');
     addTearDown(controller.dispose);
 
-    expect(controller.text.length, 'يا '.length + 1);
+    final textWithoutLastCharacter = controller.text.substring(
+      0,
+      controller.text.length - 1,
+    );
+    controller.value = TextEditingValue(
+      text: textWithoutLastCharacter,
+      selection: TextSelection.collapsed(
+        offset: textWithoutLastCharacter.length,
+      ),
+    );
+
+    expect(controller.template.text, 'يا ');
   });
 
   test('an inserted placeholder is stored by its field name at the cursor', () {
@@ -61,7 +72,6 @@ void main() {
 
     typeAtEnd(controller, 'يا {name}');
 
-    expect(controller.text.length, 'يا '.length + 1);
     expect(controller.template.text, 'يا {name}');
   });
 
@@ -116,13 +126,47 @@ void main() {
     expect(controller.value.composing, TextRange.empty);
   });
 
-  test('a stray placeholder character of no offered field is removed', () {
+  test('a private-use character that is no placeholder stays as typed', () {
     final controller = controllerWith('');
     addTearDown(controller.dispose);
 
-    typeAtEnd(controller, 'يا ');
+    typeAtEnd(controller, 'يا \u{F8FF}');
 
-    expect(controller.template.text, 'يا ');
+    expect(controller.template.text, 'يا \u{F8FF}');
+  });
+
+  testWidgets('the word being composed is underlined next to a placeholder', (
+    tester,
+  ) async {
+    final controller = controllerWith('يا {name} اهلا');
+    addTearDown(controller.dispose);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Material(child: TextField(controller: controller)),
+      ),
+    );
+    final composedWordStart = controller.text.length - 'اهلا'.length;
+    controller.value = controller.value.copyWith(
+      composing: TextRange(
+        start: composedWordStart,
+        end: controller.text.length,
+      ),
+    );
+
+    final span = controller.buildTextSpan(
+      context: tester.element(find.byType(TextField)),
+      withComposing: true,
+    );
+    final underlinedText = [
+      for (final child in span.children!)
+        if (child case TextSpan(
+          :final text?,
+          style: TextStyle(decoration: TextDecoration.underline),
+        ))
+          text,
+    ];
+
+    expect(underlinedText, ['اهلا']);
   });
 
   testWidgets('a placeholder shows as a chip with the field label', (
@@ -138,11 +182,8 @@ void main() {
     );
 
     expect(
-      find.descendant(
-        of: find.byType(TextField),
-        matching: find.text(nameField.label),
-      ),
-      findsOneWidget,
+      tester.widget<PlaceholderChip>(find.byType(PlaceholderChip)).label,
+      nameField.label,
     );
   });
 }

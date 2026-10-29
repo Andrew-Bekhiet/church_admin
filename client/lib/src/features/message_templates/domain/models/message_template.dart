@@ -15,17 +15,14 @@ class MessageTemplate with Equatable {
 
   const MessageTemplate({required this.text, required this.fields});
 
-  FieldMetadata? fieldNamed(String name) =>
+  FieldMetadata? _fieldNamed(String name) =>
       fields.firstWhereOrNull((field) => field.name == name);
 
   String renderFor(Object item) => text.replaceAllMapped(
     tokenPattern,
-    (match) => switch (fieldNamed(match[1] ?? '')) {
+    (match) => switch (_fieldNamed(match[1] ?? '')) {
       final field? => field.getValue(item)?.toString() ?? '',
       null => match[0] ?? '',
     },
   );
-
-  MessageTemplate copyWith({String? text}) =>
-      MessageTemplate(text: text ?? this.text, fields: fields);
 }
