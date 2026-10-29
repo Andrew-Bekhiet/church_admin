@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
 class ViewableObjectListIndexedItem<T extends Viewable>
@@ -39,7 +40,7 @@ class ViewableObjectListIndexedItem<T extends Viewable>
     return ViewableObjectListItem(
       key: ValueKey(items[index]),
       item: items[index],
-      selectionController: objectsController.selectionController,
+      selection: context.read<ListSelectionCubit>(),
       itemBuilder: itemBuilder,
       viewableObjectWidgetConfig: viewableObjectWidgetConfig,
       addSeparator:

@@ -34,7 +34,6 @@ void main() {
                 fieldLabel: 'مخدوم',
                 selected: const {},
                 listController: (search) => ViewableObjectListController(
-                  selectionController: SelectionController<Person>(),
                   objectsPaginatableStream: PaginatableStream.simple(
                     factory: (_) => Stream.value(
                       const PaginatableStreamResponse(data: <Person>[]),

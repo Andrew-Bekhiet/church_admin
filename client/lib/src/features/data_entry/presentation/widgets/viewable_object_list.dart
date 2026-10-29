@@ -2,12 +2,14 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
 class ViewableObjectList<T extends Viewable> extends StatefulWidget {
   final ScrollController? scrollController;
   final SliverOverlapAbsorberHandle? nestedScrollOverlapHandle;
   final ViewableObjectListController<T> objectsController;
+  final ListSelectionCubit? selection;
   final ItemBuilder<T>? itemBuilder;
   final ViewableObjectWidgetConfig<T>? viewableObjectWidgetConfig;
   final bool itemsExpandable;
@@ -19,6 +21,7 @@ class ViewableObjectList<T extends Viewable> extends StatefulWidget {
     this.type = ViewableObjectListType.list,
     this.itemsExpandable = false,
     this.addSeparator = true,
+    this.selection,
     this.itemBuilder,
     this.viewableObjectWidgetConfig,
     this.scrollController,
@@ -62,7 +65,7 @@ class _ViewableObjectListState<T extends Viewable>
 
   @override
   Widget build(BuildContext context) {
-    return NotificationListener<ScrollNotification>(
+    final list = NotificationListener<ScrollNotification>(
       onNotification: _maybePaginateForward,
       child: StreamBuilder<List<T>>(
         initialData: objectsController.currentFilteredObjectsOrNull,
@@ -130,6 +133,11 @@ class _ViewableObjectListState<T extends Viewable>
         },
       ),
     );
+
+    return switch (widget.selection) {
+      final selection? => BlocProvider.value(value: selection, child: list),
+      null => BlocProvider(create: (_) => ListSelectionCubit(), child: list),
+    };
   }
 
   bool _maybePaginateForward(ScrollNotification notification) {

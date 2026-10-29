@@ -33,7 +33,6 @@ void main() {
             initialValue: null,
             dialogFieldLabel: 'مخدوم',
             listController: (search) => ViewableObjectListController(
-              selectionController: SelectionController<Person>(),
               objectsPaginatableStream: PaginatableStream.simple(
                 factory: (_) => Stream.value(
                   const PaginatableStreamResponse(data: <Person>[]),

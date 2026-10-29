@@ -13,27 +13,6 @@ class DataExportCubit extends Cubit<DataExportState> {
     null,
   );
 
-  late final SelectionController<Area> _areasSelectionController =
-      SelectionController(
-        initialSelection: {},
-        equality: EqualityBy((a) => a.id),
-      );
-  late final SelectionController<Service> _servicesSelectionController =
-      SelectionController(
-        initialSelection: {},
-        equality: EqualityBy((s) => s.id),
-      );
-  late final SelectionController<Class> _classesSelectionController =
-      SelectionController(
-        initialSelection: {},
-        equality: EqualityBy((c) => c.id),
-      );
-  late final SelectionController<Group> _groupsSelectionController =
-      SelectionController(
-        initialSelection: {},
-        equality: EqualityBy((g) => g.id),
-      );
-
   ViewableObjectListController<Area>? _areasController;
   ViewableObjectListController<Service>? _servicesController;
   ViewableObjectListController<Class>? _classesController;
@@ -121,7 +100,6 @@ class DataExportCubit extends Cubit<DataExportState> {
           );
 
     _areasController ??= ViewableObjectListController(
-      selectionController: _areasSelectionController,
       filterStream: searchController.stream,
       objectsPaginatableStream: _databaseService.areas.streamAll(
         searchQuery: searchController.stream,
@@ -138,7 +116,6 @@ class DataExportCubit extends Cubit<DataExportState> {
     );
 
     _servicesController ??= ViewableObjectListController(
-      selectionController: _servicesSelectionController,
       filterStream: searchController.stream,
       objectsPaginatableStream: _databaseService.services.streamAll(
         searchQuery: searchController.stream,
@@ -155,7 +132,6 @@ class DataExportCubit extends Cubit<DataExportState> {
     );
 
     _classesController ??= ViewableObjectListController(
-      selectionController: _classesSelectionController,
       filterStream: searchController.stream,
       objectsPaginatableStream: _databaseService.classes.streamAll(
         searchQuery: searchController.stream,
@@ -164,7 +140,6 @@ class DataExportCubit extends Cubit<DataExportState> {
     );
 
     _groupsController ??= ViewableObjectListController(
-      selectionController: _groupsSelectionController,
       filterStream: searchController.stream,
       objectsPaginatableStream: _databaseService.groups.streamAll(
         searchQuery: searchController.stream,
@@ -236,20 +211,13 @@ class DataExportCubit extends Cubit<DataExportState> {
     ];
   }
 
-  Future<void> startExport() async {
+  Future<void> startExport({
+    List<String> areasIds = const [],
+    List<String> servicesIds = const [],
+    List<String> classesIds = const [],
+    List<String> groupsIds = const [],
+  }) async {
     if (state is! DataExportSelectingObjects) return;
-
-    final areasIds =
-        _areasSelectionController.currentValue?.map((e) => e.id).toList() ?? [];
-    final servicesIds =
-        _servicesSelectionController.currentValue?.map((e) => e.id).toList() ??
-        [];
-    final classesIds =
-        _classesSelectionController.currentValue?.map((e) => e.id).toList() ??
-        [];
-    final groupsIds =
-        _groupsSelectionController.currentValue?.map((e) => e.id).toList() ??
-        [];
 
     if (areasIds.isEmpty &&
         servicesIds.isEmpty &&

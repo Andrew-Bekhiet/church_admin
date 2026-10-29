@@ -103,16 +103,11 @@ class EditAdminOnDataWidget extends StatelessWidget {
         .nonNulls
         .toList();
 
-    final areasSelectionController = SelectionController<Area>(
-      equality: EqualityBy((a) => a.id),
-      initialSelection: existingAreas,
-    );
-    final servicesSelectionController = SelectionController<Service>(
-      equality: EqualityBy((a) => a.id),
+    final areasSelection = ListSelectionCubit(initialSelection: existingAreas);
+    final servicesSelection = ListSelectionCubit(
       initialSelection: existingServices,
     );
-    final groupsSelectionController = SelectionController<Group>(
-      equality: EqualityBy((a) => a.id),
+    final groupsSelection = ListSelectionCubit(
       initialSelection: existingGroups,
     );
 
@@ -154,8 +149,8 @@ class EditAdminOnDataWidget extends StatelessWidget {
                 body: TabBarView(
                   children: [
                     ViewableObjectList<Area>(
+                      selection: areasSelection,
                       objectsController: ViewableObjectListController(
-                        selectionController: areasSelectionController,
                         filterStream: search,
                         objectsPaginatableStream: DatabaseService.I.areas
                             .streamAll(
@@ -173,8 +168,8 @@ class EditAdminOnDataWidget extends StatelessWidget {
                       ),
                     ),
                     ViewableObjectList<Service>(
+                      selection: servicesSelection,
                       objectsController: ViewableObjectListController(
-                        selectionController: servicesSelectionController,
                         filterStream: search,
                         objectsPaginatableStream: DatabaseService.I.services
                             .streamAll(
@@ -192,8 +187,8 @@ class EditAdminOnDataWidget extends StatelessWidget {
                       ),
                     ),
                     ViewableObjectList<Group>(
+                      selection: groupsSelection,
                       objectsController: ViewableObjectListController(
-                        selectionController: groupsSelectionController,
                         filterStream: search,
                         objectsPaginatableStream: DatabaseService.I.groups
                             .streamAll(
@@ -215,9 +210,15 @@ class EditAdminOnDataWidget extends StatelessWidget {
                 floatingActionButton: FloatingActionButton(
                   key: EditAdminOnDataWidgetKeys.confirmScopesButton,
                   onPressed: () => Navigator.of(context).pop((
-                    areas: areasSelectionController.currentValue,
-                    services: servicesSelectionController.currentValue,
-                    groups: groupsSelectionController.currentValue,
+                    areas: areasSelection.state.selected
+                        .whereType<Area>()
+                        .toSet(),
+                    services: servicesSelection.state.selected
+                        .whereType<Service>()
+                        .toSet(),
+                    groups: groupsSelection.state.selected
+                        .whereType<Group>()
+                        .toSet(),
                   )),
                   child: const Icon(Symbols.save),
                 ),
@@ -227,9 +228,9 @@ class EditAdminOnDataWidget extends StatelessWidget {
         );
 
     await Future.wait([
-      areasSelectionController.dispose(),
-      servicesSelectionController.dispose(),
-      groupsSelectionController.dispose(),
+      areasSelection.close(),
+      servicesSelection.close(),
+      groupsSelection.close(),
       search.close(),
     ]);
 

@@ -271,7 +271,8 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
     final controller = ViewableObjectListController<T>(
       objectsPaginatableStream: stream,
       filterStream: search.map((s) => s ?? ''),
-    )..selectionController.selectAll(selected);
+    );
+    final selection = ListSelectionCubit(initialSelection: selected);
 
     final rslt = await Navigator.of(context).push(
       MaterialPageRoute(
@@ -285,7 +286,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
               IconButton(
                 icon: const Icon(Symbols.select_all),
                 onPressed: () {
-                  controller.selectionController.selectAll(
+                  selection.selectAll(
                     controller.currentFilteredObjectsOrNull ?? [],
                   );
                 },
@@ -293,7 +294,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
               ),
               IconButton(
                 icon: const Icon(Symbols.check_box_outline_blank),
-                onPressed: controller.selectionController.selectNone,
+                onPressed: selection.selectNone,
                 tooltip: 'تحديد لا شئ',
               ),
               IconButton(
@@ -303,17 +304,21 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
               ),
             ],
           ),
-          body: ViewableObjectList(objectsController: controller),
+          body: ViewableObjectList(
+            objectsController: controller,
+            selection: selection,
+          ),
         ),
       ),
     );
 
     if (rslt == true) {
-      final selection = controller.selectionController.currentValue
-          ?.whereType<T>()
+      final confirmedSelection = selection.state.selected
+          .whereType<T>()
           .toList();
+      unawaited(selection.close());
       AnalyticsService.I.track(
-        MapsDataSelect(entityType, selectedCount: selection?.length ?? 0),
+        MapsDataSelect(entityType, selectedCount: confirmedSelection.length),
       );
       unawaited(
         controller.dispose().then((_) async {
@@ -323,8 +328,9 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
         }),
       );
 
-      return selection;
+      return confirmedSelection;
     }
+    await selection.close();
     await controller.dispose().then((_) async {
       if (search.isClosed) return;
 
