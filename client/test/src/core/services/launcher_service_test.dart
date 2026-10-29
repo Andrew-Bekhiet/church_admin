@@ -88,6 +88,25 @@ void main() {
           );
         },
       );
+
+      test(
+        'launchWhatsappChat sends one plus for an internationally formatted '
+        'phone',
+        () async {
+          const phoneNumber = '+201001234567';
+
+          final unit = LauncherService();
+
+          await unit.launchWhatsappChat(phoneNumber);
+
+          verify(
+            (UrlLauncherPlatform.instance as MockUrlLauncherPlatform).launchUrl(
+              'whatsapp://send?phone=%2B201001234567',
+              any,
+            ),
+          );
+        },
+      );
     },
   );
 }
