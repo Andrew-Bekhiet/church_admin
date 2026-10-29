@@ -47,7 +47,7 @@ class _MultiObjectSelectionDialogState<T extends Viewable>
         OutlinedButton(
           onPressed: () => Navigator.of(
             context,
-          ).pop(_selection.state.selected.whereType<T>().toSet()),
+          ).pop(_selection.state.selectedOfType<T>()),
           child: const Text('تم'),
         ),
       ],

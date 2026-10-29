@@ -6,9 +6,14 @@ sealed class ListSelectionState with Equatable {
   Set<Viewable> get selected;
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [selected];
 
   const ListSelectionState();
+
+  Set<T> selectedOfType<T>() => selected.whereType<T>().toSet();
+
+  bool areAllSelected(Iterable<Viewable> items) =>
+      items.isNotEmpty && items.every(selected.contains);
 
   bool? maybeIsSelected(Viewable item) => switch (this) {
     ListSelectionInactive() => null,
@@ -26,9 +31,6 @@ final class ListSelectionInactive extends ListSelectionState {
 final class ListSelectionActive extends ListSelectionState {
   @override
   final Set<Viewable> selected;
-
-  @override
-  List<Object?> get props => [selected];
 
   ListSelectionActive(Iterable<Viewable> items)
     : selected = EqualitySet.from(_byId, items);

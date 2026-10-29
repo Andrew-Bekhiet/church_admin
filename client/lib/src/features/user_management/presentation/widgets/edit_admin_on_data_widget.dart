@@ -206,15 +206,9 @@ class EditAdminOnDataWidget extends StatelessWidget {
                 floatingActionButton: FloatingActionButton(
                   key: EditAdminOnDataWidgetKeys.confirmScopesButton,
                   onPressed: () => Navigator.of(context).pop((
-                    areas: areasSelection.state.selected
-                        .whereType<Area>()
-                        .toSet(),
-                    services: servicesSelection.state.selected
-                        .whereType<Service>()
-                        .toSet(),
-                    groups: groupsSelection.state.selected
-                        .whereType<Group>()
-                        .toSet(),
+                    areas: areasSelection.state.selectedOfType<Area>(),
+                    services: servicesSelection.state.selectedOfType<Service>(),
+                    groups: groupsSelection.state.selectedOfType<Group>(),
                   )),
                   child: const Icon(Symbols.save),
                 ),

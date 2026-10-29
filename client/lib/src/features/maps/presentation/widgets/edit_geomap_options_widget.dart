@@ -283,19 +283,9 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
               title: Text(title),
             ),
             actions: [
-              IconButton(
-                icon: const Icon(Symbols.select_all),
-                onPressed: () {
-                  selection.selectAll(
-                    controller.currentFilteredObjectsOrNull ?? [],
-                  );
-                },
-                tooltip: 'تحديد الكل',
-              ),
-              IconButton(
-                icon: const Icon(Symbols.check_box_outline_blank),
-                onPressed: selection.selectNone,
-                tooltip: 'تحديد لا شئ',
+              SelectAllOrNoneButton(
+                selection: selection,
+                list: controller,
               ),
               IconButton(
                 icon: const Icon(Symbols.done),
@@ -313,9 +303,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
     );
 
     if (rslt == true) {
-      final confirmedSelection = selection.state.selected
-          .whereType<T>()
-          .toList();
+      final confirmedSelection = selection.state.selectedOfType<T>().toList();
       unawaited(selection.close());
       AnalyticsService.I.track(
         MapsDataSelect(entityType, selectedCount: confirmedSelection.length),

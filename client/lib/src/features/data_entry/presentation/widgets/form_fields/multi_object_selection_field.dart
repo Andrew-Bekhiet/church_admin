@@ -57,7 +57,7 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
                 OutlinedButton(
                   onPressed: () => Navigator.of(
                     context,
-                  ).pop(selection.state.selected.whereType<T>().toSet()),
+                  ).pop(selection.state.selectedOfType<T>()),
                   child: const Text('تم'),
                 ),
               ],

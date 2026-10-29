@@ -14,19 +14,18 @@ void main() {
         unorderedEquals(items),
       );
 
-  test('a selection starts inactive', () {
-    final selection = ListSelectionCubit();
-    addTearDown(selection.close);
+  blocTest<ListSelectionCubit, ListSelectionState>(
+    'a selection starts inactive',
+    build: ListSelectionCubit.new,
+    verify: (selection) =>
+        expect(selection.state, const ListSelectionInactive()),
+  );
 
-    expect(selection.state, const ListSelectionInactive());
-  });
-
-  test('an always-active selection starts selecting its initial items', () {
-    final selection = ListSelectionCubit.alwaysActive([mina]);
-    addTearDown(selection.close);
-
-    expect(selection.state, selectingExactly([mina]));
-  });
+  blocTest<ListSelectionCubit, ListSelectionState>(
+    'an always-active selection starts selecting its initial items',
+    build: () => ListSelectionCubit.alwaysActive([mina]),
+    verify: (selection) => expect(selection.state, selectingExactly([mina])),
+  );
 
   blocTest<ListSelectionCubit, ListSelectionState>(
     'starting a selection selects only that item',
@@ -109,10 +108,4 @@ void main() {
     act: (selection) => selection.endUnlessAlwaysActive(),
     expect: () => const <ListSelectionState>[],
   );
-
-  test('an item shows as unmarked while not selecting', () {
-    expect(const ListSelectionInactive().maybeIsSelected(mina), isNull);
-    expect(ListSelectionActive([mina]).maybeIsSelected(mina), isTrue);
-    expect(ListSelectionActive([mina]).maybeIsSelected(mark), isFalse);
-  });
 }

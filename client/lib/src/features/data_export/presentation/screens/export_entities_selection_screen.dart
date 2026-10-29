@@ -189,7 +189,7 @@ class _ExportEntitiesSelectionScreenState
   }
 
   List<String> _selectedIdsIn(ListSelectionCubit selection) =>
-      selection.state.selected.whereType<ID>().map((e) => e.id).toList();
+      selection.state.selectedOfType<ID>().map((e) => e.id).toList();
 
   @override
   void dispose() {
