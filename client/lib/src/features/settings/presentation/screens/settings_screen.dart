@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:church_admin/church_admin.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
@@ -16,14 +14,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   final userPreferencesService = UserPreferencesService.I;
 
-  late bool? darkTheme = userPreferencesService.darkTheme;
+  late ThemeChoice themeChoice = userPreferencesService.themeChoice;
   late bool greatFeastTheme = userPreferencesService.greatFeastTheme;
 
   bool _needsSaving = false;
 
-  void Function(bool _) _onDarkThemeChanged(bool? value) =>
+  void Function(bool _) _onThemeChoiceChanged(ThemeChoice value) =>
       (_) => setState(() {
-        darkTheme = value;
+        themeChoice = value;
       });
 
   @override
@@ -52,22 +50,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         alignment: WrapAlignment.spaceAround,
                         children: <Widget>[
                           ChoiceChip(
-                            key: SettingsScreenKeys.themeChipFor(true),
+                            key: SettingsScreenKeys.themeChipFor(
+                              ThemeChoice.dark,
+                            ),
                             label: const Text('المظهر الداكن'),
-                            selected: darkTheme ?? false,
-                            onSelected: _onDarkThemeChanged(true),
+                            selected: themeChoice == ThemeChoice.dark,
+                            onSelected: _onThemeChoiceChanged(ThemeChoice.dark),
                           ),
                           ChoiceChip(
-                            key: SettingsScreenKeys.themeChipFor(false),
+                            key: SettingsScreenKeys.themeChipFor(
+                              ThemeChoice.light,
+                            ),
                             label: const Text('المظهر الفاتح'),
-                            selected: darkTheme == false,
-                            onSelected: _onDarkThemeChanged(false),
+                            selected: themeChoice == ThemeChoice.light,
+                            onSelected: _onThemeChoiceChanged(
+                              ThemeChoice.light,
+                            ),
                           ),
                           ChoiceChip(
-                            key: SettingsScreenKeys.themeChipFor(null),
+                            key: SettingsScreenKeys.themeChipFor(
+                              ThemeChoice.system,
+                            ),
                             label: const Text('حسب النظام'),
-                            selected: darkTheme == null,
-                            onSelected: _onDarkThemeChanged(null),
+                            selected: themeChoice == ThemeChoice.system,
+                            onSelected: _onThemeChoiceChanged(
+                              ThemeChoice.system,
+                            ),
                           ),
                         ],
                       ),
@@ -107,12 +115,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _applyThemeChange() async {
-    await userPreferencesService.setDarkTheme(darkTheme);
+    _maybeTrackThemeApply();
+
+    await userPreferencesService.setThemeChoice(themeChoice);
     await userPreferencesService.setGreatFeastTheme(greatFeastTheme);
 
-    ThemingService.I.switchTheme(
-      darkTheme ??
-          PlatformDispatcher.instance.platformBrightness == Brightness.dark,
+    ThemingService.I.switchTheme(themeChoice);
+  }
+
+  void _maybeTrackThemeApply() {
+    final isThemeChanged =
+        themeChoice != userPreferencesService.themeChoice ||
+        greatFeastTheme != userPreferencesService.greatFeastTheme;
+    if (!isThemeChanged) return;
+
+    AnalyticsService.I.track(
+      ThemeApply(
+        themeChoice: themeChoice,
+        isGreatFeastTheme: greatFeastTheme,
+      ),
     );
   }
 
@@ -149,7 +170,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       );
 
-      if (!(confirmExit ?? false)) return;
+      final isDiscarded = confirmExit ?? false;
+      AnalyticsService.I.track(
+        UnsavedChangesPromptAnswer(isDiscarded: isDiscarded),
+      );
+
+      if (!isDiscarded) return;
     }
 
     navigator.pop(result);
@@ -161,6 +187,6 @@ abstract final class SettingsScreenKeys {
     'Settings Screen Appearance Tile Key',
   );
 
-  static Key themeChipFor(bool? darkTheme) =>
-      ValueKey('Settings Screen Theme Chip $darkTheme Key');
+  static Key themeChipFor(ThemeChoice themeChoice) =>
+      ValueKey('Settings Screen Theme Chip ${themeChoice.name} Key');
 }

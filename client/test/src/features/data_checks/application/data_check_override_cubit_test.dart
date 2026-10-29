@@ -3,6 +3,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../fakes/fake_logging_service.dart';
+import '../../../fakes/recording_analytics_provider.dart';
 import '../../../utils.dart';
 
 void main() {
@@ -19,11 +21,13 @@ void main() {
     ).withUserOverride(DataCheckOverride.markedIncomplete);
 
     late _MockDataChecksDAO dao;
+    late RecordingAnalyticsProvider analytics;
 
     setUpAll(() => registerFallbackValue(const LogRecord()));
 
     setUp(() {
       dao = _MockDataChecksDAO();
+      analytics = RecordingAnalyticsProvider();
       final logging = _MockLoggingService();
       when(() => logging.exception(any())).thenAnswer((_) async {});
       initGlobalProviderContainer([
@@ -33,7 +37,66 @@ void main() {
     tearDown(defaultTearDown);
 
     DataCheckOverrideCubit cubitFor(DataCheck dataCheck) =>
-        DataCheckOverrideCubit(dataCheck: dataCheck, dao: dao);
+        DataCheckOverrideCubit(
+          dataCheck: dataCheck,
+          dao: dao,
+          analyticsService: AnalyticsService([analytics], FakeLoggingService()),
+        );
+
+    blocTest<DataCheckOverrideCubit, DataCheckOverrideState>(
+      'a saved override is tracked from the automatic verdict to the chosen one',
+      setUp: () => when(
+        () => dao.tryOverride(familyId: incomplete.familyId, isComplete: true),
+      ).thenAnswer((_) async => true),
+      build: () => cubitFor(incomplete),
+      act: (cubit) => cubit.choose(DataCheckOverride.markedComplete),
+      verify: (_) => expect(
+        analytics.trackedEventsOf<DataCheckOverrideSelect>().single,
+        isA<DataCheckOverrideSelect>()
+            .having((event) => event.familyId, 'familyId', incomplete.familyId)
+            .having(
+              (event) => event.fromOverride,
+              'fromOverride',
+              incomplete.userOverride,
+            )
+            .having(
+              (event) => event.toOverride,
+              'toOverride',
+              DataCheckOverride.markedComplete,
+            )
+            .having(
+              (event) => event.isAutomaticallyComplete,
+              'isAutomaticallyComplete',
+              incomplete.automaticVerdict,
+            )
+            .having(
+              (event) => event.outcome,
+              'outcome',
+              isA<AttemptSucceeded>(),
+            ),
+      ),
+    );
+
+    blocTest<DataCheckOverrideCubit, DataCheckOverrideState>(
+      'a refused override is tracked with why it failed',
+      setUp: () => when(
+        () => dao.tryOverride(familyId: incomplete.familyId, isComplete: true),
+      ).thenAnswer((_) async => false),
+      build: () => cubitFor(incomplete),
+      act: (cubit) => cubit.choose(DataCheckOverride.markedComplete),
+      verify: (_) => expect(
+        analytics.trackedEventsOf<DataCheckOverrideSelect>().single,
+        isA<DataCheckOverrideSelect>().having(
+          (event) => event.outcome,
+          'outcome',
+          isA<AttemptFailed>().having(
+            (outcome) => outcome.kind,
+            'kind',
+            DataCheckOverrideError.notPermitted.name,
+          ),
+        ),
+      ),
+    );
 
     blocTest<DataCheckOverrideCubit, DataCheckOverrideState>(
       'marking complete shows complete immediately and stays complete after the save',

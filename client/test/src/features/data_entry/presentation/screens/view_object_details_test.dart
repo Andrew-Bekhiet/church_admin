@@ -259,7 +259,7 @@ void _setUp() {
 Override _mockUserPreferencesService() {
   final mock = MockUserPreferencesService();
 
-  when(mock.darkTheme).thenReturn(false);
+  when(mock.themeChoice).thenReturn(ThemeChoice.light);
   when(mock.greatFeastTheme).thenReturn(false);
 
   return userPreferencesServiceProvider.overrideWithValue(mock);

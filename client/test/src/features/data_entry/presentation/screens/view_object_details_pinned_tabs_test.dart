@@ -152,7 +152,7 @@ void _setUp() {
   registerFallbackValue(const FunctionsObjectImageInfo('persons', 'fallback'));
 
   final preferences = MockUserPreferencesService();
-  when(() => preferences.darkTheme).thenReturn(false);
+  when(() => preferences.themeChoice).thenReturn(ThemeChoice.light);
   when(() => preferences.greatFeastTheme).thenReturn(false);
   when(() => preferences.getLastOrderByFor(any())).thenReturn(null);
   when(() => preferences.getLastSecondLineFieldFor(any())).thenReturn(null);

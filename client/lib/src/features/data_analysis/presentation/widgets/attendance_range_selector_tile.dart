@@ -42,6 +42,7 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
             return;
           }
 
+          _maybeTrackRangeSelect(selectedPreset);
           onChanged(selectedPreset);
         },
         dropdownMenuEntries: [
@@ -71,6 +72,12 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
     );
   }
 
+  void _maybeTrackRangeSelect(DateTimeRangePreset selectedPreset) {
+    if (selectedPreset == preset) return;
+
+    AnalyticsService.I.track(AnalysisRangeSelect(selectedPreset));
+  }
+
   Future<void> _pickCustomRange(BuildContext context) async {
     final rslt = await showCalendarDatePicker2Dialog(
       context: context,
@@ -82,15 +89,17 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
       ),
       value: [_range.start, _range.end],
     );
-    if (rslt == null || rslt.nonNulls.length < 2) return;
-
-    onChanged(
-      CustomDateTimeRangePreset(
-        range: DateTimeRange(
-          start: rslt.nonNulls.min,
-          end: rslt.nonNulls.max,
-        ),
+    final outcome = switch (rslt?.nonNulls.toList()) {
+      final picked? when picked.length >= 2 => CustomRangePicked(
+        DateTimeRange(start: picked.min, end: picked.max),
       ),
-    );
+      _ => const CustomRangePickCancelled(),
+    };
+
+    AnalyticsService.I.track(AnalysisCustomRangePick(outcome));
+
+    if (outcome case CustomRangePicked(:final range)) {
+      onChanged(CustomDateTimeRangePreset(range: range));
+    }
   }
 }

@@ -83,13 +83,12 @@ class UserPersonLinkField extends StatelessWidget {
   }
 
   void _switchMode(bool createNew) {
-    if (!createNew) {
-      cubit.selectPerson(const NoPersonSelected());
+    final target = createNew
+        ? const CreateNewPerson(name: '', gender: true)
+        : const NoPersonSelected();
 
-      return;
-    }
-
-    cubit.selectPerson(const CreateNewPerson(name: '', gender: true));
+    AnalyticsService.I.track(PersonLinkModeSwitch(target));
+    cubit.selectPerson(target);
   }
 }
 

@@ -60,6 +60,13 @@ class _FakeKaiselRouter_3<R extends _i5.KaiselRoute> extends _i1.SmartFake
 class MockUserPreferencesService extends _i1.Mock
     implements _i2.UserPreferencesService {
   @override
+  _i2.ThemeChoice get themeChoice => (super.noSuchMethod(
+    Invocation.getter(#themeChoice),
+    returnValue: _i2.ThemeChoice.dark,
+    returnValueForMissingStub: _i2.ThemeChoice.dark,
+  ) as _i2.ThemeChoice);
+
+  @override
   bool get greatFeastTheme => (super.noSuchMethod(
     Invocation.getter(#greatFeastTheme),
     returnValue: false,
@@ -75,11 +82,12 @@ class MockUserPreferencesService extends _i1.Mock
       ) as _i6.Stream<_i2.ThemePreferences>);
 
   @override
-  _i6.Future<void> setDarkTheme(bool? value) => (super.noSuchMethod(
-    Invocation.method(#setDarkTheme, [value]),
-    returnValue: _i6.Future<void>.value(),
-    returnValueForMissingStub: _i6.Future<void>.value(),
-  ) as _i6.Future<void>);
+  _i6.Future<void> setThemeChoice(_i2.ThemeChoice? value) =>
+      (super.noSuchMethod(
+        Invocation.method(#setThemeChoice, [value]),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
   _i6.Future<void> setGreatFeastTheme(bool? value) => (super.noSuchMethod(

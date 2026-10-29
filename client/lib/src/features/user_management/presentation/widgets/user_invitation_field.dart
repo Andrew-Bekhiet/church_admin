@@ -22,21 +22,30 @@ class UserInvitationField extends StatelessWidget {
           SwitchListTile(
             title: const Text('إنشاء دعوة للانضمام'),
             value: invitation is InvitationRequest,
-            onChanged: (value) => cubit.setInvitation(
-              value
-                  ? InvitationRequest(
-                      InvitationRequest.defaultExpiry(DateTime.now()),
-                    )
-                  : const NoInvitation(),
-            ),
+            onChanged: (value) {
+              AnalyticsService.I.track(InvitationToggle(isEnabled: value));
+              cubit.setInvitation(
+                value
+                    ? InvitationRequest(
+                        InvitationRequest.defaultExpiry(DateTime.now()),
+                      )
+                    : const NoInvitation(),
+              );
+            },
           ),
           if (invitation case InvitationRequest(:final expiresAt))
             UserInvitationExpiryTile(
               expiresAt: expiresAt,
               firstDate: DateTime.now().add(const Duration(days: 1)),
               lastDate: InvitationRequest.maxExpiry(DateTime.now()),
-              onExpiryChanged: (picked) =>
-                  cubit.setInvitation(InvitationRequest(picked)),
+              onExpiryChanged: (picked) {
+                _maybeTrackExpiryChange(
+                  picked: picked,
+                  current: expiresAt,
+                  validFrom: DateTime.now(),
+                );
+                cubit.setInvitation(InvitationRequest(picked));
+              },
             ),
         ],
       ),
@@ -55,12 +64,31 @@ class UserInvitationField extends StatelessWidget {
                 ? DateTime.now()
                 : invitation.createdAt.add(const Duration(days: 1)),
             lastDate: InvitationRequest.maxExpiry(invitation.createdAt),
-            onExpiryChanged: (picked) => cubit.setInvitation(
-              ExistingInvitation(invitation.copyWith(expiresAt: picked)),
-            ),
+            onExpiryChanged: (picked) {
+              _maybeTrackExpiryChange(
+                picked: picked,
+                current: invitation.expiresAt,
+                validFrom: invitation.createdAt,
+              );
+              cubit.setInvitation(
+                ExistingInvitation(invitation.copyWith(expiresAt: picked)),
+              );
+            },
           ),
         ],
       ),
     };
+  }
+
+  void _maybeTrackExpiryChange({
+    required DateTime picked,
+    required DateTime current,
+    required DateTime validFrom,
+  }) {
+    if (picked == current) return;
+
+    AnalyticsService.I.track(
+      InvitationExpiryChange(validFrom: validFrom, expiresAt: picked),
+    );
   }
 }

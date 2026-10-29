@@ -25,8 +25,9 @@ class ThemingService with WidgetsBindingObserver {
 
     bool isDark =
         isDarkOverride ??
-        effectiveUserPreferencesService.darkTheme ??
-        PlatformDispatcher.instance.platformBrightness == Brightness.dark;
+        effectiveUserPreferencesService.themeChoice.isDarkUnder(
+          PlatformDispatcher.instance.platformBrightness,
+        );
 
     final bool greatFeastTheme =
         greatFeastThemeOverride ??
@@ -277,14 +278,15 @@ class ThemingService with WidgetsBindingObserver {
 
   @override
   void didChangePlatformBrightness() {
-    switchTheme(
-      _userPreferencesService.darkTheme ??
-          PlatformDispatcher.instance.platformBrightness == Brightness.dark,
-    );
+    switchTheme(_userPreferencesService.themeChoice);
   }
 
-  void switchTheme(bool darkTheme) {
-    theme = getDefault(isDarkOverride: darkTheme);
+  void switchTheme(ThemeChoice themeChoice) {
+    theme = getDefault(
+      isDarkOverride: themeChoice.isDarkUnder(
+        PlatformDispatcher.instance.platformBrightness,
+      ),
+    );
   }
 
   Future<void> dispose() async {

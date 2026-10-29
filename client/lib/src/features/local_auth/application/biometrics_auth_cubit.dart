@@ -6,6 +6,7 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
   final AuthRepository _authRepository;
   final AuthStorage _authStorage;
   final EncryptionService _encryptionService;
+  final AnalyticsService _analyticsService;
   final AppRoute? next;
 
   BiometricsAuthCubit({
@@ -13,8 +14,10 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
     AuthRepository? authRepository,
     AuthStorage? authStorage,
     EncryptionService? encryptionService,
+    AnalyticsService? analyticsService,
     this.next,
   }) : _localAuthService = localAuthService ?? LocalAuthService.I,
+       _analyticsService = analyticsService ?? AnalyticsService.I,
        _authRepository =
            authRepository ??
            globalProviderContainer.read(authRepositoryProvider),
@@ -48,7 +51,7 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
     );
   }
 
-  Future<void> authenticateBiometrically() async {
+  Future<void> authenticateBiometrically({bool isAutoPrompted = false}) async {
     if (state is BiometricsAuthAuthenticating || isClosed) return;
 
     emit(
@@ -61,11 +64,19 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
     try {
       authenticated = await _localAuthService.authenticate();
     } on Exception {
-      if (!isClosed) _emitFailure();
+      if (isClosed) return;
+
+      _trackBiometricsUnlock(UnlockOutcome.failed, isAutoPrompted);
+      _emitFailure();
 
       return;
     }
     if (isClosed) return;
+
+    _trackBiometricsUnlock(
+      authenticated ? UnlockOutcome.unlocked : UnlockOutcome.notAuthenticated,
+      isAutoPrompted,
+    );
 
     if (authenticated) {
       _localAuthService.resetAuthState(route: next);
@@ -88,6 +99,7 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
     try {
       final email = _authRepository.currentUserEmail;
       if (email == null) {
+        _trackPasswordUnlock(UnlockOutcome.failed);
         _emitFailure();
 
         return;
@@ -105,6 +117,10 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
       );
       if (isClosed) return;
 
+      _trackPasswordUnlock(
+        authenticated ? UnlockOutcome.unlocked : UnlockOutcome.wrongPassword,
+      );
+
       if (authenticated) {
         _localAuthService.resetAuthState(route: next);
 
@@ -118,7 +134,10 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
         ),
       );
     } on Exception {
-      if (!isClosed) _emitFailure();
+      if (isClosed) return;
+
+      _trackPasswordUnlock(UnlockOutcome.failed);
+      _emitFailure();
     }
   }
 
@@ -130,6 +149,21 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
 
     _emitReady();
   }
+
+  void _trackBiometricsUnlock(UnlockOutcome outcome, bool isAutoPrompted) =>
+      _analyticsService.track(
+        BiometricsUnlockSubmit(
+          outcome: outcome,
+          isAutoPrompted: isAutoPrompted,
+        ),
+      );
+
+  void _trackPasswordUnlock(UnlockOutcome outcome) => _analyticsService.track(
+    PasswordUnlockSubmit(
+      outcome: outcome,
+      canCheckBiometrics: state.canCheckBiometrics,
+    ),
+  );
 
   void _emitReady() => emit(
     BiometricsAuthReady(

@@ -3,6 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../fakes/fake_logging_service.dart';
+import '../../../../fakes/recording_analytics_provider.dart';
 import '../../../../material_ui_test_app.dart';
 
 class _MockUserPreferencesService extends Mock
@@ -11,13 +13,19 @@ class _MockUserPreferencesService extends Mock
 void main() {
   group('SettingsScreen', () {
     late _MockUserPreferencesService userPreferencesService;
+    late RecordingAnalyticsProvider analytics;
+
+    setUpAll(() => registerFallbackValue(ThemeChoice.system));
 
     setUp(() {
       userPreferencesService = _MockUserPreferencesService();
-      when(() => userPreferencesService.darkTheme).thenReturn(null);
+      analytics = RecordingAnalyticsProvider();
+      when(
+        () => userPreferencesService.themeChoice,
+      ).thenReturn(ThemeChoice.system);
       when(() => userPreferencesService.greatFeastTheme).thenReturn(false);
       when(
-        () => userPreferencesService.setDarkTheme(any()),
+        () => userPreferencesService.setThemeChoice(any()),
       ).thenAnswer((_) async {});
       when(
         () => userPreferencesService.setGreatFeastTheme(any()),
@@ -29,18 +37,21 @@ void main() {
         userPreferencesServiceProvider.overrideWithValue(
           userPreferencesService,
         ),
+        analyticsServiceProvider.overrideWithValue(
+          AnalyticsService([analytics], FakeLoggingService()),
+        ),
       ]);
     });
 
     tearDown(resetGlobalProviderContainer);
 
-    for (final savedDarkTheme in [true, false, null]) {
+    for (final savedThemeChoice in ThemeChoice.values) {
       testWidgets(
-        'a saved dark theme of $savedDarkTheme selects only its chip',
+        'a saved $savedThemeChoice theme selects only its chip',
         (tester) async {
           when(
-            () => userPreferencesService.darkTheme,
-          ).thenReturn(savedDarkTheme);
+            () => userPreferencesService.themeChoice,
+          ).thenReturn(savedThemeChoice);
           await tester.pumpWidget(
             MaterialUiTestApp.withThemeAndLocale(child: const SizedBox()),
           );
@@ -57,7 +68,7 @@ void main() {
               .where((chip) => chip.selected)
               .map((chip) => chip.key);
           expect(selectedChipKeys, [
-            SettingsScreenKeys.themeChipFor(savedDarkTheme),
+            SettingsScreenKeys.themeChipFor(savedThemeChoice),
           ]);
         },
       );
@@ -125,7 +136,9 @@ void main() {
       await tester.tap(find.widgetWithText(ExpansionTile, 'المظهر'));
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(SettingsScreenKeys.themeChipFor(true)));
+      await tester.tap(
+        find.byKey(SettingsScreenKeys.themeChipFor(ThemeChoice.dark)),
+      );
       await tester.pumpAndSettle();
 
       await tester.tap(find.byType(FloatingActionButton));
@@ -134,6 +147,54 @@ void main() {
       expect(find.byType(AlertDialog), findsNothing);
       expect(find.byType(SettingsScreen), findsOneWidget);
       expect(find.text('تم حفظ التغييرات'), findsOneWidget);
+    });
+
+    testWidgets('saving a newly chosen theme stores and tracks that choice', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialUiTestApp.withThemeAndLocale(child: const SizedBox()),
+      );
+      tester
+          .firstState<NavigatorState>(find.byType(Navigator))
+          .push(MaterialPageRoute(builder: (_) => const SettingsScreen()));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(SettingsScreenKeys.appearanceTile));
+      await tester.pumpAndSettle();
+
+      await tester.tap(
+        find.byKey(SettingsScreenKeys.themeChipFor(ThemeChoice.light)),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.byType(FloatingActionButton));
+      await tester.pumpAndSettle();
+
+      verify(
+        () => userPreferencesService.setThemeChoice(ThemeChoice.light),
+      ).called(1);
+      expect(
+        analytics.trackedEvents.whereType<ThemeApply>().map(
+          (event) => event.themeChoice,
+        ),
+        [ThemeChoice.light],
+      );
+    });
+
+    testWidgets('saving without changing the theme tracks no theme change', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialUiTestApp.withThemeAndLocale(child: const SizedBox()),
+      );
+      tester
+          .firstState<NavigatorState>(find.byType(Navigator))
+          .push(MaterialPageRoute(builder: (_) => const SettingsScreen()));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(FloatingActionButton));
+      await tester.pumpAndSettle();
+
+      expect(analytics.trackedEvents.whereType<ThemeApply>(), isEmpty);
     });
   });
 }

@@ -79,6 +79,7 @@ class NotificationsService extends BlocObserver {
 
   final AuthBloc _authBloc;
   final DatabaseService _databaseService;
+  final AnalyticsService _analyticsService;
 
   final BehaviorSubject<bool> _isPausedSubject = BehaviorSubject.seeded(true);
 
@@ -94,7 +95,15 @@ class NotificationsService extends BlocObserver {
           .asStream()
           .switchMap(
             (initial) async* {
-              if (initial != null) yield initial;
+              if (initial != null) {
+                _analyticsService.track(
+                  NotificationOpen(
+                    initial,
+                    source: NotificationOpenSource.coldStart,
+                  ),
+                );
+                yield initial;
+              }
 
               yield* _foregroundNotificationsStreamController.stream;
             },
@@ -112,6 +121,7 @@ class NotificationsService extends BlocObserver {
     required Stream<RemoteMessage> onForegroundMessageStream,
     required Stream<RemoteMessage> onMessageOpenedAppStream,
     required this._authBloc,
+    required this._analyticsService,
     DatabaseService? databaseService,
     NotificationsStorage? storage,
     NotificationsSettingsStorage? settings,
@@ -126,6 +136,14 @@ class NotificationsService extends BlocObserver {
 
     _onMessageOpenedAppSubscription = onMessageOpenedAppStream
         .map(Notification.fromRemoteMessage)
+        .doOnData(
+          (notification) => _analyticsService.track(
+            NotificationOpen(
+              notification,
+              source: NotificationOpenSource.fcmOpenedApp,
+            ),
+          ),
+        )
         .listen(addForegroundNotificationTap);
   }
 
@@ -327,6 +345,16 @@ class NotificationsService extends BlocObserver {
     return false;
   }
 
+  Future<bool> _requestAndTrackNotificationsPermission() async {
+    final isGranted = await requestNotificationsPermission();
+
+    _analyticsService.track(
+      NotificationPermissionRequest(isGranted: isGranted),
+    );
+
+    return isGranted;
+  }
+
   @override
   Future<void> onTransition(Bloc bloc, Transition transition) async {
     super.onTransition(bloc, transition);
@@ -340,7 +368,7 @@ class NotificationsService extends BlocObserver {
 
     if (currentState is! AuthAuthenticated &&
         nextState is AuthAuthenticated &&
-        await requestNotificationsPermission()) {
+        await _requestAndTrackNotificationsPermission()) {
       if (currentState is! AuthInitial) {
         await scheduleDefaultNotifications();
       }

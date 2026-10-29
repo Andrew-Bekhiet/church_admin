@@ -9,6 +9,8 @@ import 'package:material_ui/material_ui.dart' hide Notification;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../fakes/fake_logging_service.dart';
+import '../../../fakes/recording_analytics_provider.dart';
 import 'notifications_service_callbacks_test.mocks.dart';
 
 @GenerateNiceMocks([
@@ -20,6 +22,8 @@ import 'notifications_service_callbacks_test.mocks.dart';
   MockSpec<AdvancedQueryParser>(),
   MockSpec<PaginatableStreamBase>(),
 ])
+late RecordingAnalyticsProvider analytics;
+
 void main() {
   group(
     'NotificationsServiceCallbacks =>',
@@ -65,6 +69,85 @@ void main() {
               expectedNotification,
             ),
           ]);
+        },
+      );
+
+      test(
+        'tapping a local notification is tracked as opening it',
+        () async {
+          final notification = Notification(
+            id: 'id1234',
+            title: 'title',
+            body: 'body',
+            sentTime: DateTime.now(),
+            senderUID: 's',
+          );
+          when(
+            NotificationsStorage.I.readNotification(notification.id),
+          ).thenAnswer((_) async => notification);
+
+          await NotificationsServiceCallbacks.onForegroundNotificationTap(
+            NotificationResponse(
+              notificationResponseType:
+                  NotificationResponseType.selectedNotification,
+              payload: notification.id,
+            ),
+          );
+
+          expect(analytics.trackedEvents, [
+            isA<NotificationOpen>()
+                .having(
+                  (event) => event.source,
+                  'source',
+                  NotificationOpenSource.localTap,
+                )
+                .having(
+                  (event) => event.notificationType,
+                  'notificationType',
+                  notification.type,
+                )
+                .having((event) => event.hasImage, 'hasImage', false)
+                .having((event) => event.hasQuery, 'hasQuery', false),
+          ]);
+        },
+      );
+
+      test(
+        'a reminder is tracked with how many persons it found',
+        () async {
+          await NotificationsServiceCallbacks.showKodasNotification();
+
+          expect(
+            analytics.trackedEventsOf<NotificationReminderFire>().single,
+            isA<NotificationReminderFire>()
+                .having(
+                  (event) => event.reminderType,
+                  'reminderType',
+                  LocalNotificationType.kodas.name,
+                )
+                .having(
+                  (event) => event.personCount,
+                  'personCount',
+                  expectedPersons.length,
+                ),
+          );
+        },
+      );
+
+      test(
+        'an empty reminder shows nothing and tracks nothing',
+        () async {
+          _stubReminderPersons(const []);
+
+          await _showReminder();
+
+          expect(analytics.trackedEvents, isEmpty);
+          verifyNever(
+            (NotificationsStorage.I as MockNotificationsStorage)
+                .writeNotification(
+                  argThat(predicate<Notification>((_) => true)),
+                ),
+          );
         },
       );
 
@@ -206,6 +289,25 @@ Future<void> _testNotificationMethod({
   );
 }
 
+void _stubReminderPersons(List<Person> persons) {
+  final stream = MockPaginatableStreamBase<Person>();
+  when(stream.first).thenAnswer((_) async => persons);
+  final advancedQueryParser =
+      DatabaseService.I.advancedQueryParser as MockAdvancedQueryParser;
+  when(
+    advancedQueryParser.createPaginatableStream(any),
+  ).thenAnswer((_) => stream);
+}
+
+Future<void> _showReminder() => NotificationsServiceCallbacks.showNotification(
+  channelId: 'Kodas',
+  channelName: 'إشعارات القداس',
+  channelDescription: 'إشعارات القداس',
+  title: 'إشعارات القداس',
+  type: LocalNotificationType.kodas,
+  query: AdvancedQuery(queryableType: AdvancedQueriesMetadata().person),
+);
+
 Matcher matchExpectedNotificationDetails(NotificationDetails expected) =>
     predicate<NotificationDetails>(
       (n) =>
@@ -229,12 +331,16 @@ Matcher matchExpectedNotification(Notification expectedNotification) =>
     );
 
 void _setUp() {
+  analytics = RecordingAnalyticsProvider();
   final overrides = [
     _setUpMockInitializationService(),
     _setUpMockAuthBloc(),
     _setUpMockNotificationsStorage(),
     _setUpMockNotificationsService(),
     _setUpMockDatabaseService(),
+    analyticsServiceProvider.overrideWithValue(
+      AnalyticsService([analytics], FakeLoggingService()),
+    ),
   ];
 
   initGlobalProviderContainer(overrides);

@@ -5,10 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DataCheckOverrideCubit extends Cubit<DataCheckOverrideState> {
   final DataChecksDAO _dao;
+  final AnalyticsService _analyticsService;
 
-  DataCheckOverrideCubit({required DataCheck dataCheck, DataChecksDAO? dao})
-    : _dao = dao ?? DatabaseService.I.dataChecks,
-      super(DataCheckOverrideState(dataCheck: dataCheck));
+  DataCheckOverrideCubit({
+    required DataCheck dataCheck,
+    DataChecksDAO? dao,
+    AnalyticsService? analyticsService,
+  }) : _dao = dao ?? DatabaseService.I.dataChecks,
+       _analyticsService = analyticsService ?? AnalyticsService.I,
+       super(DataCheckOverrideState(dataCheck: dataCheck));
 
   Future<void> choose(DataCheckOverride override) async {
     if (state.isSaving) return;
@@ -24,6 +29,16 @@ class DataCheckOverrideCubit extends Cubit<DataCheckOverrideState> {
     );
 
     final failure = await _save(previous.familyId, override);
+    _analyticsService.track(
+      DataCheckOverrideSelect(
+        dataCheck: previous,
+        selected: override,
+        outcome: switch (failure) {
+          null => const AttemptSucceeded(),
+          final error => AttemptFailed(error.name),
+        },
+      ),
+    );
     if (isClosed) return;
 
     emit(

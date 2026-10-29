@@ -15,6 +15,14 @@ extension DateTimeExtensions on DateTime {
     ).replaceAll('منذ ', '');
   }
 
+  int calendarDaysUntil(DateTime other) {
+    return DateTime.utc(
+      other.year,
+      other.month,
+      other.day,
+    ).difference(DateTime.utc(year, month, day)).inDays;
+  }
+
   DateTime truncateToDay() {
     return DateTime(year, month, day);
   }
@@ -57,4 +65,8 @@ extension DateTimeExtensions on DateTime {
       microsecond,
     );
   }
+}
+
+extension DateTimeRangeExtensions on DateTimeRange {
+  int get inclusiveCalendarDays => start.calendarDaysUntil(end) + 1;
 }

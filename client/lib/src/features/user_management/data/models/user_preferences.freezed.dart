@@ -39,8 +39,8 @@ mixin _$UserPreferences {
               other.secondLinePreferences,
               _this.secondLinePreferences,
             ) &&
-            (identical(other.darkTheme, _this.darkTheme) ||
-                other.darkTheme == _this.darkTheme) &&
+            (identical(other.themeChoice, _this.themeChoice) ||
+                other.themeChoice == _this.themeChoice) &&
             (identical(other.greatFeastTheme, _this.greatFeastTheme) ||
                 other.greatFeastTheme == _this.greatFeastTheme) &&
             (identical(other.lastHomeMode, _this.lastHomeMode) ||
@@ -58,7 +58,7 @@ mixin _$UserPreferences {
       _this.uid,
       const DeepCollectionEquality().hash(_this.orderByPreferences),
       const DeepCollectionEquality().hash(_this.secondLinePreferences),
-      _this.darkTheme,
+      _this.themeChoice,
       _this.greatFeastTheme,
       _this.lastHomeMode,
       _this.updatedAt,
@@ -68,7 +68,7 @@ mixin _$UserPreferences {
   @override
   String toString() {
     final _this = this as UserPreferences;
-    return 'UserPreferences(uid: ${_this.uid}, orderByPreferences: ${_this.orderByPreferences}, secondLinePreferences: ${_this.secondLinePreferences}, darkTheme: ${_this.darkTheme}, greatFeastTheme: ${_this.greatFeastTheme}, lastHomeMode: ${_this.lastHomeMode}, updatedAt: ${_this.updatedAt})';
+    return 'UserPreferences(uid: ${_this.uid}, orderByPreferences: ${_this.orderByPreferences}, secondLinePreferences: ${_this.secondLinePreferences}, themeChoice: ${_this.themeChoice}, greatFeastTheme: ${_this.greatFeastTheme}, lastHomeMode: ${_this.lastHomeMode}, updatedAt: ${_this.updatedAt})';
   }
 }
 
@@ -83,8 +83,8 @@ abstract mixin class $UserPreferencesCopyWith<$Res> {
     String uid,
     Json orderByPreferences,
     Json secondLinePreferences,
+    ThemeChoice themeChoice,
     bool greatFeastTheme,
-    bool? darkTheme,
     HomeMode? lastHomeMode,
     DateTime? updatedAt,
   });
@@ -106,8 +106,8 @@ class _$UserPreferencesCopyWithImpl<$Res>
     Object? uid = null,
     Object? orderByPreferences = null,
     Object? secondLinePreferences = null,
+    Object? themeChoice = null,
     Object? greatFeastTheme = null,
-    Object? darkTheme = freezed,
     Object? lastHomeMode = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -125,14 +125,14 @@ class _$UserPreferencesCopyWithImpl<$Res>
             ? _self.secondLinePreferences
             : secondLinePreferences // ignore: cast_nullable_to_non_nullable
                   as Json,
+        themeChoice: null == themeChoice
+            ? _self.themeChoice
+            : themeChoice // ignore: cast_nullable_to_non_nullable
+                  as ThemeChoice,
         greatFeastTheme: null == greatFeastTheme
             ? _self.greatFeastTheme
             : greatFeastTheme // ignore: cast_nullable_to_non_nullable
                   as bool,
-        darkTheme: freezed == darkTheme
-            ? _self.darkTheme
-            : darkTheme // ignore: cast_nullable_to_non_nullable
-                  as bool?,
         lastHomeMode: freezed == lastHomeMode
             ? _self.lastHomeMode
             : lastHomeMode // ignore: cast_nullable_to_non_nullable

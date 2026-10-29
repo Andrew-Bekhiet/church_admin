@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -14,6 +16,11 @@ class ForceUpdateScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentVersion = globalProviderContainer
+        .read(packageInfoPluginProvider)
+        .requireValue
+        .version;
+    final latestVersion = _featureFlagsRepo.latestVersion.toString();
     final releaseNotesUrl = _featureFlagsRepo.releaseNotesUrl;
 
     final forceUpdateMessage = _featureFlagsRepo.forceUpdateMessage;
@@ -40,14 +47,33 @@ class ForceUpdateScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
               FilledButton(
-                onPressed: () =>
+                onPressed: () {
+                  AnalyticsService.I.track(
+                    UpdateInstallTap(
+                      UpdatePromptSource.forceUpdateScreen,
+                      currentVersion: currentVersion,
+                      latestVersion: latestVersion,
+                    ),
+                  );
+                  unawaited(
                     _launcherService.launchUrl(_featureFlagsRepo.downloadUrl),
+                  );
+                },
                 child: const Text('تحديث الآن'),
               ),
               if (releaseNotesUrl != null)
                 FilledButton.tonal(
                   style: Theme.of(context).filledTonalButtonStyleWorkaround,
-                  onPressed: () => _launcherService.launchUrl(releaseNotesUrl),
+                  onPressed: () {
+                    AnalyticsService.I.track(
+                      ReleaseNotesTap(
+                        UpdatePromptSource.forceUpdateScreen,
+                        currentVersion: currentVersion,
+                        latestVersion: latestVersion,
+                      ),
+                    );
+                    unawaited(_launcherService.launchUrl(releaseNotesUrl));
+                  },
                   child: const Text('ما الجديد؟'),
                 ),
             ],

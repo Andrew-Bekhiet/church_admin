@@ -239,6 +239,8 @@ class EditAdminOnDataWidget extends StatelessWidget {
     final servicesDiff = diff(existingServices.toSet(), result.services);
     final groupsDiff = diff(existingGroups.toSet(), result.groups);
 
+    _maybeTrackScopesApply(areasDiff, servicesDiff, groupsDiff);
+
     onAdminOnChanged([
       ...adminOn.where(
         (a) =>
@@ -253,6 +255,30 @@ class EditAdminOnDataWidget extends StatelessWidget {
       for (final group in groupsDiff.added)
         AdminOnData(permissionId: '', group: group),
     ]);
+  }
+
+  void _maybeTrackScopesApply(
+    IterableDifferenceResult<Area> areasDiff,
+    IterableDifferenceResult<Service> servicesDiff,
+    IterableDifferenceResult<Group> groupsDiff,
+  ) {
+    final isChanged = [
+      areasDiff,
+      servicesDiff,
+      groupsDiff,
+    ].any((diff) => diff.added.isNotEmpty || diff.removed.isNotEmpty);
+    if (!isChanged) return;
+
+    AnalyticsService.I.track(
+      AdminScopesApply(
+        addedAreaCount: areasDiff.added.length,
+        removedAreaCount: areasDiff.removed.length,
+        addedServiceCount: servicesDiff.added.length,
+        removedServiceCount: servicesDiff.removed.length,
+        addedGroupCount: groupsDiff.added.length,
+        removedGroupCount: groupsDiff.removed.length,
+      ),
+    );
   }
 }
 

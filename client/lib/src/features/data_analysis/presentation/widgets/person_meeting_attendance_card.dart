@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -119,12 +121,21 @@ class PersonMeetingAttendanceCard extends StatelessWidget {
                   accentColor: _isLastAttendedAlerting
                       ? colorScheme.error
                       : null,
-                  onTap: () =>
+                  onTap: () {
+                    AnalyticsService.I.track(
+                      AnalysisPersonLastAttendedTap(
+                        personId: personId,
+                        meetingId: analysis.meeting.id,
+                      ),
+                    );
+                    unawaited(
                       HistoryProperty.showHistoryDialog<LastRecordedByInfo>(
                         context,
                         _historyController,
                         showTime: showTime,
                       ),
+                    );
+                  },
                 ),
               ],
             ),

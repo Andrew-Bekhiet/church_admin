@@ -52,6 +52,9 @@ class NotificationsServiceCallbacks {
 
     if (notification == null) return;
 
+    AnalyticsService.I.track(
+      NotificationOpen(notification, source: NotificationOpenSource.localTap),
+    );
     NotificationsService.I.addForegroundNotificationTap(notification);
   }
 
@@ -74,33 +77,40 @@ class NotificationsServiceCallbacks {
         .createPaginatableStream(query)
         .first;
 
-    if (persons.isNotEmpty || !kReleaseMode) {
-      final notification = makeNotificationWith(
-        persons: persons,
-        title: title,
-        additionalData: {
-          'query': query.toJson(),
-        },
-      );
+    if (persons.isEmpty) return;
 
-      await NotificationsStorage.I.writeNotification(notification);
+    AnalyticsService.I.track(
+      NotificationReminderFire(
+        reminderType: type.name,
+        personCount: persons.length,
+      ),
+    );
 
-      await NotificationsService.I.notify(
-        notification,
-        id: type.index,
-        notificationDetails: NotificationDetails(
-          android: androidNotificationDetailsFor(
-            channelId,
-            channelName,
-            channelDescription: channelDescription,
-            body: notification.body,
-            icon: type == LocalNotificationType.birthday
-                ? 'birthday'
-                : 'warning_notification',
-          ),
+    final notification = makeNotificationWith(
+      persons: persons,
+      title: title,
+      additionalData: {
+        'query': query.toJson(),
+      },
+    );
+
+    await NotificationsStorage.I.writeNotification(notification);
+
+    await NotificationsService.I.notify(
+      notification,
+      id: type.index,
+      notificationDetails: NotificationDetails(
+        android: androidNotificationDetailsFor(
+          channelId,
+          channelName,
+          channelDescription: channelDescription,
+          body: notification.body,
+          icon: type == LocalNotificationType.birthday
+              ? 'birthday'
+              : 'warning_notification',
         ),
-      );
-    }
+      ),
+    );
   }
 
   @visibleForTesting

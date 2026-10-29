@@ -9,7 +9,10 @@ class UserAnalysisRoute extends HomeChildRoute {
   String get path => routePath;
 
   @override
-  Json get analyticsProperties => {'user_id': user.uid};
+  Json get analyticsProperties => {
+    'user_id': user.uid,
+    'has_linked_person': user.person != null,
+  };
 
   @override
   List<Object?> get props => [user];

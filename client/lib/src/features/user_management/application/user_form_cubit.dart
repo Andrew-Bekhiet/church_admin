@@ -3,7 +3,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 abstract class UserFormCubit extends Cubit<UserFormState> {
-  UserFormCubit(UserDraft initial) : super(UserFormEditing(initial));
+  final AnalyticsService _analyticsService;
+
+  UserFormCubit(UserDraft initial, {AnalyticsService? analyticsService})
+    : _analyticsService = analyticsService ?? AnalyticsService.I,
+      super(UserFormEditing(initial));
 
   void setName(String name) => _emitEditing(
     state.draft.copyWith(
@@ -59,12 +63,14 @@ abstract class UserFormCubit extends Cubit<UserFormState> {
 
     final draft = state.draft;
     if (!draft.isValid) {
-      emit(
-        UserFormEditing(
+      const validationError = UserFormValidationError();
+      _analyticsService.track(
+        saveEventOf(
           draft,
-          error: const UserFormValidationError(),
+          UserManagementAnalyticsEvent.failedOutcomeOf(validationError),
         ),
       );
+      emit(UserFormEditing(draft, error: validationError));
 
       return;
     }
@@ -74,8 +80,12 @@ abstract class UserFormCubit extends Cubit<UserFormState> {
     try {
       final uid = await persist(draft);
 
+      _analyticsService.track(saveEventOf(draft, const AttemptSucceeded()));
       emit(UserFormSaved(draft, uid));
     } catch (e) {
+      _analyticsService.track(
+        saveEventOf(draft, UserManagementAnalyticsEvent.failedOutcomeOf(e)),
+      );
       emit(UserFormEditing(draft, error: e));
     }
   }
@@ -88,4 +98,7 @@ abstract class UserFormCubit extends Cubit<UserFormState> {
 
   @protected
   Future<String> persist(UserDraft draft);
+
+  @protected
+  UserSaveAttemptEvent saveEventOf(UserDraft draft, AttemptOutcome outcome);
 }
