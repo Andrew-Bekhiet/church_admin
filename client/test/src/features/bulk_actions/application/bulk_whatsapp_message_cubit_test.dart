@@ -77,12 +77,12 @@ void main() {
       );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
-    'loading lists people with a phone, by name, before people without one',
+    'loading keeps the persons in the order they were given',
     build: buildCubit,
     act: (cubit) => cubit.load(),
     verify: (cubit) => expect(
       (cubit.state as BulkWhatsappComposing).recipients.map((r) => r.person.id),
-      [mark.id, mina.id, peter.id],
+      [mina.id, mark.id, peter.id],
     ),
   );
 
@@ -94,7 +94,7 @@ void main() {
       (cubit.state as BulkWhatsappComposing).recipients.map(
         (r) => r.selectedPhone,
       ),
-      [markPhone, minaPhone, null],
+      [minaPhone, markPhone, null],
     ),
   );
 
@@ -117,6 +117,22 @@ void main() {
     verify: (cubit) => expect(
       (cubit.state as BulkWhatsappSending).current.person.id,
       mark.id,
+    ),
+  );
+
+  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+    'starting passes over people without a phone at the front',
+    build: buildCubit,
+    seed: () => BulkWhatsappComposing(
+      recipients: [
+        recipientOf(peter, []),
+        recipientOf(mina, [minaPhone]),
+      ],
+    ),
+    act: (cubit) => cubit.start(template),
+    verify: (cubit) => expect(
+      (cubit.state as BulkWhatsappSending).current.person.id,
+      mina.id,
     ),
   );
 
@@ -257,7 +273,7 @@ void main() {
     },
     verify: (cubit) {
       final state = cubit.state as BulkWhatsappSending;
-      expect(state.current.person.id, mark.id);
+      expect(state.current.person.id, mina.id);
       expect(state.current.status, WhatsappRecipientStatus.pending);
       expect(state.isAwaitingReturn, isFalse);
     },

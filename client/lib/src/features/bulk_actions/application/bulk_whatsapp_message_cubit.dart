@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
@@ -7,15 +6,6 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
     text: 'كل سنة وانت طيب يا {name} 🎂',
     fields: [PersonFields().name],
   );
-
-  static int _byReachableFirstThenName(
-    WhatsappRecipient a,
-    WhatsappRecipient b,
-  ) => switch ((a.hasPhone, b.hasPhone)) {
-    (true, false) => -1,
-    (false, true) => 1,
-    _ => a.person.name.compareTo(b.person.name),
-  };
 
   final Set<Person> _persons;
   final PersonsDAO _personsDAO;
@@ -54,7 +44,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
                 (person) =>
                     WhatsappRecipient.of(fetchedById[person.id] ?? person),
               )
-              .sorted(_byReachableFirstThenName),
+              .toList(),
         ),
       );
     } on Exception catch (error) {
