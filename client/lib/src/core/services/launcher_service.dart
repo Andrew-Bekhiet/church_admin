@@ -17,12 +17,15 @@ class LauncherService {
     return launchUrl(Uri(scheme: 'tel', path: fomattedPhone));
   }
 
+  String _withoutLeadingPlus(String phone) =>
+      phone.startsWith('+') ? phone.substring(1) : phone;
+
   Future<bool> launchWhatsappChat(String fomattedPhone) {
     return launchUrl(
       Uri(
         scheme: 'whatsapp',
         host: 'send',
-        queryParameters: {'phone': '+$fomattedPhone'},
+        queryParameters: {'phone': '+${_withoutLeadingPlus(fomattedPhone)}'},
       ),
     );
   }
