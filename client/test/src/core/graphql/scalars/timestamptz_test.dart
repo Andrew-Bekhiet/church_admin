@@ -2,12 +2,12 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  final value = DateTime(2026, 3, 10, 14, 30, 15, 123);
+  final valueUtc = value.toUtc();
+
   test(
     'tstzToString returns ISO date in UTC',
     () {
-      final value = DateTime.now();
-      final valueUtc = value.toUtc();
-
       expect(tstzToString(value), valueUtc.toIso8601String());
       expect(tstzToString(valueUtc), valueUtc.toIso8601String());
       expect(
@@ -20,9 +20,6 @@ void main() {
   test(
     'tstzFromString parses ISO date in local timezone',
     () {
-      final value = DateTime.now();
-      final valueUtc = value.toUtc();
-
       expect(tstzFromString(value.toIso8601String()), value);
       expect(tstzFromString(valueUtc.toIso8601String()), value);
 
@@ -36,9 +33,6 @@ void main() {
   test(
     'tstzFromString <=> tstzToString',
     () {
-      final value = DateTime.now();
-      final valueUtc = value.toUtc();
-
       expect(tstzFromString(tstzToString(value)), value);
       expect(tstzFromString(tstzToString(valueUtc)), value);
     },
