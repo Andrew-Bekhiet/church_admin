@@ -117,7 +117,7 @@ void main() {
       ]);
       addTearDown(objectsStream.close);
 
-      final selection = ListSelectionCubit(initialSelection: const []);
+      final selection = ListSelectionCubit()..selectNone();
       addTearDown(selection.close);
       final controller = ViewableObjectListController(
         objectsPaginatableStream: _createMockPaginatableStream(
@@ -170,7 +170,7 @@ void main() {
       await tester.pumpAndSettle();
       expectSelectedAndUnselectedItems(0, 3);
 
-      selection.end();
+      selection.endUnlessAlwaysActive();
       await tester.pumpAndSettle();
       expect(find.byType(Checkbox), findsNothing);
 

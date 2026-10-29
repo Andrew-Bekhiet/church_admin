@@ -45,8 +45,8 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
         final focusScope = FocusScope.of(context);
         final search = BehaviorSubject<String?>.seeded(null);
         final controller = listController(search);
-        final selection = ListSelectionCubit(
-          initialSelection: state.value ?? const {},
+        final selection = ListSelectionCubit.alwaysActive(
+          state.value ?? const {},
         );
         final rslt = await showDialog(
           context: state.context,

@@ -2,12 +2,16 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ListSelectionCubit extends Cubit<ListSelectionState> {
-  ListSelectionCubit({Iterable<Viewable>? initialSelection})
-    : super(
-        initialSelection == null
-            ? const ListSelectionInactive()
-            : ListSelectionActive(initialSelection),
-      );
+  final bool _isAlwaysActive;
+
+  ListSelectionCubit()
+    : _isAlwaysActive = false,
+      super(const ListSelectionInactive());
+
+  ListSelectionCubit.alwaysActive([
+    Iterable<Viewable> initialSelection = const [],
+  ]) : _isAlwaysActive = true,
+       super(ListSelectionActive(initialSelection));
 
   void startSelectingWith(Viewable item) => emit(ListSelectionActive([item]));
 
@@ -30,5 +34,7 @@ class ListSelectionCubit extends Cubit<ListSelectionState> {
 
   void selectNone() => emit(ListSelectionActive(const []));
 
-  void end() => emit(const ListSelectionInactive());
+  void endUnlessAlwaysActive() {
+    if (!_isAlwaysActive) emit(const ListSelectionInactive());
+  }
 }

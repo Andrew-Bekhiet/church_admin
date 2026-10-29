@@ -14,15 +14,15 @@ void main() {
         unorderedEquals(items),
       );
 
-  test('a selection without an initial selection starts inactive', () {
+  test('a selection starts inactive', () {
     final selection = ListSelectionCubit();
     addTearDown(selection.close);
 
     expect(selection.state, const ListSelectionInactive());
   });
 
-  test('a selection with an initial selection starts selecting it', () {
-    final selection = ListSelectionCubit(initialSelection: [mina]);
+  test('an always-active selection starts selecting its initial items', () {
+    final selection = ListSelectionCubit.alwaysActive([mina]);
     addTearDown(selection.close);
 
     expect(selection.state, selectingExactly([mina]));
@@ -30,7 +30,7 @@ void main() {
 
   blocTest<ListSelectionCubit, ListSelectionState>(
     'starting a selection selects only that item',
-    build: () => ListSelectionCubit(initialSelection: [mark]),
+    build: () => ListSelectionCubit.alwaysActive([mark]),
     act: (selection) => selection.startSelectingWith(mina),
     expect: () => [
       selectingExactly([mina]),
@@ -53,7 +53,7 @@ void main() {
 
   blocTest<ListSelectionCubit, ListSelectionState>(
     'toggling removes a selected item given as a refreshed copy',
-    build: () => ListSelectionCubit(initialSelection: [mina]),
+    build: () => ListSelectionCubit.alwaysActive([mina]),
     act: (selection) => selection.toggle(Person(id: mina.id, name: 'اسم جديد')),
     expect: () => [selectingExactly(const [])],
   );
@@ -67,7 +67,7 @@ void main() {
 
   blocTest<ListSelectionCubit, ListSelectionState>(
     'selecting items keeps one copy of each and mixes types',
-    build: () => ListSelectionCubit(initialSelection: [mina]),
+    build: () => ListSelectionCubit.alwaysActive([mina]),
     act: (selection) => selection
       ..selectAll([Person(id: mina.id, name: 'اسم جديد'), mark])
       ..select(minaFamily),
@@ -88,16 +88,26 @@ void main() {
 
   blocTest<ListSelectionCubit, ListSelectionState>(
     'selecting none keeps selecting with nothing selected',
-    build: () => ListSelectionCubit(initialSelection: [mina, mark]),
+    build: () => ListSelectionCubit.alwaysActive([mina, mark]),
     act: (selection) => selection.selectNone(),
     expect: () => [selectingExactly(const [])],
   );
 
   blocTest<ListSelectionCubit, ListSelectionState>(
     'ending a selection stops selecting',
-    build: () => ListSelectionCubit(initialSelection: [mina]),
-    act: (selection) => selection.end(),
+    build: ListSelectionCubit.new,
+    act: (selection) => selection
+      ..startSelectingWith(mina)
+      ..endUnlessAlwaysActive(),
+    skip: 1,
     expect: () => [const ListSelectionInactive()],
+  );
+
+  blocTest<ListSelectionCubit, ListSelectionState>(
+    'an always-active selection keeps selecting when asked to end',
+    build: () => ListSelectionCubit.alwaysActive([mina]),
+    act: (selection) => selection.endUnlessAlwaysActive(),
+    expect: () => const <ListSelectionState>[],
   );
 
   test('an item shows as unmarked while not selecting', () {

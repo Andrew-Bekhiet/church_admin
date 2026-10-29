@@ -30,8 +30,8 @@ class _MultiObjectSelectionDialogState<T extends Viewable>
   final BehaviorSubject<String?> _search = BehaviorSubject.seeded(null);
   late final ViewableObjectListController<T> _controller = widget
       .listController(_search);
-  late final ListSelectionCubit _selection = ListSelectionCubit(
-    initialSelection: widget.selected,
+  late final ListSelectionCubit _selection = ListSelectionCubit.alwaysActive(
+    widget.selected,
   );
 
   @override

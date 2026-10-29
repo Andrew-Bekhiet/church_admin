@@ -94,7 +94,7 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
         case ListSelectionInactive():
           selection.startSelectingWith(item);
         case ListSelectionActive():
-          selection.end();
+          selection.endUnlessAlwaysActive();
       }
     }
   }

@@ -20,18 +20,12 @@ class ExportEntitiesSelectionScreen extends StatefulWidget {
 class _ExportEntitiesSelectionScreenState
     extends State<ExportEntitiesSelectionScreen> {
   final DataExportCubit _cubit = DataExportCubit();
-  final ListSelectionCubit _areasSelection = ListSelectionCubit(
-    initialSelection: const [],
-  );
-  final ListSelectionCubit _servicesSelection = ListSelectionCubit(
-    initialSelection: const [],
-  );
-  final ListSelectionCubit _classesSelection = ListSelectionCubit(
-    initialSelection: const [],
-  );
-  final ListSelectionCubit _groupsSelection = ListSelectionCubit(
-    initialSelection: const [],
-  );
+  final ListSelectionCubit _areasSelection = ListSelectionCubit.alwaysActive();
+  final ListSelectionCubit _servicesSelection =
+      ListSelectionCubit.alwaysActive();
+  final ListSelectionCubit _classesSelection =
+      ListSelectionCubit.alwaysActive();
+  final ListSelectionCubit _groupsSelection = ListSelectionCubit.alwaysActive();
 
   @override
   Widget build(BuildContext context) {

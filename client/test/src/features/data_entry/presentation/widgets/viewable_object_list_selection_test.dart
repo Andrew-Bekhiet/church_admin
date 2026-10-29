@@ -153,7 +153,7 @@ void main() {
   testLists('a list given a selection shows what it already holds', (
     tester,
   ) async {
-    final selection = ListSelectionCubit(initialSelection: [persons[1]]);
+    final selection = ListSelectionCubit.alwaysActive([persons[1]]);
     addTearDown(selection.close);
     await pumpLists(tester, [listOf(persons, selection: selection)]);
 
@@ -161,10 +161,24 @@ void main() {
     expect(isShownSelected(tester, persons[1].id), isTrue);
   });
 
+  testLists('a long-press keeps an always-active selection and its items', (
+    tester,
+  ) async {
+    final selection = ListSelectionCubit.alwaysActive([persons[1]]);
+    addTearDown(selection.close);
+    await pumpLists(tester, [listOf(persons, selection: selection)]);
+
+    await tester.longPress(itemOf(persons[0].id));
+    await tester.pumpAndSettle();
+
+    expect(selection.state.selected, {persons[1]});
+    expect(isShownSelected(tester, persons[1].id), isTrue);
+  });
+
   testLists('a given selection survives its list leaving and coming back', (
     tester,
   ) async {
-    final selection = ListSelectionCubit(initialSelection: const []);
+    final selection = ListSelectionCubit.alwaysActive();
     addTearDown(selection.close);
     final personsList = listOf(persons, selection: selection);
     final familiesList = listOf(families);

@@ -103,13 +103,9 @@ class EditAdminOnDataWidget extends StatelessWidget {
         .nonNulls
         .toList();
 
-    final areasSelection = ListSelectionCubit(initialSelection: existingAreas);
-    final servicesSelection = ListSelectionCubit(
-      initialSelection: existingServices,
-    );
-    final groupsSelection = ListSelectionCubit(
-      initialSelection: existingGroups,
-    );
+    final areasSelection = ListSelectionCubit.alwaysActive(existingAreas);
+    final servicesSelection = ListSelectionCubit.alwaysActive(existingServices);
+    final groupsSelection = ListSelectionCubit.alwaysActive(existingGroups);
 
     final result = await Navigator.of(context)
         .push<({Set<Area> areas, Set<Service> services, Set<Group> groups})>(

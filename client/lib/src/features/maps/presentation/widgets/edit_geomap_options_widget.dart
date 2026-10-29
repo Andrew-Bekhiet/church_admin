@@ -272,7 +272,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       objectsPaginatableStream: stream,
       filterStream: search.map((s) => s ?? ''),
     );
-    final selection = ListSelectionCubit(initialSelection: selected);
+    final selection = ListSelectionCubit.alwaysActive(selected);
 
     final rslt = await Navigator.of(context).push(
       MaterialPageRoute(
