@@ -68,8 +68,9 @@ void main() {
           isAnalyticsEnabled: () => false,
         );
 
+        const event = SignInSubmit(AuthAttemptSucceeded());
         service
-          ..track(const SignInSubmit(AuthAttemptSucceeded()))
+          ..track(event)
           ..trackScreen('home');
         await pumpEventQueue();
         await service.identify(null);
