@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart' hide Polygon;
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:rxdart/rxdart.dart';
@@ -283,9 +284,23 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
               title: Text(title),
             ),
             actions: [
-              SelectAllOrNoneButton(
-                selection: selection,
-                list: controller,
+              StreamBuilder<List<T>>(
+                initialData: controller.currentFilteredObjectsOrNull,
+                stream: controller.filteredObjectsStream,
+                builder: (context, shownItemsSnapshot) {
+                  final shownItems = shownItemsSnapshot.data ?? const [];
+
+                  return BlocBuilder<ListSelectionCubit, ListSelectionState>(
+                    bloc: selection,
+                    builder: (context, state) => SelectAllOrNoneButton(
+                      areAllShownItemsSelected: state.areAllSelected(
+                        shownItems,
+                      ),
+                      onSelectAll: () => selection.selectAll(shownItems),
+                      onSelectNone: selection.selectNone,
+                    ),
+                  );
+                },
               ),
               IconButton(
                 icon: const Icon(Symbols.done),
