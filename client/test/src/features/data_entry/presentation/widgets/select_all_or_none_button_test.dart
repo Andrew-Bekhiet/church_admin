@@ -4,6 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../../../fakes/fake_logging_service.dart';
 import '../../../../fakes/mock_viewable_object_service.dart';
@@ -21,6 +22,7 @@ void main() {
 
   late ViewableObjectListController<Person> list;
   late ListSelectionCubit selection;
+  late BehaviorSubject<String?> search;
 
   setUp(() {
     initGlobalProviderContainer([
@@ -30,10 +32,12 @@ void main() {
       ),
     ]);
     selection = ListSelectionCubit.alwaysActive();
+    search = BehaviorSubject.seeded(null);
   });
 
   tearDown(() async {
     await selection.close();
+    await search.close();
     defaultTearDown();
   });
 
@@ -42,6 +46,7 @@ void main() {
       objectsPaginatableStream: PaginatableStream.simple(
         factory: (_) => Stream.value(PaginatableStreamResponse(data: persons)),
       ),
+      filterStream: search,
     );
     await tester.pumpWidget(
       MaterialApp(
@@ -128,4 +133,24 @@ void main() {
     expect(selection.state.selected, isEmpty);
     expect(shownIcon(tester), Symbols.select_all);
   });
+
+  testButton(
+    'selects the newly shown items once a search shows unselected ones',
+    (
+      tester,
+    ) async {
+      selection.select(persons[0]);
+      search.add(persons[0].name);
+      await pumpButton(tester);
+      expect(shownIcon(tester), Symbols.deselect);
+
+      search.add(null);
+      await tester.pumpAndSettle();
+      expect(shownIcon(tester), Symbols.select_all);
+
+      await tapButton(tester);
+
+      expect(selection.state.selected, persons.toSet());
+    },
+  );
 }
