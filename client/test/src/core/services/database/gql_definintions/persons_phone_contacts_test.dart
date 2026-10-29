@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gql/language.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -88,5 +89,14 @@ void main() {
     await dao().personsPhoneContacts(personsIds: [personId]);
 
     expect(link.requests.single.variables['ids'], [personId]);
+  });
+
+  test('the query keeps only persons whose id is among the selected', () async {
+    await dao().personsPhoneContacts(personsIds: [personId]);
+
+    expect(
+      printNode(link.requests.single.operation.document),
+      contains(r'persons(where: {id: {_in: $ids}})'),
+    );
   });
 }

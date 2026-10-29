@@ -121,7 +121,7 @@ class PersonsDAO extends FullCRUDDAO<Person>
       parserFn: db.parser.listParser(Person.fromJson),
     );
 
-    return graphQLClient.queryAndReturnParsed(queryOptions);
+    return graphQLClient.queryAndReturnParsed(queryOptions, onlineFirst: true);
   }
 
   Future<PersonsGeolocationsResponse?> personsGeolocations({
