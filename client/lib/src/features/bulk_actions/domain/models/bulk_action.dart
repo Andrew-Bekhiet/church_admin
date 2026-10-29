@@ -1,7 +1,6 @@
-import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
-abstract class BulkAction<T extends Viewable> {
+abstract class BulkAction<T> {
   String get key;
 
   String get label;
@@ -10,10 +9,10 @@ abstract class BulkAction<T extends Viewable> {
 
   const BulkAction();
 
-  bool isApplicableToAnyOf(Iterable<Viewable> items) =>
+  bool isApplicableToAnyOf(Iterable<Object?> items) =>
       items.any((item) => item is T);
 
-  Set<T> filterApplicableItems(Iterable<Viewable> items) =>
+  Set<T> filterApplicableItems(Iterable<Object?> items) =>
       items.whereType<T>().toSet();
 
   Future<void> run(BuildContext context, Set<T> selected);

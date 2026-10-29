@@ -22,7 +22,7 @@ final class BulkActionInvoke extends BulkActionAnalyticsEvent {
     'selected_count': selectedCount,
   };
 
-  BulkActionInvoke(this.actionKey, Set<Object> selected)
+  BulkActionInvoke(this.actionKey, Set<Object?> selected)
     : entityType = selected.map(AnalyticsEntityType.of).nonNulls.firstOrNull,
       selectedCount = selected.length;
 }
