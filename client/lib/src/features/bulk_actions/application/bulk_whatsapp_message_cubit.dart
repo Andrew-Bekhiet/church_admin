@@ -108,9 +108,9 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
 
       _isOpeningChat = true;
       try {
-        isOpened = await _launcherService.launchWhatsappChat(
-          _phoneNumberService.formatInternational(selectedPhone.phone),
-          text: sending.currentMessage,
+        isOpened = await _tryOpenWhatsappChat(
+          selectedPhone,
+          sending.currentMessage,
         );
       } finally {
         _isOpeningChat = false;
@@ -153,6 +153,20 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
   void stop() {
     if (state case final BulkWhatsappSending sending) {
       _finish(sending, isStopped: true);
+    }
+  }
+
+  Future<bool> _tryOpenWhatsappChat(
+    PhoneContact phone,
+    String message,
+  ) async {
+    try {
+      return await _launcherService.launchWhatsappChat(
+        _phoneNumberService.formatInternational(phone.phone),
+        text: message,
+      );
+    } on Exception {
+      return false;
     }
   }
 

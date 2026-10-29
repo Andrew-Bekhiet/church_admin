@@ -24,12 +24,14 @@ class FakeLauncherService extends LauncherService {
 
   bool canOpenWhatsapp = true;
   Completer<void>? whatsappGate;
+  Exception? whatsappError;
 
   @override
   Future<bool> launchCall(String fomattedPhone) async => true;
 
   @override
   Future<bool> launchWhatsappChat(String fomattedPhone, {String? text}) async {
+    if (whatsappError case final error?) throw error;
     if (!canOpenWhatsapp) return false;
 
     openedWhatsappChats.add(OpenedWhatsappChat(fomattedPhone, text));

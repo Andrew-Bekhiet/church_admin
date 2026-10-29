@@ -362,6 +362,39 @@ void main() {
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+    'a launcher error counts as a failed open',
+    build: () {
+      launcher.whatsappError = Exception('no app handles whatsapp://');
+
+      return buildCubit();
+    },
+    seed: () => sendingTo(0),
+    act: (cubit) => cubit.openCurrentChat(),
+    verify: (cubit) {
+      final state = cubit.state as BulkWhatsappSending;
+      expect(state.hasOpenFailed, isTrue);
+      expect(state.isAwaitingReturn, isFalse);
+    },
+  );
+
+  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+    'after a failed launch the chat can be opened again',
+    build: () {
+      launcher.whatsappError = Exception('no app handles whatsapp://');
+
+      return buildCubit();
+    },
+    seed: () => sendingTo(0),
+    act: (cubit) async {
+      await cubit.openCurrentChat();
+      launcher.whatsappError = null;
+      await cubit.openCurrentChat();
+    },
+    verify: (_) =>
+        expect(launcher.openedWhatsappChats, [chatWith(mark, markPhone)]),
+  );
+
+  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'after the last reachable person the run finishes with each outcome',
     build: buildCubit,
     seed: () => sendingTo(0),
