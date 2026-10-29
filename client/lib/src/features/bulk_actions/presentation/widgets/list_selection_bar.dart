@@ -11,8 +11,6 @@ class ListSelectionBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
-  List<Viewable> get _loaded => list.currentFilteredObjectsOrNull ?? const [];
-
   const ListSelectionBar({required this.list, super.key});
 
   @override
@@ -24,7 +22,7 @@ class ListSelectionBar extends StatelessWidget implements PreferredSizeWidget {
     return BlocBuilder<ListSelectionCubit, ListSelectionState>(
       builder: (context, state) => switch (state) {
         ListSelectionInactive() => const SizedBox.shrink(),
-        final ListSelectionActive active => AppBar(
+        final ListSelectionActive state => AppBar(
           key: ListSelectionBarKeys.bar,
           backgroundColor: theme.colorScheme.primaryContainer,
           foregroundColor: onBarColor,
@@ -37,7 +35,7 @@ class ListSelectionBar extends StatelessWidget implements PreferredSizeWidget {
             icon: const Icon(Symbols.close),
             onPressed: selection.endUnlessAlwaysActive,
           ),
-          title: Text('${active.selected.length} محدد'),
+          title: Text('${state.selected.length} محدد'),
           actions: [
             SelectAllOrNoneButton(
               key: ListSelectionBarKeys.selectAllButton,
@@ -45,12 +43,12 @@ class ListSelectionBar extends StatelessWidget implements PreferredSizeWidget {
               list: list,
             ),
             for (final action in BulkActionsRegistry.I.actionsApplicableToAnyOf(
-              active.selected,
+              state.selected,
             ))
               IconButton(
                 tooltip: action.label,
                 icon: action.icon,
-                onPressed: () => _run(action, active, context),
+                onPressed: () => _runAction(context, action, state),
               ),
           ],
         ),
@@ -58,13 +56,13 @@ class ListSelectionBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  void _run(
-    BulkAction action,
-    ListSelectionActive active,
+  void _runAction(
     BuildContext context,
+    BulkAction action,
+    ListSelectionActive state,
   ) {
     final applicableItems = action.filterApplicableItems(
-      active.inOrderOf(_loaded).selected,
+      state.inOrderOf(list.currentFilteredObjectsOrNull ?? const []).selected,
     );
 
     AnalyticsService.I.track(BulkActionInvoke(action.key, applicableItems));
