@@ -86,10 +86,23 @@ void main() {
   );
 
   blocTest<ListSelectionCubit, ListSelectionState>(
-    'selecting none keeps selecting with nothing selected',
-    build: () => ListSelectionCubit.alwaysActive([mina, mark]),
-    act: (selection) => selection.selectNone(),
-    expect: () => [selectingExactly(const [])],
+    'deselecting items keeps the rest selected',
+    build: () => ListSelectionCubit.alwaysActive([mina, mark, minaFamily]),
+    act: (selection) =>
+        selection.deselectAll([Person(id: mina.id, name: 'اسم جديد'), mark]),
+    expect: () => [
+      selectingExactly([minaFamily]),
+    ],
+  );
+
+  blocTest<ListSelectionCubit, ListSelectionState>(
+    'an item re-selected as a refreshed copy is still the item selected before',
+    build: () => ListSelectionCubit.alwaysActive([mina]),
+    act: (selection) => selection
+      ..toggle(mina)
+      ..toggle(Person(id: mina.id, name: 'اسم جديد')),
+    verify: (selection) =>
+        expect(selection.state.selectedOfType<Person>().contains(mina), isTrue),
   );
 
   blocTest<ListSelectionCubit, ListSelectionState>(

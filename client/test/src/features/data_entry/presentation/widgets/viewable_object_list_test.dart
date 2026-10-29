@@ -117,7 +117,7 @@ void main() {
       ]);
       addTearDown(objectsStream.close);
 
-      final selection = ListSelectionCubit()..selectNone();
+      final selection = ListSelectionCubit()..selectAll(const []);
       addTearDown(selection.close);
       final controller = ViewableObjectListController(
         objectsPaginatableStream: _createMockPaginatableStream(
@@ -166,7 +166,7 @@ void main() {
       await tester.pumpAndSettle();
       expectSelectedAndUnselectedItems(2, 1);
 
-      selection.selectNone();
+      selection.deselectAll(objectsStream.value);
       await tester.pumpAndSettle();
       expectSelectedAndUnselectedItems(0, 3);
 

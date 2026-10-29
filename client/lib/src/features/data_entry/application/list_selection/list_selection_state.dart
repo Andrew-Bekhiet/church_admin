@@ -3,6 +3,10 @@ import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class ListSelectionState with Equatable {
+  static final _byId = EqualityBy<Viewable, Object>(_idOrItself);
+
+  static Object _idOrItself(Object item) => item is ID ? item.id : item;
+
   Set<Viewable> get selected;
 
   @override
@@ -10,7 +14,10 @@ sealed class ListSelectionState with Equatable {
 
   const ListSelectionState();
 
-  Set<T> selectedOfType<T>() => selected.whereType<T>().toSet();
+  Set<T> selectedOfType<T extends Object>() => EqualitySet.from(
+    EqualityBy<T, Object>(_idOrItself),
+    selected.whereType<T>(),
+  );
 
   bool areAllSelected(Iterable<Viewable> items) =>
       items.isNotEmpty && items.every(selected.contains);
@@ -33,7 +40,7 @@ final class ListSelectionActive extends ListSelectionState {
   final Set<Viewable> selected;
 
   ListSelectionActive(Iterable<Viewable> items)
-    : selected = EqualitySet.from(_byId, items);
+    : selected = EqualitySet.from(ListSelectionState._byId, items);
 
   @override
   bool maybeIsSelected(Viewable item) => selected.contains(item);
@@ -41,11 +48,9 @@ final class ListSelectionActive extends ListSelectionState {
   ListSelectionActive including(Iterable<Viewable> items) =>
       ListSelectionActive([...selected, ...items]);
 
-  ListSelectionActive excluding(Viewable item) => ListSelectionActive(
-    selected.whereNot((other) => _byId.equals(other, item)),
-  );
+  ListSelectionActive excluding(Iterable<Viewable> items) {
+    final excluded = EqualitySet.from(ListSelectionState._byId, items);
+
+    return ListSelectionActive(selected.whereNot(excluded.contains));
+  }
 }
-
-final _byId = EqualityBy<Viewable, Object>(_idOrItself);
-
-Object _idOrItself(Object item) => item is ID ? item.id : item;

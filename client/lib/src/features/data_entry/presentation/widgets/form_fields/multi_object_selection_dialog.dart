@@ -85,9 +85,6 @@ class _MultiObjectSelectionDialogState<T extends Viewable>
                 viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
                   forceShowSecondLine: false,
                   isDense: true,
-                  onLongPress: (_) {
-                    return;
-                  },
                 ),
               ),
             ),

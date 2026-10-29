@@ -297,7 +297,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
                         shownItems,
                       ),
                       onSelectAll: () => selection.selectAll(shownItems),
-                      onSelectNone: selection.selectNone,
+                      onSelectNone: () => selection.deselectAll(shownItems),
                     ),
                   );
                 },
@@ -333,7 +333,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
 
       return confirmedSelection;
     }
-    await selection.close();
+    unawaited(selection.close());
     await controller.dispose().then((_) async {
       if (search.isClosed) return;
 

@@ -19,7 +19,7 @@ class ListSelectionCubit extends Cubit<ListSelectionState> {
     if (state case final ListSelectionActive active) {
       emit(
         active.selected.contains(item)
-            ? active.excluding(item)
+            ? active.excluding([item])
             : active.including([item]),
       );
     }
@@ -32,7 +32,11 @@ class ListSelectionCubit extends Cubit<ListSelectionState> {
     ListSelectionInactive() => ListSelectionActive(items),
   });
 
-  void selectNone() => emit(ListSelectionActive(const []));
+  void deselectAll(Iterable<Viewable> items) {
+    if (state case final ListSelectionActive active) {
+      emit(active.excluding(items));
+    }
+  }
 
   void endUnlessAlwaysActive() {
     if (!_isAlwaysActive) emit(const ListSelectionInactive());
