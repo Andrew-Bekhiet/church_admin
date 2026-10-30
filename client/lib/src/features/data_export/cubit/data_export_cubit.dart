@@ -217,11 +217,11 @@ class DataExportCubit extends Cubit<DataExportState> {
                   PrimitiveOperator.eq,
                   scope.object.id,
                 ),
-                if (scope.gender case final gender?)
+                if (scope.gender != Gender.any)
                   Filter(
                     ClassFields().serviceGender,
-                    BooleanOperator.is$,
-                    gender,
+                    GenderOperator.is$,
+                    scope.gender,
                   ),
                 if (scope.studyYear case final studyYear?)
                   Filter(

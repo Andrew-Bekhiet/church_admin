@@ -34,7 +34,7 @@ class MeetingRosterEntry with _$MeetingRosterEntry {
     final person = Person(
       id: row.personId?.uuid ?? '',
       name: row.name ?? '',
-      gender: row.gender ?? false,
+      gender: Gender.fromIsMale(row.gender),
       color: colorFromInt(row.color),
       studyYearId: row.studyYearId,
       photoUpdatedAt: row.photoUpdatedAt,

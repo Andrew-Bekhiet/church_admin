@@ -50,8 +50,9 @@ class Meeting extends ViewableWithID
   @QueryableField(label: 'السنة الدراسية')
   final StudyYear? studyYear;
 
+  @GenderIsMaleConverter()
   @QueryableField(label: 'نوع المخدومين المسؤول عنهم')
-  final bool? serviceGender;
+  final Gender serviceGender;
 
   final String? groupId;
 
@@ -67,12 +68,12 @@ class Meeting extends ViewableWithID
     required this.audience,
     required this.isArchived,
     this.showKodasCheckbox = true,
+    this.serviceGender = Gender.any,
     this.color,
     this.serviceId,
     this.service,
     this.serviceStudyYear,
     this.studyYear,
-    this.serviceGender,
     this.groupId,
     this.group,
   });
@@ -92,7 +93,7 @@ class Meeting extends ViewableWithID
       showKodasCheckbox: showKodasCheckbox,
       serviceId: service?.id.toUuid() ?? serviceId?.toUuid(),
       serviceStudyYear: serviceStudyYear,
-      serviceGender: serviceGender,
+      serviceGender: serviceGender.isMale,
       groupId: group?.id.toUuid() ?? groupId?.toUuid(),
     );
   }

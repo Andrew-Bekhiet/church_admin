@@ -43,8 +43,9 @@ class Person extends ViewableWithIDAndImage
   @QueryableField.birthday(label: 'يوم وشهر الميلاد')
   final String? birthday;
 
+  @GenderIsMaleConverter()
   @QueryableField(label: 'النوع')
-  final bool gender;
+  final Gender gender;
 
   @QueryableField(label: 'شماس؟')
   final bool isShammas;
@@ -250,7 +251,7 @@ class Person extends ViewableWithIDAndImage
     required this.name,
     this.contacts = const [],
     this.familyContacts = const [],
-    this.gender = true,
+    this.gender = Gender.male,
     this.isShammas = false,
     this.workStatus = WorkStatus.employed,
     this.martialStatus = MartialStatus.single,
@@ -363,7 +364,7 @@ class Person extends ViewableWithIDAndImage
     nationalId: nationalId,
     name: name,
     birthdate: birthdate,
-    gender: gender,
+    gender: gender.isMale,
     isShammas: isShammas,
     shammasLevelId: shammasLevel?.id.toUuid(),
     schoolId: school?.id.toUuid(),
@@ -645,10 +646,12 @@ class Person extends ViewableWithIDAndImage
     }
 
     if (gender != oldPerson.gender) {
+      final canBeShammas = isShammas && gender == Gender.male;
+
       result = result.copyWith(
-        gender: gender,
-        isShammas: isShammas && gender,
-        shammasLevelId: isShammas && gender ? result.shammasLevelId : null,
+        gender: gender.isMale,
+        isShammas: canBeShammas,
+        shammasLevelId: canBeShammas ? result.shammasLevelId : null,
       );
     }
 

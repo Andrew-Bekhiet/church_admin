@@ -18,7 +18,7 @@ class UserPermissionsUpdateHelper {
       areaAdminOnUsers: data.areaAdminOnUsers,
       adminOnService: data.service?.id.toUuid(),
       serviceStudyYear: data.serviceStudyYearData?.order,
-      serviceGender: data.serviceGender,
+      serviceGender: data.serviceGender.isMale,
       serviceAllowEdit: data.serviceAllowEdit,
       serviceAllowExport: data.serviceAllowExport,
       serviceAllowRecordAttendance: data.serviceAllowRecordAttendance,

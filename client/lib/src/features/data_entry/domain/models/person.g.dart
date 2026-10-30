@@ -65,13 +65,13 @@ class _PersonFields {
     },
   );
 
-  final FieldMetadata<bool> gender = FieldMetadata<bool>(
+  final FieldMetadata<Gender> gender = FieldMetadata<Gender>(
     getValue: (obj) => obj is Person ? obj.gender : null,
     parentType: Person,
     name: 'gender',
     label: 'النوع',
     isCodeOnly: false,
-    operators: {...BooleanOperator.values},
+    operators: {...GenderOperator.values},
   );
 
   final FieldMetadata<bool> isShammas = FieldMetadata<bool>(
@@ -816,7 +816,9 @@ Person _$PersonFromJson(Map json) => Person(
           )
           .toList() ??
       [],
-  gender: json['gender'] as bool? ?? true,
+  gender: json['gender'] == null
+      ? Gender.male
+      : const GenderIsMaleConverter().fromJson(json['gender'] as bool?),
   isShammas: json['isShammas'] as bool? ?? false,
   workStatus:
       $enumDecodeNullable(_$WorkStatusEnumMap, json['workStatus']) ??
@@ -1019,7 +1021,7 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
     const LocalDateTimeConverter().toJson,
   ),
   'birthday': instance.birthday,
-  'gender': instance.gender,
+  'gender': const GenderIsMaleConverter().toJson(instance.gender),
   'isShammas': instance.isShammas,
   'shammasLevelId': instance.shammasLevelId,
   'shammasLevel': instance.shammasLevel?.toJson(),

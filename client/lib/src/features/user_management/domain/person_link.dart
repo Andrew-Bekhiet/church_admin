@@ -23,7 +23,7 @@ final class LinkExistingPerson extends PersonLink {
 
 final class CreateNewPerson extends PersonLink {
   final String name;
-  final bool gender;
+  final Gender gender;
 
   @override
   List<Object?> get props => [name, gender];

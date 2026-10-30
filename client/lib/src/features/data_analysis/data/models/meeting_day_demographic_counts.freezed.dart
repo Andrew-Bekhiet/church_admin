@@ -80,8 +80,8 @@ abstract mixin class $MeetingDayDemographicCountsCopyWith<$Res> {
     int personsCount,
     int servantsCount,
     int totalCount,
+    Gender gender,
     int? studyYearId,
-    bool? gender,
     String? studyYearName,
   });
 }
@@ -103,8 +103,8 @@ class _$MeetingDayDemographicCountsCopyWithImpl<$Res>
     Object? personsCount = null,
     Object? servantsCount = null,
     Object? totalCount = null,
+    Object? gender = null,
     Object? studyYearId = freezed,
-    Object? gender = freezed,
     Object? studyYearName = freezed,
   }) {
     return _then(
@@ -125,14 +125,14 @@ class _$MeetingDayDemographicCountsCopyWithImpl<$Res>
             ? _self.totalCount
             : totalCount // ignore: cast_nullable_to_non_nullable
                   as int,
+        gender: null == gender
+            ? _self.gender
+            : gender // ignore: cast_nullable_to_non_nullable
+                  as Gender,
         studyYearId: freezed == studyYearId
             ? _self.studyYearId
             : studyYearId // ignore: cast_nullable_to_non_nullable
                   as int?,
-        gender: freezed == gender
-            ? _self.gender
-            : gender // ignore: cast_nullable_to_non_nullable
-                  as bool?,
         studyYearName: freezed == studyYearName
             ? _self.studyYearName
             : studyYearName // ignore: cast_nullable_to_non_nullable

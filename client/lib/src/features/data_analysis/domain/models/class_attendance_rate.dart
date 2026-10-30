@@ -1,5 +1,7 @@
 import 'dart:ui' show Color;
 
+import 'package:church_admin/church_admin.dart';
+
 /// Attendance for one class (study year + gender) on a single day: how many of
 /// its roster members attended, and the resulting rate.
 ///
@@ -12,7 +14,7 @@ class ClassAttendanceRate {
 
   final int? studyYearId;
   final String? studyYearName;
-  final bool? gender;
+  final Gender gender;
   final int attendedCount;
   final int rosterCount;
   final String? className;
@@ -32,9 +34,8 @@ class ClassAttendanceRate {
 
   String get _gradeGenderLabel {
     final genderLabel = switch (gender) {
-      null => null,
-      true => 'بنين',
-      false => 'بنات',
+      Gender.any => null,
+      Gender.male || Gender.female => gender.groupLabel,
     };
 
     final parts = [studyYearName, genderLabel].nonNulls;

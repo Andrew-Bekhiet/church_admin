@@ -19,11 +19,7 @@ class EditUserAdminScopeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final serviceScopeLabel = switch (userAdminScope) {
       UserAdminScope(object: Service(), :final studyYear, :final gender) =>
-        '${studyYear?.name ?? 'جميع السنوات الدراسية'} ${gender == null
-            ? 'بنين و بنات'
-            : gender
-            ? 'بنين'
-            : 'بنات'} فقط',
+        '${studyYear?.name ?? 'جميع السنوات الدراسية'} ${gender.groupLabel} فقط',
       _ => null,
     };
 

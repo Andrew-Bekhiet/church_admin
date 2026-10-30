@@ -8,7 +8,7 @@ class ClassFormController extends ObjectFormController<Class> {
 
   final ServicesDAO _servicesDAO;
 
-  late final gender = AdvancedFieldController<bool?, ObjectEditError>(
+  late final gender = AdvancedFieldController<Gender, ObjectEditError>(
     initialValue: initialDraft.serviceGender,
   );
   late final service = AdvancedFieldController<Service?, ObjectEditError>(

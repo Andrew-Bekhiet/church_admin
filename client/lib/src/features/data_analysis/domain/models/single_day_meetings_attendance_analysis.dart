@@ -12,7 +12,7 @@ import 'package:collection/collection.dart';
 class SingleDayMeetingsAttendanceAnalysis extends MeetingsAttendanceAnalysis {
   /// Null when [class$] doesn't match the slice at all; otherwise the number
   /// of fields the class covers itself rather than through a null wildcard.
-  static int? _matchSpecificity(Class class$, int? studyYearId, bool? gender) {
+  static int? _matchSpecificity(Class class$, int? studyYearId, Gender gender) {
     final studyYearScore = switch ((
       class$.studyYearFromOrder,
       class$.studyYearToOrder,
@@ -26,7 +26,7 @@ class SingleDayMeetingsAttendanceAnalysis extends MeetingsAttendanceAnalysis {
       _ => null,
     };
     final genderScore = switch (class$.serviceGender) {
-      null => 0,
+      Gender.any => 0,
       final classGender when classGender == gender => 1,
       _ => null,
     };
@@ -85,9 +85,9 @@ class SingleDayMeetingsAttendanceAnalysis extends MeetingsAttendanceAnalysis {
   });
 
   List<ClassAttendanceRate> _computeClassAttendanceRates() {
-    final personKey = <String, (int?, bool?)>{};
+    final personKey = <String, (int?, Gender)>{};
     final personAttended = <String, bool>{};
-    final names = <(int?, bool?), String?>{};
+    final names = <(int?, Gender), String?>{};
 
     for (final member in rosterMembers) {
       final key = (member.studyYearId, member.gender);
@@ -100,8 +100,8 @@ class SingleDayMeetingsAttendanceAnalysis extends MeetingsAttendanceAnalysis {
       names.putIfAbsent(key, () => member.studyYearName);
     }
 
-    final rosterCounts = <(int?, bool?), int>{};
-    final attendedCounts = <(int?, bool?), int>{};
+    final rosterCounts = <(int?, Gender), int>{};
+    final attendedCounts = <(int?, Gender), int>{};
 
     for (final MapEntry(key: personId, value: key) in personKey.entries) {
       rosterCounts.update(key, (count) => count + 1, ifAbsent: () => 1);
@@ -110,7 +110,7 @@ class SingleDayMeetingsAttendanceAnalysis extends MeetingsAttendanceAnalysis {
       }
     }
 
-    final byKey = SplayTreeMap<(int?, bool?), List<ClassAttendanceRate>>(
+    final byKey = SplayTreeMap<(int?, Gender), List<ClassAttendanceRate>>(
       MeetingsAttendanceAnalysis.compareStudyYearGenderKeys,
     );
 
@@ -139,7 +139,7 @@ class SingleDayMeetingsAttendanceAnalysis extends MeetingsAttendanceAnalysis {
   /// a service-wide "general" class can't steal slices from graded classes,
   /// while a single-year class and a range class covering the same year both
   /// keep it.
-  List<Class> _matchClasses(int? studyYearId, bool? gender) {
+  List<Class> _matchClasses(int? studyYearId, Gender gender) {
     final candidates = [
       for (final class$ in classes)
         if (_matchSpecificity(class$, studyYearId, gender)

@@ -16,6 +16,8 @@ export 'models/entity_relation.dart';
 export 'models/family.dart';
 export 'models/father.dart';
 export 'models/functions_object_image_info.dart';
+export 'models/gender.dart';
+export 'models/gender_is_male_converter.dart';
 export 'models/group.dart';
 export 'models/hobby.dart';
 export 'models/i_image.dart';

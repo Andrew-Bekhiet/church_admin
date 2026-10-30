@@ -1,28 +1,37 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
 class GenderField extends StatelessWidget {
   final GenderFieldType type;
-  final bool nullable;
+  final bool allowsAny;
   final bool enabled;
-  final bool? initialValue;
+  final Gender? initialValue;
 
-  final FormFieldSetter<bool?>? onSaved;
-  final FormFieldValidator<bool?>? validator;
+  final FormFieldSetter<Gender>? onSaved;
+  final FormFieldValidator<Gender>? validator;
   final AutovalidateMode? autovalidateMode;
 
   final String label;
   final String maleLabel;
   final String femaleLabel;
-  final String nullLabel;
+  final String anyLabel;
+
+  final void Function(Gender)? onChanged;
+
+  List<(Gender, String, int)> get _options => [
+    if (allowsAny) (Gender.any, anyLabel, 5),
+    (Gender.male, maleLabel, 4),
+    (Gender.female, femaleLabel, 4),
+  ];
 
   const GenderField({
     this.type = GenderFieldType.radio,
-    this.nullable = false,
+    this.allowsAny = false,
     this.enabled = true,
     this.label = 'النوع',
     this.maleLabel = 'ذكر',
     this.femaleLabel = 'أنثى',
-    this.nullLabel = 'غير معين',
+    this.anyLabel = 'غير معين',
     this.initialValue,
     this.onSaved,
     this.onChanged,
@@ -35,101 +44,59 @@ class GenderField extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (type) {
       case GenderFieldType.dropdown:
-        return DropdownButtonFormField<bool?>(
+        return DropdownButtonFormField<Gender>(
           initialValue: initialValue,
           autovalidateMode: autovalidateMode,
           validator: validator,
           onSaved: onSaved,
-          onChanged: enabled ? onChanged : null,
+          onChanged: enabled ? _onDropdownChanged : null,
           decoration: InputDecoration(
             enabled: enabled,
             labelText: label,
           ),
           items: [
-            if (nullable) DropdownMenuItem(child: Text(nullLabel)),
-            DropdownMenuItem(value: true, child: Text(maleLabel)),
-            DropdownMenuItem(value: false, child: Text(femaleLabel)),
+            for (final (gender, optionLabel, _) in _options)
+              DropdownMenuItem(value: gender, child: Text(optionLabel)),
           ],
         );
 
       case GenderFieldType.radio:
-        return FormField<bool>(
+        return FormField<Gender>(
           initialValue: initialValue,
           autovalidateMode: autovalidateMode,
           onSaved: onSaved,
           validator: validator,
           enabled: enabled,
           builder: (state) {
-            final theme = Theme.of(context);
+            final optionStyle = Theme.of(context).textTheme.titleMedium;
 
             return InputDecorator(
               decoration: InputDecoration(
                 labelText: label,
                 errorText: state.errorText,
               ),
-              child: RadioGroup<bool?>(
+              child: RadioGroup<Gender>(
                 groupValue: state.value,
-                onChanged: (v) => _onChanged(state, v),
+                onChanged: (gender) => _maybeChange(state, gender),
                 child: Row(
                   children: [
-                    if (nullable)
+                    for (final (gender, optionLabel, flex) in _options)
                       Expanded(
-                        flex: 5,
+                        flex: flex,
                         child: Row(
                           children: [
-                            const Radio<bool?>(
+                            Radio<Gender>(
                               materialTapTargetSize:
                                   MaterialTapTargetSize.shrinkWrap,
-                              value: null,
+                              value: gender,
                             ),
                             GestureDetector(
-                              onTap: () => _onChanged(state, null),
-                              child: Text(
-                                nullLabel,
-                                style: theme.textTheme.titleMedium,
-                              ),
+                              onTap: () => _maybeChange(state, gender),
+                              child: Text(optionLabel, style: optionStyle),
                             ),
                           ],
                         ),
                       ),
-                    Expanded(
-                      flex: 4,
-                      child: Row(
-                        children: [
-                          const Radio<bool?>(
-                            materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap,
-                            value: true,
-                          ),
-                          GestureDetector(
-                            onTap: () => _onChanged(state, true),
-                            child: Text(
-                              maleLabel,
-                              style: theme.textTheme.titleMedium,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 4,
-                      child: Row(
-                        children: [
-                          const Radio<bool?>(
-                            materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap,
-                            value: false,
-                          ),
-                          GestureDetector(
-                            onTap: () => _onChanged(state, false),
-                            child: Text(
-                              femaleLabel,
-                              style: theme.textTheme.titleMedium,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -139,13 +106,15 @@ class GenderField extends StatelessWidget {
     }
   }
 
-  final void Function(bool?)? onChanged;
+  void _onDropdownChanged(Gender? gender) {
+    if (gender != null) onChanged?.call(gender);
+  }
 
-  void _onChanged(FormFieldState<bool?> state, bool? value) {
-    state.didChange(value);
-    if (onChanged != null) {
-      onChanged?.call(value);
-    }
+  void _maybeChange(FormFieldState<Gender> state, Gender? gender) {
+    if (gender == null) return;
+
+    state.didChange(gender);
+    onChanged?.call(gender);
   }
 }
 

@@ -24,7 +24,7 @@ void main() {
   AdminOnData serviceAdmin(
     Service service, {
     StudyYear? studyYear,
-    bool? gender,
+    Gender gender = Gender.any,
   }) => AdminOnData(
     permissionId: 'p-${service.id}',
     service: service,
@@ -98,10 +98,10 @@ void main() {
         services: const [primarySchool],
       );
       final user = userWith(
-        adminOn: [serviceAdmin(primarySchool, gender: true)],
+        adminOn: [serviceAdmin(primarySchool, gender: Gender.male)],
       );
 
-      expect(hides(user, child, child.copyWith(gender: false)), isTrue);
+      expect(hides(user, child, child.copyWith(gender: Gender.female)), isTrue);
     });
 
     test('adding a service keeps a child visible through the old one', () {

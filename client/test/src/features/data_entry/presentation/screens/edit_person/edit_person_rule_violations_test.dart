@@ -85,7 +85,7 @@ void main() {
           AdminOnData(
             permissionId: 'grant',
             service: primary,
-            serviceGender: true,
+            serviceGender: Gender.male,
           ),
         ],
       )

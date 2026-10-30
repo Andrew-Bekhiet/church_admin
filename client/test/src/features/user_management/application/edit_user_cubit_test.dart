@@ -92,7 +92,7 @@ class _FakeInvitationsDAO extends Fake implements InvitationsDAO {
 void main() {
   group('EditUserCubit', () {
     final person1 = Person(id: 'p1', name: 'مينا');
-    final person2 = Person(id: 'p2', name: 'مريم', gender: false);
+    final person2 = Person(id: 'p2', name: 'مريم', gender: Gender.female);
 
     late _MockUserPermissionsDAO permissionsDao;
     late _FakeUsersDAO usersDao;

@@ -114,17 +114,13 @@ class MeetingFields {
     },
   );
 
-  final FieldMetadata<bool> serviceGender = FieldMetadata<bool>(
+  final FieldMetadata<Gender> serviceGender = FieldMetadata<Gender>(
     getValue: (obj) => obj is Meeting ? obj.serviceGender : null,
     parentType: Meeting,
     name: 'serviceGender',
     label: 'نوع المخدومين المسؤول عنهم',
     isCodeOnly: false,
-    operators: {
-      ...BooleanOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull,
-    },
+    operators: {...GenderOperator.values},
   );
 
   final FieldMetadata<Group> group = FieldMetadata<Group>(
@@ -181,6 +177,9 @@ Meeting _$MeetingFromJson(Map json) => Meeting(
       MeetingAudience.personsAndServants,
   isArchived: json['isArchived'] as bool? ?? false,
   showKodasCheckbox: json['showKodasCheckbox'] as bool? ?? true,
+  serviceGender: json['serviceGender'] == null
+      ? Gender.any
+      : const GenderIsMaleConverter().fromJson(json['serviceGender'] as bool?),
   color: colorFromInt((json['color'] as num?)?.toInt()),
   serviceId: json['serviceId'] as String?,
   service: json['service'] == null
@@ -190,7 +189,6 @@ Meeting _$MeetingFromJson(Map json) => Meeting(
   studyYear: json['studyYear'] == null
       ? null
       : StudyYear.fromJson(Map<String, Object?>.from(json['studyYear'] as Map)),
-  serviceGender: json['serviceGender'] as bool?,
   groupId: json['groupId'] as String?,
   group: json['group'] == null
       ? null
@@ -208,7 +206,7 @@ Map<String, dynamic> _$MeetingToJson(Meeting instance) => <String, dynamic>{
   'service': instance.service?.toJson(),
   'serviceStudyYear': instance.serviceStudyYear,
   'studyYear': instance.studyYear?.toJson(),
-  'serviceGender': instance.serviceGender,
+  'serviceGender': const GenderIsMaleConverter().toJson(instance.serviceGender),
   'groupId': instance.groupId,
   'group': instance.group?.toJson(),
 };

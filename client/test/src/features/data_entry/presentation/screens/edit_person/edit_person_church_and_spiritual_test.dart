@@ -44,7 +44,7 @@ void main() {
   testWidgets('a woman cannot be a shammas', (tester) async {
     await harness.open(
       tester,
-      UpdatePerson(person: boy.copyWith(gender: false)),
+      UpdatePerson(person: boy.copyWith(gender: Gender.female)),
     );
 
     expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsOneWidget);

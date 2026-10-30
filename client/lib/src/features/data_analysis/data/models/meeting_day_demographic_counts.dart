@@ -1,3 +1,4 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/queries.gql.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -9,7 +10,7 @@ class MeetingDayDemographicCounts with _$MeetingDayDemographicCounts {
 
   final int? studyYearId;
 
-  final bool? gender;
+  final Gender gender;
 
   final int personsCount;
 
@@ -24,8 +25,8 @@ class MeetingDayDemographicCounts with _$MeetingDayDemographicCounts {
     required this.personsCount,
     required this.servantsCount,
     required this.totalCount,
+    this.gender = Gender.any,
     this.studyYearId,
-    this.gender,
     this.studyYearName,
   });
 
@@ -34,7 +35,7 @@ class MeetingDayDemographicCounts with _$MeetingDayDemographicCounts {
   ) => MeetingDayDemographicCounts(
     day: data.day ?? DateTime.now(),
     studyYearId: data.studyYearId,
-    gender: data.gender,
+    gender: Gender.fromIsMale(data.gender),
     studyYearName: data.studyYear?.name,
     personsCount: data.personsCount ?? 0,
     servantsCount: data.servantsCount ?? 0,

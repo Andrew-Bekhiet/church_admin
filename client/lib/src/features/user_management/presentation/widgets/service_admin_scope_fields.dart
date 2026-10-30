@@ -61,10 +61,10 @@ class ServiceAdminScopeFields extends StatelessWidget {
           flex: 2,
           child: GenderField(
             type: GenderFieldType.dropdown,
-            nullable: true,
-            nullLabel: 'بنين و بنات',
-            maleLabel: 'بنين',
-            femaleLabel: 'بنات',
+            allowsAny: true,
+            anyLabel: Gender.any.groupLabel,
+            maleLabel: Gender.male.groupLabel,
+            femaleLabel: Gender.female.groupLabel,
             initialValue: userAdminScope.gender,
             onChanged: (value) =>
                 onChanged(userAdminScope.copyWith(gender: value)),

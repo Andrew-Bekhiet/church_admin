@@ -166,8 +166,8 @@ class PersonFormController extends AdvancedFormController {
 
     addRelation(
       maritalStatusAndType.gender,
-      (isMale) => isMale,
-      _clearShammasWhenFemale,
+      (gender) => gender,
+      _clearShammasWhenNotMale,
     );
     addRelation(
       household.family,
@@ -347,8 +347,8 @@ class PersonFormController extends AdvancedFormController {
     );
   }
 
-  void _clearShammasWhenFemale(bool isMale) {
-    if (isMale) return;
+  void _clearShammasWhenNotMale(Gender gender) {
+    if (gender == Gender.male) return;
 
     churchAndSpiritual.isShammas.prefill(false);
   }

@@ -38,9 +38,13 @@ class CreateUserRequest {
       CreateNewPerson(:final name, :final gender) => {
         'kind': 'new',
         'name': name,
-        'gender': gender,
+        'gender': gender.isMale,
       },
-      NoPersonSelected() => {'kind': 'new', 'name': '', 'gender': true},
+      NoPersonSelected() => {
+        'kind': 'new',
+        'name': '',
+        'gender': Gender.male.isMale,
+      },
     },
     invitation: switch (draft.invitation) {
       InvitationRequest(:final expiresAt) => {

@@ -5,6 +5,7 @@ export 'operators/boolean_operator.dart';
 export 'operators/color_operator.dart';
 export 'operators/date_range_operator.dart';
 export 'operators/date_time_operator.dart';
+export 'operators/gender_operator.dart';
 export 'operators/logical_operator.dart';
 export 'operators/multi_select_operator.dart';
 export 'operators/phone_operator.dart';

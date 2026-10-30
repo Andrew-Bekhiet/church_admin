@@ -47,7 +47,7 @@ class _EditClassScreenState extends State<EditClassScreen> {
             field: _form.gender,
             maleLabel: 'بنيــن',
             femaleLabel: 'بنات',
-            bothLabel: 'بنيــن و بنات',
+            anyLabel: 'بنيــن و بنات',
           ),
           AdvancedSingleObjectSelectionField<Service, ObjectEditError>(
             field: _form.service,

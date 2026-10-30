@@ -32,7 +32,7 @@ void main() {
       group: Group(id: 'g1', name: 'مجموعة'),
     );
     final person1 = Person(id: 'p1', name: 'مينا');
-    final person2 = Person(id: 'p2', name: 'مريم', gender: false);
+    final person2 = Person(id: 'p2', name: 'مريم', gender: Gender.female);
     final editedUser = User(uid: 'u1', name: 'مينا', person: person1);
 
     late _MockUserPermissionsDAO permissionsDao;

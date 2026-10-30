@@ -21,37 +21,34 @@ class PersonEditMaritalStatusAndTypeSection extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
-          child: AdvancedFieldBuilder<bool, PersonEditError>(
+          child: AdvancedFieldBuilder<Gender, PersonEditError>(
             field: form.gender,
             builder: (context, state, _) => InputDecorator(
               decoration: InputDecoration(
                 labelText: 'النوع',
                 enabled: !state.readOnly,
               ),
-              child: RadioGroup<bool>(
+              child: RadioGroup<Gender>(
                 groupValue: state.value,
-                onChanged: (isMale) {
-                  if (isMale == null) return;
+                onChanged: (gender) {
+                  if (gender == null) return;
 
-                  form.gender.setValue(isMale);
+                  form.gender.setValue(gender);
                 },
                 child: Row(
                   children: [
-                    for (final (isMale, label) in [
-                      (true, 'ذكر'),
-                      (false, 'أنثى'),
-                    ])
+                    for (final gender in [Gender.male, Gender.female])
                       Expanded(
                         child: Row(
                           children: [
-                            Radio<bool>(
+                            Radio<Gender>(
                               materialTapTargetSize:
                                   MaterialTapTargetSize.shrinkWrap,
-                              value: isMale,
+                              value: gender,
                             ),
                             GestureDetector(
-                              onTap: () => form.gender.setValue(isMale),
-                              child: Text(label, style: titleMedium),
+                              onTap: () => form.gender.setValue(gender),
+                              child: Text(gender.label, style: titleMedium),
                             ),
                           ],
                         ),

@@ -95,17 +95,13 @@ class AdminOnDataFields {
         },
       );
 
-  final FieldMetadata<bool> serviceGender = FieldMetadata<bool>(
+  final FieldMetadata<Gender> serviceGender = FieldMetadata<Gender>(
     getValue: (obj) => obj is AdminOnData ? obj.serviceGender : null,
     parentType: AdminOnData,
     name: 'serviceGender',
     label: 'نوع المخدومين المسؤول عنهم',
     isCodeOnly: false,
-    operators: {
-      ...BooleanOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull,
-    },
+    operators: {...GenderOperator.values},
   );
 
   final FieldMetadata<bool> serviceAllowExport = FieldMetadata<bool>(
@@ -372,6 +368,9 @@ AdminOnData _$AdminOnDataFromJson(Map json) => AdminOnData(
           ?.map((e) => Class.fromJson(Map<String, Object?>.from(e as Map)))
           .toList() ??
       const [],
+  serviceGender: json['serviceGender'] == null
+      ? Gender.any
+      : const GenderIsMaleConverter().fromJson(json['serviceGender'] as bool?),
   area: json['area'] == null
       ? null
       : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
@@ -386,7 +385,6 @@ AdminOnData _$AdminOnDataFromJson(Map json) => AdminOnData(
       : StudyYear.fromJson(
           Map<String, Object?>.from(json['serviceStudyYearData'] as Map),
         ),
-  serviceGender: json['serviceGender'] as bool?,
   serviceAllowExport: json['serviceAllowExport'] as bool?,
   serviceAllowEdit: json['serviceAllowEdit'] as bool?,
   serviceAllowRecordAttendance: json['serviceAllowRecordAttendance'] as bool?,
@@ -409,31 +407,32 @@ AdminOnData _$AdminOnDataFromJson(Map json) => AdminOnData(
       : User.fromJson(Map<String, Object?>.from(json['user'] as Map)),
 );
 
-Map<String, dynamic> _$AdminOnDataToJson(AdminOnData instance) =>
-    <String, dynamic>{
-      'permissionId': instance.permissionId,
-      'area': instance.area?.toJson(),
-      'areaAllowExport': instance.areaAllowExport,
-      'areaAllowEdit': instance.areaAllowEdit,
-      'areaAdminOnUsers': instance.areaAdminOnUsers,
-      'service': instance.service?.toJson(),
-      'serviceStudyYearData': instance.serviceStudyYearData?.toJson(),
-      'serviceGender': instance.serviceGender,
-      'serviceAllowExport': instance.serviceAllowExport,
-      'serviceAllowEdit': instance.serviceAllowEdit,
-      'serviceAllowRecordAttendance': instance.serviceAllowRecordAttendance,
-      'serviceAllowRecordServantsAttendance':
-          instance.serviceAllowRecordServantsAttendance,
-      'serviceAdminOnUsers': instance.serviceAdminOnUsers,
-      'serviceWriteRelatedFamilies': instance.serviceWriteRelatedFamilies,
-      'classes': instance.classes.map((e) => e.toJson()).toList(),
-      'group': instance.group?.toJson(),
-      'groupAllowExport': instance.groupAllowExport,
-      'groupAllowEdit': instance.groupAllowEdit,
-      'groupAllowRecordAttendance': instance.groupAllowRecordAttendance,
-      'groupAllowRecordServantsAttendance':
-          instance.groupAllowRecordServantsAttendance,
-      'groupAdminOnUsers': instance.groupAdminOnUsers,
-      'groupWriteRelatedFamilies': instance.groupWriteRelatedFamilies,
-      'user': instance.user?.toJson(),
-    };
+Map<String, dynamic> _$AdminOnDataToJson(
+  AdminOnData instance,
+) => <String, dynamic>{
+  'permissionId': instance.permissionId,
+  'area': instance.area?.toJson(),
+  'areaAllowExport': instance.areaAllowExport,
+  'areaAllowEdit': instance.areaAllowEdit,
+  'areaAdminOnUsers': instance.areaAdminOnUsers,
+  'service': instance.service?.toJson(),
+  'serviceStudyYearData': instance.serviceStudyYearData?.toJson(),
+  'serviceGender': const GenderIsMaleConverter().toJson(instance.serviceGender),
+  'serviceAllowExport': instance.serviceAllowExport,
+  'serviceAllowEdit': instance.serviceAllowEdit,
+  'serviceAllowRecordAttendance': instance.serviceAllowRecordAttendance,
+  'serviceAllowRecordServantsAttendance':
+      instance.serviceAllowRecordServantsAttendance,
+  'serviceAdminOnUsers': instance.serviceAdminOnUsers,
+  'serviceWriteRelatedFamilies': instance.serviceWriteRelatedFamilies,
+  'classes': instance.classes.map((e) => e.toJson()).toList(),
+  'group': instance.group?.toJson(),
+  'groupAllowExport': instance.groupAllowExport,
+  'groupAllowEdit': instance.groupAllowEdit,
+  'groupAllowRecordAttendance': instance.groupAllowRecordAttendance,
+  'groupAllowRecordServantsAttendance':
+      instance.groupAllowRecordServantsAttendance,
+  'groupAdminOnUsers': instance.groupAdminOnUsers,
+  'groupWriteRelatedFamilies': instance.groupWriteRelatedFamilies,
+  'user': instance.user?.toJson(),
+};

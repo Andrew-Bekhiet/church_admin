@@ -49,8 +49,9 @@ class Class extends ViewableWithIDAndImage
 
   final int? serviceStudyYearTo;
 
+  @GenderIsMaleConverter()
   @QueryableField(label: 'نوع المخدومين المسؤول عنهم')
-  final bool? serviceGender;
+  final Gender serviceGender;
 
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
@@ -87,6 +88,7 @@ class Class extends ViewableWithIDAndImage
     required this.id,
     required this.name,
     this.userCanEdit = false,
+    this.serviceGender = Gender.any,
     this.color,
     this.photoUpdatedAt,
     this.blurhash,
@@ -96,7 +98,6 @@ class Class extends ViewableWithIDAndImage
     this.serviceStudyYear,
     this.studyYearTo,
     this.serviceStudyYearTo,
-    this.serviceGender,
     this.lastEdit,
     this.adminUsers,
   });
@@ -113,7 +114,7 @@ class Class extends ViewableWithIDAndImage
       serviceId: service?.id.toUuid() ?? serviceId?.toUuid(),
       serviceStudyYear: serviceStudyYear,
       serviceStudyYearTo: serviceStudyYearTo ?? serviceStudyYear,
-      serviceGender: serviceGender,
+      serviceGender: serviceGender.isMale,
     );
   }
 
@@ -143,7 +144,7 @@ class Class extends ViewableWithIDAndImage
     }
 
     if (serviceGender != oldObject.serviceGender) {
-      result = result.copyWith(serviceGender: serviceGender);
+      result = result.copyWith(serviceGender: serviceGender.isMale);
     }
 
     return result;

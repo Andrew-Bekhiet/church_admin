@@ -86,7 +86,7 @@ class MeetingsDAO extends DAOBase<Meeting>
     final serviceId = class$.service?.id.toUuid() ?? class$.serviceId?.toUuid();
     final studyYearFrom = class$.studyYearFromOrder;
     final studyYearTo = class$.studyYearToOrder;
-    final serviceGender = class$.serviceGender;
+    final serviceIsMale = class$.serviceGender.isMale;
 
     return (
       where: [
@@ -106,10 +106,8 @@ class MeetingsDAO extends DAOBase<Meeting>
             ),
             _ => null,
           },
-          gender: switch (serviceGender) {
-            final serviceGender? => Input_BooleanComparisonExp(
-              $_eq: serviceGender,
-            ),
+          gender: switch (serviceIsMale) {
+            final isMale? => Input_BooleanComparisonExp($_eq: isMale),
             null => null,
           },
         ),
@@ -123,10 +121,8 @@ class MeetingsDAO extends DAOBase<Meeting>
             ),
             _ => null,
           },
-          gender: switch (serviceGender) {
-            final serviceGender? => Input_BooleanComparisonExp(
-              $_eq: serviceGender,
-            ),
+          gender: switch (serviceIsMale) {
+            final isMale? => Input_BooleanComparisonExp($_eq: isMale),
             null => null,
           },
         ),
@@ -363,7 +359,7 @@ class MeetingsDAO extends DAOBase<Meeting>
             personId: personId,
             studyYearId: row.studyYearId,
             studyYearName: row.studyYearName,
-            gender: row.gender,
+            gender: Gender.fromIsMale(row.gender),
             attended: row.attendanceHistory.isNotEmpty,
           ),
     ];

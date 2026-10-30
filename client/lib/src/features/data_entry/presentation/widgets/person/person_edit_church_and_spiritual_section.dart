@@ -10,7 +10,7 @@ class PersonEditChurchAndSpiritualSection extends StatelessWidget {
 
   final PersonChurchAndSpiritualFormController form;
   final PersonMetadataCatalog metadata;
-  final AdvancedFieldController<bool, PersonEditError> gender;
+  final AdvancedFieldController<Gender, PersonEditError> gender;
 
   const PersonEditChurchAndSpiritualSection({
     required this.form,
@@ -64,7 +64,7 @@ class PersonEditChurchAndSpiritualSection extends StatelessWidget {
               ),
             ),
           ],
-          if (gender.fieldValue) ...[
+          if (gender.fieldValue == Gender.male) ...[
             AdvancedCheckboxTile<PersonEditError>(
               field: form.isShammas,
               title: 'شماس؟',

@@ -93,12 +93,12 @@ abstract mixin class $MeetingCopyWith<$Res> {
     MeetingAudience audience,
     bool isArchived,
     bool showKodasCheckbox,
+    Gender serviceGender,
     Color? color,
     String? serviceId,
     Service? service,
     int? serviceStudyYear,
     StudyYear? studyYear,
-    bool? serviceGender,
     String? groupId,
     Group? group,
   });
@@ -125,12 +125,12 @@ class _$MeetingCopyWithImpl<$Res> implements $MeetingCopyWith<$Res> {
     Object? audience = null,
     Object? isArchived = null,
     Object? showKodasCheckbox = null,
+    Object? serviceGender = null,
     Object? color = freezed,
     Object? serviceId = freezed,
     Object? service = freezed,
     Object? serviceStudyYear = freezed,
     Object? studyYear = freezed,
-    Object? serviceGender = freezed,
     Object? groupId = freezed,
     Object? group = freezed,
   }) {
@@ -156,6 +156,10 @@ class _$MeetingCopyWithImpl<$Res> implements $MeetingCopyWith<$Res> {
             ? _self.showKodasCheckbox
             : showKodasCheckbox // ignore: cast_nullable_to_non_nullable
                   as bool,
+        serviceGender: null == serviceGender
+            ? _self.serviceGender
+            : serviceGender // ignore: cast_nullable_to_non_nullable
+                  as Gender,
         color: freezed == color
             ? _self.color
             : color // ignore: cast_nullable_to_non_nullable
@@ -176,10 +180,6 @@ class _$MeetingCopyWithImpl<$Res> implements $MeetingCopyWith<$Res> {
             ? _self.studyYear
             : studyYear // ignore: cast_nullable_to_non_nullable
                   as StudyYear?,
-        serviceGender: freezed == serviceGender
-            ? _self.serviceGender
-            : serviceGender // ignore: cast_nullable_to_non_nullable
-                  as bool?,
         groupId: freezed == groupId
             ? _self.groupId
             : groupId // ignore: cast_nullable_to_non_nullable
