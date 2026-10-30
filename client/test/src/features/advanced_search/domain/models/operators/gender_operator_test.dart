@@ -87,4 +87,8 @@ void main() {
       }
     }
   });
+
+  test('a saved gender this version does not know restores as unchosen', () {
+    expect(GenderOperator.is$.deserializeValue('unknown'), isNull);
+  });
 }

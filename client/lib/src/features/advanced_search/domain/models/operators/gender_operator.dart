@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:collection/collection.dart';
 
 enum GenderOperator implements Operator<Gender?> {
   is$('_eq', 'يساوي'),
@@ -30,7 +31,9 @@ enum GenderOperator implements Operator<Gender?> {
 
   @override
   Gender? deserializeValue(Object? data) => switch (data) {
-    final String name => Gender.values.byName(name),
+    final String name => Gender.values.firstWhereOrNull(
+      (gender) => gender.name == name,
+    ),
     _ => null,
   };
 }
