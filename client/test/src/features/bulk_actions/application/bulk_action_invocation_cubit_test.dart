@@ -7,6 +7,12 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../../fakes/fake_logging_service.dart';
 import '../../../fakes/recording_analytics_provider.dart';
 
+class RejectingLoggingService extends FakeLoggingService {
+  @override
+  Future<void> error(LogRecord record) async =>
+      throw StateError('logging provider down');
+}
+
 void main() {
   final mina = Person(id: 'p1', name: 'مينا');
 
@@ -99,6 +105,20 @@ void main() {
       logging.reportedErrors.map((record) => record.message),
       ['Bulk action reject failed'],
     ),
+  );
+
+  blocTest<BulkActionInvocationCubit, BulkActionInvocationState>(
+    'a failing logger still lets the next action run',
+    build: () => BulkActionInvocationCubit(
+      analyticsService: AnalyticsService([analytics], FakeLoggingService()),
+      loggingService: RejectingLoggingService(),
+    ),
+    act: (cubit) => cubit.invoke(
+      actionKey: 'show_names',
+      items: {mina},
+      run: () async => throw StateError('offline'),
+    ),
+    expect: () => const [BulkActionRunning('show_names'), BulkActionIdle()],
   );
 
   blocTest<BulkActionInvocationCubit, BulkActionInvocationState>(

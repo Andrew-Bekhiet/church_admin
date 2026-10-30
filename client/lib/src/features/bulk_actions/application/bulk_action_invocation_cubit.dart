@@ -25,18 +25,24 @@ class BulkActionInvocationCubit extends Cubit<BulkActionInvocationState> {
     try {
       await Future.sync(run);
     } on Object catch (error, stackTrace) {
-      await _logging.error(
+      _reportFailure(actionKey, error, stackTrace);
+    } finally {
+      if (!isClosed) emit(const BulkActionIdle());
+    }
+  }
+
+  void _reportFailure(
+    String actionKey,
+    Object error,
+    StackTrace stackTrace,
+  ) => _logging
+      .error(
         LogRecord(
           message: 'Bulk action $actionKey failed',
           moduleName: '$BulkActionInvocationCubit',
           error: error,
           stackTrace: stackTrace,
         ),
-      );
-    }
-
-    if (isClosed) return;
-
-    emit(const BulkActionIdle());
-  }
+      )
+      .ignore();
 }
