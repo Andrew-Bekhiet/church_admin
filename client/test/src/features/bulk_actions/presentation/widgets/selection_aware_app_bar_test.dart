@@ -36,6 +36,23 @@ class ShowNamesBulkAction extends BulkAction<Person> {
       );
 }
 
+class RejectingBulkAction extends BulkAction<Group> {
+  @override
+  String get key => 'reject';
+
+  @override
+  String get label => 'رفض';
+
+  @override
+  Widget get icon => const Icon(Symbols.block);
+
+  const RejectingBulkAction();
+
+  @override
+  Future<void> run(BuildContext context, Set<Group> selected) =>
+      throw StateError('rejected before starting');
+}
+
 class TabsHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
   double get minExtent => kToolbarHeight - 6;
@@ -76,13 +93,15 @@ void main() {
   ];
 
   late RecordingAnalyticsProvider analytics;
+  late FakeLoggingService logging;
   late ListSelectionCubit selection;
   late ViewableObjectListController listController;
 
   setUp(() {
     analytics = RecordingAnalyticsProvider();
+    logging = FakeLoggingService();
     initGlobalProviderContainer([
-      loggingServiceProvider.overrideWithValue(FakeLoggingService()),
+      loggingServiceProvider.overrideWithValue(logging),
       viewableObjectServiceProvider.overrideWithValue(
         MockViewableObjectService(),
       ),
@@ -90,7 +109,10 @@ void main() {
         AnalyticsService([analytics], FakeLoggingService()),
       ),
       bulkActionsRegistryProvider.overrideWithValue(
-        const BulkActionsRegistry([ShowNamesBulkAction()]),
+        const BulkActionsRegistry([
+          ShowNamesBulkAction(),
+          RejectingBulkAction(),
+        ]),
       ),
     ]);
   });
@@ -505,6 +527,27 @@ void main() {
       analytics.trackedEventsOf<BulkActionInvoke>().single.properties,
       containsPair('selected_count', 1),
     );
+  });
+
+  testScreen('a bulk action that throws before starting is logged', (
+    tester,
+  ) async {
+    await pumpScreenListing(tester, [const Group(id: 'g1', name: 'مجموعة')]);
+
+    await tester.longPress(
+      find.byKey(SelectionAwareAppBarTestKeys.itemFor('g1')),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.byKey(
+        ListSelectionBarKeys.actionButtonFor(const RejectingBulkAction()),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(logging.reportedErrors.map((record) => record.message), [
+      'Bulk action reject failed',
+    ]);
   });
 
   testScreen('a selection without items of an action type offers none', (

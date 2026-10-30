@@ -87,18 +87,16 @@ class ListSelectionBar extends StatelessWidget implements PreferredSizeWidget {
 
     AnalyticsService.I.track(BulkActionInvoke(action.key, applicableItems));
     unawaited(
-      action
-          .run(context, applicableItems)
-          .catchError(
-            (Object error, StackTrace stackTrace) => LoggingService.I.error(
-              LogRecord(
-                message: 'Bulk action ${action.key} failed',
-                moduleName: '$ListSelectionBar',
-                error: error,
-                stackTrace: stackTrace,
-              ),
-            ),
+      Future.sync(() => action.run(context, applicableItems)).catchError(
+        (Object error, StackTrace stackTrace) => LoggingService.I.error(
+          LogRecord(
+            message: 'Bulk action ${action.key} failed',
+            moduleName: '$ListSelectionBar',
+            error: error,
+            stackTrace: stackTrace,
           ),
+        ),
+      ),
     );
   }
 }
