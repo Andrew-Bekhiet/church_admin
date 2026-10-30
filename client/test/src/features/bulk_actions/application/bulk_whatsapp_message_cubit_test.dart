@@ -63,13 +63,15 @@ void main() {
         analyticsService: AnalyticsService([analytics], FakeLoggingService()),
       );
 
-  BulkWhatsappSending sendingTo(int currentIndex, {bool autoAdvance = false}) =>
-      BulkWhatsappSending(
-        recipients: recipients,
-        template: template,
-        currentIndex: currentIndex,
-        autoAdvance: autoAdvance,
-      );
+  BulkWhatsappSending sendingTo(
+    int currentIndex, {
+    bool opensNextChatOnReturn = false,
+  }) => BulkWhatsappSending(
+    recipients: recipients,
+    template: template,
+    currentIndex: currentIndex,
+    opensNextChatOnReturn: opensNextChatOnReturn,
+  );
 
   OpenedWhatsappChat chatWith(Person person, PhoneContact phone) =>
       OpenedWhatsappChat(
@@ -156,10 +158,12 @@ void main() {
     build: buildCubit,
     seed: () => BulkWhatsappComposing(recipients: recipients),
     act: (cubit) => cubit
-      ..setAutoAdvance(isEnabled: true)
+      ..setOpensNextChatOnReturn(isEnabled: true)
       ..start(template),
-    verify: (cubit) =>
-        expect((cubit.state as BulkWhatsappSending).autoAdvance, isTrue),
+    verify: (cubit) => expect(
+      (cubit.state as BulkWhatsappSending).opensNextChatOnReturn,
+      isTrue,
+    ),
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
@@ -365,7 +369,7 @@ void main() {
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'with auto-advance, returning to the app opens the next chat right away',
     build: buildCubit,
-    seed: () => sendingTo(0, autoAdvance: true),
+    seed: () => sendingTo(0, opensNextChatOnReturn: true),
     act: (cubit) async {
       await cubit.openCurrentChat();
       await cubit.continueAfterOpenedChat();
@@ -489,7 +493,7 @@ void main() {
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'finishing a run tracks how it went',
     build: buildCubit,
-    seed: () => sendingTo(0, autoAdvance: true),
+    seed: () => sendingTo(0, opensNextChatOnReturn: true),
     act: (cubit) async {
       await cubit.openCurrentChat();
       cubit.stop();
@@ -502,7 +506,7 @@ void main() {
         'opened_count': 1,
         'skipped_count': 0,
         'without_phone_count': 1,
-        'is_auto_advance': true,
+        'opens_next_chat_on_return': true,
         'is_stopped': true,
       });
     },

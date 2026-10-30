@@ -1,12 +1,9 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
-  static MessageTemplate get defaultTemplate => MessageTemplate(
-    text: 'كل سنة وانت طيب يا {name} 🎂',
-    fields: [PersonFields().name],
-  );
-
   final Set<Person> _persons;
   final PersonsDAO _personsDAO;
   final LauncherService _launcherService;
@@ -34,7 +31,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
       if (isClosed) return;
 
       final fetchedById = {
-        for (final person in fetched ?? const <Person>[]) person.id: person,
+        for (final person in fetched) person.id: person,
       };
 
       emit(
@@ -55,15 +52,15 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
     }
   }
 
-  void setAutoAdvance({required bool isEnabled}) => switch (state) {
+  void setOpensNextChatOnReturn({required bool isEnabled}) => switch (state) {
     final BulkWhatsappComposing composing => emit(
       BulkWhatsappComposing(
         recipients: composing.recipients,
-        autoAdvance: isEnabled,
+        opensNextChatOnReturn: isEnabled,
       ),
     ),
     final BulkWhatsappSending sending => emit(
-      sending.copyWith(autoAdvance: isEnabled),
+      sending.copyWith(opensNextChatOnReturn: isEnabled),
     ),
     _ => null,
   };
@@ -71,13 +68,13 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
   void start(MessageTemplate template) {
     if (state case final BulkWhatsappComposing composing) {
       _runId++;
-      _showNextReachableAfter(
+      _showNextReachableOrFinish(
         -1,
         BulkWhatsappSending(
           recipients: composing.recipients,
           template: template,
           currentIndex: 0,
-          autoAdvance: composing.autoAdvance,
+          opensNextChatOnReturn: composing.opensNextChatOnReturn,
         ),
       );
     }
@@ -130,9 +127,9 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
   Future<void> continueAfterOpenedChat() async {
     if (state
         case BulkWhatsappSending(isAwaitingReturn: true) && final sending) {
-      _showNextReachableAfter(sending.currentIndex, sending);
+      _showNextReachableOrFinish(sending.currentIndex, sending);
 
-      if (state case BulkWhatsappSending(autoAdvance: true)) {
+      if (state case BulkWhatsappSending(opensNextChatOnReturn: true)) {
         await openCurrentChat();
       }
     }
@@ -140,7 +137,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
 
   void skipCurrent() {
     if (state case final BulkWhatsappSending sending) {
-      _showNextReachableAfter(
+      _showNextReachableOrFinish(
         sending.currentIndex,
         sending.copyWith(
           recipients: _withCurrent(
@@ -175,7 +172,17 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
         _phoneNumberService.formatInternational(phone.phone),
         text: message,
       );
-    } on Exception {
+    } on Exception catch (error, stackTrace) {
+      unawaited(
+        LoggingService.I.exception(
+          LogRecord(
+            moduleName: '$BulkWhatsappMessageCubit',
+            error: error,
+            stackTrace: stackTrace,
+          ),
+        ),
+      );
+
       return false;
     }
   }
@@ -201,7 +208,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
     WhatsappRecipient current,
   ) => [...sending.recipients]..[sending.currentIndex] = current;
 
-  void _showNextReachableAfter(int index, BulkWhatsappSending sending) {
+  void _showNextReachableOrFinish(int index, BulkWhatsappSending sending) {
     final nextIndex = sending.recipients.indexWhere(
       (recipient) => recipient.hasPhone,
       index + 1,
@@ -224,7 +231,14 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
 
   void _finish(BulkWhatsappSending sending, {required bool isStopped}) {
     _analyticsService.track(
-      BulkWhatsappRunFinish(sending, isStopped: isStopped),
+      BulkWhatsappRunFinish(
+        recipientCount: sending.recipients.length,
+        openedCount: sending.countOf(WhatsappRecipientStatus.opened),
+        skippedCount: sending.countOf(WhatsappRecipientStatus.skipped),
+        withoutPhoneCount: sending.withoutPhone.length,
+        opensNextChatOnReturn: sending.opensNextChatOnReturn,
+        isStopped: isStopped,
+      ),
     );
     emit(
       BulkWhatsappFinished(

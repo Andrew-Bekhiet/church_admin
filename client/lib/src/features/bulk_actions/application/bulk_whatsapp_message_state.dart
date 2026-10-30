@@ -41,21 +41,21 @@ sealed class BulkWhatsappRun extends BulkWhatsappMessageState {
 }
 
 final class BulkWhatsappComposing extends BulkWhatsappRun {
-  final bool autoAdvance;
+  final bool opensNextChatOnReturn;
 
   @override
-  List<Object?> get props => [...super.props, autoAdvance];
+  List<Object?> get props => [...super.props, opensNextChatOnReturn];
 
   const BulkWhatsappComposing({
     required super.recipients,
-    this.autoAdvance = false,
+    this.opensNextChatOnReturn = false,
   });
 }
 
 final class BulkWhatsappSending extends BulkWhatsappRun {
   final MessageTemplate template;
   final int currentIndex;
-  final bool autoAdvance;
+  final bool opensNextChatOnReturn;
   final bool isAwaitingReturn;
   final bool hasOpenFailed;
 
@@ -73,7 +73,7 @@ final class BulkWhatsappSending extends BulkWhatsappRun {
     ...super.props,
     template,
     currentIndex,
-    autoAdvance,
+    opensNextChatOnReturn,
     isAwaitingReturn,
     hasOpenFailed,
   ];
@@ -82,7 +82,7 @@ final class BulkWhatsappSending extends BulkWhatsappRun {
     required this.template,
     required this.currentIndex,
     required super.recipients,
-    this.autoAdvance = false,
+    this.opensNextChatOnReturn = false,
     this.isAwaitingReturn = false,
     this.hasOpenFailed = false,
   });
@@ -90,14 +90,14 @@ final class BulkWhatsappSending extends BulkWhatsappRun {
   BulkWhatsappSending copyWith({
     List<WhatsappRecipient>? recipients,
     int? currentIndex,
-    bool? autoAdvance,
+    bool? opensNextChatOnReturn,
     bool? isAwaitingReturn,
     bool? hasOpenFailed,
   }) => BulkWhatsappSending(
     recipients: recipients ?? this.recipients,
     template: template,
     currentIndex: currentIndex ?? this.currentIndex,
-    autoAdvance: autoAdvance ?? this.autoAdvance,
+    opensNextChatOnReturn: opensNextChatOnReturn ?? this.opensNextChatOnReturn,
     isAwaitingReturn: isAwaitingReturn ?? this.isAwaitingReturn,
     hasOpenFailed: hasOpenFailed ?? this.hasOpenFailed,
   );
