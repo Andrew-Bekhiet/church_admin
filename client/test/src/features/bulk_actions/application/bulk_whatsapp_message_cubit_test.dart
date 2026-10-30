@@ -32,6 +32,7 @@ void main() {
   late FakePersonsDAO personsDAO;
   late FakeLauncherService launcher;
   late RecordingAnalyticsProvider analytics;
+  late FakeLoggingService logging;
 
   WhatsappRecipient recipientOf(Person person, List<PhoneContact> contacts) =>
       WhatsappRecipient.of(person.copyWith(contacts: contacts));
@@ -47,6 +48,7 @@ void main() {
       ];
     launcher = FakeLauncherService();
     analytics = RecordingAnalyticsProvider();
+    logging = FakeLoggingService();
     recipients = [
       recipientOf(mark, [markPhone]),
       recipientOf(mina, [minaPhone, minaOtherPhone]),
@@ -61,6 +63,7 @@ void main() {
         launcherService: launcher,
         phoneNumberService: phoneNumbers,
         analyticsService: AnalyticsService([analytics], FakeLoggingService()),
+        loggingService: logging,
       );
 
   BulkWhatsappSending sendingTo(
@@ -127,6 +130,20 @@ void main() {
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+    'a failed load is logged',
+    build: () {
+      personsDAO.phoneContactsError = Exception('offline');
+
+      return buildCubit();
+    },
+    act: (cubit) => cubit.load(),
+    verify: (_) => expect(
+      logging.reportedExceptions.map((record) => record.error.toString()),
+      ['Exception: offline'],
+    ),
+  );
+
+  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'starting shows the first person with a phone',
     build: buildCubit,
     seed: () => BulkWhatsappComposing(recipients: recipients),
@@ -154,7 +171,7 @@ void main() {
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
-    'starting keeps the auto-advance choice made while composing',
+    'starting keeps the open-next-chat-on-return choice made while composing',
     build: buildCubit,
     seed: () => BulkWhatsappComposing(recipients: recipients),
     act: (cubit) => cubit
@@ -367,7 +384,7 @@ void main() {
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
-    'with auto-advance, returning to the app opens the next chat right away',
+    'opening the next chat on return opens it right away',
     build: buildCubit,
     seed: () => sendingTo(0, opensNextChatOnReturn: true),
     act: (cubit) async {

@@ -9,6 +9,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
   final LauncherService _launcherService;
   final PhoneNumberService _phoneNumberService;
   final AnalyticsService _analyticsService;
+  final LoggingService _loggingService;
 
   int _runId = 0;
   ({int runId, int index})? _chatBeingOpened;
@@ -19,6 +20,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
     required this._launcherService,
     required this._phoneNumberService,
     required this._analyticsService,
+    required this._loggingService,
   }) : super(const BulkWhatsappLoading());
 
   Future<void> load() async {
@@ -45,7 +47,8 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
               .toList(),
         ),
       );
-    } on Exception catch (error) {
+    } on Exception catch (error, stackTrace) {
+      _logException(error, stackTrace);
       if (isClosed) return;
 
       emit(BulkWhatsappLoadFailure(error));
@@ -68,8 +71,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
   void start(MessageTemplate template) {
     if (state case final BulkWhatsappComposing composing) {
       _runId++;
-      _showNextReachableOrFinish(
-        -1,
+      _showFirstReachableOrFinish(
         BulkWhatsappSending(
           recipients: composing.recipients,
           template: template,
@@ -114,11 +116,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
         if (_chatBeingOpened == chat) _chatBeingOpened = null;
       }
 
-      if (isClosed || chat.runId != _runId) return;
-
-      if (state case final BulkWhatsappSending latest
-          when latest.currentIndex == chat.index &&
-              latest.current.selectedPhone == selectedPhone) {
+      if (_stillShowing(chat, selectedPhone) case final latest?) {
         _recordChatOpening(latest, isOpened: isOpened);
       }
     }
@@ -127,7 +125,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
   Future<void> continueAfterOpenedChat() async {
     if (state
         case BulkWhatsappSending(isAwaitingReturn: true) && final sending) {
-      _showNextReachableOrFinish(sending.currentIndex, sending);
+      _showNextReachableOrFinish(sending, afterIndex: sending.currentIndex);
 
       if (state case BulkWhatsappSending(opensNextChatOnReturn: true)) {
         await openCurrentChat();
@@ -138,13 +136,13 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
   void skipCurrent() {
     if (state case final BulkWhatsappSending sending) {
       _showNextReachableOrFinish(
-        sending.currentIndex,
         sending.copyWith(
           recipients: _withCurrent(
             sending,
             sending.current.copyWith(status: WhatsappRecipientStatus.skipped),
           ),
         ),
+        afterIndex: sending.currentIndex,
       );
     }
   }
@@ -154,6 +152,29 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
       _finish(sending, isStopped: true);
     }
   }
+
+  BulkWhatsappSending? _stillShowing(
+    ({int runId, int index}) chat,
+    PhoneContact phone,
+  ) => switch (state) {
+    final BulkWhatsappSending latest
+        when !isClosed &&
+            chat.runId == _runId &&
+            latest.currentIndex == chat.index &&
+            latest.current.selectedPhone == phone =>
+      latest,
+    _ => null,
+  };
+
+  void _logException(Object error, StackTrace stackTrace) => unawaited(
+    _loggingService.exception(
+      LogRecord(
+        moduleName: '$BulkWhatsappMessageCubit',
+        error: error,
+        stackTrace: stackTrace,
+      ),
+    ),
+  );
 
   Person _withFetchedContacts(Person selected, Person? fetched) =>
       fetched == null
@@ -173,15 +194,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
         text: message,
       );
     } on Exception catch (error, stackTrace) {
-      unawaited(
-        LoggingService.I.exception(
-          LogRecord(
-            moduleName: '$BulkWhatsappMessageCubit',
-            error: error,
-            stackTrace: stackTrace,
-          ),
-        ),
-      );
+      _logException(error, stackTrace);
 
       return false;
     }
@@ -208,10 +221,16 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
     WhatsappRecipient current,
   ) => [...sending.recipients]..[sending.currentIndex] = current;
 
-  void _showNextReachableOrFinish(int index, BulkWhatsappSending sending) {
+  void _showFirstReachableOrFinish(BulkWhatsappSending sending) =>
+      _showNextReachableOrFinish(sending, afterIndex: -1);
+
+  void _showNextReachableOrFinish(
+    BulkWhatsappSending sending, {
+    required int afterIndex,
+  }) {
     final nextIndex = sending.recipients.indexWhere(
       (recipient) => recipient.hasPhone,
-      index + 1,
+      afterIndex + 1,
     );
 
     if (nextIndex == -1) {
