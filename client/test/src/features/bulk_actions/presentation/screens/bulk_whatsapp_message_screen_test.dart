@@ -75,7 +75,7 @@ void main() {
 
     expect(
       tester.widget<Text>(find.byKey(BulkWhatsappComposeViewKeys.preview)).data,
-      BulkWhatsappMessageScreen.defaultTemplate.renderFor(mina),
+      'كل سنة وانت طيب يا مينا 🎂',
     );
   });
 
@@ -91,6 +91,18 @@ void main() {
     expect(
       tester.widget<Text>(find.byKey(BulkWhatsappComposeViewKeys.preview)).data,
       'اهلا ${mina.name}',
+    );
+  });
+
+  testWidgets('an opened chat cannot be skipped', (tester) async {
+    await pumpScreen(tester);
+    await startAndOpenFirstChat(tester);
+
+    expect(
+      tester
+          .widget<TextButton>(find.byKey(BulkWhatsappQueueViewKeys.skipButton))
+          .onPressed,
+      isNull,
     );
   });
 
