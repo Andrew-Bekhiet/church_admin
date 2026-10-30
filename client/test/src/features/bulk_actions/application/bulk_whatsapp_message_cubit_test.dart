@@ -256,6 +256,10 @@ void main() {
     'skipping while WhatsApp is opening keeps the next person current',
     build: () {
       launcher.whatsappGate = Completer();
+      recipients = [
+        recipientOf(mark, [markPhone]),
+        recipientOf(peter, [markPhone]),
+      ];
 
       return buildCubit();
     },
@@ -268,7 +272,8 @@ void main() {
     },
     verify: (cubit) {
       final state = cubit.state as BulkWhatsappSending;
-      expect(state.current.person.id, mina.id);
+      expect(state.current.person.id, peter.id);
+      expect(state.current.status, WhatsappRecipientStatus.pending);
       expect(state.isAwaitingReturn, isFalse);
       expect(state.recipients.first.status, WhatsappRecipientStatus.skipped);
     },
@@ -339,7 +344,7 @@ void main() {
     build: () {
       launcher.whatsappGate = Completer();
 
-      return buildCubit();
+      return buildCubit(persons: {mark});
     },
     seed: () => sendingTo(0),
     act: (cubit) async {
@@ -352,7 +357,7 @@ void main() {
     },
     verify: (cubit) {
       final state = cubit.state as BulkWhatsappSending;
-      expect(state.current.person.id, mina.id);
+      expect(state.current.person.id, mark.id);
       expect(state.current.status, WhatsappRecipientStatus.pending);
       expect(state.isAwaitingReturn, isFalse);
     },
