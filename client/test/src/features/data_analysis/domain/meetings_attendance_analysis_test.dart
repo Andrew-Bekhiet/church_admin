@@ -204,7 +204,7 @@ void main() {
     );
 
     test(
-      'within a study year, slices for any gender and girls come before boys',
+      'within a study year, boys come first, then girls, then both',
       () {
         final analysis = MeetingsAttendanceAnalysis(
           title: 'خدمة',
@@ -212,7 +212,7 @@ void main() {
             MeetingAttendanceSummary(
               meeting: meeting('m1', 'أول'),
               demographics: [
-                for (final gender in [Gender.male, Gender.female, Gender.any])
+                for (final gender in [Gender.any, Gender.female, Gender.male])
                   demographic(d1, persons: 1, studyYearId: 1, gender: gender),
               ],
             ),
@@ -220,9 +220,9 @@ void main() {
         );
 
         expect(analysis.demographicBreakdown.map((entry) => entry.gender), [
-          Gender.any,
-          Gender.female,
           Gender.male,
+          Gender.female,
+          Gender.any,
         ]);
       },
     );

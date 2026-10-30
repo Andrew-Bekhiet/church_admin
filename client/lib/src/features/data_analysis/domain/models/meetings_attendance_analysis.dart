@@ -12,9 +12,9 @@ class MeetingsAttendanceAnalysis {
   }
 
   static int _genderRank(Gender gender) => switch (gender) {
-    Gender.any => 0,
+    Gender.male => 0,
     Gender.female => 1,
-    Gender.male => 2,
+    Gender.any => 2,
   };
 
   final String title;
