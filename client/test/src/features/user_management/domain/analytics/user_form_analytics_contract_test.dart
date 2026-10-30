@@ -15,7 +15,9 @@ void main() {
     final expiresAt = DateTime(2026, 10, 4, 9);
     final contracts = <(AnalyticsEvent, String, Json)>[
       (
-        const PersonLinkModeSwitch(CreateNewPerson(name: '', gender: true)),
+        const PersonLinkModeSwitch(
+          CreateNewPerson(name: '', gender: Gender.male),
+        ),
         'user_management:person_link_mode_switch',
         {'person_link_mode': 'create'},
       ),

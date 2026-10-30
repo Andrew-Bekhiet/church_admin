@@ -34,12 +34,11 @@ class ValueInputWidget extends StatelessWidget {
           onChanged: onChanged,
         );
 
-      case FieldMetadata<bool>(:final name)
-          when name.toLowerCase().endsWith('gender'):
+      case FieldMetadata<Gender>():
         widget = GenderField(
-          initialValue: value as bool?,
+          initialValue: value as Gender?,
           onChanged: onChanged,
-          nullable: true,
+          allowsAny: true,
         );
 
       case FieldMetadata<bool>():

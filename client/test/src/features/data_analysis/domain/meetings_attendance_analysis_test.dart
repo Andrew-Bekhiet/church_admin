@@ -14,7 +14,7 @@ void main() {
     int persons = 0,
     int servants = 0,
     int? studyYearId,
-    bool? gender,
+    Gender gender = Gender.any,
     String? studyYearName,
   }) => MeetingDayDemographicCounts(
     day: d,
@@ -166,10 +166,15 @@ void main() {
                   d1,
                   persons: 5,
                   studyYearId: 1,
-                  gender: true,
+                  gender: Gender.male,
                   studyYearName: 'أولى',
                 ),
-                demographic(d1, persons: 3, studyYearId: 2, gender: false),
+                demographic(
+                  d1,
+                  persons: 3,
+                  studyYearId: 2,
+                  gender: Gender.female,
+                ),
               ],
             ),
             MeetingAttendanceSummary(
@@ -179,7 +184,7 @@ void main() {
                   d2,
                   persons: 2,
                   studyYearId: 1,
-                  gender: true,
+                  gender: Gender.male,
                   studyYearName: 'أولى',
                 ),
               ],
@@ -198,6 +203,30 @@ void main() {
       },
     );
 
+    test(
+      'within a study year, boys come first, then girls, then both',
+      () {
+        final analysis = MeetingsAttendanceAnalysis(
+          title: 'خدمة',
+          meetings: [
+            MeetingAttendanceSummary(
+              meeting: meeting('m1', 'أول'),
+              demographics: [
+                for (final gender in [Gender.any, Gender.female, Gender.male])
+                  demographic(d1, persons: 1, studyYearId: 1, gender: gender),
+              ],
+            ),
+          ],
+        );
+
+        expect(analysis.demographicBreakdown.map((entry) => entry.gender), [
+          Gender.male,
+          Gender.female,
+          Gender.any,
+        ]);
+      },
+    );
+
     test('a single demographic slice has no demographic breakdown', () {
       final analysis = MeetingsAttendanceAnalysis(
         title: 'فصل',
@@ -205,8 +234,8 @@ void main() {
           MeetingAttendanceSummary(
             meeting: meeting('m1', 'اجتماع'),
             demographics: [
-              demographic(d1, persons: 4, studyYearId: 1, gender: true),
-              demographic(d2, persons: 2, studyYearId: 1, gender: true),
+              demographic(d1, persons: 4, studyYearId: 1, gender: Gender.male),
+              demographic(d2, persons: 2, studyYearId: 1, gender: Gender.male),
             ],
           ),
         ],

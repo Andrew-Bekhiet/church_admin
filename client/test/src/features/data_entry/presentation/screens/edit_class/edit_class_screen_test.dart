@@ -180,7 +180,7 @@ void main() {
 
     expect(
       harness.classesDAO.updates.single.editedObject.serviceGender,
-      isFalse,
+      Gender.female,
     );
   });
 }

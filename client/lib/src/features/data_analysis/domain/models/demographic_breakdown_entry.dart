@@ -1,7 +1,9 @@
+import 'package:church_admin/church_admin.dart';
+
 typedef DemographicBreakdownEntry = ({
   int? studyYearId,
   String? studyYearName,
-  bool? gender,
+  Gender gender,
   int personsCount,
   int servantsCount,
   int totalCount,

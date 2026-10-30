@@ -18,7 +18,7 @@ void main() {
     name: 'Class',
     service: service,
     studyYear: studyYear,
-    serviceGender: false,
+    serviceGender: Gender.female,
   );
 
   group('PersonEditIntent after a JSON round trip', () {
@@ -123,7 +123,7 @@ void main() {
       expect(person.services, isEmpty);
       expect(person.groups, isEmpty);
       expect(person.workStatus, WorkStatus.employed);
-      expect(person.gender, isTrue);
+      expect(person.gender, Gender.male);
     });
 
     test('a family intent drafts a member of that family', () {
@@ -180,7 +180,15 @@ void main() {
     test('a class intent drafts the gender the class serves', () {
       final person = CreatePersonInClass(class$: class$).draftPerson('new');
 
-      expect(person.gender, isFalse);
+      expect(person.gender, class$.serviceGender);
+    });
+
+    test('a class serving both genders drafts a male student', () {
+      final person = CreatePersonInClass(
+        class$: class$.copyWith(serviceGender: Gender.any),
+      ).draftPerson('new');
+
+      expect(person.gender, Gender.male);
     });
   });
 }

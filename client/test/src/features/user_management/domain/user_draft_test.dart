@@ -91,7 +91,7 @@ void main() {
       const draft = UserDraft(
         name: 'مينا',
         email: '',
-        person: CreateNewPerson(name: '  ', gender: true),
+        person: CreateNewPerson(name: '  ', gender: Gender.male),
         permissions: PermissionsSet.empty(),
         adminOn: [],
         invitation: NoInvitation(),
@@ -119,7 +119,7 @@ void main() {
       const draft = UserDraft(
         name: 'مينا',
         email: '',
-        person: CreateNewPerson(name: 'مخدوم جديد', gender: true),
+        person: CreateNewPerson(name: 'مخدوم جديد', gender: Gender.male),
         permissions: PermissionsSet.empty(),
         adminOn: [],
         invitation: NoInvitation(),

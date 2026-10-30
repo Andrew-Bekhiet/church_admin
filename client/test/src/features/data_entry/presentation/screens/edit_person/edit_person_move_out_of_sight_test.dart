@@ -42,7 +42,7 @@ void main() {
           AdminOnData(
             permissionId: 'grant',
             service: primary,
-            serviceGender: true,
+            serviceGender: Gender.male,
           ),
         ],
       )
@@ -95,7 +95,7 @@ void main() {
     await tester.tap(confirmationButton('حفظ'));
     await tester.pumpAndSettle();
 
-    expect(harness.persons.updatedPeople.single.gender, isFalse);
+    expect(harness.persons.updatedPeople.single.gender, Gender.female);
     expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsNothing);
     expect(find.text('open'), findsOneWidget);
   });

@@ -19,7 +19,8 @@ class Note {}
 class Tag {}
 class Summary {}
 class PersonsTags {}
-enum Gender { male, female }
+enum Gender { male, female, any }
+enum Weekday { monday, tuesday }
 
 $annotation
 class Model implements ID {

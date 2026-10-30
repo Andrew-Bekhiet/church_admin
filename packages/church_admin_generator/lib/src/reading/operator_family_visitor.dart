@@ -11,7 +11,10 @@ final class OperatorFamilyVisitor extends UnifyingTypeVisitor<OperatorFamily?> {
   OperatorFamily? visitDartType(DartType type) => null;
 
   @override
-  OperatorFamily? visitInterfaceType(InterfaceType type) {
+  OperatorFamily? visitInterfaceType(InterfaceType type) =>
+      _dartCoreFamily(type) ?? _namedFamily(type) ?? _supertypeFamily(type);
+
+  OperatorFamily? _dartCoreFamily(InterfaceType type) {
     if (type.isDartCoreBool) return OperatorFamily.boolean;
 
     if (type.isDartCoreNum || type.isDartCoreInt || type.isDartCoreDouble) {
@@ -20,13 +23,17 @@ final class OperatorFamilyVisitor extends UnifyingTypeVisitor<OperatorFamily?> {
 
     if (type.isDartCoreString) return OperatorFamily.string;
 
-    return switch (type.element.name) {
-      'Color' => OperatorFamily.color,
-      'DateTime' when type.element.library.isDartCore =>
-        OperatorFamily.dateTime,
-      _ => _supertypeFamily(type),
-    };
+    return null;
   }
+
+  OperatorFamily? _namedFamily(InterfaceType type) =>
+      switch (type.element.name) {
+        'Color' => OperatorFamily.color,
+        'Gender' => OperatorFamily.gender,
+        'DateTime' when type.element.library.isDartCore =>
+          OperatorFamily.dateTime,
+        _ => null,
+      };
 
   OperatorFamily? _supertypeFamily(InterfaceType type) {
     final supertypes = type.allSupertypes;

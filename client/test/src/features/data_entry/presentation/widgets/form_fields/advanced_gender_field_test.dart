@@ -6,10 +6,12 @@ import 'package:material_ui/material_ui.dart';
 import '../../../../../material_ui_test_app.dart';
 
 void main() {
-  late AdvancedFieldController<bool?, String> field;
+  late AdvancedFieldController<Gender, String> field;
 
   setUp(
-    () => field = AdvancedFieldController<bool?, String>(initialValue: null),
+    () => field = AdvancedFieldController<Gender, String>(
+      initialValue: Gender.any,
+    ),
   );
 
   tearDown(() => field.dispose());
@@ -17,7 +19,7 @@ void main() {
   Future<void> showField(WidgetTester tester) => tester.pumpWidget(
     MaterialUiTestApp.withThemeAndLocale(
       child: Scaffold(
-        body: AdvancedGenderField<String>(field: field, bothLabel: 'الكل'),
+        body: AdvancedGenderField<String>(field: field, anyLabel: 'الكل'),
       ),
     ),
   );
@@ -25,18 +27,18 @@ void main() {
   testWidgets('choosing a gender sets the value', (tester) async {
     await showField(tester);
 
-    await tester.tap(find.byType(Radio<bool?>).last);
+    await tester.tap(find.byType(Radio<Gender>).last);
     await tester.pump();
 
-    expect(field.fieldValue, isFalse);
+    expect(field.fieldValue, Gender.female);
   });
 
   testWidgets('a read-only field shows its choices disabled', (tester) async {
     field.markReadOnly();
     await showField(tester);
 
-    for (final radio in find.byType(Radio<bool?>).evaluate()) {
-      expect((radio.widget as Radio<bool?>).enabled, isFalse);
+    for (final radio in find.byType(Radio<Gender>).evaluate()) {
+      expect((radio.widget as Radio<Gender>).enabled, isFalse);
     }
   });
 }

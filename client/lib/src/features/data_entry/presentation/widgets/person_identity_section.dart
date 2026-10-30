@@ -12,7 +12,7 @@ class PersonIdentitySection extends StatelessWidget {
       children: [
         ListTile(
           title: const Text('النوع'),
-          subtitle: Text(person.gender ? 'ذكر' : 'أنثى'),
+          subtitle: Text(person.gender.label),
         ),
         ListTile(
           title: const Text('الحالة الاجتماعية'),

@@ -5,7 +5,7 @@ class PersonMaritalStatusAndTypeFormController extends AdvancedFormController
     implements PersonFormSection {
   final Person _person;
 
-  late final gender = AdvancedFieldController<bool, PersonEditError>(
+  late final gender = AdvancedFieldController<Gender, PersonEditError>(
     initialValue: _person.gender,
   );
   late final martialStatus =

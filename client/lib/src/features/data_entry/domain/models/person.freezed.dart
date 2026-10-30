@@ -303,7 +303,7 @@ abstract mixin class $PersonCopyWith<$Res> {
     String name,
     List<PhoneContact> contacts,
     List<FamilyPhoneContact> familyContacts,
-    bool gender,
+    Gender gender,
     bool isShammas,
     WorkStatus? workStatus,
     MartialStatus? martialStatus,
@@ -507,7 +507,7 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
         gender: null == gender
             ? _self.gender
             : gender // ignore: cast_nullable_to_non_nullable
-                  as bool,
+                  as Gender,
         isShammas: null == isShammas
             ? _self.isShammas
             : isShammas // ignore: cast_nullable_to_non_nullable

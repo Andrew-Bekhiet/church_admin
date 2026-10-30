@@ -49,7 +49,7 @@ sealed class CreatePerson extends PersonEditIntent {
     Address address = const Address(),
     List<Service> services = const [],
     List<Group> groups = const [],
-    bool gender = true,
+    Gender gender = Gender.male,
     Family? family,
     StudyYear? studyYear,
   }) => Person(
@@ -93,7 +93,10 @@ final class CreatePersonInClass extends CreatePerson {
     id,
     services: [?class$.service],
     studyYear: class$.studyYear,
-    gender: class$.serviceGender ?? true,
+    gender: switch (class$.serviceGender) {
+      Gender.any => Gender.male,
+      Gender.male || Gender.female => class$.serviceGender,
+    },
   );
 
   @override

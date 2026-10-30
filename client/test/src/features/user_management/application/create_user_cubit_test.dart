@@ -163,7 +163,7 @@ void main() {
       'when creating a new person the user name names the person too',
       build: () => buildCubit(
         initial: const UserDraft.empty().copyWith(
-          person: const CreateNewPerson(name: '', gender: true),
+          person: const CreateNewPerson(name: '', gender: Gender.male),
         ),
       ),
       act: (cubit) => cubit.setName('يوسف'),
@@ -173,7 +173,7 @@ void main() {
             .having(
               (s) => s.draft.person,
               'person',
-              const CreateNewPerson(name: 'يوسف', gender: true),
+              const CreateNewPerson(name: 'يوسف', gender: Gender.male),
             ),
       ],
     );

@@ -99,6 +99,7 @@ abstract mixin class $ClassCopyWith<$Res> {
     String id,
     String name,
     bool userCanEdit,
+    Gender serviceGender,
     Color? color,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -108,7 +109,6 @@ abstract mixin class $ClassCopyWith<$Res> {
     int? serviceStudyYear,
     StudyYear? studyYearTo,
     int? serviceStudyYearTo,
-    bool? serviceGender,
     LastRecordedByInfo? lastEdit,
     List<User>? adminUsers,
   });
@@ -134,6 +134,7 @@ class _$ClassCopyWithImpl<$Res> implements $ClassCopyWith<$Res> {
     Object? id = null,
     Object? name = null,
     Object? userCanEdit = null,
+    Object? serviceGender = null,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
     Object? blurhash = freezed,
@@ -143,7 +144,6 @@ class _$ClassCopyWithImpl<$Res> implements $ClassCopyWith<$Res> {
     Object? serviceStudyYear = freezed,
     Object? studyYearTo = freezed,
     Object? serviceStudyYearTo = freezed,
-    Object? serviceGender = freezed,
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
   }) {
@@ -161,6 +161,10 @@ class _$ClassCopyWithImpl<$Res> implements $ClassCopyWith<$Res> {
             ? _self.userCanEdit
             : userCanEdit // ignore: cast_nullable_to_non_nullable
                   as bool,
+        serviceGender: null == serviceGender
+            ? _self.serviceGender
+            : serviceGender // ignore: cast_nullable_to_non_nullable
+                  as Gender,
         color: freezed == color
             ? _self.color
             : color // ignore: cast_nullable_to_non_nullable
@@ -197,10 +201,6 @@ class _$ClassCopyWithImpl<$Res> implements $ClassCopyWith<$Res> {
             ? _self.serviceStudyYearTo
             : serviceStudyYearTo // ignore: cast_nullable_to_non_nullable
                   as int?,
-        serviceGender: freezed == serviceGender
-            ? _self.serviceGender
-            : serviceGender // ignore: cast_nullable_to_non_nullable
-                  as bool?,
         lastEdit: freezed == lastEdit
             ? _self.lastEdit
             : lastEdit // ignore: cast_nullable_to_non_nullable

@@ -1,5 +1,4 @@
-import 'package:church_admin/src/features/attendance/domain/models/meeting.dart';
-import 'package:church_admin/src/features/attendance/domain/models/meeting_audience.dart';
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -12,7 +11,7 @@ Meeting _meeting({
   Color? color,
   String? serviceId,
   int? serviceStudyYear,
-  bool? serviceGender,
+  Gender serviceGender = Gender.any,
   String? groupId,
 }) => Meeting(
   id: id,
@@ -140,7 +139,7 @@ void main() {
       expect(meeting.audience, MeetingAudience.onlyServants);
       expect(meeting.serviceId, 'svc-uuid');
       expect(meeting.serviceStudyYear, 3);
-      expect(meeting.serviceGender, isTrue);
+      expect(meeting.serviceGender, Gender.male);
       expect(meeting.groupId, isNull);
     });
   });
@@ -153,7 +152,7 @@ void main() {
         color: const Color(0xFF2196F3),
         serviceId: 'svc-abc',
         serviceStudyYear: 2,
-        serviceGender: false,
+        serviceGender: Gender.female,
       );
       final input = meeting.toInsertInput();
       expect(input.name, 'New Meeting');

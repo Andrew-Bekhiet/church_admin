@@ -56,23 +56,23 @@ class UserAdminScope<T extends ViewableWithID> {
   final bool? canRecordServantsAttendance;
 
   final StudyYear? studyYear;
-  final bool? gender;
+  final Gender gender;
 
   UserAdminScope({
     required this.object,
     required this.canManageUsers,
     required this.canWriteData,
     required this.canExportData,
+    this.gender = Gender.any,
     this.canWriteRelatedFamilies,
     this.canRecordAttendance,
     this.canRecordServantsAttendance,
     this.studyYear,
-    this.gender,
   });
 
   UserAdminScope copyWith({
     Object? studyYear = _undefined,
-    Object? gender = _undefined,
+    Gender? gender,
     bool? canManageUsers,
     bool? canWriteData,
     bool? canExportData,
@@ -94,7 +94,7 @@ class UserAdminScope<T extends ViewableWithID> {
       canRecordServantsAttendance:
           canRecordServantsAttendance ?? this.canRecordServantsAttendance,
       studyYear: studyYear is StudyYear? ? studyYear : this.studyYear,
-      gender: gender is bool? ? gender : this.gender,
+      gender: gender ?? this.gender,
     );
   }
 

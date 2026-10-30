@@ -44,12 +44,12 @@ class PersonChurchSection extends StatelessWidget {
             title: const Text('نوع الخدمة'),
             subtitle: Text(person.serviceType ?? ''),
           ),
-        if (person.gender)
+        if (person.gender.canBeShammas)
           ListTile(
             title: const Text('شماس؟'),
             subtitle: Text(person.isShammas ? 'نعم' : 'لا'),
           ),
-        if (person.gender && person.isShammas)
+        if (person.gender.canBeShammas && person.isShammas)
           ListTile(
             title: const Text('رتبة الشموسية'),
             subtitle: Text(person.shammasLevel?.name ?? ''),

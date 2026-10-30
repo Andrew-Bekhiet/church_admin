@@ -1,16 +1,17 @@
 import 'package:advanced_forms/advanced_forms.dart';
+import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
 class AdvancedGenderField<E extends Object> extends StatelessWidget {
-  final AdvancedFieldController<bool?, E> field;
+  final AdvancedFieldController<Gender, E> field;
   final String label;
   final String maleLabel;
   final String femaleLabel;
-  final String bothLabel;
+  final String anyLabel;
 
   const AdvancedGenderField({
     required this.field,
-    required this.bothLabel,
+    required this.anyLabel,
     this.label = 'النوع',
     this.maleLabel = 'ذكر',
     this.femaleLabel = 'أنثى',
@@ -21,36 +22,36 @@ class AdvancedGenderField<E extends Object> extends StatelessWidget {
   Widget build(BuildContext context) {
     final optionStyle = TextTheme.of(context).titleMedium;
 
-    return AdvancedFieldBuilder<bool?, E>(
+    return AdvancedFieldBuilder<Gender, E>(
       field: field,
       builder: (context, state, _) => InputDecorator(
         decoration: InputDecoration(
           labelText: label,
           enabled: !state.readOnly,
         ),
-        child: RadioGroup<bool?>(
+        child: RadioGroup<Gender>(
           groupValue: state.value,
-          onChanged: field.setValue,
+          onChanged: _maybeSetValue,
           child: Row(
             children: [
-              for (final (isMale, optionLabel, flex) in [
-                (null, bothLabel, 5),
-                (true, maleLabel, 4),
-                (false, femaleLabel, 4),
+              for (final (gender, optionLabel, flex) in [
+                (Gender.any, anyLabel, 5),
+                (Gender.male, maleLabel, 4),
+                (Gender.female, femaleLabel, 4),
               ])
                 Expanded(
                   flex: flex,
                   child: Row(
                     children: [
-                      Radio<bool?>(
+                      Radio<Gender>(
                         enabled: !state.readOnly,
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        value: isMale,
+                        value: gender,
                       ),
                       GestureDetector(
                         onTap: state.readOnly
                             ? null
-                            : () => field.setValue(isMale),
+                            : () => field.setValue(gender),
                         child: Text(optionLabel, style: optionStyle),
                       ),
                     ],
@@ -61,5 +62,9 @@ class AdvancedGenderField<E extends Object> extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _maybeSetValue(Gender? gender) {
+    if (gender != null) field.setValue(gender);
   }
 }

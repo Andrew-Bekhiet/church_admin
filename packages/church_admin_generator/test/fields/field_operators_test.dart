@@ -12,7 +12,8 @@ void main() {
         type: 'DateTime',
         operators: '{...DateTimeOperator.values, ...DateRangeOperator.values}',
       ),
-      (type: 'Gender', operators: '{...MultiSelectOperator.values}'),
+      (type: 'Gender', operators: '{...GenderOperator.values}'),
+      (type: 'Weekday', operators: '{...MultiSelectOperator.values}'),
       (type: 'Person', operators: '{...MultiSelectOperator.values}'),
     ];
 

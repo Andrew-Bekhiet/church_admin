@@ -29,8 +29,9 @@ class AdminOnData with _$AdminOnData implements ToJson {
   @QueryableField(label: 'السنة الدراسية')
   final StudyYear? serviceStudyYearData;
 
+  @GenderIsMaleConverter()
   @QueryableField(label: 'نوع المخدومين المسؤول عنهم')
-  final bool? serviceGender;
+  final Gender serviceGender;
 
   @QueryableField(label: 'يمكنه تصدير بيانات الخدمة')
   final bool? serviceAllowExport;
@@ -80,13 +81,13 @@ class AdminOnData with _$AdminOnData implements ToJson {
   const AdminOnData({
     required this.permissionId,
     this.classes = const [],
+    this.serviceGender = Gender.any,
     this.area,
     this.areaAllowExport,
     this.areaAllowEdit,
     this.areaAdminOnUsers,
     this.service,
     this.serviceStudyYearData,
-    this.serviceGender,
     this.serviceAllowExport,
     this.serviceAllowEdit,
     this.serviceAllowRecordAttendance,
@@ -109,17 +110,13 @@ class AdminOnData with _$AdminOnData implements ToJson {
   @override
   Map<String, dynamic> toJson() => _$AdminOnDataToJson(this);
 
-  String describeServicePermission() {
-    if (serviceGender == null && serviceStudyYearData == null) {
-      return '(جميع البيانات داخل الخدمة)';
-    } else if (serviceGender != null && serviceStudyYearData == null) {
-      return serviceGender!
-          ? '(جميع البنين في الخدمة)'
-          : '(جميع البنات داخل الخدمة)';
-    } else if (serviceGender != null) {
-      return '(${serviceStudyYearData!.name}${serviceGender! ? ' بنين' : ' بنات'})';
-    } else {
-      return '(جميع بيانات ${serviceStudyYearData!.name})';
-    }
-  }
+  String describeServicePermission() =>
+      switch ((serviceStudyYearData, serviceGender)) {
+        (null, Gender.any) => '(جميع البيانات داخل الخدمة)',
+        (null, Gender.male) => '(جميع البنين في الخدمة)',
+        (null, Gender.female) => '(جميع البنات داخل الخدمة)',
+        (final studyYear?, Gender.any) => '(جميع بيانات ${studyYear.name})',
+        (final studyYear?, final gender) =>
+          '(${studyYear.name} ${gender.groupLabel})',
+      };
 }

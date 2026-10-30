@@ -48,7 +48,7 @@ class UserPersonLinkField extends StatelessWidget {
           GenderField(
             initialValue: gender,
             onChanged: (value) => cubit.selectPerson(
-              CreateNewPerson(name: name, gender: value ?? gender),
+              CreateNewPerson(name: name, gender: value),
             ),
           )
         else
@@ -84,7 +84,7 @@ class UserPersonLinkField extends StatelessWidget {
 
   void _switchMode(bool createNew) {
     final target = createNew
-        ? const CreateNewPerson(name: '', gender: true)
+        ? const CreateNewPerson(name: '', gender: Gender.male)
         : const NoPersonSelected();
 
     AnalyticsService.I.track(PersonLinkModeSwitch(target));

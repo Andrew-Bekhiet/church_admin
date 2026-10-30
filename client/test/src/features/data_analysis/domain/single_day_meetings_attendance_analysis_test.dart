@@ -13,7 +13,7 @@ void main() {
   SingleDayRosterMember member(
     String personId, {
     int? studyYearId,
-    bool? gender,
+    Gender gender = Gender.any,
     String? studyYearName,
     bool attended = false,
   }) => SingleDayRosterMember(
@@ -29,7 +29,7 @@ void main() {
     Color? color,
     int? studyYearOrder,
     int? studyYearToOrder,
-    bool? serviceGender,
+    Gender serviceGender = Gender.any,
   }) => Class(
     id: name,
     name: name,
@@ -111,10 +111,10 @@ void main() {
     test('per-class rate divides distinct attendees by distinct roster', () {
       final subject = analysis(
         rosterMembers: [
-          member('p1', studyYearId: 1, gender: true, attended: true),
-          member('p2', studyYearId: 1, gender: true, attended: true),
-          member('p3', studyYearId: 1, gender: true, attended: true),
-          member('p4', studyYearId: 1, gender: true),
+          member('p1', studyYearId: 1, gender: Gender.male, attended: true),
+          member('p2', studyYearId: 1, gender: Gender.male, attended: true),
+          member('p3', studyYearId: 1, gender: Gender.male, attended: true),
+          member('p4', studyYearId: 1, gender: Gender.male),
         ],
       );
 
@@ -127,10 +127,10 @@ void main() {
     test('a class with roster but no attendance has rate 0', () {
       final subject = analysis(
         rosterMembers: [
-          member('p1', studyYearId: 1, gender: true, attended: true),
-          member('p2', studyYearId: 1, gender: true, attended: true),
-          member('p3', studyYearId: 2, gender: false),
-          member('p4', studyYearId: 2, gender: false),
+          member('p1', studyYearId: 1, gender: Gender.male, attended: true),
+          member('p2', studyYearId: 1, gender: Gender.male, attended: true),
+          member('p3', studyYearId: 2, gender: Gender.female),
+          member('p4', studyYearId: 2, gender: Gender.female),
         ],
       );
 
@@ -147,12 +147,12 @@ void main() {
     test('topClass picks the highest rate via maxBy', () {
       final subject = analysis(
         rosterMembers: [
-          member('p1', studyYearId: 1, gender: true, attended: true),
-          member('p2', studyYearId: 1, gender: true),
-          member('p3', studyYearId: 2, gender: true, attended: true),
-          member('p4', studyYearId: 2, gender: true, attended: true),
-          member('p5', studyYearId: 2, gender: true, attended: true),
-          member('p6', studyYearId: 2, gender: true),
+          member('p1', studyYearId: 1, gender: Gender.male, attended: true),
+          member('p2', studyYearId: 1, gender: Gender.male),
+          member('p3', studyYearId: 2, gender: Gender.male, attended: true),
+          member('p4', studyYearId: 2, gender: Gender.male, attended: true),
+          member('p5', studyYearId: 2, gender: Gender.male, attended: true),
+          member('p6', studyYearId: 2, gender: Gender.male),
         ],
       );
 
@@ -163,10 +163,10 @@ void main() {
     test('lowestClass picks the lowest rate via minBy', () {
       final subject = analysis(
         rosterMembers: [
-          member('p1', studyYearId: 1, gender: true, attended: true),
-          member('p2', studyYearId: 1, gender: true),
-          member('p3', studyYearId: 2, gender: true, attended: true),
-          member('p4', studyYearId: 2, gender: true, attended: true),
+          member('p1', studyYearId: 1, gender: Gender.male, attended: true),
+          member('p2', studyYearId: 1, gender: Gender.male),
+          member('p3', studyYearId: 2, gender: Gender.male, attended: true),
+          member('p4', studyYearId: 2, gender: Gender.male, attended: true),
         ],
       );
 
@@ -177,10 +177,10 @@ void main() {
     test('topClass keeps the first class on a rate tie', () {
       final subject = analysis(
         rosterMembers: [
-          member('p1', studyYearId: 1, gender: true, attended: true),
-          member('p2', studyYearId: 1, gender: true),
-          member('p3', studyYearId: 2, gender: true, attended: true),
-          member('p4', studyYearId: 2, gender: true),
+          member('p1', studyYearId: 1, gender: Gender.male, attended: true),
+          member('p2', studyYearId: 1, gender: Gender.male),
+          member('p3', studyYearId: 2, gender: Gender.male, attended: true),
+          member('p4', studyYearId: 2, gender: Gender.male),
         ],
       );
 
@@ -190,8 +190,8 @@ void main() {
     test('lowestClass is null with fewer than two rated classes', () {
       final subject = analysis(
         rosterMembers: [
-          member('p1', studyYearId: 1, gender: true, attended: true),
-          member('p2', studyYearId: 1, gender: true),
+          member('p1', studyYearId: 1, gender: Gender.male, attended: true),
+          member('p2', studyYearId: 1, gender: Gender.male),
         ],
       );
 
@@ -205,15 +205,15 @@ void main() {
     test('matches a class by study year order and gender', () {
       final subject = analysis(
         rosterMembers: [
-          member('p1', studyYearId: 3, gender: true, attended: true),
-          member('p2', studyYearId: 3, gender: true),
+          member('p1', studyYearId: 3, gender: Gender.male, attended: true),
+          member('p2', studyYearId: 3, gender: Gender.male),
         ],
         classes: [
           class$(
             name: 'أولى إعدادي بنين',
             color: const Color(0xFF112233),
             studyYearOrder: 3,
-            serviceGender: true,
+            serviceGender: Gender.male,
           ),
         ],
       );
@@ -230,11 +230,11 @@ void main() {
       final matching = class$(
         name: 'صف مطابق',
         studyYearOrder: 2,
-        serviceGender: false,
+        serviceGender: Gender.female,
       );
       final subject = analysis(
         rosterMembers: [
-          member('p1', studyYearId: 2, gender: false, attended: true),
+          member('p1', studyYearId: 2, gender: Gender.female, attended: true),
         ],
         classes: [matching],
       );
@@ -247,12 +247,12 @@ void main() {
       final exact = class$(
         name: 'أولى بنين',
         studyYearOrder: 1,
-        serviceGender: true,
+        serviceGender: Gender.male,
       );
       final subject = analysis(
         rosterMembers: [
-          member('p1', studyYearId: 1, gender: true, attended: true),
-          member('p2', studyYearId: 2, gender: false, attended: true),
+          member('p1', studyYearId: 1, gender: Gender.male, attended: true),
+          member('p2', studyYearId: 2, gender: Gender.female, attended: true),
         ],
         // Wildcard first: list order must not let it steal the graded slice.
         classes: [wildcard, exact],
@@ -264,10 +264,10 @@ void main() {
       );
     });
 
-    test('a class with null gender matches either gender slice', () {
+    test('a class serving any gender matches either gender slice', () {
       final subject = analysis(
         rosterMembers: [
-          member('p1', studyYearId: 4, gender: true, attended: true),
+          member('p1', studyYearId: 4, gender: Gender.male, attended: true),
         ],
         classes: [
           class$(name: 'مختلط', studyYearOrder: 4),
@@ -280,9 +280,9 @@ void main() {
     test('a range class names every slice its study years cover', () {
       final subject = analysis(
         rosterMembers: [
-          member('p1', studyYearId: 3, gender: true, attended: true),
-          member('p2', studyYearId: 4, gender: false, attended: true),
-          member('p3', studyYearId: 5, gender: true, attended: true),
+          member('p1', studyYearId: 3, gender: Gender.male, attended: true),
+          member('p2', studyYearId: 4, gender: Gender.female, attended: true),
+          member('p3', studyYearId: 5, gender: Gender.male, attended: true),
         ],
         classes: [
           class$(name: 'كشافة', studyYearOrder: 3, studyYearToOrder: 4),
@@ -300,8 +300,8 @@ void main() {
       () {
         final subject = analysis(
           rosterMembers: [
-            member('p1', studyYearId: 3, gender: true, attended: true),
-            member('p2', studyYearId: 4, gender: true, attended: true),
+            member('p1', studyYearId: 3, gender: Gender.male, attended: true),
+            member('p2', studyYearId: 4, gender: Gender.male, attended: true),
           ],
           classes: [
             class$(name: 'كشافة', studyYearOrder: 3, studyYearToOrder: 4),
@@ -319,8 +319,8 @@ void main() {
     test("every class covering a slice shows that slice's attendance", () {
       final subject = analysis(
         rosterMembers: [
-          member('p1', studyYearId: 3, gender: true, attended: true),
-          member('p2', studyYearId: 3, gender: true),
+          member('p1', studyYearId: 3, gender: Gender.male, attended: true),
+          member('p2', studyYearId: 3, gender: Gender.male),
         ],
         classes: [
           class$(name: 'كشافة', studyYearOrder: 3, studyYearToOrder: 4),
@@ -337,8 +337,8 @@ void main() {
     test('a person in a slice two classes cover is counted once overall', () {
       final subject = analysis(
         rosterMembers: [
-          member('p1', studyYearId: 3, gender: true, attended: true),
-          member('p2', studyYearId: 3, gender: true),
+          member('p1', studyYearId: 3, gender: Gender.male, attended: true),
+          member('p2', studyYearId: 3, gender: Gender.male),
         ],
         classes: [
           class$(name: 'كشافة', studyYearOrder: 3, studyYearToOrder: 4),
@@ -359,15 +359,15 @@ void main() {
     test('a boys range class leaves girls in its study years unnamed', () {
       final subject = analysis(
         rosterMembers: [
-          member('p1', studyYearId: 3, gender: true, attended: true),
-          member('p2', studyYearId: 4, gender: false, attended: true),
+          member('p1', studyYearId: 3, gender: Gender.male, attended: true),
+          member('p2', studyYearId: 4, gender: Gender.female, attended: true),
         ],
         classes: [
           class$(
             name: 'كشافة بنين',
             studyYearOrder: 3,
             studyYearToOrder: 4,
-            serviceGender: true,
+            serviceGender: Gender.male,
           ),
         ],
       );
@@ -381,8 +381,8 @@ void main() {
     test('a graded range class keeps its slices from a general class', () {
       final subject = analysis(
         rosterMembers: [
-          member('p1', studyYearId: 3, gender: true, attended: true),
-          member('p2', studyYearId: 5, gender: true, attended: true),
+          member('p1', studyYearId: 3, gender: Gender.male, attended: true),
+          member('p2', studyYearId: 5, gender: Gender.male, attended: true),
         ],
         classes: [
           class$(name: 'فصل عام'),
@@ -402,7 +402,7 @@ void main() {
           member(
             'p1',
             studyYearId: 1,
-            gender: true,
+            gender: Gender.male,
             studyYearName: 'أولى',
             attended: true,
           ),

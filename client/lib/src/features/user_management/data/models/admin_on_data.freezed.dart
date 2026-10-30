@@ -151,13 +151,13 @@ abstract mixin class $AdminOnDataCopyWith<$Res> {
   $Res call({
     String permissionId,
     List<Class> classes,
+    Gender serviceGender,
     Area? area,
     bool? areaAllowExport,
     bool? areaAllowEdit,
     bool? areaAdminOnUsers,
     Service? service,
     StudyYear? serviceStudyYearData,
-    bool? serviceGender,
     bool? serviceAllowExport,
     bool? serviceAllowEdit,
     bool? serviceAllowRecordAttendance,
@@ -195,13 +195,13 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
   $Res call({
     Object? permissionId = null,
     Object? classes = null,
+    Object? serviceGender = null,
     Object? area = freezed,
     Object? areaAllowExport = freezed,
     Object? areaAllowEdit = freezed,
     Object? areaAdminOnUsers = freezed,
     Object? service = freezed,
     Object? serviceStudyYearData = freezed,
-    Object? serviceGender = freezed,
     Object? serviceAllowExport = freezed,
     Object? serviceAllowEdit = freezed,
     Object? serviceAllowRecordAttendance = freezed,
@@ -227,6 +227,10 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
             ? _self.classes
             : classes // ignore: cast_nullable_to_non_nullable
                   as List<Class>,
+        serviceGender: null == serviceGender
+            ? _self.serviceGender
+            : serviceGender // ignore: cast_nullable_to_non_nullable
+                  as Gender,
         area: freezed == area
             ? _self.area
             : area // ignore: cast_nullable_to_non_nullable
@@ -251,10 +255,6 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
             ? _self.serviceStudyYearData
             : serviceStudyYearData // ignore: cast_nullable_to_non_nullable
                   as StudyYear?,
-        serviceGender: freezed == serviceGender
-            ? _self.serviceGender
-            : serviceGender // ignore: cast_nullable_to_non_nullable
-                  as bool?,
         serviceAllowExport: freezed == serviceAllowExport
             ? _self.serviceAllowExport
             : serviceAllowExport // ignore: cast_nullable_to_non_nullable

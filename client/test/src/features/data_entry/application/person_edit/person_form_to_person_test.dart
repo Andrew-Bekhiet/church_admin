@@ -28,7 +28,7 @@ void main() {
     college: const College(id: 'college', name: 'هندسة'),
     job: const Job(id: 'job', name: 'مهندس'),
     jobDescription: 'برمجة',
-    gender: false,
+    gender: Gender.female,
     personType: const PersonType(id: 'type', name: 'ابن'),
     church: const Church(id: 'church', name: 'مارجرجس'),
     father: const Father(id: 'father', name: 'أبونا'),
@@ -298,10 +298,10 @@ void main() {
   group('gender', () {
     test('choosing female clears shammas', () {
       final controller = fixture.controllerOfUpdate(
-        fullPerson.copyWith(gender: true, isShammas: true),
+        fullPerson.copyWith(gender: Gender.male, isShammas: true),
       );
 
-      controller.maritalStatusAndType.gender.setValue(false);
+      controller.maritalStatusAndType.gender.setValue(Gender.female);
 
       expect(controller.churchAndSpiritual.isShammas.fieldValue, isFalse);
       expect(controller.toPerson().isShammas, isFalse);
@@ -309,10 +309,10 @@ void main() {
 
     test('choosing male leaves shammas alone', () {
       final controller = fixture.controllerOfUpdate(
-        fullPerson.copyWith(gender: false, isShammas: false),
+        fullPerson.copyWith(gender: Gender.female, isShammas: false),
       );
 
-      controller.maritalStatusAndType.gender.setValue(true);
+      controller.maritalStatusAndType.gender.setValue(Gender.male);
       controller.churchAndSpiritual.isShammas.setValue(true);
 
       expect(controller.toPerson().isShammas, isTrue);
@@ -320,7 +320,7 @@ void main() {
 
     test('shammas needs a level', () async {
       final controller = fixture.controllerOfUpdate(
-        fullPerson.copyWith(gender: true, isShammas: false),
+        fullPerson.copyWith(gender: Gender.male, isShammas: false),
       );
       controller.churchAndSpiritual.isShammas.setValue(true);
 

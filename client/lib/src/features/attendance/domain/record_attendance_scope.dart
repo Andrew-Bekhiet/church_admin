@@ -49,15 +49,14 @@ final class ServiceAttendanceScope extends RecordAttendanceScope {
   final Service service;
   final StudyYear? studyYear;
 
-  /// true=male, false=female.
-  final bool? gender;
+  final Gender gender;
 
   const ServiceAttendanceScope({
     required this.service,
     required super.canRecordPersons,
     required super.canRecordServants,
+    this.gender = Gender.any,
     this.studyYear,
-    this.gender,
   });
 
   @override
@@ -65,18 +64,13 @@ final class ServiceAttendanceScope extends RecordAttendanceScope {
     if (service.id != meeting.serviceId) return false;
 
     final studyYear = this.studyYear;
-    final gender = this.gender;
 
     final studyYearsMatch =
         studyYear == null ||
         meeting.serviceStudyYear == null ||
         studyYear.order == meeting.serviceStudyYear;
-    final gendersMatch =
-        gender == null ||
-        meeting.serviceGender == null ||
-        gender == meeting.serviceGender;
 
-    return studyYearsMatch && gendersMatch;
+    return studyYearsMatch && gender.overlaps(meeting.serviceGender);
   }
 }
 

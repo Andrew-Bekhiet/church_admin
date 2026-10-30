@@ -8,7 +8,7 @@ void main() {
   SingleDayRosterMember member(
     String personId, {
     int? studyYearId,
-    bool? gender,
+    Gender gender = Gender.any,
     String? studyYearName,
     bool attended = false,
   }) => SingleDayRosterMember(
@@ -60,19 +60,29 @@ void main() {
           member(
             'p1',
             studyYearId: 1,
-            gender: true,
+            gender: Gender.male,
             studyYearName: 'أولى',
             attended: true,
           ),
-          member('p2', studyYearId: 1, gender: true, studyYearName: 'أولى'),
+          member(
+            'p2',
+            studyYearId: 1,
+            gender: Gender.male,
+            studyYearName: 'أولى',
+          ),
           member(
             'p3',
             studyYearId: 2,
-            gender: false,
+            gender: Gender.female,
             studyYearName: 'ثانية',
             attended: true,
           ),
-          member('p4', studyYearId: 2, gender: false, studyYearName: 'ثانية'),
+          member(
+            'p4',
+            studyYearId: 2,
+            gender: Gender.female,
+            studyYearName: 'ثانية',
+          ),
         ],
         meetings: [summary(totalCount: 2)],
       );
@@ -92,8 +102,8 @@ void main() {
       final analysis = SingleDayMeetingsAttendanceAnalysis(
         title: 'خدمة',
         rosterMembers: [
-          member('p1', studyYearId: 1, gender: true),
-          member('p2', studyYearId: 1, gender: true),
+          member('p1', studyYearId: 1, gender: Gender.male),
+          member('p2', studyYearId: 1, gender: Gender.male),
         ],
         meetings: [summary(totalCount: 0)],
       );

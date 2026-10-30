@@ -47,13 +47,13 @@ void main() {
     'a list is filtered by its element type and cannot be ordered',
     () async {
       final field = await ModelFixture.generatedFieldFor(
-        "@QueryableField(label: 'Genders')\nlate final List<Gender> genders;",
+        "@QueryableField(label: 'Weekdays')\nlate final List<Weekday> weekdays;",
       );
 
       expect(
         field,
         allOf(
-          startsWith('final FieldMetadata<Gender> genders'),
+          startsWith('final FieldMetadata<Weekday> weekdays'),
           contains('isOrderable: false'),
         ),
       );

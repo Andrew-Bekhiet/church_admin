@@ -8,11 +8,11 @@ void main() {
     const service = Service(id: 's1', name: 'خدمة');
     const group = Group(id: 'g1', name: 'مجموعة');
     final linkedPerson = Person(id: 'p1', name: 'مينا');
-    final otherPerson = Person(id: 'p2', name: 'مريم', gender: false);
+    final otherPerson = Person(id: 'p2', name: 'مريم', gender: Gender.female);
     final draft = UserDraft(
       name: 'مينا',
       email: 'mina@example.com',
-      person: const CreateNewPerson(name: 'مينا', gender: true),
+      person: const CreateNewPerson(name: 'مينا', gender: Gender.male),
       permissions: const PermissionsSet.fromSet({
         UserPermission.approved,
         UserPermission.readAllData,
@@ -296,7 +296,7 @@ void main() {
         UserSave(
           savedUser,
           savedDraft.copyWith(
-            person: const CreateNewPerson(name: 'جديد', gender: true),
+            person: const CreateNewPerson(name: 'جديد', gender: Gender.male),
           ),
           const AttemptSucceeded(),
         ),

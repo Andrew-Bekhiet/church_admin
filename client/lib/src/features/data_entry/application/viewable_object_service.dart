@@ -143,14 +143,6 @@ class ViewableObjectService {
         return '${dateTime.toDurationString(appendSince: false)}'
             '\t\t\t\t\u202D${DateFormat('yyyy/M/d').format(dateTime)}';
 
-      case final bool? gender
-          when fieldName?.toLowerCase().endsWith('gender') ?? false:
-        return gender == null
-            ? 'غير محدد'
-            : gender
-            ? 'ذكر'
-            : 'أنثى';
-
       case final bool? value:
         return value == null
             ? 'غير محدد'

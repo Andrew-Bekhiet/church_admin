@@ -4,6 +4,7 @@ enum OperatorFamily {
   primitive(['PrimitiveOperator']),
   string(['StringOperator']),
   color(['ColorOperator']),
+  gender(['GenderOperator']),
   dateTime(['DateTimeOperator', 'DateRangeOperator']),
   spatial(['SpatialOperator']),
   multiSelect(['MultiSelectOperator']);

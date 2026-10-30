@@ -70,7 +70,7 @@ class OutOfSightAfterSave {
     final studyYear = grant.serviceStudyYearData;
 
     return isInService &&
-        (grant.serviceGender ?? person.gender) == person.gender &&
+        grant.serviceGender.overlaps(person.gender) &&
         (studyYear == null || studyYear.order == person.studyYear?.order);
   }
 }
