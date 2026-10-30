@@ -77,6 +77,16 @@ void main() {
   );
 
   blocTest<ListSelectionCubit, ListSelectionState>(
+    'items of different types sharing an id are both selected',
+    build: () => ListSelectionCubit.alwaysActive([mina]),
+    act: (selection) => selection.select(Family(id: mina.id, name: 'عائلة')),
+    verify: (selection) => expect(
+      selection.state.selectedOfType<Family>().single.id,
+      mina.id,
+    ),
+  );
+
+  blocTest<ListSelectionCubit, ListSelectionState>(
     'selecting while inactive starts selecting',
     build: ListSelectionCubit.new,
     act: (selection) => selection.select(mina),

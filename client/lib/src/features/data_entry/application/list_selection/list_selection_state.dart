@@ -5,7 +5,8 @@ import 'package:equatable/equatable.dart';
 sealed class ListSelectionState with Equatable {
   static final _byId = EqualityBy<Viewable, Object>(_idOrItself);
 
-  static Object _idOrItself(Object item) => item is ID ? item.id : item;
+  static Object _idOrItself(Object item) =>
+      item is ID ? (item.runtimeType, item.id) : item;
 
   Set<Viewable> get selected;
 

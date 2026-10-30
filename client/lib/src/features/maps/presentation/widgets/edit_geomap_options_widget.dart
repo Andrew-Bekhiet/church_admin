@@ -319,7 +319,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
 
     if (rslt == true) {
       final confirmedSelection = selection.state.selectedOfType<T>().toList();
-      unawaited(selection.close());
+      await selection.close();
       AnalyticsService.I.track(
         MapsDataSelect(entityType, selectedCount: confirmedSelection.length),
       );
@@ -333,7 +333,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
 
       return confirmedSelection;
     }
-    unawaited(selection.close());
+    await selection.close();
     await controller.dispose().then((_) async {
       if (search.isClosed) return;
 
