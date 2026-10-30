@@ -80,6 +80,7 @@ abstract final class SelectionAwareAppBarTestKeys {
   static const Key tabsHeader = ValueKey('selection-aware-tabs-header');
   static const Key screenTitle = ValueKey('selection-aware-screen-title');
   static const Key shownNames = ValueKey('selection-aware-shown-names');
+  static const Key previousScreen = ValueKey('selection-aware-previous-screen');
 
   static Key itemFor(String id) => ValueKey('selection-aware-item-$id');
 }
@@ -123,6 +124,7 @@ void main() {
     WidgetTester tester,
     List<T> items, {
     bool hasPinnedTabsHeader = false,
+    bool isPushedOverAnotherScreen = false,
     Stream<String?>? search,
   }) async {
     selection = ListSelectionCubit();
@@ -153,37 +155,49 @@ void main() {
       ),
     );
 
-    await tester.pumpWidget(
-      MaterialApp(
-        home: ListSelectionHost(
-          child: hasPinnedTabsHeader
-              ? Scaffold(
-                  body: CustomScrollView(
-                    slivers: [
-                      const SliverAppBar(
-                        pinned: true,
-                        title: Text(
-                          screenTitle,
-                          key: SelectionAwareAppBarTestKeys.screenTitle,
-                        ),
-                      ),
-                      const SliverPersistentHeader(
-                        pinned: true,
-                        delegate: SelectionAwarePersistentHeaderDelegate(
-                          TabsHeaderDelegate(),
-                        ),
-                      ),
-                      SliverFillRemaining(child: list),
-                    ],
+    final screen = ListSelectionHost(
+      child: hasPinnedTabsHeader
+          ? Scaffold(
+              body: CustomScrollView(
+                slivers: [
+                  const SliverAppBar(
+                    pinned: true,
+                    title: Text(
+                      screenTitle,
+                      key: SelectionAwareAppBarTestKeys.screenTitle,
+                    ),
                   ),
-                )
-              : Scaffold(
-                  appBar: SelectionAwareAppBar(child: screenAppBar),
-                  body: list,
-                ),
-        ),
-      ),
+                  const SliverPersistentHeader(
+                    pinned: true,
+                    delegate: SelectionAwarePersistentHeaderDelegate(
+                      TabsHeaderDelegate(),
+                    ),
+                  ),
+                  SliverFillRemaining(child: list),
+                ],
+              ),
+            )
+          : Scaffold(
+              appBar: SelectionAwareAppBar(child: screenAppBar),
+              body: list,
+            ),
     );
+
+    if (isPushedOverAnotherScreen) {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Text(
+            'previous',
+            key: SelectionAwareAppBarTestKeys.previousScreen,
+          ),
+        ),
+      );
+      tester
+          .state<NavigatorState>(find.byType(Navigator))
+          .push(MaterialPageRoute<void>(builder: (_) => screen));
+    } else {
+      await tester.pumpWidget(MaterialApp(home: screen));
+    }
     await tester.pumpAndSettle();
   }
 
@@ -300,6 +314,37 @@ void main() {
         find.byKey(SelectionAwareAppBarTestKeys.itemFor(persons[0].id)),
       ),
       isA<ListTile>().having((t) => t.selected, 'selected', isFalse),
+    );
+  });
+
+  testScreen('going back while selecting ends the selection', (tester) async {
+    await pumpScreenListing(tester, persons, isPushedOverAnotherScreen: true);
+    await tester.longPress(
+      find.byKey(SelectionAwareAppBarTestKeys.itemFor(persons[0].id)),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.binding.handlePopRoute();
+    await tester.pumpAndSettle();
+
+    expect(selection.state, const ListSelectionInactive());
+    expect(
+      find.byKey(SelectionAwareAppBarTestKeys.screenTitle),
+      findsOneWidget,
+    );
+  });
+
+  testScreen('going back without a selection leaves the screen', (
+    tester,
+  ) async {
+    await pumpScreenListing(tester, persons, isPushedOverAnotherScreen: true);
+
+    await tester.binding.handlePopRoute();
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(SelectionAwareAppBarTestKeys.previousScreen),
+      findsOneWidget,
     );
   });
 
