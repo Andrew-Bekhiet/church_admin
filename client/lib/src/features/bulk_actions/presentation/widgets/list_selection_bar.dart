@@ -24,59 +24,72 @@ class ListSelectionBar extends StatelessWidget implements PreferredSizeWidget {
     final onBarColor = theme.colorScheme.onPrimaryContainer;
     final selection = context.read<ListSelectionCubit>();
 
-    return BlocBuilder<ListSelectionCubit, ListSelectionState>(
-      builder: (context, state) => switch (state) {
-        ListSelectionInactive() => const SizedBox.shrink(),
-        final ListSelectionActive state => AppBar(
-          key: ListSelectionBarKeys.bar,
-          toolbarHeight: toolbarHeight,
-          backgroundColor: theme.colorScheme.primaryContainer,
-          foregroundColor: onBarColor,
-          titleTextStyle: theme.textTheme.titleLarge?.copyWith(
-            color: onBarColor,
-          ),
-          leading: IconButton(
-            key: ListSelectionBarKeys.closeButton,
-            tooltip: 'الغاء التحديد',
-            icon: const Icon(Symbols.close),
-            onPressed: selection.endUnlessAlwaysActive,
-          ),
-          title: Text(
-            '${state.selected.length} محدد',
-            key: ListSelectionBarKeys.selectedCount,
-          ),
-          actions: [
-            StreamBuilder<List<Viewable>>(
-              initialData: list.currentFilteredObjectsOrNull,
-              stream: list.filteredObjectsStream,
-              builder: (context, shownItemsSnapshot) {
-                final shownItems =
-                    shownItemsSnapshot.data ?? const <Viewable>[];
-
-                return SelectAllOrNoneButton(
-                  key: ListSelectionBarKeys.selectAllButton,
-                  areAllShownItemsSelected: state.areAllSelected(shownItems),
-                  onSelectAll: () => selection.selectAll(shownItems),
-                  onSelectNone: () => selection.deselectAll(shownItems),
-                );
-              },
+    return BlocProvider(
+      create: (_) => BulkActionInvocationCubit(),
+      child: BlocBuilder<ListSelectionCubit, ListSelectionState>(
+        builder: (context, state) => switch (state) {
+          ListSelectionInactive() => const SizedBox.shrink(),
+          final ListSelectionActive state => AppBar(
+            key: ListSelectionBarKeys.bar,
+            toolbarHeight: toolbarHeight,
+            backgroundColor: theme.colorScheme.primaryContainer,
+            foregroundColor: onBarColor,
+            titleTextStyle: theme.textTheme.titleLarge?.copyWith(
+              color: onBarColor,
             ),
-            for (final action in BulkActionsRegistry.I.actionsApplicableToAnyOf(
-              state.selected,
-            ))
-              IconButton(
-                key: ListSelectionBarKeys.actionButtonFor(action),
-                tooltip: action.label,
-                icon: action.icon,
-                onPressed: () => _runAction(context, action, state),
+            leading: IconButton(
+              key: ListSelectionBarKeys.closeButton,
+              tooltip: 'الغاء التحديد',
+              icon: const Icon(Symbols.close),
+              onPressed: selection.endUnlessAlwaysActive,
+            ),
+            title: Text(
+              '${state.selected.length} محدد',
+              key: ListSelectionBarKeys.selectedCount,
+            ),
+            actions: [
+              StreamBuilder<List<Viewable>>(
+                initialData: list.currentFilteredObjectsOrNull,
+                stream: list.filteredObjectsStream,
+                builder: (context, shownItemsSnapshot) {
+                  final shownItems =
+                      shownItemsSnapshot.data ?? const <Viewable>[];
+
+                  return SelectAllOrNoneButton(
+                    key: ListSelectionBarKeys.selectAllButton,
+                    areAllShownItemsSelected: state.areAllSelected(shownItems),
+                    onSelectAll: () => selection.selectAll(shownItems),
+                    onSelectNone: () => selection.deselectAll(shownItems),
+                  );
+                },
               ),
-          ],
-        ),
-      },
+              BlocBuilder<BulkActionInvocationCubit, BulkActionInvocationState>(
+                builder: (context, invocation) => Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (final action
+                        in BulkActionsRegistry.I.actionsApplicableToAnyOf(
+                          state.selected,
+                        ))
+                      IconButton(
+                        key: ListSelectionBarKeys.actionButtonFor(action),
+                        tooltip: action.label,
+                        icon: action.icon,
+                        onPressed: invocation is BulkActionRunning
+                            ? null
+                            : () => _invoke(context, action, state),
+                      ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        },
+      ),
     );
   }
 
-  void _runAction(
+  void _invoke(
     BuildContext context,
     BulkAction action,
     ListSelectionActive state,
@@ -85,17 +98,11 @@ class ListSelectionBar extends StatelessWidget implements PreferredSizeWidget {
       state.inOrderOf(list.currentFilteredObjectsOrNull ?? const []).selected,
     );
 
-    AnalyticsService.I.track(BulkActionInvoke(action.key, applicableItems));
     unawaited(
-      Future.sync(() => action.run(context, applicableItems)).catchError(
-        (Object error, StackTrace stackTrace) => LoggingService.I.error(
-          LogRecord(
-            message: 'Bulk action ${action.key} failed',
-            moduleName: '$ListSelectionBar',
-            error: error,
-            stackTrace: stackTrace,
-          ),
-        ),
+      context.read<BulkActionInvocationCubit>().invoke(
+        actionKey: action.key,
+        items: applicableItems,
+        run: () => action.run(context, applicableItems),
       ),
     );
   }

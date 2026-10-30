@@ -550,6 +550,34 @@ void main() {
     ]);
   });
 
+  testScreen('the bulk actions are disabled while one is running', (
+    tester,
+  ) async {
+    await pumpScreenListing(tester, persons);
+
+    await tester.longPress(
+      find.byKey(SelectionAwareAppBarTestKeys.itemFor(persons[0].id)),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.byKey(
+        ListSelectionBarKeys.actionButtonFor(const ShowNamesBulkAction()),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      tester
+          .widget<IconButton>(
+            find.byKey(
+              ListSelectionBarKeys.actionButtonFor(const ShowNamesBulkAction()),
+            ),
+          )
+          .onPressed,
+      isNull,
+    );
+  });
+
   testScreen('a selection without items of an action type offers none', (
     tester,
   ) async {
