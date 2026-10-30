@@ -71,4 +71,20 @@ void main() {
       );
     });
   });
+
+  group('a restored gender filter is the filter that was saved', () {
+    for (final operator in GenderOperator.values) {
+      for (final gender in [...Gender.values, null]) {
+        test('${operator.name} ${gender?.name ?? 'unchosen'}', () {
+          final Filter<Object> filter = Filter(
+            ClassFields().serviceGender,
+            operator,
+            gender,
+          );
+
+          expect(Filter.fromJson(filter.toJson()), filter);
+        });
+      }
+    }
+  });
 }
