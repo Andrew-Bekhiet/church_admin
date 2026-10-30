@@ -65,16 +65,25 @@ class BulkWhatsappComposeView extends StatelessWidget {
             ),
           ),
         OpensNextChatOnReturnCheckboxTile(value: state.opensNextChatOnReturn),
-        FilledButton.icon(
-          key: BulkWhatsappComposeViewKeys.startButton,
-          style: theme.largeFilledButtonStyle,
-          icon: const Icon(Symbols.send),
-          label: const Text('ابدأ'),
-          onPressed: reachableCount > 0
-              ? () => context.read<BulkWhatsappMessageCubit>().start(
-                  templateController.template,
-                )
-              : null,
+        ListenableBuilder(
+          listenable: templateController,
+          builder: (context, _) {
+            final canStart =
+                reachableCount > 0 &&
+                templateController.template.text.trim().isNotEmpty;
+
+            return FilledButton.icon(
+              key: BulkWhatsappComposeViewKeys.startButton,
+              style: theme.largeFilledButtonStyle,
+              icon: const Icon(Symbols.send),
+              label: const Text('ابدأ'),
+              onPressed: canStart
+                  ? () => context.read<BulkWhatsappMessageCubit>().start(
+                      templateController.template,
+                    )
+                  : null,
+            );
+          },
         ),
       ],
     );

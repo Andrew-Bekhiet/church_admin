@@ -26,6 +26,7 @@ class _BulkWhatsappMessageScreenState extends State<BulkWhatsappMessageScreen> {
     launcherService: LauncherService.I,
     phoneNumberService: PhoneNumberService.I,
     analyticsService: AnalyticsService.I,
+    loggingService: LoggingService.I,
   );
 
   late final PlaceholderTextEditingController _templateController =
@@ -40,7 +41,7 @@ class _BulkWhatsappMessageScreenState extends State<BulkWhatsappMessageScreen> {
     super.initState();
 
     _appLifecycleListener = AppLifecycleListener(
-      onResume: () => unawaited(_cubit.continueAfterOpenedChat()),
+      onShow: () => unawaited(_cubit.continueAfterOpenedChat()),
     );
     unawaited(_cubit.load());
   }

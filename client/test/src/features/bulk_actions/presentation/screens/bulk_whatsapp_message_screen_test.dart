@@ -117,6 +117,41 @@ void main() {
     );
   });
 
+  testWidgets('a dialog over the app does not count as returning from a chat', (
+    tester,
+  ) async {
+    await pumpScreen(tester);
+    await startAndOpenFirstChat(tester);
+
+    tester.binding
+      ..handleAppLifecycleStateChanged(AppLifecycleState.inactive)
+      ..handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+    await tester.pumpAndSettle();
+
+    expect(
+      tester
+          .widget<Text>(find.byKey(BulkWhatsappQueueViewKeys.currentName))
+          .data,
+      mina.name,
+    );
+  });
+
+  testWidgets('an empty message cannot be started', (tester) async {
+    await pumpScreen(tester);
+
+    await tester.enterText(find.byKey(MessageTemplateFieldKeys.textField), ' ');
+    await tester.pumpAndSettle();
+
+    expect(
+      tester
+          .widget<ButtonStyleButton>(
+            find.byKey(BulkWhatsappComposeViewKeys.startButton),
+          )
+          .onPressed,
+      isNull,
+    );
+  });
+
   testWidgets('the summary lists the people who have no phone', (
     tester,
   ) async {
