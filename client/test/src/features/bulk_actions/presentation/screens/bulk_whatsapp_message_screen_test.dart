@@ -75,7 +75,7 @@ void main() {
 
     expect(
       tester.widget<Text>(find.byKey(BulkWhatsappComposeViewKeys.preview)).data,
-      'كل سنة وانت طيب يا ${mina.name} 🎂',
+      BulkWhatsappMessageScreen.defaultTemplate.renderFor(mina),
     );
   });
 
@@ -131,6 +131,9 @@ void main() {
       tester.widget<Text>(find.byKey(BulkWhatsappSummaryViewKeys.counts)).data,
       'تم فتح 1 محادثة وتخطي 1',
     );
-    expect(find.widgetWithText(ListTile, peter.name), findsOneWidget);
+    expect(
+      find.byKey(BulkWhatsappSummaryViewKeys.withoutPhoneFor(peter)),
+      findsOneWidget,
+    );
   });
 }

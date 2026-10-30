@@ -17,7 +17,7 @@ class BulkWhatsappSummaryView extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: [
         Text(
-          state.isStopped ? 'تم ايقاف الارسال' : 'تم الانتهاء',
+          state.isStopped ? 'تم إيقاف الإرسال' : 'تم الانتهاء',
           style: theme.textTheme.titleLarge,
         ),
         Text(
@@ -31,6 +31,9 @@ class BulkWhatsappSummaryView extends StatelessWidget {
           ),
           for (final recipient in withoutPhone)
             ListTile(
+              key: BulkWhatsappSummaryViewKeys.withoutPhoneFor(
+                recipient.person,
+              ),
               contentPadding: EdgeInsets.zero,
               title: Text(recipient.person.name),
             ),
@@ -49,4 +52,7 @@ class BulkWhatsappSummaryView extends StatelessWidget {
 
 abstract final class BulkWhatsappSummaryViewKeys {
   static const Key counts = ValueKey('Bulk Whatsapp Summary Counts Key');
+
+  static Key withoutPhoneFor(Person person) =>
+      ValueKey('Bulk Whatsapp Summary Without Phone Key ${person.id}');
 }

@@ -64,7 +64,7 @@ class BulkWhatsappComposeView extends StatelessWidget {
               color: theme.colorScheme.error,
             ),
           ),
-        AutoAdvanceCheckboxTile(value: state.autoAdvance),
+        OpensNextChatOnReturnCheckboxTile(value: state.opensNextChatOnReturn),
         FilledButton.icon(
           key: BulkWhatsappComposeViewKeys.startButton,
           style: theme.largeFilledButtonStyle,

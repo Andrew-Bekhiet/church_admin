@@ -5,6 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
 class BulkWhatsappMessageScreen extends StatefulWidget {
+  static final MessageTemplate defaultTemplate = MessageTemplate(
+    text: 'كل سنة وانت طيب يا {name} 🎂',
+    fields: [PersonFields().name],
+  );
+
   final Set<Person> persons;
 
   const BulkWhatsappMessageScreen({required this.persons, super.key});
@@ -25,7 +30,7 @@ class _BulkWhatsappMessageScreenState extends State<BulkWhatsappMessageScreen> {
 
   late final PlaceholderTextEditingController _templateController =
       PlaceholderTextEditingController(
-        template: BulkWhatsappMessageCubit.defaultTemplate,
+        template: BulkWhatsappMessageScreen.defaultTemplate,
       );
 
   late final AppLifecycleListener _appLifecycleListener;
@@ -60,7 +65,7 @@ class _BulkWhatsappMessageScreenState extends State<BulkWhatsappMessageScreen> {
                   const Text('تعذر تحميل أرقام الهواتف'),
                   FilledButton(
                     onPressed: () => unawaited(_cubit.load()),
-                    child: const Text('اعادة المحاولة'),
+                    child: const Text('إعادة المحاولة'),
                   ),
                 ],
               ),

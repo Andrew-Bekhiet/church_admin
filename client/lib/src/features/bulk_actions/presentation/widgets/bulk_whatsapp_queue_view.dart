@@ -42,7 +42,9 @@ class BulkWhatsappQueueView extends StatelessWidget {
                 ),
                 if (current.phones.length > 1)
                   DropdownButtonFormField<PhoneContact>(
-                    key: ValueKey(current.person.id),
+                    key: BulkWhatsappQueueViewKeys.phonePickerFor(
+                      current.person,
+                    ),
                     initialValue: current.selectedPhone,
                     isExpanded: true,
                     decoration: const InputDecoration(labelText: 'رقم الهاتف'),
@@ -79,14 +81,14 @@ class BulkWhatsappQueueView extends StatelessWidget {
               color: theme.colorScheme.error,
             ),
           ),
-        AutoAdvanceCheckboxTile(value: state.autoAdvance),
+        OpensNextChatOnReturnCheckboxTile(value: state.opensNextChatOnReturn),
         Row(
           spacing: 8,
           children: [
             TextButton(
               key: BulkWhatsappQueueViewKeys.stopButton,
               onPressed: cubit.stop,
-              child: const Text('ايقاف'),
+              child: const Text('إيقاف'),
             ),
             TextButton(
               key: BulkWhatsappQueueViewKeys.skipButton,
@@ -123,4 +125,7 @@ abstract final class BulkWhatsappQueueViewKeys {
   static const Key skipButton = ValueKey('Bulk Whatsapp Skip Key');
   static const Key nextButton = ValueKey('Bulk Whatsapp Next Key');
   static const Key openChatButton = ValueKey('Bulk Whatsapp Open Chat Key');
+
+  static Key phonePickerFor(Person person) =>
+      ValueKey('Bulk Whatsapp Phone Picker Key ${person.id}');
 }
