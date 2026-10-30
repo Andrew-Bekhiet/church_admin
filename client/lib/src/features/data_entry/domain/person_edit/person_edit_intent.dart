@@ -95,7 +95,7 @@ final class CreatePersonInClass extends CreatePerson {
     studyYear: class$.studyYear,
     gender: switch (class$.serviceGender) {
       Gender.any => Gender.male,
-      final classGender => classGender,
+      Gender.male || Gender.female => class$.serviceGender,
     },
   );
 

@@ -4,14 +4,18 @@ import 'dart:ui';
 import 'package:church_admin/church_admin.dart';
 
 class MeetingsAttendanceAnalysis {
-  static const _genderOrder = [Gender.any, Gender.female, Gender.male];
-
   static int compareStudyYearGenderKeys((int?, Gender) a, (int?, Gender) b) {
     final studyYearCompare = (a.$1 ?? -1).compareTo(b.$1 ?? -1);
     if (studyYearCompare != 0) return studyYearCompare;
 
-    return _genderOrder.indexOf(a.$2).compareTo(_genderOrder.indexOf(b.$2));
+    return _genderRank(a.$2).compareTo(_genderRank(b.$2));
   }
+
+  static int _genderRank(Gender gender) => switch (gender) {
+    Gender.any => 0,
+    Gender.female => 1,
+    Gender.male => 2,
+  };
 
   final String title;
   final Color? color;

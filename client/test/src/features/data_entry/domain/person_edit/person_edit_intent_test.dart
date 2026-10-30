@@ -180,7 +180,15 @@ void main() {
     test('a class intent drafts the gender the class serves', () {
       final person = CreatePersonInClass(class$: class$).draftPerson('new');
 
-      expect(person.gender, Gender.female);
+      expect(person.gender, class$.serviceGender);
+    });
+
+    test('a class serving both genders drafts a male student', () {
+      final person = CreatePersonInClass(
+        class$: class$.copyWith(serviceGender: Gender.any),
+      ).draftPerson('new');
+
+      expect(person.gender, Gender.male);
     });
   });
 }

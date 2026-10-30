@@ -203,6 +203,30 @@ void main() {
       },
     );
 
+    test(
+      'within a study year, slices for any gender and girls come before boys',
+      () {
+        final analysis = MeetingsAttendanceAnalysis(
+          title: 'خدمة',
+          meetings: [
+            MeetingAttendanceSummary(
+              meeting: meeting('m1', 'أول'),
+              demographics: [
+                for (final gender in [Gender.male, Gender.female, Gender.any])
+                  demographic(d1, persons: 1, studyYearId: 1, gender: gender),
+              ],
+            ),
+          ],
+        );
+
+        expect(analysis.demographicBreakdown.map((entry) => entry.gender), [
+          Gender.any,
+          Gender.female,
+          Gender.male,
+        ]);
+      },
+    );
+
     test('a single demographic slice has no demographic breakdown', () {
       final analysis = MeetingsAttendanceAnalysis(
         title: 'فصل',

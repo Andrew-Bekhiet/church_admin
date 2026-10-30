@@ -646,12 +646,12 @@ class Person extends ViewableWithIDAndImage
     }
 
     if (gender != oldPerson.gender) {
-      final canBeShammas = isShammas && gender == Gender.male;
+      final staysShammas = isShammas && gender.canBeShammas;
 
       result = result.copyWith(
         gender: gender.isMale,
-        isShammas: canBeShammas,
-        shammasLevelId: canBeShammas ? result.shammasLevelId : null,
+        isShammas: staysShammas,
+        shammasLevelId: staysShammas ? result.shammasLevelId : null,
       );
     }
 

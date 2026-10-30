@@ -64,7 +64,7 @@ class PersonEditChurchAndSpiritualSection extends StatelessWidget {
               ),
             ),
           ],
-          if (gender.fieldValue == Gender.male) ...[
+          if (gender.fieldValue.canBeShammas) ...[
             AdvancedCheckboxTile<PersonEditError>(
               field: form.isShammas,
               title: 'شماس؟',

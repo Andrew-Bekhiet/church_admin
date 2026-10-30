@@ -49,7 +49,7 @@ class GenderField extends StatelessWidget {
           autovalidateMode: autovalidateMode,
           validator: validator,
           onSaved: onSaved,
-          onChanged: enabled ? _onDropdownChanged : null,
+          onChanged: enabled ? _maybeNotifyChanged : null,
           decoration: InputDecoration(
             enabled: enabled,
             labelText: label,
@@ -106,7 +106,7 @@ class GenderField extends StatelessWidget {
     }
   }
 
-  void _onDropdownChanged(Gender? gender) {
+  void _maybeNotifyChanged(Gender? gender) {
     if (gender != null) onChanged?.call(gender);
   }
 

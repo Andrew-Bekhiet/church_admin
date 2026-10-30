@@ -264,7 +264,7 @@ void main() {
       );
     });
 
-    test('a class with null gender matches either gender slice', () {
+    test('a class serving any gender matches either gender slice', () {
       final subject = analysis(
         rosterMembers: [
           member('p1', studyYearId: 4, gender: Gender.male, attended: true),

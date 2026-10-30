@@ -41,5 +41,34 @@ void main() {
         },
       );
     });
+
+    test(
+      'a filter whose gender is not chosen yet matches rows without one',
+      () {
+        expect(
+          Filter(
+            ClassFields().serviceGender,
+            GenderOperator.is$,
+            null,
+          ).queryToJson(),
+          {
+            'serviceGender': {'_isNull': true},
+          },
+        );
+      },
+    );
+
+    test('excluding any gender matches rows that set a gender', () {
+      expect(
+        Filter(
+          ClassFields().serviceGender,
+          GenderOperator.isNot,
+          Gender.any,
+        ).queryToJson(),
+        {
+          'serviceGender': {'_isNull': false},
+        },
+      );
+    });
   });
 }

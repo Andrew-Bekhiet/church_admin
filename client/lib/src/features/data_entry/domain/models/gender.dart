@@ -24,6 +24,8 @@ enum Gender implements LabeledEnum {
     any => null,
   };
 
+  bool get canBeShammas => this == male;
+
   const Gender(this.label, {required this.groupLabel});
 
   bool overlaps(Gender other) => this == any || other == any || this == other;
