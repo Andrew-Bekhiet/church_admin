@@ -46,7 +46,7 @@ class FakePersonsDAO extends Fake implements PersonsDAO {
   Object? phoneContactsError;
 
   @override
-  Future<List<Person>?> personsPhoneContacts({
+  Future<List<Person>> personsPhoneContacts({
     required Iterable<String> personsIds,
   }) async {
     if (phoneContactsError case final error?) throw error;

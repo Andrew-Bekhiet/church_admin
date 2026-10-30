@@ -109,7 +109,7 @@ class PersonsDAO extends FullCRUDDAO<Person>
     return graphQLClient.queryAndReturnParsed(queryOptions);
   }
 
-  Future<List<Person>?> personsPhoneContacts({
+  Future<List<Person>> personsPhoneContacts({
     required Iterable<String> personsIds,
   }) {
     final queryOptions = QueryOptions(
