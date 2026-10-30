@@ -92,7 +92,7 @@ class BulkWhatsappQueueView extends StatelessWidget {
             ),
             TextButton(
               key: BulkWhatsappQueueViewKeys.skipButton,
-              onPressed: cubit.skipCurrent,
+              onPressed: state.isAwaitingReturn ? null : cubit.skipCurrent,
               child: const Text('تخطي'),
             ),
             Expanded(
