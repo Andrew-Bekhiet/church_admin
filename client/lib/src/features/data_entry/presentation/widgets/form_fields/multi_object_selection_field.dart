@@ -87,6 +87,7 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
                                 onPressed: () async {
                                   final customObject = await onCreateCustom
                                       ?.call(search.value!);
+                                  if (search.isClosed) return;
                                   if (customObject != null) {
                                     selection.select(customObject);
                                   }
