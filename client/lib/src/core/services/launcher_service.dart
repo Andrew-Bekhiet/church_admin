@@ -30,12 +30,7 @@ class LauncherService {
       Uri(
         scheme: 'whatsapp',
         host: 'send',
-        query: queryParameters.entries
-            .map(
-              (parameter) =>
-                  '${parameter.key}=${Uri.encodeComponent(parameter.value)}',
-            )
-            .join('&'),
+        queryParameters: queryParameters,
       ),
     );
   }

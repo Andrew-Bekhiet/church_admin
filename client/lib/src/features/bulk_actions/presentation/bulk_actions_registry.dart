@@ -4,6 +4,10 @@ class BulkActionsRegistry {
   static BulkActionsRegistry get I =>
       globalProviderContainer.read(bulkActionsRegistryProvider);
 
+  static const BulkActionsRegistry standard = BulkActionsRegistry([
+    SendWhatsappMessageBulkAction(),
+  ]);
+
   final List<BulkAction> _actions;
 
   const BulkActionsRegistry(this._actions);
