@@ -109,6 +109,21 @@ class PersonsDAO extends FullCRUDDAO<Person>
     return graphQLClient.queryAndReturnParsed(queryOptions);
   }
 
+  Future<List<Person>> personsPhoneContacts({
+    required Iterable<String> personsIds,
+  }) {
+    final queryOptions = QueryOptions(
+      document: transformDocument(documentNodeQuerypersonsPhoneContacts),
+      operationName: 'personsPhoneContacts',
+      variables: Variables_Query_personsPhoneContacts(
+        ids: personsIds.map((id) => id.toUuid()).toList(),
+      ).toJson(),
+      parserFn: db.parser.listParser(Person.fromJson),
+    );
+
+    return graphQLClient.queryAndReturnParsed(queryOptions, onlineFirst: true);
+  }
+
   Future<PersonsGeolocationsResponse?> personsGeolocations({
     List<UuidValue> areasIds = const [],
     List<UuidValue> streetsIds = const [],
