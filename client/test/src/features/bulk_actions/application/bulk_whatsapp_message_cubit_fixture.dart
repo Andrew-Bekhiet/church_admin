@@ -41,8 +41,16 @@ class BulkWhatsappMessageCubitFixture {
     stubWhatsappLaunch(() async => true);
   }
 
+  static BulkWhatsappSending sendingStateOf(BulkWhatsappMessageCubit cubit) =>
+      cubit.state as BulkWhatsappSending;
+
   WhatsappRecipient recipientOf(Person person, List<PhoneContact> contacts) =>
       WhatsappRecipient.of(person.copyWith(contacts: contacts));
+
+  List<WhatsappRecipient> markThenMinaWithTwoPhones() => [
+    recipientOf(mark, [markPhone]),
+    recipientOf(mina, [minaPhone, minaOtherPhone]),
+  ];
 
   void stubWhatsappLaunch(Future<bool> Function() launch) => when(
     () => launcher.launchWhatsappChat(any(), text: any(named: 'text')),

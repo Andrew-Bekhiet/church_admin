@@ -16,18 +16,11 @@ void main() {
 
   setUp(() => fixture = BulkWhatsappMessageCubitFixture());
 
-  List<WhatsappRecipient> markThenMina() => [
-    fixture.recipientOf(mark, [markPhone]),
-    fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
-  ];
-
-  BulkWhatsappSending sendingState(BulkWhatsappMessageCubit cubit) =>
-      cubit.state as BulkWhatsappSending;
-
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'a second tap while WhatsApp is opening does not open the chat again',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(recipients: markThenMina()),
+    seed: () =>
+        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
     act: (cubit) async {
       final gate = fixture.holdWhatsappLaunches();
       final opening = cubit.openCurrentChat();
@@ -55,7 +48,7 @@ void main() {
       await opening;
     },
     verify: (cubit) {
-      final state = sendingState(cubit);
+      final state = BulkWhatsappMessageCubitFixture.sendingStateOf(cubit);
       expect(state.current.person.id, peter.id);
       expect(state.current.status, WhatsappRecipientStatus.pending);
       expect(state.isAwaitingReturn, isFalse);
@@ -66,7 +59,10 @@ void main() {
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'choosing another phone while WhatsApp is opening leaves it unopened',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(recipients: markThenMina(), currentIndex: 1),
+    seed: () => fixture.sendingTo(
+      recipients: fixture.markThenMinaWithTwoPhones(),
+      currentIndex: 1,
+    ),
     act: (cubit) async {
       final gate = fixture.holdWhatsappLaunches();
       final opening = cubit.openCurrentChat();
@@ -76,17 +72,21 @@ void main() {
     },
     verify: (cubit) {
       expect(
-        sendingState(cubit).current.status,
+        BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).current.status,
         WhatsappRecipientStatus.pending,
       );
-      expect(sendingState(cubit).isAwaitingReturn, isFalse);
+      expect(
+        BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).isAwaitingReturn,
+        isFalse,
+      );
     },
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     "skipping while WhatsApp is opening lets the next person's chat open",
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(recipients: markThenMina()),
+    seed: () =>
+        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
     act: (cubit) async {
       final gate = fixture.holdWhatsappLaunches();
       final opening = cubit.openCurrentChat();
@@ -105,7 +105,8 @@ void main() {
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'stopping while WhatsApp is opening keeps the run finished',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(recipients: markThenMina()),
+    seed: () =>
+        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
     act: (cubit) async {
       final gate = fixture.holdWhatsappLaunches();
       final opening = cubit.openCurrentChat();
@@ -140,7 +141,7 @@ void main() {
       await opening;
     },
     verify: (cubit) {
-      final state = sendingState(cubit);
+      final state = BulkWhatsappMessageCubitFixture.sendingStateOf(cubit);
       expect(state.current.person.id, mark.id);
       expect(state.current.status, WhatsappRecipientStatus.pending);
       expect(state.isAwaitingReturn, isFalse);
@@ -150,7 +151,8 @@ void main() {
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'closing while WhatsApp is opening ends quietly',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(recipients: markThenMina()),
+    seed: () =>
+        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
     act: (cubit) async {
       final gate = fixture.holdWhatsappLaunches();
       final opening = cubit.openCurrentChat();
