@@ -85,7 +85,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
         currentIndex: 0,
         opensNextChatOnReturn: composing.opensNextChatOnReturn,
       );
-      _showNextWithPhoneOrFinish(sendingState, fromIndex: 0);
+      _showNextWithPhoneOrFinishAndTrackRun(sendingState, fromIndex: 0);
     }
   }
 
@@ -130,7 +130,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
   Future<void> showNextAndMaybeOpenItsChat() async {
     if (state
         case BulkWhatsappSending(isAwaitingReturn: true) && final sending) {
-      _showNextWithPhoneOrFinish(
+      _showNextWithPhoneOrFinishAndTrackRun(
         sending,
         fromIndex: sending.currentIndex + 1,
       );
@@ -143,7 +143,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
 
   void skipCurrent() {
     if (state case final BulkWhatsappSending sending) {
-      _showNextWithPhoneOrFinish(
+      _showNextWithPhoneOrFinishAndTrackRun(
         sending.withCurrent(
           sending.current.copyWith(status: WhatsappRecipientStatus.skipped),
         ),
@@ -211,7 +211,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
         : sending.copyWith(hasOpenFailed: true),
   );
 
-  void _showNextWithPhoneOrFinish(
+  void _showNextWithPhoneOrFinishAndTrackRun(
     BulkWhatsappSending sending, {
     required int fromIndex,
   }) {

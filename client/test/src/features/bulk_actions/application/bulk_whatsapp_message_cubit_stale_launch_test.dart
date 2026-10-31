@@ -32,14 +32,19 @@ void main() {
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
-    'skipping while WhatsApp is opening keeps the next person current',
+    'skipping while WhatsApp is opening keeps the next person current '
+    'even on the same phone',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(
-      recipients: [
-        fixture.recipientOf(mark, [markPhone]),
-        fixture.recipientOf(peter, [markPhone]),
-      ],
-    ),
+    seed: () {
+      const sharedPhone = markPhone;
+
+      return fixture.sendingTo(
+        recipients: [
+          fixture.recipientOf(mark, [sharedPhone]),
+          fixture.recipientOf(peter, [sharedPhone]),
+        ],
+      );
+    },
     act: (cubit) async {
       final gate = fixture.holdWhatsappLaunches();
       final opening = cubit.openCurrentChat();
@@ -57,7 +62,7 @@ void main() {
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
-    'choosing another phone while WhatsApp is opening leaves it unopened',
+    'choosing another phone while WhatsApp is opening keeps the person pending',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTo(
       recipients: fixture.markThenMinaWithTwoPhones(),
