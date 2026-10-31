@@ -3,10 +3,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../fakes/fake_launcher_service.dart';
 import '../../../../fakes/fake_logging_service.dart';
 import '../../../../fakes/fake_persons_dao.dart';
 import '../../../../fakes/mock_database_service.dart';
+import '../../../../fakes/mock_launcher_service.dart';
 import '../../../../fakes/recording_analytics_provider.dart';
 import '../../../../utils.dart';
 
@@ -15,10 +15,13 @@ void main() {
   final mina = Person(id: 'p1', name: 'مينا');
   final peter = Person(id: 'p3', name: 'بيتر');
 
-  late FakeLauncherService launcher;
+  late MockLauncherService launcher;
 
   setUp(() {
-    launcher = FakeLauncherService();
+    launcher = MockLauncherService();
+    when(
+      () => launcher.launchWhatsappChat(any(), text: any(named: 'text')),
+    ).thenAnswer((_) async => true);
     final database = MockDatabaseService();
     when(() => database.persons).thenReturn(
       FakePersonsDAO()
