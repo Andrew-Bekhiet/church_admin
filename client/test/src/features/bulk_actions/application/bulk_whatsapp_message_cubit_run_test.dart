@@ -49,7 +49,7 @@ void main() {
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
-    'starting with nobody reachable on a phone finishes right away',
+    'starting with nobody who has a phone finishes right away',
     build: () => fixture.buildCubit(),
     seed: () =>
         BulkWhatsappComposing(recipients: [fixture.recipientOf(peter, [])]),
@@ -66,7 +66,7 @@ void main() {
     verify: (_) => verify(
       () => fixture.launcher.launchWhatsappChat(
         '+201000000003',
-        text: 'كل سنة وانت طيب يا مارك',
+        text: fixture.template.renderFor(mark),
       ),
     ),
   );
