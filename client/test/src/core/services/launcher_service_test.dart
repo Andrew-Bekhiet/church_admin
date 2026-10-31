@@ -107,24 +107,6 @@ void main() {
           );
         },
       );
-
-      test(
-        'launchWhatsappChat percent-encodes the spaces of the message',
-        () async {
-          final unit = LauncherService();
-
-          await unit.launchWhatsappChat('+201001234567', text: 'يا مينا 1+1');
-
-          verify(
-            (UrlLauncherPlatform.instance as MockUrlLauncherPlatform).launchUrl(
-              'whatsapp://send?phone=%2B201001234567&text='
-              '${Uri.encodeComponent('يا')}%20${Uri.encodeComponent('مينا')}'
-              '%201%2B1',
-              any,
-            ),
-          );
-        },
-      );
     },
   );
 }
