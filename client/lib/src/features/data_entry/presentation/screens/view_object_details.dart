@@ -180,7 +180,9 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
           if (widget.sliverPersistentHeaderDelegate != null)
             SliverPersistentHeader(
               pinned: true,
-              delegate: widget.sliverPersistentHeaderDelegate!,
+              delegate: SelectionAwarePersistentHeaderDelegate(
+                widget.sliverPersistentHeaderDelegate!,
+              ),
             ),
         ];
 
@@ -224,44 +226,46 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
           );
         }
 
-        return Theme(
-          data: newTheme,
-          child: DefaultTabController(
-            length: widget.childrenTypes.length,
-            child: Scaffold(
-              body: NotificationListener<ScrollEndNotification>(
-                onNotification: _onScrollEnd,
-                child: body,
-              ),
-              bottomNavigationBar: widget.bottomNavBarBuilder != null
-                  ? Builder(
-                      builder: (context) => BottomAppBar(
-                        child: widget.bottomNavBarBuilder!(
-                          context,
-                          DefaultTabController.of(context),
+        return ListSelectionHost(
+          child: Theme(
+            data: newTheme,
+            child: DefaultTabController(
+              length: widget.childrenTypes.length,
+              child: Scaffold(
+                body: NotificationListener<ScrollEndNotification>(
+                  onNotification: _onScrollEnd,
+                  child: body,
+                ),
+                bottomNavigationBar: widget.bottomNavBarBuilder != null
+                    ? Builder(
+                        builder: (context) => BottomAppBar(
+                          child: widget.bottomNavBarBuilder!(
+                            context,
+                            DefaultTabController.of(context),
+                          ),
                         ),
-                      ),
-                    )
-                  : null,
-              floatingActionButtonLocation: widget.bottomNavBarBuilder != null
-                  ? FloatingActionButtonLocation.endContained
-                  : null,
-              floatingActionButton:
-                  widget.floatingActionButtonBuilder != null && canEditObject
-                  ? Builder(
-                      builder: (context) {
-                        if (!isObjectFullyLoaded) {
-                          return const LoadingFloatingActionButton();
-                        }
+                      )
+                    : null,
+                floatingActionButtonLocation: widget.bottomNavBarBuilder != null
+                    ? FloatingActionButtonLocation.endContained
+                    : null,
+                floatingActionButton:
+                    widget.floatingActionButtonBuilder != null && canEditObject
+                    ? Builder(
+                        builder: (context) {
+                          if (!isObjectFullyLoaded) {
+                            return const LoadingFloatingActionButton();
+                          }
 
-                        return widget.floatingActionButtonBuilder!(
-                          context,
-                          DefaultTabController.of(context),
-                          objectData,
-                        );
-                      },
-                    )
-                  : null,
+                          return widget.floatingActionButtonBuilder!(
+                            context,
+                            DefaultTabController.of(context),
+                            objectData,
+                          );
+                        },
+                      )
+                    : null,
+              ),
             ),
           ),
         );

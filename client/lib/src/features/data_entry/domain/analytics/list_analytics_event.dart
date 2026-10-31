@@ -34,3 +34,18 @@ final class ListArrangementSave extends ListAnalyticsEvent {
       primarySortDirection = arrangement.orderBy.firstOrNull?.value,
       hasSecondLine = arrangement.secondLineField != null;
 }
+
+final class ListMultiSelectOpen extends ListAnalyticsEvent {
+  final AnalyticsEntityType? entityType;
+
+  @override
+  String get objectAction => 'multi_select_open';
+
+  @override
+  Json get properties => {
+    if (entityType case final type?) 'entity_type': type.key,
+  };
+
+  ListMultiSelectOpen(Object firstSelected)
+    : entityType = AnalyticsEntityType.of(firstSelected);
+}

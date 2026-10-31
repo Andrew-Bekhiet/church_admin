@@ -54,4 +54,7 @@ final class ListSelectionActive extends ListSelectionState {
 
     return ListSelectionActive(selected.whereNot(excluded.contains));
   }
+
+  ListSelectionActive inOrderOf(Iterable<Viewable> items) =>
+      ListSelectionActive([...items.where(selected.contains), ...selected]);
 }

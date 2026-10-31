@@ -12,6 +12,7 @@ export 'widgets/form_fields.dart';
 export 'widgets/image_object_from_url.dart';
 export 'widgets/image_object_placeholder.dart';
 export 'widgets/image_object_widget.dart';
+export 'widgets/list_selection_host.dart';
 export 'widgets/loading_floating_action_button.dart';
 export 'widgets/move_out_of_sight_confirmation_dialog.dart';
 export 'widgets/object_selection_preview.dart';

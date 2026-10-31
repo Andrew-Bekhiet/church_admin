@@ -92,6 +92,7 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
     } else {
       switch (selection.state) {
         case ListSelectionInactive():
+          AnalyticsService.I.track(ListMultiSelectOpen(item));
           selection.startSelectingWith(item);
         case ListSelectionActive():
           selection.endUnlessAlwaysActive();

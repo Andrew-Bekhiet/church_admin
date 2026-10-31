@@ -134,9 +134,26 @@ class _ViewableObjectListState<T extends Viewable>
       ),
     );
 
+    final listRegisteringWithHost =
+        BlocListener<ListSelectionCubit, ListSelectionState>(
+          listenWhen: (previous, current) =>
+              previous is ListSelectionInactive &&
+              current is ListSelectionActive,
+          listener: (context, _) => ListSelectionHost.maybeOf(
+            context,
+          )?.register(context.read(), list: objectsController),
+          child: list,
+        );
+
     return switch (widget.selection) {
-      final selection? => BlocProvider.value(value: selection, child: list),
-      null => BlocProvider(create: (_) => ListSelectionCubit(), child: list),
+      final selection? => BlocProvider.value(
+        value: selection,
+        child: listRegisteringWithHost,
+      ),
+      null => BlocProvider(
+        create: (_) => ListSelectionCubit(),
+        child: listRegisteringWithHost,
+      ),
     };
   }
 

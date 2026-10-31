@@ -44,14 +44,18 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }
         },
-        child: Scaffold(
-          extendBodyBehindAppBar: true,
-          drawer: const HomeDrawer(),
-          appBar: HomeAppBar(pageController: _pageController),
-          body: HomeBody(pageController: _pageController),
-          floatingActionButton: HomeFAB(pageController: _pageController),
-          bottomNavigationBar: HomeBottomNavBar(
-            pageController: _pageController,
+        child: ListSelectionHost(
+          child: Scaffold(
+            extendBodyBehindAppBar: true,
+            drawer: const HomeDrawer(),
+            appBar: SelectionAwareAppBar(
+              child: HomeAppBar(pageController: _pageController),
+            ),
+            body: HomeBody(pageController: _pageController),
+            floatingActionButton: HomeFAB(pageController: _pageController),
+            bottomNavigationBar: HomeBottomNavBar(
+              pageController: _pageController,
+            ),
           ),
         ),
       ),
