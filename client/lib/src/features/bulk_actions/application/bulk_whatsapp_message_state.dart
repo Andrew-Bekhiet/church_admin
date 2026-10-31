@@ -22,10 +22,10 @@ final class BulkWhatsappLoadFailure extends BulkWhatsappMessageState {
   const BulkWhatsappLoadFailure(this.error);
 }
 
-sealed class BulkWhatsappRun extends BulkWhatsappMessageState {
+sealed class BulkWhatsappLoaded extends BulkWhatsappMessageState {
   final List<WhatsappRecipient> recipients;
 
-  Iterable<WhatsappRecipient> get reachable =>
+  Iterable<WhatsappRecipient> get withPhone =>
       recipients.where((recipient) => recipient.hasPhone);
 
   Iterable<WhatsappRecipient> get withoutPhone =>
@@ -34,13 +34,13 @@ sealed class BulkWhatsappRun extends BulkWhatsappMessageState {
   @override
   List<Object?> get props => [recipients];
 
-  const BulkWhatsappRun({required this.recipients});
+  const BulkWhatsappLoaded({required this.recipients});
 
-  int countOf(WhatsappRecipientStatus status) =>
-      reachable.where((recipient) => recipient.status == status).length;
+  int withPhoneCountOf(WhatsappRecipientStatus status) =>
+      withPhone.where((recipient) => recipient.status == status).length;
 }
 
-final class BulkWhatsappComposing extends BulkWhatsappRun {
+final class BulkWhatsappComposing extends BulkWhatsappLoaded {
   final bool opensNextChatOnReturn;
 
   @override
@@ -52,7 +52,7 @@ final class BulkWhatsappComposing extends BulkWhatsappRun {
   });
 }
 
-final class BulkWhatsappSending extends BulkWhatsappRun {
+final class BulkWhatsappSending extends BulkWhatsappLoaded {
   final MessageTemplate template;
   final int currentIndex;
   final bool opensNextChatOnReturn;
@@ -63,7 +63,7 @@ final class BulkWhatsappSending extends BulkWhatsappRun {
 
   String get currentMessage => template.renderFor(current.person);
 
-  int get currentPosition => recipients
+  int get currentPositionAmongWithPhone => recipients
       .take(currentIndex + 1)
       .where((recipient) => recipient.hasPhone)
       .length;
@@ -101,9 +101,12 @@ final class BulkWhatsappSending extends BulkWhatsappRun {
     isAwaitingReturn: isAwaitingReturn ?? this.isAwaitingReturn,
     hasOpenFailed: hasOpenFailed ?? this.hasOpenFailed,
   );
+
+  BulkWhatsappSending withCurrent(WhatsappRecipient current) =>
+      copyWith(recipients: [...recipients]..[currentIndex] = current);
 }
 
-final class BulkWhatsappFinished extends BulkWhatsappRun {
+final class BulkWhatsappFinished extends BulkWhatsappLoaded {
   final bool isStopped;
 
   @override
