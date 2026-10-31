@@ -5,7 +5,7 @@ abstract final class WhatsappMessageFields {
 
   static final FieldMetadata<String> firstName = FieldMetadata<String>(
     parentType: Person,
-    name: 'first_name',
+    name: 'firstName',
     label: 'الاسم الأول',
     getValue: (person) =>
         person is Person ? person.name.trim().split(_whitespace).first : null,

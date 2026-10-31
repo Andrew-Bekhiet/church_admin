@@ -13,9 +13,11 @@ import '../../../../utils.dart';
 void main() {
   const markPhone = PhoneContact(id: 'c2', phone: '01000000002');
   const minaPhone = PhoneContact(id: 'c1', phone: '01000000001');
+  const johnPhone = PhoneContact(id: 'c4', phone: '01000000004');
   final mark = Person(id: 'p2', name: 'مارك');
   final mina = Person(id: 'p1', name: 'مينا');
   final peterWithoutPhone = Person(id: 'p3', name: 'بيتر');
+  final john = Person(id: 'p4', name: 'يوحنا');
   final firstNameToken = MessageTemplate.tokenOf(
     WhatsappMessageFields.firstName,
   );
@@ -33,6 +35,7 @@ void main() {
         ..personsWithPhoneContacts = [
           mark.copyWith(contacts: [markPhone]),
           mina.copyWith(contacts: [minaPhone]),
+          john.copyWith(contacts: [johnPhone]),
           peterWithoutPhone,
         ],
     );
@@ -220,11 +223,19 @@ void main() {
   testWidgets('the summary counts the opened and skipped chats', (
     tester,
   ) async {
-    const openedCount = 1;
+    const openedCount = 2;
     const skippedCount = 1;
-    await pumpScreen(tester, persons: {mina, mark});
+    await pumpScreen(tester, persons: {mina, mark, john});
 
-    await openFirstChatThenSkipTheNext(tester);
+    await startAndOpenFirstChat(tester);
+    await tester.tap(find.byKey(BulkWhatsappQueueViewKeys.nextButton));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(BulkWhatsappQueueViewKeys.openChatButton));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(BulkWhatsappQueueViewKeys.nextButton));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(BulkWhatsappQueueViewKeys.skipButton));
+    await tester.pumpAndSettle();
 
     final counts = tester
         .widget<Text>(find.byKey(BulkWhatsappSummaryViewKeys.counts))
