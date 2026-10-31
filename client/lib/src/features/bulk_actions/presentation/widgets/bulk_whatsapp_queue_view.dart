@@ -14,18 +14,20 @@ class BulkWhatsappQueueView extends StatelessWidget {
     final theme = Theme.of(context);
     final cubit = context.read<BulkWhatsappMessageCubit>();
     final current = state.current;
-    final reachableCount = state.reachable.length;
+    final withPhoneCount = state.withPhone.length;
 
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
         Text(
-          '${state.currentPosition} / $reachableCount',
+          '${state.currentPositionAmongWithPhone} / $withPhoneCount',
           key: BulkWhatsappQueueViewKeys.progress,
           style: theme.textTheme.titleMedium,
           textAlign: TextAlign.center,
         ),
-        LinearProgressIndicator(value: state.currentPosition / reachableCount),
+        LinearProgressIndicator(
+          value: state.currentPositionAmongWithPhone / withPhoneCount,
+        ),
         Card.filled(
           color: theme.colorScheme.surfaceContainerHigh,
           margin: const EdgeInsets.symmetric(vertical: 16),
@@ -100,7 +102,7 @@ class BulkWhatsappQueueView extends StatelessWidget {
                   ? FilledButton(
                       key: BulkWhatsappQueueViewKeys.nextButton,
                       onPressed: () =>
-                          unawaited(cubit.continueAfterOpenedChat()),
+                          unawaited(cubit.showNextAndMaybeOpenItsChat()),
                       child: const Text('التالي'),
                     )
                   : FilledButton.icon(

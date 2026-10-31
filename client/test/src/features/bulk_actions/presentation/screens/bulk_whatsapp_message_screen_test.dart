@@ -71,16 +71,21 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('the preview fills the template for the first reachable person', (
-    tester,
-  ) async {
-    await pumpScreen(tester);
+  testWidgets(
+    'the preview fills the template for the first person with a phone',
+    (
+      tester,
+    ) async {
+      await pumpScreen(tester);
 
-    expect(
-      tester.widget<Text>(find.byKey(BulkWhatsappComposeViewKeys.preview)).data,
-      'كل سنة وانت طيب يا مينا 🎂',
-    );
-  });
+      expect(
+        tester
+            .widget<Text>(find.byKey(BulkWhatsappComposeViewKeys.preview))
+            .data,
+        BulkWhatsappMessageScreen.defaultTemplate.renderFor(mina),
+      );
+    },
+  );
 
   testWidgets('the preview follows edits to the template', (tester) async {
     await pumpScreen(tester);

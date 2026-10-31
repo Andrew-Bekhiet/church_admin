@@ -41,7 +41,7 @@ class _BulkWhatsappMessageScreenState extends State<BulkWhatsappMessageScreen> {
     super.initState();
 
     _appLifecycleListener = AppLifecycleListener(
-      onShow: () => unawaited(_cubit.continueAfterOpenedChat()),
+      onShow: () => unawaited(_cubit.showNextAndMaybeOpenItsChat()),
     );
     unawaited(_cubit.load());
   }

@@ -16,8 +16,8 @@ class BulkWhatsappComposeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final previewRecipient = state.reachable.firstOrNull;
-    final reachableCount = state.reachable.length;
+    final previewRecipient = state.withPhone.firstOrNull;
+    final withPhoneCount = state.withPhone.length;
     final withoutPhoneCount = state.withoutPhone.length;
 
     return ListView(
@@ -54,7 +54,7 @@ class BulkWhatsappComposeView extends StatelessWidget {
             ),
           ),
         Text(
-          'سيتم فتح محادثة مع $reachableCount من ${state.recipients.length}',
+          'سيتم فتح محادثة مع $withPhoneCount من ${state.recipients.length}',
           style: theme.textTheme.titleMedium,
         ),
         if (withoutPhoneCount > 0)
@@ -69,7 +69,7 @@ class BulkWhatsappComposeView extends StatelessWidget {
           listenable: templateController,
           builder: (context, _) {
             final canStart =
-                reachableCount > 0 &&
+                withPhoneCount > 0 &&
                 templateController.template.text.trim().isNotEmpty;
 
             return FilledButton.icon(

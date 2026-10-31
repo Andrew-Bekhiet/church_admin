@@ -9,8 +9,10 @@ class BulkWhatsappSummaryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final openedCount = state.countOf(WhatsappRecipientStatus.opened);
-    final skippedCount = state.countOf(WhatsappRecipientStatus.skipped);
+    final openedCount = state.withPhoneCountOf(WhatsappRecipientStatus.opened);
+    final skippedCount = state.withPhoneCountOf(
+      WhatsappRecipientStatus.skipped,
+    );
     final withoutPhone = state.withoutPhone.toList();
 
     return ListView(
