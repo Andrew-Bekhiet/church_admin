@@ -2,16 +2,15 @@ import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
 class AdminScopePermissionCheckboxes extends StatelessWidget {
+  final UserAdminScope userAdminScope;
+  final String objectLabel;
+  final void Function(UserAdminScope) onChanged;
   const AdminScopePermissionCheckboxes({
     required this.userAdminScope,
     required this.objectLabel,
     required this.onChanged,
     super.key,
   });
-
-  final UserAdminScope userAdminScope;
-  final String objectLabel;
-  final void Function(UserAdminScope) onChanged;
 
   @override
   Widget build(BuildContext context) {

@@ -2,12 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
 class FieldPathPicker extends StatelessWidget {
-  final QueryableType queryableType;
-  final FieldMetadata field;
-  final ValueChanged<FieldMetadata> onChanged;
-  final List<Widget> leafTrailing;
-  final String? labelText;
-
   static FieldMetadata topLevelFieldOf(
     QueryableType queryableType,
     FieldMetadata field,
@@ -17,6 +11,11 @@ class FieldPathPicker extends StatelessWidget {
       parentField,
     _ => field,
   };
+  final QueryableType queryableType;
+  final FieldMetadata field;
+  final ValueChanged<FieldMetadata> onChanged;
+  final List<Widget> leafTrailing;
+  final String? labelText;
 
   const FieldPathPicker({
     required this.queryableType,

@@ -8,10 +8,6 @@ import 'package:material_ui/material_ui.dart';
 class HomeDailyTextSheet extends StatelessWidget {
   static const double _maxHeightFraction = 0.7;
 
-  final HomeDailyDataType type;
-
-  const HomeDailyTextSheet({required this.type, super.key});
-
   static Future<void> show(BuildContext context, HomeDailyDataType type) {
     final homeCubit = context.read<HomeCubit>();
 
@@ -29,6 +25,10 @@ class HomeDailyTextSheet extends StatelessWidget {
       ),
     );
   }
+
+  final HomeDailyDataType type;
+
+  const HomeDailyTextSheet({required this.type, super.key});
 
   @override
   Widget build(BuildContext context) {

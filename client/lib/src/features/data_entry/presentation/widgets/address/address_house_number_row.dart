@@ -3,6 +3,11 @@ import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
 class AddressHouseNumberRow extends StatelessWidget {
+  final Address address;
+  final bool enabled;
+  final void Function(String?) onSubstreetNameChanged;
+  final void Function(String?) onHouseCodeChanged;
+  final int textResetToken;
   const AddressHouseNumberRow({
     required this.address,
     required this.enabled,
@@ -11,12 +16,6 @@ class AddressHouseNumberRow extends StatelessWidget {
     this.textResetToken = 0,
     super.key,
   });
-
-  final Address address;
-  final bool enabled;
-  final void Function(String?) onSubstreetNameChanged;
-  final void Function(String?) onHouseCodeChanged;
-  final int textResetToken;
 
   @override
   Widget build(BuildContext context) {

@@ -2,14 +2,13 @@ import 'package:flutter/gestures.dart';
 import 'package:material_ui/material_ui.dart';
 
 class SignupAgreementText extends StatelessWidget {
+  final TapGestureRecognizer termsOfServiceRecognizer;
+  final TapGestureRecognizer privacyPolicyRecognizer;
   const SignupAgreementText({
     required this.termsOfServiceRecognizer,
     required this.privacyPolicyRecognizer,
     super.key,
   });
-
-  final TapGestureRecognizer termsOfServiceRecognizer;
-  final TapGestureRecognizer privacyPolicyRecognizer;
 
   @override
   Widget build(BuildContext context) {

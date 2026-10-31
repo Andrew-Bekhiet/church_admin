@@ -8,6 +8,10 @@ class TappableFormField<T> extends StatefulWidget {
   final Widget? Function(BuildContext, FormFieldState<T>) builder;
   final AutovalidateMode? autovalidateMode;
   final FocusNode? focusNode;
+  final Future<void>? Function(FormFieldState<T>)? onTap;
+  final String? Function(T?)? validator;
+  final void Function(T?)? onSaved;
+  final InputDecoration Function(BuildContext, FormFieldState<T>)? decoration;
   const TappableFormField({
     required this.onTap,
     required this.initialValue,
@@ -20,10 +24,6 @@ class TappableFormField<T> extends StatefulWidget {
     this.focusNode,
     super.key,
   }) : assert(labelText != null || decoration != null);
-  final Future<void>? Function(FormFieldState<T>)? onTap;
-  final String? Function(T?)? validator;
-  final void Function(T?)? onSaved;
-  final InputDecoration Function(BuildContext, FormFieldState<T>)? decoration;
 
   @override
   State<TappableFormField<T>> createState() => _TappableFormFieldState<T>();

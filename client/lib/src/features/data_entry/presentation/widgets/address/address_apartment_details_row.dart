@@ -4,6 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 
 class AddressApartmentDetailsRow extends StatelessWidget {
+  final Address address;
+  final bool enabled;
+  final void Function(int) onStoreyNumberChanged;
+  final void Function(int) onApartmentNumberChanged;
+  final void Function(String?) onSpecialLandmarkChanged;
+  final int textResetToken;
   const AddressApartmentDetailsRow({
     required this.address,
     required this.enabled,
@@ -13,13 +19,6 @@ class AddressApartmentDetailsRow extends StatelessWidget {
     this.textResetToken = 0,
     super.key,
   });
-
-  final Address address;
-  final bool enabled;
-  final void Function(int) onStoreyNumberChanged;
-  final void Function(int) onApartmentNumberChanged;
-  final void Function(String?) onSpecialLandmarkChanged;
-  final int textResetToken;
 
   @override
   Widget build(BuildContext context) {

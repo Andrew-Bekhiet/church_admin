@@ -21,6 +21,13 @@ class DataGeomap extends StatefulWidget {
   final List<Widget> addLayers;
 
   final bool showUserLocation;
+  final void Function(Point?)? onTapLocation;
+  final MapOptions Function(LatLng)? createMapOptions;
+  final Stream<PersonsGeolocationsResponse?> Function(
+    PersonsGeolocationsResponse?,
+  )?
+  overrideResponseObjects;
+  final void Function(Position?)? onUserLocationChanged;
 
   const DataGeomap({
     required this.geomapOptionsStream,
@@ -33,13 +40,6 @@ class DataGeomap extends StatefulWidget {
     this.onTapLocation,
     super.key,
   });
-  final void Function(Point?)? onTapLocation;
-  final MapOptions Function(LatLng)? createMapOptions;
-  final Stream<PersonsGeolocationsResponse?> Function(
-    PersonsGeolocationsResponse?,
-  )?
-  overrideResponseObjects;
-  final void Function(Position?)? onUserLocationChanged;
 
   @override
   State<DataGeomap> createState() => DataGeomapState();

@@ -2,8 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
 class DiscardChangesDialog extends StatelessWidget {
-  const DiscardChangesDialog({super.key});
-
   static Future<void> popAfterConfirmingDiscard(
     BuildContext context, {
     required bool wasModified,
@@ -29,6 +27,8 @@ class DiscardChangesDialog extends StatelessWidget {
 
     if (isDiscarded) navigator.pop(result);
   }
+
+  const DiscardChangesDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

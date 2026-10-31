@@ -3,16 +3,15 @@ import 'package:material_symbols_icons/symbols.dart';
 import 'package:material_ui/material_ui.dart';
 
 class AddressLocationTapField extends StatelessWidget {
+  final Point? geolocation;
+  final bool enabled;
+  final Future<void>? Function(FormFieldState<Point?>) onTap;
   const AddressLocationTapField({
     required this.geolocation,
     required this.enabled,
     required this.onTap,
     super.key,
   });
-
-  final Point? geolocation;
-  final bool enabled;
-  final Future<void>? Function(FormFieldState<Point?>) onTap;
 
   @override
   Widget build(BuildContext context) {

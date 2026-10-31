@@ -12,6 +12,8 @@ class PhoneNumberPropertyWidget extends StatelessWidget {
   final void Function(String) phoneCall;
   final ViewableWithID owner;
   final bool isFamilyNumber;
+
+  final void Function(String)? addToContacts;
   const PhoneNumberPropertyWidget(
     this.propName,
     this.value,
@@ -104,6 +106,4 @@ class PhoneNumberPropertyWidget extends StatelessWidget {
       trailing: trailing,
     );
   }
-
-  final void Function(String)? addToContacts;
 }

@@ -3,14 +3,13 @@ import 'package:material_symbols_icons/symbols.dart';
 import 'package:material_ui/material_ui.dart';
 
 class SuggestedAddressCard extends StatelessWidget {
+  final Address? suggestedAddress;
+  final VoidCallback onUseSuggestion;
   const SuggestedAddressCard({
     required this.suggestedAddress,
     required this.onUseSuggestion,
     super.key,
   });
-
-  final Address? suggestedAddress;
-  final VoidCallback onUseSuggestion;
 
   @override
   Widget build(BuildContext context) {

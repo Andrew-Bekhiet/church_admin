@@ -3,9 +3,8 @@ import 'package:material_symbols_icons/symbols.dart';
 import 'package:material_ui/material_ui.dart';
 
 class AddressPreview extends StatelessWidget {
-  const AddressPreview({required this.address, super.key});
-
   final Address address;
+  const AddressPreview({required this.address, super.key});
 
   @override
   Widget build(BuildContext context) {

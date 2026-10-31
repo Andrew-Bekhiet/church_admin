@@ -5,9 +5,6 @@ import 'package:material_symbols_icons/symbols.dart';
 import 'package:material_ui/material_ui.dart';
 
 class ListArrangementSheet extends StatefulWidget {
-  final QueryableType queryableType;
-  final ListArrangement initialArrangement;
-
   static Future<ListArrangement?> show(
     BuildContext context, {
     required QueryableType queryableType,
@@ -22,6 +19,8 @@ class ListArrangementSheet extends StatefulWidget {
       initialArrangement: initialArrangement,
     ),
   );
+  final QueryableType queryableType;
+  final ListArrangement initialArrangement;
 
   const ListArrangementSheet({
     required this.queryableType,

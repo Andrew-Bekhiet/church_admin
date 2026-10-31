@@ -2,14 +2,13 @@ import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
 class LoginPasswordFields extends StatelessWidget {
+  final TextEditingController passwordController;
+  final Future<void> Function() onSubmit;
   const LoginPasswordFields({
     required this.passwordController,
     required this.onSubmit,
     super.key,
   });
-
-  final TextEditingController passwordController;
-  final Future<void> Function() onSubmit;
 
   @override
   Widget build(BuildContext context) {

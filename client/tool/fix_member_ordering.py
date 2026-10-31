@@ -293,9 +293,15 @@ def classify(src, class_name):
     header_end = len(stripped)
     depth = 0
     arrow = eq = paren = -1
+    angle = 0
     for idx, ch in enumerate(stripped):
+        if paren == -1 and eq == -1 and arrow == -1 and depth == 0:
+            if ch == "<":
+                angle += 1
+            elif ch == ">" and angle > 0 and stripped[idx - 1] != "=":
+                angle -= 1
         if ch in "([{":
-            if ch == "(" and depth == 0 and paren == -1:
+            if ch == "(" and depth == 0 and angle == 0 and paren == -1:
                 paren = idx
             depth += 1
         elif ch in ")]}":
@@ -341,7 +347,7 @@ def classify(src, class_name):
                 if depth == 0:
                     close = idx
                     break
-        after = stripped[close + 1 :].lstrip()
+        after = stripped[close + 1 :].lstrip().lstrip("?").lstrip()
         if not re.match(r"^[A-Za-z_$]", after) or re.match(
             r"^(async|sync)\b", after
         ):

@@ -9,6 +9,8 @@ import 'package:tinycolor2/tinycolor2.dart';
 class AttendanceTrendChart extends StatelessWidget {
   final Color? color;
 
+  final List<(DateTime day, int value)> points;
+
   const AttendanceTrendChart({required this.points, this.color, super.key});
 
   @override
@@ -206,6 +208,4 @@ class AttendanceTrendChart extends StatelessWidget {
       ),
     );
   }
-
-  final List<(DateTime day, int value)> points;
 }

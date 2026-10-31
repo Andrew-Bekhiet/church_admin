@@ -2,16 +2,15 @@ import 'package:material_symbols_icons/symbols.dart';
 import 'package:material_ui/material_ui.dart';
 
 class LocationUpdateReminderCard extends StatelessWidget {
+  final bool isShown;
+  final VoidCallback onUpdateLocation;
+  final VoidCallback onKeepLocation;
   const LocationUpdateReminderCard({
     required this.isShown,
     required this.onUpdateLocation,
     required this.onKeepLocation,
     super.key,
   });
-
-  final bool isShown;
-  final VoidCallback onUpdateLocation;
-  final VoidCallback onKeepLocation;
 
   @override
   Widget build(BuildContext context) {

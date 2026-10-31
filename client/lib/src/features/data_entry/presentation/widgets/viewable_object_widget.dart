@@ -23,6 +23,14 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
   final ViewableObjectService viewableObjectService;
   final ViewableObjectWidgetConfig config;
 
+  final void Function(T)? onTap;
+  final void Function(T)? onLongPress;
+
+  void Function(T)? get _onTap =>
+      onTap ?? config.onTap ?? viewableObjectService.onTap;
+
+  void Function(T)? get _onLongPress => onLongPress ?? config.onLongPress;
+
   ViewableObjectWidget(
     this.object, {
     this.title,
@@ -120,12 +128,4 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
 
     return tile;
   }
-
-  final void Function(T)? onTap;
-  final void Function(T)? onLongPress;
-
-  void Function(T)? get _onTap =>
-      onTap ?? config.onTap ?? viewableObjectService.onTap;
-
-  void Function(T)? get _onLongPress => onLongPress ?? config.onLongPress;
 }

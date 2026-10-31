@@ -12,6 +12,10 @@ class PasswordFormField extends StatefulWidget {
   final FocusNode? focusNode;
   final AutovalidateMode autoValidateMode;
   final InputDecoration? decoration;
+  final void Function(String)? onChanged;
+  final void Function(String)? onFieldSubmitted;
+  final void Function(String?)? onSaved;
+  final String? Function(String?)? validator;
   const PasswordFormField({
     this.autoFillHints = const [AutofillHints.password],
     this.autoValidateMode = AutovalidateMode.disabled,
@@ -28,10 +32,6 @@ class PasswordFormField extends StatefulWidget {
     this.decoration,
     super.key,
   });
-  final void Function(String)? onChanged;
-  final void Function(String)? onFieldSubmitted;
-  final void Function(String?)? onSaved;
-  final String? Function(String?)? validator;
 
   @override
   State<PasswordFormField> createState() => _PasswordFormFieldState();

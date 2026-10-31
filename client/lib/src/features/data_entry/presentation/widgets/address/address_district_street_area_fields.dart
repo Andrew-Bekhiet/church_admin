@@ -3,17 +3,6 @@ import 'package:material_ui/material_ui.dart';
 import 'package:uuid/uuid.dart';
 
 class AddressDistrictStreetAreaFields extends StatelessWidget {
-  const AddressDistrictStreetAreaFields({
-    required this.address,
-    required this.enabled,
-    required this.required,
-    required this.listControllerFor,
-    required this.onDistrictChanged,
-    required this.onStreetChanged,
-    required this.onAreaChanged,
-    super.key,
-  });
-
   final Address address;
   final bool enabled;
   final bool required;
@@ -26,6 +15,16 @@ class AddressDistrictStreetAreaFields extends StatelessWidget {
   final void Function(District?) onDistrictChanged;
   final void Function(Street?) onStreetChanged;
   final void Function(Area?) onAreaChanged;
+  const AddressDistrictStreetAreaFields({
+    required this.address,
+    required this.enabled,
+    required this.required,
+    required this.listControllerFor,
+    required this.onDistrictChanged,
+    required this.onStreetChanged,
+    required this.onAreaChanged,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

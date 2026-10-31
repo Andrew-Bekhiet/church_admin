@@ -6,6 +6,15 @@ import 'package:flutter/gestures.dart';
 import 'package:material_ui/material_ui.dart';
 
 class AuthForm extends StatelessWidget {
+  final bool isLogin;
+  final bool loading;
+  final GlobalKey<FormState> formKey;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final TextEditingController passwordConfirmationController;
+  final TapGestureRecognizer termsOfServiceRecognizer;
+  final TapGestureRecognizer privacyPolicyRecognizer;
+  final Future<void> Function() onSubmit;
   const AuthForm({
     required this.isLogin,
     required this.loading,
@@ -18,16 +27,6 @@ class AuthForm extends StatelessWidget {
     required this.onSubmit,
     super.key,
   });
-
-  final bool isLogin;
-  final bool loading;
-  final GlobalKey<FormState> formKey;
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
-  final TextEditingController passwordConfirmationController;
-  final TapGestureRecognizer termsOfServiceRecognizer;
-  final TapGestureRecognizer privacyPolicyRecognizer;
-  final Future<void> Function() onSubmit;
 
   @override
   Widget build(BuildContext context) {

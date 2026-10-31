@@ -9,16 +9,15 @@ typedef ActiveListSelection = ({
 });
 
 class ListSelectionHost extends StatefulWidget {
-  final Widget child;
-
-  const ListSelectionHost({required this.child, super.key});
-
   static ListSelectionHostState? maybeOf(BuildContext context) =>
       context.getInheritedWidgetOfExactType<ListSelectionHostScope>()?.host;
 
   static ActiveListSelection? maybeActiveOf(BuildContext context) => context
       .dependOnInheritedWidgetOfExactType<ListSelectionHostScope>()
       ?.active;
+  final Widget child;
+
+  const ListSelectionHost({required this.child, super.key});
 
   @override
   State<ListSelectionHost> createState() => ListSelectionHostState();
@@ -27,6 +26,23 @@ class ListSelectionHost extends StatefulWidget {
 class ListSelectionHostState extends State<ListSelectionHost> {
   ActiveListSelection? _active;
   StreamSubscription<ListSelectionState>? _activeSubscription;
+
+  @override
+  Widget build(BuildContext context) => PopScope(
+    canPop: _active == null,
+    onPopInvokedWithResult: _endActiveSelectionUnlessPopped,
+    child: ListSelectionHostScope(
+      host: this,
+      active: _active,
+      child: widget.child,
+    ),
+  );
+
+  @override
+  void dispose() {
+    unawaited(_activeSubscription?.cancel());
+    super.dispose();
+  }
 
   void register(
     ListSelectionCubit selection, {
@@ -57,23 +73,6 @@ class ListSelectionHostState extends State<ListSelectionHost> {
 
   void _endActiveSelectionUnlessPopped(bool didPop, Object? _) {
     if (!didPop) _active?.selection.endUnlessAlwaysActive();
-  }
-
-  @override
-  Widget build(BuildContext context) => PopScope(
-    canPop: _active == null,
-    onPopInvokedWithResult: _endActiveSelectionUnlessPopped,
-    child: ListSelectionHostScope(
-      host: this,
-      active: _active,
-      child: widget.child,
-    ),
-  );
-
-  @override
-  void dispose() {
-    unawaited(_activeSubscription?.cancel());
-    super.dispose();
   }
 }
 

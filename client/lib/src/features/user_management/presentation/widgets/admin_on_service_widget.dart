@@ -3,6 +3,9 @@ import 'package:material_ui/material_ui.dart';
 
 class AdminOnServiceWidget extends StatelessWidget {
   final (Service, List<AdminOnData>) serviceData;
+
+  final Widget Function(BuildContext, ViewableWithID)? trailingBuilder;
+  final void Function(ViewableWithID)? onTap;
   const AdminOnServiceWidget({
     required this.serviceData,
     this.trailingBuilder,
@@ -72,7 +75,4 @@ class AdminOnServiceWidget extends StatelessWidget {
       ],
     );
   }
-
-  final Widget Function(BuildContext, ViewableWithID)? trailingBuilder;
-  final void Function(ViewableWithID)? onTap;
 }

@@ -2,14 +2,14 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
 class AdminScopeActionButtons extends StatelessWidget {
+  final void Function() onDelete;
+
+  final void Function()? onDuplicate;
   const AdminScopeActionButtons({
     required this.onDuplicate,
     required this.onDelete,
     super.key,
   });
-
-  final void Function()? onDuplicate;
-  final void Function() onDelete;
 
   @override
   Widget build(BuildContext context) {
