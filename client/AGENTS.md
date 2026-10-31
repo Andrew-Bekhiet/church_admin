@@ -55,7 +55,7 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 
 ## Where helpers go
 
-- Never put extension files in `presentation/widgets/` — that directory holds widget classes only.
+- `presentation/widgets/` holds widget classes and their Keys companions only. Extensions go in `utils/`; result and model classes go in `domain/models/`.
 - One consumer → private member in that file. Multiple consumers → the feature's `utils/`. A model's own display behaviour → a method on the model.
 - **A helper that works on a Dart type is an extension on that type** (`json.nonNullPairs` on `Map`), not a static method on a holder class. When you add one, fold in the copies the files you touch already carry.
 - **File size is not a reason to extract.** A helper of 20 source lines or fewer with a single consumer stays a private instance method on that consumer, even when the file then passes 350 lines. The 420 ceiling still binds. Pulling a helper out to satisfy a line limit also pushes you to pass state in as parameters, which turns a live read into a snapshot taken at the wrong moment.
@@ -77,6 +77,7 @@ Unit tests are a **design tool**, not a bug-finding tool. Integration and manual
 - **Test cubits and blocs with `blocTest`**, never a plain `test` that builds the cubit and closes it by hand. `blocTest` owns the lifecycle; drive the scenario in `act` and assert the resulting state in `expect` or `verify`.
 - **New mocks use `mocktail`.** Tests still on `mockito` migrate when touched: stub every member the mockito nice mock answered by default, and `registerFallbackValue` for custom argument types.
 - **Drive the path production takes.** Simulate app lifecycle through `WidgetsBindingObserver` under `fakeAsync` instead of calling internals such as `LocalAuthService.scheduleReauth()`.
+- **After changing a shared widget or model** (`ViewableObjectList`, `ViewableObjectWidget`, form fields, anything under `core/`), run the full test bundle, not only the tests you touched: every screen that uses it changed too.
 - **Verify red before trusting green.** Break the line under test by editing it, confirm a meaningful failure, then edit it back. Never park the fix in `git stash`: the stash is shared with every worktree, and an interrupted session leaves the fix there. A bug fix's regression test must fail on the unfixed code.
 - Don't unit-test wiring, DI registration, or configuration — that belongs in integration tests.
 - Beyond unit tests: standard **widget tests** for Flutter UI, and **integration tests per API module**. E2E journeys: see `client/patrol_test/AGENTS.md`.
