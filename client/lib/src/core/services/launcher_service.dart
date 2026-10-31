@@ -20,12 +20,22 @@ class LauncherService {
   String _withoutLeadingPlus(String phone) =>
       phone.startsWith('+') ? phone.substring(1) : phone;
 
-  Future<bool> launchWhatsappChat(String fomattedPhone) {
+  Future<bool> launchWhatsappChat(String formattedPhone, {String? text}) {
+    final queryParameters = {
+      'phone': '+${_withoutLeadingPlus(formattedPhone)}',
+      'text': ?text,
+    };
+
     return launchUrl(
       Uri(
         scheme: 'whatsapp',
         host: 'send',
-        queryParameters: {'phone': '+${_withoutLeadingPlus(fomattedPhone)}'},
+        query: queryParameters.entries
+            .map(
+              (parameter) =>
+                  '${parameter.key}=${Uri.encodeComponent(parameter.value)}',
+            )
+            .join('&'),
       ),
     );
   }

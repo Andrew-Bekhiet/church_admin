@@ -44,11 +44,13 @@ class FakePersonsDAO extends Fake implements PersonsDAO {
 
   List<Person> personsWithPhoneContacts = const [];
   Object? phoneContactsError;
+  Completer<void>? phoneContactsGate;
 
   @override
   Future<List<Person>> personsPhoneContacts({
     required Iterable<String> personsIds,
   }) async {
+    await phoneContactsGate?.future;
     if (phoneContactsError case final error?) throw error;
 
     return personsWithPhoneContacts
