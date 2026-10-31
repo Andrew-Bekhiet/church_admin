@@ -934,6 +934,7 @@ class Input_UsersPreferencesBoolExp {
     Input_BooleanComparisonExp? darkTheme,
     Input_BooleanComparisonExp? greatFeastTheme,
     Input_StringComparisonExp? lastHomeMode,
+    Input_StringComparisonExp? lastWhatsappMessageText,
     Input_JsonbComparisonExp? orderByPreferences,
     Input_JsonbComparisonExp? secondLinePreferences,
     Input_UuidComparisonExp? uid,
@@ -946,6 +947,8 @@ class Input_UsersPreferencesBoolExp {
     if (darkTheme != null) r'darkTheme': darkTheme,
     if (greatFeastTheme != null) r'greatFeastTheme': greatFeastTheme,
     if (lastHomeMode != null) r'lastHomeMode': lastHomeMode,
+    if (lastWhatsappMessageText != null)
+      r'lastWhatsappMessageText': lastWhatsappMessageText,
     if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
     if (secondLinePreferences != null)
       r'secondLinePreferences': secondLinePreferences,
@@ -1010,6 +1013,14 @@ class Input_UsersPreferencesBoolExp {
               (l$lastHomeMode as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('lastWhatsappMessageText')) {
+      final l$lastWhatsappMessageText = data['lastWhatsappMessageText'];
+      result$data['lastWhatsappMessageText'] = l$lastWhatsappMessageText == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$lastWhatsappMessageText as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = data['orderByPreferences'];
       result$data['orderByPreferences'] = l$orderByPreferences == null
@@ -1071,6 +1082,9 @@ class Input_UsersPreferencesBoolExp {
   Input_StringComparisonExp? get lastHomeMode =>
       (_$data['lastHomeMode'] as Input_StringComparisonExp?);
 
+  Input_StringComparisonExp? get lastWhatsappMessageText =>
+      (_$data['lastWhatsappMessageText'] as Input_StringComparisonExp?);
+
   Input_JsonbComparisonExp? get orderByPreferences =>
       (_$data['orderByPreferences'] as Input_JsonbComparisonExp?);
 
@@ -1111,6 +1125,11 @@ class Input_UsersPreferencesBoolExp {
     if (_$data.containsKey('lastHomeMode')) {
       final l$lastHomeMode = lastHomeMode;
       result$data['lastHomeMode'] = l$lastHomeMode?.toJson();
+    }
+    if (_$data.containsKey('lastWhatsappMessageText')) {
+      final l$lastWhatsappMessageText = lastWhatsappMessageText;
+      result$data['lastWhatsappMessageText'] = l$lastWhatsappMessageText
+          ?.toJson();
     }
     if (_$data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = orderByPreferences;
@@ -1220,6 +1239,15 @@ class Input_UsersPreferencesBoolExp {
     if (l$lastHomeMode != lOther$lastHomeMode) {
       return false;
     }
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
+    final lOther$lastWhatsappMessageText = other.lastWhatsappMessageText;
+    if (_$data.containsKey('lastWhatsappMessageText') !=
+        other._$data.containsKey('lastWhatsappMessageText')) {
+      return false;
+    }
+    if (l$lastWhatsappMessageText != lOther$lastWhatsappMessageText) {
+      return false;
+    }
     final l$orderByPreferences = orderByPreferences;
     final lOther$orderByPreferences = other.orderByPreferences;
     if (_$data.containsKey('orderByPreferences') !=
@@ -1274,6 +1302,7 @@ class Input_UsersPreferencesBoolExp {
     final l$darkTheme = darkTheme;
     final l$greatFeastTheme = greatFeastTheme;
     final l$lastHomeMode = lastHomeMode;
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
     final l$orderByPreferences = orderByPreferences;
     final l$secondLinePreferences = secondLinePreferences;
     final l$uid = uid;
@@ -1294,6 +1323,9 @@ class Input_UsersPreferencesBoolExp {
       _$data.containsKey('darkTheme') ? l$darkTheme : const {},
       _$data.containsKey('greatFeastTheme') ? l$greatFeastTheme : const {},
       _$data.containsKey('lastHomeMode') ? l$lastHomeMode : const {},
+      _$data.containsKey('lastWhatsappMessageText')
+          ? l$lastWhatsappMessageText
+          : const {},
       _$data.containsKey('orderByPreferences')
           ? l$orderByPreferences
           : const {},
@@ -1323,6 +1355,7 @@ abstract class CopyWith_Input_UsersPreferencesBoolExp<TRes> {
     Input_BooleanComparisonExp? darkTheme,
     Input_BooleanComparisonExp? greatFeastTheme,
     Input_StringComparisonExp? lastHomeMode,
+    Input_StringComparisonExp? lastWhatsappMessageText,
     Input_JsonbComparisonExp? orderByPreferences,
     Input_JsonbComparisonExp? secondLinePreferences,
     Input_UuidComparisonExp? uid,
@@ -1349,6 +1382,7 @@ abstract class CopyWith_Input_UsersPreferencesBoolExp<TRes> {
   CopyWith_Input_BooleanComparisonExp<TRes> get darkTheme;
   CopyWith_Input_BooleanComparisonExp<TRes> get greatFeastTheme;
   CopyWith_Input_StringComparisonExp<TRes> get lastHomeMode;
+  CopyWith_Input_StringComparisonExp<TRes> get lastWhatsappMessageText;
   CopyWith_Input_JsonbComparisonExp<TRes> get orderByPreferences;
   CopyWith_Input_JsonbComparisonExp<TRes> get secondLinePreferences;
   CopyWith_Input_UuidComparisonExp<TRes> get uid;
@@ -1373,6 +1407,7 @@ class _CopyWithImpl_Input_UsersPreferencesBoolExp<TRes>
     Object? darkTheme = _undefined,
     Object? greatFeastTheme = _undefined,
     Object? lastHomeMode = _undefined,
+    Object? lastWhatsappMessageText = _undefined,
     Object? orderByPreferences = _undefined,
     Object? secondLinePreferences = _undefined,
     Object? uid = _undefined,
@@ -1393,6 +1428,9 @@ class _CopyWithImpl_Input_UsersPreferencesBoolExp<TRes>
         'greatFeastTheme': (greatFeastTheme as Input_BooleanComparisonExp?),
       if (lastHomeMode != _undefined)
         'lastHomeMode': (lastHomeMode as Input_StringComparisonExp?),
+      if (lastWhatsappMessageText != _undefined)
+        'lastWhatsappMessageText':
+            (lastWhatsappMessageText as Input_StringComparisonExp?),
       if (orderByPreferences != _undefined)
         'orderByPreferences': (orderByPreferences as Input_JsonbComparisonExp?),
       if (secondLinePreferences != _undefined)
@@ -1475,6 +1513,16 @@ class _CopyWithImpl_Input_UsersPreferencesBoolExp<TRes>
           );
   }
 
+  CopyWith_Input_StringComparisonExp<TRes> get lastWhatsappMessageText {
+    final local$lastWhatsappMessageText = _instance.lastWhatsappMessageText;
+    return local$lastWhatsappMessageText == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$lastWhatsappMessageText,
+            (e) => call(lastWhatsappMessageText: e),
+          );
+  }
+
   CopyWith_Input_JsonbComparisonExp<TRes> get orderByPreferences {
     final local$orderByPreferences = _instance.orderByPreferences;
     return local$orderByPreferences == null
@@ -1533,6 +1581,7 @@ class _CopyWithStubImpl_Input_UsersPreferencesBoolExp<TRes>
     Input_BooleanComparisonExp? darkTheme,
     Input_BooleanComparisonExp? greatFeastTheme,
     Input_StringComparisonExp? lastHomeMode,
+    Input_StringComparisonExp? lastWhatsappMessageText,
     Input_JsonbComparisonExp? orderByPreferences,
     Input_JsonbComparisonExp? secondLinePreferences,
     Input_UuidComparisonExp? uid,
@@ -1554,6 +1603,9 @@ class _CopyWithStubImpl_Input_UsersPreferencesBoolExp<TRes>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
 
   CopyWith_Input_StringComparisonExp<TRes> get lastHomeMode =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get lastWhatsappMessageText =>
       CopyWith_Input_StringComparisonExp.stub(_res);
 
   CopyWith_Input_JsonbComparisonExp<TRes> get orderByPreferences =>
@@ -2061,6 +2113,7 @@ class Input_UsersPreferencesOrderBy {
     Enum_OrderBy? darkTheme,
     Enum_OrderBy? greatFeastTheme,
     Enum_OrderBy? lastHomeMode,
+    Enum_OrderBy? lastWhatsappMessageText,
     Enum_OrderBy? orderByPreferences,
     Enum_OrderBy? secondLinePreferences,
     Enum_OrderBy? uid,
@@ -2070,6 +2123,8 @@ class Input_UsersPreferencesOrderBy {
     if (darkTheme != null) r'darkTheme': darkTheme,
     if (greatFeastTheme != null) r'greatFeastTheme': greatFeastTheme,
     if (lastHomeMode != null) r'lastHomeMode': lastHomeMode,
+    if (lastWhatsappMessageText != null)
+      r'lastWhatsappMessageText': lastWhatsappMessageText,
     if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
     if (secondLinePreferences != null)
       r'secondLinePreferences': secondLinePreferences,
@@ -2099,6 +2154,12 @@ class Input_UsersPreferencesOrderBy {
       result$data['lastHomeMode'] = l$lastHomeMode == null
           ? null
           : fromJson_Enum_OrderBy((l$lastHomeMode as String));
+    }
+    if (data.containsKey('lastWhatsappMessageText')) {
+      final l$lastWhatsappMessageText = data['lastWhatsappMessageText'];
+      result$data['lastWhatsappMessageText'] = l$lastWhatsappMessageText == null
+          ? null
+          : fromJson_Enum_OrderBy((l$lastWhatsappMessageText as String));
     }
     if (data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = data['orderByPreferences'];
@@ -2144,6 +2205,9 @@ class Input_UsersPreferencesOrderBy {
 
   Enum_OrderBy? get lastHomeMode => (_$data['lastHomeMode'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get lastWhatsappMessageText =>
+      (_$data['lastWhatsappMessageText'] as Enum_OrderBy?);
+
   Enum_OrderBy? get orderByPreferences =>
       (_$data['orderByPreferences'] as Enum_OrderBy?);
 
@@ -2176,6 +2240,12 @@ class Input_UsersPreferencesOrderBy {
       result$data['lastHomeMode'] = l$lastHomeMode == null
           ? null
           : toJson_Enum_OrderBy(l$lastHomeMode);
+    }
+    if (_$data.containsKey('lastWhatsappMessageText')) {
+      final l$lastWhatsappMessageText = lastWhatsappMessageText;
+      result$data['lastWhatsappMessageText'] = l$lastWhatsappMessageText == null
+          ? null
+          : toJson_Enum_OrderBy(l$lastWhatsappMessageText);
     }
     if (_$data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = orderByPreferences;
@@ -2245,6 +2315,15 @@ class Input_UsersPreferencesOrderBy {
     if (l$lastHomeMode != lOther$lastHomeMode) {
       return false;
     }
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
+    final lOther$lastWhatsappMessageText = other.lastWhatsappMessageText;
+    if (_$data.containsKey('lastWhatsappMessageText') !=
+        other._$data.containsKey('lastWhatsappMessageText')) {
+      return false;
+    }
+    if (l$lastWhatsappMessageText != lOther$lastWhatsappMessageText) {
+      return false;
+    }
     final l$orderByPreferences = orderByPreferences;
     final lOther$orderByPreferences = other.orderByPreferences;
     if (_$data.containsKey('orderByPreferences') !=
@@ -2296,6 +2375,7 @@ class Input_UsersPreferencesOrderBy {
     final l$darkTheme = darkTheme;
     final l$greatFeastTheme = greatFeastTheme;
     final l$lastHomeMode = lastHomeMode;
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
     final l$orderByPreferences = orderByPreferences;
     final l$secondLinePreferences = secondLinePreferences;
     final l$uid = uid;
@@ -2305,6 +2385,9 @@ class Input_UsersPreferencesOrderBy {
       _$data.containsKey('darkTheme') ? l$darkTheme : const {},
       _$data.containsKey('greatFeastTheme') ? l$greatFeastTheme : const {},
       _$data.containsKey('lastHomeMode') ? l$lastHomeMode : const {},
+      _$data.containsKey('lastWhatsappMessageText')
+          ? l$lastWhatsappMessageText
+          : const {},
       _$data.containsKey('orderByPreferences')
           ? l$orderByPreferences
           : const {},
@@ -2331,6 +2414,7 @@ abstract class CopyWith_Input_UsersPreferencesOrderBy<TRes> {
     Enum_OrderBy? darkTheme,
     Enum_OrderBy? greatFeastTheme,
     Enum_OrderBy? lastHomeMode,
+    Enum_OrderBy? lastWhatsappMessageText,
     Enum_OrderBy? orderByPreferences,
     Enum_OrderBy? secondLinePreferences,
     Enum_OrderBy? uid,
@@ -2354,6 +2438,7 @@ class _CopyWithImpl_Input_UsersPreferencesOrderBy<TRes>
     Object? darkTheme = _undefined,
     Object? greatFeastTheme = _undefined,
     Object? lastHomeMode = _undefined,
+    Object? lastWhatsappMessageText = _undefined,
     Object? orderByPreferences = _undefined,
     Object? secondLinePreferences = _undefined,
     Object? uid = _undefined,
@@ -2367,6 +2452,8 @@ class _CopyWithImpl_Input_UsersPreferencesOrderBy<TRes>
         'greatFeastTheme': (greatFeastTheme as Enum_OrderBy?),
       if (lastHomeMode != _undefined)
         'lastHomeMode': (lastHomeMode as Enum_OrderBy?),
+      if (lastWhatsappMessageText != _undefined)
+        'lastWhatsappMessageText': (lastWhatsappMessageText as Enum_OrderBy?),
       if (orderByPreferences != _undefined)
         'orderByPreferences': (orderByPreferences as Enum_OrderBy?),
       if (secondLinePreferences != _undefined)
@@ -2395,6 +2482,7 @@ class _CopyWithStubImpl_Input_UsersPreferencesOrderBy<TRes>
     Enum_OrderBy? darkTheme,
     Enum_OrderBy? greatFeastTheme,
     Enum_OrderBy? lastHomeMode,
+    Enum_OrderBy? lastWhatsappMessageText,
     Enum_OrderBy? orderByPreferences,
     Enum_OrderBy? secondLinePreferences,
     Enum_OrderBy? uid,
@@ -2458,143 +2546,5 @@ class Input_UsersPreferencesPkColumnsInput {
   int get hashCode {
     final l$uid = uid;
     return Object.hashAll([l$uid]);
-  }
-}
-
-abstract class CopyWith_Input_UsersPreferencesPkColumnsInput<TRes> {
-  factory CopyWith_Input_UsersPreferencesPkColumnsInput(
-    Input_UsersPreferencesPkColumnsInput instance,
-    TRes Function(Input_UsersPreferencesPkColumnsInput) then,
-  ) = _CopyWithImpl_Input_UsersPreferencesPkColumnsInput;
-
-  factory CopyWith_Input_UsersPreferencesPkColumnsInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_UsersPreferencesPkColumnsInput;
-
-  TRes call({UuidValue? uid});
-}
-
-class _CopyWithImpl_Input_UsersPreferencesPkColumnsInput<TRes>
-    implements CopyWith_Input_UsersPreferencesPkColumnsInput<TRes> {
-  _CopyWithImpl_Input_UsersPreferencesPkColumnsInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_UsersPreferencesPkColumnsInput _instance;
-
-  final TRes Function(Input_UsersPreferencesPkColumnsInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? uid = _undefined}) => _then(
-    Input_UsersPreferencesPkColumnsInput._({
-      ..._instance._$data,
-      if (uid != _undefined && uid != null) 'uid': (uid as UuidValue),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_UsersPreferencesPkColumnsInput<TRes>
-    implements CopyWith_Input_UsersPreferencesPkColumnsInput<TRes> {
-  _CopyWithStubImpl_Input_UsersPreferencesPkColumnsInput(this._res);
-
-  TRes _res;
-
-  call({UuidValue? uid}) => _res;
-}
-
-class Input_UsersPreferencesPrependInput {
-  factory Input_UsersPreferencesPrependInput({
-    Json? orderByPreferences,
-    Json? secondLinePreferences,
-  }) => Input_UsersPreferencesPrependInput._({
-    if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
-    if (secondLinePreferences != null)
-      r'secondLinePreferences': secondLinePreferences,
-  });
-
-  Input_UsersPreferencesPrependInput._(this._$data);
-
-  factory Input_UsersPreferencesPrependInput.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('orderByPreferences')) {
-      final l$orderByPreferences = data['orderByPreferences'];
-      result$data['orderByPreferences'] = (l$orderByPreferences as Json?);
-    }
-    if (data.containsKey('secondLinePreferences')) {
-      final l$secondLinePreferences = data['secondLinePreferences'];
-      result$data['secondLinePreferences'] = (l$secondLinePreferences as Json?);
-    }
-    return Input_UsersPreferencesPrependInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Json? get orderByPreferences => (_$data['orderByPreferences'] as Json?);
-
-  Json? get secondLinePreferences => (_$data['secondLinePreferences'] as Json?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('orderByPreferences')) {
-      final l$orderByPreferences = orderByPreferences;
-      result$data['orderByPreferences'] = l$orderByPreferences;
-    }
-    if (_$data.containsKey('secondLinePreferences')) {
-      final l$secondLinePreferences = secondLinePreferences;
-      result$data['secondLinePreferences'] = l$secondLinePreferences;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_UsersPreferencesPrependInput<
-    Input_UsersPreferencesPrependInput
-  >
-  get copyWith => CopyWith_Input_UsersPreferencesPrependInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_UsersPreferencesPrependInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$orderByPreferences = orderByPreferences;
-    final lOther$orderByPreferences = other.orderByPreferences;
-    if (_$data.containsKey('orderByPreferences') !=
-        other._$data.containsKey('orderByPreferences')) {
-      return false;
-    }
-    if (l$orderByPreferences != lOther$orderByPreferences) {
-      return false;
-    }
-    final l$secondLinePreferences = secondLinePreferences;
-    final lOther$secondLinePreferences = other.secondLinePreferences;
-    if (_$data.containsKey('secondLinePreferences') !=
-        other._$data.containsKey('secondLinePreferences')) {
-      return false;
-    }
-    if (l$secondLinePreferences != lOther$secondLinePreferences) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$orderByPreferences = orderByPreferences;
-    final l$secondLinePreferences = secondLinePreferences;
-    return Object.hashAll([
-      _$data.containsKey('orderByPreferences')
-          ? l$orderByPreferences
-          : const {},
-      _$data.containsKey('secondLinePreferences')
-          ? l$secondLinePreferences
-          : const {},
-    ]);
   }
 }

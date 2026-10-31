@@ -7866,6 +7866,7 @@ type UsersPreferences {
   darkTheme: Boolean
   greatFeastTheme: Boolean!
   lastHomeMode: String
+  lastWhatsappMessageText: String
   orderByPreferences(path: String): jsonb!
   secondLinePreferences(path: String): jsonb!
   uid: uuid!
@@ -7885,6 +7886,7 @@ input UsersPreferencesBoolExp {
   darkTheme: BooleanComparisonExp
   greatFeastTheme: BooleanComparisonExp
   lastHomeMode: StringComparisonExp
+  lastWhatsappMessageText: StringComparisonExp
   orderByPreferences: JsonbComparisonExp
   secondLinePreferences: JsonbComparisonExp
   uid: UuidComparisonExp
@@ -7916,6 +7918,7 @@ input UsersPreferencesOrderBy {
   darkTheme: OrderBy
   greatFeastTheme: OrderBy
   lastHomeMode: OrderBy
+  lastWhatsappMessageText: OrderBy
   orderByPreferences: OrderBy
   secondLinePreferences: OrderBy
   uid: OrderBy
@@ -7936,6 +7939,7 @@ enum UsersPreferencesSelectColumn {
   darkTheme
   greatFeastTheme
   lastHomeMode
+  lastWhatsappMessageText
   orderByPreferences
   secondLinePreferences
   uid
@@ -7946,6 +7950,7 @@ input UsersPreferencesSetInput {
   darkTheme: Boolean
   greatFeastTheme: Boolean
   lastHomeMode: String
+  lastWhatsappMessageText: String
   orderByPreferences: jsonb
   secondLinePreferences: jsonb
 }
@@ -7959,6 +7964,7 @@ input UsersPreferencesStreamCursorValueInput {
   darkTheme: Boolean
   greatFeastTheme: Boolean
   lastHomeMode: String
+  lastWhatsappMessageText: String
   orderByPreferences: jsonb
   secondLinePreferences: jsonb
   uid: uuid

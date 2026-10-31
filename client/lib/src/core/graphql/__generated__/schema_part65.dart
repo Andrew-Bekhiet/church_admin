@@ -1,6 +1,144 @@
 // Part 65 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_UsersPreferencesPkColumnsInput<TRes> {
+  factory CopyWith_Input_UsersPreferencesPkColumnsInput(
+    Input_UsersPreferencesPkColumnsInput instance,
+    TRes Function(Input_UsersPreferencesPkColumnsInput) then,
+  ) = _CopyWithImpl_Input_UsersPreferencesPkColumnsInput;
+
+  factory CopyWith_Input_UsersPreferencesPkColumnsInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UsersPreferencesPkColumnsInput;
+
+  TRes call({UuidValue? uid});
+}
+
+class _CopyWithImpl_Input_UsersPreferencesPkColumnsInput<TRes>
+    implements CopyWith_Input_UsersPreferencesPkColumnsInput<TRes> {
+  _CopyWithImpl_Input_UsersPreferencesPkColumnsInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_UsersPreferencesPkColumnsInput _instance;
+
+  final TRes Function(Input_UsersPreferencesPkColumnsInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? uid = _undefined}) => _then(
+    Input_UsersPreferencesPkColumnsInput._({
+      ..._instance._$data,
+      if (uid != _undefined && uid != null) 'uid': (uid as UuidValue),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UsersPreferencesPkColumnsInput<TRes>
+    implements CopyWith_Input_UsersPreferencesPkColumnsInput<TRes> {
+  _CopyWithStubImpl_Input_UsersPreferencesPkColumnsInput(this._res);
+
+  TRes _res;
+
+  call({UuidValue? uid}) => _res;
+}
+
+class Input_UsersPreferencesPrependInput {
+  factory Input_UsersPreferencesPrependInput({
+    Json? orderByPreferences,
+    Json? secondLinePreferences,
+  }) => Input_UsersPreferencesPrependInput._({
+    if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
+    if (secondLinePreferences != null)
+      r'secondLinePreferences': secondLinePreferences,
+  });
+
+  Input_UsersPreferencesPrependInput._(this._$data);
+
+  factory Input_UsersPreferencesPrependInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('orderByPreferences')) {
+      final l$orderByPreferences = data['orderByPreferences'];
+      result$data['orderByPreferences'] = (l$orderByPreferences as Json?);
+    }
+    if (data.containsKey('secondLinePreferences')) {
+      final l$secondLinePreferences = data['secondLinePreferences'];
+      result$data['secondLinePreferences'] = (l$secondLinePreferences as Json?);
+    }
+    return Input_UsersPreferencesPrependInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Json? get orderByPreferences => (_$data['orderByPreferences'] as Json?);
+
+  Json? get secondLinePreferences => (_$data['secondLinePreferences'] as Json?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('orderByPreferences')) {
+      final l$orderByPreferences = orderByPreferences;
+      result$data['orderByPreferences'] = l$orderByPreferences;
+    }
+    if (_$data.containsKey('secondLinePreferences')) {
+      final l$secondLinePreferences = secondLinePreferences;
+      result$data['secondLinePreferences'] = l$secondLinePreferences;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UsersPreferencesPrependInput<
+    Input_UsersPreferencesPrependInput
+  >
+  get copyWith => CopyWith_Input_UsersPreferencesPrependInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UsersPreferencesPrependInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$orderByPreferences = orderByPreferences;
+    final lOther$orderByPreferences = other.orderByPreferences;
+    if (_$data.containsKey('orderByPreferences') !=
+        other._$data.containsKey('orderByPreferences')) {
+      return false;
+    }
+    if (l$orderByPreferences != lOther$orderByPreferences) {
+      return false;
+    }
+    final l$secondLinePreferences = secondLinePreferences;
+    final lOther$secondLinePreferences = other.secondLinePreferences;
+    if (_$data.containsKey('secondLinePreferences') !=
+        other._$data.containsKey('secondLinePreferences')) {
+      return false;
+    }
+    if (l$secondLinePreferences != lOther$secondLinePreferences) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$orderByPreferences = orderByPreferences;
+    final l$secondLinePreferences = secondLinePreferences;
+    return Object.hashAll([
+      _$data.containsKey('orderByPreferences')
+          ? l$orderByPreferences
+          : const {},
+      _$data.containsKey('secondLinePreferences')
+          ? l$secondLinePreferences
+          : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_UsersPreferencesPrependInput<TRes> {
   factory CopyWith_Input_UsersPreferencesPrependInput(
     Input_UsersPreferencesPrependInput instance,
@@ -51,12 +189,15 @@ class Input_UsersPreferencesSetInput {
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
+    String? lastWhatsappMessageText,
     Json? orderByPreferences,
     Json? secondLinePreferences,
   }) => Input_UsersPreferencesSetInput._({
     if (darkTheme != null) r'darkTheme': darkTheme,
     if (greatFeastTheme != null) r'greatFeastTheme': greatFeastTheme,
     if (lastHomeMode != null) r'lastHomeMode': lastHomeMode,
+    if (lastWhatsappMessageText != null)
+      r'lastWhatsappMessageText': lastWhatsappMessageText,
     if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
     if (secondLinePreferences != null)
       r'secondLinePreferences': secondLinePreferences,
@@ -78,6 +219,11 @@ class Input_UsersPreferencesSetInput {
       final l$lastHomeMode = data['lastHomeMode'];
       result$data['lastHomeMode'] = (l$lastHomeMode as String?);
     }
+    if (data.containsKey('lastWhatsappMessageText')) {
+      final l$lastWhatsappMessageText = data['lastWhatsappMessageText'];
+      result$data['lastWhatsappMessageText'] =
+          (l$lastWhatsappMessageText as String?);
+    }
     if (data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = data['orderByPreferences'];
       result$data['orderByPreferences'] = (l$orderByPreferences as Json?);
@@ -97,6 +243,9 @@ class Input_UsersPreferencesSetInput {
 
   String? get lastHomeMode => (_$data['lastHomeMode'] as String?);
 
+  String? get lastWhatsappMessageText =>
+      (_$data['lastWhatsappMessageText'] as String?);
+
   Json? get orderByPreferences => (_$data['orderByPreferences'] as Json?);
 
   Json? get secondLinePreferences => (_$data['secondLinePreferences'] as Json?);
@@ -114,6 +263,10 @@ class Input_UsersPreferencesSetInput {
     if (_$data.containsKey('lastHomeMode')) {
       final l$lastHomeMode = lastHomeMode;
       result$data['lastHomeMode'] = l$lastHomeMode;
+    }
+    if (_$data.containsKey('lastWhatsappMessageText')) {
+      final l$lastWhatsappMessageText = lastWhatsappMessageText;
+      result$data['lastWhatsappMessageText'] = l$lastWhatsappMessageText;
     }
     if (_$data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = orderByPreferences;
@@ -165,6 +318,15 @@ class Input_UsersPreferencesSetInput {
     if (l$lastHomeMode != lOther$lastHomeMode) {
       return false;
     }
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
+    final lOther$lastWhatsappMessageText = other.lastWhatsappMessageText;
+    if (_$data.containsKey('lastWhatsappMessageText') !=
+        other._$data.containsKey('lastWhatsappMessageText')) {
+      return false;
+    }
+    if (l$lastWhatsappMessageText != lOther$lastWhatsappMessageText) {
+      return false;
+    }
     final l$orderByPreferences = orderByPreferences;
     final lOther$orderByPreferences = other.orderByPreferences;
     if (_$data.containsKey('orderByPreferences') !=
@@ -191,12 +353,16 @@ class Input_UsersPreferencesSetInput {
     final l$darkTheme = darkTheme;
     final l$greatFeastTheme = greatFeastTheme;
     final l$lastHomeMode = lastHomeMode;
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
     final l$orderByPreferences = orderByPreferences;
     final l$secondLinePreferences = secondLinePreferences;
     return Object.hashAll([
       _$data.containsKey('darkTheme') ? l$darkTheme : const {},
       _$data.containsKey('greatFeastTheme') ? l$greatFeastTheme : const {},
       _$data.containsKey('lastHomeMode') ? l$lastHomeMode : const {},
+      _$data.containsKey('lastWhatsappMessageText')
+          ? l$lastWhatsappMessageText
+          : const {},
       _$data.containsKey('orderByPreferences')
           ? l$orderByPreferences
           : const {},
@@ -220,6 +386,7 @@ abstract class CopyWith_Input_UsersPreferencesSetInput<TRes> {
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
+    String? lastWhatsappMessageText,
     Json? orderByPreferences,
     Json? secondLinePreferences,
   });
@@ -239,6 +406,7 @@ class _CopyWithImpl_Input_UsersPreferencesSetInput<TRes>
     Object? darkTheme = _undefined,
     Object? greatFeastTheme = _undefined,
     Object? lastHomeMode = _undefined,
+    Object? lastWhatsappMessageText = _undefined,
     Object? orderByPreferences = _undefined,
     Object? secondLinePreferences = _undefined,
   }) => _then(
@@ -248,6 +416,8 @@ class _CopyWithImpl_Input_UsersPreferencesSetInput<TRes>
       if (greatFeastTheme != _undefined)
         'greatFeastTheme': (greatFeastTheme as bool?),
       if (lastHomeMode != _undefined) 'lastHomeMode': (lastHomeMode as String?),
+      if (lastWhatsappMessageText != _undefined)
+        'lastWhatsappMessageText': (lastWhatsappMessageText as String?),
       if (orderByPreferences != _undefined)
         'orderByPreferences': (orderByPreferences as Json?),
       if (secondLinePreferences != _undefined)
@@ -266,6 +436,7 @@ class _CopyWithStubImpl_Input_UsersPreferencesSetInput<TRes>
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
+    String? lastWhatsappMessageText,
     Json? orderByPreferences,
     Json? secondLinePreferences,
   }) => _res;
@@ -437,6 +608,7 @@ class Input_UsersPreferencesStreamCursorValueInput {
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
+    String? lastWhatsappMessageText,
     Json? orderByPreferences,
     Json? secondLinePreferences,
     UuidValue? uid,
@@ -445,6 +617,8 @@ class Input_UsersPreferencesStreamCursorValueInput {
     if (darkTheme != null) r'darkTheme': darkTheme,
     if (greatFeastTheme != null) r'greatFeastTheme': greatFeastTheme,
     if (lastHomeMode != null) r'lastHomeMode': lastHomeMode,
+    if (lastWhatsappMessageText != null)
+      r'lastWhatsappMessageText': lastWhatsappMessageText,
     if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
     if (secondLinePreferences != null)
       r'secondLinePreferences': secondLinePreferences,
@@ -469,6 +643,11 @@ class Input_UsersPreferencesStreamCursorValueInput {
     if (data.containsKey('lastHomeMode')) {
       final l$lastHomeMode = data['lastHomeMode'];
       result$data['lastHomeMode'] = (l$lastHomeMode as String?);
+    }
+    if (data.containsKey('lastWhatsappMessageText')) {
+      final l$lastWhatsappMessageText = data['lastWhatsappMessageText'];
+      result$data['lastWhatsappMessageText'] =
+          (l$lastWhatsappMessageText as String?);
     }
     if (data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = data['orderByPreferences'];
@@ -499,6 +678,9 @@ class Input_UsersPreferencesStreamCursorValueInput {
 
   String? get lastHomeMode => (_$data['lastHomeMode'] as String?);
 
+  String? get lastWhatsappMessageText =>
+      (_$data['lastWhatsappMessageText'] as String?);
+
   Json? get orderByPreferences => (_$data['orderByPreferences'] as Json?);
 
   Json? get secondLinePreferences => (_$data['secondLinePreferences'] as Json?);
@@ -520,6 +702,10 @@ class Input_UsersPreferencesStreamCursorValueInput {
     if (_$data.containsKey('lastHomeMode')) {
       final l$lastHomeMode = lastHomeMode;
       result$data['lastHomeMode'] = l$lastHomeMode;
+    }
+    if (_$data.containsKey('lastWhatsappMessageText')) {
+      final l$lastWhatsappMessageText = lastWhatsappMessageText;
+      result$data['lastWhatsappMessageText'] = l$lastWhatsappMessageText;
     }
     if (_$data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = orderByPreferences;
@@ -584,6 +770,15 @@ class Input_UsersPreferencesStreamCursorValueInput {
     if (l$lastHomeMode != lOther$lastHomeMode) {
       return false;
     }
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
+    final lOther$lastWhatsappMessageText = other.lastWhatsappMessageText;
+    if (_$data.containsKey('lastWhatsappMessageText') !=
+        other._$data.containsKey('lastWhatsappMessageText')) {
+      return false;
+    }
+    if (l$lastWhatsappMessageText != lOther$lastWhatsappMessageText) {
+      return false;
+    }
     final l$orderByPreferences = orderByPreferences;
     final lOther$orderByPreferences = other.orderByPreferences;
     if (_$data.containsKey('orderByPreferences') !=
@@ -627,6 +822,7 @@ class Input_UsersPreferencesStreamCursorValueInput {
     final l$darkTheme = darkTheme;
     final l$greatFeastTheme = greatFeastTheme;
     final l$lastHomeMode = lastHomeMode;
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
     final l$orderByPreferences = orderByPreferences;
     final l$secondLinePreferences = secondLinePreferences;
     final l$uid = uid;
@@ -635,6 +831,9 @@ class Input_UsersPreferencesStreamCursorValueInput {
       _$data.containsKey('darkTheme') ? l$darkTheme : const {},
       _$data.containsKey('greatFeastTheme') ? l$greatFeastTheme : const {},
       _$data.containsKey('lastHomeMode') ? l$lastHomeMode : const {},
+      _$data.containsKey('lastWhatsappMessageText')
+          ? l$lastWhatsappMessageText
+          : const {},
       _$data.containsKey('orderByPreferences')
           ? l$orderByPreferences
           : const {},
@@ -660,6 +859,7 @@ abstract class CopyWith_Input_UsersPreferencesStreamCursorValueInput<TRes> {
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
+    String? lastWhatsappMessageText,
     Json? orderByPreferences,
     Json? secondLinePreferences,
     UuidValue? uid,
@@ -684,6 +884,7 @@ class _CopyWithImpl_Input_UsersPreferencesStreamCursorValueInput<TRes>
     Object? darkTheme = _undefined,
     Object? greatFeastTheme = _undefined,
     Object? lastHomeMode = _undefined,
+    Object? lastWhatsappMessageText = _undefined,
     Object? orderByPreferences = _undefined,
     Object? secondLinePreferences = _undefined,
     Object? uid = _undefined,
@@ -695,6 +896,8 @@ class _CopyWithImpl_Input_UsersPreferencesStreamCursorValueInput<TRes>
       if (greatFeastTheme != _undefined)
         'greatFeastTheme': (greatFeastTheme as bool?),
       if (lastHomeMode != _undefined) 'lastHomeMode': (lastHomeMode as String?),
+      if (lastWhatsappMessageText != _undefined)
+        'lastWhatsappMessageText': (lastWhatsappMessageText as String?),
       if (orderByPreferences != _undefined)
         'orderByPreferences': (orderByPreferences as Json?),
       if (secondLinePreferences != _undefined)
@@ -715,6 +918,7 @@ class _CopyWithStubImpl_Input_UsersPreferencesStreamCursorValueInput<TRes>
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
+    String? lastWhatsappMessageText,
     Json? orderByPreferences,
     Json? secondLinePreferences,
     UuidValue? uid,
@@ -2302,232 +2506,6 @@ class Input_groupsAggregateBoolExpCount {
                 ? null
                 : Object.hashAll(l$arguments.map((v) => v))
           : const {},
-      _$data.containsKey('distinct') ? l$distinct : const {},
-      _$data.containsKey('filter') ? l$filter : const {},
-      l$predicate,
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_groupsAggregateBoolExpCount<TRes> {
-  factory CopyWith_Input_groupsAggregateBoolExpCount(
-    Input_groupsAggregateBoolExpCount instance,
-    TRes Function(Input_groupsAggregateBoolExpCount) then,
-  ) = _CopyWithImpl_Input_groupsAggregateBoolExpCount;
-
-  factory CopyWith_Input_groupsAggregateBoolExpCount.stub(TRes res) =
-      _CopyWithStubImpl_Input_groupsAggregateBoolExpCount;
-
-  TRes call({
-    List<Enum_GroupsSelectColumn>? arguments,
-    bool? distinct,
-    Input_GroupsBoolExp? filter,
-    Input_IntComparisonExp? predicate,
-  });
-  CopyWith_Input_GroupsBoolExp<TRes> get filter;
-  CopyWith_Input_IntComparisonExp<TRes> get predicate;
-}
-
-class _CopyWithImpl_Input_groupsAggregateBoolExpCount<TRes>
-    implements CopyWith_Input_groupsAggregateBoolExpCount<TRes> {
-  _CopyWithImpl_Input_groupsAggregateBoolExpCount(this._instance, this._then);
-
-  final Input_groupsAggregateBoolExpCount _instance;
-
-  final TRes Function(Input_groupsAggregateBoolExpCount) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? arguments = _undefined,
-    Object? distinct = _undefined,
-    Object? filter = _undefined,
-    Object? predicate = _undefined,
-  }) => _then(
-    Input_groupsAggregateBoolExpCount._({
-      ..._instance._$data,
-      if (arguments != _undefined)
-        'arguments': (arguments as List<Enum_GroupsSelectColumn>?),
-      if (distinct != _undefined) 'distinct': (distinct as bool?),
-      if (filter != _undefined) 'filter': (filter as Input_GroupsBoolExp?),
-      if (predicate != _undefined && predicate != null)
-        'predicate': (predicate as Input_IntComparisonExp),
-    }),
-  );
-
-  CopyWith_Input_GroupsBoolExp<TRes> get filter {
-    final local$filter = _instance.filter;
-    return local$filter == null
-        ? CopyWith_Input_GroupsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_GroupsBoolExp(local$filter, (e) => call(filter: e));
-  }
-
-  CopyWith_Input_IntComparisonExp<TRes> get predicate {
-    final local$predicate = _instance.predicate;
-    return CopyWith_Input_IntComparisonExp(
-      local$predicate,
-      (e) => call(predicate: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_groupsAggregateBoolExpCount<TRes>
-    implements CopyWith_Input_groupsAggregateBoolExpCount<TRes> {
-  _CopyWithStubImpl_Input_groupsAggregateBoolExpCount(this._res);
-
-  TRes _res;
-
-  call({
-    List<Enum_GroupsSelectColumn>? arguments,
-    bool? distinct,
-    Input_GroupsBoolExp? filter,
-    Input_IntComparisonExp? predicate,
-  }) => _res;
-
-  CopyWith_Input_GroupsBoolExp<TRes> get filter =>
-      CopyWith_Input_GroupsBoolExp.stub(_res);
-
-  CopyWith_Input_IntComparisonExp<TRes> get predicate =>
-      CopyWith_Input_IntComparisonExp.stub(_res);
-}
-
-class Input_historyAttendanceHistoryAggregateBoolExpBool_and {
-  factory Input_historyAttendanceHistoryAggregateBoolExpBool_and({
-    required Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns
-    arguments,
-    bool? distinct,
-    Input_HistoryAttendanceHistoryBoolExp? filter,
-    required Input_BooleanComparisonExp predicate,
-  }) => Input_historyAttendanceHistoryAggregateBoolExpBool_and._({
-    r'arguments': arguments,
-    if (distinct != null) r'distinct': distinct,
-    if (filter != null) r'filter': filter,
-    r'predicate': predicate,
-  });
-
-  Input_historyAttendanceHistoryAggregateBoolExpBool_and._(this._$data);
-
-  factory Input_historyAttendanceHistoryAggregateBoolExpBool_and.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    final l$arguments = data['arguments'];
-    result$data['arguments'] =
-        fromJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns(
-          (l$arguments as String),
-        );
-    if (data.containsKey('distinct')) {
-      final l$distinct = data['distinct'];
-      result$data['distinct'] = (l$distinct as bool?);
-    }
-    if (data.containsKey('filter')) {
-      final l$filter = data['filter'];
-      result$data['filter'] = l$filter == null
-          ? null
-          : Input_HistoryAttendanceHistoryBoolExp.fromJson(
-              (l$filter as Map<String, dynamic>),
-            );
-    }
-    final l$predicate = data['predicate'];
-    result$data['predicate'] = Input_BooleanComparisonExp.fromJson(
-      (l$predicate as Map<String, dynamic>),
-    );
-    return Input_historyAttendanceHistoryAggregateBoolExpBool_and._(
-      result$data,
-    );
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns
-  get arguments =>
-      (_$data['arguments']
-          as Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns);
-
-  bool? get distinct => (_$data['distinct'] as bool?);
-
-  Input_HistoryAttendanceHistoryBoolExp? get filter =>
-      (_$data['filter'] as Input_HistoryAttendanceHistoryBoolExp?);
-
-  Input_BooleanComparisonExp get predicate =>
-      (_$data['predicate'] as Input_BooleanComparisonExp);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$arguments = arguments;
-    result$data['arguments'] =
-        toJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns(
-          l$arguments,
-        );
-    if (_$data.containsKey('distinct')) {
-      final l$distinct = distinct;
-      result$data['distinct'] = l$distinct;
-    }
-    if (_$data.containsKey('filter')) {
-      final l$filter = filter;
-      result$data['filter'] = l$filter?.toJson();
-    }
-    final l$predicate = predicate;
-    result$data['predicate'] = l$predicate.toJson();
-    return result$data;
-  }
-
-  CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and<
-    Input_historyAttendanceHistoryAggregateBoolExpBool_and
-  >
-  get copyWith =>
-      CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and(
-        this,
-        (i) => i,
-      );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_historyAttendanceHistoryAggregateBoolExpBool_and ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$arguments = arguments;
-    final lOther$arguments = other.arguments;
-    if (l$arguments != lOther$arguments) {
-      return false;
-    }
-    final l$distinct = distinct;
-    final lOther$distinct = other.distinct;
-    if (_$data.containsKey('distinct') !=
-        other._$data.containsKey('distinct')) {
-      return false;
-    }
-    if (l$distinct != lOther$distinct) {
-      return false;
-    }
-    final l$filter = filter;
-    final lOther$filter = other.filter;
-    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
-      return false;
-    }
-    if (l$filter != lOther$filter) {
-      return false;
-    }
-    final l$predicate = predicate;
-    final lOther$predicate = other.predicate;
-    if (l$predicate != lOther$predicate) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$arguments = arguments;
-    final l$distinct = distinct;
-    final l$filter = filter;
-    final l$predicate = predicate;
-    return Object.hashAll([
-      l$arguments,
       _$data.containsKey('distinct') ? l$distinct : const {},
       _$data.containsKey('filter') ? l$filter : const {},
       l$predicate,

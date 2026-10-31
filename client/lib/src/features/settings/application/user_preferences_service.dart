@@ -18,6 +18,7 @@ class UserPreferencesService extends BlocObserver {
   static const _darkThemeKey = 'darkTheme';
   static const _greatFeastThemeKey = 'greatFeastTheme';
   static const _lastHomeModeKey = 'lastHomeMode';
+  static const _lastWhatsappMessageTextKey = 'lastWhatsappMessageText';
 
   // SyncKVStore/Sembast treat put(null) as delete; wrap so key presence is kept.
   static const _nullQueuedValue = <String, bool>{'pendingNull': true};
@@ -86,6 +87,11 @@ class UserPreferencesService extends BlocObserver {
     return _serverPreferences?.lastHomeMode;
   }
 
+  String? get lastWhatsappMessageText =>
+      _hasQueuedWrite(_lastWhatsappMessageTextKey)
+      ? _readQueuedWrite(_lastWhatsappMessageTextKey) as String?
+      : _serverPreferences?.lastWhatsappMessageText;
+
   UserPreferencesService({
     required SyncKVStore box,
     required this._databaseService,
@@ -104,6 +110,11 @@ class UserPreferencesService extends BlocObserver {
 
   Future<void> setLastHomeMode(HomeMode? value) async {
     _queueWrite(_lastHomeModeKey, value?.name);
+    unawaited(_flushPending());
+  }
+
+  Future<void> setLastWhatsappMessageText(String text) async {
+    _queueWrite(_lastWhatsappMessageTextKey, text);
     unawaited(_flushPending());
   }
 

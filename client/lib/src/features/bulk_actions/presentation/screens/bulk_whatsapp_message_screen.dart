@@ -29,11 +29,14 @@ class _BulkWhatsappMessageScreenState extends State<BulkWhatsappMessageScreen> {
     phoneNumberService: PhoneNumberService.I,
     analyticsService: AnalyticsService.I,
     loggingService: LoggingService.I,
+    userPreferencesService: UserPreferencesService.I,
   );
 
   late final MessageTemplateEditingController _templateController =
       MessageTemplateEditingController(
-        template: BulkWhatsappMessageScreen.defaultTemplate,
+        template: _cubit.withLastSentTextOr(
+          BulkWhatsappMessageScreen.defaultTemplate,
+        ),
       );
 
   late final AppLifecycleListener _appLifecycleListener;

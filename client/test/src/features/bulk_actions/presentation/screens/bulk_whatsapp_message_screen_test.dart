@@ -3,8 +3,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../fakes/fake_box.dart';
 import '../../../../fakes/fake_logging_service.dart';
 import '../../../../fakes/fake_persons_dao.dart';
+import '../../../../fakes/mock_auth_bloc.dart';
 import '../../../../fakes/mock_database_service.dart';
 import '../../../../fakes/mock_launcher_service.dart';
 import '../../../../fakes/recording_analytics_provider.dart';
@@ -23,6 +25,7 @@ void main() {
   );
 
   late MockLauncherService launcher;
+  late UserPreferencesService userPreferences;
 
   setUp(() {
     launcher = MockLauncherService();
@@ -40,8 +43,15 @@ void main() {
         ],
     );
 
+    userPreferences = UserPreferencesService(
+      box: FakeSyncKVStore(),
+      databaseService: database,
+      authBloc: MockAuthBloc(),
+    );
+
     initGlobalProviderContainer([
       databaseServiceProvider.overrideWithValue(database),
+      userPreferencesServiceProvider.overrideWithValue(userPreferences),
       launcherServiceProvider.overrideWithValue(launcher),
       loggingServiceProvider.overrideWithValue(FakeLoggingService()),
       analyticsServiceProvider.overrideWithValue(
@@ -91,6 +101,23 @@ void main() {
       );
     },
   );
+
+  testWidgets('the screen opens with the last message that was sent', (
+    tester,
+  ) async {
+    final lastText = 'اهلا $firstNameToken';
+    await userPreferences.setLastWhatsappMessageText(lastText);
+
+    await pumpScreen(tester, persons: {mina, mark});
+
+    expect(
+      tester.widget<Text>(find.byKey(BulkWhatsappComposeViewKeys.preview)).data,
+      MessageTemplate(
+        text: lastText,
+        fields: BulkWhatsappMessageScreen.defaultTemplate.fields,
+      ).renderFor(mina),
+    );
+  });
 
   test('the message greets a person by their first name only', () {
     const firstName = 'مينا';

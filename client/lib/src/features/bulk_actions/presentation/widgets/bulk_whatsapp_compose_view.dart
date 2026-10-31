@@ -78,9 +78,11 @@ class BulkWhatsappComposeView extends StatelessWidget {
               icon: const Icon(Symbols.send),
               label: const Text('ابدأ'),
               onPressed: canStart
-                  ? () => context.read<BulkWhatsappMessageCubit>().start(
-                      templateController.template,
-                    )
+                  ? () => context
+                        .read<BulkWhatsappMessageCubit>()
+                        .saveTextAndStart(
+                          templateController.template,
+                        )
                   : null,
             );
           },

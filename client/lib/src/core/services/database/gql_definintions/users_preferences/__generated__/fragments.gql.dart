@@ -9,6 +9,7 @@ class Fragment_UserPreferences {
     this.darkTheme,
     required this.greatFeastTheme,
     this.lastHomeMode,
+    this.lastWhatsappMessageText,
     required this.updatedAt,
     this.$__typename = 'UsersPreferences',
   });
@@ -20,6 +21,7 @@ class Fragment_UserPreferences {
     final l$darkTheme = json['darkTheme'];
     final l$greatFeastTheme = json['greatFeastTheme'];
     final l$lastHomeMode = json['lastHomeMode'];
+    final l$lastWhatsappMessageText = json['lastWhatsappMessageText'];
     final l$updatedAt = json['updatedAt'];
     final l$$__typename = json['__typename'];
     return Fragment_UserPreferences(
@@ -29,6 +31,7 @@ class Fragment_UserPreferences {
       darkTheme: (l$darkTheme as bool?),
       greatFeastTheme: (l$greatFeastTheme as bool),
       lastHomeMode: (l$lastHomeMode as String?),
+      lastWhatsappMessageText: (l$lastWhatsappMessageText as String?),
       updatedAt: tstzFromString(l$updatedAt),
       $__typename: (l$$__typename as String),
     );
@@ -45,6 +48,8 @@ class Fragment_UserPreferences {
   final bool greatFeastTheme;
 
   final String? lastHomeMode;
+
+  final String? lastWhatsappMessageText;
 
   final DateTime updatedAt;
 
@@ -64,6 +69,8 @@ class Fragment_UserPreferences {
     _resultData['greatFeastTheme'] = l$greatFeastTheme;
     final l$lastHomeMode = lastHomeMode;
     _resultData['lastHomeMode'] = l$lastHomeMode;
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
+    _resultData['lastWhatsappMessageText'] = l$lastWhatsappMessageText;
     final l$updatedAt = updatedAt;
     _resultData['updatedAt'] = tstzToString(l$updatedAt);
     final l$$__typename = $__typename;
@@ -79,6 +86,7 @@ class Fragment_UserPreferences {
     final l$darkTheme = darkTheme;
     final l$greatFeastTheme = greatFeastTheme;
     final l$lastHomeMode = lastHomeMode;
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
     final l$updatedAt = updatedAt;
     final l$$__typename = $__typename;
     return Object.hashAll([
@@ -88,6 +96,7 @@ class Fragment_UserPreferences {
       l$darkTheme,
       l$greatFeastTheme,
       l$lastHomeMode,
+      l$lastWhatsappMessageText,
       l$updatedAt,
       l$$__typename,
     ]);
@@ -132,6 +141,11 @@ class Fragment_UserPreferences {
     if (l$lastHomeMode != lOther$lastHomeMode) {
       return false;
     }
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
+    final lOther$lastWhatsappMessageText = other.lastWhatsappMessageText;
+    if (l$lastWhatsappMessageText != lOther$lastWhatsappMessageText) {
+      return false;
+    }
     final l$updatedAt = updatedAt;
     final lOther$updatedAt = other.updatedAt;
     if (l$updatedAt != lOther$updatedAt) {
@@ -168,6 +182,7 @@ abstract class CopyWith_Fragment_UserPreferences<TRes> {
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
+    String? lastWhatsappMessageText,
     DateTime? updatedAt,
     String? $__typename,
   });
@@ -190,6 +205,7 @@ class _CopyWithImpl_Fragment_UserPreferences<TRes>
     Object? darkTheme = _undefined,
     Object? greatFeastTheme = _undefined,
     Object? lastHomeMode = _undefined,
+    Object? lastWhatsappMessageText = _undefined,
     Object? updatedAt = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
@@ -214,6 +230,9 @@ class _CopyWithImpl_Fragment_UserPreferences<TRes>
       lastHomeMode: lastHomeMode == _undefined
           ? _instance.lastHomeMode
           : (lastHomeMode as String?),
+      lastWhatsappMessageText: lastWhatsappMessageText == _undefined
+          ? _instance.lastWhatsappMessageText
+          : (lastWhatsappMessageText as String?),
       updatedAt: updatedAt == _undefined || updatedAt == null
           ? _instance.updatedAt
           : (updatedAt as DateTime),
@@ -237,6 +256,7 @@ class _CopyWithStubImpl_Fragment_UserPreferences<TRes>
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
+    String? lastWhatsappMessageText,
     DateTime? updatedAt,
     String? $__typename,
   }) => _res;
@@ -290,6 +310,13 @@ const fragmentDefinitionUserPreferences = FragmentDefinitionNode(
       ),
       FieldNode(
         name: NameNode(value: 'lastHomeMode'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'lastWhatsappMessageText'),
         alias: null,
         arguments: [],
         directives: [],

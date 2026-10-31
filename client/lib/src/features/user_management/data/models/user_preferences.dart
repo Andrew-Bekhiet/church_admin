@@ -25,6 +25,8 @@ class UserPreferences with _$UserPreferences implements ToJson {
 
   final HomeMode? lastHomeMode;
 
+  final String? lastWhatsappMessageText;
+
   @LocalDateTimeConverter()
   final DateTime? updatedAt;
 
@@ -35,6 +37,7 @@ class UserPreferences with _$UserPreferences implements ToJson {
     this.themeChoice = ThemeChoice.system,
     this.greatFeastTheme = true,
     this.lastHomeMode,
+    this.lastWhatsappMessageText,
     this.updatedAt,
   });
 

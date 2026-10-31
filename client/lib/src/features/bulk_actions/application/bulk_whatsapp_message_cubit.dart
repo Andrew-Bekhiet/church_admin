@@ -10,6 +10,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
   final PhoneNumberService _phoneNumberService;
   final AnalyticsService _analyticsService;
   final LoggingService _loggingService;
+  final UserPreferencesService _userPreferencesService;
 
   int _runId = 0;
   WhatsappChatLaunch? _chatBeingOpened;
@@ -21,6 +22,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
     required this._phoneNumberService,
     required this._analyticsService,
     required this._loggingService,
+    required this._userPreferencesService,
   }) : super(const BulkWhatsappLoading());
 
   Future<void> load() async {
@@ -75,9 +77,20 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
     _ => null,
   };
 
-  void start(MessageTemplate template) {
+  MessageTemplate withLastSentTextOr(MessageTemplate defaults) =>
+      switch (_userPreferencesService.lastWhatsappMessageText) {
+        final text? => MessageTemplate(text: text, fields: defaults.fields),
+        null => defaults,
+      };
+
+  void saveTextAndStart(MessageTemplate template) {
     if (state case final BulkWhatsappComposing composing) {
       _runId++;
+      unawaited(
+        _userPreferencesService
+            .setLastWhatsappMessageText(template.text)
+            .catchError(_logException),
+      );
 
       final sendingState = BulkWhatsappSending(
         recipients: composing.recipients,

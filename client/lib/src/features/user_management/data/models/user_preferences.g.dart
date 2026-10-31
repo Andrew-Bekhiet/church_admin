@@ -26,6 +26,7 @@ UserPreferences _$UserPreferencesFromJson(Map json) => UserPreferences(
       : const StoredDarkThemeConverter().fromJson(json['darkTheme'] as bool?),
   greatFeastTheme: json['greatFeastTheme'] as bool? ?? true,
   lastHomeMode: $enumDecodeNullable(_$HomeModeEnumMap, json['lastHomeMode']),
+  lastWhatsappMessageText: json['lastWhatsappMessageText'] as String?,
   updatedAt: _$JsonConverterFromJson<String, DateTime>(
     json['updatedAt'],
     const LocalDateTimeConverter().fromJson,
@@ -41,6 +42,7 @@ Map<String, dynamic> _$UserPreferencesToJson(
   'darkTheme': const StoredDarkThemeConverter().toJson(instance.themeChoice),
   'greatFeastTheme': instance.greatFeastTheme,
   'lastHomeMode': _$HomeModeEnumMap[instance.lastHomeMode],
+  'lastWhatsappMessageText': instance.lastWhatsappMessageText,
   'updatedAt': _$JsonConverterToJson<String, DateTime>(
     instance.updatedAt,
     const LocalDateTimeConverter().toJson,

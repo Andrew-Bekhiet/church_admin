@@ -26,7 +26,7 @@ void main() {
         fixture.recipientOf(mina, [minaPhone]),
       ],
     ),
-    act: (cubit) => cubit.start(fixture.template),
+    act: (cubit) => cubit.saveTextAndStart(fixture.template),
     verify: (cubit) => expect(
       BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).current.person.id,
       mina.id,
@@ -40,7 +40,7 @@ void main() {
         BulkWhatsappComposing(recipients: fixture.markThenMinaWithTwoPhones()),
     act: (cubit) => cubit
       ..setOpensNextChatOnReturn(isEnabled: true)
-      ..start(fixture.template),
+      ..saveTextAndStart(fixture.template),
     verify: (cubit) => expect(
       BulkWhatsappMessageCubitFixture.sendingStateOf(cubit)
           .opensNextChatOnReturn,
@@ -53,7 +53,7 @@ void main() {
     build: () => fixture.buildCubit(),
     seed: () =>
         BulkWhatsappComposing(recipients: [fixture.recipientOf(peter, [])]),
-    act: (cubit) => cubit.start(fixture.template),
+    act: (cubit) => cubit.saveTextAndStart(fixture.template),
     verify: (cubit) => expect(cubit.state, isA<BulkWhatsappFinished>()),
   );
 
