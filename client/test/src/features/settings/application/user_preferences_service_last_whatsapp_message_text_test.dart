@@ -14,7 +14,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   const uid = 'uid';
-  const sentText = 'اهلا {first_name}';
+  const sentText = 'اهلا {firstName}';
 
   setUpAll(() {
     registerFallbackValue(Input_UsersPreferencesSetInput());
