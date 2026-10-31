@@ -44,8 +44,10 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
       onTap: (state) async {
         final focusScope = FocusScope.of(context);
         final search = BehaviorSubject<String?>.seeded(null);
-        final controller = listController(search)
-          ..selectionController.selectAll(state.value?.toList() ?? []);
+        final controller = listController(search);
+        final selection = ListSelectionCubit.alwaysActive(
+          state.value ?? const {},
+        );
         final rslt = await showDialog(
           context: state.context,
           builder: (context) {
@@ -55,7 +57,7 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
                 OutlinedButton(
                   onPressed: () => Navigator.of(
                     context,
-                  ).pop(controller.selectionController.currentValue ?? {}),
+                  ).pop(selection.state.selectedOfType<T>()),
                   child: const Text('تم'),
                 ),
               ],
@@ -85,10 +87,9 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
                                 onPressed: () async {
                                   final customObject = await onCreateCustom
                                       ?.call(search.value!);
+                                  if (search.isClosed) return;
                                   if (customObject != null) {
-                                    controller.selectionController.select(
-                                      customObject,
-                                    );
+                                    selection.select(customObject);
                                   }
                                   search.add(null);
                                 },
@@ -103,12 +104,10 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
                     Expanded(
                       child: ViewableObjectList<T>(
                         objectsController: controller,
+                        selection: selection,
                         viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
                           forceShowSecondLine: false,
                           isDense: true,
-                          onLongPress: (_) {
-                            return;
-                          },
                         ),
                         itemBuilder: itemBuilder,
                       ),
@@ -120,6 +119,7 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
           },
         );
         await search.close();
+        await selection.close();
         await controller.dispose();
 
         if (rslt != null && rslt != state.value) {

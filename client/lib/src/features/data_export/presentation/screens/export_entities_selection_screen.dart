@@ -20,6 +20,12 @@ class ExportEntitiesSelectionScreen extends StatefulWidget {
 class _ExportEntitiesSelectionScreenState
     extends State<ExportEntitiesSelectionScreen> {
   final DataExportCubit _cubit = DataExportCubit();
+  final ListSelectionCubit _areasSelection = ListSelectionCubit.alwaysActive();
+  final ListSelectionCubit _servicesSelection =
+      ListSelectionCubit.alwaysActive();
+  final ListSelectionCubit _classesSelection =
+      ListSelectionCubit.alwaysActive();
+  final ListSelectionCubit _groupsSelection = ListSelectionCubit.alwaysActive();
 
   @override
   Widget build(BuildContext context) {
@@ -141,6 +147,10 @@ class _ExportEntitiesSelectionScreenState
                   servicesController: servicesController,
                   classesController: classesController,
                   groupsController: groupsController,
+                  areasSelection: _areasSelection,
+                  servicesSelection: _servicesSelection,
+                  classesSelection: _classesSelection,
+                  groupsSelection: _groupsSelection,
                 ),
               DataExportInProgress(:final progress) => ExportInProgressBody(
                 progress: progress,
@@ -161,7 +171,12 @@ class _ExportEntitiesSelectionScreenState
               ),
               DataExportSelectingObjects() => FloatingActionButton.extended(
                 key: ExportEntitiesSelectionScreenKeys.startExportButton,
-                onPressed: _cubit.startExport,
+                onPressed: () => _cubit.startExport(
+                  areasIds: _selectedIdsIn(_areasSelection),
+                  servicesIds: _selectedIdsIn(_servicesSelection),
+                  classesIds: _selectedIdsIn(_classesSelection),
+                  groupsIds: _selectedIdsIn(_groupsSelection),
+                ),
                 icon: const Icon(Symbols.play_arrow),
                 label: const Text('بدء التصدير'),
               ),
@@ -173,9 +188,20 @@ class _ExportEntitiesSelectionScreenState
     );
   }
 
+  List<String> _selectedIdsIn(ListSelectionCubit selection) =>
+      selection.state.selectedOfType<ID>().map((e) => e.id).toList();
+
   @override
   void dispose() {
     unawaited(_cubit.close());
+    for (final selection in [
+      _areasSelection,
+      _servicesSelection,
+      _classesSelection,
+      _groupsSelection,
+    ]) {
+      unawaited(selection.close());
+    }
     super.dispose();
   }
 }

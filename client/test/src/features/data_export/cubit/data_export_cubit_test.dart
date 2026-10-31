@@ -116,12 +116,9 @@ void main() {
       },
       build: () => fixture.createCubit(),
       act: (cubit) async {
-        final selectingState = await cubit.stream
-            .whereType<DataExportSelectingObjects>()
-            .first;
+        await cubit.stream.whereType<DataExportSelectingObjects>().first;
 
-        selectingState.areasController.selectionController.select(area);
-        await cubit.startExport();
+        await cubit.startExport(areasIds: [area.id]);
       },
       expect: () => [
         isA<DataExportSelectingObjects>(),
@@ -165,12 +162,9 @@ void main() {
       ).thenAnswer((_) => Completer<String>().future),
       build: () => fixture.createCubit(),
       act: (cubit) async {
-        final selectingState = await cubit.stream
-            .whereType<DataExportSelectingObjects>()
-            .first;
+        await cubit.stream.whereType<DataExportSelectingObjects>().first;
 
-        selectingState.areasController.selectionController.select(area);
-        unawaited(cubit.startExport());
+        unawaited(cubit.startExport(areasIds: [area.id]));
       },
       verify: (_) => expect(
         fixture.analytics.trackedEventsOf<ExportStart>().single,
@@ -194,12 +188,9 @@ void main() {
       ).thenThrow(Exception('offline')),
       build: () => fixture.createCubit(),
       act: (cubit) async {
-        final selectingState = await cubit.stream
-            .whereType<DataExportSelectingObjects>()
-            .first;
+        await cubit.stream.whereType<DataExportSelectingObjects>().first;
 
-        selectingState.areasController.selectionController.select(area);
-        await cubit.startExport();
+        await cubit.startExport(areasIds: [area.id]);
       },
       verify: (_) => expect(
         fixture.analytics.trackedEventsOf<ExportFinish>().single,

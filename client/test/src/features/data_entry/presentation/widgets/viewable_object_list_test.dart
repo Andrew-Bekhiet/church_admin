@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -31,7 +30,6 @@ void main() {
       addTearDown(objectsStream.close);
 
       final controller = ViewableObjectListController(
-        selectionController: SelectionController<Person>(),
         objectsPaginatableStream: _createMockPaginatableStream(
           isLoading,
           objectsStream,
@@ -119,20 +117,21 @@ void main() {
       ]);
       addTearDown(objectsStream.close);
 
-      final selectionController = SelectionController<Person>(
-        equality: EqualityBy((p) => p.id),
-      );
+      final selection = ListSelectionCubit()..selectAll(const []);
+      addTearDown(selection.close);
       final controller = ViewableObjectListController(
         objectsPaginatableStream: _createMockPaginatableStream(
           BehaviorSubject.seeded(false),
           objectsStream,
         ),
-        selectionController: selectionController,
       );
 
       await tester.pumpWidget(
         MaterialUiTestApp(
-          child: ViewableObjectList(objectsController: controller),
+          child: ViewableObjectList(
+            objectsController: controller,
+            selection: selection,
+          ),
         ),
       );
 
@@ -151,27 +150,27 @@ void main() {
         findsOneWidget,
       );
 
-      selectionController.select(Person(id: 'id1', name: ''));
+      selection.select(Person(id: 'id1', name: ''));
       await tester.pumpAndSettle();
       expectSelectedAndUnselectedItems(1, 2);
 
-      selectionController.select(Person(id: 'id2', name: ''));
+      selection.select(Person(id: 'id2', name: ''));
       await tester.pumpAndSettle();
       expectSelectedAndUnselectedItems(2, 1);
 
-      selectionController.select(Person(id: 'id3', name: ''));
+      selection.select(Person(id: 'id3', name: ''));
       await tester.pumpAndSettle();
       expectSelectedAndUnselectedItems(3, 0);
 
-      selectionController.deselect(Person(id: 'id1', name: ''));
+      selection.toggle(Person(id: 'id1', name: ''));
       await tester.pumpAndSettle();
       expectSelectedAndUnselectedItems(2, 1);
 
-      selectionController.selectNone();
+      selection.deselectAll(objectsStream.value);
       await tester.pumpAndSettle();
       expectSelectedAndUnselectedItems(0, 3);
 
-      selectionController.clear();
+      selection.endUnlessAlwaysActive();
       await tester.pumpAndSettle();
       expect(find.byType(Checkbox), findsNothing);
 
@@ -196,7 +195,6 @@ void main() {
           objectsStream,
         ),
         filterStream: filterStream,
-        selectionController: SelectionController<Person>(),
       );
 
       await tester.pumpWidget(

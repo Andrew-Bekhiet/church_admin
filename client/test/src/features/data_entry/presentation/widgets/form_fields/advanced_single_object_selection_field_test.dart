@@ -38,7 +38,6 @@ void main() {
             label: 'مخدوم',
             translateError: (error) => error,
             listController: (search) => ViewableObjectListController(
-              selectionController: SelectionController<Person>(),
               objectsPaginatableStream: PaginatableStream.simple(
                 factory: (_) => Stream.value(
                   const PaginatableStreamResponse(data: <Person>[]),

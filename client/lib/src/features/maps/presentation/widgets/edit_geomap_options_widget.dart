@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart' hide Polygon;
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:rxdart/rxdart.dart';
@@ -271,7 +272,8 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
     final controller = ViewableObjectListController<T>(
       objectsPaginatableStream: stream,
       filterStream: search.map((s) => s ?? ''),
-    )..selectionController.selectAll(selected);
+    );
+    final selection = ListSelectionCubit.alwaysActive(selected);
 
     final rslt = await Navigator.of(context).push(
       MaterialPageRoute(
@@ -282,19 +284,23 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
               title: Text(title),
             ),
             actions: [
-              IconButton(
-                icon: const Icon(Symbols.select_all),
-                onPressed: () {
-                  controller.selectionController.selectAll(
-                    controller.currentFilteredObjectsOrNull ?? [],
+              StreamBuilder<List<T>>(
+                initialData: controller.currentFilteredObjectsOrNull,
+                stream: controller.filteredObjectsStream,
+                builder: (context, shownItemsSnapshot) {
+                  final shownItems = shownItemsSnapshot.data ?? const [];
+
+                  return BlocBuilder<ListSelectionCubit, ListSelectionState>(
+                    bloc: selection,
+                    builder: (context, state) => SelectAllOrNoneButton(
+                      areAllShownItemsSelected: state.areAllSelected(
+                        shownItems,
+                      ),
+                      onSelectAll: () => selection.selectAll(shownItems),
+                      onSelectNone: () => selection.deselectAll(shownItems),
+                    ),
                   );
                 },
-                tooltip: 'تحديد الكل',
-              ),
-              IconButton(
-                icon: const Icon(Symbols.check_box_outline_blank),
-                onPressed: controller.selectionController.selectNone,
-                tooltip: 'تحديد لا شئ',
               ),
               IconButton(
                 icon: const Icon(Symbols.done),
@@ -303,17 +309,19 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
               ),
             ],
           ),
-          body: ViewableObjectList(objectsController: controller),
+          body: ViewableObjectList(
+            objectsController: controller,
+            selection: selection,
+          ),
         ),
       ),
     );
 
     if (rslt == true) {
-      final selection = controller.selectionController.currentValue
-          ?.whereType<T>()
-          .toList();
+      final confirmedSelection = selection.state.selectedOfType<T>().toList();
+      await selection.close();
       AnalyticsService.I.track(
-        MapsDataSelect(entityType, selectedCount: selection?.length ?? 0),
+        MapsDataSelect(entityType, selectedCount: confirmedSelection.length),
       );
       unawaited(
         controller.dispose().then((_) async {
@@ -323,8 +331,9 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
         }),
       );
 
-      return selection;
+      return confirmedSelection;
     }
+    await selection.close();
     await controller.dispose().then((_) async {
       if (search.isClosed) return;
 

@@ -1,22 +1,18 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
 class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
   final T item;
-  final SelectionController<T> selectionController;
+  final ListSelectionCubit selection;
   final ItemBuilder<T>? itemBuilder;
   final ViewableObjectWidgetConfig<T>? viewableObjectWidgetConfig;
   final ViewableObjectService viewableObjectService;
   final bool addSeparator;
 
-  late final ViewableObjectWidgetConfig<T> effectiveConfig =
-      (viewableObjectWidgetConfig ?? ViewableObjectWidgetConfig<T>()).copyWith(
-        onLongPress: _onLongPress,
-        onTap: _onTap,
-      );
   ViewableObjectListItem({
     required this.item,
-    required this.selectionController,
+    required this.selection,
     this.addSeparator = true,
     this.itemBuilder,
     this.viewableObjectWidgetConfig,
@@ -26,23 +22,26 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<bool?>(
-      initialData: selectionController.currentValue?.contains(item),
-      stream: selectionController.stream
-          .map((s) => s?.contains(item))
-          .distinct(),
-      builder: (context, selectionData) {
-        final config = effectiveConfig.copyWith(
-          selected: selectionData.data,
-          trailing: selectionData.data != null
-              ? Checkbox(
-                  visualDensity: VisualDensity.compact,
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  value: selectionData.data,
-                  onChanged: (v) => _onSelect(!v!),
-                )
-              : null,
-        );
+    return BlocSelector<ListSelectionCubit, ListSelectionState, bool?>(
+      bloc: selection,
+      selector: (state) => state.maybeIsSelected(item),
+      builder: (context, isSelected) {
+        final config =
+            (viewableObjectWidgetConfig ?? ViewableObjectWidgetConfig<T>())
+                .copyWith(
+                  onTap: _onTap,
+                  onLongPress: _onLongPress,
+                  selected: isSelected,
+                  trailing: isSelected != null
+                      ? Checkbox(
+                          visualDensity: VisualDensity.compact,
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                          value: isSelected,
+                          onChanged: (_) => selection.toggle(item),
+                        )
+                      : null,
+                );
 
         final Widget itemWidget = itemBuilder != null
             ? itemBuilder!(
@@ -70,20 +69,16 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
     );
   }
 
-  void _onSelect(bool isSelected) => isSelected
-      ? selectionController.deselect(item)
-      : selectionController.select(item);
-
   void _onTap(T item) {
-    if (!selectionController.isSelecting) {
+    if (selection.state is ListSelectionActive) {
+      selection.toggle(item);
+    } else {
       final effectiveOnTap =
           viewableObjectWidgetConfig?.onTap ??
           ViewableObjectWidgetConfig<T>().onTap ??
           viewableObjectService.onTap;
 
       effectiveOnTap(item);
-    } else {
-      _onSelect(selectionController.isSelected(item));
     }
   }
 
@@ -94,10 +89,13 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
 
     if (effectiveOnLongPress != null) {
       effectiveOnLongPress(item);
-    } else if (!selectionController.isSelecting) {
-      selectionController.toggle(item);
     } else {
-      selectionController.clear();
+      switch (selection.state) {
+        case ListSelectionInactive():
+          selection.startSelectingWith(item);
+        case ListSelectionActive():
+          selection.endUnlessAlwaysActive();
+      }
     }
   }
 }

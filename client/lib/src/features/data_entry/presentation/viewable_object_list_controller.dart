@@ -2,13 +2,10 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:collection/collection.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ViewableObjectListController<T extends Viewable> {
   final PaginatableStreamBase<T> _objectsPaginatableStream;
-
-  final SelectionController<T> selectionController;
 
   final Stream<String?>? filterStream;
 
@@ -39,15 +36,7 @@ class ViewableObjectListController<T extends Viewable> {
   ViewableObjectListController({
     required PaginatableStreamBase<T> objectsPaginatableStream,
     this.filterStream,
-    SelectionController<T>? selectionController,
-  }) : _objectsPaginatableStream = objectsPaginatableStream,
-       selectionController =
-           selectionController ??
-           SelectionController<T>(
-             equality: EqualityBy(
-               (o) => (o is ID) ? (o as ID).id : o,
-             ),
-           ) {
+  }) : _objectsPaginatableStream = objectsPaginatableStream {
     _itemsSubjectSubscription = filterStream == null
         ? _objectsPaginatableStream.listen(
             _itemsSubject.add,
@@ -110,7 +99,6 @@ class ViewableObjectListController<T extends Viewable> {
     await Future.wait([
       _loadPageThrottler.close(),
       _loadPageThrottlerListener.cancel(),
-      selectionController.dispose(),
       _objectsPaginatableStream.dispose(),
     ]);
 

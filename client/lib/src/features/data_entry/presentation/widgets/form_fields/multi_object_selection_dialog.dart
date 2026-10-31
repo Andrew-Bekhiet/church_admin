@@ -28,9 +28,11 @@ class MultiObjectSelectionDialog<T extends Viewable> extends StatefulWidget {
 class _MultiObjectSelectionDialogState<T extends Viewable>
     extends State<MultiObjectSelectionDialog<T>> {
   final BehaviorSubject<String?> _search = BehaviorSubject.seeded(null);
-  late final ViewableObjectListController<T> _controller =
-      widget.listController(_search)
-        ..selectionController.selectAll(widget.selected.toList());
+  late final ViewableObjectListController<T> _controller = widget
+      .listController(_search);
+  late final ListSelectionCubit _selection = ListSelectionCubit.alwaysActive(
+    widget.selected,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class _MultiObjectSelectionDialogState<T extends Viewable>
         OutlinedButton(
           onPressed: () => Navigator.of(
             context,
-          ).pop(_controller.selectionController.currentValue ?? <T>{}),
+          ).pop(_selection.state.selectedOfType<T>()),
           child: const Text('تم'),
         ),
       ],
@@ -79,12 +81,10 @@ class _MultiObjectSelectionDialogState<T extends Viewable>
             Expanded(
               child: ViewableObjectList<T>(
                 objectsController: _controller,
+                selection: _selection,
                 viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
                   forceShowSecondLine: false,
                   isDense: true,
-                  onLongPress: (_) {
-                    return;
-                  },
                 ),
               ),
             ),
@@ -117,7 +117,7 @@ class _MultiObjectSelectionDialogState<T extends Viewable>
     }
     if (!mounted) return;
 
-    _controller.selectionController.select(created);
+    _selection.select(created);
     _search.add(null);
   }
 
@@ -125,6 +125,7 @@ class _MultiObjectSelectionDialogState<T extends Viewable>
   void dispose() {
     unawaited(_search.close());
     unawaited(_controller.dispose());
+    unawaited(_selection.close());
     super.dispose();
   }
 }
