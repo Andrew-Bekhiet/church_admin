@@ -78,14 +78,14 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
   void start(MessageTemplate template) {
     if (state case final BulkWhatsappComposing composing) {
       _runId++;
-      _showFirstReachableOrFinish(
-        BulkWhatsappSending(
-          recipients: composing.recipients,
-          template: template,
-          currentIndex: 0,
-          opensNextChatOnReturn: composing.opensNextChatOnReturn,
-        ),
+
+      final sendingState = BulkWhatsappSending(
+        recipients: composing.recipients,
+        template: template,
+        currentIndex: 0,
+        opensNextChatOnReturn: composing.opensNextChatOnReturn,
       );
+      _showNextReachableOrFinish(sendingState, afterIndex: -1);
     }
   }
 
@@ -219,9 +219,6 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
     BulkWhatsappSending sending,
     WhatsappRecipient current,
   ) => [...sending.recipients]..[sending.currentIndex] = current;
-
-  void _showFirstReachableOrFinish(BulkWhatsappSending sending) =>
-      _showNextReachableOrFinish(sending, afterIndex: -1);
 
   void _showNextReachableOrFinish(
     BulkWhatsappSending sending, {
