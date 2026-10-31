@@ -19,7 +19,7 @@ church_admin is a mobile-only Arabic RTL app with about 30 real users. Hasura mi
 - **Critical / Major**: one of the failures above, or a crash or compile error on this PR's head, given the scope the PR declares.
 - **Minor**: a correctness edge case with a concrete trigger.
 - **Trivial**: naming, structure, style. A broken convention is Trivial unless it causes one of the failures above.
-- **Pre-existing**: the problem is already on the base branch, or the PR moves the code without changing it. Start the comment with "Pre-existing:", tag it Trivial, and do not ask for a fix in this PR.
+- **Pre-existing**: the problem is already on the base branch, or the PR moves the code without changing it. Start the comment with "Pre-existing:", tag it Trivial, and do not ask for a fix in this PR. When the PR rewrites that code, for example by porting a screen to a new editor, the gap belongs to the rewrite: report it at its real severity.
 
 ## Evidence
 
@@ -39,6 +39,7 @@ Read the diff against the PR description.
 - **Anything CI enforces.** That covers `dart analyze --fatal-infos` with solid_lints (`client/analysis_options.yaml`), `dart format`, sqlfluff (`sql-lint.yml`), and the generated-code and schema-drift checks (`generated-code.yml`). If the analyzer accepts something, its config chose to.
 - **Generated files** (`*.g.dart`, `*.graphql.dart`, `__generated__/`, `schema.graphql`). Fix the generator or the source, not the output.
 - **Missing doc comments, or a low docstring count.** The repo writes no comments by design (`AGENTS.md`, under Comments).
+- **Dart 3.13 semantics that look like bugs.** The SDK floor is 3.13: `required this._form` declares a private named parameter that callers pass as `form:`; a `late final` local runs its initializer on first read, so a branch that never reads it never runs it; a mocktail stub matches a call that omits a named parameter, because the forwarder fills in the default. CI compiles every PR, so a claimed compile error needs the analyzer output that shows it.
 - **Browser history, web reload, or restoring route extras across app versions.** The app is mobile-only, and route extras live only in memory.
 
 ## Stacks
