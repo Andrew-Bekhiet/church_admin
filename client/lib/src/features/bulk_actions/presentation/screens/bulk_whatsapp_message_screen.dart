@@ -29,8 +29,8 @@ class _BulkWhatsappMessageScreenState extends State<BulkWhatsappMessageScreen> {
     loggingService: LoggingService.I,
   );
 
-  late final PlaceholderTextEditingController _templateController =
-      PlaceholderTextEditingController(
+  late final MessageTemplateEditingController _templateController =
+      MessageTemplateEditingController(
         template: BulkWhatsappMessageScreen.defaultTemplate,
       );
 

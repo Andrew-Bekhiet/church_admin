@@ -5,7 +5,7 @@ import 'package:material_ui/material_ui.dart';
 
 class BulkWhatsappComposeView extends StatelessWidget {
   final BulkWhatsappComposing state;
-  final PlaceholderTextEditingController templateController;
+  final MessageTemplateEditingController templateController;
 
   const BulkWhatsappComposeView({
     required this.state,
