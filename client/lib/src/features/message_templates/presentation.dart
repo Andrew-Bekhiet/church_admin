@@ -1,2 +1,3 @@
-export 'presentation/placeholder_text_editing_controller.dart';
+export 'presentation/message_template_editing_controller.dart';
+export 'presentation/text_replacement.dart';
 export 'presentation/widgets.dart';

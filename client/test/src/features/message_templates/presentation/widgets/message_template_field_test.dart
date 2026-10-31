@@ -6,11 +6,11 @@ import 'package:material_ui/material_ui.dart';
 void main() {
   final nameField = PersonFields().name;
 
-  Future<PlaceholderTextEditingController> pumpField(
+  Future<MessageTemplateEditingController> pumpField(
     WidgetTester tester,
     String storedText,
   ) async {
-    final controller = PlaceholderTextEditingController(
+    final controller = MessageTemplateEditingController(
       template: MessageTemplate(text: storedText, fields: [nameField]),
     );
     addTearDown(controller.dispose);

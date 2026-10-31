@@ -5,12 +5,12 @@ import 'package:material_ui/material_ui.dart';
 void main() {
   final nameField = PersonFields().name;
 
-  PlaceholderTextEditingController controllerWith(String storedText) =>
-      PlaceholderTextEditingController(
+  MessageTemplateEditingController controllerWith(String storedText) =>
+      MessageTemplateEditingController(
         template: MessageTemplate(text: storedText, fields: [nameField]),
       );
 
-  void typeAtEnd(PlaceholderTextEditingController controller, String typed) {
+  void typeAtEnd(MessageTemplateEditingController controller, String typed) {
     final text = controller.text + typed;
     controller.value = TextEditingValue(
       text: text,

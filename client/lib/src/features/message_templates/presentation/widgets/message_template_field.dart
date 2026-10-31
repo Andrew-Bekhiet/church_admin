@@ -3,7 +3,7 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
 class MessageTemplateField extends StatelessWidget {
-  final PlaceholderTextEditingController controller;
+  final MessageTemplateEditingController controller;
 
   const MessageTemplateField({required this.controller, super.key});
 
