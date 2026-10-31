@@ -87,6 +87,17 @@ void main() {
     },
   );
 
+  test('the message greets a person by their first name only', () {
+    const firstName = 'مينا';
+    const familyName = 'عادل';
+    final message = BulkWhatsappMessageScreen.defaultTemplate.renderFor(
+      Person(id: 'p4', name: ' $firstName $familyName '),
+    );
+
+    expect(message, contains(firstName));
+    expect(message, isNot(contains(familyName)));
+  });
+
   testWidgets('the preview follows edits to the template', (tester) async {
     await pumpScreen(tester);
 

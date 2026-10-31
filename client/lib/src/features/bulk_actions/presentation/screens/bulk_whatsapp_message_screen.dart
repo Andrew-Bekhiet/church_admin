@@ -7,7 +7,7 @@ import 'package:material_ui/material_ui.dart';
 class BulkWhatsappMessageScreen extends StatefulWidget {
   static final MessageTemplate defaultTemplate = MessageTemplate(
     text: 'كل سنة وانت طيب يا {name} 🎂',
-    fields: [PersonFields().name],
+    fields: [WhatsappMessageFields.nameAsFirstName],
   );
 
   final Set<Person> persons;
