@@ -11,9 +11,14 @@ import '../../../../fakes/recording_analytics_provider.dart';
 import '../../../../utils.dart';
 
 void main() {
+  const markPhone = PhoneContact(id: 'c2', phone: '01000000002');
+  const minaPhone = PhoneContact(id: 'c1', phone: '01000000001');
   final mark = Person(id: 'p2', name: 'مارك');
   final mina = Person(id: 'p1', name: 'مينا');
-  final peter = Person(id: 'p3', name: 'بيتر');
+  final peterWithoutPhone = Person(id: 'p3', name: 'بيتر');
+  final firstNameToken = MessageTemplate.tokenOf(
+    WhatsappMessageFields.firstName,
+  );
 
   late MockLauncherService launcher;
 
@@ -26,13 +31,9 @@ void main() {
     when(() => database.persons).thenReturn(
       FakePersonsDAO()
         ..personsWithPhoneContacts = [
-          mark.copyWith(
-            contacts: [const PhoneContact(id: 'c2', phone: '01000000002')],
-          ),
-          mina.copyWith(
-            contacts: [const PhoneContact(id: 'c1', phone: '01000000001')],
-          ),
-          peter,
+          mark.copyWith(contacts: [markPhone]),
+          mina.copyWith(contacts: [minaPhone]),
+          peterWithoutPhone,
         ],
     );
 
@@ -48,14 +49,17 @@ void main() {
 
   tearDown(defaultTearDown);
 
-  Future<void> pumpScreen(WidgetTester tester) async {
+  Future<void> pumpScreen(
+    WidgetTester tester, {
+    required Set<Person> persons,
+  }) async {
     await tester.pumpWidget(
       MaterialApp(
         theme: ThemingService.getDefault(
           isDarkOverride: false,
           greatFeastThemeOverride: false,
         ),
-        home: BulkWhatsappMessageScreen(persons: {mina, mark, peter}),
+        home: BulkWhatsappMessageScreen(persons: persons),
       ),
     );
     await tester.pumpAndSettle();
@@ -72,11 +76,9 @@ void main() {
   }
 
   testWidgets(
-    'the preview fills the template for the first person with a phone',
-    (
-      tester,
-    ) async {
-      await pumpScreen(tester);
+    'the preview fills the template for the first selected person with a phone',
+    (tester) async {
+      await pumpScreen(tester, persons: {peterWithoutPhone, mina, mark});
 
       expect(
         tester
@@ -99,11 +101,11 @@ void main() {
   });
 
   testWidgets('the preview follows edits to the template', (tester) async {
-    await pumpScreen(tester);
+    await pumpScreen(tester, persons: {mina, mark});
 
     await tester.enterText(
       find.byKey(MessageTemplateFieldKeys.textField),
-      'اهلا {name}',
+      'اهلا $firstNameToken',
     );
     await tester.pumpAndSettle();
 
@@ -113,8 +115,32 @@ void main() {
     );
   });
 
+  testWidgets("the edited message is sent to the first person's phone", (
+    tester,
+  ) async {
+    final editedText = 'اهلا $firstNameToken';
+    await pumpScreen(tester, persons: {mina, mark});
+    await tester.enterText(
+      find.byKey(MessageTemplateFieldKeys.textField),
+      editedText,
+    );
+    await tester.pumpAndSettle();
+
+    await startAndOpenFirstChat(tester);
+
+    verify(
+      () => launcher.launchWhatsappChat(
+        PhoneNumberService.I.formatInternational(minaPhone.phone),
+        text: MessageTemplate(
+          text: editedText,
+          fields: BulkWhatsappMessageScreen.defaultTemplate.fields,
+        ).renderFor(mina),
+      ),
+    ).called(1);
+  });
+
   testWidgets('an opened chat cannot be skipped', (tester) async {
-    await pumpScreen(tester);
+    await pumpScreen(tester, persons: {mina, mark, peterWithoutPhone});
     await startAndOpenFirstChat(tester);
 
     expect(
@@ -128,7 +154,7 @@ void main() {
   testWidgets('returning to the app after a chat shows the next person', (
     tester,
   ) async {
-    await pumpScreen(tester);
+    await pumpScreen(tester, persons: {mina, mark, peterWithoutPhone});
     await startAndOpenFirstChat(tester);
 
     tester.binding
@@ -151,7 +177,7 @@ void main() {
   testWidgets('a dialog over the app does not count as returning from a chat', (
     tester,
   ) async {
-    await pumpScreen(tester);
+    await pumpScreen(tester, persons: {mina, mark, peterWithoutPhone});
     await startAndOpenFirstChat(tester);
 
     tester.binding
@@ -168,7 +194,7 @@ void main() {
   });
 
   testWidgets('an empty message cannot be started', (tester) async {
-    await pumpScreen(tester);
+    await pumpScreen(tester, persons: {mina, mark, peterWithoutPhone});
 
     await tester.enterText(find.byKey(MessageTemplateFieldKeys.textField), ' ');
     await tester.pumpAndSettle();
@@ -183,22 +209,43 @@ void main() {
     );
   });
 
-  testWidgets('the summary lists the people who have no phone', (
-    tester,
-  ) async {
-    await pumpScreen(tester);
+  Future<void> openFirstChatThenSkipTheNext(WidgetTester tester) async {
     await startAndOpenFirstChat(tester);
     await tester.tap(find.byKey(BulkWhatsappQueueViewKeys.nextButton));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(BulkWhatsappQueueViewKeys.skipButton));
     await tester.pumpAndSettle();
+  }
+
+  testWidgets('the summary counts the opened and skipped chats', (
+    tester,
+  ) async {
+    const openedCount = 1;
+    const skippedCount = 1;
+    await pumpScreen(tester, persons: {mina, mark});
+
+    await openFirstChatThenSkipTheNext(tester);
+
+    final counts = tester
+        .widget<Text>(find.byKey(BulkWhatsappSummaryViewKeys.counts))
+        .data;
+    expect(
+      RegExp(r'\d+').allMatches(counts ?? '').map((match) => match[0]),
+      ['$openedCount', '$skippedCount'],
+    );
+  });
+
+  testWidgets('the summary lists the people who have no phone', (
+    tester,
+  ) async {
+    await pumpScreen(tester, persons: {mina, mark, peterWithoutPhone});
+
+    await openFirstChatThenSkipTheNext(tester);
 
     expect(
-      tester.widget<Text>(find.byKey(BulkWhatsappSummaryViewKeys.counts)).data,
-      'تم فتح 1 محادثة وتخطي 1',
-    );
-    expect(
-      find.byKey(BulkWhatsappSummaryViewKeys.withoutPhoneFor(peter)),
+      find.byKey(
+        BulkWhatsappSummaryViewKeys.withoutPhoneFor(peterWithoutPhone),
+      ),
       findsOneWidget,
     );
   });
