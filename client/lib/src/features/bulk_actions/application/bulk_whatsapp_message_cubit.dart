@@ -38,13 +38,20 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
 
       emit(
         BulkWhatsappComposing(
-          recipients: _persons
-              .map(
-                (person) => WhatsappRecipient.of(
-                  _withFetchedContacts(person, fetchedById[person.id]),
-                ),
-              )
-              .toList(),
+          recipients: _persons.map(
+            (person) {
+              final fetchedPerson = fetchedById[person.id];
+
+              return WhatsappRecipient.of(
+                fetchedPerson == null
+                    ? person
+                    : person.copyWith(
+                        contacts: fetchedPerson.contacts,
+                        familyContacts: fetchedPerson.familyContacts,
+                      ),
+              );
+            },
+          ).toList(),
         ),
       );
     } on Exception catch (error, stackTrace) {
@@ -175,14 +182,6 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
       ),
     ),
   );
-
-  Person _withFetchedContacts(Person selected, Person? fetched) =>
-      fetched == null
-      ? selected
-      : selected.copyWith(
-          contacts: fetched.contacts,
-          familyContacts: fetched.familyContacts,
-        );
 
   Future<bool> _tryOpenWhatsappChat(
     PhoneContact phone,
