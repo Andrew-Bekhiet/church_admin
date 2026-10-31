@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 class AuthModeSwitch extends StatelessWidget {
   final bool isLogin;
   final VoidCallback onToggle;
+
   const AuthModeSwitch({
     required this.isLogin,
     required this.onToggle,

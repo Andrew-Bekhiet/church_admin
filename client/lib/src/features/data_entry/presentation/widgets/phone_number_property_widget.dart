@@ -14,6 +14,7 @@ class PhoneNumberPropertyWidget extends StatelessWidget {
   final bool isFamilyNumber;
 
   final void Function(String)? addToContacts;
+
   const PhoneNumberPropertyWidget(
     this.propName,
     this.value,

@@ -8,6 +8,7 @@ class AddressHouseNumberRow extends StatelessWidget {
   final void Function(String?) onSubstreetNameChanged;
   final void Function(String?) onHouseCodeChanged;
   final int textResetToken;
+
   const AddressHouseNumberRow({
     required this.address,
     required this.enabled,

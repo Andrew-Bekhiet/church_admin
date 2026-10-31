@@ -15,6 +15,7 @@ class AuthForm extends StatelessWidget {
   final TapGestureRecognizer termsOfServiceRecognizer;
   final TapGestureRecognizer privacyPolicyRecognizer;
   final Future<void> Function() onSubmit;
+
   const AuthForm({
     required this.isLogin,
     required this.loading,

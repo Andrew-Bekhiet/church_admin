@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 class ServiceAdminScopeFields extends StatelessWidget {
   final UserAdminScope userAdminScope;
   final void Function(UserAdminScope) onChanged;
+
   const ServiceAdminScopeFields({
     required this.userAdminScope,
     required this.onChanged,

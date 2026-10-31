@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 
 class ChipTabBar extends StatelessWidget {
   final List<({String label, IconData icon})> tabs;
+
   const ChipTabBar({
     required this.tabs,
     super.key,

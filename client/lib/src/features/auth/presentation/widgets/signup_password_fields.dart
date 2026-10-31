@@ -6,6 +6,7 @@ class SignupPasswordFields extends StatelessWidget {
   final TextEditingController passwordController;
   final TextEditingController passwordConfirmationController;
   final Future<void> Function() onSubmit;
+
   const SignupPasswordFields({
     required this.emailController,
     required this.passwordController,

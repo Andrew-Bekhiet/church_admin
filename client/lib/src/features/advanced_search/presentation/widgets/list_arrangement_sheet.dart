@@ -19,6 +19,7 @@ class ListArrangementSheet extends StatefulWidget {
       initialArrangement: initialArrangement,
     ),
   );
+
   final QueryableType queryableType;
   final ListArrangement initialArrangement;
 

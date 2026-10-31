@@ -84,6 +84,7 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
   final void Function()? onRecordNow;
 
   DateFormat get dateFormat => _dateFormat(showTime: showTime);
+
   const HistoryProperty({
     required this.name,
     required this.getHistoryListController,

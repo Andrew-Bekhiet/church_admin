@@ -11,6 +11,7 @@ class FieldPathPicker extends StatelessWidget {
       parentField,
     _ => field,
   };
+
   final QueryableType queryableType;
   final FieldMetadata field;
   final ValueChanged<FieldMetadata> onChanged;

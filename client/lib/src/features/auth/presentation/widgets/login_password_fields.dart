@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 class LoginPasswordFields extends StatelessWidget {
   final TextEditingController passwordController;
   final Future<void> Function() onSubmit;
+
   const LoginPasswordFields({
     required this.passwordController,
     required this.onSubmit,

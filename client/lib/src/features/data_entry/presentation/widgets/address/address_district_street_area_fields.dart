@@ -15,6 +15,7 @@ class AddressDistrictStreetAreaFields extends StatelessWidget {
   final void Function(District?) onDistrictChanged;
   final void Function(Street?) onStreetChanged;
   final void Function(Area?) onAreaChanged;
+
   const AddressDistrictStreetAreaFields({
     required this.address,
     required this.enabled,

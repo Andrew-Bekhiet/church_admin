@@ -16,6 +16,7 @@ class PasswordFormField extends StatefulWidget {
   final void Function(String)? onFieldSubmitted;
   final void Function(String?)? onSaved;
   final String? Function(String?)? validator;
+
   const PasswordFormField({
     this.autoFillHints = const [AutofillHints.password],
     this.autoValidateMode = AutovalidateMode.disabled,

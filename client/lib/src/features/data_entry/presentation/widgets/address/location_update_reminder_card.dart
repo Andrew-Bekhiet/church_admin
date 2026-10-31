@@ -5,6 +5,7 @@ class LocationUpdateReminderCard extends StatelessWidget {
   final bool isShown;
   final VoidCallback onUpdateLocation;
   final VoidCallback onKeepLocation;
+
   const LocationUpdateReminderCard({
     required this.isShown,
     required this.onUpdateLocation,

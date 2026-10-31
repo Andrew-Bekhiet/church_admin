@@ -5,6 +5,7 @@ import 'package:material_ui/material_ui.dart';
 class SuggestedAddressCard extends StatelessWidget {
   final Address? suggestedAddress;
   final VoidCallback onUseSuggestion;
+
   const SuggestedAddressCard({
     required this.suggestedAddress,
     required this.onUseSuggestion,

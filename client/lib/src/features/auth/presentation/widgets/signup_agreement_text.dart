@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 class SignupAgreementText extends StatelessWidget {
   final TapGestureRecognizer termsOfServiceRecognizer;
   final TapGestureRecognizer privacyPolicyRecognizer;
+
   const SignupAgreementText({
     required this.termsOfServiceRecognizer,
     required this.privacyPolicyRecognizer,

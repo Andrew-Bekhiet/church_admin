@@ -5,6 +5,7 @@ class AdminScopePermissionCheckboxes extends StatelessWidget {
   final UserAdminScope userAdminScope;
   final String objectLabel;
   final void Function(UserAdminScope) onChanged;
+
   const AdminScopePermissionCheckboxes({
     required this.userAdminScope,
     required this.objectLabel,

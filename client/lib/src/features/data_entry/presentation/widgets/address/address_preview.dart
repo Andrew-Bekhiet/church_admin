@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 
 class AddressPreview extends StatelessWidget {
   final Address address;
+
   const AddressPreview({required this.address, super.key});
 
   @override

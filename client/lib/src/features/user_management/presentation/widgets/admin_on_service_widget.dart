@@ -6,6 +6,7 @@ class AdminOnServiceWidget extends StatelessWidget {
 
   final Widget Function(BuildContext, ViewableWithID)? trailingBuilder;
   final void Function(ViewableWithID)? onTap;
+
   const AdminOnServiceWidget({
     required this.serviceData,
     this.trailingBuilder,

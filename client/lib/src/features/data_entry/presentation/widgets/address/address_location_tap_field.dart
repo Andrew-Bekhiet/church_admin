@@ -6,6 +6,7 @@ class AddressLocationTapField extends StatelessWidget {
   final Point? geolocation;
   final bool enabled;
   final Future<void>? Function(FormFieldState<Point?>) onTap;
+
   const AddressLocationTapField({
     required this.geolocation,
     required this.enabled,

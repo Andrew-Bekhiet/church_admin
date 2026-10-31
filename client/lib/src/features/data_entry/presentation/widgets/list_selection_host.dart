@@ -15,6 +15,7 @@ class ListSelectionHost extends StatefulWidget {
   static ActiveListSelection? maybeActiveOf(BuildContext context) => context
       .dependOnInheritedWidgetOfExactType<ListSelectionHostScope>()
       ?.active;
+
   final Widget child;
 
   const ListSelectionHost({required this.child, super.key});

@@ -10,6 +10,7 @@ class AddressApartmentDetailsRow extends StatelessWidget {
   final void Function(int) onApartmentNumberChanged;
   final void Function(String?) onSpecialLandmarkChanged;
   final int textResetToken;
+
   const AddressApartmentDetailsRow({
     required this.address,
     required this.enabled,

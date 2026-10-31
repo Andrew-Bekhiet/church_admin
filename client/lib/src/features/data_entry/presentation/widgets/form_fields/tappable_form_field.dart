@@ -12,6 +12,7 @@ class TappableFormField<T> extends StatefulWidget {
   final String? Function(T?)? validator;
   final void Function(T?)? onSaved;
   final InputDecoration Function(BuildContext, FormFieldState<T>)? decoration;
+
   const TappableFormField({
     required this.onTap,
     required this.initialValue,

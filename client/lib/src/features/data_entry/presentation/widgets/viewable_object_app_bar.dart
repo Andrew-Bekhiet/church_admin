@@ -8,6 +8,7 @@ class ViewableObjectAppBar extends StatefulWidget {
   final bool circleCrop;
   final Widget? overrideImage;
   final void Function()? onTap;
+
   const ViewableObjectAppBar({
     required this.viewable,
     required this.appBarMaxHeight,
