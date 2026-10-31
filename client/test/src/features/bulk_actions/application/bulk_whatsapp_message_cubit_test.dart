@@ -3,10 +3,11 @@ import 'dart:async';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
-import '../../../fakes/fake_launcher_service.dart';
 import '../../../fakes/fake_logging_service.dart';
 import '../../../fakes/fake_persons_dao.dart';
+import '../../../fakes/mock_launcher_service.dart';
 import '../../../fakes/recording_analytics_provider.dart';
 
 void main() {
@@ -30,7 +31,8 @@ void main() {
   const markPhone = PhoneContact(id: 'c3', phone: '01000000003');
 
   late FakePersonsDAO personsDAO;
-  late FakeLauncherService launcher;
+  late MockLauncherService launcher;
+  late Completer<bool> whatsappGate;
   late RecordingAnalyticsProvider analytics;
   late FakeLoggingService logging;
 
@@ -39,6 +41,14 @@ void main() {
 
   late List<WhatsappRecipient> recipients;
 
+  void stubWhatsappLaunch(Future<bool> Function() launch) => when(
+    () => launcher.launchWhatsappChat(any(), text: any(named: 'text')),
+  ).thenAnswer((_) => launch());
+
+  void stubWhatsappLaunchThrowing(Object error) => when(
+    () => launcher.launchWhatsappChat(any(), text: any(named: 'text')),
+  ).thenThrow(error);
+
   setUp(() {
     personsDAO = FakePersonsDAO()
       ..personsWithPhoneContacts = [
@@ -46,7 +56,8 @@ void main() {
         mark.copyWith(contacts: [markPhone]),
         peter,
       ];
-    launcher = FakeLauncherService();
+    launcher = MockLauncherService();
+    stubWhatsappLaunch(() async => true);
     analytics = RecordingAnalyticsProvider();
     logging = FakeLoggingService();
     recipients = [
@@ -76,11 +87,19 @@ void main() {
     opensNextChatOnReturn: opensNextChatOnReturn,
   );
 
-  OpenedWhatsappChat chatWith(Person person, PhoneContact phone) =>
-      OpenedWhatsappChat(
+  Future<bool> launchingChatWith(Person person, PhoneContact phone) =>
+      launcher.launchWhatsappChat(
         phoneNumbers.formatInternational(phone.phone),
-        template.renderFor(person),
+        text: template.renderFor(person),
       );
+
+  void verifyChatsOpenedInOrder(List<(Person, PhoneContact)> chats) {
+    verifyInOrder([
+      for (final (person, phone) in chats)
+        () => launchingChatWith(person, phone),
+    ]);
+    verifyNoMoreInteractions(launcher);
+  }
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'loading keeps the persons in the order they were given',
@@ -196,8 +215,7 @@ void main() {
     build: buildCubit,
     seed: () => sendingTo(0),
     act: (cubit) => cubit.openCurrentChat(),
-    verify: (_) =>
-        expect(launcher.openedWhatsappChats, [chatWith(mark, markPhone)]),
+    verify: (_) => verifyChatsOpenedInOrder([(mark, markPhone)]),
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
@@ -237,7 +255,8 @@ void main() {
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'a second tap while WhatsApp is opening does not open the chat again',
     build: () {
-      launcher.whatsappGate = Completer();
+      whatsappGate = Completer();
+      stubWhatsappLaunch(() => whatsappGate.future);
 
       return buildCubit();
     },
@@ -245,17 +264,17 @@ void main() {
     act: (cubit) async {
       final opening = cubit.openCurrentChat();
       await cubit.openCurrentChat();
-      launcher.whatsappGate?.complete();
+      whatsappGate.complete(true);
       await opening;
     },
-    verify: (_) =>
-        expect(launcher.openedWhatsappChats, [chatWith(mark, markPhone)]),
+    verify: (_) => verifyChatsOpenedInOrder([(mark, markPhone)]),
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'skipping while WhatsApp is opening keeps the next person current',
     build: () {
-      launcher.whatsappGate = Completer();
+      whatsappGate = Completer();
+      stubWhatsappLaunch(() => whatsappGate.future);
       recipients = [
         recipientOf(mark, [markPhone]),
         recipientOf(peter, [markPhone]),
@@ -267,7 +286,7 @@ void main() {
     act: (cubit) async {
       final opening = cubit.openCurrentChat();
       cubit.skipCurrent();
-      launcher.whatsappGate?.complete();
+      whatsappGate.complete(true);
       await opening;
     },
     verify: (cubit) {
@@ -282,7 +301,8 @@ void main() {
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'choosing another phone while WhatsApp is opening leaves it unopened',
     build: () {
-      launcher.whatsappGate = Completer();
+      whatsappGate = Completer();
+      stubWhatsappLaunch(() => whatsappGate.future);
 
       return buildCubit();
     },
@@ -290,7 +310,7 @@ void main() {
     act: (cubit) async {
       final opening = cubit.openCurrentChat();
       cubit.selectPhone(minaOtherPhone);
-      launcher.whatsappGate?.complete();
+      whatsappGate.complete(true);
       await opening;
     },
     verify: (cubit) {
@@ -303,7 +323,8 @@ void main() {
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     "skipping while WhatsApp is opening lets the next person's chat open",
     build: () {
-      launcher.whatsappGate = Completer();
+      whatsappGate = Completer();
+      stubWhatsappLaunch(() => whatsappGate.future);
 
       return buildCubit();
     },
@@ -312,20 +333,21 @@ void main() {
       final opening = cubit.openCurrentChat();
       cubit.skipCurrent();
       final openingNext = cubit.openCurrentChat();
-      launcher.whatsappGate?.complete();
+      whatsappGate.complete(true);
       await opening;
       await openingNext;
     },
-    verify: (_) => expect(launcher.openedWhatsappChats, [
-      chatWith(mark, markPhone),
-      chatWith(mina, minaPhone),
+    verify: (_) => verifyChatsOpenedInOrder([
+      (mark, markPhone),
+      (mina, minaPhone),
     ]),
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'stopping while WhatsApp is opening keeps the run finished',
     build: () {
-      launcher.whatsappGate = Completer();
+      whatsappGate = Completer();
+      stubWhatsappLaunch(() => whatsappGate.future);
 
       return buildCubit();
     },
@@ -333,7 +355,7 @@ void main() {
     act: (cubit) async {
       final opening = cubit.openCurrentChat();
       cubit.stop();
-      launcher.whatsappGate?.complete();
+      whatsappGate.complete(true);
       await opening;
     },
     verify: (cubit) => expect(cubit.state, isA<BulkWhatsappFinished>()),
@@ -342,7 +364,8 @@ void main() {
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'a chat opened by a stopped run does not count in the next run',
     build: () {
-      launcher.whatsappGate = Completer();
+      whatsappGate = Completer();
+      stubWhatsappLaunch(() => whatsappGate.future);
 
       return buildCubit(persons: {mark});
     },
@@ -352,7 +375,7 @@ void main() {
       cubit.stop();
       await cubit.load();
       cubit.start(template);
-      launcher.whatsappGate?.complete();
+      whatsappGate.complete(true);
       await opening;
     },
     verify: (cubit) {
@@ -396,9 +419,9 @@ void main() {
       await cubit.openCurrentChat();
       await cubit.continueAfterOpenedChat();
     },
-    verify: (_) => expect(launcher.openedWhatsappChats, [
-      chatWith(mark, markPhone),
-      chatWith(mina, minaPhone),
+    verify: (_) => verifyChatsOpenedInOrder([
+      (mark, markPhone),
+      (mina, minaPhone),
     ]),
   );
 
@@ -409,7 +432,7 @@ void main() {
     act: (cubit) => cubit.skipCurrent(),
     verify: (cubit) {
       expect((cubit.state as BulkWhatsappSending).current.person.id, mina.id);
-      expect(launcher.openedWhatsappChats, isEmpty);
+      verifyZeroInteractions(launcher);
     },
   );
 
@@ -421,15 +444,15 @@ void main() {
       cubit.selectPhone(minaOtherPhone);
       await cubit.openCurrentChat();
     },
-    verify: (_) => expect(launcher.openedWhatsappChats, [
-      chatWith(mina, minaOtherPhone),
+    verify: (_) => verifyChatsOpenedInOrder([
+      (mina, minaOtherPhone),
     ]),
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'when WhatsApp cannot be opened the person stays current with the failure',
     build: () {
-      launcher.canOpenWhatsapp = false;
+      stubWhatsappLaunch(() async => false);
 
       return buildCubit();
     },
@@ -448,7 +471,7 @@ void main() {
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'a launcher error counts as a failed open',
     build: () {
-      launcher.whatsappError = Exception('no app handles whatsapp://');
+      stubWhatsappLaunchThrowing(Exception('no app handles whatsapp://'));
 
       return buildCubit();
     },
@@ -464,18 +487,17 @@ void main() {
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'after a failed launch the chat can be opened again',
     build: () {
-      launcher.whatsappError = Exception('no app handles whatsapp://');
+      stubWhatsappLaunchThrowing(Exception('no app handles whatsapp://'));
 
       return buildCubit();
     },
     seed: () => sendingTo(0),
     act: (cubit) async {
       await cubit.openCurrentChat();
-      launcher.whatsappError = null;
+      stubWhatsappLaunch(() async => true);
       await cubit.openCurrentChat();
     },
-    verify: (_) =>
-        expect(launcher.openedWhatsappChats, [chatWith(mark, markPhone)]),
+    verify: (_) => verify(() => launchingChatWith(mark, markPhone)).called(2),
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
