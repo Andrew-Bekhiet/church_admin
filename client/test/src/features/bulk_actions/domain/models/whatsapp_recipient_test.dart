@@ -10,6 +10,7 @@ void main() {
     isMainPhone: true,
   );
   const otherPhone = PhoneContact(id: 'c2', phone: '01000000002');
+  const anotherPhone = PhoneContact(id: 'c4', phone: '01000000004');
   const familyPhone = PhoneContact(id: 'c3', phone: '01000000003');
 
   Person personWith({
@@ -22,17 +23,9 @@ void main() {
     familyContacts: familyContacts,
   );
 
-  test('the main phone is chosen even when listed after another', () {
-    final recipient = WhatsappRecipient.of(
-      personWith(contacts: [otherPhone, mainPhone]),
-    );
-
-    expect(recipient.selectedPhone, mainPhone);
-  });
-
   test('without a main phone the first own phone is chosen', () {
     final recipient = WhatsappRecipient.of(
-      personWith(contacts: [otherPhone, familyPhone]),
+      personWith(contacts: [otherPhone, anotherPhone]),
     );
 
     expect(recipient.selectedPhone, otherPhone);
@@ -50,7 +43,7 @@ void main() {
     expect(recipient.selectedPhone, familyPhone);
   });
 
-  test('own phones are offered before family phones', () {
+  test('the main phone comes first and is chosen, before family phones', () {
     final recipient = WhatsappRecipient.of(
       personWith(
         contacts: [otherPhone, mainPhone],
@@ -61,6 +54,7 @@ void main() {
     );
 
     expect(recipient.phones, [mainPhone, otherPhone, familyPhone]);
+    expect(recipient.selectedPhone, mainPhone);
   });
 
   test('a family phone that is the same number is offered once', () {
