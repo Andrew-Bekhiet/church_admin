@@ -57,6 +57,7 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 
 - Never put extension files in `presentation/widgets/` — that directory holds widget classes only.
 - One consumer → private member in that file. Multiple consumers → the feature's `utils/`. A model's own display behaviour → a method on the model.
+- **A helper that works on a Dart type is an extension on that type** (`json.nonNullPairs` on `Map`), not a static method on a holder class. When you add one, fold in the copies the files you touch already carry.
 - **File size is not a reason to extract.** A helper of 20 source lines or fewer with a single consumer stays a private instance method on that consumer, even when the file then passes 350 lines. The 420 ceiling still binds. Pulling a helper out to satisfy a line limit also pushes you to pass state in as parameters, which turns a live read into a snapshot taken at the wrong moment.
 
 ## Tests
