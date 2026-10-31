@@ -10,18 +10,22 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 
 - **No private `_Foo` widget classes, and no `part`/`part of` beyond the two exceptions below.** A sealed class and its subclasses share one file while it stays under 420 lines; `avoid_multiple_declarations_per_file` allows that family, and companions of 15 lines or fewer such as `XKeys`.
 - **One `part` exception is the sealed `AppRoute` family**, which is too large for one file. `core/services/router/app_route.dart` is the library: it holds every import and a `part` per route, and each route stays in its feature's `presentation/navigation/` folder as a `part of` file. A part cannot import or have parts of its own, so a new route adds its imports to `app_route.dart`. A route's fields mirror its screen's constructor parameters, so callers build a route with the screen's own arguments: no wrapper extra objects. Tests cannot subclass `AppRoute`: use real routes and stub what the test router's `builder` renders.
-- **The sealed `AnalyticsEvent` family is the other `part` exception.** `core/analytics/domain/models/analytics_event.dart` is the library: it holds every import and a `part` per feature event file, and each feature's events stay in its `domain/analytics/` folder as a `part of` file. Enums or types that non-analytics code uses go in the feature's `domain/models/`, not in the part file.
+- **The sealed `AnalyticsEvent` family is the other `part` exception.** `core/analytics/domain/models/analytics_event.dart` is the library: it holds every import and a `part` per feature event file, and each feature's events stay in its `domain/analytics/` folder as a `part of` file. Enums or types that non-analytics code uses go in the feature's `domain/models/`, not in the part file. An event serialises itself and its properties; callers hand it domain values, never a ready-made property map. Keep properties coarse enough to answer a product question: no counts of individual edits, durations in days rather than milliseconds.
 - **Widget keys live with the widget.** Define a widget's test keys in the same file as the widget that renders them.
 - **UI is mobile-first and responsive**; keep components modular and reusable rather than page-specific.
 - **Never return widgets from methods** (`Widget _buildFoo()`). Extract a widget class, or if the subtree is small (under ~100 lines) inline it at the call site. Non-widget helpers returning `String`/data are fine.
-- **No top-level variables or functions.** Use `static` members on the class that owns them.
+- **No top-level variables or functions.** Use `static` members on the class that owns them. Inside a class that has instances, a private helper is an instance method, not a `static` one, placed below the first member that calls it.
 - **Files under 350 lines; 420 is a hard maximum.** Split before you reach it.
 - **`dispose()` is the last member** of any class that has one (controllers, notifiers, form controllers, not only widget `State`).
 
 ## Idioms
 
 - **Pattern matching over conditionals.** `switch` on enums and sealed classes for compile-time exhaustiveness; `if (x case final y?)` for non-null matching. Use the object-pattern shorthand `Foo(:final bar?)`, not `Foo(bar: final bar?)`.
-- **`package:collection`** (`maxBy`, `groupListsBy`, `EqualitySet.from(EqualityBy(...))` for de-duplication, `.map(...).sum`, …) instead of hand-rolled folds and `{key: value}` map tricks.
+- **`package:collection`** (`maxBy`, `groupListsBy`, `mapIndexed`, `firstWhereOrNull`, `EqualitySet.from(EqualityBy(...))` for de-duplication, `.map(...).sum`, …) instead of hand-rolled folds, index loops and `{key: value}` map tricks. Build collections with collection `if` and `for` elements, including a conditional element for an optional entry, rather than a loop that adds to a list.
+- **Let the type answer for itself.** When each member of a sealed family can answer a question on its own, make it a member of the family, not a `switch` over its subtypes somewhere else. A `switch` belongs at a consumer that decides something the types cannot know, such as which widget renders them.
+- **Decode stored and server values tolerantly.** `values.firstWhereOrNull((v) => v.name == raw)`, not `byName`, so a value a newer app version or the server writes cannot crash this one.
+- **Declare a mutable local's type instead of `var`** — `List<AppRoute> resolved = stack;`.
+- **Initialise fields from constructor parameters** — `required this._form`, `required super.currentUserId` — rather than through an initializer list. The SDK floor (3.13) passes a private named parameter as `form:`.
 - **Domain models are classes, not record typedefs.** Behaviour (display names, formatting) belongs on the class.
 - **A helper with one caller is inlined at that caller as an expression.** When it needs a name, make it a private method on the class. Never declare a nested (local) function.
 - **`Row.spacing` / `Column.spacing`** instead of `SizedBox` gaps; `MainAxisAlignment.space*` instead of `Expanded` where it fits; `Padding` instead of `SizedBox` in linear layouts.
@@ -33,8 +37,10 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 - **`close_sinks` does not catch a missing `dispose()`,** only an incomplete one. A `BehaviorSubject` field on a `State` with no `dispose` at all is invisible to it, so check by hand.
 - **Handle errors thoroughly** with typed Dart exceptions, and carry user-facing messages as error codes so they can be localised later.
 - **Presentation talks only to blocs/cubits and `application/` advanced_forms form controllers, never to repositories or data sources.**
+- **A widget that only renders takes values, not streams.** The parent owns the `BlocBuilder` or `StreamBuilder` and passes the latest value down, so the child can stay stateless.
+- **A dialog returns the domain value its caller acts on** (the enum the caller switches on), not a `bool` or a string the caller has to map back.
 - **Keep the upstream message** when mapping a Firebase error to a typed exception. The code drives the UI's wording; the original message is what explains the real cause.
-- **Import Material and Cupertino from `package:material_ui`**, never `package:flutter/material.dart` (migrated in #295 and #298).
+- **Import Material and Cupertino from `package:material_ui`**, never `package:flutter/material.dart`.
 
 ### Unenforced house style
 
@@ -55,12 +61,15 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 
 Unit tests are a **design tool**, not a bug-finding tool. Integration and manual testing catch regressions.
 
-- **Assert observable behaviour, never interactions.** Check the state the unit ends in, not which collaborators it called.
+- **Assert observable behaviour, never interactions.** Check the state the unit ends in, not which collaborators it called. The one exception is an outgoing command at the system edge, such as launching a URL or a write the server receives: that command *is* the behaviour, so verify it with a mocktail `Mock` and `verify(...)` rather than a hand-written fake that records calls.
 - **If there is no observable difference, there is no test.** Delete it rather than asserting an interaction.
 - **One behaviour per test.** Don't bundle unrelated assertions.
 - **Name tests as behaviour sentences** — `'selecting an existing person makes the user take that person's name'`, not `existingPerson_selectPerson_nameFollowsThePerson`. Say what is observed, never which method ran.
 - **Expect the injected value, not a repeated literal** — `expect(user.name, fixture.name)`; find widgets by the widget's own `keyFor(...)`.
 - **Mock all external services** (DB, network, filesystem). Tests must not depend on ordering or live infra.
+- **Tests do not depend on the clock or the host timezone.** Use fixed dates instead of `DateTime.now()`, and UTC for wire-format fixtures. Cairo's DST changes have broken local-time tests twice.
+- **Render the real widgets.** A harness that swaps screens for placeholder text makes the test pin the harness; assert on the real screen, or on the router's route stack.
+- **No test-only switches in production code.** If a test needs a flag to pass, change the test or the design.
 - **Test cubits and blocs with `blocTest`**, never a plain `test` that builds the cubit and closes it by hand. `blocTest` owns the lifecycle; drive the scenario in `act` and assert the resulting state in `expect` or `verify`.
 - **New mocks use `mocktail`.** Tests still on `mockito` migrate when touched: stub every member the mockito nice mock answered by default, and `registerFallbackValue` for custom argument types.
 - **Drive the path production takes.** Simulate app lifecycle through `WidgetsBindingObserver` under `fakeAsync` instead of calling internals such as `LocalAuthService.scheduleReauth()`.
@@ -83,6 +92,6 @@ No path argument: a directory argument such as `lib` silently drops every solid_
 
 **Run `fvm dart format lib test patrol_test` from `client/` before committing**, covering every tracked Dart directory, not only the directory you touched. `dart format .` also walks the untracked `build/` directory and reports about 68 files as changed while git stays clean. The repo has mixed line endings per file; formatting a single subdirectory is how mixed endings have survived review. CI fails on unformatted code (`dart format --set-exit-if-changed .` in `static-analysis.yml`, which prints the diff).
 
-**Tests**: prefer the test bundle for the full suite, from `client/`: `fvm flutter test --dart-define CI=true test/test_bundle.dart $(scripts/generate_test_bundle.sh)`. It is much faster than a bare `fvm flutter test`; see [flutter/flutter#90225](https://github.com/flutter/flutter/issues/90225).
+**Tests**: run the suite through the test bundle, which compiles it once and is much faster than `fvm flutter test` on a list of files; see [flutter/flutter#90225](https://github.com/flutter/flutter/issues/90225). Two calls from `client/`, because the sandbox breaks `fvm` inside `$(…)`: `scripts/generate_test_bundle.sh` rewrites `test/test_bundle.dart` and prints the few files it could not bundle; then run `fvm flutter test --dart-define CI=true test/test_bundle.dart <printed files>`. Filter to a feature with `--plain-name` or `--name` on the bundle rather than listing test files.
 
 GraphQL codegen has its own sequence and gotchas: use the `graphql-codegen` skill (`.claude/skills/graphql-codegen/SKILL.md`).
