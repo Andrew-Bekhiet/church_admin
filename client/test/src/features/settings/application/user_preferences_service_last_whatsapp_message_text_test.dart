@@ -14,7 +14,8 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   const uid = 'uid';
-  const sentText = 'اهلا {firstName}';
+  final sentText =
+      'اهلا ${MessageTemplate.tokenOf(WhatsappMessageFields.firstName)}';
 
   setUpAll(() {
     registerFallbackValue(Input_UsersPreferencesSetInput());
