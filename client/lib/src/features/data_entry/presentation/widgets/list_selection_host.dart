@@ -55,9 +55,20 @@ class ListSelectionHostState extends State<ListSelectionHost> {
     setState(() => _active = null);
   }
 
+  void _endActiveSelectionUnlessPopped(bool didPop, Object? _) {
+    if (!didPop) _active?.selection.endUnlessAlwaysActive();
+  }
+
   @override
-  Widget build(BuildContext context) =>
-      ListSelectionHostScope(host: this, active: _active, child: widget.child);
+  Widget build(BuildContext context) => PopScope(
+    canPop: _active == null,
+    onPopInvokedWithResult: _endActiveSelectionUnlessPopped,
+    child: ListSelectionHostScope(
+      host: this,
+      active: _active,
+      child: widget.child,
+    ),
+  );
 
   @override
   void dispose() {
