@@ -55,7 +55,7 @@ class BulkWhatsappQueueView extends StatelessWidget {
                         DropdownMenuItem(
                           value: phone,
                           child: Text(
-                            phone.labelledPhone,
+                            phone.maybeLabelledPhone,
                             textDirection: TextDirection.ltr,
                           ),
                         ),
@@ -65,7 +65,7 @@ class BulkWhatsappQueueView extends StatelessWidget {
                   )
                 else if (current.selectedPhone case final phone?)
                   Text(
-                    phone.labelledPhone,
+                    phone.maybeLabelledPhone,
                     textDirection: TextDirection.ltr,
                     textAlign: TextAlign.end,
                     style: theme.textTheme.bodyLarge,
