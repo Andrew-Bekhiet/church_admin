@@ -8,7 +8,7 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 
 ## Structure
 
-- **No private `_Foo` widget classes, and no `part`/`part of` beyond the two exceptions below.** A sealed class and its subclasses share one file while it stays under 420 lines; `avoid_multiple_declarations_per_file` allows that family, and companions of 15 lines or fewer such as `XKeys`.
+- **No private `_Foo` widget classes, test files included, and no `part`/`part of` beyond the two exceptions below.** A sealed class and its subclasses share one file while it stays under 420 lines; `avoid_multiple_declarations_per_file` allows that family, and companions of 15 lines or fewer such as `XKeys`.
 - **One `part` exception is the sealed `AppRoute` family**, which is too large for one file. `core/services/router/app_route.dart` is the library: it holds every import and a `part` per route, and each route stays in its feature's `presentation/navigation/` folder as a `part of` file. A part cannot import or have parts of its own, so a new route adds its imports to `app_route.dart`. A route's fields mirror its screen's constructor parameters, so callers build a route with the screen's own arguments: no wrapper extra objects. Tests cannot subclass `AppRoute`: use real routes and stub what the test router's `builder` renders.
 - **The sealed `AnalyticsEvent` family is the other `part` exception.** `core/analytics/domain/models/analytics_event.dart` is the library: it holds every import and a `part` per feature event file, and each feature's events stay in its `domain/analytics/` folder as a `part of` file. Enums or types that non-analytics code uses go in the feature's `domain/models/`, not in the part file. An event serialises itself and its properties; callers hand it domain values, never a ready-made property map. Keep properties coarse enough to answer a product question: no counts of individual edits, durations in days rather than milliseconds.
 - **Widget keys live with the widget.** Define a widget's test keys in the same file as the widget that renders them.
@@ -21,7 +21,8 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 ## Idioms
 
 - **Pattern matching over conditionals.** `switch` on enums and sealed classes for compile-time exhaustiveness; `if (x case final y?)` for non-null matching. Use the object-pattern shorthand `Foo(:final bar?)`, not `Foo(bar: final bar?)`.
-- **`package:collection`** (`maxBy`, `groupListsBy`, `mapIndexed`, `firstWhereOrNull`, `EqualitySet.from(EqualityBy(...))` for de-duplication, `.map(...).sum`, …) instead of hand-rolled folds, index loops and `{key: value}` map tricks. Build collections with collection `if` and `for` elements, including a conditional element for an optional entry, rather than a loop that adds to a list.
+- **`package:collection`** (`maxBy`, `groupListsBy`, `mapIndexed`, `firstWhereOrNull`, `EqualitySet.from(EqualityBy(...))` for de-duplication, `.map(...).sum`, …) instead of hand-rolled folds, index loops, a cascade that replaces one element by index, and `{key: value}` map tricks. Build collections with collection `if` and `for` elements, including a conditional element for an optional entry, rather than a loop that adds to a list. Order a list with `sorted` and composed comparators, not by concatenating `where`/`whereNot` partitions.
+- **Build URLs with `Uri(...)` and `queryParameters`**, never by concatenating strings and encoding by hand.
 - **Let the type answer for itself.** When each member of a sealed family can answer a question on its own, make it a member of the family, not a `switch` over its subtypes somewhere else. A `switch` belongs at a consumer that decides something the types cannot know, such as which widget renders them.
 - **Decode stored and server values tolerantly.** `values.firstWhereOrNull((v) => v.name == raw)`, not `byName`, so a value a newer app version or the server writes cannot crash this one.
 - **Declare a mutable local's type instead of `var`** — `List<AppRoute> resolved = stack;`.
@@ -37,7 +38,7 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 - **`close_sinks` does not catch a missing `dispose()`,** only an incomplete one. A `BehaviorSubject` field on a `State` with no `dispose` at all is invisible to it, so check by hand.
 - **Handle errors thoroughly** with typed Dart exceptions, and carry user-facing messages as error codes so they can be localised later.
 - **Presentation talks only to blocs/cubits and `application/` advanced_forms form controllers, never to repositories or data sources.**
-- **A widget that only renders takes values, not streams.** The parent owns the `BlocBuilder` or `StreamBuilder` and passes the latest value down, so the child can stay stateless.
+- **A child widget takes values and callbacks, never streams or controllers to subscribe to.** The parent owns the `BlocBuilder` or `StreamBuilder`, computes what the child shows (for example whether every shown item is selected) and passes it down with the callbacks, so the child stays stateless. This holds for buttons with actions too.
 - **A dialog returns the domain value its caller acts on** (the enum the caller switches on), not a `bool` or a string the caller has to map back.
 - **Keep the upstream message** when mapping a Firebase error to a typed exception. The code drives the UI's wording; the original message is what explains the real cause.
 - **Import Material and Cupertino from `package:material_ui`**, never `package:flutter/material.dart`.
@@ -61,11 +62,12 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 
 Unit tests are a **design tool**, not a bug-finding tool. Integration and manual testing catch regressions.
 
-- **Assert observable behaviour, never interactions.** Check the state the unit ends in, not which collaborators it called. The one exception is an outgoing command at the system edge, such as launching a URL or a write the server receives: that command *is* the behaviour, so verify it with a mocktail `Mock` and `verify(...)` rather than a hand-written fake that records calls.
+- **Assert observable behaviour, never interactions.** Check the state the unit ends in, not which collaborators it called. The one exception is an outgoing command at the system edge, such as launching a URL or a write the server receives: that command *is* the behaviour, so verify it with a mocktail `Mock` and `verify(...)` rather than a hand-written fake that records calls. Assert what the command means (the parsed `Uri` and its `queryParameters`), not its byte-level encoding.
 - **If there is no observable difference, there is no test.** Delete it rather than asserting an interaction.
 - **One behaviour per test.** Don't bundle unrelated assertions.
 - **Name tests as behaviour sentences** — `'selecting an existing person makes the user take that person's name'`, not `existingPerson_selectPerson_nameFollowsThePerson`. Say what is observed, never which method ran.
-- **Expect the injected value, not a repeated literal** — `expect(user.name, fixture.name)`; find widgets by the widget's own `keyFor(...)`.
+- **Expect the injected value, not a repeated literal** — `expect(user.name, fixture.name)`. A value the test does not own comes from the product code that owns it: a default template rendered with `renderFor`, a placeholder token from `MessageTemplate.tokenOf(field)`. Write an expected value out by hand only for the logic under test, and in one test that deliberately pins a persisted format.
+- **Find widgets by key, never by text, tooltip or icon.** Use the widget's own `<Widget>Keys` or `keyFor(...)`; a widget a test needs to find gets a Keys companion in its file.
 - **Mock all external services** (DB, network, filesystem). Tests must not depend on ordering or live infra.
 - **Tests do not depend on the clock or the host timezone.** Use fixed dates instead of `DateTime.now()`, and UTC for wire-format fixtures. Cairo's DST changes have broken local-time tests twice.
 - **Render the real widgets.** A harness that swaps screens for placeholder text makes the test pin the harness; assert on the real screen, or on the router's route stack.
