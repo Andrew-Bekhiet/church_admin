@@ -141,7 +141,7 @@ void main() {
       final opening = cubit.openCurrentChat();
       cubit.stop();
       await cubit.load();
-      cubit.start(fixture.template);
+      cubit.saveTextAndStart(fixture.template);
       gate.complete(true);
       await opening;
     },

@@ -34,7 +34,7 @@ class _BulkWhatsappMessageScreenState extends State<BulkWhatsappMessageScreen> {
 
   late final MessageTemplateEditingController _templateController =
       MessageTemplateEditingController(
-        template: _cubit.lastTemplateOr(
+        template: _cubit.withLastSentTextOr(
           BulkWhatsappMessageScreen.defaultTemplate,
         ),
       );

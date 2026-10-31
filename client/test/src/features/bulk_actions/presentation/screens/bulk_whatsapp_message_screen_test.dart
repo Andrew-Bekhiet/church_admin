@@ -105,10 +105,10 @@ void main() {
   testWidgets('the screen opens with the last message that was sent', (
     tester,
   ) async {
-    const lastText = 'اهلا {name}';
-    await userPreferences.setLastWhatsappMessageTemplate(lastText);
+    final lastText = 'اهلا $firstNameToken';
+    await userPreferences.setLastWhatsappMessageText(lastText);
 
-    await pumpScreen(tester);
+    await pumpScreen(tester, persons: {mina, mark});
 
     expect(
       tester.widget<Text>(find.byKey(BulkWhatsappComposeViewKeys.preview)).data,

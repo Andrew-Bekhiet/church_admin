@@ -77,17 +77,17 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
     _ => null,
   };
 
-  MessageTemplate lastTemplateOr(MessageTemplate fallback) =>
-      switch (_userPreferencesService.lastWhatsappMessageTemplate) {
-        final text? => MessageTemplate(text: text, fields: fallback.fields),
-        null => fallback,
+  MessageTemplate withLastSentTextOr(MessageTemplate defaults) =>
+      switch (_userPreferencesService.lastWhatsappMessageText) {
+        final text? => MessageTemplate(text: text, fields: defaults.fields),
+        null => defaults,
       };
 
-  void start(MessageTemplate template) {
+  void saveTextAndStart(MessageTemplate template) {
     if (state case final BulkWhatsappComposing composing) {
       _runId++;
       unawaited(
-        _userPreferencesService.setLastWhatsappMessageTemplate(template.text),
+        _userPreferencesService.setLastWhatsappMessageText(template.text),
       );
 
       final sendingState = BulkWhatsappSending(
