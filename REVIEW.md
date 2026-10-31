@@ -45,6 +45,14 @@ Read the diff against the PR description.
 
 Many PRs are one layer of a `gh stack`, and their base branch is the layer below. Read the PR description first. If it says this layer holds only hand-written code, or that CI fails until a later layer lands, review the layer against that stated scope. When a later layer already fixes something, note that instead of opening a thread.
 
+Once the layers below are squash-merged, a PR can still carry their original commits. Review only the commits that belong to it. A push that only rebases onto a moved base leaves the PR's own diff unchanged and needs no new review.
+
+## Suggested fixes
+
+Write a fix the author can apply verbatim without drawing a new finding. Before proposing a name, key, token or column, look at its siblings and use the convention they share. For example, a review once proposed the `FieldMetadata` key `first_name` although every other key is camelCase, and the next round had to correct it (#375).
+
+A name that reaches storage is cheap to rename only until its first release: a DB column, a prefs key, an analytics event, or a token users type into saved text. Before that release, tag a misleading persisted name Minor rather than Trivial, and say that it ships persisted. Examples from #375 and #385: `last_whatsapp_message_template` held only the text, and `{name}` held only the first name.
+
 ## Nits and classes of bugs
 
 Post at most three Trivial findings per review. When one mistake repeats, post it once and list every location, so the author fixes the whole class of bug and not one line. For example, one `print` pattern once drew fourteen separate threads (#29).
@@ -53,6 +61,7 @@ Post at most three Trivial findings per review. When one mistake repeats, post i
 
 - After the first review, review only the commits added since the previous one.
 - Do not repeat a finding you already posted, or one the author already answered.
+- Treat a resolved thread as settled. Leave it closed, and keep later findings consistent with it rather than rewording it or asking for the opposite. The exception is a concrete defect the fix itself introduced; in that case, link the earlier thread.
 - When the author declines with a reason, accept it unless you have new evidence: a concrete trigger their reason does not cover.
 - From the third review round onwards, open no new Minor or Trivial threads. If Major findings keep coming, say once that the approach may need rethinking.
 

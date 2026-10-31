@@ -15,7 +15,12 @@ Human review of #1–#312 raised layering more often than any other topic, and a
 
 ## Names
 
-Apply the **Names** section of the root `AGENTS.md` to every identifier the PR adds or renames, including workflow jobs, steps, and test names. Read the body, then flag any name that hides a branch, a side effect, or what the return value means, and propose a better one. Names from past reviews: `_userStream` (it holds one user), `locationFromStreetAddress`, `hasPlaceChangedWithStaleLocation`, `DataCheckDetail`.
+Apply the **Names** section of the root `AGENTS.md` to every identifier the PR adds or renames, including workflow jobs, steps, test names, and test helpers. Read the body, then flag any name that hides a branch, a side effect, or what the return value means, and propose a better one. Names from past reviews:
+- `_userStream`: it holds one user.
+- `locationFromStreetAddress`, `hasPlaceChangedWithStaleLocation` and `DataCheckDetail`.
+- `_finish`: it also tracked analytics.
+- `start`: it also saved the template.
+- `verifyChatsOpenedInOrder`: it also ran `verifyNoMoreInteractions`.
 
 ## Async and lifecycle
 
@@ -57,6 +62,11 @@ Sembast stores, the KV store, and user preferences survive app upgrades. When a 
 Review each test for what it proves:
 
 - Ask whether the test fails if the behaviour breaks. Flag a test that passes regardless: a precondition it never asserts, an earlier state that already satisfies the expectation, a finder that matches an unselected tab, or an `expect(future, completion(…))` nobody awaits.
+- Give each assertion an input that a wrong implementation answers differently. Name the mutation that survives when it doesn't. Examples from #374 and #375:
+  - An order test whose input order matches the fake's own order cannot fail.
+  - Two expected counts of 1 still pass when the counts are swapped.
+  - A fetch that returns every person never exercises the missing-person path.
+- Keep the values an assertion depends on in the test body: which people are selected and in what order, and who has a phone. A helper may build the screen, but it should take those values as arguments the test passes. `setUp` and fixtures may hold setup the assertion does not depend on, such as a launcher stubbed to succeed.
 - Async gaps run under `fakeAsync`, not real timers.
 - Flag implementation tests, as `client/AGENTS.md` defines them under Tests: counting calls, testing wiring, or pinning a JSON shape in a test that is not about JSON.
 - Build fixtures from model objects, not raw JSON maps. Assert against the injected fixture value and keep any unit conversion (`percent / 100`). For a computed result, write the expected value independently instead of reusing the code under test.
@@ -68,5 +78,6 @@ Review each test for what it proves:
 ## Not findings here
 
 - `!` and magic numbers are unenforced house style (`client/AGENTS.md`). Raise them only in code the PR adds, as a single Trivial finding listing every location, and never in moved code.
-- Established conventions that are not findings: a `<Widget>Keys` companion class in the widget's file, a sealed family kept in one file, `*Fields` extensions beside their models with a reasoned lint ignore, and private mocks and fakes inside the test file that uses them.
+- Established conventions that are not findings: a `<Widget>Keys` companion class in the widget's file, a sealed family kept in one file, `*Fields` extensions beside their models with a reasoned lint ignore, and private mocks and fakes inside the test file that uses them, as long as `test/src/fakes/` has no shared copy of the same class.
+- Arrange and Act steps written out again in each test. In tests, visible setup is worth more than shared helpers, so leave the repetition.
 - `.g.dart` output. Review the generator in `packages/church_admin_generator` instead.
