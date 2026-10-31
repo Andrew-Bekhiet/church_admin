@@ -6,4 +6,4 @@ begin
 end $$;
 
 alter table "public"."users_preferences"
-    drop column if exists "last_whatsapp_message_template";
+drop column if exists "last_whatsapp_message_template";
