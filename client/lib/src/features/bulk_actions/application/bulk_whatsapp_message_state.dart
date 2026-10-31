@@ -102,8 +102,13 @@ final class BulkWhatsappSending extends BulkWhatsappLoaded {
     hasOpenFailed: hasOpenFailed ?? this.hasOpenFailed,
   );
 
-  BulkWhatsappSending withCurrent(WhatsappRecipient current) =>
-      copyWith(recipients: [...recipients]..[currentIndex] = current);
+  BulkWhatsappSending withCurrent(WhatsappRecipient current) => copyWith(
+    recipients: recipients
+        .mapIndexed(
+          (index, recipient) => index == currentIndex ? current : recipient,
+        )
+        .toList(),
+  );
 }
 
 final class BulkWhatsappFinished extends BulkWhatsappLoaded {
