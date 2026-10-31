@@ -24,8 +24,13 @@ class WhatsappRecipient with Equatable {
     final phones = EqualitySet<PhoneContact>.from(
       EqualityBy((contact) => contact.phone),
       [
-        ...person.contacts.where((contact) => contact.isMainPhone),
-        ...person.contacts.whereNot((contact) => contact.isMainPhone),
+        ...person.contacts.sorted(
+          (a, b) => switch ((a.isMainPhone, b.isMainPhone)) {
+            (true, false) => -1,
+            (false, true) => 1,
+            _ => 0,
+          },
+        ),
         ...person.familyContacts.map((familyContact) => familyContact.contact),
       ],
     ).toList();
