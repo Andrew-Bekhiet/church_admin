@@ -39,13 +39,14 @@ class BulkWhatsappMessageCubitFixture {
   final MockLauncherService launcher = MockLauncherService();
   final RecordingAnalyticsProvider analytics = RecordingAnalyticsProvider();
   final FakeLoggingService logging = FakeLoggingService();
-  final UserPreferencesService userPreferences = UserPreferencesService(
-    box: FakeSyncKVStore(),
-    databaseService: MockDatabaseService(),
-    authBloc: MockAuthBloc(),
-  );
+  final UserPreferencesService userPreferences;
 
-  BulkWhatsappMessageCubitFixture() {
+  BulkWhatsappMessageCubitFixture({SyncKVStore? preferencesBox})
+    : userPreferences = UserPreferencesService(
+        box: preferencesBox ?? FakeSyncKVStore(),
+        databaseService: MockDatabaseService(),
+        authBloc: MockAuthBloc(),
+      ) {
     stubWhatsappLaunch(() async => true);
   }
 

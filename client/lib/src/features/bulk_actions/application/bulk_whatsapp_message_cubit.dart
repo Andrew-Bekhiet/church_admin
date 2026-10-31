@@ -87,7 +87,9 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
     if (state case final BulkWhatsappComposing composing) {
       _runId++;
       unawaited(
-        _userPreferencesService.setLastWhatsappMessageText(template.text),
+        _userPreferencesService
+            .setLastWhatsappMessageText(template.text)
+            .catchError(_logException),
       );
 
       final sendingState = BulkWhatsappSending(
