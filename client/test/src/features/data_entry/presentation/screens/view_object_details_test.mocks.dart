@@ -104,6 +104,14 @@ class MockUserPreferencesService extends _i1.Mock
   ) as _i6.Future<void>);
 
   @override
+  _i6.Future<void> setLastWhatsappMessageText(String? text) =>
+      (super.noSuchMethod(
+        Invocation.method(#setLastWhatsappMessageText, [text]),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
   List<_i2.OrderBy>? getLastOrderByFor(_i2.OrderByPreferenceKey? key) =>
       (super.noSuchMethod(
         Invocation.method(#getLastOrderByFor, [key]),
