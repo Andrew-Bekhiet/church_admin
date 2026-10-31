@@ -524,7 +524,7 @@ enum Enum_UsersPreferencesSelectColumn {
   darkTheme,
   greatFeastTheme,
   lastHomeMode,
-  lastWhatsappMessageTemplate,
+  lastWhatsappMessageText,
   orderByPreferences,
   secondLinePreferences,
   uid,
@@ -547,8 +547,8 @@ String toJson_Enum_UsersPreferencesSelectColumn(
       return r'greatFeastTheme';
     case Enum_UsersPreferencesSelectColumn.lastHomeMode:
       return r'lastHomeMode';
-    case Enum_UsersPreferencesSelectColumn.lastWhatsappMessageTemplate:
-      return r'lastWhatsappMessageTemplate';
+    case Enum_UsersPreferencesSelectColumn.lastWhatsappMessageText:
+      return r'lastWhatsappMessageText';
     case Enum_UsersPreferencesSelectColumn.orderByPreferences:
       return r'orderByPreferences';
     case Enum_UsersPreferencesSelectColumn.secondLinePreferences:
@@ -572,8 +572,8 @@ Enum_UsersPreferencesSelectColumn fromJson_Enum_UsersPreferencesSelectColumn(
       return Enum_UsersPreferencesSelectColumn.greatFeastTheme;
     case r'lastHomeMode':
       return Enum_UsersPreferencesSelectColumn.lastHomeMode;
-    case r'lastWhatsappMessageTemplate':
-      return Enum_UsersPreferencesSelectColumn.lastWhatsappMessageTemplate;
+    case r'lastWhatsappMessageText':
+      return Enum_UsersPreferencesSelectColumn.lastWhatsappMessageText;
     case r'orderByPreferences':
       return Enum_UsersPreferencesSelectColumn.orderByPreferences;
     case r'secondLinePreferences':

@@ -6,8 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../fakes/fake_box.dart';
-
-class MockUserPreferencesDAO extends Mock implements UserPreferencesDAO {}
+import '../../../fakes/mock_user_preferences_dao.dart';
 
 class MockDatabaseService extends Mock implements DatabaseService {}
 

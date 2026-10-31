@@ -189,15 +189,15 @@ class Input_UsersPreferencesSetInput {
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
-    String? lastWhatsappMessageTemplate,
+    String? lastWhatsappMessageText,
     Json? orderByPreferences,
     Json? secondLinePreferences,
   }) => Input_UsersPreferencesSetInput._({
     if (darkTheme != null) r'darkTheme': darkTheme,
     if (greatFeastTheme != null) r'greatFeastTheme': greatFeastTheme,
     if (lastHomeMode != null) r'lastHomeMode': lastHomeMode,
-    if (lastWhatsappMessageTemplate != null)
-      r'lastWhatsappMessageTemplate': lastWhatsappMessageTemplate,
+    if (lastWhatsappMessageText != null)
+      r'lastWhatsappMessageText': lastWhatsappMessageText,
     if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
     if (secondLinePreferences != null)
       r'secondLinePreferences': secondLinePreferences,
@@ -219,10 +219,10 @@ class Input_UsersPreferencesSetInput {
       final l$lastHomeMode = data['lastHomeMode'];
       result$data['lastHomeMode'] = (l$lastHomeMode as String?);
     }
-    if (data.containsKey('lastWhatsappMessageTemplate')) {
-      final l$lastWhatsappMessageTemplate = data['lastWhatsappMessageTemplate'];
-      result$data['lastWhatsappMessageTemplate'] =
-          (l$lastWhatsappMessageTemplate as String?);
+    if (data.containsKey('lastWhatsappMessageText')) {
+      final l$lastWhatsappMessageText = data['lastWhatsappMessageText'];
+      result$data['lastWhatsappMessageText'] =
+          (l$lastWhatsappMessageText as String?);
     }
     if (data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = data['orderByPreferences'];
@@ -243,8 +243,8 @@ class Input_UsersPreferencesSetInput {
 
   String? get lastHomeMode => (_$data['lastHomeMode'] as String?);
 
-  String? get lastWhatsappMessageTemplate =>
-      (_$data['lastWhatsappMessageTemplate'] as String?);
+  String? get lastWhatsappMessageText =>
+      (_$data['lastWhatsappMessageText'] as String?);
 
   Json? get orderByPreferences => (_$data['orderByPreferences'] as Json?);
 
@@ -264,10 +264,9 @@ class Input_UsersPreferencesSetInput {
       final l$lastHomeMode = lastHomeMode;
       result$data['lastHomeMode'] = l$lastHomeMode;
     }
-    if (_$data.containsKey('lastWhatsappMessageTemplate')) {
-      final l$lastWhatsappMessageTemplate = lastWhatsappMessageTemplate;
-      result$data['lastWhatsappMessageTemplate'] =
-          l$lastWhatsappMessageTemplate;
+    if (_$data.containsKey('lastWhatsappMessageText')) {
+      final l$lastWhatsappMessageText = lastWhatsappMessageText;
+      result$data['lastWhatsappMessageText'] = l$lastWhatsappMessageText;
     }
     if (_$data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = orderByPreferences;
@@ -319,14 +318,13 @@ class Input_UsersPreferencesSetInput {
     if (l$lastHomeMode != lOther$lastHomeMode) {
       return false;
     }
-    final l$lastWhatsappMessageTemplate = lastWhatsappMessageTemplate;
-    final lOther$lastWhatsappMessageTemplate =
-        other.lastWhatsappMessageTemplate;
-    if (_$data.containsKey('lastWhatsappMessageTemplate') !=
-        other._$data.containsKey('lastWhatsappMessageTemplate')) {
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
+    final lOther$lastWhatsappMessageText = other.lastWhatsappMessageText;
+    if (_$data.containsKey('lastWhatsappMessageText') !=
+        other._$data.containsKey('lastWhatsappMessageText')) {
       return false;
     }
-    if (l$lastWhatsappMessageTemplate != lOther$lastWhatsappMessageTemplate) {
+    if (l$lastWhatsappMessageText != lOther$lastWhatsappMessageText) {
       return false;
     }
     final l$orderByPreferences = orderByPreferences;
@@ -355,15 +353,15 @@ class Input_UsersPreferencesSetInput {
     final l$darkTheme = darkTheme;
     final l$greatFeastTheme = greatFeastTheme;
     final l$lastHomeMode = lastHomeMode;
-    final l$lastWhatsappMessageTemplate = lastWhatsappMessageTemplate;
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
     final l$orderByPreferences = orderByPreferences;
     final l$secondLinePreferences = secondLinePreferences;
     return Object.hashAll([
       _$data.containsKey('darkTheme') ? l$darkTheme : const {},
       _$data.containsKey('greatFeastTheme') ? l$greatFeastTheme : const {},
       _$data.containsKey('lastHomeMode') ? l$lastHomeMode : const {},
-      _$data.containsKey('lastWhatsappMessageTemplate')
-          ? l$lastWhatsappMessageTemplate
+      _$data.containsKey('lastWhatsappMessageText')
+          ? l$lastWhatsappMessageText
           : const {},
       _$data.containsKey('orderByPreferences')
           ? l$orderByPreferences
@@ -388,7 +386,7 @@ abstract class CopyWith_Input_UsersPreferencesSetInput<TRes> {
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
-    String? lastWhatsappMessageTemplate,
+    String? lastWhatsappMessageText,
     Json? orderByPreferences,
     Json? secondLinePreferences,
   });
@@ -408,7 +406,7 @@ class _CopyWithImpl_Input_UsersPreferencesSetInput<TRes>
     Object? darkTheme = _undefined,
     Object? greatFeastTheme = _undefined,
     Object? lastHomeMode = _undefined,
-    Object? lastWhatsappMessageTemplate = _undefined,
+    Object? lastWhatsappMessageText = _undefined,
     Object? orderByPreferences = _undefined,
     Object? secondLinePreferences = _undefined,
   }) => _then(
@@ -418,8 +416,8 @@ class _CopyWithImpl_Input_UsersPreferencesSetInput<TRes>
       if (greatFeastTheme != _undefined)
         'greatFeastTheme': (greatFeastTheme as bool?),
       if (lastHomeMode != _undefined) 'lastHomeMode': (lastHomeMode as String?),
-      if (lastWhatsappMessageTemplate != _undefined)
-        'lastWhatsappMessageTemplate': (lastWhatsappMessageTemplate as String?),
+      if (lastWhatsappMessageText != _undefined)
+        'lastWhatsappMessageText': (lastWhatsappMessageText as String?),
       if (orderByPreferences != _undefined)
         'orderByPreferences': (orderByPreferences as Json?),
       if (secondLinePreferences != _undefined)
@@ -438,7 +436,7 @@ class _CopyWithStubImpl_Input_UsersPreferencesSetInput<TRes>
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
-    String? lastWhatsappMessageTemplate,
+    String? lastWhatsappMessageText,
     Json? orderByPreferences,
     Json? secondLinePreferences,
   }) => _res;
@@ -610,7 +608,7 @@ class Input_UsersPreferencesStreamCursorValueInput {
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
-    String? lastWhatsappMessageTemplate,
+    String? lastWhatsappMessageText,
     Json? orderByPreferences,
     Json? secondLinePreferences,
     UuidValue? uid,
@@ -619,8 +617,8 @@ class Input_UsersPreferencesStreamCursorValueInput {
     if (darkTheme != null) r'darkTheme': darkTheme,
     if (greatFeastTheme != null) r'greatFeastTheme': greatFeastTheme,
     if (lastHomeMode != null) r'lastHomeMode': lastHomeMode,
-    if (lastWhatsappMessageTemplate != null)
-      r'lastWhatsappMessageTemplate': lastWhatsappMessageTemplate,
+    if (lastWhatsappMessageText != null)
+      r'lastWhatsappMessageText': lastWhatsappMessageText,
     if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
     if (secondLinePreferences != null)
       r'secondLinePreferences': secondLinePreferences,
@@ -646,10 +644,10 @@ class Input_UsersPreferencesStreamCursorValueInput {
       final l$lastHomeMode = data['lastHomeMode'];
       result$data['lastHomeMode'] = (l$lastHomeMode as String?);
     }
-    if (data.containsKey('lastWhatsappMessageTemplate')) {
-      final l$lastWhatsappMessageTemplate = data['lastWhatsappMessageTemplate'];
-      result$data['lastWhatsappMessageTemplate'] =
-          (l$lastWhatsappMessageTemplate as String?);
+    if (data.containsKey('lastWhatsappMessageText')) {
+      final l$lastWhatsappMessageText = data['lastWhatsappMessageText'];
+      result$data['lastWhatsappMessageText'] =
+          (l$lastWhatsappMessageText as String?);
     }
     if (data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = data['orderByPreferences'];
@@ -680,8 +678,8 @@ class Input_UsersPreferencesStreamCursorValueInput {
 
   String? get lastHomeMode => (_$data['lastHomeMode'] as String?);
 
-  String? get lastWhatsappMessageTemplate =>
-      (_$data['lastWhatsappMessageTemplate'] as String?);
+  String? get lastWhatsappMessageText =>
+      (_$data['lastWhatsappMessageText'] as String?);
 
   Json? get orderByPreferences => (_$data['orderByPreferences'] as Json?);
 
@@ -705,10 +703,9 @@ class Input_UsersPreferencesStreamCursorValueInput {
       final l$lastHomeMode = lastHomeMode;
       result$data['lastHomeMode'] = l$lastHomeMode;
     }
-    if (_$data.containsKey('lastWhatsappMessageTemplate')) {
-      final l$lastWhatsappMessageTemplate = lastWhatsappMessageTemplate;
-      result$data['lastWhatsappMessageTemplate'] =
-          l$lastWhatsappMessageTemplate;
+    if (_$data.containsKey('lastWhatsappMessageText')) {
+      final l$lastWhatsappMessageText = lastWhatsappMessageText;
+      result$data['lastWhatsappMessageText'] = l$lastWhatsappMessageText;
     }
     if (_$data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = orderByPreferences;
@@ -773,14 +770,13 @@ class Input_UsersPreferencesStreamCursorValueInput {
     if (l$lastHomeMode != lOther$lastHomeMode) {
       return false;
     }
-    final l$lastWhatsappMessageTemplate = lastWhatsappMessageTemplate;
-    final lOther$lastWhatsappMessageTemplate =
-        other.lastWhatsappMessageTemplate;
-    if (_$data.containsKey('lastWhatsappMessageTemplate') !=
-        other._$data.containsKey('lastWhatsappMessageTemplate')) {
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
+    final lOther$lastWhatsappMessageText = other.lastWhatsappMessageText;
+    if (_$data.containsKey('lastWhatsappMessageText') !=
+        other._$data.containsKey('lastWhatsappMessageText')) {
       return false;
     }
-    if (l$lastWhatsappMessageTemplate != lOther$lastWhatsappMessageTemplate) {
+    if (l$lastWhatsappMessageText != lOther$lastWhatsappMessageText) {
       return false;
     }
     final l$orderByPreferences = orderByPreferences;
@@ -826,7 +822,7 @@ class Input_UsersPreferencesStreamCursorValueInput {
     final l$darkTheme = darkTheme;
     final l$greatFeastTheme = greatFeastTheme;
     final l$lastHomeMode = lastHomeMode;
-    final l$lastWhatsappMessageTemplate = lastWhatsappMessageTemplate;
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
     final l$orderByPreferences = orderByPreferences;
     final l$secondLinePreferences = secondLinePreferences;
     final l$uid = uid;
@@ -835,8 +831,8 @@ class Input_UsersPreferencesStreamCursorValueInput {
       _$data.containsKey('darkTheme') ? l$darkTheme : const {},
       _$data.containsKey('greatFeastTheme') ? l$greatFeastTheme : const {},
       _$data.containsKey('lastHomeMode') ? l$lastHomeMode : const {},
-      _$data.containsKey('lastWhatsappMessageTemplate')
-          ? l$lastWhatsappMessageTemplate
+      _$data.containsKey('lastWhatsappMessageText')
+          ? l$lastWhatsappMessageText
           : const {},
       _$data.containsKey('orderByPreferences')
           ? l$orderByPreferences
@@ -863,7 +859,7 @@ abstract class CopyWith_Input_UsersPreferencesStreamCursorValueInput<TRes> {
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
-    String? lastWhatsappMessageTemplate,
+    String? lastWhatsappMessageText,
     Json? orderByPreferences,
     Json? secondLinePreferences,
     UuidValue? uid,
@@ -888,7 +884,7 @@ class _CopyWithImpl_Input_UsersPreferencesStreamCursorValueInput<TRes>
     Object? darkTheme = _undefined,
     Object? greatFeastTheme = _undefined,
     Object? lastHomeMode = _undefined,
-    Object? lastWhatsappMessageTemplate = _undefined,
+    Object? lastWhatsappMessageText = _undefined,
     Object? orderByPreferences = _undefined,
     Object? secondLinePreferences = _undefined,
     Object? uid = _undefined,
@@ -900,8 +896,8 @@ class _CopyWithImpl_Input_UsersPreferencesStreamCursorValueInput<TRes>
       if (greatFeastTheme != _undefined)
         'greatFeastTheme': (greatFeastTheme as bool?),
       if (lastHomeMode != _undefined) 'lastHomeMode': (lastHomeMode as String?),
-      if (lastWhatsappMessageTemplate != _undefined)
-        'lastWhatsappMessageTemplate': (lastWhatsappMessageTemplate as String?),
+      if (lastWhatsappMessageText != _undefined)
+        'lastWhatsappMessageText': (lastWhatsappMessageText as String?),
       if (orderByPreferences != _undefined)
         'orderByPreferences': (orderByPreferences as Json?),
       if (secondLinePreferences != _undefined)
@@ -922,7 +918,7 @@ class _CopyWithStubImpl_Input_UsersPreferencesStreamCursorValueInput<TRes>
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
-    String? lastWhatsappMessageTemplate,
+    String? lastWhatsappMessageText,
     Json? orderByPreferences,
     Json? secondLinePreferences,
     UuidValue? uid,

@@ -15,7 +15,7 @@ select_permissions:
         - dark_theme
         - great_feast_theme
         - last_home_mode
-        - last_whatsapp_message_template
+        - last_whatsapp_message_text
         - updated_at
       filter:
         uid:
@@ -29,7 +29,7 @@ update_permissions:
         - dark_theme
         - great_feast_theme
         - last_home_mode
-        - last_whatsapp_message_template
+        - last_whatsapp_message_text
       filter:
         uid:
           _eq: X-Hasura-User-Id

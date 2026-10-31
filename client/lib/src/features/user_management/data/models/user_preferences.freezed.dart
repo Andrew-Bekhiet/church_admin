@@ -46,11 +46,11 @@ mixin _$UserPreferences {
             (identical(other.lastHomeMode, _this.lastHomeMode) ||
                 other.lastHomeMode == _this.lastHomeMode) &&
             (identical(
-                  other.lastWhatsappMessageTemplate,
-                  _this.lastWhatsappMessageTemplate,
+                  other.lastWhatsappMessageText,
+                  _this.lastWhatsappMessageText,
                 ) ||
-                other.lastWhatsappMessageTemplate ==
-                    _this.lastWhatsappMessageTemplate) &&
+                other.lastWhatsappMessageText ==
+                    _this.lastWhatsappMessageText) &&
             (identical(other.updatedAt, _this.updatedAt) ||
                 other.updatedAt == _this.updatedAt));
   }
@@ -67,7 +67,7 @@ mixin _$UserPreferences {
       _this.themeChoice,
       _this.greatFeastTheme,
       _this.lastHomeMode,
-      _this.lastWhatsappMessageTemplate,
+      _this.lastWhatsappMessageText,
       _this.updatedAt,
     );
   }
@@ -75,7 +75,7 @@ mixin _$UserPreferences {
   @override
   String toString() {
     final _this = this as UserPreferences;
-    return 'UserPreferences(uid: ${_this.uid}, orderByPreferences: ${_this.orderByPreferences}, secondLinePreferences: ${_this.secondLinePreferences}, themeChoice: ${_this.themeChoice}, greatFeastTheme: ${_this.greatFeastTheme}, lastHomeMode: ${_this.lastHomeMode}, lastWhatsappMessageTemplate: ${_this.lastWhatsappMessageTemplate}, updatedAt: ${_this.updatedAt})';
+    return 'UserPreferences(uid: ${_this.uid}, orderByPreferences: ${_this.orderByPreferences}, secondLinePreferences: ${_this.secondLinePreferences}, themeChoice: ${_this.themeChoice}, greatFeastTheme: ${_this.greatFeastTheme}, lastHomeMode: ${_this.lastHomeMode}, lastWhatsappMessageText: ${_this.lastWhatsappMessageText}, updatedAt: ${_this.updatedAt})';
   }
 }
 
@@ -93,7 +93,7 @@ abstract mixin class $UserPreferencesCopyWith<$Res> {
     ThemeChoice themeChoice,
     bool greatFeastTheme,
     HomeMode? lastHomeMode,
-    String? lastWhatsappMessageTemplate,
+    String? lastWhatsappMessageText,
     DateTime? updatedAt,
   });
 }
@@ -117,7 +117,7 @@ class _$UserPreferencesCopyWithImpl<$Res>
     Object? themeChoice = null,
     Object? greatFeastTheme = null,
     Object? lastHomeMode = freezed,
-    Object? lastWhatsappMessageTemplate = freezed,
+    Object? lastWhatsappMessageText = freezed,
     Object? updatedAt = freezed,
   }) {
     return _then(
@@ -146,9 +146,9 @@ class _$UserPreferencesCopyWithImpl<$Res>
             ? _self.lastHomeMode
             : lastHomeMode // ignore: cast_nullable_to_non_nullable
                   as HomeMode?,
-        lastWhatsappMessageTemplate: freezed == lastWhatsappMessageTemplate
-            ? _self.lastWhatsappMessageTemplate
-            : lastWhatsappMessageTemplate // ignore: cast_nullable_to_non_nullable
+        lastWhatsappMessageText: freezed == lastWhatsappMessageText
+            ? _self.lastWhatsappMessageText
+            : lastWhatsappMessageText // ignore: cast_nullable_to_non_nullable
                   as String?,
         updatedAt: freezed == updatedAt
             ? _self.updatedAt

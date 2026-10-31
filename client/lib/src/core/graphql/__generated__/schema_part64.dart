@@ -934,7 +934,7 @@ class Input_UsersPreferencesBoolExp {
     Input_BooleanComparisonExp? darkTheme,
     Input_BooleanComparisonExp? greatFeastTheme,
     Input_StringComparisonExp? lastHomeMode,
-    Input_StringComparisonExp? lastWhatsappMessageTemplate,
+    Input_StringComparisonExp? lastWhatsappMessageText,
     Input_JsonbComparisonExp? orderByPreferences,
     Input_JsonbComparisonExp? secondLinePreferences,
     Input_UuidComparisonExp? uid,
@@ -947,8 +947,8 @@ class Input_UsersPreferencesBoolExp {
     if (darkTheme != null) r'darkTheme': darkTheme,
     if (greatFeastTheme != null) r'greatFeastTheme': greatFeastTheme,
     if (lastHomeMode != null) r'lastHomeMode': lastHomeMode,
-    if (lastWhatsappMessageTemplate != null)
-      r'lastWhatsappMessageTemplate': lastWhatsappMessageTemplate,
+    if (lastWhatsappMessageText != null)
+      r'lastWhatsappMessageText': lastWhatsappMessageText,
     if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
     if (secondLinePreferences != null)
       r'secondLinePreferences': secondLinePreferences,
@@ -1013,13 +1013,12 @@ class Input_UsersPreferencesBoolExp {
               (l$lastHomeMode as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('lastWhatsappMessageTemplate')) {
-      final l$lastWhatsappMessageTemplate = data['lastWhatsappMessageTemplate'];
-      result$data['lastWhatsappMessageTemplate'] =
-          l$lastWhatsappMessageTemplate == null
+    if (data.containsKey('lastWhatsappMessageText')) {
+      final l$lastWhatsappMessageText = data['lastWhatsappMessageText'];
+      result$data['lastWhatsappMessageText'] = l$lastWhatsappMessageText == null
           ? null
           : Input_StringComparisonExp.fromJson(
-              (l$lastWhatsappMessageTemplate as Map<String, dynamic>),
+              (l$lastWhatsappMessageText as Map<String, dynamic>),
             );
     }
     if (data.containsKey('orderByPreferences')) {
@@ -1083,8 +1082,8 @@ class Input_UsersPreferencesBoolExp {
   Input_StringComparisonExp? get lastHomeMode =>
       (_$data['lastHomeMode'] as Input_StringComparisonExp?);
 
-  Input_StringComparisonExp? get lastWhatsappMessageTemplate =>
-      (_$data['lastWhatsappMessageTemplate'] as Input_StringComparisonExp?);
+  Input_StringComparisonExp? get lastWhatsappMessageText =>
+      (_$data['lastWhatsappMessageText'] as Input_StringComparisonExp?);
 
   Input_JsonbComparisonExp? get orderByPreferences =>
       (_$data['orderByPreferences'] as Input_JsonbComparisonExp?);
@@ -1127,9 +1126,9 @@ class Input_UsersPreferencesBoolExp {
       final l$lastHomeMode = lastHomeMode;
       result$data['lastHomeMode'] = l$lastHomeMode?.toJson();
     }
-    if (_$data.containsKey('lastWhatsappMessageTemplate')) {
-      final l$lastWhatsappMessageTemplate = lastWhatsappMessageTemplate;
-      result$data['lastWhatsappMessageTemplate'] = l$lastWhatsappMessageTemplate
+    if (_$data.containsKey('lastWhatsappMessageText')) {
+      final l$lastWhatsappMessageText = lastWhatsappMessageText;
+      result$data['lastWhatsappMessageText'] = l$lastWhatsappMessageText
           ?.toJson();
     }
     if (_$data.containsKey('orderByPreferences')) {
@@ -1240,14 +1239,13 @@ class Input_UsersPreferencesBoolExp {
     if (l$lastHomeMode != lOther$lastHomeMode) {
       return false;
     }
-    final l$lastWhatsappMessageTemplate = lastWhatsappMessageTemplate;
-    final lOther$lastWhatsappMessageTemplate =
-        other.lastWhatsappMessageTemplate;
-    if (_$data.containsKey('lastWhatsappMessageTemplate') !=
-        other._$data.containsKey('lastWhatsappMessageTemplate')) {
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
+    final lOther$lastWhatsappMessageText = other.lastWhatsappMessageText;
+    if (_$data.containsKey('lastWhatsappMessageText') !=
+        other._$data.containsKey('lastWhatsappMessageText')) {
       return false;
     }
-    if (l$lastWhatsappMessageTemplate != lOther$lastWhatsappMessageTemplate) {
+    if (l$lastWhatsappMessageText != lOther$lastWhatsappMessageText) {
       return false;
     }
     final l$orderByPreferences = orderByPreferences;
@@ -1304,7 +1302,7 @@ class Input_UsersPreferencesBoolExp {
     final l$darkTheme = darkTheme;
     final l$greatFeastTheme = greatFeastTheme;
     final l$lastHomeMode = lastHomeMode;
-    final l$lastWhatsappMessageTemplate = lastWhatsappMessageTemplate;
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
     final l$orderByPreferences = orderByPreferences;
     final l$secondLinePreferences = secondLinePreferences;
     final l$uid = uid;
@@ -1325,8 +1323,8 @@ class Input_UsersPreferencesBoolExp {
       _$data.containsKey('darkTheme') ? l$darkTheme : const {},
       _$data.containsKey('greatFeastTheme') ? l$greatFeastTheme : const {},
       _$data.containsKey('lastHomeMode') ? l$lastHomeMode : const {},
-      _$data.containsKey('lastWhatsappMessageTemplate')
-          ? l$lastWhatsappMessageTemplate
+      _$data.containsKey('lastWhatsappMessageText')
+          ? l$lastWhatsappMessageText
           : const {},
       _$data.containsKey('orderByPreferences')
           ? l$orderByPreferences
@@ -1357,7 +1355,7 @@ abstract class CopyWith_Input_UsersPreferencesBoolExp<TRes> {
     Input_BooleanComparisonExp? darkTheme,
     Input_BooleanComparisonExp? greatFeastTheme,
     Input_StringComparisonExp? lastHomeMode,
-    Input_StringComparisonExp? lastWhatsappMessageTemplate,
+    Input_StringComparisonExp? lastWhatsappMessageText,
     Input_JsonbComparisonExp? orderByPreferences,
     Input_JsonbComparisonExp? secondLinePreferences,
     Input_UuidComparisonExp? uid,
@@ -1384,7 +1382,7 @@ abstract class CopyWith_Input_UsersPreferencesBoolExp<TRes> {
   CopyWith_Input_BooleanComparisonExp<TRes> get darkTheme;
   CopyWith_Input_BooleanComparisonExp<TRes> get greatFeastTheme;
   CopyWith_Input_StringComparisonExp<TRes> get lastHomeMode;
-  CopyWith_Input_StringComparisonExp<TRes> get lastWhatsappMessageTemplate;
+  CopyWith_Input_StringComparisonExp<TRes> get lastWhatsappMessageText;
   CopyWith_Input_JsonbComparisonExp<TRes> get orderByPreferences;
   CopyWith_Input_JsonbComparisonExp<TRes> get secondLinePreferences;
   CopyWith_Input_UuidComparisonExp<TRes> get uid;
@@ -1409,7 +1407,7 @@ class _CopyWithImpl_Input_UsersPreferencesBoolExp<TRes>
     Object? darkTheme = _undefined,
     Object? greatFeastTheme = _undefined,
     Object? lastHomeMode = _undefined,
-    Object? lastWhatsappMessageTemplate = _undefined,
+    Object? lastWhatsappMessageText = _undefined,
     Object? orderByPreferences = _undefined,
     Object? secondLinePreferences = _undefined,
     Object? uid = _undefined,
@@ -1430,9 +1428,9 @@ class _CopyWithImpl_Input_UsersPreferencesBoolExp<TRes>
         'greatFeastTheme': (greatFeastTheme as Input_BooleanComparisonExp?),
       if (lastHomeMode != _undefined)
         'lastHomeMode': (lastHomeMode as Input_StringComparisonExp?),
-      if (lastWhatsappMessageTemplate != _undefined)
-        'lastWhatsappMessageTemplate':
-            (lastWhatsappMessageTemplate as Input_StringComparisonExp?),
+      if (lastWhatsappMessageText != _undefined)
+        'lastWhatsappMessageText':
+            (lastWhatsappMessageText as Input_StringComparisonExp?),
       if (orderByPreferences != _undefined)
         'orderByPreferences': (orderByPreferences as Input_JsonbComparisonExp?),
       if (secondLinePreferences != _undefined)
@@ -1515,14 +1513,13 @@ class _CopyWithImpl_Input_UsersPreferencesBoolExp<TRes>
           );
   }
 
-  CopyWith_Input_StringComparisonExp<TRes> get lastWhatsappMessageTemplate {
-    final local$lastWhatsappMessageTemplate =
-        _instance.lastWhatsappMessageTemplate;
-    return local$lastWhatsappMessageTemplate == null
+  CopyWith_Input_StringComparisonExp<TRes> get lastWhatsappMessageText {
+    final local$lastWhatsappMessageText = _instance.lastWhatsappMessageText;
+    return local$lastWhatsappMessageText == null
         ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
         : CopyWith_Input_StringComparisonExp(
-            local$lastWhatsappMessageTemplate,
-            (e) => call(lastWhatsappMessageTemplate: e),
+            local$lastWhatsappMessageText,
+            (e) => call(lastWhatsappMessageText: e),
           );
   }
 
@@ -1584,7 +1581,7 @@ class _CopyWithStubImpl_Input_UsersPreferencesBoolExp<TRes>
     Input_BooleanComparisonExp? darkTheme,
     Input_BooleanComparisonExp? greatFeastTheme,
     Input_StringComparisonExp? lastHomeMode,
-    Input_StringComparisonExp? lastWhatsappMessageTemplate,
+    Input_StringComparisonExp? lastWhatsappMessageText,
     Input_JsonbComparisonExp? orderByPreferences,
     Input_JsonbComparisonExp? secondLinePreferences,
     Input_UuidComparisonExp? uid,
@@ -1608,7 +1605,7 @@ class _CopyWithStubImpl_Input_UsersPreferencesBoolExp<TRes>
   CopyWith_Input_StringComparisonExp<TRes> get lastHomeMode =>
       CopyWith_Input_StringComparisonExp.stub(_res);
 
-  CopyWith_Input_StringComparisonExp<TRes> get lastWhatsappMessageTemplate =>
+  CopyWith_Input_StringComparisonExp<TRes> get lastWhatsappMessageText =>
       CopyWith_Input_StringComparisonExp.stub(_res);
 
   CopyWith_Input_JsonbComparisonExp<TRes> get orderByPreferences =>
@@ -2116,7 +2113,7 @@ class Input_UsersPreferencesOrderBy {
     Enum_OrderBy? darkTheme,
     Enum_OrderBy? greatFeastTheme,
     Enum_OrderBy? lastHomeMode,
-    Enum_OrderBy? lastWhatsappMessageTemplate,
+    Enum_OrderBy? lastWhatsappMessageText,
     Enum_OrderBy? orderByPreferences,
     Enum_OrderBy? secondLinePreferences,
     Enum_OrderBy? uid,
@@ -2126,8 +2123,8 @@ class Input_UsersPreferencesOrderBy {
     if (darkTheme != null) r'darkTheme': darkTheme,
     if (greatFeastTheme != null) r'greatFeastTheme': greatFeastTheme,
     if (lastHomeMode != null) r'lastHomeMode': lastHomeMode,
-    if (lastWhatsappMessageTemplate != null)
-      r'lastWhatsappMessageTemplate': lastWhatsappMessageTemplate,
+    if (lastWhatsappMessageText != null)
+      r'lastWhatsappMessageText': lastWhatsappMessageText,
     if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
     if (secondLinePreferences != null)
       r'secondLinePreferences': secondLinePreferences,
@@ -2158,12 +2155,11 @@ class Input_UsersPreferencesOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$lastHomeMode as String));
     }
-    if (data.containsKey('lastWhatsappMessageTemplate')) {
-      final l$lastWhatsappMessageTemplate = data['lastWhatsappMessageTemplate'];
-      result$data['lastWhatsappMessageTemplate'] =
-          l$lastWhatsappMessageTemplate == null
+    if (data.containsKey('lastWhatsappMessageText')) {
+      final l$lastWhatsappMessageText = data['lastWhatsappMessageText'];
+      result$data['lastWhatsappMessageText'] = l$lastWhatsappMessageText == null
           ? null
-          : fromJson_Enum_OrderBy((l$lastWhatsappMessageTemplate as String));
+          : fromJson_Enum_OrderBy((l$lastWhatsappMessageText as String));
     }
     if (data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = data['orderByPreferences'];
@@ -2209,8 +2205,8 @@ class Input_UsersPreferencesOrderBy {
 
   Enum_OrderBy? get lastHomeMode => (_$data['lastHomeMode'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get lastWhatsappMessageTemplate =>
-      (_$data['lastWhatsappMessageTemplate'] as Enum_OrderBy?);
+  Enum_OrderBy? get lastWhatsappMessageText =>
+      (_$data['lastWhatsappMessageText'] as Enum_OrderBy?);
 
   Enum_OrderBy? get orderByPreferences =>
       (_$data['orderByPreferences'] as Enum_OrderBy?);
@@ -2245,12 +2241,11 @@ class Input_UsersPreferencesOrderBy {
           ? null
           : toJson_Enum_OrderBy(l$lastHomeMode);
     }
-    if (_$data.containsKey('lastWhatsappMessageTemplate')) {
-      final l$lastWhatsappMessageTemplate = lastWhatsappMessageTemplate;
-      result$data['lastWhatsappMessageTemplate'] =
-          l$lastWhatsappMessageTemplate == null
+    if (_$data.containsKey('lastWhatsappMessageText')) {
+      final l$lastWhatsappMessageText = lastWhatsappMessageText;
+      result$data['lastWhatsappMessageText'] = l$lastWhatsappMessageText == null
           ? null
-          : toJson_Enum_OrderBy(l$lastWhatsappMessageTemplate);
+          : toJson_Enum_OrderBy(l$lastWhatsappMessageText);
     }
     if (_$data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = orderByPreferences;
@@ -2320,14 +2315,13 @@ class Input_UsersPreferencesOrderBy {
     if (l$lastHomeMode != lOther$lastHomeMode) {
       return false;
     }
-    final l$lastWhatsappMessageTemplate = lastWhatsappMessageTemplate;
-    final lOther$lastWhatsappMessageTemplate =
-        other.lastWhatsappMessageTemplate;
-    if (_$data.containsKey('lastWhatsappMessageTemplate') !=
-        other._$data.containsKey('lastWhatsappMessageTemplate')) {
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
+    final lOther$lastWhatsappMessageText = other.lastWhatsappMessageText;
+    if (_$data.containsKey('lastWhatsappMessageText') !=
+        other._$data.containsKey('lastWhatsappMessageText')) {
       return false;
     }
-    if (l$lastWhatsappMessageTemplate != lOther$lastWhatsappMessageTemplate) {
+    if (l$lastWhatsappMessageText != lOther$lastWhatsappMessageText) {
       return false;
     }
     final l$orderByPreferences = orderByPreferences;
@@ -2381,7 +2375,7 @@ class Input_UsersPreferencesOrderBy {
     final l$darkTheme = darkTheme;
     final l$greatFeastTheme = greatFeastTheme;
     final l$lastHomeMode = lastHomeMode;
-    final l$lastWhatsappMessageTemplate = lastWhatsappMessageTemplate;
+    final l$lastWhatsappMessageText = lastWhatsappMessageText;
     final l$orderByPreferences = orderByPreferences;
     final l$secondLinePreferences = secondLinePreferences;
     final l$uid = uid;
@@ -2391,8 +2385,8 @@ class Input_UsersPreferencesOrderBy {
       _$data.containsKey('darkTheme') ? l$darkTheme : const {},
       _$data.containsKey('greatFeastTheme') ? l$greatFeastTheme : const {},
       _$data.containsKey('lastHomeMode') ? l$lastHomeMode : const {},
-      _$data.containsKey('lastWhatsappMessageTemplate')
-          ? l$lastWhatsappMessageTemplate
+      _$data.containsKey('lastWhatsappMessageText')
+          ? l$lastWhatsappMessageText
           : const {},
       _$data.containsKey('orderByPreferences')
           ? l$orderByPreferences
@@ -2420,7 +2414,7 @@ abstract class CopyWith_Input_UsersPreferencesOrderBy<TRes> {
     Enum_OrderBy? darkTheme,
     Enum_OrderBy? greatFeastTheme,
     Enum_OrderBy? lastHomeMode,
-    Enum_OrderBy? lastWhatsappMessageTemplate,
+    Enum_OrderBy? lastWhatsappMessageText,
     Enum_OrderBy? orderByPreferences,
     Enum_OrderBy? secondLinePreferences,
     Enum_OrderBy? uid,
@@ -2444,7 +2438,7 @@ class _CopyWithImpl_Input_UsersPreferencesOrderBy<TRes>
     Object? darkTheme = _undefined,
     Object? greatFeastTheme = _undefined,
     Object? lastHomeMode = _undefined,
-    Object? lastWhatsappMessageTemplate = _undefined,
+    Object? lastWhatsappMessageText = _undefined,
     Object? orderByPreferences = _undefined,
     Object? secondLinePreferences = _undefined,
     Object? uid = _undefined,
@@ -2458,9 +2452,8 @@ class _CopyWithImpl_Input_UsersPreferencesOrderBy<TRes>
         'greatFeastTheme': (greatFeastTheme as Enum_OrderBy?),
       if (lastHomeMode != _undefined)
         'lastHomeMode': (lastHomeMode as Enum_OrderBy?),
-      if (lastWhatsappMessageTemplate != _undefined)
-        'lastWhatsappMessageTemplate':
-            (lastWhatsappMessageTemplate as Enum_OrderBy?),
+      if (lastWhatsappMessageText != _undefined)
+        'lastWhatsappMessageText': (lastWhatsappMessageText as Enum_OrderBy?),
       if (orderByPreferences != _undefined)
         'orderByPreferences': (orderByPreferences as Enum_OrderBy?),
       if (secondLinePreferences != _undefined)
@@ -2489,7 +2482,7 @@ class _CopyWithStubImpl_Input_UsersPreferencesOrderBy<TRes>
     Enum_OrderBy? darkTheme,
     Enum_OrderBy? greatFeastTheme,
     Enum_OrderBy? lastHomeMode,
-    Enum_OrderBy? lastWhatsappMessageTemplate,
+    Enum_OrderBy? lastWhatsappMessageText,
     Enum_OrderBy? orderByPreferences,
     Enum_OrderBy? secondLinePreferences,
     Enum_OrderBy? uid,
