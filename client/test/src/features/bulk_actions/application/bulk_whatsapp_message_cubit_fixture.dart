@@ -3,8 +3,11 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../fakes/fake_box.dart';
 import '../../../fakes/fake_logging_service.dart';
 import '../../../fakes/fake_persons_dao.dart';
+import '../../../fakes/mock_auth_bloc.dart';
+import '../../../fakes/mock_database_service.dart';
 import '../../../fakes/mock_launcher_service.dart';
 import '../../../fakes/recording_analytics_provider.dart';
 
@@ -36,6 +39,11 @@ class BulkWhatsappMessageCubitFixture {
   final MockLauncherService launcher = MockLauncherService();
   final RecordingAnalyticsProvider analytics = RecordingAnalyticsProvider();
   final FakeLoggingService logging = FakeLoggingService();
+  final UserPreferencesService userPreferences = UserPreferencesService(
+    box: FakeSyncKVStore(),
+    databaseService: MockDatabaseService(),
+    authBloc: MockAuthBloc(),
+  );
 
   BulkWhatsappMessageCubitFixture() {
     stubWhatsappLaunch(() async => true);
@@ -75,6 +83,7 @@ class BulkWhatsappMessageCubitFixture {
         phoneNumberService: phoneNumbers,
         analyticsService: AnalyticsService([analytics], FakeLoggingService()),
         loggingService: logging,
+        userPreferencesService: userPreferences,
       );
 
   BulkWhatsappSending sendingTo({
