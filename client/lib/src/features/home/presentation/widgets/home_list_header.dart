@@ -3,6 +3,14 @@ import 'package:material_symbols_icons/symbols.dart';
 import 'package:material_ui/material_ui.dart';
 
 class HomeListHeader extends StatelessWidget {
+  static ViewableObjectListType segmentOf(ViewableObjectListType listType) {
+    return switch (listType) {
+      ViewableObjectListType.list => ViewableObjectListType.list,
+      ViewableObjectListType.grid ||
+      ViewableObjectListType.grid3 => ViewableObjectListType.grid,
+    };
+  }
+
   final int? total;
   final String label;
   final ViewableObjectListType? listType;
@@ -15,14 +23,6 @@ class HomeListHeader extends StatelessWidget {
     required this.onToggleListType,
     super.key,
   });
-
-  static ViewableObjectListType segmentOf(ViewableObjectListType listType) {
-    return switch (listType) {
-      ViewableObjectListType.list => ViewableObjectListType.list,
-      ViewableObjectListType.grid ||
-      ViewableObjectListType.grid3 => ViewableObjectListType.grid,
-    };
-  }
 
   @override
   Widget build(BuildContext context) {

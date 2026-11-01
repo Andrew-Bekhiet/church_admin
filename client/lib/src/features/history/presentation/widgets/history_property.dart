@@ -81,14 +81,10 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
     );
   };
 
-  void _maybeTrack(AnalyticsEvent Function(TrackedHistory) eventOf) {
-    final tracking = trackedAs;
-    if (tracking is! TrackedHistory) return;
-
-    AnalyticsService.I.track(eventOf(tracking));
-  }
+  final void Function()? onRecordNow;
 
   DateFormat get dateFormat => _dateFormat(showTime: showTime);
+
   const HistoryProperty({
     required this.name,
     required this.getHistoryListController,
@@ -143,5 +139,10 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
     );
   }
 
-  final void Function()? onRecordNow;
+  void _maybeTrack(AnalyticsEvent Function(TrackedHistory) eventOf) {
+    final tracking = trackedAs;
+    if (tracking is! TrackedHistory) return;
+
+    AnalyticsService.I.track(eventOf(tracking));
+  }
 }

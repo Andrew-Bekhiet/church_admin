@@ -2,7 +2,7 @@
 
 Conventions for anyone (human or agent) writing code here. Rules are stated as requirements, not suggestions.
 
-Organise files by feature or domain, not by type. All backend access goes through the database service module (`client/lib/src/core/services/database/`) with `graphql_codegen`-generated operations — features never issue raw GraphQL themselves.
+Organise files by feature or domain, not by type. A new capability that several screens use, and that later work will grow, gets its own `features/<name>/` instead of living inside the first feature that hosts it. All backend access goes through the database service module (`client/lib/src/core/services/database/`) with `graphql_codegen`-generated operations — features never issue raw GraphQL themselves.
 
 To stream a whole collection rather than the default page size, raise the limit instead of draining pages: `dao.streamAllWithConfig(streamAllConfig: dao.baseStreamAllConfig, overrideTotalLimit: _pageSize, …)` with `static const int _pageSize` on the caller.
 
@@ -21,7 +21,11 @@ Each area's rules load when you work under it. The repo carries only `AGENTS.md`
 
 - **Conventional commits.** `feat(scope):`, `fix(scope):`, `refactor(scope):` etc.
 - **Do not write summary or README files** after implementing something unless explicitly asked.
-- **Branch from the right base.** A PR branch starts from `master`, or from the layer below it when it belongs to a stack. Create, rebase and merge stacks with `/gh-stack`.
+- **Branch from the right base.** A PR branch starts from an up-to-date `origin/master` (fetch first), or from the layer below it when it belongs to a stack. Create, rebase and merge stacks with `/gh-stack`.
+- **Size a PR for one review sitting:** 500–800 added lines under `lib/`, 1000 at most. When the work needs more, propose the stack layers before writing code, then stop after each layer until it is reviewed.
+- **Review your own diff before the first push.** Reviewers apply the `REVIEW.md` beside every changed file (root, `client/`, `server/hasura/`, `server/firebase/functions/`), and most review rounds here re-find what those files already list, above all the async and lifecycle checks in `client/REVIEW.md`. Read them, walk your diff against them, and fix what they catch before anyone else has to post it.
+- **Read a file's recent history before moving or rewriting it** (`git log -5 -p -- <file>`). Refactors here have silently reverted fixes from the week before.
+- **CodeRabbit reviews every push on its own.** Its review quota is small, so post `@coderabbitai review` only when its review is paused or stuck on an older head, once, and never `full review` or `approve`. When it reports a rate limit, read the reset time from its comment rather than guessing.
 - **Production holds real users' data.** Migrations are additive and preserve existing rows; never treat the schema as greenfield or propose dropping what is there.
 - **Permissions hang off `auth.users_data.uid`, never `auth_id`.** Anything that changes account identity must preserve that uid; sign-up and sign-in claim a seeded row rather than inserting a second one.
 
@@ -37,7 +41,7 @@ These rules apply to every language and all code in the repo. A name tells the *
 - A predicate's name _is_ the rule — `if (await mustVerifyEmailBeforeClaiming(authUser))`.
 - A condition inside an expression gets an explaining variable — `phoneExists`, `existingPhone`.
 
-**Keep names in sync across the client/server boundary.** A client wrapper, the callable it invokes, and the file exporting it share one name (`tryClaimInvitation` / `try_claim_invitation.ts`). Renaming a deployed callable is a deploy-order dependency — client and functions ship separately, so a mismatched pair fails with `NOT_FOUND`.
+**Keep names in sync across the client/server boundary.** A client wrapper, the callable it invokes, and the file exporting it share one name (`applyInvitationCode` / `apply_invitation_code.ts`). Renaming a deployed callable is a deploy-order dependency — client and functions ship separately, so a mismatched pair fails with `NOT_FOUND`.
 
 ## Comments — write none
 

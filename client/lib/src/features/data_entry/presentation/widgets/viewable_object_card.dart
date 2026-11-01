@@ -16,6 +16,14 @@ class ViewableObjectCard<T extends Viewable> extends StatelessWidget {
   final ViewableObjectService viewableObjectService;
   final ViewableObjectWidgetConfig config;
 
+  final void Function(T)? onTap;
+  final void Function(T)? onLongPress;
+
+  void Function(T)? get _onTap =>
+      onTap ?? config.onTap ?? viewableObjectService.onTap;
+
+  void Function(T)? get _onLongPress => onLongPress ?? config.onLongPress;
+
   ViewableObjectCard(
     this.object, {
     this.size = 150,
@@ -84,12 +92,4 @@ class ViewableObjectCard<T extends Viewable> extends StatelessWidget {
       ),
     );
   }
-
-  final void Function(T)? onTap;
-  final void Function(T)? onLongPress;
-
-  void Function(T)? get _onTap =>
-      onTap ?? config.onTap ?? viewableObjectService.onTap;
-
-  void Function(T)? get _onLongPress => onLongPress ?? config.onLongPress;
 }

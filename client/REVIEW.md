@@ -41,7 +41,7 @@ Sembast stores, the KV store, and user preferences survive app upgrades. When a 
 ## Reuse before adding
 
 - Flag a new widget or helper that duplicates an existing one in `core/widgets`, the feature's widgets, or `utils/`, and name the one to reuse.
-- Flag hand-rolled code where a Flutter or package API already does the job, such as an input formatter where `TextFormField.maxLength` works.
+- Flag hand-rolled code where a Flutter or package API already does the job, such as an input formatter where `TextFormField.maxLength` works, a "was hidden" flag kept from `onHide`/`onResume` where `AppLifecycleListener.onShow` works, or a query string built by hand where `Uri(queryParameters:)` works.
 - A change to a shared widget changes every screen that uses it. Check that the PR meant that, or limit the change to the caller that needs it.
 
 ## Logic slips seen before
@@ -69,7 +69,7 @@ Review each test for what it proves:
 - Keep the values an assertion depends on in the test body: which people are selected and in what order, and who has a phone. A helper may build the screen, but it should take those values as arguments the test passes. `setUp` and fixtures may hold setup the assertion does not depend on, such as a launcher stubbed to succeed.
 - Async gaps run under `fakeAsync`, not real timers.
 - Flag implementation tests, as `client/AGENTS.md` defines them under Tests: counting calls, testing wiring, or pinning a JSON shape in a test that is not about JSON.
-- Build fixtures from model objects, not raw JSON maps. Assert against the injected fixture value and keep any unit conversion (`percent / 100`). For a computed result, write the expected value independently instead of reusing the code under test.
+- Build fixtures from model objects, not raw JSON maps. Assert against the injected fixture value and keep any unit conversion (`percent / 100`). For a computed result, write the expected value independently instead of reusing the code under test. A product value the test does not own, such as a default template or a placeholder token, comes from the code that owns it, not a copied literal.
 - Find widgets through the widget's own `<Widget>Keys` or `keyFor`, never by text or by rebuilding a `ValueKey` string.
 - Test cubits and blocs with `blocTest`.
 - When the code branches on a permission variant, such as a manager scoped to some areas versus one who manages all users, check that a test covers each branch.

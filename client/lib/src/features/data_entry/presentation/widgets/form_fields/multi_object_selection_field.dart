@@ -16,6 +16,12 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
   final FocusNode? focusNode;
   final InputDecoration? decoration;
 
+  final Future<T> Function(String)? onCreateCustom;
+
+  final String? Function(Set<T>?)? validator;
+  final void Function(Set<T>?)? onSaved;
+  final void Function(Set<T>?)? onChanged;
+
   const MultiObjectSelectionField({
     required this.listController,
     required this.builder,
@@ -154,10 +160,4 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
       builder: builder,
     );
   }
-
-  final Future<T> Function(String)? onCreateCustom;
-
-  final String? Function(Set<T>?)? validator;
-  final void Function(Set<T>?)? onSaved;
-  final void Function(Set<T>?)? onChanged;
 }

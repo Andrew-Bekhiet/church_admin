@@ -1,6 +1,8 @@
 import 'package:material_ui/material_ui.dart';
 
 class ClassAttendanceLegend extends StatelessWidget {
+  final List<(String label, Color color)> entries;
+
   const ClassAttendanceLegend({required this.entries, super.key});
 
   @override
@@ -31,6 +33,4 @@ class ClassAttendanceLegend extends StatelessWidget {
       ],
     );
   }
-
-  final List<(String label, Color color)> entries;
 }

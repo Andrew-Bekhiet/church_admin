@@ -4,6 +4,7 @@ class _LocationsLayer<T extends Viewable> extends StatefulWidget {
   final Set<T> objects;
   final Point? currentFocusedLocation;
   final Point? Function(T) getLocation;
+  final void Function(T, Point)? afterTap;
 
   const _LocationsLayer({
     required this.objects,
@@ -11,7 +12,6 @@ class _LocationsLayer<T extends Viewable> extends StatefulWidget {
     this.afterTap,
     this.currentFocusedLocation,
   });
-  final void Function(T, Point)? afterTap;
 
   @override
   State<_LocationsLayer<T>> createState() => _LocationsLayerState();

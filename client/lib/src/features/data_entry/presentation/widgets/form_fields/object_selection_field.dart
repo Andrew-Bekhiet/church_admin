@@ -15,6 +15,12 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
   final FocusNode? focusNode;
   final InputDecoration? decoration;
 
+  final String? Function(F?)? validator;
+
+  final void Function(F?)? onSaved;
+  final void Function(F?)? onChanged;
+  final Future<T> Function(String)? onCreateCustom;
+
   const ObjectSelectionField({
     required this.listController,
     required this.builder,
@@ -79,8 +85,6 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
     );
   }
 
-  final String? Function(F?)? validator;
-
   Future<void> _select(BuildContext context, FormFieldState<F> state) async {
     final focusScope = FocusScope.of(context);
     final result = await showDialog<ObjectSelectionResult<T>>(
@@ -135,8 +139,4 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
       return null;
     }
   }
-
-  final void Function(F?)? onSaved;
-  final void Function(F?)? onChanged;
-  final Future<T> Function(String)? onCreateCustom;
 }

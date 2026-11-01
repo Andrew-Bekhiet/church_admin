@@ -10,6 +10,8 @@ class MapSnappingSheet extends StatelessWidget {
   final SnappingSheetContent? sheetBelow;
   final bool showGrabbing;
 
+  final void Function(SheetPositionData)? onSheetMoved;
+
   const MapSnappingSheet({
     required this.sheetBelow,
     required this.child,
@@ -63,6 +65,4 @@ class MapSnappingSheet extends StatelessWidget {
       child: child,
     );
   }
-
-  final void Function(SheetPositionData)? onSheetMoved;
 }

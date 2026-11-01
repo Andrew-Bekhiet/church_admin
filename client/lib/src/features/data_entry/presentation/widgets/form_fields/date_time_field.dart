@@ -12,6 +12,10 @@ class DateTimeField extends StatelessWidget {
   final FocusNode? focusNode;
   final InputDecoration? decoration;
 
+  final void Function(DateTime?)? onChanged;
+  final void Function(DateTime?)? onSaved;
+  final String? Function(DateTime?)? validator;
+
   DateTimeField({
     required this.label,
     this.nullable = false,
@@ -69,10 +73,6 @@ class DateTimeField extends StatelessWidget {
           (v) => v == null && !nullable ? 'برجاء ادخال $label' : null,
     );
   }
-
-  final void Function(DateTime?)? onChanged;
-  final void Function(DateTime?)? onSaved;
-  final String? Function(DateTime?)? validator;
 
   Future<DateTime?> _selectDateTime(
     BuildContext context,

@@ -9,15 +9,15 @@ class EditLocationActionsBar extends StatelessWidget
   final Stream<Position?>? userLocation;
   final ValueChanged<Position> onUseCurrentLocation;
 
+  @override
+  Size get preferredSize => const Size.fromHeight(56);
+
   const EditLocationActionsBar({
     required this.onPickFromMapsLink,
     required this.onUseCurrentLocation,
     this.userLocation,
     super.key,
   });
-
-  @override
-  Size get preferredSize => const Size.fromHeight(56);
 
   @override
   Widget build(BuildContext context) {

@@ -76,6 +76,10 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
   final WidgetBuilderWithObject<T> editButtonBuilder;
   final WidgetBuilderWithObject<T> detailsBuilder;
   final SliverPersistentHeaderDelegate? sliverPersistentHeaderDelegate;
+  final Map<Type, Widget Function(BuildContext)> tabsContentBuilders;
+  final Widget Function(BuildContext, TabController, T)?
+  floatingActionButtonBuilder;
+  final Widget Function(BuildContext, TabController)? bottomNavBarBuilder;
 
   const ViewObjectDetails({
     required this.objectId,
@@ -94,10 +98,6 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
          childrenTypes.length == 0 || sliverPersistentHeaderDelegate != null,
        ),
        assert(childrenTypes.length == tabsContentBuilders.length);
-  final Map<Type, Widget Function(BuildContext)> tabsContentBuilders;
-  final Widget Function(BuildContext, TabController, T)?
-  floatingActionButtonBuilder;
-  final Widget Function(BuildContext, TabController)? bottomNavBarBuilder;
 
   @override
   State<ViewObjectDetails<T>> createState() => _ViewObjectDetailsState<T>();
