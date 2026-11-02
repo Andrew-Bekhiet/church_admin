@@ -314,11 +314,11 @@
 
         function preferredLanguage() {
           var fromHash = location.hash.replace("#", "");
-          if (sections[fromHash]) return fromHash;
+          if (Object.prototype.hasOwnProperty.call(sections, fromHash)) return fromHash;
           var languages = navigator.languages || [navigator.language || ""];
           for (var i = 0; i < languages.length; i++) {
             var code = String(languages[i]).toLowerCase().split("-")[0];
-            if (sections[code]) return code;
+            if (Object.prototype.hasOwnProperty.call(sections, code)) return code;
           }
           return "ar";
         }
