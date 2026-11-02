@@ -14,6 +14,7 @@
 
     <script src="/__/firebase/8.10.1/firebase-app.js"></script>
     <script src="/__/firebase/8.10.1/firebase-auth.js"></script>
+    <script src="/__/firebase/8.10.1/firebase-functions.js"></script>
 
     <script>
       fetch("/__/firebase/init.json").then(async (response) => {
@@ -29,21 +30,23 @@
             signInSuccessWithAuthResult: function (authResult, redirectUrl) {
               // Show an alert to confirm account deletion
               var confirmation = window.confirm(
-                "Are you sure you want to delete your account?\n" +
-                  authResult.user.email
+                "هل أنت متأكد من حذف حسابك؟\n" +
+                  authResult.user.email +
+                  "\n\nسيتم حذف حساب تسجيل الدخول وصلاحياتك في التطبيق." +
+                  "\nسيبقى سجلك في بيانات الكنيسة ما لم تطلب من الكنيسة حذفه عبر البريد churchadmin@andrewbekhiet.dev."
               );
 
               if (confirmation) {
-                authResult.user
-                  .delete()
+                app
+                  .functions("europe-west6")
+                  .httpsCallable("deleteMyAccount")()
+                  .then(() => auth.signOut())
                   .then(() => {
                     console.log("Account deleted successfully");
-                    window.alert("Your account has been successfully deleted.");
+                    window.alert("تم حذف حسابك بنجاح.");
                   })
                   .catch((error) => {
-                    window.alert(
-                      "Something went wrong. Please try again later"
-                    );
+                    window.alert("حدث خطأ ما. يرجى المحاولة مرة أخرى لاحقاً");
                     console.log(error);
                   });
               }
@@ -74,8 +77,8 @@
         align-items: center;
         justify-content: center;
       ">
-      <h1>حذف حسابك في خدمة مدارس الأحد</h1>
-      <p>قم بتسجيل الدخول وسيتم حذف حسابك من خدمة المدارس الأحد</p>
+      <h1>حذف حسابك في تطبيق خدمة كنيسة السيدة العذراء مريم</h1>
+      <p>قم بتسجيل الدخول وسيتم حذف حسابك من تطبيق خدمة كنيسة السيدة العذراء مريم</p>
       <div
         id="g_id_onload"
         data-client_id="496540691813-o5pv1f1t58s67affh8nlc0b194ge3pqg.apps.googleusercontent.com"
