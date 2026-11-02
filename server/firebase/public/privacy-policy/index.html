@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
     <title>سياسة الخصوصية | Privacy Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=El+Messiri:wght@700&display=swap" />
     <style>
       :root {
         --bg: #fbfaf8;
@@ -34,8 +39,9 @@
         margin: 0;
         background: var(--bg);
         color: var(--fg);
-        font-family: system-ui, -apple-system, "Segoe UI", Roboto, Tahoma,
-          "Helvetica Neue", Arial, sans-serif;
+        font-family: "Cairo", system-ui, -apple-system, "Segoe UI", Roboto,
+          Tahoma, "Helvetica Neue", Arial, sans-serif;
+        font-weight: 400;
         font-size: 17px;
         line-height: 1.65;
       }
@@ -48,19 +54,19 @@
         line-height: 1.9;
       }
       h1 {
+        font-family: "El Messiri", "Cairo", system-ui, -apple-system,
+          "Segoe UI", Roboto, Tahoma, Arial, sans-serif;
+        font-weight: 700;
         font-size: 1.6rem;
         line-height: 1.3;
         margin: 0.5rem 0 0.25rem;
       }
       h2 {
+        font-weight: 700;
         font-size: 1.15rem;
         margin: 2rem 0 0.5rem;
         padding-bottom: 0.25rem;
         border-bottom: 1px solid var(--border);
-      }
-      h3 {
-        font-size: 1rem;
-        margin: 1.25rem 0 0.25rem;
       }
       p,
       ul {
@@ -79,12 +85,6 @@
       .meta {
         color: var(--muted);
         margin: 0;
-      }
-      .note {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 0.75rem 1rem;
       }
       .switch {
         display: flex;
@@ -116,305 +116,95 @@
       </nav>
 
       <section id="ar" lang="ar" dir="rtl">
-        <h1>سياسة الخصوصية لتطبيق خدمة كنيسة السيدة العذراء مريم</h1>
+        <h1>سياسة الخصوصية</h1>
         <p class="meta">تاريخ السريان: 2 نوفمبر 2026</p>
 
         <h2>من نحن</h2>
         <p>
-          هذا التطبيق (St Mary Church) يستخدمه خدام
-          <strong>كنيسة السيدة العذراء مريم</strong> لمتابعة المخدومين وأسرهم
-          والفصول والخدمات والحضور. الكنيسة هي المسؤولة عن البيانات وعن تحديد
-          أغراض استخدامها. يتولى مطوّر التطبيق، أندرو بخيت، تشغيله تقنيًا
-          لحساب الكنيسة وبتكليف منها، ولا يستخدم البيانات لأي غرض خاص به.
-        </p>
-        <p>
-          التطبيق مفتوح المصدر، ويمكن مراجعة الكود على
-          <a href="https://github.com/Andrew-Bekhiet/church_admin">GitHub</a>.
-          لأي سؤال أو طلب يخص بياناتك راسلنا على
+          يستخدم خدام <strong>كنيسة السيدة العذراء مريم</strong> هذا التطبيق
+          لمتابعة المخدومين وأسرهم والفصول والخدمات. الكنيسة هي المسؤولة عن
+          البيانات. للتواصل:
           <a href="mailto:churchadmin@andrewbekhiet.dev">churchadmin@andrewbekhiet.dev</a>.
         </p>
 
-        <h2>البيانات التي نجمعها</h2>
-        <h3>عن الخادم صاحب الحساب</h3>
+        <h2>البيانات التي نجمعها عنك</h2>
         <ul>
-          <li>
-            البريد الإلكتروني وكلمة المرور. تسجيل الدخول بالبريد وكلمة المرور
-            فقط، وتتولى Firebase Authentication حفظ كلمة المرور، فلا يطّلع عليها
-            التطبيق ولا الكنيسة.
-          </li>
-          <li>
-            الاسم والصورة (إن وُجدت) وسجلّك الشخصي في بيانات الكنيسة، والصلاحيات
-            والخدمات والفصول المسؤول عنها.
-          </li>
-          <li>حالة الاتصال وآخر ظهور لك في التطبيق.</li>
-          <li>رمز الجهاز الخاص بالإشعارات (لإرسال الإشعارات إليك).</li>
-          <li>
-            على iPhone: تسجيل كل محاولة لأخذ لقطة شاشة أو تسجيل الشاشة (نوع
-            المحاولة ووقتها).
-          </li>
-          <li>
-            بيانات الاستخدام والأعطال وتسجيلات الجلسات، وهي موضحة بالتفصيل أدناه.
-          </li>
+          <li>بيانات حسابك، مثل بريدك الإلكتروني واسمك.</li>
+          <li>بيانات الاستخدام والأعطال.</li>
+          <li>معلومات عن جهازك ونظام التشغيل.</li>
         </ul>
 
-        <h3>عن المخدومين وأسرهم</h3>
+        <h2>بيانات المخدومين</h2>
         <p>
-          يُدخل الخدام هذه البيانات بأنفسهم، والكنيسة مسؤولة عنها، ويحفظها
-          التطبيق ويعالجها نيابةً عن الكنيسة. قد تشمل:
-        </p>
-        <ul>
-          <li>الاسم والنوع وتاريخ الميلاد والصورة.</li>
-          <li>
-            الرقم القومي، إذا فعّلت الكنيسة هذا الحقل (وهو غير مفعّل افتراضيًا).
-          </li>
-          <li>أرقام الهاتف (الشخصية وأرقام الأسرة) والعنوان وموقعه على الخريطة.</li>
-          <li>الأسرة وصلة القرابة بين أفرادها.</li>
-          <li>
-            الكنيسة وأب الاعتراف، والمدرسة أو الكلية والسنة الدراسية، والمؤهل
-            والعمل، والحالة الاجتماعية، والهوايات، والملاحظات والتصنيفات.
-          </li>
-          <li>
-            الخدمات والفصول والمجموعات التابع لها، وسجلات الحضور والافتقاد
-            والمكالمات، وتواريخ الاعتراف وحضور القداس.
-          </li>
-          <li>سجلّ التعديلات: من عدّل السجل ومتى.</li>
-        </ul>
-        <p>
-          بعض هذه البيانات تخص أطفالًا، وبعضها يكشف عن الانتماء الديني، لذلك
-          نتعامل معها على أنها بيانات حسّاسة.
+          هي البيانات التي تختار الكنيسة تسجيلها عن مخدوميها وأسرهم، مثل الأسماء
+          وبيانات الاتصال والعناوين وصلات القرابة والصور والمشاركة في الخدمات
+          والأنشطة الكنسية. يُدخلها خدام الكنيسة، والكنيسة مسؤولة عنها، وقد تشمل
+          بيانات أطفال. لا يراها إلا الخدام المصرّح لهم.
         </p>
 
-        <h2>لماذا نستخدمها</h2>
-        <ul>
-          <li>لتمكين الخدام من متابعة المخدومين وافتقادهم وتسجيل الحضور.</li>
-          <li>للتحقق من هويتك وتحديد ما يُسمح لك برؤيته وتعديله.</li>
-          <li>
-            لإرسال الإشعارات والتذكيرات (أعياد الميلاد، الاعتراف، القداس،
-            الحضور).
-          </li>
-          <li>لاكتشاف الأعطال وإصلاحها وتحسين التطبيق.</li>
-          <li>لحماية البيانات من النسخ أو التسريب.</li>
-        </ul>
-        <p>لا نبيع أي بيانات، ولا نعرض إعلانات، ولا نستخدم البيانات للتسويق.</p>
-
-        <h2>من يرى سجلات المخدومين</h2>
-        <ul>
-          <li>لا يدخل أي خادم إلا بعد أن يعتمد حسابه أحد المسؤولين.</li>
-          <li>
-            يرى كل خادم المخدومين في الخدمات والفصول المسؤول عنها فقط، ما لم
-            تمنحه الكنيسة صلاحية رؤية كل البيانات.
-          </li>
-          <li>
-            هناك صلاحيات منفصلة لتعديل البيانات، وتسجيل الحضور، وتصدير البيانات،
-            وإدارة المستخدمين، واسترجاع المحذوف. يمنح المسؤولون في الكنيسة هذه
-            الصلاحيات.
-          </li>
-          <li>
-            تصدير البيانات ينشئ ملف Excel يُحفظ في Firebase Storage، ويُفتح
-            برابط تحميل صالح لمدة عشر دقائق.
-          </li>
-        </ul>
+        <h2>تسجيل الجلسات والتحليلات</h2>
+        <p>
+          قد تُسجَّل جلسات استخدام التطبيق لتشخيص المشكلات، والنصوص والصور التي
+          على الشاشة تُخفى افتراضيًا. ترتبط التحليلات وتقارير الأعطال بحسابك.
+        </p>
 
         <h2>مقدّمو الخدمات</h2>
         <p>
-          نعتمد على الشركات التالية لتشغيل التطبيق، وتعالج كلٌّ منها البيانات
-          لحسابنا فقط:
+          نعتمد على مقدّمي خدمات موثوقين يستضيفون التطبيق ويشغّلونه، مثل Google
+          Firebase. وتصل بياناتك الشخصية إلى الجهات التالية للتحليلات وتقارير
+          الأعطال وتسجيل الجلسات:
         </p>
         <ul>
-          <li>
-            <strong>Google Firebase</strong>: تسجيل الدخول، وقاعدة بيانات حالة
-            الاتصال (Realtime Database)، والإشعارات (Cloud Messaging)،
-            والإعدادات عن بُعد (Remote Config)، والتحقق من سلامة التطبيق (App
-            Check)، والدوال السحابية (Cloud Functions) على خوادم في أوروبا،
-            وحفظ الصور والملفات المصدَّرة (Cloud Storage).
-            <a href="https://firebase.google.com/support/privacy">سياسة الخصوصية</a>
-          </li>
-          <li>
-            <strong>Railway</strong>: استضافة قاعدة البيانات الرئيسية (PostgreSQL)
-            وواجهة Hasura التي يتصل بها التطبيق.
-            <a href="https://railway.com/legal/privacy">سياسة الخصوصية</a>
-          </li>
-          <li>
-            <strong>PostHog</strong> (خوادم الاتحاد الأوروبي): تسجيل الجلسات،
-            وتتبّع الأعطال، والسجلات التقنية، والاستبيانات داخل التطبيق،
-            والتحليلات.
-            <a href="https://posthog.com/privacy">سياسة الخصوصية</a>
-          </li>
-          <li>
-            <strong>Sentry</strong> (خوادم الولايات المتحدة): تقارير الأعطال
-            وقياس الأداء وتسجيل الجلسات.
-            <a href="https://sentry.io/privacy/">سياسة الخصوصية</a>
-          </li>
-          <li>
-            <strong>Shorebird</strong>: تحديثات التطبيق السريعة دون المرور
-            بالمتجر، وقد يجمع معرّفًا مجهول الهوية للجهاز.
-            <a href="https://shorebird.dev/privacy">سياسة الخصوصية</a>
-          </li>
-          <li>
-            <strong>OpenStreetMap</strong>: صور الخرائط. عند فتح خريطة يصل
-            خادم الخرائط عنوان IP الخاص بك والمنطقة المعروضة.
-            <a href="https://osmfoundation.org/wiki/Privacy_Policy">سياسة الخصوصية</a>
-          </li>
-        </ul>
-        <p>
-          عند فتح محادثة WhatsApp أو الاتصال أو إرسال رسالة نصية، ينتقل الأمر إلى
-          التطبيق المختص على جهازك، وتسري عليه سياسته الخاصة، ومنها
-          <a href="https://www.whatsapp.com/legal/privacy-policy">سياسة خصوصية WhatsApp</a>.
-        </p>
-
-        <h2>تسجيل الجلسات والتحليلات وتقارير الأعطال</h2>
-        <div class="note">
-          <p>
-            <strong>قد تُسجَّل كل جلسة استخدام للتطبيق.</strong> يسجّل PostHog
-            وSentry ما يظهر على الشاشة ولمساتك عليها، ليساعدانا على فهم الأعطال
-            وصعوبات الاستخدام. نسبة التسجيل الحالية هي كل الجلسات، ويمكن تغييرها
-            عن بُعد. كما يحفظ Sentry دائمًا اللحظات السابقة لأي عطل.
-          </p>
-        </div>
-        <ul>
-          <li>
-            كل النصوص والصور تُخفى افتراضيًا بمربعات تغطيها، فلا تظهر في
-            التسجيل أسماء المخدومين ولا أرقامهم ولا صورهم.
-          </li>
-          <li>
-            تُترك بعض أجزاء الواجهة ظاهرة عمدًا لأنها لا تحتوي على بيانات شخصية:
-            شريط التنقل والقائمة الجانبية والشريط العلوي، وشاشة الإعدادات، وعنوان
-            شاشة الدخول وصورتها، وشاشات التحديث والصيانة، ونوافذ الأخطاء ونافذة
-            "حول"، وبطاقات الصفحة الرئيسية والنصوص اليومية، وأسماء الخدمات
-            والفصول والمجموعات والمناطق والسنوات الدراسية والاجتماعات، وأعداد
-            العناصر في القوائم.
-          </li>
-          <li>
-            تقارير الأعطال (Sentry) تتضمن معلومات الجهاز ونظام التشغيل وعنوان IP،
-            وبريدك الإلكتروني واسمك ومعرّف حسابك، ولقطة شاشة لحظة العطل تُخفى فيها
-            النصوص والصور بالطريقة نفسها.
-          </li>
-          <li>
-            السجلات التقنية وتقارير الأعطال والتسجيلات في PostHog مرتبطة ببريدك
-            الإلكتروني واسمك.
-          </li>
-          <li>
-            تحليلات الاستخدام (مثل فتح شاشة أو حفظ سجل) لا تعمل إلا إذا فعّلناها
-            من الإعدادات عن بُعد. وهي مرتبطة ببريدك واسمك وصلاحياتك، لكن الأحداث
-            نفسها تحمل معرّفات وأعدادًا واختيارات فقط، ولا تحمل أسماء المخدومين
-            ولا أرقام هواتفهم ولا نص البحث (يُسجَّل طول نص البحث فقط).
-          </li>
+          <li><a href="https://policies.google.com/privacy">Google (Firebase)</a></li>
+          <li><a href="https://posthog.com/privacy">PostHog</a></li>
+          <li><a href="https://sentry.io/privacy/">Sentry</a></li>
         </ul>
 
         <h2>صلاحيات الجهاز</h2>
         <ul>
-          <li>
-            <strong>الكاميرا ومعرض الصور</strong>: عند اختيارك إضافة صورة لشخص أو
-            أسرة فقط. تُرفع الصورة بعد قصّها إلى Firebase Storage.
-          </li>
-          <li>
-            <strong>جهات الاتصال</strong>: عندما تختار استيراد رقم من جهة اتصال
-            تفتح قائمة جهات الاتصال لتختار واحدة، وعندما تطلب حفظ رقم مخدوم على
-            جهازك. لا يُرفع دليل الهاتف ولا يُقرأ كاملًا.
-          </li>
-          <li>
-            <strong>الموقع</strong>: أثناء استخدام التطبيق فقط، في شاشات الخرائط،
-            لإظهار مكانك ومساعدتك على تحديد موقع عنوان. لا يقرأ التطبيق موقعك في
-            الخلفية، ولا يُحفظ موقعك إلا إذا اخترت أن تستخدمه موقعًا لعنوان.
-          </li>
-          <li>
-            <strong>البصمة أو التعرّف على الوجه</strong>: لفتح التطبيق. يتم التحقق
-            على جهازك بواسطة النظام، ولا يصل التطبيق أي بيانات حيوية.
-          </li>
-          <li>
-            <strong>الإشعارات</strong>: لإشعارات الكنيسة وللتذكيرات. على أجهزة
-            Android تُجدوَل التذكيرات على الجهاز نفسه، ولذلك يطلب التطبيق صلاحيات
-            المنبّهات والتشغيل بعد إعادة تشغيل الجهاز.
-          </li>
-          <li>
-            <strong>WhatsApp والاتصال والرسائل</strong>: يفتح التطبيق المحادثة
-            ومعها رسالة مكتوبة مسبقًا، وأنت من يضغط إرسال. لا يُرسَل شيء تلقائيًا.
-            بعد المكالمة يسألك التطبيق إن كنت تريد تسجيل تاريخها في سجل المخدوم.
-          </li>
-          <li>
-            <strong>لقطات الشاشة</strong>: يمنع التطبيق لقطات الشاشة وتسجيلها
-            على Android. على iPhone لا يمكن منعها، فيُسجَّل كل محاولة وقد يصل إشعار
-            بها إلى المسؤولين الذين لهم هذه الصلاحية.
-          </li>
+          <li>الكاميرا والصور: لإضافة صورة عندما تختار ذلك.</li>
+          <li>جهات الاتصال: عندما تختار استيراد رقم فقط.</li>
+          <li>الموقع: أثناء استخدام الخرائط فقط.</li>
+          <li>البصمة أو الوجه: لفتح التطبيق، والتحقق يتم على جهازك فقط.</li>
+          <li>لا يُرسل التطبيق أي رسالة WhatsApp تلقائيًا.</li>
         </ul>
+        <p>
+          على iPhone قد تُسجَّل محاولات تصوير الشاشة أو تسجيلها ويُبلَّغ بها
+          المسؤولون في الكنيسة.
+        </p>
 
-        <h2>مشاركة البيانات</h2>
-        <p>لا نشارك البيانات إلا في الحالات التالية:</p>
-        <ul>
-          <li>مع الخدام والمسؤولين في الكنيسة، كلٌّ حسب صلاحياته.</li>
-          <li>مع مقدّمي الخدمات المذكورين أعلاه، لتشغيل التطبيق فقط.</li>
-          <li>إذا ألزمنا القانون بذلك.</li>
-        </ul>
+        <h2>المشاركة</h2>
+        <p>
+          لا نبيع أي بيانات ولا نعرض إعلانات. نشارك البيانات فقط مع خدام الكنيسة
+          حسب صلاحياتهم، ومع مقدّمي الخدمات لتشغيل التطبيق، أو إذا ألزمنا القانون.
+        </p>
 
-        <h2>مدة الاحتفاظ</h2>
-        <ul>
-          <li>نحتفظ ببيانات حسابك ما دام الحساب قائمًا.</li>
-          <li>
-            سجلات المخدومين جزء من سجلات الكنيسة، وتبقى إلى أن تقرر الكنيسة
-            حذفها.
-          </li>
-          <li>
-            عند حذف سجل من التطبيق ينتقل إلى أرشيف المحذوفات، ويستطيع من له
-            الصلاحية استرجاعه. للحذف النهائي من الأرشيف راسلنا.
-          </li>
-          <li>
-            الملفات المصدَّرة تبقى في Firebase Storage إلى أن تُحذف، ويمكنك طلب
-            حذفها.
-          </li>
-          <li>
-            يحتفظ PostHog وSentry بالتسجيلات والتقارير لمدة محدودة بحسب خطة
-            الاشتراك، ثم تُحذف تلقائيًا.
-          </li>
-        </ul>
+        <h2>الاحتفاظ والحذف</h2>
+        <p>
+          يمكنك حذف حسابك من التطبيق أو من صفحة
+          <a href="/delete-account/">حذف الحساب</a>، فيُحذف حساب الدخول وتُلغى
+          صلاحياتك.
+        </p>
+        <p>
+          تبقى سجلات الكنيسة عنك أو عن ابنك إلى أن تطلب من الكنيسة تصحيحها أو
+          حذفها، عن طريق الخادم المسؤول أو بمراسلتنا.
+        </p>
+        <p>قد تُحفظ السجلات المحذوفة في أرشيف لإمكانية استرجاعها.</p>
 
-        <h2>حذف الحساب وتصحيح البيانات أو حذفها</h2>
-        <ul>
-          <li>
-            <strong>حذف حسابك</strong>: من شاشة "حسابي" في التطبيق، ثم حذف
-            الحساب، مع تأكيدين. أو من صفحة
-            <a href="https://church-data-admin.firebaseapp.com/delete-account/">حذف الحساب</a>،
-            أو بمراسلتنا. حذف الحساب يحذف حساب الدخول ويلغي صلاحياتك، أما سجلّك
-            الشخصي في بيانات الكنيسة فيبقى ضمن سجلاتها ما لم تطلب حذفه أيضًا.
-          </li>
-          <li>
-            <strong>إن كانت لك أو لابنك بيانات في التطبيق</strong>: اطلب من
-            الخادم المسؤول أو من الكنيسة تصحيحها أو حذفها، أو راسلنا على البريد
-            أدناه وسنوصّل طلبك إلى الكنيسة وننفّذه بموافقتها. قد نطلب ما يثبت
-            هويتك أو صلتك بصاحب السجل.
-          </li>
-          <li>
-            يمكنك أيضًا أن تطلب نسخة من بياناتك، أو أن تعترض على استخدام معيّن
-            لها.
-          </li>
-        </ul>
-
-        <h2>أمان البيانات</h2>
-        <ul>
-          <li>كل الاتصالات مشفّرة (HTTPS).</li>
-          <li>يُحدَّد ما يراه كل مستخدم بصلاحياته على الخادم، لا في التطبيق فقط.</li>
-          <li>يتحقق Firebase App Check من أن الطلبات صادرة من التطبيق الأصلي.</li>
-          <li>يمكنك قفل التطبيق بالبصمة أو بكلمة المرور.</li>
-          <li>لقطات الشاشة ممنوعة على Android ومسجّلة على iPhone.</li>
-        </ul>
-        <p>لا يوجد نظام آمن تمامًا، لكننا نعمل على حماية البيانات قدر استطاعتنا.</p>
+        <h2>الأمان</h2>
+        <p>نحمي البيانات بالاتصال المشفّر والصلاحيات.</p>
 
         <h2>الأطفال</h2>
         <p>
-          التطبيق مخصص للخدام الذين تكلّفهم الكنيسة، وليس للأطفال. لكن سجلات
-          المخدومين قد تشمل أطفالًا، كمخدومي مدارس الأحد، ويُدخلها الخدام
-          بمسؤولية الكنيسة. يستطيع ولي الأمر في أي وقت أن يطلب الاطلاع على بيانات
-          ابنه أو تصحيحها أو حذفها كما هو موضح أعلاه.
+          التطبيق مخصص للخدام وليس للأطفال. يمكن لولي الأمر أن يطلب تصحيح بيانات
+          ابنه أو حذفها في أي وقت.
         </p>
 
-        <h2>التغييرات على هذه السياسة</h2>
-        <p>
-          قد نحدّث هذه السياسة. سننشر النسخة الجديدة في هذه الصفحة ونغيّر تاريخ
-          السريان.
-        </p>
+        <h2>التغييرات</h2>
+        <p>قد نحدّث هذه السياسة، وسننشر أي تغيير في هذه الصفحة مع تاريخ جديد.</p>
 
         <h2>تواصل معنا</h2>
         <p>
-          لأي سؤال أو طلب:
           <a href="mailto:churchadmin@andrewbekhiet.dev">churchadmin@andrewbekhiet.dev</a>
         </p>
       </section>
@@ -422,338 +212,104 @@
       <hr data-both-only />
 
       <section id="en" lang="en" dir="ltr">
-        <h1>Privacy Policy for the St Mary Church servants' app</h1>
+        <h1>Privacy Policy</h1>
         <p class="meta">Effective date: 2 November 2026</p>
 
         <h2>Who we are</h2>
         <p>
-          This app (St Mary Church) is used by the servants of
-          <strong>St Mary Church (كنيسة السيدة العذراء مريم)</strong> to look
-          after the people they serve, their families, classes, services and
-          attendance. The church is the data controller: it decides what is
-          recorded and why. The app's developer, Andrew Bekhiet, runs the
-          technical service on the church's behalf and does not use the data for
-          any purpose of his own.
-        </p>
-        <p>
-          The app is open source; the code is on
-          <a href="https://github.com/Andrew-Bekhiet/church_admin">GitHub</a>.
-          For any question or request about your data, write to
+          Servants of <strong>St Mary Church (كنيسة السيدة العذراء مريم)</strong>
+          use this app to look after the people they serve, their families,
+          classes and services. The church is responsible for the data. Contact:
           <a href="mailto:churchadmin@andrewbekhiet.dev">churchadmin@andrewbekhiet.dev</a>.
         </p>
 
-        <h2>What we collect</h2>
-        <h3>About you, the servant with an account</h3>
+        <h2>What we collect about you</h2>
         <ul>
-          <li>
-            Your email address and password. Sign-in is by email and password
-            only. Firebase Authentication stores the password; neither the app
-            nor the church can read it.
-          </li>
-          <li>
-            Your name, photo (if any), your own record in the church's data, and
-            your permissions and the services and classes you are responsible
-            for.
-          </li>
-          <li>Whether you are online, and when you were last active.</li>
-          <li>A device token used to send you notifications.</li>
-          <li>
-            On iPhone: each attempt to take a screenshot or record the screen
-            (the kind of attempt and its time).
-          </li>
-          <li>Usage, crash and session-replay data, described below.</li>
+          <li>Your account information, such as your email and name.</li>
+          <li>Usage and diagnostics data.</li>
+          <li>Information about your device and operating system.</li>
         </ul>
 
-        <h3>About the people you serve and their families</h3>
+        <h2>The people you serve</h2>
         <p>
-          Servants enter this information themselves and the church is
-          responsible for it. The app stores and processes it on the church's
-          behalf. It can include:
-        </p>
-        <ul>
-          <li>Name, gender, date of birth and photo.</li>
-          <li>
-            National ID number, if the church turns that field on (it is off by
-            default).
-          </li>
-          <li>
-            Phone numbers (personal and family), address and its location on a
-            map.
-          </li>
-          <li>Family, and how family members are related.</li>
-          <li>
-            Church and father of confession, school or college and study year,
-            qualification and job, marital status, hobbies, notes and tags.
-          </li>
-          <li>
-            Services, classes and groups they belong to; attendance, visit and
-            call records; and dates of confession and Liturgy attendance.
-          </li>
-          <li>An edit history: who changed a record and when.</li>
-        </ul>
-        <p>
-          Some of these records are about children, and many reveal religious
-          affiliation, so we treat them as sensitive.
+          This is the information the church chooses to record about the people
+          it serves and their families, such as names, contact details,
+          addresses, family relationships, photos, and their participation in
+          church services and activities. The church's servants enter it and the
+          church is responsible for it. It can include children's data. Only
+          authorised servants can see it.
         </p>
 
-        <h2>Why we use it</h2>
-        <ul>
-          <li>
-            To let servants follow up with the people they serve, visit them and
-            record attendance.
-          </li>
-          <li>To verify who you are and decide what you may see and change.</li>
-          <li>
-            To send notifications and reminders (birthdays, confession, Liturgy,
-            attendance).
-          </li>
-          <li>To find and fix bugs and improve the app.</li>
-          <li>To protect the data from being copied or leaked.</li>
-        </ul>
+        <h2>Session recording and analytics</h2>
         <p>
-          We do not sell any data, show ads, or use the data for marketing.
+          Sessions in the app may be recorded to diagnose problems; text and
+          images on screen are masked by default. Analytics and crash reports
+          are linked to your account.
         </p>
-
-        <h2>Who can see records of the people served</h2>
-        <ul>
-          <li>No servant gets in until an administrator approves the account.</li>
-          <li>
-            Each servant sees only the people in the services and classes they
-            are responsible for, unless the church grants access to all data.
-          </li>
-          <li>
-            Editing, recording attendance, exporting, managing users and
-            restoring deleted records are separate permissions, granted by the
-            church's administrators.
-          </li>
-          <li>
-            An export creates an Excel file stored in Firebase Storage, opened
-            through a download link that is valid for ten minutes.
-          </li>
-        </ul>
 
         <h2>Service providers</h2>
         <p>
-          These companies run parts of the app and process data only on our
-          behalf:
+          We rely on trusted service providers that host and run the app, such
+          as Google Firebase. These receive your personal data for analytics,
+          crash reports and session recordings:
         </p>
         <ul>
-          <li>
-            <strong>Google Firebase</strong>: sign-in, the online-status
-            database (Realtime Database), notifications (Cloud Messaging),
-            remote settings (Remote Config), app integrity checks (App Check),
-            server functions (Cloud Functions, on servers in Europe), and storage
-            for photos and exported files (Cloud Storage).
-            <a href="https://firebase.google.com/support/privacy">Privacy policy</a>
-          </li>
-          <li>
-            <strong>Railway</strong>: hosts the main database (PostgreSQL) and
-            the Hasura API the app talks to.
-            <a href="https://railway.com/legal/privacy">Privacy policy</a>
-          </li>
-          <li>
-            <strong>PostHog</strong> (EU servers): session replay, error
-            tracking, technical logs, in-app surveys and analytics.
-            <a href="https://posthog.com/privacy">Privacy policy</a>
-          </li>
-          <li>
-            <strong>Sentry</strong> (US servers): crash reports, performance
-            monitoring and session replay.
-            <a href="https://sentry.io/privacy/">Privacy policy</a>
-          </li>
-          <li>
-            <strong>Shorebird</strong>: delivers app updates without going
-            through the store, and may collect an anonymous device identifier.
-            <a href="https://shorebird.dev/privacy">Privacy policy</a>
-          </li>
-          <li>
-            <strong>OpenStreetMap</strong>: map images. When you open a map, the
-            map server receives your IP address and the area being shown.
-            <a href="https://osmfoundation.org/wiki/Privacy_Policy">Privacy policy</a>
-          </li>
-        </ul>
-        <p>
-          When you open a WhatsApp chat, place a call or send a text message,
-          the relevant app on your phone takes over and its own policy applies,
-          for example
-          <a href="https://www.whatsapp.com/legal/privacy-policy">WhatsApp's privacy policy</a>.
-        </p>
-
-        <h2>Session replay, analytics and crash reports</h2>
-        <div class="note">
-          <p>
-            <strong>Every session in the app may be recorded.</strong> PostHog
-            and Sentry record what appears on screen and where you tap, so we
-            can understand bugs and places where the app is hard to use. The
-            current setting records all sessions, and we can change it remotely.
-            Sentry also always keeps the moments leading up to an error.
-          </p>
-        </div>
-        <ul>
-          <li>
-            All text and images are masked by default with blocks drawn over
-            them, so names, phone numbers and photos of the people you serve do
-            not appear in recordings.
-          </li>
-          <li>
-            A few parts of the interface are deliberately left visible because
-            they hold no personal data: the navigation bar, side menu and top
-            bar; the settings screen; the sign-in title and illustration; update
-            and maintenance screens; error dialogs and the About dialog; the home
-            screen's summary cards and daily texts; the names of services,
-            classes, groups, areas, study years and meetings; and item counts in
-            lists.
-          </li>
-          <li>
-            Crash reports (Sentry) include device and operating-system details,
-            your IP address, your email, name and account ID, and a screenshot
-            taken at the moment of the error, masked the same way.
-          </li>
-          <li>
-            Technical logs, error reports and recordings in PostHog are linked
-            to your email and name.
-          </li>
-          <li>
-            Product analytics (such as opening a screen or saving a record) run
-            only when we turn them on through remote settings. They are linked
-            to your email, name and permissions, but the events themselves carry
-            only IDs, counts and choices. They never carry the names or phone
-            numbers of people you serve, or your search text (only its length is
-            recorded).
-          </li>
+          <li><a href="https://policies.google.com/privacy">Google (Firebase)</a></li>
+          <li><a href="https://posthog.com/privacy">PostHog</a></li>
+          <li><a href="https://sentry.io/privacy/">Sentry</a></li>
         </ul>
 
         <h2>Device permissions</h2>
         <ul>
-          <li>
-            <strong>Camera and photo library</strong>: only when you choose to
-            add a photo of a person or family. The photo is cropped and then
-            uploaded to Firebase Storage.
-          </li>
-          <li>
-            <strong>Contacts</strong>: when you choose to import a number, the
-            system contact picker opens and you pick one contact; when you ask,
-            the app saves a person's number to your phone. Your address book is
-            never read in full or uploaded.
-          </li>
-          <li>
-            <strong>Location</strong>: only while you are using the app, on map
-            screens, to show where you are and help you place an address. The
-            app never reads your location in the background, and your position
-            is saved only if you choose to use it as an address's location.
-          </li>
-          <li>
-            <strong>Fingerprint or Face ID</strong>: to unlock the app. Your
-            phone's system does the check; the app never receives biometric
-            data.
-          </li>
-          <li>
-            <strong>Notifications</strong>: for church notifications and
-            reminders. On Android, reminders are scheduled on the phone itself,
-            which is why the app asks for alarm and start-after-reboot
-            permissions.
-          </li>
-          <li>
-            <strong>WhatsApp, calls and text messages</strong>: the app opens the
-            chat with a message already filled in, and you press send. Nothing
-            is sent automatically. After a call, the app asks whether to record
-            its date in the person's record.
-          </li>
-          <li>
-            <strong>Screen capture</strong>: on Android the app blocks
-            screenshots and screen recording. iPhone does not allow blocking, so
-            each attempt is recorded and may notify administrators who have that
-            permission.
-          </li>
-        </ul>
-
-        <h2>Sharing</h2>
-        <p>We share data only:</p>
-        <ul>
-          <li>with the church's servants and administrators, each within their permissions;</li>
-          <li>with the service providers listed above, only to run the app;</li>
-          <li>when the law requires it.</li>
-        </ul>
-
-        <h2>Retention</h2>
-        <ul>
-          <li>We keep your account data for as long as the account exists.</li>
-          <li>
-            Records of the people served are part of the church's records and
-            stay until the church decides to delete them.
-          </li>
-          <li>
-            Deleting a record in the app moves it to a deleted-items archive,
-            from which anyone with that permission can restore it. Write to us to
-            have it erased from the archive for good.
-          </li>
-          <li>
-            Exported files stay in Firebase Storage until they are deleted; you
-            can ask us to delete them.
-          </li>
-          <li>
-            PostHog and Sentry keep recordings and reports for a limited period
-            set by our plan, then delete them automatically.
-          </li>
-        </ul>
-
-        <h2>Deleting your account, and correcting or deleting records</h2>
-        <ul>
-          <li>
-            <strong>To delete your account</strong>: in the app, open "My
-            account" (حسابي) and choose delete account, then confirm twice. You
-            can also use the
-            <a href="https://church-data-admin.firebaseapp.com/delete-account/">account deletion page</a>
-            or write to us. Deleting your account removes your sign-in and your
-            permissions. Your own record in the church's data stays among its
-            records unless you also ask for it to be deleted.
-          </li>
-          <li>
-            <strong>If you or your child have a record in the app</strong>: ask
-            your servant or the church to correct or delete it, or write to us at
-            the address below. We will pass your request to the church and carry
-            it out with its approval. We may ask you to show who you are or how
-            you are related to the person in the record.
-          </li>
-          <li>
-            You can also ask for a copy of your data, or object to a particular
-            use of it.
-          </li>
-        </ul>
-
-        <h2>Security</h2>
-        <ul>
-          <li>All connections are encrypted (HTTPS).</li>
-          <li>
-            The server, not just the app, enforces what each user may see.
-          </li>
-          <li>Firebase App Check verifies that requests come from the genuine app.</li>
-          <li>You can lock the app with your fingerprint, face or password.</li>
-          <li>Screenshots are blocked on Android and recorded on iPhone.</li>
+          <li>Camera and photos: to add a photo when you choose to.</li>
+          <li>Contacts: only when you choose to import a number.</li>
+          <li>Location: only while you use the maps.</li>
+          <li>Fingerprint or face: to unlock the app; checked on your device only.</li>
+          <li>The app never sends a WhatsApp message automatically.</li>
         </ul>
         <p>
-          No system is perfectly secure, but we work to protect the data as best
-          we can.
+          On iPhone, attempts to take a screenshot or record the screen may be
+          logged and reported to the church's administrators.
         </p>
+
+        <h2>Sharing</h2>
+        <p>
+          We do not sell data or show ads. We share data only with the church's
+          servants within their permissions, with service providers to run the
+          app, or when the law requires it.
+        </p>
+
+        <h2>Retention and deletion</h2>
+        <p>
+          You can delete your account in the app or on the
+          <a href="/delete-account/">account deletion page</a>. This removes your
+          sign-in and your permissions.
+        </p>
+        <p>
+          The church's records about you or your child stay until you ask the
+          church to correct or delete them, through your servant or by writing to
+          us.
+        </p>
+        <p>Deleted records may be kept in an archive so they can be recovered.</p>
+
+        <h2>Security</h2>
+        <p>We protect the data with encrypted connections and access permissions.</p>
 
         <h2>Children</h2>
         <p>
-          The app is meant for servants appointed by the church, not for
-          children. The records of people served can include children, such as
-          Sunday School pupils, and servants enter them under the church's
-          responsibility. A parent or guardian can at any time ask to see,
-          correct or delete their child's record, as described above.
+          The app is meant for servants, not for children. A parent or guardian
+          can ask at any time for their child's record to be corrected or
+          deleted.
         </p>
 
-        <h2>Changes to this policy</h2>
+        <h2>Changes</h2>
         <p>
-          We may update this policy. We will post the new version on this page
-          and change the effective date.
+          We may update this policy and will post any change on this page with a
+          new date.
         </p>
 
         <h2>Contact</h2>
         <p>
-          For any question or request:
           <a href="mailto:churchadmin@andrewbekhiet.dev">churchadmin@andrewbekhiet.dev</a>
         </p>
       </section>
