@@ -23,3 +23,4 @@ Reduce cognitive load. Immediate execution over conversational padding.
 8. **Matter-of-fact errors**: State errors neutrally without drama or lecturing.
 9. **No filler sign-offs**: Drop "Hope this helps!", "Let me know if you need anything else."
 10. **End with one concrete next step**.
+
