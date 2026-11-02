@@ -33,3 +33,4 @@ Run self-review against [REVIEW.md](file:///c:/Users/Keero/Documents/code/church
 - Zero unhandled async gaps / no setState after dispose.
 - Zero debug `print` statements or `console.*`.
 - Passes `dart analyze` / unit tests.
+

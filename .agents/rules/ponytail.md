@@ -30,3 +30,4 @@ Before writing any code, stop at the first rung that holds:
   - Arabic RTL layout & accessibility.
   - Lifecycle & async safety (no write after dispose).
   - Single runnable check: every non-trivial logic change leaves behind one test or assertion proving it works.
+
