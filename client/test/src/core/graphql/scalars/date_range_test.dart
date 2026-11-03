@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   final firstDay = DateTime(2026, 3, 10);
-  final secondDay = addCalendarDays(firstDay, 1);
-  final thirdDay = addCalendarDays(firstDay, 2);
+  final secondDay = firstDay.midnightInDays(1);
+  final thirdDay = firstDay.midnightInDays(2);
 
   test('Date Range => toString', () {
     final dateTimeRange = DateTimeRange(start: firstDay, end: thirdDay);
@@ -90,6 +90,3 @@ void main() {
     );
   });
 }
-
-DateTime addCalendarDays(DateTime date, int days) =>
-    DateTime(date.year, date.month, date.day + days);

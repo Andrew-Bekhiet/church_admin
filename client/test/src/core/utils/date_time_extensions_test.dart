@@ -59,4 +59,40 @@ void main() {
       );
     });
   });
+
+  group('midnightInDays', () {
+    test(
+      'the midnight after the 25-hour DST fall-back day is the next date',
+      () {
+        expect(
+          DateTime(2026, 10, 29).midnightInDays(1),
+          DateTime(2026, 10, 30),
+        );
+      },
+    );
+
+    test(
+      'the midnight after the 23-hour DST spring-forward day is the next date',
+      () {
+        expect(
+          DateTime(2026, 4, 24).midnightInDays(1),
+          DateTime(2026, 4, 25),
+        );
+      },
+    );
+
+    test('drops the time of day', () {
+      expect(
+        DateTime(2026, 10, 29, 23, 30).midnightInDays(0),
+        DateTime(2026, 10, 29),
+      );
+    });
+
+    test('going back across a DST change lands on the earlier date', () {
+      expect(
+        DateTime(2026, 4, 25).midnightInDays(-1),
+        DateTime(2026, 4, 24),
+      );
+    });
+  });
 }

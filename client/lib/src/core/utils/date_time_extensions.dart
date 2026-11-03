@@ -53,6 +53,8 @@ extension DateTimeExtensions on DateTime {
     );
   }
 
+  DateTime midnightInDays(int days) => DateTime(year, month, day + days);
+
   DateTime replaceDate(DateTime date) {
     return DateTime(
       date.year,
