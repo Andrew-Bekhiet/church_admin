@@ -54,6 +54,12 @@ defmodule ChurchAdmin.People.FamilyCommandsTest do
 
   defp address(area, street), do: %{area_id: area.id, street_id: street.id}
 
+  defp addressed_family(area, street) do
+    family = Factory.family!()
+    Factory.address!(%{family_id: family.id, area_id: area.id, street_id: street.id})
+    family
+  end
+
   defp parent_ids(family_id),
     do: FamilyRelation |> rows_of(child_family_id: family_id) |> Enum.map(& &1.parent_family_id)
 
@@ -128,6 +134,54 @@ defmodule ChurchAdmin.People.FamilyCommandsTest do
 
       assert {widowed.marriage_date, widowed.deceased_spouse_name} == {nil, "Fawzy"}
       assert {married.marriage_date, married.deceased_spouse_name} == {~D[2000-01-01], nil}
+    end
+
+    test "an area editor links and visits the family it creates in its area", ctx do
+      parent = addressed_family(ctx.area, ctx.street)
+      child = addressed_family(ctx.area, ctx.street)
+
+      {:ok, family} =
+        People.create_family(
+          %{
+            name: "a",
+            address: address(ctx.area, ctx.street),
+            parents: [parent.id],
+            children: [child.id],
+            last_visit: ~U[2026-10-01 10:00:00.000000Z],
+            last_father_visit: ~U[2026-10-02 10:00:00.000000Z]
+          },
+          actor: area_editor(ctx.area)
+        )
+
+      assert parent_ids(family.id) == [parent.id]
+      assert child_ids(family.id) == [child.id]
+
+      assert family.id
+             |> then(&rows_of(Visit, table: "families", record_id: &1))
+             |> Enum.map(&{&1.time, &1.is_father_visit})
+             |> Enum.sort() == [
+               {~U[2026-10-01 10:00:00.000000Z], false},
+               {~U[2026-10-02 10:00:00.000000Z], true}
+             ]
+    end
+
+    test "an area editor may not create a family left outside its scope", ctx do
+      editor = area_editor(ctx.area)
+      parent = addressed_family(ctx.area, ctx.street)
+      outside_scope = address(ctx.other_area, ctx.other_street)
+
+      for attrs <- [
+            %{name: "a"},
+            %{name: "a", parents: [parent.id]},
+            %{name: "a", children: [parent.id], last_visit: ~U[2026-10-01 10:00:00.000000Z]},
+            %{name: "a", address: outside_scope},
+            %{name: "a", address: outside_scope, parents: [parent.id]}
+          ] do
+        assert {:error, error} = People.create_family(attrs, actor: editor)
+        assert codes(error) == ["forbidden"]
+      end
+
+      assert parent |> Map.fetch!(:id) |> child_ids() == []
     end
 
     test "a parent the actor cannot read is relation/not-found", ctx do
