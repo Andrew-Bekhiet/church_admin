@@ -54,7 +54,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   Map<String, int> _gutterIndex = const {};
 
   DateTime get _fromDate => _selectedDate;
-  DateTime get _toDate => _selectedDate.midnightInDays(1);
+  DateTime get _toDate => DateUtils.addDaysToDate(_selectedDate, 1);
   bool get _asServant => _audienceView.asServant;
 
   AttendanceSorting get _effectiveSort => switch (_grouping) {
@@ -332,8 +332,8 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
         // Ends the day before selectedDate so marking attendance today doesn't
         // retroactively change the shown incoming track record.
         range: DateTimeRange(
-          start: _selectedDate.midnightInDays(-_streakWindowDays),
-          end: _selectedDate.midnightInDays(-1),
+          start: DateUtils.addDaysToDate(_selectedDate, -_streakWindowDays),
+          end: DateUtils.addDaysToDate(_selectedDate, -1),
         ),
         asServant: _asServant,
       );
