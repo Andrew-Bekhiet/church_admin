@@ -34,7 +34,8 @@ defmodule ChurchAdmin.Activity.Visit do
     repo ChurchAdmin.Repo
     migration_types table: :name
 
-    migration_defaults time: ~S[fragment("now()")]
+    migration_defaults time: ~S[fragment("now()")],
+                       visit_id: ~S[fragment("gen_random_uuid()")]
 
     references do
       reference :user,

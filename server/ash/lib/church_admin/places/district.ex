@@ -27,6 +27,7 @@ defmodule ChurchAdmin.Places.District do
   postgres do
     table "districts"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
     identity_index_names unique_name: "districts_unique_name"
   end
 

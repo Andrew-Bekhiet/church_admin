@@ -32,6 +32,7 @@ defmodule ChurchAdmin.Activity.Confession do
     schema "history"
     table "confession_history"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
 
     identity_index_names unique_day_id_person_id: "confession_history_day_id_person_id_key"
 

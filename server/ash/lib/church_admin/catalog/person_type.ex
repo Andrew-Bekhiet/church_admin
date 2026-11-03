@@ -27,7 +27,9 @@ defmodule ChurchAdmin.Catalog.PersonType do
     table "person_types"
     repo ChurchAdmin.Repo
     migration_types order: :integer
-    migration_defaults order: ~S[fragment("nextval('person_types_order_seq'::regclass)")]
+
+    migration_defaults order: ~S[fragment("nextval('person_types_order_seq'::regclass)")],
+                       id: ~S[fragment("gen_random_uuid()")]
 
     identity_index_names unique_name: "person_types_name_key",
                          unique_order: "person_types_order_key"

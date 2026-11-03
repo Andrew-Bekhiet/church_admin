@@ -24,6 +24,7 @@ defmodule ChurchAdmin.Catalog.Tag do
   postgres do
     table "tags"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
     migration_types color: :bigint
     identity_index_names unique_name: "tags_name_key"
   end

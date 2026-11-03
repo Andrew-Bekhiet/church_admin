@@ -49,6 +49,7 @@ defmodule ChurchAdmin.Organization.Group do
   postgres do
     table "groups"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
     migration_types color: :bigint
     identity_index_names unique_default_meeting_id: "groups_default_meeting_id_key"
 

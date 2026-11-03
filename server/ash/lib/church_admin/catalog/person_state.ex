@@ -20,6 +20,7 @@ defmodule ChurchAdmin.Catalog.PersonState do
   postgres do
     table "person_states"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
     migration_types color: :bigint
     identity_index_names unique_color: "states_color_key", unique_name: "states_name_key"
   end

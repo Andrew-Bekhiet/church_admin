@@ -23,6 +23,7 @@ defmodule ChurchAdmin.People.PersonTag do
   postgres do
     table "persons_tags"
     repo ChurchAdmin.Repo
+    migration_defaults rel_id: ~S[fragment("gen_random_uuid()")]
 
     references do
       reference :person, on_delete: :delete, on_update: :restrict

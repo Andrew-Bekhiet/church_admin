@@ -55,6 +55,7 @@ defmodule ChurchAdmin.Organization.Service do
   postgres do
     table "services"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
     migration_types study_year_from_id: :smallint, study_year_to_id: :smallint, color: :bigint
 
     identity_index_names unique_default_meeting_id: "services_default_meeting_id_key",

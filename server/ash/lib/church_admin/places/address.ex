@@ -40,6 +40,7 @@ defmodule ChurchAdmin.Places.Address do
   postgres do
     table "addresses"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
 
     migration_types geolocation: :"geography(Point,4326)",
                     storey_number: :smallint,

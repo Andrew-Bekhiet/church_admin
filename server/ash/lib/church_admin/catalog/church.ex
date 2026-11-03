@@ -24,6 +24,7 @@ defmodule ChurchAdmin.Catalog.Church do
   postgres do
     table "churches"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
     identity_index_names unique_name: "churches_name_key"
   end
 

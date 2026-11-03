@@ -52,6 +52,7 @@ defmodule ChurchAdmin.Places.Street do
   postgres do
     table "streets"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
     foreign_key_names [{:addresses, "addresses_streets_fk"}]
     migration_types line: :"geography(LineString,4326)", color: :bigint
 

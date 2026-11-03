@@ -50,6 +50,7 @@ defmodule ChurchAdmin.Organization.Class do
   postgres do
     table "classes"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
     migration_types service_study_year: :integer, color: :bigint, service_study_year_to: :integer
 
     references do

@@ -34,7 +34,8 @@ defmodule ChurchAdmin.Attendance.AttendanceRecord do
     table "attendance_history"
     repo ChurchAdmin.Repo
 
-    migration_defaults datetime: ~S[fragment("now()")]
+    migration_defaults datetime: ~S[fragment("now()")],
+                       id: ~S[fragment("gen_random_uuid()")]
 
     identity_index_names unique_attendance_per_day_meeting_person_and_role:
                            "attendance_history_meeting_person_day_idx"

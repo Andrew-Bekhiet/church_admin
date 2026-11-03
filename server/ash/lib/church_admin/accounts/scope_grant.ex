@@ -28,6 +28,7 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
     schema "auth"
     table "users_admin_on"
     repo ChurchAdmin.Repo
+    migration_defaults permission_id: ~S[fragment("gen_random_uuid()")]
     migration_types service_study_year: :integer
 
     identity_index_names unique_uid_admin_on_area: "users_admin_on_area",

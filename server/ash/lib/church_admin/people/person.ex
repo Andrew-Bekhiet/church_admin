@@ -129,6 +129,7 @@ defmodule ChurchAdmin.People.Person do
   postgres do
     table "persons"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
     migration_types study_year_id: :smallint, color: :bigint
     identity_index_names unique_uid: "persons_uid_key"
 

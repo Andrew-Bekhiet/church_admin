@@ -55,6 +55,7 @@ defmodule ChurchAdmin.People.Family do
   postgres do
     table "families"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
     migration_types color: :bigint
 
     references do

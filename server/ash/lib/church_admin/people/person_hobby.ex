@@ -22,6 +22,7 @@ defmodule ChurchAdmin.People.PersonHobby do
   postgres do
     table "persons_hobbies"
     repo ChurchAdmin.Repo
+    migration_defaults rel_id: ~S[fragment("gen_random_uuid()")]
 
     references do
       reference :hobby, on_delete: :restrict, on_update: :restrict

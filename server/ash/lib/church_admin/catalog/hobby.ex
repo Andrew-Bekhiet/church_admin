@@ -24,6 +24,7 @@ defmodule ChurchAdmin.Catalog.Hobby do
   postgres do
     table "hobbies"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
     migration_types color: :bigint
     identity_index_names unique_name: "hobbies_name_key"
   end

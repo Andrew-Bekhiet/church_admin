@@ -22,6 +22,7 @@ defmodule ChurchAdmin.People.FamilyRelation do
   postgres do
     table "families_families"
     repo ChurchAdmin.Repo
+    migration_defaults rel_id: ~S[fragment("gen_random_uuid()")]
 
     references do
       reference :child,

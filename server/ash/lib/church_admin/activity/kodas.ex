@@ -33,6 +33,7 @@ defmodule ChurchAdmin.Activity.Kodas do
     schema "history"
     table "kodas_history"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
 
     identity_index_names unique_day_id_person_id: "kodas_history_day_id_person_id_key"
 

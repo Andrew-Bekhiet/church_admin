@@ -24,6 +24,7 @@ defmodule ChurchAdmin.Catalog.Qualification do
   postgres do
     table "qualifications"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
     identity_index_names unique_name: "qualifications_name_key"
   end
 

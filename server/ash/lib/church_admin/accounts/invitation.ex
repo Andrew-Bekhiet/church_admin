@@ -27,7 +27,8 @@ defmodule ChurchAdmin.Accounts.Invitation do
     repo ChurchAdmin.Repo
 
     migration_defaults created_at: ~S[fragment("now()")],
-                       expires_at: ~S[fragment("(now() + '7 days'::interval)")]
+                       expires_at: ~S[fragment("(now() + '7 days'::interval)")],
+                       id: ~S[fragment("gen_random_uuid()")]
 
     identity_index_names unique_code: "invitations_code_key",
                          unique_user_uid: "invitations_user_uid_key"

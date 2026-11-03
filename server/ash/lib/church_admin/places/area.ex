@@ -51,6 +51,7 @@ defmodule ChurchAdmin.Places.Area do
   postgres do
     table "areas"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
     foreign_key_names [{:addresses, "addresses_areas_fk"}]
     migration_types bounds: :"geography(Polygon,4326)", color: :bigint
 

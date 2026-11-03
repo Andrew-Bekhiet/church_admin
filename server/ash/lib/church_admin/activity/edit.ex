@@ -26,7 +26,8 @@ defmodule ChurchAdmin.Activity.Edit do
     repo ChurchAdmin.Repo
     migration_types table: :name
 
-    migration_defaults time: ~S[fragment("now()")]
+    migration_defaults time: ~S[fragment("now()")],
+                       audit_id: ~S[fragment("gen_random_uuid()")]
 
     references do
       reference :user,

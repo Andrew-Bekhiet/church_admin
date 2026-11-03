@@ -27,6 +27,7 @@ defmodule ChurchAdmin.Catalog.Father do
   postgres do
     table "fathers"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
     identity_index_names unique_name: "fathers_name_key"
 
     references do

@@ -20,6 +20,7 @@ defmodule ChurchAdmin.Catalog.ShammasLevel do
   postgres do
     table "shammas_levels"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
     migration_types order: :integer
 
     identity_index_names unique_name: "shammas_level_name_key",

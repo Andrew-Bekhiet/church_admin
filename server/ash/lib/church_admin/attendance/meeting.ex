@@ -35,6 +35,7 @@ defmodule ChurchAdmin.Attendance.Meeting do
     schema "history"
     table "meetings"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
     migration_types service_study_year: :integer, color: :bigint
 
     references do

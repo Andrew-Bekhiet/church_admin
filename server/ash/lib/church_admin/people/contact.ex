@@ -31,7 +31,10 @@ defmodule ChurchAdmin.People.Contact do
     table "contacts"
     repo ChurchAdmin.Repo
     migration_types phone: :e164_phone
-    migration_defaults created_at: ~S[fragment("now()")], updated_at: ~S[fragment("now()")]
+
+    migration_defaults created_at: ~S[fragment("now()")],
+                       updated_at: ~S[fragment("now()")],
+                       id: ~S[fragment("gen_random_uuid()")]
 
     identity_index_names unique_person_id_phone: "contacts_person_id_phone_key",
                          one_main_phone_per_person: "contacts_person_main_phone_key",

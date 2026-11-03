@@ -46,6 +46,7 @@ defmodule ChurchAdmin.Places.Store do
   postgres do
     table "stores"
     repo ChurchAdmin.Repo
+    migration_defaults id: ~S[fragment("gen_random_uuid()")]
     migration_types color: :bigint
 
     references do

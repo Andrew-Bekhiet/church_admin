@@ -84,6 +84,7 @@ defmodule ChurchAdmin.Accounts.User do
     schema "auth"
     table "users_data"
     repo ChurchAdmin.Repo
+    migration_defaults uid: ~S[fragment("gen_random_uuid()")]
 
     identity_index_names unique_auth_id: "users_data_auth_id_key",
                          unique_email: "users_data_email_key",

@@ -23,6 +23,7 @@ defmodule ChurchAdmin.People.GroupMembership do
   postgres do
     table "persons_groups"
     repo ChurchAdmin.Repo
+    migration_defaults rel_id: ~S[fragment("gen_random_uuid()")]
     identity_index_names unique_person_id_group_id: "persons_groups_person_id_group_id_key"
 
     references do
