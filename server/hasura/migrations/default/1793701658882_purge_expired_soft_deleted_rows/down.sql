@@ -25,7 +25,9 @@ drop function if exists operations.record_soft_deleted_rows_kept_by_guards(
     bigint, text, timestamptz
 );
 drop function if exists operations.soft_deleted_purge_guards();
+drop function if exists operations.is_live_person_without_own_connection(public.persons);
 drop function if exists operations.soft_deleted_purge_order();
 drop function if exists operations.soft_deleted_rows_retention();
 drop table if exists operations.soft_deleted_purge_kept_rows;
 drop table if exists operations.soft_deleted_purge_runs;
+drop domain if exists operations.soft_deleted_purge_run_status;

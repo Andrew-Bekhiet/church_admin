@@ -1,14 +1,24 @@
 create schema if not exists operations;
 
+do $$
+begin
+    if not exists (
+        select 1 from pg_type
+        where typname = 'soft_deleted_purge_run_status'
+          and typnamespace = 'operations'::regnamespace
+    ) then
+        create domain operations.soft_deleted_purge_run_status as text
+        check (value in ('completed', 'failed'));
+    end if;
+end $$;
+
 create table if not exists operations.soft_deleted_purge_runs (
     id bigint generated always as identity primary key,
     recorded_at timestamptz not null default now(),
     deleted_before timestamptz not null,
-    status text not null,
+    status operations.soft_deleted_purge_run_status not null,
     purged_counts jsonb,
-    error text,
-    constraint soft_deleted_purge_runs_status_check
-    check (status in ('completed', 'failed'))
+    error text
 );
 
 create table if not exists operations.soft_deleted_purge_kept_rows (
@@ -50,6 +60,17 @@ return array[
     'public.areas'
 ];
 
+create or replace function operations.is_live_person_without_own_connection(
+    p_person public.persons
+)
+returns boolean
+language sql
+immutable
+return p_person.deleted_at is null
+and p_person.family_id is null
+and p_person.store_id is null
+and p_person.uid is null;
+
 create or replace function operations.soft_deleted_purge_guards()
 returns table (target_table text, keep_reason text, keep_predicate text)
 language sql
@@ -83,6 +104,35 @@ as $$
             'exists (select 1 from public.areas_streets link'
             || ' join public.streets street on street.id = link.street_id'
             || ' where link.area_id = doomed.id and street.deleted_at is null)'
+        ),
+        (
+            'public.groups',
+            'group_is_last_connection_of_live_person',
+            'exists (select 1 from public.persons_groups link'
+            || ' join public.persons person on person.id = link.person_id'
+            || ' where link.group_id = doomed.id'
+            || ' and operations.is_live_person_without_own_connection(person)'
+            || ' and not exists (select 1 from public.persons_groups other'
+            || ' join public.groups grp on grp.id = other.group_id'
+            || ' where other.person_id = person.id and other.group_id <> doomed.id and grp.deleted_at is null)'
+            || ' and not exists (select 1 from public.persons_services other'
+            || ' join public.services service on service.id = other.service_id'
+            || ' where other.person_id = person.id and service.deleted_at is null))'
+        ),
+        (
+            'public.services',
+            'service_is_last_connection_of_live_person',
+            'exists (select 1 from public.persons_services link'
+            || ' join public.persons person on person.id = link.person_id'
+            || ' where link.service_id = doomed.id'
+            || ' and operations.is_live_person_without_own_connection(person)'
+            || ' and not exists (select 1 from public.persons_services other'
+            || ' join public.services service on service.id = other.service_id'
+            || ' where other.person_id = person.id and other.service_id <> doomed.id'
+            || ' and service.deleted_at is null)'
+            || ' and not exists (select 1 from public.persons_groups other'
+            || ' join public.groups grp on grp.id = other.group_id'
+            || ' where other.person_id = person.id and grp.deleted_at is null))'
         )
 $$;
 
