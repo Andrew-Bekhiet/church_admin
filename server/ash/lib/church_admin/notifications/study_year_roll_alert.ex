@@ -10,13 +10,11 @@ defmodule ChurchAdmin.Notifications.StudyYearRollAlert do
 
   use Oban.Worker, queue: :notifications, max_attempts: 5
 
-  require Ash.Query
   require Logger
 
-  alias ChurchAdmin.Accounts.DeviceToken
   alias ChurchAdmin.Authz.Actor
-  alias ChurchAdmin.Google.Messaging
   alias ChurchAdmin.Google.Messaging.Message
+  alias ChurchAdmin.Notifications.PermissionHolderAlert
   alias ChurchAdmin.Operations.StudyYearRollRun
 
   @maintenance_permission "maintenanceNotifications"
@@ -36,17 +34,13 @@ defmodule ChurchAdmin.Notifications.StudyYearRollAlert do
 
   defp alert_once(%StudyYearRollRun{status: status, notified_at: nil} = run)
        when status in ["failed", "missed"] do
-    tokens = maintainer_tokens()
+    tokens = PermissionHolderAlert.tokens_of_holders(@maintenance_permission)
 
     if tokens == [] do
       Logger.error("No maintenanceNotifications recipients for study year roll run #{run.id}")
     end
 
-    outcomes = Map.new(tokens, &{&1, Messaging.send_message(alert_message(run, &1))})
-
-    outcomes |> unregistered_tokens() |> delete_device_tokens()
-
-    case delivery_failures(outcomes) do
+    case PermissionHolderAlert.deliver_each(tokens, &alert_message(run, &1)) do
       [] ->
         mark_notified(run)
 
@@ -56,15 +50,6 @@ defmodule ChurchAdmin.Notifications.StudyYearRollAlert do
   end
 
   defp alert_once(_run), do: :ok
-
-  defp maintainer_tokens do
-    DeviceToken
-    |> Ash.Query.filter(exists(user.permissions, permission == ^@maintenance_permission))
-    |> Ash.Query.select([:token])
-    |> Ash.read!(actor: Actor.system(), page: false)
-    |> Enum.map(& &1.token)
-    |> Enum.uniq()
-  end
 
   defp alert_message(%StudyYearRollRun{} = run, token) do
     %Message{
@@ -85,23 +70,6 @@ defmodule ChurchAdmin.Notifications.StudyYearRollAlert do
 
   defp code("failed"), do: "studyYearRollFailed"
   defp code("missed"), do: "studyYearRollMissed"
-
-  defp unregistered_tokens(outcomes),
-    do: for({token, {:error, :unregistered}} <- outcomes, do: token)
-
-  defp delivery_failures(outcomes) do
-    for {token, {:error, reason}} <- outcomes, reason != :unregistered, do: {token, reason}
-  end
-
-  defp delete_device_tokens([]), do: :ok
-
-  defp delete_device_tokens(tokens) do
-    DeviceToken
-    |> Ash.Query.filter(token in ^tokens)
-    |> Ash.bulk_destroy!(:destroy, %{}, actor: Actor.system())
-
-    :ok
-  end
 
   defp mark_notified(run) do
     Ash.update!(run, %{}, action: :mark_notified, actor: Actor.system())
