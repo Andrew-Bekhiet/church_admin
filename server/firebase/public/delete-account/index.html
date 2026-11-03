@@ -14,13 +14,39 @@
 
     <script src="/__/firebase/8.10.1/firebase-app.js"></script>
     <script src="/__/firebase/8.10.1/firebase-auth.js"></script>
-    <script src="/__/firebase/8.10.1/firebase-functions.js"></script>
 
     <script>
+      // Hosting serves this file as is, so it cannot read the client's API_SERVER_URL define.
+      const API_ORIGIN = "";
+
+      async function deleteMyAccount(user) {
+        const idToken = await user.getIdToken();
+
+        const response = await fetch(API_ORIGIN + "/gql", {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + idToken,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            query: "mutation deleteMyAccount {\n  deleteMyAccount\n}",
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("deleteMyAccount answered HTTP " + response.status);
+        }
+
+        const body = await response.json();
+
+        if (body.errors?.length || body.data?.deleteMyAccount !== true) {
+          throw new Error("deleteMyAccount failed: " + JSON.stringify(body));
+        }
+      }
+
       fetch("/__/firebase/init.json").then(async (response) => {
         firebase.initializeApp(await response.json());
 
-        const app = firebase.app();
         const auth = firebase.auth();
 
         var ui = new firebaseui.auth.AuthUI(firebase.auth());
@@ -37,9 +63,7 @@
               );
 
               if (confirmation) {
-                app
-                  .functions("europe-west6")
-                  .httpsCallable("deleteMyAccount")()
+                deleteMyAccount(authResult.user)
                   .then(() => auth.signOut())
                   .then(() => {
                     console.log("Account deleted successfully");
