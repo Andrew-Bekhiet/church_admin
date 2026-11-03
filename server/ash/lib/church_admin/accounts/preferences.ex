@@ -46,7 +46,7 @@ defmodule ChurchAdmin.Accounts.Preferences do
 
     update :update_my_preferences do
       description "Sets the scalar preferences given and merges the patches into the maps; a null patch value removes its key."
-      accept [:dark_theme, :great_feast_theme, :last_home_mode]
+      accept [:dark_theme, :great_feast_theme, :last_home_mode, :last_whatsapp_message_text]
       argument :order_by_preferences_patch, JsonbMap, constraints: [preserve_nil_values?: true]
       argument :second_line_preferences_patch, JsonbMap, constraints: [preserve_nil_values?: true]
 
@@ -74,6 +74,7 @@ defmodule ChurchAdmin.Accounts.Preferences do
     attribute :dark_theme, :boolean, public?: true
     attribute :great_feast_theme, :boolean, allow_nil?: false, default: true, public?: true
     attribute :last_home_mode, Text, public?: true
+    attribute :last_whatsapp_message_text, Text, public?: true
 
     attribute :created_at, AshPostgres.TimestamptzUsec,
       allow_nil?: false,

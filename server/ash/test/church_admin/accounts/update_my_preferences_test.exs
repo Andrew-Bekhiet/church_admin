@@ -80,6 +80,19 @@ defmodule ChurchAdmin.Accounts.UpdateMyPreferencesTest do
       assert %{dark_theme: nil, last_home_mode: nil} = updated
     end
 
+    test "keeps the last WhatsApp message text until null clears it", ctx do
+      text = "رسالة تذكير بموعد الاجتماع"
+
+      assert %{last_whatsapp_message_text: ^text} =
+               update!(ctx.actor, %{last_whatsapp_message_text: text})
+
+      assert %{last_whatsapp_message_text: ^text, dark_theme: true} =
+               update!(ctx.actor, %{dark_theme: true})
+
+      assert %{last_whatsapp_message_text: nil} =
+               update!(ctx.actor, %{last_whatsapp_message_text: nil})
+    end
+
     test "the great-feast theme cannot be null", ctx do
       assert {:error, error} = update(ctx.actor, %{great_feast_theme: nil})
       assert codes(error) == ["required"]

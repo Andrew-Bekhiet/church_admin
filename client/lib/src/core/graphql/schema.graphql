@@ -9434,6 +9434,7 @@ input UpdateMyPreferencesInput {
   darkTheme: Boolean
   greatFeastTheme: Boolean
   lastHomeMode: String
+  lastWhatsappMessageText: String
   orderByPreferencesPatch: Json
   secondLinePreferencesPatch: Json
 }
@@ -9462,6 +9463,24 @@ input UserPreferencesFilterUpdatedAt {
   greaterThanOrEqual: DateTime
   isDistinctFrom: DateTime
   isNotDistinctFrom: DateTime
+}
+
+input UserPreferencesFilterLastWhatsappMessageText {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input UserPreferencesFilterLastHomeMode {
@@ -9543,6 +9562,7 @@ input UserPreferencesFilterInput {
   darkTheme: UserPreferencesFilterDarkTheme
   greatFeastTheme: UserPreferencesFilterGreatFeastTheme
   lastHomeMode: UserPreferencesFilterLastHomeMode
+  lastWhatsappMessageText: UserPreferencesFilterLastWhatsappMessageText
   updatedAt: UserPreferencesFilterUpdatedAt
   secondLinePreferences: UserPreferencesFilterSecondLinePreferences
   user: UserFilterInput
@@ -9555,6 +9575,7 @@ type UserPreferences {
   darkTheme: Boolean
   greatFeastTheme: Boolean!
   lastHomeMode: String
+  lastWhatsappMessageText: String
   updatedAt: DateTime!
   secondLinePreferences: Json!
   user: User

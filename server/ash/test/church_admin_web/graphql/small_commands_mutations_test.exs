@@ -63,6 +63,64 @@ defmodule ChurchAdminWeb.Graphql.SmallCommandsMutationsTest do
              }
     end
 
+    test "writes the last WhatsApp message text and reads it back through the user", %{
+      conn: conn,
+      user: user
+    } do
+      text = "رسالة تذكير بموعد الاجتماع"
+
+      assert %{
+               "data" => %{
+                 "updateMyPreferences" => %{"result" => %{"lastWhatsappMessageText" => ^text}}
+               }
+             } =
+               run(
+                 conn,
+                 """
+                 mutation($input: UpdateMyPreferencesInput!) {
+                   updateMyPreferences(input: $input) { result { lastWhatsappMessageText } }
+                 }
+                 """,
+                 user,
+                 %{"input" => %{"lastWhatsappMessageText" => text}}
+               )
+
+      assert %{
+               "data" => %{
+                 "user" => %{"preferences" => %{"lastWhatsappMessageText" => ^text}}
+               }
+             } =
+               run(
+                 conn,
+                 "query($uid: ID!) { user(id: $uid) { preferences { lastWhatsappMessageText } } }",
+                 user,
+                 %{"uid" => user.uid}
+               )
+    end
+
+    test "another user neither reads nor overwrites the text", %{
+      conn: conn,
+      user: user,
+      world: world
+    } do
+      other = world.users.read_all
+      Ash.Seed.seed!(Preferences, %{uid: other.uid, last_whatsapp_message_text: "other"})
+
+      write =
+        "mutation($input: UpdateMyPreferencesInput!) { updateMyPreferences(input: $input) { result { uid } } }"
+
+      read = "query($uid: ID!) { user(id: $uid) { preferences { lastWhatsappMessageText } } }"
+
+      run(conn, write, user, %{"input" => %{"lastWhatsappMessageText" => "mine"}})
+      run(conn, write, other, %{"input" => %{"lastWhatsappMessageText" => "changed"}})
+
+      assert %{"data" => %{"user" => %{"preferences" => nil}}} =
+               run(conn, read, other, %{"uid" => user.uid})
+
+      assert %{"data" => %{"user" => %{"preferences" => %{"lastWhatsappMessageText" => "mine"}}}} =
+               run(conn, read, user, %{"uid" => user.uid})
+    end
+
     test "has no uid to name: only the signed-in user's row is reachable", %{
       conn: conn,
       world: world
