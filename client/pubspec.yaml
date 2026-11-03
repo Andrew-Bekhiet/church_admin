@@ -97,7 +97,9 @@ dependencies:
   phone_numbers_parser: ^9.0.0
   photo_view: ^0.15.0
   pointycastle: ^4.0.0
-  posthog_flutter: ^5.46.0
+  # 5.58.1 masks every Android replay frame while FLAG_SECURE is set, and
+  # MainActivity sets it app-wide, so newer versions record blank replays.
+  posthog_flutter: ">=5.46.0 <5.58.1"
   pub_semver: ^2.2.0
   riverpod: ^3.0.3
   rxdart: ^0.28.0
