@@ -20,6 +20,11 @@ enum PhotoSubject {
   USERS
 }
 
+enum ScreenCaptureKind {
+  SCREEN_RECORDING
+  SCREENSHOT
+}
+
 enum VisitSubject {
   AREAS
   FAMILIES
@@ -11259,6 +11264,25 @@ type DataCheck {
   family: Family
 }
 
+"The result of the :record_screen_capture_attempt mutation"
+type RecordScreenCaptureAttemptResult {
+  "The successful result of the mutation"
+  result: ScreenCaptureAttempt
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input RecordScreenCaptureAttemptInput {
+  captureKind: ScreenCaptureKind!
+}
+
+type ScreenCaptureAttempt {
+  id: ID!
+  captureKind: ScreenCaptureKind!
+  recordedAt: DateTime!
+}
+
 type RootQueryType {
   appDownloadLink(platform: AppPlatform): AppDownloadLink!
   photoDownloadUrl(subject: PhotoSubject!, id: ID!, contentType: String): PhotoLink!
@@ -12399,6 +12423,9 @@ type RootMutationType {
   deletePhoto(subject: PhotoSubject!, id: ID!): Boolean!
 
   exportData(areasIds: [ID!], servicesIds: [ID!], classesIds: [ID!], groupsIds: [ID!]): ExportDownloadLink!
+
+  "Records that the acting user took a screenshot or recorded the screen."
+  recordScreenCaptureAttempt(input: RecordScreenCaptureAttemptInput!): RecordScreenCaptureAttemptResult
 
   "Sets whether the family's data is complete, whatever the automatic check says."
   overrideDataCheck(input: OverrideDataCheckInput!): OverrideDataCheckResult
