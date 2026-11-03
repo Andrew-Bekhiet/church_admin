@@ -71,25 +71,29 @@ export async function checkUserApproved(uid: string): Promise<boolean> {
   return false;
 }
 
-export async function getHasuraUID(
+export async function getHasuraUIDOrThrow(
   firebaseAuthUID: string,
 ): Promise<string | null> {
-  try {
-    const hasura_response = await makeGraphqlRequest({
-      query: `
+  const hasura_response = await makeGraphqlRequest({
+    query: `
             query getUserByFirebaseUID($firebaseAuthUID: String) {
               authUsersData(where: {authId: {_eq: $firebaseAuthUID}}, limit: 1) {
                 uid
               }
             }
           `,
-      variables: { firebaseAuthUID },
-      operationName: "getUserByFirebaseUID",
-    });
-    const hasura_uid: string =
-      dataOrThrow(hasura_response)["authUsersData"]?.[0]?.["uid"] ?? null;
+    variables: { firebaseAuthUID },
+    operationName: "getUserByFirebaseUID",
+  });
 
-    return hasura_uid;
+  return dataOrThrow(hasura_response)["authUsersData"]?.[0]?.["uid"] ?? null;
+}
+
+export async function getHasuraUID(
+  firebaseAuthUID: string,
+): Promise<string | null> {
+  try {
+    return await getHasuraUIDOrThrow(firebaseAuthUID);
   } catch (e) {
     console.error(e);
   }

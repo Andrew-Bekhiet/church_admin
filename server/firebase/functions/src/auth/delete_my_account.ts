@@ -1,6 +1,6 @@
 import { getAuth } from "firebase-admin/auth";
 import { https } from "firebase-functions/v2";
-import { getHasuraUID, releaseUserAccount } from "../hasura_interface";
+import { getHasuraUIDOrThrow, releaseUserAccount } from "../hasura_interface";
 
 export const deleteMyAccount = https.onCall(async (data) => {
   const uid = data.auth?.uid;
@@ -10,11 +10,11 @@ export const deleteMyAccount = https.onCall(async (data) => {
   }
 
   try {
-    const hasuraUID = await getHasuraUID(uid);
-
-    await getAuth().deleteUser(uid);
+    const hasuraUID = await getHasuraUIDOrThrow(uid);
 
     if (hasuraUID) await releaseUserAccount(hasuraUID);
+
+    await getAuth().deleteUser(uid);
 
     console.log(`User ${uid} deleted successfully`);
 
