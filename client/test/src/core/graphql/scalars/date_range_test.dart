@@ -1,10 +1,11 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart' show DateUtils;
 
 void main() {
   final firstDay = DateTime(2026, 3, 10);
-  final secondDay = addCalendarDays(firstDay, 1);
-  final thirdDay = addCalendarDays(firstDay, 2);
+  final secondDay = DateUtils.addDaysToDate(firstDay, 1);
+  final thirdDay = DateUtils.addDaysToDate(firstDay, 2);
 
   test('Date Range => toString', () {
     final dateTimeRange = DateTimeRange(start: firstDay, end: thirdDay);
@@ -90,6 +91,3 @@ void main() {
     );
   });
 }
-
-DateTime addCalendarDays(DateTime date, int days) =>
-    DateTime(date.year, date.month, date.day + days);

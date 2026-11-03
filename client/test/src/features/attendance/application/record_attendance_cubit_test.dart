@@ -164,6 +164,48 @@ void main() {
           ).called(2); // once on init, once after date change
         },
       );
+
+      blocTest<RecordAttendanceCubit, RecordAttendanceState>(
+        'the 25-hour DST fall-back day streams attendance up to the next '
+        'midnight',
+        build: () => f.createCubit(),
+        act: (cubit) async {
+          await cubit.stream.whereType<RecordAttendanceLoaded>().firstWhere(
+            (s) => s.rosterStatus == RosterStatus.ready,
+          );
+          cubit.selectDate(DateTime(2026, 10, 29));
+        },
+        verify: (_) {
+          verify(
+            () => f.dao.streamAttendanceHistory(
+              meetingId: any(named: 'meetingId'),
+              fromDate: DateTime(2026, 10, 29),
+              toDate: DateTime(2026, 10, 30),
+            ),
+          );
+        },
+      );
+
+      blocTest<RecordAttendanceCubit, RecordAttendanceState>(
+        'the 23-hour DST spring-forward day streams attendance only up to the '
+        'next midnight',
+        build: () => f.createCubit(),
+        act: (cubit) async {
+          await cubit.stream.whereType<RecordAttendanceLoaded>().firstWhere(
+            (s) => s.rosterStatus == RosterStatus.ready,
+          );
+          cubit.selectDate(DateTime(2026, 4, 24));
+        },
+        verify: (_) {
+          verify(
+            () => f.dao.streamAttendanceHistory(
+              meetingId: any(named: 'meetingId'),
+              fromDate: DateTime(2026, 4, 24),
+              toDate: DateTime(2026, 4, 25),
+            ),
+          );
+        },
+      );
     });
 
     group('toggleAudience', () {
