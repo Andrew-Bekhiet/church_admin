@@ -7,7 +7,7 @@ set -eu
 
 app_dir="$(cd "$(dirname "$0")/.." && pwd)"
 repo_root="$(git -C "$app_dir" rev-parse --show-toplevel)"
-baseline_ref="${BASELINE_REF:-e91f310f12b13b3550a5578a9357d9196375864a}"
+baseline_ref="${BASELINE_REF:-1f2c1624efe79634e4bd3231dfd6b40077ae4f28}"
 work_dir="$(mktemp -d)"
 project=church-admin-ash-baseline-compare
 
