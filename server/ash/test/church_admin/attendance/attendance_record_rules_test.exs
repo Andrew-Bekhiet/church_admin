@@ -192,6 +192,37 @@ defmodule ChurchAdmin.Attendance.AttendanceRecordRulesTest do
     end
   end
 
+  describe "Cairo days" do
+    @winter_late_evening ~U[2026-11-03 22:30:00.000000Z]
+    @summer_late_evening ~U[2026-07-03 21:30:00.000000Z]
+
+    test "a record belongs to the Cairo date of its time, in winter and in summer", ctx do
+      meeting = Factory.meeting!(service_id: ctx.service.id)
+
+      {:ok, winter} = attend(ctx, meeting, ctx.boy, at: @winter_late_evening)
+      {:ok, summer} = attend(ctx, meeting, ctx.boy, at: @summer_late_evening)
+
+      assert column("history.attendance_history", "day", winter) == "2026-11-04"
+      assert column("history.attendance_history", "day", summer) == "2026-07-04"
+    end
+
+    test "two records on one Cairo day are refused although they fall on two UTC days", ctx do
+      meeting = Factory.meeting!(service_id: ctx.service.id)
+
+      assert {:ok, _id} = attend(ctx, meeting, ctx.boy, at: ~U[2026-11-03 22:30:00.000000Z])
+
+      assert {:error, "attendance/already-recorded"} =
+               attend(ctx, meeting, ctx.boy, at: ~U[2026-11-04 01:00:00.000000Z])
+    end
+
+    test "records on two Cairo days are kept although they fall on one UTC day", ctx do
+      meeting = Factory.meeting!(service_id: ctx.service.id)
+
+      assert {:ok, _id} = attend(ctx, meeting, ctx.boy, at: ~U[2026-11-03 21:30:00.000000Z])
+      assert {:ok, _id} = attend(ctx, meeting, ctx.boy, at: ~U[2026-11-03 22:30:00.000000Z])
+    end
+  end
+
   describe "changing a record" do
     test "its time moves, and the move is checked against the meeting again", ctx do
       meeting = Factory.meeting!(service_id: ctx.service.id)
