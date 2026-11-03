@@ -1,7 +1,9 @@
 defmodule ChurchAdmin.Operations.ScreenCaptureAttempt do
   @moduledoc """
   One report from the app that its user took a screenshot or recorded the
-  screen. Any signed-in user records their own; nobody reads them back.
+  screen. Any signed-in user records their own; nobody reads them back, the
+  holders of `screenCaptureNotifications` are told through
+  `ChurchAdmin.Notifications.ScreenCaptureAlert`.
   """
 
   use Ash.Resource,
@@ -14,6 +16,7 @@ defmodule ChurchAdmin.Operations.ScreenCaptureAttempt do
   alias ChurchAdmin.Authz.Checks.System
   alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.Operations.CaptureKind
+  alias ChurchAdmin.Operations.Changes.EnqueueScreenCaptureAlert
 
   graphql do
     type :screen_capture_attempt
@@ -39,10 +42,11 @@ defmodule ChurchAdmin.Operations.ScreenCaptureAttempt do
     defaults [:read]
 
     create :record_screen_capture_attempt do
-      description "Records that the acting user took a screenshot or recorded the screen."
+      description "Records that the acting user took a screenshot or recorded the screen and tells the holders of screenCaptureNotifications."
       accept [:capture_kind]
 
       change {StampActor, attribute: :uid}
+      change EnqueueScreenCaptureAlert
     end
   end
 
