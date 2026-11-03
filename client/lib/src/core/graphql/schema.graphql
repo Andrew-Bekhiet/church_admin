@@ -12424,7 +12424,7 @@ type RootMutationType {
 
   exportData(areasIds: [ID!], servicesIds: [ID!], classesIds: [ID!], groupsIds: [ID!]): ExportDownloadLink!
 
-  "Records that the acting user took a screenshot or recorded the screen."
+  "Records that the acting user took a screenshot or recorded the screen and tells the holders of screenCaptureNotifications."
   recordScreenCaptureAttempt(input: RecordScreenCaptureAttemptInput!): RecordScreenCaptureAttemptResult
 
   "Sets whether the family's data is complete, whatever the automatic check says."
