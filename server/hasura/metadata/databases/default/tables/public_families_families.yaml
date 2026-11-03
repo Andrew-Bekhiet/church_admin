@@ -44,6 +44,9 @@ insert_permissions:
                           _eq: any
                       - entity_id:
                           _is_null: true
+              - child:
+                  insertedInCurrentTransaction:
+                    _eq: true
           - _or:
               - &family_by_parent_family_id_editable
                 _exists:
@@ -60,6 +63,9 @@ insert_permissions:
                             - $
                             - parent_family_id
               - *all_data_editable
+              - parent:
+                  insertedInCurrentTransaction:
+                    _eq: true
       columns:
         - child_family_id
         - parent_family_id

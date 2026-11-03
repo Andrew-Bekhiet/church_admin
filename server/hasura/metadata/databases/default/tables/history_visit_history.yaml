@@ -40,6 +40,21 @@ insert_permissions:
                       _ceq:
                         - $
                         - record_id
+          - _and:
+              - table:
+                  _eq: families
+              - _exists:
+                  _table:
+                    name: families
+                    schema: public
+                  _where:
+                    _and:
+                      - id:
+                          _ceq:
+                            - $
+                            - record_id
+                      - insertedInCurrentTransaction:
+                          _eq: true
       set:
         recorded_by: x-hasura-user-id
       columns:
