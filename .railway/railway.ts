@@ -29,16 +29,16 @@ export default defineRailway((ctx) => {
     sizeMB: 5900,
   });
 
-  const hasura = service("burly-lunchroom", {
+  const ash = service("burly-lunchroom", {
     source: github("Andrew-Bekhiet/church_admin", {
       branch: "master",
       checkSuites: true,
-      rootDirectory: "/server/hasura",
+      rootDirectory: "/server/ash",
     }),
     build: {
       builder: "DOCKERFILE",
-      dockerfilePath: "/server/hasura/Dockerfile",
-      watchPatterns: ["/server/hasura/**"],
+      dockerfilePath: "/server/ash/Dockerfile",
+      watchPatterns: ["/server/ash/**"],
     },
     healthcheck: "/healthz",
     healthcheckTimeout: 180,
@@ -51,30 +51,19 @@ export default defineRailway((ctx) => {
           memoryBytes: 2_000_000_000,
         },
       },
-      sleepApplication: true,
     },
     env: {
-      HASURA_GRAPHQL_ADMIN_SECRET: preserve(),
-      HASURA_GRAPHQL_DATABASE_URL:
-        "${{church-admin-db-eu.DATABASE_PRIVATE_URL}}",
-      HASURA_GRAPHQL_DEFAULT_NAMING_CONVENTION: "graphql-default",
-      HASURA_GRAPHQL_DEV_MODE: "false",
-      HASURA_GRAPHQL_ENABLED_APIS: "metadata,graphql",
-      HASURA_GRAPHQL_ENABLE_CONSOLE: "false",
-      HASURA_GRAPHQL_ENABLE_TELEMETRY: "false",
-      HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: "naming_convention",
-      HASURA_GRAPHQL_JWT_SECRET:
-        '{"jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com","audience": "${{shared.FIREBASE_PROJECT_ID}}","issuer": "https://securetoken.google.com/${{shared.FIREBASE_PROJECT_ID}}","claims_namespace_path": "$","claims_format": "json"}',
-      HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL: "1000",
-      HASURA_GRAPHQL_LOG_LEVEL: "info",
-      HASURA_GRAPHQL_SERVER_PORT: "${{PORT}}",
+      APP_RELEASE_GCS_BUCKET: preserve(),
+      CORS_ALLOWED_ORIGINS: preserve(),
+      DATABASE_URL: "${{church-admin-db-eu.DATABASE_PRIVATE_URL}}",
+      FIREBASE_PROJECT_ID: "${{shared.FIREBASE_PROJECT_ID}}",
+      GCS_SIGNING_SERVICE_ACCOUNT: preserve(),
+      GOOGLE_APPLICATION_CREDENTIALS_JSON: preserve(),
+      PHOTOS_GCS_BUCKET: preserve(),
+      PHX_HOST: preserve(),
+      PHX_SERVER: "true",
       PORT: "443",
-      STUDY_YEAR_ROLL_NOTIFY_URL:
-        "https://europe-west6-${{shared.FIREBASE_PROJECT_ID}}.cloudfunctions.net/notifyStudyYearRollFailure",
-      STUDY_YEAR_ROLL_WEBHOOK_SECRET: preserve(),
-      SCREEN_CAPTURE_NOTIFY_URL:
-        "https://europe-west6-${{shared.FIREBASE_PROJECT_ID}}.cloudfunctions.net/notifyScreenCaptureAttempt",
-      SCREEN_CAPTURE_WEBHOOK_SECRET: preserve(),
+      SECRET_KEY_BASE: preserve(),
     },
   });
 
@@ -172,7 +161,7 @@ export default defineRailway((ctx) => {
       SINGLE_SHOT_MODE: "true",
     },
   });
-  const backend = group("backend", [hasura, postgresDb]);
+  const backend = group("backend", [ash, postgresDb]);
 
   return project("church-admin", {
     resources: [
