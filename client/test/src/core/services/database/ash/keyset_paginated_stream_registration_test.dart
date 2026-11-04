@@ -137,6 +137,39 @@ void main() {
       });
     });
 
+    test('a push that arrives while the next page loads is still shown once '
+        'the page is loaded', () {
+      fakeAsync((async) {
+        final harness = LiveQueryHarness(
+          KeysetStreamHarness.rowsNamed(10),
+          latency: const Duration(seconds: 2),
+        );
+        final stream = KeysetStreamHarness.streamOver(harness);
+        final emitted = <List<AshTestItem>>[];
+        final subscription = stream.listen(emitted.add);
+        async.elapse(settleTime);
+        final ref = harness.liveQueriesServer.registeredRefs.single;
+        final [first, second, third, ...] = harness.server.rows;
+        final renamed = second.renamed('اسم جديد');
+
+        unawaited(stream.listenToNextPage());
+        async.elapse(const Duration(milliseconds: 100));
+        harness.liveQueriesServer.pushDelta(ref, rows: [renamed.toJson()]);
+        async.elapse(settleTime);
+
+        expect(emitted.last, [
+          first,
+          renamed,
+          third,
+          ...harness.server.rows.skip(pageSize).take(pageSize),
+        ]);
+
+        unawaited(subscription.cancel());
+        unawaited(stream.dispose());
+        harness.dispose();
+      });
+    });
+
     test('a next page that fails to load leaves the list live', () {
       fakeAsync((async) {
         final harness = LiveQueryHarness(KeysetStreamHarness.rowsNamed(10));

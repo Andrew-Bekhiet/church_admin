@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:church_admin/church_admin.dart';
+import 'package:collection/collection.dart';
 import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -214,23 +215,17 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     List<KeysetChunk<T>> chunks, {
     required int requestedRows,
   }) {
-    final items = [
-      ...keep,
-      for (final chunk in chunks) ...chunk.page.items,
-    ];
-    final fetchedRows = items.length - keep.length;
+    final fetchedRows = chunks.map((chunk) => chunk.page.items.length).sum;
     final chunksData = [for (final chunk in chunks) chunk.data];
     _loadedQuery = query;
-    if (keep.isEmpty) {
-      _window = LiveListWindow(
-        rootField: AshResultParser.rootFieldOf(query.document),
-      )..replaceWith(chunksData);
-    } else {
-      _window?.append(chunksData);
-    }
+    final window = _window =
+        (keep.isEmpty ? null : _window) ??
+        LiveListWindow(rootField: AshResultParser.rootFieldOf(query.document));
+    window.append(chunksData);
+    final page = query.parsePage(window.pageData);
     _publish(
-      items,
-      count: chunks.lastOrNull?.page.count,
+      page.items,
+      count: page.count,
       hasMore: fetchedRows >= requestedRows,
     );
   }
