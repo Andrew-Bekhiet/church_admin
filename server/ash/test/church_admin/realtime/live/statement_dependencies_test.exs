@@ -231,15 +231,17 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependenciesTest do
       hold_the_probe_connection()
 
       assert {:error, {:probe_unavailable, %DBConnection.ConnectionError{}}} =
-               Probe.dependencies(unique_sql("select 1"))
+               "select 1" |> unique_sql() |> Probe.dependencies()
     end
 
     test "reports a backend that died instead of raising, and works again after" do
       %{rows: [[backend]]} = Postgrex.query!(Probe, "select pg_backend_pid()", [])
       Repo.query!("select pg_terminate_backend($1)", [backend])
 
-      assert {:error, {:probe_unavailable, _reason}} = Probe.dependencies(unique_sql("select 1"))
-      assert {:ok, %{}} = await_probe_back(unique_sql("select 1"))
+      assert {:error, {:probe_unavailable, _reason}} =
+               "select 1" |> unique_sql() |> Probe.dependencies()
+
+      assert {:ok, %{}} = "select 1" |> unique_sql() |> await_probe_back()
     end
 
     defp await_probe_back(sql, attempts \\ 50) do

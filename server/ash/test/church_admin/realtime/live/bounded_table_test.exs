@@ -3,11 +3,7 @@ defmodule ChurchAdmin.Realtime.Live.BoundedTableTest do
 
   alias ChurchAdmin.Realtime.Live.BoundedTable
 
-  defp table!(context) do
-    name = :"#{inspect(context.test)}"
-    BoundedTable.new(name)
-    name
-  end
+  defp table!(%{test: unique_name}), do: BoundedTable.new(unique_name)
 
   test "keeps what it is given", context do
     table = table!(context)

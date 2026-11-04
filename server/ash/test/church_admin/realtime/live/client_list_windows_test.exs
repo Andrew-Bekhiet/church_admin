@@ -22,9 +22,11 @@ defmodule ChurchAdmin.Realtime.Live.ClientListWindowsTest do
   @window_for_a_scoped_user_only ~w(geolocatedPersons geolocatedStores meetingsWithDays)
 
   defp list_documents do
+    paging_variables = MapSet.new(~w(first after))
+
     for {operation, text} <- ClientDocuments.queries_as_sent(),
         {:ok, document} = Document.prepare(text, operation),
-        MapSet.subset?(MapSet.new(~w(first after)), document.declared_variables),
+        MapSet.subset?(paging_variables, document.declared_variables),
         do: {operation, document}
   end
 
@@ -45,7 +47,7 @@ defmodule ChurchAdmin.Realtime.Live.ClientListWindowsTest do
   end
 
   defp window_run(operation, document, actor),
-    do: Refresh.run(input(operation, document, actor))
+    do: operation |> input(document, actor) |> Refresh.run()
 
   defp row_type(document), do: Pipeline.list_row_type(document.root_field)
 
@@ -72,9 +74,12 @@ defmodule ChurchAdmin.Realtime.Live.ClientListWindowsTest do
   end
 
   defp operations_that_need_the_window(actor) do
-    for {operation, document} <- list_documents(),
-        plan_after_a_change_to_its_first_row(operation, document, actor) == :window,
-        do: operation
+    needing_it =
+      for {operation, document} <- list_documents(),
+          plan_after_a_change_to_its_first_row(operation, document, actor) == :window,
+          do: operation
+
+    Enum.sort(needing_it)
   end
 
   test "every client list document, as printed, has one root field with rows of a known table" do
@@ -85,7 +90,7 @@ defmodule ChurchAdmin.Realtime.Live.ClientListWindowsTest do
     for {operation, document} <- documents do
       assert document.root_field != nil, operation
       assert row_type(document) != nil, operation
-      assert TypeMap.relation_of_type(row_type(document)) != nil, operation
+      assert document |> row_type() |> TypeMap.relation_of_type() != nil, operation
     end
   end
 
@@ -103,10 +108,9 @@ defmodule ChurchAdmin.Realtime.Live.ClientListWindowsTest do
     end
 
     test "a change to one row narrows all but the lists that need the window", context do
-      assert operations_that_need_the_window(context.full_admin) |> Enum.sort() ==
-               @window_for_everyone
+      assert operations_that_need_the_window(context.full_admin) == @window_for_everyone
 
-      assert operations_that_need_the_window(context.scoped) |> Enum.sort() ==
+      assert operations_that_need_the_window(context.scoped) ==
                Enum.sort(@window_for_everyone ++ @window_for_a_scoped_user_only)
     end
 
