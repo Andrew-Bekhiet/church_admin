@@ -12,11 +12,14 @@ defmodule ChurchAdminWeb.Graphql.Pipeline do
   list field's children by its `first`, `last` or `limit` argument.
   `ChurchAdminWeb.Graphql.ClientDocumentsTest` runs every document the client
   sends through both limits.
+
+  A query response that returned data and no errors carries
+  `extensions.resultHash` (`ChurchAdminWeb.Graphql.Phase.PutResultHash`).
   """
 
   alias Absinthe.Phase.Document.Result
   alias Absinthe.Phase.Document.Validation.NoFragmentCycles
-  alias ChurchAdminWeb.Graphql.Phase.LimitDepth
+  alias ChurchAdminWeb.Graphql.Phase.{LimitDepth, PutResultHash}
 
   @max_complexity 150_000
   @max_depth 10
@@ -38,6 +41,7 @@ defmodule ChurchAdminWeb.Graphql.Pipeline do
     |> Absinthe.Plug.default_pipeline(pipeline_opts)
     |> Absinthe.Pipeline.insert_after(NoFragmentCycles, {LimitDepth, depth_options})
     |> Absinthe.Pipeline.replace(Result, {Result, spec_compliant_errors: true})
+    |> Absinthe.Pipeline.insert_after(Result, PutResultHash)
     |> Absinthe.Pipeline.insert_after(Result, ChurchAdminWeb.Graphql.FillMissingErrorCodes)
   end
 end

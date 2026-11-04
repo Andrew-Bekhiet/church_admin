@@ -16,7 +16,7 @@ defmodule ChurchAdminWeb.EndpointTest do
   test "/gql serves anonymous requests", %{conn: conn} do
     conn = post(conn, "/gql", %{"query" => "{ __typename }"})
 
-    assert json_response(conn, 200) == %{"data" => %{"__typename" => "RootQueryType"}}
+    assert %{"data" => %{"__typename" => "RootQueryType"}} = json_response(conn, 200)
   end
 
   test "/gql rejects an expired token with 401 unauthenticated", %{conn: conn} do
