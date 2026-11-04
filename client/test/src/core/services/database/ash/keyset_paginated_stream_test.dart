@@ -54,7 +54,11 @@ void main() {
     fakeAsync((async) {
       const limit = 7;
       final harness = LiveQueryHarness(KeysetStreamHarness.rowsNamed(10));
-      final stream = KeysetStreamHarness.streamOver(harness, totalLimit: limit, maxPageSize: 3);
+      final stream = KeysetStreamHarness.streamOver(
+        harness,
+        totalLimit: limit,
+        maxPageSize: 3,
+      );
       final emitted = <List<AshTestItem>>[];
       final subscription = stream.listen(emitted.add);
       async.elapse(settleTime);
@@ -70,7 +74,9 @@ void main() {
 
   test('a page shorter than requested has no more after it', () {
     fakeAsync((async) {
-      final harness = LiveQueryHarness(KeysetStreamHarness.rowsNamed(pageSize - 1));
+      final harness = LiveQueryHarness(
+        KeysetStreamHarness.rowsNamed(pageSize - 1),
+      );
       final stream = KeysetStreamHarness.streamOver(harness);
       final subscription = stream.listen(null);
       async.elapse(settleTime);

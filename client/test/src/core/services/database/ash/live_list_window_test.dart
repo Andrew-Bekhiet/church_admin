@@ -38,7 +38,6 @@ void main() {
       expect(window.count, 9);
       expect(window.endKeyset, 'k9');
     });
-
   });
 
   group('a delta', () {
