@@ -24,6 +24,10 @@ class ChangeFeedClient {
   static const resyncEvent = 'live:resync';
   static const tokenExpiredReason = 'token_expired';
   static const Duration defaultRejoinDelay = Duration(seconds: 5);
+  static const _leavableStates = {
+    PhoenixChannelState.joined,
+    PhoenixChannelState.errored,
+  };
 
   final Uri socketUrl;
   final Stream<AuthLinkCredentials?> _credentials;
@@ -171,19 +175,30 @@ class ChangeFeedClient {
 
     final channel = socket.addChannel(topic: topic);
     _channel = channel;
-    _channelSubscription = channel.messages
-        .where((message) => message.event.value == liveResultEvent)
-        .listen(
-          (message) => _emit(
-            LiveResultReceived(LiveResult.fromJson(message.payload as Json)),
-          ),
-        );
+    _channelSubscription = channel.messages.listen(
+      (message) => _onChannelMessage(channel, message),
+    );
     unawaited(
       channel.join().future.then(
         (reply) => _onJoinReply(channel, reply),
         onError: (_) => _rejoinLater(channel),
       ),
     );
+  }
+
+  void _onChannelMessage(PhoenixChannel channel, Message message) {
+    if (message.event == PhoenixChannelEvent.error) {
+      _onChannelCrashed(channel);
+    } else if (message.event.value == liveResultEvent) {
+      _emit(LiveResultReceived(LiveResult.fromJson(message.payload as Json)));
+    }
+  }
+
+  void _onChannelCrashed(PhoenixChannel channel) {
+    if (!identical(channel, _channel)) return;
+
+    _isJoined = false;
+    _rejoinLater(channel);
   }
 
   void _onJoinReply(PhoenixChannel channel, PushResponse reply) {
@@ -223,7 +238,7 @@ class ChangeFeedClient {
     _channel = null;
     if (channel == null) return;
 
-    if (leave && channel.state == PhoenixChannelState.joined) {
+    if (leave && _leavableStates.contains(channel.state)) {
       channel.leave().future.ignore();
     }
     channel.close();

@@ -51,4 +51,56 @@ void main() {
       });
     });
   });
+
+    group('a channel crash on the server', () {
+    test('is announced as a join again, so registrations are made again', () {
+      fakeAsync((async) {
+        final feed = ChangeFeedTestFeed.start(async);
+        unawaited(feed.register(async, registration));
+
+        feed.server.crashChannel();
+        async.elapse(ChangeFeedClient.defaultRejoinDelay * 2);
+
+        expect(feed.events, [const ChannelJoined(), const ChannelJoined()]);
+
+        feed.dispose();
+      });
+    });
+
+    test('leaves one joined channel, not a second one from the library '
+        'rejoin timer', () {
+      fakeAsync((async) {
+        final feed = ChangeFeedTestFeed.start(async);
+
+        feed.server.crashChannel();
+        async.elapse(const Duration(minutes: 1));
+
+        expect(feed.server.joinRefs, hasLength(2));
+        expect(feed.events, [const ChannelJoined(), const ChannelJoined()]);
+
+        feed.dispose();
+      });
+    });
+
+    test('can be registered on again once the channel is joined again', () {
+      fakeAsync((async) {
+        final feed = ChangeFeedTestFeed.start(async);
+        feed.server.crashChannel();
+        async.elapse(ChangeFeedClient.defaultRejoinDelay * 2);
+        LiveRegisterOutcome? outcome;
+
+        unawaited(
+          feed
+              .register(async, registration)
+              .then((value) => outcome = value),
+        );
+        async.flushMicrotasks();
+
+        expect(outcome, LiveRegisterOutcome.accepted);
+        expect(feed.server.registrations.keys, [ref]);
+
+        feed.dispose();
+      });
+    });
+  });
 }
