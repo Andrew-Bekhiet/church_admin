@@ -51,6 +51,9 @@ abstract final class E2eBackend {
   static Future<String> serviceIdByName(String serviceName) =>
       E2eAsh.idByName('services', serviceName);
 
+  static Future<void> renameService(String serviceId, String name) =>
+      E2eAsh.updateRecord('Service', serviceId, {'name': name});
+
   static Future<String> classIdByName(String className) =>
       E2eAsh.idByName('classes', className);
 

@@ -123,4 +123,23 @@ abstract final class E2eAsh {
     String type,
     Map<String, dynamic> input,
   ) async => (await createRecord(type, input))['id'] as String;
+
+  static Future<void> updateRecord(
+    String type,
+    String id,
+    Map<String, dynamic> input,
+  ) async {
+    await mutation(
+      '''
+      mutation Update$type(\$id: ID!, \$input: Update${type}Input!) {
+        update$type(id: \$id, input: \$input) {
+          result { id }
+          errors { code message fields }
+        }
+      }
+      ''',
+      field: 'update$type',
+      variables: {'id': id, 'input': input},
+    );
+  }
 }
