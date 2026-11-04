@@ -26,6 +26,19 @@ defmodule ChurchAdmin.Realtime.ReplicationStreamTest do
     {family, person}
   end
 
+  defp await_columns(relation, columns) do
+    expected = MapSet.new(columns)
+
+    receive do
+      {:realtime_changes, %{rows: rows}} ->
+        if Enum.any?(rows, &match?(%{relation: ^relation, columns: ^expected}, &1)),
+          do: :ok,
+          else: await_columns(relation, columns)
+    after
+      2_000 -> flunk("no batch named only #{inspect(columns)} of #{inspect(relation)}")
+    end
+  end
+
   defp sql!(writer, statement, params \\ []) do
     Postgrex.query!(writer, statement, Enum.map(params, &Ecto.UUID.dump!/1))
   end
@@ -133,6 +146,58 @@ defmodule ChurchAdmin.Realtime.ReplicationStreamTest do
       for %{changes: changes} <- earlier ++ [batch], %{type: "Hobby", id: id} <- changes, do: id
 
     assert hobby_ids == [second, first]
+  end
+
+  describe "an update of a table whose rows many lists read names only the columns it changed" do
+    test "persons", %{writer: writer} do
+      {_family, person} = insert_family_and_person(writer)
+      await_change(%{type: "Person", id: person, op: "insert"})
+
+      sql!(writer, "update persons set notes = 'changed' where id = $1", [person])
+
+      await_columns({"public", "persons"}, ~w(notes))
+    end
+
+    test "families", %{writer: writer} do
+      {family, _person} = insert_family_and_person(writer)
+      await_change(%{type: "Family", id: family, op: "insert"})
+
+      sql!(writer, "update families set notes = 'changed' where id = $1", [family])
+
+      await_columns({"public", "families"}, ~w(notes))
+    end
+
+    test "stores", %{writer: writer} do
+      store = uuid()
+
+      sql!(writer, "insert into stores (id, name) values ($1, 'Store ' || $1::uuid::text)", [
+        store
+      ])
+
+      cleanup_sql(["delete from stores where id = '#{store}'"])
+      await_change(%{type: "Store", id: store, op: "insert"})
+
+      sql!(writer, "update stores set name = 'changed' where id = $1", [store])
+
+      await_columns({"public", "stores"}, ~w(name))
+    end
+
+    test "auth.users_data", %{writer: writer} do
+      uid = uuid()
+
+      sql!(
+        writer,
+        "insert into auth.users_data (uid, name) values ($1, 'User ' || $1::uuid::text)",
+        [uid]
+      )
+
+      cleanup_sql(["delete from auth.users_data where uid = '#{uid}'"])
+      await_change(%{type: "User", id: uid, op: "insert"})
+
+      sql!(writer, "update auth.users_data set name = 'changed' where uid = $1", [uid])
+
+      await_columns({"auth", "users_data"}, ~w(name))
+    end
   end
 
   test "an update of a table replicated in full names its changed columns", %{writer: writer} do

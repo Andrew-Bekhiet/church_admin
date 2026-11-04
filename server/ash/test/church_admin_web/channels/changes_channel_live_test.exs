@@ -663,6 +663,31 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
       assert :sys.get_state(socket.channel_pid).assigns.actor.family_id == other_family.id
     end
 
+    test "reaches a viewer when their linked person is unlinked", %{writer: writer} do
+      viewer = approved_viewer!()
+      person = Factory.person!(%{family_id: Factory.family!().id, uid: viewer.uid})
+      socket = join_as(viewer)
+      {:ok, %{}} = register(socket, window_payload("r1", @families))
+      assert_push "live:result", %{data: %{"families" => %{"results" => [_own]}}}
+      await_batch_passed()
+
+      Postgrex.query!(writer, "update persons set uid = null where id = $1", [dump(person.id)])
+
+      assert_push "live:result",
+                  %{full: true, data: %{"families" => %{"results" => []}}},
+                  @staleness_budget_ms
+    end
+
+    test "is not assumed from an edit of a person nobody is linked to", %{writer: writer} do
+      unlinked = Factory.person!(%{family_id: Factory.family!().id})
+      Phoenix.PubSub.subscribe(ChurchAdmin.PubSub, Broadcaster.viewer_scope_topic())
+      await_batch_passed()
+
+      rename_person(writer, unlinked.id, "renamed")
+
+      refute_receive :viewer_scope_changed, 900
+    end
+
     test "made while the channel was down applies to the rejoin, not the socket's old actor", %{
       writer: writer
     } do

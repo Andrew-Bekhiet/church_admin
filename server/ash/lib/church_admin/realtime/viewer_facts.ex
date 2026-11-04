@@ -3,8 +3,9 @@ defmodule ChurchAdmin.Realtime.ViewerFacts do
   Whether a row change can change what `ChurchAdmin.Authz.ActorLoader` reads
   about a connected viewer beyond the permission tables, which `TypeMap`
   already announces: a person row gives its linked user `person_id` and
-  `family_id`. A row with no uid and no old row cannot be told from any
-  other unlinked person, so unlinking a person goes unnoticed here.
+  `family_id`. `persons` replicates whole old rows, so an unlink still names
+  the user it took the person from, and a person nobody was linked to is
+  ignored.
   """
 
   alias ChurchAdmin.Realtime.RowChange
@@ -18,13 +19,19 @@ defmodule ChurchAdmin.Realtime.ViewerFacts do
   def touched?(%RowChange{relation: @persons, op: :delete, old: old}),
     do: is_nil(old) or old["uid"] != nil or not Map.has_key?(old, "uid")
 
-  def touched?(%RowChange{relation: @persons, new: %{"uid" => uid}} = change)
-      when is_binary(uid) do
-    case RowChange.changed_columns(change) do
-      :all -> true
-      columns -> not MapSet.disjoint?(columns, @columns_read_for_viewers)
+  def touched?(%RowChange{relation: @persons, new: %{} = new} = change) do
+    if linked?(new) or linked?(change.old) do
+      case RowChange.changed_columns(change) do
+        :all -> true
+        columns -> not MapSet.disjoint?(columns, @columns_read_for_viewers)
+      end
+    else
+      false
     end
   end
 
   def touched?(%RowChange{}), do: false
+
+  defp linked?(%{"uid" => uid}), do: is_binary(uid)
+  defp linked?(_no_row_or_a_key_only_one), do: false
 end
