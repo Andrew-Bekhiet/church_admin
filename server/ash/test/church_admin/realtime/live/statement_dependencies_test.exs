@@ -255,5 +255,25 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependenciesTest do
       assert Enum.any?(results, &match?({:ok, %{@persons => _}}, &1))
       assert Enum.any?(results, &match?({:ok, %{{"public", "families"} => _}}, &1))
     end
+
+    test "extracts the dependencies of keyset pages with a count" do
+      for _ <- 1..3, do: Factory.person!()
+
+      {_, statements} =
+        StatementCapture.capture(fn ->
+          first = Ash.read!(Person, authorize?: false, page: [limit: 2, count: true])
+          last = List.last(first.results)
+
+          Ash.read!(Person,
+            authorize?: false,
+            page: [limit: 2, after: last.__metadata__.keyset]
+          )
+        end)
+
+      results = Enum.map(statements, &StatementDependencies.for_sql/1)
+
+      assert length(statements) >= 3
+      assert Enum.all?(results, &match?({:ok, %{@persons => _}}, &1)), inspect(results)
+    end
   end
 end
