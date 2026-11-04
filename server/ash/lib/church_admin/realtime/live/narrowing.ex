@@ -68,7 +68,9 @@ defmodule ChurchAdmin.Realtime.Live.Narrowing do
     with true <- row_type != nil,
          false <- Pipeline.selects_type_inside_rows?(document.parsed, document.root_field),
          {_schema, table} = relation <- TypeMap.relation_of_type(row_type) do
-      Enum.all?(Enum.uniq(statements), &reads_table_only_as_the_list?(&1, table, relation))
+      statements
+      |> Enum.uniq()
+      |> Enum.all?(&reads_table_only_as_the_list?(&1, table, relation))
     else
       _not_provably_alone -> false
     end

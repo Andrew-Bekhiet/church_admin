@@ -40,7 +40,7 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
      all_names: %{"name" => %{"in" => ~w(a b c)}}}
   end
 
-  defp input(context, overrides \\ []) do
+  defp input(context, overrides) do
     Map.merge(
       %{
         document: context.document,
@@ -60,7 +60,7 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
   end
 
   defp window!(context, overrides \\ []) do
-    {:ok, run} = Refresh.run(input(context, overrides))
+    {:ok, run} = context |> input(overrides) |> Refresh.run()
     run
   end
 
@@ -102,7 +102,7 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
 
       {{:ok, %{result: result}}, _statements} = narrowed(context, stored, [update(second)])
 
-      assert Enum.sort(names(result)) == ~w(a c renamed)
+      assert result |> names() |> Enum.sort() == ~w(a c renamed)
       assert_same_as_a_fresh_window(context, result)
     end
 
