@@ -10,6 +10,7 @@ defmodule ChurchAdmin.Catalog.StudyYear do
 
   graphql do
     type :study_year
+    keyset_field :keyset
 
     queries do
       get :study_year, :read

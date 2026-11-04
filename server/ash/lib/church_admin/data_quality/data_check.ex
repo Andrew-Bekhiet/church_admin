@@ -10,6 +10,7 @@ defmodule ChurchAdmin.DataQuality.DataCheck do
 
   graphql do
     type :data_check
+    keyset_field :keyset
 
     relationships [:family]
 

@@ -8,6 +8,7 @@ query classes(
     count
     endKeyset
     results {
+      keyset
       ...ClassWithStudyYears
     }
   }

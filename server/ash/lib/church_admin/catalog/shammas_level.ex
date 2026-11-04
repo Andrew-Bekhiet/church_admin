@@ -10,6 +10,7 @@ defmodule ChurchAdmin.Catalog.ShammasLevel do
 
   graphql do
     type :shammas_level
+    keyset_field :keyset
 
     queries do
       get :shammas_level, :read

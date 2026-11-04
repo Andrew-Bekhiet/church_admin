@@ -11,6 +11,7 @@ defmodule ChurchAdmin.People.PersonHobby do
 
   graphql do
     type :person_hobby
+    keyset_field :keyset
 
     relationships [:person]
 

@@ -52,6 +52,7 @@ defmodule ChurchAdmin.Accounts.User do
 
   graphql do
     type :user
+    keyset_field :keyset
 
     relationships [
       :person,

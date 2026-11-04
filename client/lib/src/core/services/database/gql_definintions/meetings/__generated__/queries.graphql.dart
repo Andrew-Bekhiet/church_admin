@@ -433,6 +433,13 @@ const documentNodeQuerymeetings = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'Meeting'),
                         directives: [],
@@ -491,7 +498,11 @@ class Query_meetings_meetings {
       count: (l$count as int?),
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
-          ?.map((e) => Fragment_Meeting.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Query_meetings_meetings_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -501,7 +512,7 @@ class Query_meetings_meetings {
 
   final String? endKeyset;
 
-  final List<Fragment_Meeting>? results;
+  final List<Query_meetings_meetings_results>? results;
 
   final String $__typename;
 
@@ -592,12 +603,16 @@ abstract class CopyWith_Query_meetings_meetings<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_Meeting>? results,
+    List<Query_meetings_meetings_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_Meeting>? Function(
-      Iterable<CopyWith_Fragment_Meeting<Fragment_Meeting>>?,
+    Iterable<Query_meetings_meetings_results>? Function(
+      Iterable<
+        CopyWith_Query_meetings_meetings_results<
+          Query_meetings_meetings_results
+        >
+      >?,
     )
     _fn,
   );
@@ -626,7 +641,7 @@ class _CopyWithImpl_Query_meetings_meetings<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_Meeting>?),
+          : (results as List<Query_meetings_meetings_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -634,13 +649,19 @@ class _CopyWithImpl_Query_meetings_meetings<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_Meeting>? Function(
-      Iterable<CopyWith_Fragment_Meeting<Fragment_Meeting>>?,
+    Iterable<Query_meetings_meetings_results>? Function(
+      Iterable<
+        CopyWith_Query_meetings_meetings_results<
+          Query_meetings_meetings_results
+        >
+      >?,
     )
     _fn,
   ) => call(
     results: _fn(
-      _instance.results?.map((e) => CopyWith_Fragment_Meeting(e, (i) => i)),
+      _instance.results?.map(
+        (e) => CopyWith_Query_meetings_meetings_results(e, (i) => i),
+      ),
     )?.toList(),
   );
 }
@@ -654,11 +675,430 @@ class _CopyWithStubImpl_Query_meetings_meetings<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_Meeting>? results,
+    List<Query_meetings_meetings_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_meetings_meetings_results implements Fragment_Meeting {
+  Query_meetings_meetings_results({
+    this.keyset,
+    required this.id,
+    required this.name,
+    required this.audience,
+    this.color,
+    required this.isArchived,
+    required this.showKodasCheckbox,
+    this.serviceId,
+    this.serviceGender,
+    this.serviceStudyYear,
+    this.groupId,
+    this.service,
+    this.studyYear,
+    this.group,
+    this.$__typename = 'Meeting',
+  });
+
+  factory Query_meetings_meetings_results.fromJson(Map<String, dynamic> json) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$audience = json['audience'];
+    final l$color = json['color'];
+    final l$isArchived = json['isArchived'];
+    final l$showKodasCheckbox = json['showKodasCheckbox'];
+    final l$serviceId = json['serviceId'];
+    final l$serviceGender = json['serviceGender'];
+    final l$serviceStudyYear = json['serviceStudyYear'];
+    final l$groupId = json['groupId'];
+    final l$service = json['service'];
+    final l$studyYear = json['studyYear'];
+    final l$group = json['group'];
+    final l$$__typename = json['__typename'];
+    return Query_meetings_meetings_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      name: (l$name as String),
+      audience: fromJson_Enum_MeetingAudience((l$audience as String)),
+      color: (l$color as int?),
+      isArchived: (l$isArchived as bool),
+      showKodasCheckbox: (l$showKodasCheckbox as bool),
+      serviceId: (l$serviceId as String?),
+      serviceGender: (l$serviceGender as bool?),
+      serviceStudyYear: (l$serviceStudyYear as int?),
+      groupId: (l$groupId as String?),
+      service: l$service == null
+          ? null
+          : Fragment_MeetingService.fromJson(
+              (l$service as Map<String, dynamic>),
+            ),
+      studyYear: l$studyYear == null
+          ? null
+          : Fragment_StudyYear.fromJson((l$studyYear as Map<String, dynamic>)),
+      group: l$group == null
+          ? null
+          : Fragment_MeetingGroup.fromJson((l$group as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final String name;
+
+  final Enum_MeetingAudience audience;
+
+  final int? color;
+
+  final bool isArchived;
+
+  final bool showKodasCheckbox;
+
+  final String? serviceId;
+
+  final bool? serviceGender;
+
+  final int? serviceStudyYear;
+
+  final String? groupId;
+
+  final Fragment_MeetingService? service;
+
+  final Fragment_StudyYear? studyYear;
+
+  final Fragment_MeetingGroup? group;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$audience = audience;
+    _resultData['audience'] = toJson_Enum_MeetingAudience(l$audience);
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$isArchived = isArchived;
+    _resultData['isArchived'] = l$isArchived;
+    final l$showKodasCheckbox = showKodasCheckbox;
+    _resultData['showKodasCheckbox'] = l$showKodasCheckbox;
+    final l$serviceId = serviceId;
+    _resultData['serviceId'] = l$serviceId;
+    final l$serviceGender = serviceGender;
+    _resultData['serviceGender'] = l$serviceGender;
+    final l$serviceStudyYear = serviceStudyYear;
+    _resultData['serviceStudyYear'] = l$serviceStudyYear;
+    final l$groupId = groupId;
+    _resultData['groupId'] = l$groupId;
+    final l$service = service;
+    _resultData['service'] = l$service?.toJson();
+    final l$studyYear = studyYear;
+    _resultData['studyYear'] = l$studyYear?.toJson();
+    final l$group = group;
+    _resultData['group'] = l$group?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$name = name;
+    final l$audience = audience;
+    final l$color = color;
+    final l$isArchived = isArchived;
+    final l$showKodasCheckbox = showKodasCheckbox;
+    final l$serviceId = serviceId;
+    final l$serviceGender = serviceGender;
+    final l$serviceStudyYear = serviceStudyYear;
+    final l$groupId = groupId;
+    final l$service = service;
+    final l$studyYear = studyYear;
+    final l$group = group;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$name,
+      l$audience,
+      l$color,
+      l$isArchived,
+      l$showKodasCheckbox,
+      l$serviceId,
+      l$serviceGender,
+      l$serviceStudyYear,
+      l$groupId,
+      l$service,
+      l$studyYear,
+      l$group,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_meetings_meetings_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$audience = audience;
+    final lOther$audience = other.audience;
+    if (l$audience != lOther$audience) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$isArchived = isArchived;
+    final lOther$isArchived = other.isArchived;
+    if (l$isArchived != lOther$isArchived) {
+      return false;
+    }
+    final l$showKodasCheckbox = showKodasCheckbox;
+    final lOther$showKodasCheckbox = other.showKodasCheckbox;
+    if (l$showKodasCheckbox != lOther$showKodasCheckbox) {
+      return false;
+    }
+    final l$serviceId = serviceId;
+    final lOther$serviceId = other.serviceId;
+    if (l$serviceId != lOther$serviceId) {
+      return false;
+    }
+    final l$serviceGender = serviceGender;
+    final lOther$serviceGender = other.serviceGender;
+    if (l$serviceGender != lOther$serviceGender) {
+      return false;
+    }
+    final l$serviceStudyYear = serviceStudyYear;
+    final lOther$serviceStudyYear = other.serviceStudyYear;
+    if (l$serviceStudyYear != lOther$serviceStudyYear) {
+      return false;
+    }
+    final l$groupId = groupId;
+    final lOther$groupId = other.groupId;
+    if (l$groupId != lOther$groupId) {
+      return false;
+    }
+    final l$service = service;
+    final lOther$service = other.service;
+    if (l$service != lOther$service) {
+      return false;
+    }
+    final l$studyYear = studyYear;
+    final lOther$studyYear = other.studyYear;
+    if (l$studyYear != lOther$studyYear) {
+      return false;
+    }
+    final l$group = group;
+    final lOther$group = other.group;
+    if (l$group != lOther$group) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_meetings_meetings_results
+    on Query_meetings_meetings_results {
+  CopyWith_Query_meetings_meetings_results<Query_meetings_meetings_results>
+  get copyWith => CopyWith_Query_meetings_meetings_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_meetings_meetings_results<TRes> {
+  factory CopyWith_Query_meetings_meetings_results(
+    Query_meetings_meetings_results instance,
+    TRes Function(Query_meetings_meetings_results) then,
+  ) = _CopyWithImpl_Query_meetings_meetings_results;
+
+  factory CopyWith_Query_meetings_meetings_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_meetings_meetings_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    String? name,
+    Enum_MeetingAudience? audience,
+    int? color,
+    bool? isArchived,
+    bool? showKodasCheckbox,
+    String? serviceId,
+    bool? serviceGender,
+    int? serviceStudyYear,
+    String? groupId,
+    Fragment_MeetingService? service,
+    Fragment_StudyYear? studyYear,
+    Fragment_MeetingGroup? group,
+    String? $__typename,
+  });
+  CopyWith_Fragment_MeetingService<TRes> get service;
+  CopyWith_Fragment_StudyYear<TRes> get studyYear;
+  CopyWith_Fragment_MeetingGroup<TRes> get group;
+}
+
+class _CopyWithImpl_Query_meetings_meetings_results<TRes>
+    implements CopyWith_Query_meetings_meetings_results<TRes> {
+  _CopyWithImpl_Query_meetings_meetings_results(this._instance, this._then);
+
+  final Query_meetings_meetings_results _instance;
+
+  final TRes Function(Query_meetings_meetings_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? audience = _undefined,
+    Object? color = _undefined,
+    Object? isArchived = _undefined,
+    Object? showKodasCheckbox = _undefined,
+    Object? serviceId = _undefined,
+    Object? serviceGender = _undefined,
+    Object? serviceStudyYear = _undefined,
+    Object? groupId = _undefined,
+    Object? service = _undefined,
+    Object? studyYear = _undefined,
+    Object? group = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_meetings_meetings_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      audience: audience == _undefined || audience == null
+          ? _instance.audience
+          : (audience as Enum_MeetingAudience),
+      color: color == _undefined ? _instance.color : (color as int?),
+      isArchived: isArchived == _undefined || isArchived == null
+          ? _instance.isArchived
+          : (isArchived as bool),
+      showKodasCheckbox:
+          showKodasCheckbox == _undefined || showKodasCheckbox == null
+          ? _instance.showKodasCheckbox
+          : (showKodasCheckbox as bool),
+      serviceId: serviceId == _undefined
+          ? _instance.serviceId
+          : (serviceId as String?),
+      serviceGender: serviceGender == _undefined
+          ? _instance.serviceGender
+          : (serviceGender as bool?),
+      serviceStudyYear: serviceStudyYear == _undefined
+          ? _instance.serviceStudyYear
+          : (serviceStudyYear as int?),
+      groupId: groupId == _undefined ? _instance.groupId : (groupId as String?),
+      service: service == _undefined
+          ? _instance.service
+          : (service as Fragment_MeetingService?),
+      studyYear: studyYear == _undefined
+          ? _instance.studyYear
+          : (studyYear as Fragment_StudyYear?),
+      group: group == _undefined
+          ? _instance.group
+          : (group as Fragment_MeetingGroup?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith_Fragment_MeetingService<TRes> get service {
+    final local$service = _instance.service;
+    return local$service == null
+        ? CopyWith_Fragment_MeetingService.stub(_then(_instance))
+        : CopyWith_Fragment_MeetingService(
+            local$service,
+            (e) => call(service: e),
+          );
+  }
+
+  CopyWith_Fragment_StudyYear<TRes> get studyYear {
+    final local$studyYear = _instance.studyYear;
+    return local$studyYear == null
+        ? CopyWith_Fragment_StudyYear.stub(_then(_instance))
+        : CopyWith_Fragment_StudyYear(
+            local$studyYear,
+            (e) => call(studyYear: e),
+          );
+  }
+
+  CopyWith_Fragment_MeetingGroup<TRes> get group {
+    final local$group = _instance.group;
+    return local$group == null
+        ? CopyWith_Fragment_MeetingGroup.stub(_then(_instance))
+        : CopyWith_Fragment_MeetingGroup(local$group, (e) => call(group: e));
+  }
+}
+
+class _CopyWithStubImpl_Query_meetings_meetings_results<TRes>
+    implements CopyWith_Query_meetings_meetings_results<TRes> {
+  _CopyWithStubImpl_Query_meetings_meetings_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    String? name,
+    Enum_MeetingAudience? audience,
+    int? color,
+    bool? isArchived,
+    bool? showKodasCheckbox,
+    String? serviceId,
+    bool? serviceGender,
+    int? serviceStudyYear,
+    String? groupId,
+    Fragment_MeetingService? service,
+    Fragment_StudyYear? studyYear,
+    Fragment_MeetingGroup? group,
+    String? $__typename,
+  }) => _res;
+
+  CopyWith_Fragment_MeetingService<TRes> get service =>
+      CopyWith_Fragment_MeetingService.stub(_res);
+
+  CopyWith_Fragment_StudyYear<TRes> get studyYear =>
+      CopyWith_Fragment_StudyYear.stub(_res);
+
+  CopyWith_Fragment_MeetingGroup<TRes> get group =>
+      CopyWith_Fragment_MeetingGroup.stub(_res);
 }
 
 class Variables_Query_meeting {
@@ -1372,6 +1812,13 @@ const documentNodeQueryattendanceRecords = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'AttendanceRecord'),
                         directives: [],
@@ -1431,8 +1878,9 @@ class Query_attendanceRecords_attendanceRecords {
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
           ?.map(
-            (e) =>
-                Fragment_AttendanceRecord.fromJson((e as Map<String, dynamic>)),
+            (e) => Query_attendanceRecords_attendanceRecords_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
           )
           .toList(),
       $__typename: (l$$__typename as String),
@@ -1443,7 +1891,7 @@ class Query_attendanceRecords_attendanceRecords {
 
   final String? endKeyset;
 
-  final List<Fragment_AttendanceRecord>? results;
+  final List<Query_attendanceRecords_attendanceRecords_results>? results;
 
   final String $__typename;
 
@@ -1539,12 +1987,16 @@ abstract class CopyWith_Query_attendanceRecords_attendanceRecords<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_AttendanceRecord>? results,
+    List<Query_attendanceRecords_attendanceRecords_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_AttendanceRecord>? Function(
-      Iterable<CopyWith_Fragment_AttendanceRecord<Fragment_AttendanceRecord>>?,
+    Iterable<Query_attendanceRecords_attendanceRecords_results>? Function(
+      Iterable<
+        CopyWith_Query_attendanceRecords_attendanceRecords_results<
+          Query_attendanceRecords_attendanceRecords_results
+        >
+      >?,
     )
     _fn,
   );
@@ -1576,7 +2028,8 @@ class _CopyWithImpl_Query_attendanceRecords_attendanceRecords<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_AttendanceRecord>?),
+          : (results
+                as List<Query_attendanceRecords_attendanceRecords_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -1584,14 +2037,21 @@ class _CopyWithImpl_Query_attendanceRecords_attendanceRecords<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_AttendanceRecord>? Function(
-      Iterable<CopyWith_Fragment_AttendanceRecord<Fragment_AttendanceRecord>>?,
+    Iterable<Query_attendanceRecords_attendanceRecords_results>? Function(
+      Iterable<
+        CopyWith_Query_attendanceRecords_attendanceRecords_results<
+          Query_attendanceRecords_attendanceRecords_results
+        >
+      >?,
     )
     _fn,
   ) => call(
     results: _fn(
       _instance.results?.map(
-        (e) => CopyWith_Fragment_AttendanceRecord(e, (i) => i),
+        (e) => CopyWith_Query_attendanceRecords_attendanceRecords_results(
+          e,
+          (i) => i,
+        ),
       ),
     )?.toList(),
   );
@@ -1606,11 +2066,300 @@ class _CopyWithStubImpl_Query_attendanceRecords_attendanceRecords<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_AttendanceRecord>? results,
+    List<Query_attendanceRecords_attendanceRecords_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_attendanceRecords_attendanceRecords_results
+    implements Fragment_AttendanceRecord {
+  Query_attendanceRecords_attendanceRecords_results({
+    this.keyset,
+    required this.id,
+    required this.meetingId,
+    required this.personId,
+    required this.datetime,
+    required this.asServant,
+    required this.recordedBy,
+    this.recordedByUser,
+    this.$__typename = 'AttendanceRecord',
+  });
+
+  factory Query_attendanceRecords_attendanceRecords_results.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$meetingId = json['meetingId'];
+    final l$personId = json['personId'];
+    final l$datetime = json['datetime'];
+    final l$asServant = json['asServant'];
+    final l$recordedBy = json['recordedBy'];
+    final l$recordedByUser = json['recordedByUser'];
+    final l$$__typename = json['__typename'];
+    return Query_attendanceRecords_attendanceRecords_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      meetingId: (l$meetingId as String),
+      personId: (l$personId as String),
+      datetime: tstzFromString(l$datetime),
+      asServant: (l$asServant as bool),
+      recordedBy: (l$recordedBy as String),
+      recordedByUser: l$recordedByUser == null
+          ? null
+          : Fragment_User.fromJson((l$recordedByUser as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final String meetingId;
+
+  final String personId;
+
+  final DateTime datetime;
+
+  final bool asServant;
+
+  final String recordedBy;
+
+  final Fragment_User? recordedByUser;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$meetingId = meetingId;
+    _resultData['meetingId'] = l$meetingId;
+    final l$personId = personId;
+    _resultData['personId'] = l$personId;
+    final l$datetime = datetime;
+    _resultData['datetime'] = tstzToString(l$datetime);
+    final l$asServant = asServant;
+    _resultData['asServant'] = l$asServant;
+    final l$recordedBy = recordedBy;
+    _resultData['recordedBy'] = l$recordedBy;
+    final l$recordedByUser = recordedByUser;
+    _resultData['recordedByUser'] = l$recordedByUser?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$meetingId = meetingId;
+    final l$personId = personId;
+    final l$datetime = datetime;
+    final l$asServant = asServant;
+    final l$recordedBy = recordedBy;
+    final l$recordedByUser = recordedByUser;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$meetingId,
+      l$personId,
+      l$datetime,
+      l$asServant,
+      l$recordedBy,
+      l$recordedByUser,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_attendanceRecords_attendanceRecords_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$meetingId = meetingId;
+    final lOther$meetingId = other.meetingId;
+    if (l$meetingId != lOther$meetingId) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    final l$datetime = datetime;
+    final lOther$datetime = other.datetime;
+    if (l$datetime != lOther$datetime) {
+      return false;
+    }
+    final l$asServant = asServant;
+    final lOther$asServant = other.asServant;
+    if (l$asServant != lOther$asServant) {
+      return false;
+    }
+    final l$recordedBy = recordedBy;
+    final lOther$recordedBy = other.recordedBy;
+    if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$recordedByUser = recordedByUser;
+    final lOther$recordedByUser = other.recordedByUser;
+    if (l$recordedByUser != lOther$recordedByUser) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_attendanceRecords_attendanceRecords_results
+    on Query_attendanceRecords_attendanceRecords_results {
+  CopyWith_Query_attendanceRecords_attendanceRecords_results<
+    Query_attendanceRecords_attendanceRecords_results
+  >
+  get copyWith => CopyWith_Query_attendanceRecords_attendanceRecords_results(
+    this,
+    (i) => i,
+  );
+}
+
+abstract class CopyWith_Query_attendanceRecords_attendanceRecords_results<
+  TRes
+> {
+  factory CopyWith_Query_attendanceRecords_attendanceRecords_results(
+    Query_attendanceRecords_attendanceRecords_results instance,
+    TRes Function(Query_attendanceRecords_attendanceRecords_results) then,
+  ) = _CopyWithImpl_Query_attendanceRecords_attendanceRecords_results;
+
+  factory CopyWith_Query_attendanceRecords_attendanceRecords_results.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Query_attendanceRecords_attendanceRecords_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    String? meetingId,
+    String? personId,
+    DateTime? datetime,
+    bool? asServant,
+    String? recordedBy,
+    Fragment_User? recordedByUser,
+    String? $__typename,
+  });
+  CopyWith_Fragment_User<TRes> get recordedByUser;
+}
+
+class _CopyWithImpl_Query_attendanceRecords_attendanceRecords_results<TRes>
+    implements
+        CopyWith_Query_attendanceRecords_attendanceRecords_results<TRes> {
+  _CopyWithImpl_Query_attendanceRecords_attendanceRecords_results(
+    this._instance,
+    this._then,
+  );
+
+  final Query_attendanceRecords_attendanceRecords_results _instance;
+
+  final TRes Function(Query_attendanceRecords_attendanceRecords_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? meetingId = _undefined,
+    Object? personId = _undefined,
+    Object? datetime = _undefined,
+    Object? asServant = _undefined,
+    Object? recordedBy = _undefined,
+    Object? recordedByUser = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_attendanceRecords_attendanceRecords_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      meetingId: meetingId == _undefined || meetingId == null
+          ? _instance.meetingId
+          : (meetingId as String),
+      personId: personId == _undefined || personId == null
+          ? _instance.personId
+          : (personId as String),
+      datetime: datetime == _undefined || datetime == null
+          ? _instance.datetime
+          : (datetime as DateTime),
+      asServant: asServant == _undefined || asServant == null
+          ? _instance.asServant
+          : (asServant as bool),
+      recordedBy: recordedBy == _undefined || recordedBy == null
+          ? _instance.recordedBy
+          : (recordedBy as String),
+      recordedByUser: recordedByUser == _undefined
+          ? _instance.recordedByUser
+          : (recordedByUser as Fragment_User?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith_Fragment_User<TRes> get recordedByUser {
+    final local$recordedByUser = _instance.recordedByUser;
+    return local$recordedByUser == null
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(
+            local$recordedByUser,
+            (e) => call(recordedByUser: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Query_attendanceRecords_attendanceRecords_results<TRes>
+    implements
+        CopyWith_Query_attendanceRecords_attendanceRecords_results<TRes> {
+  _CopyWithStubImpl_Query_attendanceRecords_attendanceRecords_results(
+    this._res,
+  );
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    String? meetingId,
+    String? personId,
+    DateTime? datetime,
+    bool? asServant,
+    String? recordedBy,
+    Fragment_User? recordedByUser,
+    String? $__typename,
+  }) => _res;
+
+  CopyWith_Fragment_User<TRes> get recordedByUser =>
+      CopyWith_Fragment_User.stub(_res);
 }
 
 class Variables_Query_rosterEntries {
@@ -2050,6 +2799,13 @@ const documentNodeQueryrosterEntries = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'RosterEntry'),
                         directives: [],
@@ -2108,7 +2864,9 @@ class Query_rosterEntries_rosterEntries {
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
           ?.map(
-            (e) => Fragment_RosterEntry.fromJson((e as Map<String, dynamic>)),
+            (e) => Query_rosterEntries_rosterEntries_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
           )
           .toList(),
       $__typename: (l$$__typename as String),
@@ -2119,7 +2877,7 @@ class Query_rosterEntries_rosterEntries {
 
   final String? endKeyset;
 
-  final List<Fragment_RosterEntry>? results;
+  final List<Query_rosterEntries_rosterEntries_results>? results;
 
   final String $__typename;
 
@@ -2212,12 +2970,16 @@ abstract class CopyWith_Query_rosterEntries_rosterEntries<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_RosterEntry>? results,
+    List<Query_rosterEntries_rosterEntries_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_RosterEntry>? Function(
-      Iterable<CopyWith_Fragment_RosterEntry<Fragment_RosterEntry>>?,
+    Iterable<Query_rosterEntries_rosterEntries_results>? Function(
+      Iterable<
+        CopyWith_Query_rosterEntries_rosterEntries_results<
+          Query_rosterEntries_rosterEntries_results
+        >
+      >?,
     )
     _fn,
   );
@@ -2246,7 +3008,7 @@ class _CopyWithImpl_Query_rosterEntries_rosterEntries<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_RosterEntry>?),
+          : (results as List<Query_rosterEntries_rosterEntries_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -2254,13 +3016,19 @@ class _CopyWithImpl_Query_rosterEntries_rosterEntries<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_RosterEntry>? Function(
-      Iterable<CopyWith_Fragment_RosterEntry<Fragment_RosterEntry>>?,
+    Iterable<Query_rosterEntries_rosterEntries_results>? Function(
+      Iterable<
+        CopyWith_Query_rosterEntries_rosterEntries_results<
+          Query_rosterEntries_rosterEntries_results
+        >
+      >?,
     )
     _fn,
   ) => call(
     results: _fn(
-      _instance.results?.map((e) => CopyWith_Fragment_RosterEntry(e, (i) => i)),
+      _instance.results?.map(
+        (e) => CopyWith_Query_rosterEntries_rosterEntries_results(e, (i) => i),
+      ),
     )?.toList(),
   );
 }
@@ -2274,11 +3042,384 @@ class _CopyWithStubImpl_Query_rosterEntries_rosterEntries<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_RosterEntry>? results,
+    List<Query_rosterEntries_rosterEntries_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_rosterEntries_rosterEntries_results
+    implements Fragment_RosterEntry {
+  Query_rosterEntries_rosterEntries_results({
+    this.keyset,
+    required this.id,
+    required this.meetingId,
+    required this.personId,
+    required this.asServant,
+    this.name,
+    this.phones,
+    this.gender,
+    this.color,
+    this.studyYearId,
+    this.studyYearName,
+    this.photoUpdatedAt,
+    this.blurhash,
+    this.$__typename = 'RosterEntry',
+  });
+
+  factory Query_rosterEntries_rosterEntries_results.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$meetingId = json['meetingId'];
+    final l$personId = json['personId'];
+    final l$asServant = json['asServant'];
+    final l$name = json['name'];
+    final l$phones = json['phones'];
+    final l$gender = json['gender'];
+    final l$color = json['color'];
+    final l$studyYearId = json['studyYearId'];
+    final l$studyYearName = json['studyYearName'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
+    final l$$__typename = json['__typename'];
+    return Query_rosterEntries_rosterEntries_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      meetingId: (l$meetingId as String),
+      personId: (l$personId as String),
+      asServant: (l$asServant as bool),
+      name: (l$name as String?),
+      phones: (l$phones as List<dynamic>?)?.map((e) => (e as String)).toList(),
+      gender: (l$gender as bool?),
+      color: (l$color as int?),
+      studyYearId: (l$studyYearId as int?),
+      studyYearName: (l$studyYearName as String?),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final String meetingId;
+
+  final String personId;
+
+  final bool asServant;
+
+  final String? name;
+
+  final List<String>? phones;
+
+  final bool? gender;
+
+  final int? color;
+
+  final int? studyYearId;
+
+  final String? studyYearName;
+
+  final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$meetingId = meetingId;
+    _resultData['meetingId'] = l$meetingId;
+    final l$personId = personId;
+    _resultData['personId'] = l$personId;
+    final l$asServant = asServant;
+    _resultData['asServant'] = l$asServant;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$phones = phones;
+    _resultData['phones'] = l$phones?.map((e) => e).toList();
+    final l$gender = gender;
+    _resultData['gender'] = l$gender;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$studyYearId = studyYearId;
+    _resultData['studyYearId'] = l$studyYearId;
+    final l$studyYearName = studyYearName;
+    _resultData['studyYearName'] = l$studyYearName;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$meetingId = meetingId;
+    final l$personId = personId;
+    final l$asServant = asServant;
+    final l$name = name;
+    final l$phones = phones;
+    final l$gender = gender;
+    final l$color = color;
+    final l$studyYearId = studyYearId;
+    final l$studyYearName = studyYearName;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$meetingId,
+      l$personId,
+      l$asServant,
+      l$name,
+      l$phones == null ? null : Object.hashAll(l$phones.map((v) => v)),
+      l$gender,
+      l$color,
+      l$studyYearId,
+      l$studyYearName,
+      l$photoUpdatedAt,
+      l$blurhash,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_rosterEntries_rosterEntries_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$meetingId = meetingId;
+    final lOther$meetingId = other.meetingId;
+    if (l$meetingId != lOther$meetingId) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    final l$asServant = asServant;
+    final lOther$asServant = other.asServant;
+    if (l$asServant != lOther$asServant) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$phones = phones;
+    final lOther$phones = other.phones;
+    if (l$phones != null && lOther$phones != null) {
+      if (l$phones.length != lOther$phones.length) {
+        return false;
+      }
+      for (int i = 0; i < l$phones.length; i++) {
+        final l$phones$entry = l$phones[i];
+        final lOther$phones$entry = lOther$phones[i];
+        if (l$phones$entry != lOther$phones$entry) {
+          return false;
+        }
+      }
+    } else if (l$phones != lOther$phones) {
+      return false;
+    }
+    final l$gender = gender;
+    final lOther$gender = other.gender;
+    if (l$gender != lOther$gender) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$studyYearId = studyYearId;
+    final lOther$studyYearId = other.studyYearId;
+    if (l$studyYearId != lOther$studyYearId) {
+      return false;
+    }
+    final l$studyYearName = studyYearName;
+    final lOther$studyYearName = other.studyYearName;
+    if (l$studyYearName != lOther$studyYearName) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_rosterEntries_rosterEntries_results
+    on Query_rosterEntries_rosterEntries_results {
+  CopyWith_Query_rosterEntries_rosterEntries_results<
+    Query_rosterEntries_rosterEntries_results
+  >
+  get copyWith =>
+      CopyWith_Query_rosterEntries_rosterEntries_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_rosterEntries_rosterEntries_results<TRes> {
+  factory CopyWith_Query_rosterEntries_rosterEntries_results(
+    Query_rosterEntries_rosterEntries_results instance,
+    TRes Function(Query_rosterEntries_rosterEntries_results) then,
+  ) = _CopyWithImpl_Query_rosterEntries_rosterEntries_results;
+
+  factory CopyWith_Query_rosterEntries_rosterEntries_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_rosterEntries_rosterEntries_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    String? meetingId,
+    String? personId,
+    bool? asServant,
+    String? name,
+    List<String>? phones,
+    bool? gender,
+    int? color,
+    int? studyYearId,
+    String? studyYearName,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Query_rosterEntries_rosterEntries_results<TRes>
+    implements CopyWith_Query_rosterEntries_rosterEntries_results<TRes> {
+  _CopyWithImpl_Query_rosterEntries_rosterEntries_results(
+    this._instance,
+    this._then,
+  );
+
+  final Query_rosterEntries_rosterEntries_results _instance;
+
+  final TRes Function(Query_rosterEntries_rosterEntries_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? meetingId = _undefined,
+    Object? personId = _undefined,
+    Object? asServant = _undefined,
+    Object? name = _undefined,
+    Object? phones = _undefined,
+    Object? gender = _undefined,
+    Object? color = _undefined,
+    Object? studyYearId = _undefined,
+    Object? studyYearName = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_rosterEntries_rosterEntries_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      meetingId: meetingId == _undefined || meetingId == null
+          ? _instance.meetingId
+          : (meetingId as String),
+      personId: personId == _undefined || personId == null
+          ? _instance.personId
+          : (personId as String),
+      asServant: asServant == _undefined || asServant == null
+          ? _instance.asServant
+          : (asServant as bool),
+      name: name == _undefined ? _instance.name : (name as String?),
+      phones: phones == _undefined
+          ? _instance.phones
+          : (phones as List<String>?),
+      gender: gender == _undefined ? _instance.gender : (gender as bool?),
+      color: color == _undefined ? _instance.color : (color as int?),
+      studyYearId: studyYearId == _undefined
+          ? _instance.studyYearId
+          : (studyYearId as int?),
+      studyYearName: studyYearName == _undefined
+          ? _instance.studyYearName
+          : (studyYearName as String?),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Query_rosterEntries_rosterEntries_results<TRes>
+    implements CopyWith_Query_rosterEntries_rosterEntries_results<TRes> {
+  _CopyWithStubImpl_Query_rosterEntries_rosterEntries_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    String? meetingId,
+    String? personId,
+    bool? asServant,
+    String? name,
+    List<String>? phones,
+    bool? gender,
+    int? color,
+    int? studyYearId,
+    String? studyYearName,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    String? $__typename,
+  }) => _res;
 }
 
 class Variables_Query_meetingsHeldDays {
@@ -2696,6 +3837,13 @@ const documentNodeQuerymeetingsHeldDays = DocumentNode(
                   selectionSet: SelectionSetNode(
                     selections: [
                       FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
                         name: NameNode(value: 'id'),
                         alias: null,
                         arguments: [],
@@ -2956,6 +4104,7 @@ class _CopyWithStubImpl_Query_meetingsHeldDays_meetings<TRes>
 
 class Query_meetingsHeldDays_meetings_results {
   Query_meetingsHeldDays_meetings_results({
+    this.keyset,
     required this.id,
     this.heldDays,
     this.$__typename = 'Meeting',
@@ -2964,10 +4113,12 @@ class Query_meetingsHeldDays_meetings_results {
   factory Query_meetingsHeldDays_meetings_results.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$keyset = json['keyset'];
     final l$id = json['id'];
     final l$heldDays = json['heldDays'];
     final l$$__typename = json['__typename'];
     return Query_meetingsHeldDays_meetings_results(
+      keyset: (l$keyset as String?),
       id: (l$id as String),
       heldDays: (l$heldDays as List<dynamic>?)
           ?.map((e) => dateFromString(e))
@@ -2975,6 +4126,8 @@ class Query_meetingsHeldDays_meetings_results {
       $__typename: (l$$__typename as String),
     );
   }
+
+  final String? keyset;
 
   final String id;
 
@@ -2984,6 +4137,8 @@ class Query_meetingsHeldDays_meetings_results {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
     final l$id = id;
     _resultData['id'] = l$id;
     final l$heldDays = heldDays;
@@ -2995,10 +4150,12 @@ class Query_meetingsHeldDays_meetings_results {
 
   @override
   int get hashCode {
+    final l$keyset = keyset;
     final l$id = id;
     final l$heldDays = heldDays;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$keyset,
       l$id,
       l$heldDays == null ? null : Object.hashAll(l$heldDays.map((v) => v)),
       l$$__typename,
@@ -3012,6 +4169,11 @@ class Query_meetingsHeldDays_meetings_results {
     }
     if (other is! Query_meetingsHeldDays_meetings_results ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
       return false;
     }
     final l$id = id;
@@ -3062,7 +4224,12 @@ abstract class CopyWith_Query_meetingsHeldDays_meetings_results<TRes> {
   factory CopyWith_Query_meetingsHeldDays_meetings_results.stub(TRes res) =
       _CopyWithStubImpl_Query_meetingsHeldDays_meetings_results;
 
-  TRes call({String? id, List<DateTime>? heldDays, String? $__typename});
+  TRes call({
+    String? keyset,
+    String? id,
+    List<DateTime>? heldDays,
+    String? $__typename,
+  });
 }
 
 class _CopyWithImpl_Query_meetingsHeldDays_meetings_results<TRes>
@@ -3079,11 +4246,13 @@ class _CopyWithImpl_Query_meetingsHeldDays_meetings_results<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? keyset = _undefined,
     Object? id = _undefined,
     Object? heldDays = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Query_meetingsHeldDays_meetings_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
       id: id == _undefined || id == null ? _instance.id : (id as String),
       heldDays: heldDays == _undefined
           ? _instance.heldDays
@@ -3101,7 +4270,12 @@ class _CopyWithStubImpl_Query_meetingsHeldDays_meetings_results<TRes>
 
   TRes _res;
 
-  call({String? id, List<DateTime>? heldDays, String? $__typename}) => _res;
+  call({
+    String? keyset,
+    String? id,
+    List<DateTime>? heldDays,
+    String? $__typename,
+  }) => _res;
 }
 
 class Variables_Query_rosterAttendance {
@@ -3588,6 +4762,13 @@ const documentNodeQueryrosterAttendance = DocumentNode(
                   selectionSet: SelectionSetNode(
                     selections: [
                       FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
                         name: NameNode(value: 'id'),
                         alias: null,
                         arguments: [],
@@ -3943,6 +5124,7 @@ class _CopyWithStubImpl_Query_rosterAttendance_rosterEntries<TRes>
 
 class Query_rosterAttendance_rosterEntries_results {
   Query_rosterAttendance_rosterEntries_results({
+    this.keyset,
     required this.id,
     required this.meetingId,
     required this.personId,
@@ -3957,6 +5139,7 @@ class Query_rosterAttendance_rosterEntries_results {
   factory Query_rosterAttendance_rosterEntries_results.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$keyset = json['keyset'];
     final l$id = json['id'];
     final l$meetingId = json['meetingId'];
     final l$personId = json['personId'];
@@ -3967,6 +5150,7 @@ class Query_rosterAttendance_rosterEntries_results {
     final l$attendanceRecords = json['attendanceRecords'];
     final l$$__typename = json['__typename'];
     return Query_rosterAttendance_rosterEntries_results(
+      keyset: (l$keyset as String?),
       id: (l$id as String),
       meetingId: (l$meetingId as String),
       personId: (l$personId as String),
@@ -3985,6 +5169,8 @@ class Query_rosterAttendance_rosterEntries_results {
       $__typename: (l$$__typename as String),
     );
   }
+
+  final String? keyset;
 
   final String id;
 
@@ -4007,6 +5193,8 @@ class Query_rosterAttendance_rosterEntries_results {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
     final l$id = id;
     _resultData['id'] = l$id;
     final l$meetingId = meetingId;
@@ -4032,6 +5220,7 @@ class Query_rosterAttendance_rosterEntries_results {
 
   @override
   int get hashCode {
+    final l$keyset = keyset;
     final l$id = id;
     final l$meetingId = meetingId;
     final l$personId = personId;
@@ -4042,6 +5231,7 @@ class Query_rosterAttendance_rosterEntries_results {
     final l$attendanceRecords = attendanceRecords;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$keyset,
       l$id,
       l$meetingId,
       l$personId,
@@ -4061,6 +5251,11 @@ class Query_rosterAttendance_rosterEntries_results {
     }
     if (other is! Query_rosterAttendance_rosterEntries_results ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
       return false;
     }
     final l$id = id;
@@ -4138,6 +5333,7 @@ abstract class CopyWith_Query_rosterAttendance_rosterEntries_results<TRes> {
       _CopyWithStubImpl_Query_rosterAttendance_rosterEntries_results;
 
   TRes call({
+    String? keyset,
     String? id,
     String? meetingId,
     String? personId,
@@ -4176,6 +5372,7 @@ class _CopyWithImpl_Query_rosterAttendance_rosterEntries_results<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? keyset = _undefined,
     Object? id = _undefined,
     Object? meetingId = _undefined,
     Object? personId = _undefined,
@@ -4187,6 +5384,7 @@ class _CopyWithImpl_Query_rosterAttendance_rosterEntries_results<TRes>
     Object? $__typename = _undefined,
   }) => _then(
     Query_rosterAttendance_rosterEntries_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
       id: id == _undefined || id == null ? _instance.id : (id as String),
       meetingId: meetingId == _undefined || meetingId == null
           ? _instance.meetingId
@@ -4247,6 +5445,7 @@ class _CopyWithStubImpl_Query_rosterAttendance_rosterEntries_results<TRes>
   TRes _res;
 
   call({
+    String? keyset,
     String? id,
     String? meetingId,
     String? personId,
@@ -4889,6 +6088,13 @@ const documentNodeQuerymeetingsWithDays = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'Meeting'),
                         directives: [],
@@ -5231,6 +6437,7 @@ class _CopyWithStubImpl_Query_meetingsWithDays_meetings<TRes>
 
 class Query_meetingsWithDays_meetings_results implements Fragment_Meeting {
   Query_meetingsWithDays_meetings_results({
+    this.keyset,
     required this.id,
     required this.name,
     required this.audience,
@@ -5251,6 +6458,7 @@ class Query_meetingsWithDays_meetings_results implements Fragment_Meeting {
   factory Query_meetingsWithDays_meetings_results.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$keyset = json['keyset'];
     final l$id = json['id'];
     final l$name = json['name'];
     final l$audience = json['audience'];
@@ -5267,6 +6475,7 @@ class Query_meetingsWithDays_meetings_results implements Fragment_Meeting {
     final l$$__typename = json['__typename'];
     final l$days = json['days'];
     return Query_meetingsWithDays_meetings_results(
+      keyset: (l$keyset as String?),
       id: (l$id as String),
       name: (l$name as String),
       audience: fromJson_Enum_MeetingAudience((l$audience as String)),
@@ -5298,6 +6507,8 @@ class Query_meetingsWithDays_meetings_results implements Fragment_Meeting {
           .toList(),
     );
   }
+
+  final String? keyset;
 
   final String id;
 
@@ -5331,6 +6542,8 @@ class Query_meetingsWithDays_meetings_results implements Fragment_Meeting {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
     final l$id = id;
     _resultData['id'] = l$id;
     final l$name = name;
@@ -5366,6 +6579,7 @@ class Query_meetingsWithDays_meetings_results implements Fragment_Meeting {
 
   @override
   int get hashCode {
+    final l$keyset = keyset;
     final l$id = id;
     final l$name = name;
     final l$audience = audience;
@@ -5382,6 +6596,7 @@ class Query_meetingsWithDays_meetings_results implements Fragment_Meeting {
     final l$$__typename = $__typename;
     final l$days = days;
     return Object.hashAll([
+      l$keyset,
       l$id,
       l$name,
       l$audience,
@@ -5407,6 +6622,11 @@ class Query_meetingsWithDays_meetings_results implements Fragment_Meeting {
     }
     if (other is! Query_meetingsWithDays_meetings_results ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
       return false;
     }
     final l$id = id;
@@ -5514,6 +6734,7 @@ abstract class CopyWith_Query_meetingsWithDays_meetings_results<TRes> {
       _CopyWithStubImpl_Query_meetingsWithDays_meetings_results;
 
   TRes call({
+    String? keyset,
     String? id,
     String? name,
     Enum_MeetingAudience? audience,
@@ -5559,6 +6780,7 @@ class _CopyWithImpl_Query_meetingsWithDays_meetings_results<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? keyset = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? audience = _undefined,
@@ -5576,6 +6798,7 @@ class _CopyWithImpl_Query_meetingsWithDays_meetings_results<TRes>
     Object? days = _undefined,
   }) => _then(
     Query_meetingsWithDays_meetings_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
       id: id == _undefined || id == null ? _instance.id : (id as String),
       name: name == _undefined || name == null
           ? _instance.name
@@ -5672,6 +6895,7 @@ class _CopyWithStubImpl_Query_meetingsWithDays_meetings_results<TRes>
   TRes _res;
 
   call({
+    String? keyset,
     String? id,
     String? name,
     Enum_MeetingAudience? audience,
@@ -6396,6 +7620,13 @@ const documentNodeQuerypersonMeetingEntries = DocumentNode(
                   selectionSet: SelectionSetNode(
                     selections: [
                       FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
                         name: NameNode(value: 'id'),
                         alias: null,
                         arguments: [],
@@ -6698,6 +7929,7 @@ class _CopyWithStubImpl_Query_personMeetingEntries_rosterEntries<TRes>
 
 class Query_personMeetingEntries_rosterEntries_results {
   Query_personMeetingEntries_rosterEntries_results({
+    this.keyset,
     required this.id,
     required this.personId,
     required this.asServant,
@@ -6709,6 +7941,7 @@ class Query_personMeetingEntries_rosterEntries_results {
   factory Query_personMeetingEntries_rosterEntries_results.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$keyset = json['keyset'];
     final l$id = json['id'];
     final l$personId = json['personId'];
     final l$asServant = json['asServant'];
@@ -6716,6 +7949,7 @@ class Query_personMeetingEntries_rosterEntries_results {
     final l$meeting = json['meeting'];
     final l$$__typename = json['__typename'];
     return Query_personMeetingEntries_rosterEntries_results(
+      keyset: (l$keyset as String?),
       id: (l$id as String),
       personId: (l$personId as String),
       asServant: (l$asServant as bool),
@@ -6726,6 +7960,8 @@ class Query_personMeetingEntries_rosterEntries_results {
       $__typename: (l$$__typename as String),
     );
   }
+
+  final String? keyset;
 
   final String id;
 
@@ -6741,6 +7977,8 @@ class Query_personMeetingEntries_rosterEntries_results {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
     final l$id = id;
     _resultData['id'] = l$id;
     final l$personId = personId;
@@ -6758,6 +7996,7 @@ class Query_personMeetingEntries_rosterEntries_results {
 
   @override
   int get hashCode {
+    final l$keyset = keyset;
     final l$id = id;
     final l$personId = personId;
     final l$asServant = asServant;
@@ -6765,6 +8004,7 @@ class Query_personMeetingEntries_rosterEntries_results {
     final l$meeting = meeting;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$keyset,
       l$id,
       l$personId,
       l$asServant,
@@ -6781,6 +8021,11 @@ class Query_personMeetingEntries_rosterEntries_results {
     }
     if (other is! Query_personMeetingEntries_rosterEntries_results ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
       return false;
     }
     final l$id = id;
@@ -6837,6 +8082,7 @@ abstract class CopyWith_Query_personMeetingEntries_rosterEntries_results<TRes> {
   ) = _CopyWithStubImpl_Query_personMeetingEntries_rosterEntries_results;
 
   TRes call({
+    String? keyset,
     String? id,
     String? personId,
     bool? asServant,
@@ -6861,6 +8107,7 @@ class _CopyWithImpl_Query_personMeetingEntries_rosterEntries_results<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? keyset = _undefined,
     Object? id = _undefined,
     Object? personId = _undefined,
     Object? asServant = _undefined,
@@ -6869,6 +8116,7 @@ class _CopyWithImpl_Query_personMeetingEntries_rosterEntries_results<TRes>
     Object? $__typename = _undefined,
   }) => _then(
     Query_personMeetingEntries_rosterEntries_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
       id: id == _undefined || id == null ? _instance.id : (id as String),
       personId: personId == _undefined || personId == null
           ? _instance.personId
@@ -6903,6 +8151,7 @@ class _CopyWithStubImpl_Query_personMeetingEntries_rosterEntries_results<TRes>
   TRes _res;
 
   call({
+    String? keyset,
     String? id,
     String? personId,
     bool? asServant,

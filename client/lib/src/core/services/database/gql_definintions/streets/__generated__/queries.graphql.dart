@@ -3,6 +3,7 @@ import '../../areas/__generated__/fragments.graphql.dart';
 import '../../gql/__generated__/fragments.graphql.dart';
 import 'fragments.graphql.dart';
 
+import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
 class Variables_Query_streets {
@@ -427,6 +428,13 @@ const documentNodeQuerystreets = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'StreetWithLine'),
                         directives: [],
@@ -484,8 +492,9 @@ class Query_streets_streets {
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
           ?.map(
-            (e) =>
-                Fragment_StreetWithLine.fromJson((e as Map<String, dynamic>)),
+            (e) => Query_streets_streets_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
           )
           .toList(),
       $__typename: (l$$__typename as String),
@@ -496,7 +505,7 @@ class Query_streets_streets {
 
   final String? endKeyset;
 
-  final List<Fragment_StreetWithLine>? results;
+  final List<Query_streets_streets_results>? results;
 
   final String $__typename;
 
@@ -587,12 +596,14 @@ abstract class CopyWith_Query_streets_streets<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_StreetWithLine>? results,
+    List<Query_streets_streets_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_StreetWithLine>? Function(
-      Iterable<CopyWith_Fragment_StreetWithLine<Fragment_StreetWithLine>>?,
+    Iterable<Query_streets_streets_results>? Function(
+      Iterable<
+        CopyWith_Query_streets_streets_results<Query_streets_streets_results>
+      >?,
     )
     _fn,
   );
@@ -621,7 +632,7 @@ class _CopyWithImpl_Query_streets_streets<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_StreetWithLine>?),
+          : (results as List<Query_streets_streets_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -629,14 +640,16 @@ class _CopyWithImpl_Query_streets_streets<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_StreetWithLine>? Function(
-      Iterable<CopyWith_Fragment_StreetWithLine<Fragment_StreetWithLine>>?,
+    Iterable<Query_streets_streets_results>? Function(
+      Iterable<
+        CopyWith_Query_streets_streets_results<Query_streets_streets_results>
+      >?,
     )
     _fn,
   ) => call(
     results: _fn(
       _instance.results?.map(
-        (e) => CopyWith_Fragment_StreetWithLine(e, (i) => i),
+        (e) => CopyWith_Query_streets_streets_results(e, (i) => i),
       ),
     )?.toList(),
   );
@@ -651,11 +664,267 @@ class _CopyWithStubImpl_Query_streets_streets<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_StreetWithLine>? results,
+    List<Query_streets_streets_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_streets_streets_results
+    implements Fragment_StreetWithLine, Fragment_Street {
+  Query_streets_streets_results({
+    this.keyset,
+    required this.id,
+    required this.name,
+    this.color,
+    this.photoUpdatedAt,
+    this.blurhash,
+    required this.userCanEdit,
+    this.$__typename = 'Street',
+    this.line,
+  });
+
+  factory Query_streets_streets_results.fromJson(Map<String, dynamic> json) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$color = json['color'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
+    final l$userCanEdit = json['userCanEdit'];
+    final l$$__typename = json['__typename'];
+    final l$line = json['line'];
+    return Query_streets_streets_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      name: (l$name as String),
+      color: (l$color as int?),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
+      userCanEdit: (l$userCanEdit as bool),
+      $__typename: (l$$__typename as String),
+      line: (l$line as Json?),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final String name;
+
+  final int? color;
+
+  final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
+
+  final bool userCanEdit;
+
+  final String $__typename;
+
+  final Json? line;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$line = line;
+    _resultData['line'] = l$line;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$name = name;
+    final l$color = color;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
+    final l$userCanEdit = userCanEdit;
+    final l$$__typename = $__typename;
+    final l$line = line;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$name,
+      l$color,
+      l$photoUpdatedAt,
+      l$blurhash,
+      l$userCanEdit,
+      l$$__typename,
+      l$line,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_streets_streets_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$line = line;
+    final lOther$line = other.line;
+    if (l$line != lOther$line) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_streets_streets_results
+    on Query_streets_streets_results {
+  CopyWith_Query_streets_streets_results<Query_streets_streets_results>
+  get copyWith => CopyWith_Query_streets_streets_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_streets_streets_results<TRes> {
+  factory CopyWith_Query_streets_streets_results(
+    Query_streets_streets_results instance,
+    TRes Function(Query_streets_streets_results) then,
+  ) = _CopyWithImpl_Query_streets_streets_results;
+
+  factory CopyWith_Query_streets_streets_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_streets_streets_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    bool? userCanEdit,
+    String? $__typename,
+    Json? line,
+  });
+}
+
+class _CopyWithImpl_Query_streets_streets_results<TRes>
+    implements CopyWith_Query_streets_streets_results<TRes> {
+  _CopyWithImpl_Query_streets_streets_results(this._instance, this._then);
+
+  final Query_streets_streets_results _instance;
+
+  final TRes Function(Query_streets_streets_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? color = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
+    Object? userCanEdit = _undefined,
+    Object? $__typename = _undefined,
+    Object? line = _undefined,
+  }) => _then(
+    Query_streets_streets_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      userCanEdit: userCanEdit == _undefined || userCanEdit == null
+          ? _instance.userCanEdit
+          : (userCanEdit as bool),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      line: line == _undefined ? _instance.line : (line as Json?),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Query_streets_streets_results<TRes>
+    implements CopyWith_Query_streets_streets_results<TRes> {
+  _CopyWithStubImpl_Query_streets_streets_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    bool? userCanEdit,
+    String? $__typename,
+    Json? line,
+  }) => _res;
 }
 
 class Variables_Query_street {

@@ -4,6 +4,7 @@ import '../../metadata/study_years/__generated__/fragments.graphql.dart';
 import '../../services/__generated__/fragments.graphql.dart';
 import 'fragments.graphql.dart';
 
+import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
 class Variables_Query_classes {
@@ -426,6 +427,13 @@ const documentNodeQueryclasses = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'ClassWithStudyYears'),
                         directives: [],
@@ -485,7 +493,7 @@ class Query_classes_classes {
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
           ?.map(
-            (e) => Fragment_ClassWithStudyYears.fromJson(
+            (e) => Query_classes_classes_results.fromJson(
               (e as Map<String, dynamic>),
             ),
           )
@@ -498,7 +506,7 @@ class Query_classes_classes {
 
   final String? endKeyset;
 
-  final List<Fragment_ClassWithStudyYears>? results;
+  final List<Query_classes_classes_results>? results;
 
   final String $__typename;
 
@@ -589,13 +597,13 @@ abstract class CopyWith_Query_classes_classes<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_ClassWithStudyYears>? results,
+    List<Query_classes_classes_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_ClassWithStudyYears>? Function(
+    Iterable<Query_classes_classes_results>? Function(
       Iterable<
-        CopyWith_Fragment_ClassWithStudyYears<Fragment_ClassWithStudyYears>
+        CopyWith_Query_classes_classes_results<Query_classes_classes_results>
       >?,
     )
     _fn,
@@ -625,7 +633,7 @@ class _CopyWithImpl_Query_classes_classes<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_ClassWithStudyYears>?),
+          : (results as List<Query_classes_classes_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -633,16 +641,16 @@ class _CopyWithImpl_Query_classes_classes<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_ClassWithStudyYears>? Function(
+    Iterable<Query_classes_classes_results>? Function(
       Iterable<
-        CopyWith_Fragment_ClassWithStudyYears<Fragment_ClassWithStudyYears>
+        CopyWith_Query_classes_classes_results<Query_classes_classes_results>
       >?,
     )
     _fn,
   ) => call(
     results: _fn(
       _instance.results?.map(
-        (e) => CopyWith_Fragment_ClassWithStudyYears(e, (i) => i),
+        (e) => CopyWith_Query_classes_classes_results(e, (i) => i),
       ),
     )?.toList(),
   );
@@ -657,11 +665,410 @@ class _CopyWithStubImpl_Query_classes_classes<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_ClassWithStudyYears>? results,
+    List<Query_classes_classes_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_classes_classes_results
+    implements
+        Fragment_ClassWithStudyYears,
+        Fragment_Class,
+        Fragment_ClassNoPhoto {
+  Query_classes_classes_results({
+    this.keyset,
+    required this.id,
+    required this.name,
+    this.color,
+    required this.userCanEdit,
+    this.$__typename = 'Class',
+    this.photoUpdatedAt,
+    this.blurhash,
+    required this.serviceId,
+    required this.serviceStudyYear,
+    required this.serviceStudyYearTo,
+    this.serviceGender,
+    this.studyYearFrom,
+    this.studyYearTo,
+  });
+
+  factory Query_classes_classes_results.fromJson(Map<String, dynamic> json) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
+    final l$$__typename = json['__typename'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
+    final l$serviceId = json['serviceId'];
+    final l$serviceStudyYear = json['serviceStudyYear'];
+    final l$serviceStudyYearTo = json['serviceStudyYearTo'];
+    final l$serviceGender = json['serviceGender'];
+    final l$studyYearFrom = json['studyYearFrom'];
+    final l$studyYearTo = json['studyYearTo'];
+    return Query_classes_classes_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      name: (l$name as String),
+      color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool),
+      $__typename: (l$$__typename as String),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
+      serviceId: (l$serviceId as String),
+      serviceStudyYear: (l$serviceStudyYear as int),
+      serviceStudyYearTo: (l$serviceStudyYearTo as int),
+      serviceGender: (l$serviceGender as bool?),
+      studyYearFrom: l$studyYearFrom == null
+          ? null
+          : Fragment_StudyYear.fromJson(
+              (l$studyYearFrom as Map<String, dynamic>),
+            ),
+      studyYearTo: l$studyYearTo == null
+          ? null
+          : Fragment_StudyYear.fromJson(
+              (l$studyYearTo as Map<String, dynamic>),
+            ),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final String name;
+
+  final int? color;
+
+  final bool userCanEdit;
+
+  final String $__typename;
+
+  final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
+
+  final String serviceId;
+
+  final int serviceStudyYear;
+
+  final int serviceStudyYearTo;
+
+  final bool? serviceGender;
+
+  final Fragment_StudyYear? studyYearFrom;
+
+  final Fragment_StudyYear? studyYearTo;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
+    final l$serviceId = serviceId;
+    _resultData['serviceId'] = l$serviceId;
+    final l$serviceStudyYear = serviceStudyYear;
+    _resultData['serviceStudyYear'] = l$serviceStudyYear;
+    final l$serviceStudyYearTo = serviceStudyYearTo;
+    _resultData['serviceStudyYearTo'] = l$serviceStudyYearTo;
+    final l$serviceGender = serviceGender;
+    _resultData['serviceGender'] = l$serviceGender;
+    final l$studyYearFrom = studyYearFrom;
+    _resultData['studyYearFrom'] = l$studyYearFrom?.toJson();
+    final l$studyYearTo = studyYearTo;
+    _resultData['studyYearTo'] = l$studyYearTo?.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$name = name;
+    final l$color = color;
+    final l$userCanEdit = userCanEdit;
+    final l$$__typename = $__typename;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
+    final l$serviceId = serviceId;
+    final l$serviceStudyYear = serviceStudyYear;
+    final l$serviceStudyYearTo = serviceStudyYearTo;
+    final l$serviceGender = serviceGender;
+    final l$studyYearFrom = studyYearFrom;
+    final l$studyYearTo = studyYearTo;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$name,
+      l$color,
+      l$userCanEdit,
+      l$$__typename,
+      l$photoUpdatedAt,
+      l$blurhash,
+      l$serviceId,
+      l$serviceStudyYear,
+      l$serviceStudyYearTo,
+      l$serviceGender,
+      l$studyYearFrom,
+      l$studyYearTo,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_classes_classes_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$serviceId = serviceId;
+    final lOther$serviceId = other.serviceId;
+    if (l$serviceId != lOther$serviceId) {
+      return false;
+    }
+    final l$serviceStudyYear = serviceStudyYear;
+    final lOther$serviceStudyYear = other.serviceStudyYear;
+    if (l$serviceStudyYear != lOther$serviceStudyYear) {
+      return false;
+    }
+    final l$serviceStudyYearTo = serviceStudyYearTo;
+    final lOther$serviceStudyYearTo = other.serviceStudyYearTo;
+    if (l$serviceStudyYearTo != lOther$serviceStudyYearTo) {
+      return false;
+    }
+    final l$serviceGender = serviceGender;
+    final lOther$serviceGender = other.serviceGender;
+    if (l$serviceGender != lOther$serviceGender) {
+      return false;
+    }
+    final l$studyYearFrom = studyYearFrom;
+    final lOther$studyYearFrom = other.studyYearFrom;
+    if (l$studyYearFrom != lOther$studyYearFrom) {
+      return false;
+    }
+    final l$studyYearTo = studyYearTo;
+    final lOther$studyYearTo = other.studyYearTo;
+    if (l$studyYearTo != lOther$studyYearTo) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_classes_classes_results
+    on Query_classes_classes_results {
+  CopyWith_Query_classes_classes_results<Query_classes_classes_results>
+  get copyWith => CopyWith_Query_classes_classes_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_classes_classes_results<TRes> {
+  factory CopyWith_Query_classes_classes_results(
+    Query_classes_classes_results instance,
+    TRes Function(Query_classes_classes_results) then,
+  ) = _CopyWithImpl_Query_classes_classes_results;
+
+  factory CopyWith_Query_classes_classes_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_classes_classes_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    String? $__typename,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    String? serviceId,
+    int? serviceStudyYear,
+    int? serviceStudyYearTo,
+    bool? serviceGender,
+    Fragment_StudyYear? studyYearFrom,
+    Fragment_StudyYear? studyYearTo,
+  });
+  CopyWith_Fragment_StudyYear<TRes> get studyYearFrom;
+  CopyWith_Fragment_StudyYear<TRes> get studyYearTo;
+}
+
+class _CopyWithImpl_Query_classes_classes_results<TRes>
+    implements CopyWith_Query_classes_classes_results<TRes> {
+  _CopyWithImpl_Query_classes_classes_results(this._instance, this._then);
+
+  final Query_classes_classes_results _instance;
+
+  final TRes Function(Query_classes_classes_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? color = _undefined,
+    Object? userCanEdit = _undefined,
+    Object? $__typename = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
+    Object? serviceId = _undefined,
+    Object? serviceStudyYear = _undefined,
+    Object? serviceStudyYearTo = _undefined,
+    Object? serviceGender = _undefined,
+    Object? studyYearFrom = _undefined,
+    Object? studyYearTo = _undefined,
+  }) => _then(
+    Query_classes_classes_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined || userCanEdit == null
+          ? _instance.userCanEdit
+          : (userCanEdit as bool),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      serviceId: serviceId == _undefined || serviceId == null
+          ? _instance.serviceId
+          : (serviceId as String),
+      serviceStudyYear:
+          serviceStudyYear == _undefined || serviceStudyYear == null
+          ? _instance.serviceStudyYear
+          : (serviceStudyYear as int),
+      serviceStudyYearTo:
+          serviceStudyYearTo == _undefined || serviceStudyYearTo == null
+          ? _instance.serviceStudyYearTo
+          : (serviceStudyYearTo as int),
+      serviceGender: serviceGender == _undefined
+          ? _instance.serviceGender
+          : (serviceGender as bool?),
+      studyYearFrom: studyYearFrom == _undefined
+          ? _instance.studyYearFrom
+          : (studyYearFrom as Fragment_StudyYear?),
+      studyYearTo: studyYearTo == _undefined
+          ? _instance.studyYearTo
+          : (studyYearTo as Fragment_StudyYear?),
+    ),
+  );
+
+  CopyWith_Fragment_StudyYear<TRes> get studyYearFrom {
+    final local$studyYearFrom = _instance.studyYearFrom;
+    return local$studyYearFrom == null
+        ? CopyWith_Fragment_StudyYear.stub(_then(_instance))
+        : CopyWith_Fragment_StudyYear(
+            local$studyYearFrom,
+            (e) => call(studyYearFrom: e),
+          );
+  }
+
+  CopyWith_Fragment_StudyYear<TRes> get studyYearTo {
+    final local$studyYearTo = _instance.studyYearTo;
+    return local$studyYearTo == null
+        ? CopyWith_Fragment_StudyYear.stub(_then(_instance))
+        : CopyWith_Fragment_StudyYear(
+            local$studyYearTo,
+            (e) => call(studyYearTo: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Query_classes_classes_results<TRes>
+    implements CopyWith_Query_classes_classes_results<TRes> {
+  _CopyWithStubImpl_Query_classes_classes_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    String? $__typename,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    String? serviceId,
+    int? serviceStudyYear,
+    int? serviceStudyYearTo,
+    bool? serviceGender,
+    Fragment_StudyYear? studyYearFrom,
+    Fragment_StudyYear? studyYearTo,
+  }) => _res;
+
+  CopyWith_Fragment_StudyYear<TRes> get studyYearFrom =>
+      CopyWith_Fragment_StudyYear.stub(_res);
+
+  CopyWith_Fragment_StudyYear<TRes> get studyYearTo =>
+      CopyWith_Fragment_StudyYear.stub(_res);
 }
 
 class Variables_Query_class {

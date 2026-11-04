@@ -8,6 +8,7 @@ query qualifications(
     count
     endKeyset
     results {
+      keyset
       ...Qualification
     }
   }

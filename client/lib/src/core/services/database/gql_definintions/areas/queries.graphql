@@ -8,6 +8,7 @@ query areas(
     count
     endKeyset
     results {
+      keyset
       ...AreaWithBounds
     }
   }

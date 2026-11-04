@@ -2,6 +2,7 @@ import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../gql/__generated__/fragments.graphql.dart';
 import 'fragments.graphql.dart';
 
+import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
 class Variables_Query_areas {
@@ -419,6 +420,13 @@ const documentNodeQueryareas = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'AreaWithBounds'),
                         directives: [],
@@ -477,7 +485,7 @@ class Query_areas_areas {
       results: (l$results as List<dynamic>?)
           ?.map(
             (e) =>
-                Fragment_AreaWithBounds.fromJson((e as Map<String, dynamic>)),
+                Query_areas_areas_results.fromJson((e as Map<String, dynamic>)),
           )
           .toList(),
       $__typename: (l$$__typename as String),
@@ -488,7 +496,7 @@ class Query_areas_areas {
 
   final String? endKeyset;
 
-  final List<Fragment_AreaWithBounds>? results;
+  final List<Query_areas_areas_results>? results;
 
   final String $__typename;
 
@@ -579,12 +587,12 @@ abstract class CopyWith_Query_areas_areas<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_AreaWithBounds>? results,
+    List<Query_areas_areas_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_AreaWithBounds>? Function(
-      Iterable<CopyWith_Fragment_AreaWithBounds<Fragment_AreaWithBounds>>?,
+    Iterable<Query_areas_areas_results>? Function(
+      Iterable<CopyWith_Query_areas_areas_results<Query_areas_areas_results>>?,
     )
     _fn,
   );
@@ -613,7 +621,7 @@ class _CopyWithImpl_Query_areas_areas<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_AreaWithBounds>?),
+          : (results as List<Query_areas_areas_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -621,14 +629,14 @@ class _CopyWithImpl_Query_areas_areas<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_AreaWithBounds>? Function(
-      Iterable<CopyWith_Fragment_AreaWithBounds<Fragment_AreaWithBounds>>?,
+    Iterable<Query_areas_areas_results>? Function(
+      Iterable<CopyWith_Query_areas_areas_results<Query_areas_areas_results>>?,
     )
     _fn,
   ) => call(
     results: _fn(
       _instance.results?.map(
-        (e) => CopyWith_Fragment_AreaWithBounds(e, (i) => i),
+        (e) => CopyWith_Query_areas_areas_results(e, (i) => i),
       ),
     )?.toList(),
   );
@@ -643,11 +651,267 @@ class _CopyWithStubImpl_Query_areas_areas<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_AreaWithBounds>? results,
+    List<Query_areas_areas_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_areas_areas_results
+    implements Fragment_AreaWithBounds, Fragment_Area {
+  Query_areas_areas_results({
+    this.keyset,
+    required this.id,
+    required this.name,
+    this.color,
+    this.photoUpdatedAt,
+    this.blurhash,
+    required this.userCanEdit,
+    this.$__typename = 'Area',
+    this.bounds,
+  });
+
+  factory Query_areas_areas_results.fromJson(Map<String, dynamic> json) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$color = json['color'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
+    final l$userCanEdit = json['userCanEdit'];
+    final l$$__typename = json['__typename'];
+    final l$bounds = json['bounds'];
+    return Query_areas_areas_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      name: (l$name as String),
+      color: (l$color as int?),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
+      userCanEdit: (l$userCanEdit as bool),
+      $__typename: (l$$__typename as String),
+      bounds: (l$bounds as Json?),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final String name;
+
+  final int? color;
+
+  final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
+
+  final bool userCanEdit;
+
+  final String $__typename;
+
+  final Json? bounds;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$bounds = bounds;
+    _resultData['bounds'] = l$bounds;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$name = name;
+    final l$color = color;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
+    final l$userCanEdit = userCanEdit;
+    final l$$__typename = $__typename;
+    final l$bounds = bounds;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$name,
+      l$color,
+      l$photoUpdatedAt,
+      l$blurhash,
+      l$userCanEdit,
+      l$$__typename,
+      l$bounds,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_areas_areas_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$bounds = bounds;
+    final lOther$bounds = other.bounds;
+    if (l$bounds != lOther$bounds) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_areas_areas_results
+    on Query_areas_areas_results {
+  CopyWith_Query_areas_areas_results<Query_areas_areas_results> get copyWith =>
+      CopyWith_Query_areas_areas_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_areas_areas_results<TRes> {
+  factory CopyWith_Query_areas_areas_results(
+    Query_areas_areas_results instance,
+    TRes Function(Query_areas_areas_results) then,
+  ) = _CopyWithImpl_Query_areas_areas_results;
+
+  factory CopyWith_Query_areas_areas_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_areas_areas_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    bool? userCanEdit,
+    String? $__typename,
+    Json? bounds,
+  });
+}
+
+class _CopyWithImpl_Query_areas_areas_results<TRes>
+    implements CopyWith_Query_areas_areas_results<TRes> {
+  _CopyWithImpl_Query_areas_areas_results(this._instance, this._then);
+
+  final Query_areas_areas_results _instance;
+
+  final TRes Function(Query_areas_areas_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? color = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
+    Object? userCanEdit = _undefined,
+    Object? $__typename = _undefined,
+    Object? bounds = _undefined,
+  }) => _then(
+    Query_areas_areas_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      userCanEdit: userCanEdit == _undefined || userCanEdit == null
+          ? _instance.userCanEdit
+          : (userCanEdit as bool),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      bounds: bounds == _undefined ? _instance.bounds : (bounds as Json?),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Query_areas_areas_results<TRes>
+    implements CopyWith_Query_areas_areas_results<TRes> {
+  _CopyWithStubImpl_Query_areas_areas_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    bool? userCanEdit,
+    String? $__typename,
+    Json? bounds,
+  }) => _res;
 }
 
 class Variables_Query_area {

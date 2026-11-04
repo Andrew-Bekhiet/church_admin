@@ -23,6 +23,7 @@ defmodule ChurchAdmin.People.Family do
 
   graphql do
     type :family
+    keyset_field :keyset
 
     relationships [
       :persons,

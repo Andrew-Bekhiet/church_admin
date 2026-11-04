@@ -11,6 +11,7 @@ defmodule ChurchAdmin.Activity.LatestConfession do
 
   graphql do
     type :latest_confession
+    keyset_field :keyset
 
     relationships [:person, :user]
 

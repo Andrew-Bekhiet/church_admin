@@ -11,6 +11,7 @@ defmodule ChurchAdmin.Catalog.Father do
 
   graphql do
     type :father
+    keyset_field :keyset
 
     relationships [:church]
 

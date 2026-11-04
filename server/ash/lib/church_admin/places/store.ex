@@ -28,6 +28,7 @@ defmodule ChurchAdmin.Places.Store do
 
   graphql do
     type :store
+    keyset_field :keyset
 
     relationships [:address, :admin_family, :latest_edit, :edits, :latest_visit, :visits]
 

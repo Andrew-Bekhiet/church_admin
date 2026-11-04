@@ -10,6 +10,7 @@ defmodule ChurchAdmin.Catalog.Job do
 
   graphql do
     type :job
+    keyset_field :keyset
 
     queries do
       get :job, :read

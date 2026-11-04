@@ -11,6 +11,7 @@ defmodule ChurchAdmin.Activity.LatestKodas do
 
   graphql do
     type :latest_kodas
+    keyset_field :keyset
 
     relationships [:person, :user]
 

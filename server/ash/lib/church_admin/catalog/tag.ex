@@ -10,6 +10,7 @@ defmodule ChurchAdmin.Catalog.Tag do
 
   graphql do
     type :tag
+    keyset_field :keyset
 
     queries do
       get :tag, :read

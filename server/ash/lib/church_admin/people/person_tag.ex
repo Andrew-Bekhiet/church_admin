@@ -12,6 +12,7 @@ defmodule ChurchAdmin.People.PersonTag do
 
   graphql do
     type :person_tag
+    keyset_field :keyset
 
     relationships [:person]
 

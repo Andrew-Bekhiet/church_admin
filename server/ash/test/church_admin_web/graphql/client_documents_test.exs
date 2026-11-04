@@ -3,7 +3,7 @@ defmodule ChurchAdminWeb.Graphql.ClientDocumentsTest do
 
   import Plug.Test
 
-  alias Absinthe.{Blueprint, Phase}
+  alias Absinthe.{Blueprint, Language, Phase}
   alias ChurchAdminWeb.Graphql.Phase.LimitDepth
   alias ChurchAdminWeb.Graphql.Pipeline
 
@@ -28,6 +28,36 @@ defmodule ChurchAdminWeb.Graphql.ClientDocumentsTest do
     {:ok, parsed} = Phase.Parse.run(%Absinthe.Language.Source{body: Enum.join(bodies, "\n")}, [])
     for %Absinthe.Language.OperationDefinition{name: name} <- parsed.input.definitions, do: name
   end
+
+  defp list_documents(bodies) do
+    {:ok, parsed} = Phase.Parse.run(%Absinthe.Language.Source{body: Enum.join(bodies, "\n")}, [])
+
+    for %Language.OperationDefinition{operation: :query} = operation <- parsed.input.definitions,
+        %Language.Field{} = root <- operation.selection_set.selections,
+        selects_directly?(root, "endKeyset") do
+      %{operation: operation, root: root}
+    end
+  end
+
+  defp selects_directly?(%Language.Field{selection_set: %{selections: selections}}, name),
+    do: Enum.any?(selections, &match?(%Language.Field{name: ^name}, &1))
+
+  defp results_select_keyset?(%Language.Field{selection_set: %{selections: selections}}) do
+    Enum.any?(
+      selections,
+      &(match?(%Language.Field{name: "results"}, &1) and selects_directly?(&1, "keyset"))
+    )
+  end
+
+  defp declares_variable?(%Language.OperationDefinition{variable_definitions: definitions}, name),
+    do: Enum.any?(definitions, &(&1.variable.name == name))
+
+  defp passes_variable?(%Language.Field{arguments: arguments}, argument, variable),
+    do:
+      Enum.any?(
+        arguments,
+        &(&1.name == argument and match?(%Language.Variable{name: ^variable}, &1.value))
+      )
 
   defp measure(body, operation_name) do
     phases =
@@ -72,7 +102,10 @@ defmodule ChurchAdminWeb.Graphql.ClientDocumentsTest do
   setup_all do
     bodies = client_documents()
     all = Enum.join(bodies, "\n")
-    {:ok, measured: bodies |> client_operation_names() |> Enum.map(&measure(all, &1))}
+
+    {:ok,
+     measured: bodies |> client_operation_names() |> Enum.map(&measure(all, &1)),
+     lists: list_documents(bodies)}
   end
 
   describe "the documents the client sends" do
@@ -92,6 +125,31 @@ defmodule ChurchAdminWeb.Graphql.ClientDocumentsTest do
 
       assert deep == [],
              "raise Pipeline.max_depth/0 or flatten these documents: #{inspect(deep)}"
+    end
+  end
+
+  describe "the list documents the client sends" do
+    test "are found", %{lists: lists} do
+      assert length(lists) > 40
+    end
+
+    test "declare $filter and pass it to the list field", %{lists: lists} do
+      without_filter =
+        for %{operation: operation, root: root} <- lists,
+            not (declares_variable?(operation, "filter") and
+                   passes_variable?(root, "filter", "filter")),
+            do: operation.name
+
+      assert without_filter == []
+    end
+
+    test "select keyset inside results", %{lists: lists} do
+      without_keyset =
+        for %{operation: operation, root: root} <- lists,
+            not results_select_keyset?(root),
+            do: operation.name
+
+      assert without_keyset == []
     end
   end
 

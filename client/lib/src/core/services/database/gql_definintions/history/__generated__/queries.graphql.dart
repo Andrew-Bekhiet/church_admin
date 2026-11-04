@@ -2,6 +2,7 @@ import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../gql/__generated__/fragments.graphql.dart';
 import 'fragments.graphql.dart';
 
+import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
 class Variables_Query_edits {
@@ -419,6 +420,13 @@ const documentNodeQueryedits = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'Edit'),
                         directives: [],
@@ -475,7 +483,10 @@ class Query_edits_edits {
       count: (l$count as int?),
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
-          ?.map((e) => Fragment_Edit.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) =>
+                Query_edits_edits_results.fromJson((e as Map<String, dynamic>)),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -485,7 +496,7 @@ class Query_edits_edits {
 
   final String? endKeyset;
 
-  final List<Fragment_Edit>? results;
+  final List<Query_edits_edits_results>? results;
 
   final String $__typename;
 
@@ -576,12 +587,12 @@ abstract class CopyWith_Query_edits_edits<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_Edit>? results,
+    List<Query_edits_edits_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_Edit>? Function(
-      Iterable<CopyWith_Fragment_Edit<Fragment_Edit>>?,
+    Iterable<Query_edits_edits_results>? Function(
+      Iterable<CopyWith_Query_edits_edits_results<Query_edits_edits_results>>?,
     )
     _fn,
   );
@@ -610,7 +621,7 @@ class _CopyWithImpl_Query_edits_edits<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_Edit>?),
+          : (results as List<Query_edits_edits_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -618,13 +629,15 @@ class _CopyWithImpl_Query_edits_edits<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_Edit>? Function(
-      Iterable<CopyWith_Fragment_Edit<Fragment_Edit>>?,
+    Iterable<Query_edits_edits_results>? Function(
+      Iterable<CopyWith_Query_edits_edits_results<Query_edits_edits_results>>?,
     )
     _fn,
   ) => call(
     results: _fn(
-      _instance.results?.map((e) => CopyWith_Fragment_Edit(e, (i) => i)),
+      _instance.results?.map(
+        (e) => CopyWith_Query_edits_edits_results(e, (i) => i),
+      ),
     )?.toList(),
   );
 }
@@ -638,11 +651,198 @@ class _CopyWithStubImpl_Query_edits_edits<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_Edit>? results,
+    List<Query_edits_edits_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_edits_edits_results implements Fragment_Edit {
+  Query_edits_edits_results({
+    this.keyset,
+    required this.time,
+    this.recordedBy,
+    this.user,
+    this.$__typename = 'Edit',
+  });
+
+  factory Query_edits_edits_results.fromJson(Map<String, dynamic> json) {
+    final l$keyset = json['keyset'];
+    final l$time = json['time'];
+    final l$recordedBy = json['recordedBy'];
+    final l$user = json['user'];
+    final l$$__typename = json['__typename'];
+    return Query_edits_edits_results(
+      keyset: (l$keyset as String?),
+      time: tstzFromString(l$time),
+      recordedBy: (l$recordedBy as String?),
+      user: l$user == null
+          ? null
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? keyset;
+
+  final DateTime time;
+
+  final String? recordedBy;
+
+  final Fragment_User? user;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$time = time;
+    _resultData['time'] = tstzToString(l$time);
+    final l$recordedBy = recordedBy;
+    _resultData['recordedBy'] = l$recordedBy;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$time = time;
+    final l$recordedBy = recordedBy;
+    final l$user = user;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$keyset,
+      l$time,
+      l$recordedBy,
+      l$user,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_edits_edits_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$recordedBy = recordedBy;
+    final lOther$recordedBy = other.recordedBy;
+    if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_edits_edits_results
+    on Query_edits_edits_results {
+  CopyWith_Query_edits_edits_results<Query_edits_edits_results> get copyWith =>
+      CopyWith_Query_edits_edits_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_edits_edits_results<TRes> {
+  factory CopyWith_Query_edits_edits_results(
+    Query_edits_edits_results instance,
+    TRes Function(Query_edits_edits_results) then,
+  ) = _CopyWithImpl_Query_edits_edits_results;
+
+  factory CopyWith_Query_edits_edits_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_edits_edits_results;
+
+  TRes call({
+    String? keyset,
+    DateTime? time,
+    String? recordedBy,
+    Fragment_User? user,
+    String? $__typename,
+  });
+  CopyWith_Fragment_User<TRes> get user;
+}
+
+class _CopyWithImpl_Query_edits_edits_results<TRes>
+    implements CopyWith_Query_edits_edits_results<TRes> {
+  _CopyWithImpl_Query_edits_edits_results(this._instance, this._then);
+
+  final Query_edits_edits_results _instance;
+
+  final TRes Function(Query_edits_edits_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? time = _undefined,
+    Object? recordedBy = _undefined,
+    Object? user = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_edits_edits_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      time: time == _undefined || time == null
+          ? _instance.time
+          : (time as DateTime),
+      recordedBy: recordedBy == _undefined
+          ? _instance.recordedBy
+          : (recordedBy as String?),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith_Fragment_User<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Query_edits_edits_results<TRes>
+    implements CopyWith_Query_edits_edits_results<TRes> {
+  _CopyWithStubImpl_Query_edits_edits_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    DateTime? time,
+    String? recordedBy,
+    Fragment_User? user,
+    String? $__typename,
+  }) => _res;
+
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
 class Variables_Query_visits {
@@ -1060,6 +1260,13 @@ const documentNodeQueryvisits = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'Visit'),
                         directives: [],
@@ -1116,7 +1323,11 @@ class Query_visits_visits {
       count: (l$count as int?),
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
-          ?.map((e) => Fragment_Visit.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Query_visits_visits_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -1126,7 +1337,7 @@ class Query_visits_visits {
 
   final String? endKeyset;
 
-  final List<Fragment_Visit>? results;
+  final List<Query_visits_visits_results>? results;
 
   final String $__typename;
 
@@ -1217,12 +1428,14 @@ abstract class CopyWith_Query_visits_visits<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_Visit>? results,
+    List<Query_visits_visits_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_Visit>? Function(
-      Iterable<CopyWith_Fragment_Visit<Fragment_Visit>>?,
+    Iterable<Query_visits_visits_results>? Function(
+      Iterable<
+        CopyWith_Query_visits_visits_results<Query_visits_visits_results>
+      >?,
     )
     _fn,
   );
@@ -1251,7 +1464,7 @@ class _CopyWithImpl_Query_visits_visits<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_Visit>?),
+          : (results as List<Query_visits_visits_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -1259,13 +1472,17 @@ class _CopyWithImpl_Query_visits_visits<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_Visit>? Function(
-      Iterable<CopyWith_Fragment_Visit<Fragment_Visit>>?,
+    Iterable<Query_visits_visits_results>? Function(
+      Iterable<
+        CopyWith_Query_visits_visits_results<Query_visits_visits_results>
+      >?,
     )
     _fn,
   ) => call(
     results: _fn(
-      _instance.results?.map((e) => CopyWith_Fragment_Visit(e, (i) => i)),
+      _instance.results?.map(
+        (e) => CopyWith_Query_visits_visits_results(e, (i) => i),
+      ),
     )?.toList(),
   );
 }
@@ -1279,11 +1496,236 @@ class _CopyWithStubImpl_Query_visits_visits<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_Visit>? results,
+    List<Query_visits_visits_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_visits_visits_results implements Fragment_Visit {
+  Query_visits_visits_results({
+    this.keyset,
+    required this.id,
+    required this.time,
+    this.recordedBy,
+    required this.isFatherVisit,
+    this.user,
+    this.$__typename = 'Visit',
+  });
+
+  factory Query_visits_visits_results.fromJson(Map<String, dynamic> json) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$time = json['time'];
+    final l$recordedBy = json['recordedBy'];
+    final l$isFatherVisit = json['isFatherVisit'];
+    final l$user = json['user'];
+    final l$$__typename = json['__typename'];
+    return Query_visits_visits_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      time: tstzFromString(l$time),
+      recordedBy: (l$recordedBy as String?),
+      isFatherVisit: (l$isFatherVisit as bool),
+      user: l$user == null
+          ? null
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final DateTime time;
+
+  final String? recordedBy;
+
+  final bool isFatherVisit;
+
+  final Fragment_User? user;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$time = time;
+    _resultData['time'] = tstzToString(l$time);
+    final l$recordedBy = recordedBy;
+    _resultData['recordedBy'] = l$recordedBy;
+    final l$isFatherVisit = isFatherVisit;
+    _resultData['isFatherVisit'] = l$isFatherVisit;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$time = time;
+    final l$recordedBy = recordedBy;
+    final l$isFatherVisit = isFatherVisit;
+    final l$user = user;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$time,
+      l$recordedBy,
+      l$isFatherVisit,
+      l$user,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_visits_visits_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$recordedBy = recordedBy;
+    final lOther$recordedBy = other.recordedBy;
+    if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$isFatherVisit = isFatherVisit;
+    final lOther$isFatherVisit = other.isFatherVisit;
+    if (l$isFatherVisit != lOther$isFatherVisit) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_visits_visits_results
+    on Query_visits_visits_results {
+  CopyWith_Query_visits_visits_results<Query_visits_visits_results>
+  get copyWith => CopyWith_Query_visits_visits_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_visits_visits_results<TRes> {
+  factory CopyWith_Query_visits_visits_results(
+    Query_visits_visits_results instance,
+    TRes Function(Query_visits_visits_results) then,
+  ) = _CopyWithImpl_Query_visits_visits_results;
+
+  factory CopyWith_Query_visits_visits_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_visits_visits_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    DateTime? time,
+    String? recordedBy,
+    bool? isFatherVisit,
+    Fragment_User? user,
+    String? $__typename,
+  });
+  CopyWith_Fragment_User<TRes> get user;
+}
+
+class _CopyWithImpl_Query_visits_visits_results<TRes>
+    implements CopyWith_Query_visits_visits_results<TRes> {
+  _CopyWithImpl_Query_visits_visits_results(this._instance, this._then);
+
+  final Query_visits_visits_results _instance;
+
+  final TRes Function(Query_visits_visits_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? time = _undefined,
+    Object? recordedBy = _undefined,
+    Object? isFatherVisit = _undefined,
+    Object? user = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_visits_visits_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      time: time == _undefined || time == null
+          ? _instance.time
+          : (time as DateTime),
+      recordedBy: recordedBy == _undefined
+          ? _instance.recordedBy
+          : (recordedBy as String?),
+      isFatherVisit: isFatherVisit == _undefined || isFatherVisit == null
+          ? _instance.isFatherVisit
+          : (isFatherVisit as bool),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith_Fragment_User<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Query_visits_visits_results<TRes>
+    implements CopyWith_Query_visits_visits_results<TRes> {
+  _CopyWithStubImpl_Query_visits_visits_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    DateTime? time,
+    String? recordedBy,
+    bool? isFatherVisit,
+    Fragment_User? user,
+    String? $__typename,
+  }) => _res;
+
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
 class Variables_Query_calls {
@@ -1701,6 +2143,13 @@ const documentNodeQuerycalls = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'Call'),
                         directives: [],
@@ -1757,7 +2206,10 @@ class Query_calls_calls {
       count: (l$count as int?),
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
-          ?.map((e) => Fragment_Call.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) =>
+                Query_calls_calls_results.fromJson((e as Map<String, dynamic>)),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -1767,7 +2219,7 @@ class Query_calls_calls {
 
   final String? endKeyset;
 
-  final List<Fragment_Call>? results;
+  final List<Query_calls_calls_results>? results;
 
   final String $__typename;
 
@@ -1858,12 +2310,12 @@ abstract class CopyWith_Query_calls_calls<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_Call>? results,
+    List<Query_calls_calls_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_Call>? Function(
-      Iterable<CopyWith_Fragment_Call<Fragment_Call>>?,
+    Iterable<Query_calls_calls_results>? Function(
+      Iterable<CopyWith_Query_calls_calls_results<Query_calls_calls_results>>?,
     )
     _fn,
   );
@@ -1892,7 +2344,7 @@ class _CopyWithImpl_Query_calls_calls<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_Call>?),
+          : (results as List<Query_calls_calls_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -1900,13 +2352,15 @@ class _CopyWithImpl_Query_calls_calls<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_Call>? Function(
-      Iterable<CopyWith_Fragment_Call<Fragment_Call>>?,
+    Iterable<Query_calls_calls_results>? Function(
+      Iterable<CopyWith_Query_calls_calls_results<Query_calls_calls_results>>?,
     )
     _fn,
   ) => call(
     results: _fn(
-      _instance.results?.map((e) => CopyWith_Fragment_Call(e, (i) => i)),
+      _instance.results?.map(
+        (e) => CopyWith_Query_calls_calls_results(e, (i) => i),
+      ),
     )?.toList(),
   );
 }
@@ -1920,11 +2374,216 @@ class _CopyWithStubImpl_Query_calls_calls<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_Call>? results,
+    List<Query_calls_calls_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_calls_calls_results implements Fragment_Call {
+  Query_calls_calls_results({
+    this.keyset,
+    required this.id,
+    required this.time,
+    this.recordedBy,
+    this.user,
+    this.$__typename = 'Call',
+  });
+
+  factory Query_calls_calls_results.fromJson(Map<String, dynamic> json) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$time = json['time'];
+    final l$recordedBy = json['recordedBy'];
+    final l$user = json['user'];
+    final l$$__typename = json['__typename'];
+    return Query_calls_calls_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      time: tstzFromString(l$time),
+      recordedBy: (l$recordedBy as String?),
+      user: l$user == null
+          ? null
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final DateTime time;
+
+  final String? recordedBy;
+
+  final Fragment_User? user;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$time = time;
+    _resultData['time'] = tstzToString(l$time);
+    final l$recordedBy = recordedBy;
+    _resultData['recordedBy'] = l$recordedBy;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$time = time;
+    final l$recordedBy = recordedBy;
+    final l$user = user;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$time,
+      l$recordedBy,
+      l$user,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_calls_calls_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$recordedBy = recordedBy;
+    final lOther$recordedBy = other.recordedBy;
+    if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_calls_calls_results
+    on Query_calls_calls_results {
+  CopyWith_Query_calls_calls_results<Query_calls_calls_results> get copyWith =>
+      CopyWith_Query_calls_calls_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_calls_calls_results<TRes> {
+  factory CopyWith_Query_calls_calls_results(
+    Query_calls_calls_results instance,
+    TRes Function(Query_calls_calls_results) then,
+  ) = _CopyWithImpl_Query_calls_calls_results;
+
+  factory CopyWith_Query_calls_calls_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_calls_calls_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    DateTime? time,
+    String? recordedBy,
+    Fragment_User? user,
+    String? $__typename,
+  });
+  CopyWith_Fragment_User<TRes> get user;
+}
+
+class _CopyWithImpl_Query_calls_calls_results<TRes>
+    implements CopyWith_Query_calls_calls_results<TRes> {
+  _CopyWithImpl_Query_calls_calls_results(this._instance, this._then);
+
+  final Query_calls_calls_results _instance;
+
+  final TRes Function(Query_calls_calls_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? time = _undefined,
+    Object? recordedBy = _undefined,
+    Object? user = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_calls_calls_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      time: time == _undefined || time == null
+          ? _instance.time
+          : (time as DateTime),
+      recordedBy: recordedBy == _undefined
+          ? _instance.recordedBy
+          : (recordedBy as String?),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith_Fragment_User<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Query_calls_calls_results<TRes>
+    implements CopyWith_Query_calls_calls_results<TRes> {
+  _CopyWithStubImpl_Query_calls_calls_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    DateTime? time,
+    String? recordedBy,
+    Fragment_User? user,
+    String? $__typename,
+  }) => _res;
+
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
 class Variables_Query_confessions {
@@ -2359,6 +3018,13 @@ const documentNodeQueryconfessions = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'Confession'),
                         directives: [],
@@ -2416,7 +3082,9 @@ class Query_confessions_confessions {
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
           ?.map(
-            (e) => Fragment_Confession.fromJson((e as Map<String, dynamic>)),
+            (e) => Query_confessions_confessions_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
           )
           .toList(),
       $__typename: (l$$__typename as String),
@@ -2427,7 +3095,7 @@ class Query_confessions_confessions {
 
   final String? endKeyset;
 
-  final List<Fragment_Confession>? results;
+  final List<Query_confessions_confessions_results>? results;
 
   final String $__typename;
 
@@ -2520,12 +3188,16 @@ abstract class CopyWith_Query_confessions_confessions<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_Confession>? results,
+    List<Query_confessions_confessions_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_Confession>? Function(
-      Iterable<CopyWith_Fragment_Confession<Fragment_Confession>>?,
+    Iterable<Query_confessions_confessions_results>? Function(
+      Iterable<
+        CopyWith_Query_confessions_confessions_results<
+          Query_confessions_confessions_results
+        >
+      >?,
     )
     _fn,
   );
@@ -2554,7 +3226,7 @@ class _CopyWithImpl_Query_confessions_confessions<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_Confession>?),
+          : (results as List<Query_confessions_confessions_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -2562,13 +3234,19 @@ class _CopyWithImpl_Query_confessions_confessions<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_Confession>? Function(
-      Iterable<CopyWith_Fragment_Confession<Fragment_Confession>>?,
+    Iterable<Query_confessions_confessions_results>? Function(
+      Iterable<
+        CopyWith_Query_confessions_confessions_results<
+          Query_confessions_confessions_results
+        >
+      >?,
     )
     _fn,
   ) => call(
     results: _fn(
-      _instance.results?.map((e) => CopyWith_Fragment_Confession(e, (i) => i)),
+      _instance.results?.map(
+        (e) => CopyWith_Query_confessions_confessions_results(e, (i) => i),
+      ),
     )?.toList(),
   );
 }
@@ -2582,11 +3260,222 @@ class _CopyWithStubImpl_Query_confessions_confessions<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_Confession>? results,
+    List<Query_confessions_confessions_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_confessions_confessions_results implements Fragment_Confession {
+  Query_confessions_confessions_results({
+    this.keyset,
+    required this.id,
+    this.time,
+    required this.recordedBy,
+    this.user,
+    this.$__typename = 'Confession',
+  });
+
+  factory Query_confessions_confessions_results.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$time = json['time'];
+    final l$recordedBy = json['recordedBy'];
+    final l$user = json['user'];
+    final l$$__typename = json['__typename'];
+    return Query_confessions_confessions_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      time: l$time == null ? null : dateFromString(l$time),
+      recordedBy: (l$recordedBy as String),
+      user: l$user == null
+          ? null
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final DateTime? time;
+
+  final String recordedBy;
+
+  final Fragment_User? user;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$time = time;
+    _resultData['time'] = l$time == null ? null : dateToString(l$time);
+    final l$recordedBy = recordedBy;
+    _resultData['recordedBy'] = l$recordedBy;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$time = time;
+    final l$recordedBy = recordedBy;
+    final l$user = user;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$time,
+      l$recordedBy,
+      l$user,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_confessions_confessions_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$recordedBy = recordedBy;
+    final lOther$recordedBy = other.recordedBy;
+    if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_confessions_confessions_results
+    on Query_confessions_confessions_results {
+  CopyWith_Query_confessions_confessions_results<
+    Query_confessions_confessions_results
+  >
+  get copyWith =>
+      CopyWith_Query_confessions_confessions_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_confessions_confessions_results<TRes> {
+  factory CopyWith_Query_confessions_confessions_results(
+    Query_confessions_confessions_results instance,
+    TRes Function(Query_confessions_confessions_results) then,
+  ) = _CopyWithImpl_Query_confessions_confessions_results;
+
+  factory CopyWith_Query_confessions_confessions_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_confessions_confessions_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    DateTime? time,
+    String? recordedBy,
+    Fragment_User? user,
+    String? $__typename,
+  });
+  CopyWith_Fragment_User<TRes> get user;
+}
+
+class _CopyWithImpl_Query_confessions_confessions_results<TRes>
+    implements CopyWith_Query_confessions_confessions_results<TRes> {
+  _CopyWithImpl_Query_confessions_confessions_results(
+    this._instance,
+    this._then,
+  );
+
+  final Query_confessions_confessions_results _instance;
+
+  final TRes Function(Query_confessions_confessions_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? time = _undefined,
+    Object? recordedBy = _undefined,
+    Object? user = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_confessions_confessions_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      time: time == _undefined ? _instance.time : (time as DateTime?),
+      recordedBy: recordedBy == _undefined || recordedBy == null
+          ? _instance.recordedBy
+          : (recordedBy as String),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith_Fragment_User<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Query_confessions_confessions_results<TRes>
+    implements CopyWith_Query_confessions_confessions_results<TRes> {
+  _CopyWithStubImpl_Query_confessions_confessions_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    DateTime? time,
+    String? recordedBy,
+    Fragment_User? user,
+    String? $__typename,
+  }) => _res;
+
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
 class Variables_Query_kodases {
@@ -3009,6 +3898,13 @@ const documentNodeQuerykodases = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'Kodas'),
                         directives: [],
@@ -3065,7 +3961,11 @@ class Query_kodases_kodases {
       count: (l$count as int?),
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
-          ?.map((e) => Fragment_Kodas.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Query_kodases_kodases_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -3075,7 +3975,7 @@ class Query_kodases_kodases {
 
   final String? endKeyset;
 
-  final List<Fragment_Kodas>? results;
+  final List<Query_kodases_kodases_results>? results;
 
   final String $__typename;
 
@@ -3166,12 +4066,14 @@ abstract class CopyWith_Query_kodases_kodases<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_Kodas>? results,
+    List<Query_kodases_kodases_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_Kodas>? Function(
-      Iterable<CopyWith_Fragment_Kodas<Fragment_Kodas>>?,
+    Iterable<Query_kodases_kodases_results>? Function(
+      Iterable<
+        CopyWith_Query_kodases_kodases_results<Query_kodases_kodases_results>
+      >?,
     )
     _fn,
   );
@@ -3200,7 +4102,7 @@ class _CopyWithImpl_Query_kodases_kodases<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_Kodas>?),
+          : (results as List<Query_kodases_kodases_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -3208,13 +4110,17 @@ class _CopyWithImpl_Query_kodases_kodases<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_Kodas>? Function(
-      Iterable<CopyWith_Fragment_Kodas<Fragment_Kodas>>?,
+    Iterable<Query_kodases_kodases_results>? Function(
+      Iterable<
+        CopyWith_Query_kodases_kodases_results<Query_kodases_kodases_results>
+      >?,
     )
     _fn,
   ) => call(
     results: _fn(
-      _instance.results?.map((e) => CopyWith_Fragment_Kodas(e, (i) => i)),
+      _instance.results?.map(
+        (e) => CopyWith_Query_kodases_kodases_results(e, (i) => i),
+      ),
     )?.toList(),
   );
 }
@@ -3228,11 +4134,214 @@ class _CopyWithStubImpl_Query_kodases_kodases<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_Kodas>? results,
+    List<Query_kodases_kodases_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_kodases_kodases_results implements Fragment_Kodas {
+  Query_kodases_kodases_results({
+    this.keyset,
+    required this.id,
+    this.time,
+    required this.recordedBy,
+    this.user,
+    this.$__typename = 'Kodas',
+  });
+
+  factory Query_kodases_kodases_results.fromJson(Map<String, dynamic> json) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$time = json['time'];
+    final l$recordedBy = json['recordedBy'];
+    final l$user = json['user'];
+    final l$$__typename = json['__typename'];
+    return Query_kodases_kodases_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      time: l$time == null ? null : dateFromString(l$time),
+      recordedBy: (l$recordedBy as String),
+      user: l$user == null
+          ? null
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final DateTime? time;
+
+  final String recordedBy;
+
+  final Fragment_User? user;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$time = time;
+    _resultData['time'] = l$time == null ? null : dateToString(l$time);
+    final l$recordedBy = recordedBy;
+    _resultData['recordedBy'] = l$recordedBy;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$time = time;
+    final l$recordedBy = recordedBy;
+    final l$user = user;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$time,
+      l$recordedBy,
+      l$user,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_kodases_kodases_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$recordedBy = recordedBy;
+    final lOther$recordedBy = other.recordedBy;
+    if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_kodases_kodases_results
+    on Query_kodases_kodases_results {
+  CopyWith_Query_kodases_kodases_results<Query_kodases_kodases_results>
+  get copyWith => CopyWith_Query_kodases_kodases_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_kodases_kodases_results<TRes> {
+  factory CopyWith_Query_kodases_kodases_results(
+    Query_kodases_kodases_results instance,
+    TRes Function(Query_kodases_kodases_results) then,
+  ) = _CopyWithImpl_Query_kodases_kodases_results;
+
+  factory CopyWith_Query_kodases_kodases_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_kodases_kodases_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    DateTime? time,
+    String? recordedBy,
+    Fragment_User? user,
+    String? $__typename,
+  });
+  CopyWith_Fragment_User<TRes> get user;
+}
+
+class _CopyWithImpl_Query_kodases_kodases_results<TRes>
+    implements CopyWith_Query_kodases_kodases_results<TRes> {
+  _CopyWithImpl_Query_kodases_kodases_results(this._instance, this._then);
+
+  final Query_kodases_kodases_results _instance;
+
+  final TRes Function(Query_kodases_kodases_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? time = _undefined,
+    Object? recordedBy = _undefined,
+    Object? user = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_kodases_kodases_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      time: time == _undefined ? _instance.time : (time as DateTime?),
+      recordedBy: recordedBy == _undefined || recordedBy == null
+          ? _instance.recordedBy
+          : (recordedBy as String),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith_Fragment_User<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Query_kodases_kodases_results<TRes>
+    implements CopyWith_Query_kodases_kodases_results<TRes> {
+  _CopyWithStubImpl_Query_kodases_kodases_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    DateTime? time,
+    String? recordedBy,
+    Fragment_User? user,
+    String? $__typename,
+  }) => _res;
+
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
 class Variables_Query_dayKodases {
@@ -3546,6 +4655,13 @@ const documentNodeQuerydayKodases = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'KodasDayRecord'),
                         directives: [],
@@ -3602,8 +4718,9 @@ class Query_dayKodases_kodases {
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
           ?.map(
-            (e) =>
-                Fragment_KodasDayRecord.fromJson((e as Map<String, dynamic>)),
+            (e) => Query_dayKodases_kodases_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
           )
           .toList(),
       $__typename: (l$$__typename as String),
@@ -3614,7 +4731,7 @@ class Query_dayKodases_kodases {
 
   final String? endKeyset;
 
-  final List<Fragment_KodasDayRecord>? results;
+  final List<Query_dayKodases_kodases_results>? results;
 
   final String $__typename;
 
@@ -3707,12 +4824,16 @@ abstract class CopyWith_Query_dayKodases_kodases<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_KodasDayRecord>? results,
+    List<Query_dayKodases_kodases_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_KodasDayRecord>? Function(
-      Iterable<CopyWith_Fragment_KodasDayRecord<Fragment_KodasDayRecord>>?,
+    Iterable<Query_dayKodases_kodases_results>? Function(
+      Iterable<
+        CopyWith_Query_dayKodases_kodases_results<
+          Query_dayKodases_kodases_results
+        >
+      >?,
     )
     _fn,
   );
@@ -3741,7 +4862,7 @@ class _CopyWithImpl_Query_dayKodases_kodases<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_KodasDayRecord>?),
+          : (results as List<Query_dayKodases_kodases_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -3749,14 +4870,18 @@ class _CopyWithImpl_Query_dayKodases_kodases<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_KodasDayRecord>? Function(
-      Iterable<CopyWith_Fragment_KodasDayRecord<Fragment_KodasDayRecord>>?,
+    Iterable<Query_dayKodases_kodases_results>? Function(
+      Iterable<
+        CopyWith_Query_dayKodases_kodases_results<
+          Query_dayKodases_kodases_results
+        >
+      >?,
     )
     _fn,
   ) => call(
     results: _fn(
       _instance.results?.map(
-        (e) => CopyWith_Fragment_KodasDayRecord(e, (i) => i),
+        (e) => CopyWith_Query_dayKodases_kodases_results(e, (i) => i),
       ),
     )?.toList(),
   );
@@ -3771,9 +4896,178 @@ class _CopyWithStubImpl_Query_dayKodases_kodases<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_KodasDayRecord>? results,
+    List<Query_dayKodases_kodases_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_dayKodases_kodases_results implements Fragment_KodasDayRecord {
+  Query_dayKodases_kodases_results({
+    this.keyset,
+    required this.id,
+    required this.personId,
+    required this.dayId,
+    this.$__typename = 'Kodas',
+  });
+
+  factory Query_dayKodases_kodases_results.fromJson(Map<String, dynamic> json) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$personId = json['personId'];
+    final l$dayId = json['dayId'];
+    final l$$__typename = json['__typename'];
+    return Query_dayKodases_kodases_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      personId: (l$personId as String),
+      dayId: dateFromString(l$dayId),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final String personId;
+
+  final DateTime dayId;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$personId = personId;
+    _resultData['personId'] = l$personId;
+    final l$dayId = dayId;
+    _resultData['dayId'] = dateToString(l$dayId);
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$personId = personId;
+    final l$dayId = dayId;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$keyset, l$id, l$personId, l$dayId, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_dayKodases_kodases_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    final l$dayId = dayId;
+    final lOther$dayId = other.dayId;
+    if (l$dayId != lOther$dayId) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_dayKodases_kodases_results
+    on Query_dayKodases_kodases_results {
+  CopyWith_Query_dayKodases_kodases_results<Query_dayKodases_kodases_results>
+  get copyWith => CopyWith_Query_dayKodases_kodases_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_dayKodases_kodases_results<TRes> {
+  factory CopyWith_Query_dayKodases_kodases_results(
+    Query_dayKodases_kodases_results instance,
+    TRes Function(Query_dayKodases_kodases_results) then,
+  ) = _CopyWithImpl_Query_dayKodases_kodases_results;
+
+  factory CopyWith_Query_dayKodases_kodases_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_dayKodases_kodases_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    String? personId,
+    DateTime? dayId,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Query_dayKodases_kodases_results<TRes>
+    implements CopyWith_Query_dayKodases_kodases_results<TRes> {
+  _CopyWithImpl_Query_dayKodases_kodases_results(this._instance, this._then);
+
+  final Query_dayKodases_kodases_results _instance;
+
+  final TRes Function(Query_dayKodases_kodases_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? personId = _undefined,
+    Object? dayId = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_dayKodases_kodases_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      personId: personId == _undefined || personId == null
+          ? _instance.personId
+          : (personId as String),
+      dayId: dayId == _undefined || dayId == null
+          ? _instance.dayId
+          : (dayId as DateTime),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Query_dayKodases_kodases_results<TRes>
+    implements CopyWith_Query_dayKodases_kodases_results<TRes> {
+  _CopyWithStubImpl_Query_dayKodases_kodases_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    String? personId,
+    DateTime? dayId,
+    String? $__typename,
+  }) => _res;
 }

@@ -17,6 +17,7 @@ defmodule ChurchAdmin.Attendance.Meeting do
 
   graphql do
     type :meeting
+    keyset_field :keyset
 
     relationships [:attendance_records, :days, :roster_entries, :service, :group, :study_year]
 

@@ -12,6 +12,7 @@ defmodule ChurchAdmin.Activity.LatestVisit do
 
   graphql do
     type :latest_visit
+    keyset_field :keyset
 
     relationships [:user]
 

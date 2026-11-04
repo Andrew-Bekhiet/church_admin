@@ -8,6 +8,7 @@ query families(
     count
     endKeyset
     results {
+      keyset
       ...Family
     }
   }
@@ -23,6 +24,7 @@ query familiesWithAddresses(
     count
     endKeyset
     results {
+      keyset
       ...FamilyWithAddress
     }
   }

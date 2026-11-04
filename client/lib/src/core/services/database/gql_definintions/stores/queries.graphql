@@ -8,6 +8,7 @@ query stores(
     count
     endKeyset
     results {
+      keyset
       ...Store
     }
   }

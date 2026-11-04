@@ -13,6 +13,7 @@ defmodule ChurchAdmin.Attendance.RosterEntry do
 
   graphql do
     type :roster_entry
+    keyset_field :keyset
 
     relationships [:attendance_records, :meeting, :person]
 

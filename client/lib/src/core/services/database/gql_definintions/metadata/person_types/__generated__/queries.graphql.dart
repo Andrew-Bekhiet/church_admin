@@ -435,6 +435,13 @@ const documentNodeQuerypersonTypes = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'PersonType'),
                         directives: [],
@@ -491,7 +498,9 @@ class Query_personTypes_personTypes {
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
           ?.map(
-            (e) => Fragment_PersonType.fromJson((e as Map<String, dynamic>)),
+            (e) => Query_personTypes_personTypes_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
           )
           .toList(),
       $__typename: (l$$__typename as String),
@@ -502,7 +511,7 @@ class Query_personTypes_personTypes {
 
   final String? endKeyset;
 
-  final List<Fragment_PersonType>? results;
+  final List<Query_personTypes_personTypes_results>? results;
 
   final String $__typename;
 
@@ -595,12 +604,16 @@ abstract class CopyWith_Query_personTypes_personTypes<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_PersonType>? results,
+    List<Query_personTypes_personTypes_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_PersonType>? Function(
-      Iterable<CopyWith_Fragment_PersonType<Fragment_PersonType>>?,
+    Iterable<Query_personTypes_personTypes_results>? Function(
+      Iterable<
+        CopyWith_Query_personTypes_personTypes_results<
+          Query_personTypes_personTypes_results
+        >
+      >?,
     )
     _fn,
   );
@@ -629,7 +642,7 @@ class _CopyWithImpl_Query_personTypes_personTypes<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_PersonType>?),
+          : (results as List<Query_personTypes_personTypes_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -637,13 +650,19 @@ class _CopyWithImpl_Query_personTypes_personTypes<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_PersonType>? Function(
-      Iterable<CopyWith_Fragment_PersonType<Fragment_PersonType>>?,
+    Iterable<Query_personTypes_personTypes_results>? Function(
+      Iterable<
+        CopyWith_Query_personTypes_personTypes_results<
+          Query_personTypes_personTypes_results
+        >
+      >?,
     )
     _fn,
   ) => call(
     results: _fn(
-      _instance.results?.map((e) => CopyWith_Fragment_PersonType(e, (i) => i)),
+      _instance.results?.map(
+        (e) => CopyWith_Query_personTypes_personTypes_results(e, (i) => i),
+      ),
     )?.toList(),
   );
 }
@@ -657,9 +676,232 @@ class _CopyWithStubImpl_Query_personTypes_personTypes<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_PersonType>? results,
+    List<Query_personTypes_personTypes_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_personTypes_personTypes_results implements Fragment_PersonType {
+  Query_personTypes_personTypes_results({
+    this.keyset,
+    required this.id,
+    required this.name,
+    required this.order,
+    required this.isFamilyAdmin,
+    required this.isHidden,
+    this.$__typename = 'PersonType',
+  });
+
+  factory Query_personTypes_personTypes_results.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$order = json['order'];
+    final l$isFamilyAdmin = json['isFamilyAdmin'];
+    final l$isHidden = json['isHidden'];
+    final l$$__typename = json['__typename'];
+    return Query_personTypes_personTypes_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      name: (l$name as String),
+      order: (l$order as int),
+      isFamilyAdmin: (l$isFamilyAdmin as bool),
+      isHidden: (l$isHidden as bool),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final String name;
+
+  final int order;
+
+  final bool isFamilyAdmin;
+
+  final bool isHidden;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$order = order;
+    _resultData['order'] = l$order;
+    final l$isFamilyAdmin = isFamilyAdmin;
+    _resultData['isFamilyAdmin'] = l$isFamilyAdmin;
+    final l$isHidden = isHidden;
+    _resultData['isHidden'] = l$isHidden;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$name = name;
+    final l$order = order;
+    final l$isFamilyAdmin = isFamilyAdmin;
+    final l$isHidden = isHidden;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$name,
+      l$order,
+      l$isFamilyAdmin,
+      l$isHidden,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_personTypes_personTypes_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (l$order != lOther$order) {
+      return false;
+    }
+    final l$isFamilyAdmin = isFamilyAdmin;
+    final lOther$isFamilyAdmin = other.isFamilyAdmin;
+    if (l$isFamilyAdmin != lOther$isFamilyAdmin) {
+      return false;
+    }
+    final l$isHidden = isHidden;
+    final lOther$isHidden = other.isHidden;
+    if (l$isHidden != lOther$isHidden) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_personTypes_personTypes_results
+    on Query_personTypes_personTypes_results {
+  CopyWith_Query_personTypes_personTypes_results<
+    Query_personTypes_personTypes_results
+  >
+  get copyWith =>
+      CopyWith_Query_personTypes_personTypes_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_personTypes_personTypes_results<TRes> {
+  factory CopyWith_Query_personTypes_personTypes_results(
+    Query_personTypes_personTypes_results instance,
+    TRes Function(Query_personTypes_personTypes_results) then,
+  ) = _CopyWithImpl_Query_personTypes_personTypes_results;
+
+  factory CopyWith_Query_personTypes_personTypes_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_personTypes_personTypes_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? order,
+    bool? isFamilyAdmin,
+    bool? isHidden,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Query_personTypes_personTypes_results<TRes>
+    implements CopyWith_Query_personTypes_personTypes_results<TRes> {
+  _CopyWithImpl_Query_personTypes_personTypes_results(
+    this._instance,
+    this._then,
+  );
+
+  final Query_personTypes_personTypes_results _instance;
+
+  final TRes Function(Query_personTypes_personTypes_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? order = _undefined,
+    Object? isFamilyAdmin = _undefined,
+    Object? isHidden = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_personTypes_personTypes_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      order: order == _undefined || order == null
+          ? _instance.order
+          : (order as int),
+      isFamilyAdmin: isFamilyAdmin == _undefined || isFamilyAdmin == null
+          ? _instance.isFamilyAdmin
+          : (isFamilyAdmin as bool),
+      isHidden: isHidden == _undefined || isHidden == null
+          ? _instance.isHidden
+          : (isHidden as bool),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Query_personTypes_personTypes_results<TRes>
+    implements CopyWith_Query_personTypes_personTypes_results<TRes> {
+  _CopyWithStubImpl_Query_personTypes_personTypes_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? order,
+    bool? isFamilyAdmin,
+    bool? isHidden,
+    String? $__typename,
+  }) => _res;
 }

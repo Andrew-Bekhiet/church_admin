@@ -8,6 +8,7 @@ query edits(
     count
     endKeyset
     results {
+      keyset
       ...Edit
     }
   }
@@ -23,6 +24,7 @@ query visits(
     count
     endKeyset
     results {
+      keyset
       ...Visit
     }
   }
@@ -38,6 +40,7 @@ query calls(
     count
     endKeyset
     results {
+      keyset
       ...Call
     }
   }
@@ -53,6 +56,7 @@ query confessions(
     count
     endKeyset
     results {
+      keyset
       ...Confession
     }
   }
@@ -68,6 +72,7 @@ query kodases(
     count
     endKeyset
     results {
+      keyset
       ...Kodas
     }
   }
@@ -78,6 +83,7 @@ query dayKodases($filter: KodasFilterInput, $first: Int) {
     count
     endKeyset
     results {
+      keyset
       ...KodasDayRecord
     }
   }

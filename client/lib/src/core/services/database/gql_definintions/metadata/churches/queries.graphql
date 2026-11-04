@@ -8,6 +8,7 @@ query churches(
     count
     endKeyset
     results {
+      keyset
       ...Church
     }
   }

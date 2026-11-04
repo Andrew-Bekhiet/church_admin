@@ -12,6 +12,7 @@ defmodule ChurchAdmin.Activity.LatestEdit do
 
   graphql do
     type :latest_edit
+    keyset_field :keyset
 
     relationships [:user]
 

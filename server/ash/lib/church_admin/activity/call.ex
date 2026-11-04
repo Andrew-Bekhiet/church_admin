@@ -14,6 +14,7 @@ defmodule ChurchAdmin.Activity.Call do
 
   graphql do
     type :call
+    keyset_field :keyset
 
     relationships [:person, :user]
 

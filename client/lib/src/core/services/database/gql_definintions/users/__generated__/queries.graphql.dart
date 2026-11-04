@@ -426,6 +426,13 @@ const documentNodeQueryusers = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'UserOverview'),
                         directives: [],
@@ -673,6 +680,7 @@ class _CopyWithStubImpl_Query_users_users<TRes>
 class Query_users_users_results
     implements Fragment_UserOverview, Fragment_User, Fragment_UserAdminScopes {
   Query_users_users_results({
+    this.keyset,
     required this.id,
     required this.uid,
     required this.name,
@@ -689,6 +697,7 @@ class Query_users_users_results
   });
 
   factory Query_users_users_results.fromJson(Map<String, dynamic> json) {
+    final l$keyset = json['keyset'];
     final l$id = json['id'];
     final l$uid = json['uid'];
     final l$name = json['name'];
@@ -703,6 +712,7 @@ class Query_users_users_results
     final l$person = json['person'];
     final l$scopeGrants = json['scopeGrants'];
     return Query_users_users_results(
+      keyset: (l$keyset as String?),
       id: (l$id as String),
       uid: (l$uid as String),
       name: (l$name as String),
@@ -739,6 +749,8 @@ class Query_users_users_results
     );
   }
 
+  final String? keyset;
+
   final String id;
 
   final String uid;
@@ -767,6 +779,8 @@ class Query_users_users_results
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
     final l$id = id;
     _resultData['id'] = l$id;
     final l$uid = uid;
@@ -801,6 +815,7 @@ class Query_users_users_results
 
   @override
   int get hashCode {
+    final l$keyset = keyset;
     final l$id = id;
     final l$uid = uid;
     final l$name = name;
@@ -815,6 +830,7 @@ class Query_users_users_results
     final l$person = person;
     final l$scopeGrants = scopeGrants;
     return Object.hashAll([
+      l$keyset,
       l$id,
       l$uid,
       l$name,
@@ -838,6 +854,11 @@ class Query_users_users_results
     }
     if (other is! Query_users_users_results ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
       return false;
     }
     final l$id = id;
@@ -940,6 +961,7 @@ abstract class CopyWith_Query_users_users_results<TRes> {
       _CopyWithStubImpl_Query_users_users_results;
 
   TRes call({
+    String? keyset,
     String? id,
     String? uid,
     String? name,
@@ -989,6 +1011,7 @@ class _CopyWithImpl_Query_users_users_results<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? keyset = _undefined,
     Object? id = _undefined,
     Object? uid = _undefined,
     Object? name = _undefined,
@@ -1004,6 +1027,7 @@ class _CopyWithImpl_Query_users_users_results<TRes>
     Object? scopeGrants = _undefined,
   }) => _then(
     Query_users_users_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
       id: id == _undefined || id == null ? _instance.id : (id as String),
       uid: uid == _undefined || uid == null ? _instance.uid : (uid as String),
       name: name == _undefined || name == null
@@ -1099,6 +1123,7 @@ class _CopyWithStubImpl_Query_users_users_results<TRes>
   TRes _res;
 
   call({
+    String? keyset,
     String? id,
     String? uid,
     String? name,
