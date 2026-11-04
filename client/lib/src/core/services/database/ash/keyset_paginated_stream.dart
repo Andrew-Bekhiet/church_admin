@@ -91,16 +91,18 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
 
     final generation = _generation;
     await _serialized(() async {
-      final needsResyncs = (pageIndex + 1) * pageSize - currentItems.length;
-      if (generation != _generation || !hasMore || needsResyncs <= 0) return;
+      final missingRows = (pageIndex + 1) * pageSize - currentItems.length;
+      if (generation != _generation || !hasMore || missingRows <= 0) return;
 
+      final loadedPageIndex = _pageIndex;
       _pageIndex = pageIndex;
-      await _load(
+      final didLoad = await _load(
         generation,
-        rows: needsResyncs,
+        rows: missingRows,
         after: _window?.endKeyset,
         keep: currentItems,
       );
+      if (!didLoad && generation == _generation) _pageIndex = loadedPageIndex;
     });
   }
 
@@ -147,7 +149,7 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     }
   }
 
-  Future<void> _load(
+  Future<bool> _load(
     int generation, {
     required int rows,
     required String? after,
@@ -168,7 +170,7 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
         after: after,
         fetchPolicy: effectivePolicy,
       );
-      if (generation != _generation) return;
+      if (generation != _generation) return false;
 
       _registry.stopLive(this);
       _awaitingResync = false;
@@ -176,12 +178,16 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
       if (effectivePolicy == FetchPolicy.networkOnly) {
         _startLive(query, variables, chunks, isFromFirstRow: keep.isEmpty);
       }
+
+      return true;
     } on Object catch (error, stackTrace) {
-      if (generation != _generation) return;
+      if (generation != _generation) return false;
       if (isCachePreview) rethrow;
 
       _registry.markStale(this);
       _subject.addError(error, stackTrace);
+
+      return false;
     } finally {
       if (generation == _generation) _loading.add(false);
     }

@@ -198,6 +198,42 @@ void main() {
       });
     });
 
+    test('a next page that fails to load can be loaded after a push', () {
+      fakeAsync((async) {
+        final harness = LiveQueryHarness(KeysetStreamHarness.rowsNamed(10));
+        final stream = KeysetStreamHarness.streamOver(harness);
+        final emitted = <List<AshTestItem>>[];
+        final subscription = stream.listen(
+          emitted.add,
+          onError: (Object _) {},
+        );
+        async.elapse(settleTime);
+        final ref = harness.liveQueriesServer.registeredRefs.single;
+        final [first, second, third, ...] = harness.server.rows;
+        final renamed = second.renamed('اسم جديد');
+
+        harness.server.reachable = false;
+        unawaited(stream.listenToNextPage());
+        async.elapse(settleTime);
+        harness.server.reachable = true;
+        harness.liveQueriesServer.pushDelta(ref, rows: [renamed.toJson()]);
+        async.elapse(settleTime);
+        unawaited(stream.listenToNextPage());
+        async.elapse(settleTime);
+
+        expect(emitted.last, [
+          first,
+          renamed,
+          third,
+          ...harness.server.rows.skip(pageSize).take(pageSize),
+        ]);
+
+        unawaited(subscription.cancel());
+        unawaited(stream.dispose());
+        harness.dispose();
+      });
+    });
+
     test('a reconnect registers the window again and the rows stay shown '
         'meanwhile', () {
       fakeAsync((async) {
