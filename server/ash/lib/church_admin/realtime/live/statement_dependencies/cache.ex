@@ -8,25 +8,20 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependencies.Cache do
 
   use GenServer
 
+  alias ChurchAdmin.Realtime.Live.BoundedTable
+
   @table __MODULE__
   @max_entries 5_000
 
   def start_link(_opts), do: GenServer.start_link(__MODULE__, nil, name: __MODULE__)
 
   @spec fetch(String.t()) :: {:ok, term()} | :error
-  def fetch(sql) do
-    case :ets.lookup(@table, sql) do
-      [{^sql, result}] -> {:ok, result}
-      [] -> :error
-    end
-  rescue
-    ArgumentError -> :error
-  end
+  def fetch(sql), do: BoundedTable.fetch(@table, sql)
 
   @doc "Stores what the probe answered about a statement, except for failures that a retry can fix."
   @spec put_unless_transient(term(), String.t()) :: term()
   def put_unless_transient(result, sql) do
-    if cacheable?(result), do: put(sql, result)
+    if cacheable?(result), do: BoundedTable.put(@table, sql, result, @max_entries)
     result
   end
 
@@ -35,16 +30,9 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependencies.Cache do
   defp cacheable?({:error, {:unplannable, _message}}), do: false
   defp cacheable?({:error, {:probe_unavailable, _reason}}), do: false
 
-  defp put(sql, result) do
-    if :ets.info(@table, :size) >= @max_entries, do: :ets.delete_all_objects(@table)
-    :ets.insert(@table, {sql, result})
-  rescue
-    ArgumentError -> :ok
-  end
-
   @impl GenServer
   def init(nil) do
-    :ets.new(@table, [:set, :public, :named_table, read_concurrency: true])
+    BoundedTable.new(@table)
     {:ok, nil}
   end
 end

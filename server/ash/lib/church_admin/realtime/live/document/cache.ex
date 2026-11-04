@@ -7,28 +7,22 @@ defmodule ChurchAdmin.Realtime.Live.Document.Cache do
 
   use GenServer
 
+  alias ChurchAdmin.Realtime.Live.BoundedTable
+
   @table __MODULE__
   @max_entries 1_000
 
   def start_link(_opts), do: GenServer.start_link(__MODULE__, nil, name: __MODULE__)
 
   @spec fetch(String.t()) :: {:ok, Absinthe.Language.Document.t()} | :error
-  def fetch(hash) do
-    case :ets.lookup(@table, hash) do
-      [{^hash, parsed}] -> {:ok, parsed}
-      [] -> :error
-    end
-  end
+  def fetch(hash), do: BoundedTable.fetch(@table, hash)
 
-  @spec put(String.t(), Absinthe.Language.Document.t()) :: true
-  def put(hash, parsed) do
-    if :ets.info(@table, :size) >= @max_entries, do: :ets.delete_all_objects(@table)
-    :ets.insert(@table, {hash, parsed})
-  end
+  @spec put(String.t(), Absinthe.Language.Document.t()) :: :ok
+  def put(hash, parsed), do: BoundedTable.put(@table, hash, parsed, @max_entries)
 
   @impl GenServer
   def init(nil) do
-    :ets.new(@table, [:set, :public, :named_table, read_concurrency: true])
+    BoundedTable.new(@table)
     {:ok, nil}
   end
 end
