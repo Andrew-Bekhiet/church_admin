@@ -8,7 +8,7 @@ typedef ChangeFeedIdentity = ({String uid, String? userId});
 
 typedef IdTokenFetcher = Future<String?> Function({bool forceRefresh});
 
-/// The client of the server's `changes` channel. It connects while
+/// The client of the server's `live_queries` channel. It connects while
 /// [events] has a listener and someone is signed in. Live queries are
 /// registered, unregistered and resynced through it, and the channel's
 /// `live:result` pushes arrive as [LiveResultReceived]. The server keeps no
@@ -17,12 +17,13 @@ typedef IdTokenFetcher = Future<String?> Function({bool forceRefresh});
 /// token reconnects with a refreshed one. A refused connect backs off
 /// between attempts and retries at once when the credentials change.
 class ChangeFeedClient {
-  static const topic = 'changes';
+  static const topic = 'live_queries';
   static const liveResultEvent = 'live:result';
   static const registerEvent = 'live:register';
   static const unregisterEvent = 'live:unregister';
   static const resyncEvent = 'live:resync';
   static const tokenExpiredReason = 'token_expired';
+  static const runFailedReason = 'run_failed';
   static const Duration defaultRejoinDelay = Duration(seconds: 5);
   static const _leavableStates = {
     PhoenixChannelState.joined,
@@ -74,6 +75,8 @@ class ChangeFeedClient {
 
       return switch (reply) {
         PushResponse(isOk: true) => LiveRegisterOutcome.accepted,
+        PushResponse(response: {'reason': runFailedReason}) =>
+          LiveRegisterOutcome.failed,
         PushResponse(response: {'reason': String _}) =>
           LiveRegisterOutcome.refused,
         _ => LiveRegisterOutcome.failed,

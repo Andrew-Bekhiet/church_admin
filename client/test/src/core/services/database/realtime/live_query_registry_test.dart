@@ -92,6 +92,59 @@ void main() {
       });
     });
 
+    test('the server fails to run is sent again, up to a bound, and the '
+        'query turns stale', () {
+      fakeAsync((async) {
+        final harness = LiveQueryHarness([mina]);
+        var attempts = 0;
+        harness.changeFeedServer.refusalFor = (_) {
+          attempts++;
+
+          return ChangeFeedClient.runFailedReason;
+        };
+        final subscription = harness.watchList().listen(null);
+        async.elapse(const Duration(minutes: 1));
+        final attemptsBeforeStaleRefetch = attempts;
+        final requestsBeforeStale = harness.server.requestCount;
+
+        harness.goOffline();
+        harness.goOnline();
+        async.elapse(settleTime);
+
+        expect(
+          attemptsBeforeStaleRefetch,
+          LiveQueryRegistry.maxRegisterAttempts,
+        );
+        expect(harness.server.requestCount, greaterThan(requestsBeforeStale));
+
+        unawaited(subscription.cancel());
+        harness.dispose();
+      });
+    });
+
+    test('the server fails to run once and then runs is live and not '
+        'stale', () {
+      fakeAsync((async) {
+        final harness = LiveQueryHarness([mina]);
+        var attempts = 0;
+        harness.changeFeedServer.refusalFor = (_) =>
+            attempts++ == 0 ? ChangeFeedClient.runFailedReason : null;
+        final subscription = harness.watchList().listen(null);
+        async.elapse(const Duration(minutes: 1));
+        final requestsWhenLive = harness.server.requestCount;
+
+        harness.goOffline();
+        harness.goOnline();
+        async.elapse(settleTime);
+
+        expect(harness.changeFeedServer.registrations, isNotEmpty);
+        expect(harness.server.requestCount, requestsWhenLive);
+
+        unawaited(subscription.cancel());
+        harness.dispose();
+      });
+    });
+
     test('the server refuses is not sent again, and the query keeps its '
         'rows', () {
       fakeAsync((async) {

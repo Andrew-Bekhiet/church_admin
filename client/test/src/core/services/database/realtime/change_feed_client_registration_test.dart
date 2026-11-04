@@ -128,6 +128,24 @@ void main() {
       });
     });
 
+    test('the server fails to run the first time is reported as failed', () {
+      fakeAsync((async) {
+        final feed = ChangeFeedTestFeed.start(
+          async,
+          prepareServer: (server) =>
+              server.refusalFor = (_) => ChangeFeedClient.runFailedReason,
+        );
+        LiveRegisterOutcome? outcome;
+
+        unawaited(register(async, feed).then((value) => outcome = value));
+        async.flushMicrotasks();
+
+        expect(outcome, LiveRegisterOutcome.failed);
+
+        feed.dispose();
+      });
+    });
+
     test('before the channel is joined is reported as not joined', () {
       fakeAsync((async) {
         final feed = ChangeFeedTestFeed.start(async, initialCredentials: null);

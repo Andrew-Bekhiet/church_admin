@@ -8,16 +8,18 @@ import 'package:rxdart/rxdart.dart';
 /// most one registration, under a ref of its own that the server answers
 /// to. A result for a ref no target holds any more is dropped. Every join of
 /// the channel re-sends all registrations, because the server keeps none
-/// across a join. A registration the channel fails to take is sent again
-/// after [registerRetryDelay]; one the server refuses is not. An unheard or
-/// offline target that missed a load only turns stale until it is heard or
-/// online again, and at most [maxConcurrentRefetches] stale refetches run at
-/// once. The change feed stays subscribed for [changeFeedGracePeriod] after
+/// across a join. A registration the channel fails to take, or whose first
+/// run fails on the server, is sent again after [registerRetryDelay] up to
+/// [maxRegisterAttempts] times, then its target turns stale; one the server
+/// refuses is not. An unheard or offline target that missed a load only turns
+/// stale until it is heard or online again, and at most
+/// [maxConcurrentRefetches] stale refetches run at once. The change feed stays subscribed for [changeFeedGracePeriod] after
 /// the last target leaves, so moving between screens does not reconnect it.
 class LiveQueryRegistry {
   static const maxConcurrentRefetches = 4;
   static const changeFeedGracePeriod = Duration(seconds: 30);
   static const registerRetryDelay = Duration(seconds: 5);
+  static const maxRegisterAttempts = 5;
 
   final ChangeFeedClient? _changeFeed;
   final ValueStream<bool> _connectivity;
@@ -136,6 +138,7 @@ class LiveQueryRegistry {
   void _registerAgain() {
     for (final MapEntry(key: target, value: state) in _states.entries) {
       if (state.live case final live?) {
+        live.failedAttempts = 0;
         unawaited(_sendRegistration(target, live));
       }
     }
@@ -151,6 +154,12 @@ class LiveQueryRegistry {
     );
     if (outcome != LiveRegisterOutcome.failed) return;
     if (!identical(_states[target]?.live, live)) return;
+
+    if (++live.failedAttempts >= maxRegisterAttempts) {
+      markStale(target);
+
+      return;
+    }
 
     live.needsRetry = true;
     _registerRetry ??= Timer(registerRetryDelay, _retryFailedRegistrations);
@@ -227,6 +236,7 @@ class LiveRegistrationState {
   final String ref;
   LiveQueryRequest request;
   bool needsRetry = false;
+  int failedAttempts = 0;
 
   LiveRegistrationState({required this.ref, required this.request});
 }
