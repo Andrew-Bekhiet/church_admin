@@ -7,33 +7,39 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClass do
   check that reads those gives the same answer. Any other actor is keyed by
   its uid.
 
-  Operations whose results depend on the blanked fields are keyed by uid for
-  every viewer. `ChurchAdmin.Realtime.Live.ViewerClassCompletenessTest`
-  proves this list against every client document.
+  Operations whose results depend on the blanked fields are keyed by uid.
+  Some depend on them for every viewer. The others depend on them only below
+  full write, because `userCanEdit` and `currentUserCanManageThisUser` fold
+  to `true` for a viewer holding both write-all and manage-all, so full
+  admins still share those. `ViewerClassCompletenessTest` proves both lists
+  against every client document.
   """
 
   alias ChurchAdmin.Authz.{Actor, Grant, Scope}
 
   @entities_outside_scope_resources [:history_record, :contact, :resolved_contact]
-  @per_uid_operations ~w(
+  @operations_per_uid_for_everyone ~w(user)
+  @operations_per_uid_below_full_write ~w(
     geolocatedPersons
     homeSearch
     person
     personHistoryAnalysis
     personMemberships
     persons
-    user
     users
   )
 
   @type t :: {:uid, String.t()} | {:global_reader, Actor.t()}
 
-  @spec per_uid_operations() :: [String.t()]
-  def per_uid_operations, do: @per_uid_operations
+  @spec operations_per_uid_for_everyone() :: [String.t()]
+  def operations_per_uid_for_everyone, do: @operations_per_uid_for_everyone
+
+  @spec operations_per_uid_below_full_write() :: [String.t()]
+  def operations_per_uid_below_full_write, do: @operations_per_uid_below_full_write
 
   @spec key(Actor.t(), String.t() | nil) :: t()
   def key(%Actor{} = actor, operation_name) do
-    if operation_name not in @per_uid_operations and global_reader?(actor),
+    if global_reader?(actor) and not depends_on_identity?(operation_name, actor),
       do: {:global_reader, facts(actor)},
       else: {:uid, actor.uid}
   end
@@ -65,6 +71,14 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClass do
 
     Enum.all?(entities, &(Scope.for_entity(&1, actor, :read) == true))
   end
+
+  defp depends_on_identity?(operation_name, %Actor{} = actor) do
+    operation_name in @operations_per_uid_for_everyone or
+      (operation_name in @operations_per_uid_below_full_write and not full_writer?(actor))
+  end
+
+  defp full_writer?(%Actor{write_all?: write_all?, manage_all_users?: manage_all_users?}),
+    do: write_all? and manage_all_users?
 
   defp scope(%Actor{} = actor) do
     {facts(actor), actor.uid, actor.person_id, actor.family_id,

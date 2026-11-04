@@ -12,6 +12,7 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassCompletenessTest do
 
   @read_only_reader ~w(approved readAllData)
   @full_admin ~w(approved readAllData writeAllData manageAllUsers exportAllData)
+  @write_all_without_manage_all ~w(approved readAllData writeAllData)
 
   @registered_never_since_they_mint_links ~w(photoDownloadUrl appDownloadLink)
 
@@ -139,14 +140,39 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassCompletenessTest do
     assert second.visible_servant_uids == [first.uid]
   end
 
-  test "the per-uid list is exactly the operations whose results differ between global readers" do
-    {read_only_first, read_only_second, read_only_ids} = world(@read_only_reader, 1)
-    {admin_first, admin_second, admin_ids} = world(@full_admin, 2)
+  describe "the per-uid lists are exactly the operations whose results differ" do
+    test "for everyone: the operations that differ between two full admins" do
+      {first, second, ids} = world(@full_admin, 2)
 
-    differ =
-      operations_that_differ(read_only_first, read_only_second, read_only_ids) ++
-        operations_that_differ(admin_first, admin_second, admin_ids)
+      assert first.write_all? and first.manage_all_users?
 
-    assert Enum.sort(ViewerClass.per_uid_operations()) == differ |> Enum.uniq() |> Enum.sort()
+      assert Enum.sort(ViewerClass.operations_per_uid_for_everyone()) ==
+               first |> operations_that_differ(second, ids) |> Enum.sort()
+    end
+
+    test "below full write: the rest of what differs between two read-only global readers" do
+      {first, second, ids} = world(@read_only_reader, 1)
+
+      assert Enum.sort(ViewerClass.operations_per_uid_below_full_write()) ==
+               Enum.sort(
+                 operations_that_differ(first, second, ids) --
+                   ViewerClass.operations_per_uid_for_everyone()
+               )
+    end
+
+    test "write-all without manage-all differs on users, so it is below full write" do
+      {first, second, ids} = world(@write_all_without_manage_all, 3)
+
+      assert first.write_all?
+      refute first.manage_all_users?
+
+      differ = operations_that_differ(first, second, ids)
+
+      assert "users" in differ
+
+      assert differ --
+               (ViewerClass.operations_per_uid_for_everyone() ++
+                  ViewerClass.operations_per_uid_below_full_write()) == []
+    end
   end
 end

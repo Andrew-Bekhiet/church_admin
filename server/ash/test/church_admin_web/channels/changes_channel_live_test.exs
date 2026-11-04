@@ -346,6 +346,25 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
       assert runs(runs) == 2
     end
 
+    test "two full admins share one persons execution" do
+      Factory.person!(%{family_id: Factory.family!().id})
+      runs = count_runs()
+      full_admin = ~w(approved readAllData writeAllData manageAllUsers)
+
+      {:ok, %{}} = register(join_as(user_with!(full_admin)), window_payload("a", @persons))
+      {:ok, %{}} = register(join_as(user_with!(full_admin)), window_payload("b", @persons))
+
+      assert Registry.group_count() == 1
+      assert runs(runs) == 1
+    end
+
+    test "two read-only global readers do not share persons" do
+      {:ok, %{}} = register(join_as(admin!()), window_payload("a", @persons))
+      {:ok, %{}} = register(join_as(admin!()), window_payload("b", @persons))
+
+      assert Registry.group_count() == 2
+    end
+
     test "a scoped user does not share with an admin" do
       {:ok, %{}} = register(join_as(admin!()), window_payload("a", @hobbies))
       {:ok, %{}} = register(join_as(approved_viewer!()), window_payload("b", @hobbies))

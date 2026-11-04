@@ -71,12 +71,32 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassTest do
     assert ViewerClass.key(actor, "hobbies") == {:uid, "uid-a"}
   end
 
-  test "an operation on the per-uid list is keyed by uid even for a global reader" do
-    per_uid = ViewerClass.per_uid_operations()
+  test "every operation that depends on identity is keyed by uid for a read-only global reader" do
+    operations =
+      ViewerClass.operations_per_uid_for_everyone() ++
+        ViewerClass.operations_per_uid_below_full_write()
 
-    for operation <- per_uid do
+    for operation <- operations do
       assert ViewerClass.key(global_reader(), operation) == {:uid, "uid-a"}
     end
+  end
+
+  test "a full admin is keyed by uid only for operations that depend on identity for everyone" do
+    admin = global_reader(write_all?: true, manage_all_users?: true)
+
+    for operation <- ViewerClass.operations_per_uid_for_everyone() do
+      assert ViewerClass.key(admin, operation) == {:uid, "uid-a"}
+    end
+
+    for operation <- ViewerClass.operations_per_uid_below_full_write() do
+      assert {:global_reader, _facts} = ViewerClass.key(admin, operation)
+    end
+  end
+
+  test "write-all without manage-all is not a full writer" do
+    writer = global_reader(write_all?: true)
+
+    assert ViewerClass.key(writer, "users") == {:uid, "uid-a"}
   end
 
   test "same_scope? ignores the token and notices a change in identity-bound facts" do
