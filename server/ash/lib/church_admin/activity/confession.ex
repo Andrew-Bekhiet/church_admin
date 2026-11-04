@@ -15,6 +15,7 @@ defmodule ChurchAdmin.Activity.Confession do
 
   graphql do
     type :confession
+    keyset_field :keyset
 
     relationships [:day, :person, :user]
 

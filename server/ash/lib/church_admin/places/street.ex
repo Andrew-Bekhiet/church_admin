@@ -26,6 +26,7 @@ defmodule ChurchAdmin.Places.Street do
 
   graphql do
     type :street
+    keyset_field :keyset
 
     relationships [
       :addresses,

@@ -13,6 +13,7 @@ defmodule ChurchAdmin.People.ResolvedContact do
 
   graphql do
     type :family_contact
+    keyset_field :keyset
 
     relationships [:person, :person_type, :family]
 

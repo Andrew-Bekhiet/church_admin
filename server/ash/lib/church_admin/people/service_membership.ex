@@ -12,6 +12,7 @@ defmodule ChurchAdmin.People.ServiceMembership do
 
   graphql do
     type :service_membership
+    keyset_field :keyset
 
     relationships [:person, :service]
 

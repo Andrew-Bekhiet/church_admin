@@ -11,6 +11,7 @@ defmodule ChurchAdmin.People.ClassMembership do
 
   graphql do
     type :class_membership
+    keyset_field :keyset
 
     relationships [:class, :person]
 

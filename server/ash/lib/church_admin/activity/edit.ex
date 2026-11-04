@@ -12,6 +12,7 @@ defmodule ChurchAdmin.Activity.Edit do
 
   graphql do
     type :edit
+    keyset_field :keyset
 
     relationships [:user]
 

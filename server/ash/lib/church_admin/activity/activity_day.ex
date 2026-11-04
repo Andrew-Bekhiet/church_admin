@@ -10,6 +10,7 @@ defmodule ChurchAdmin.Activity.ActivityDay do
 
   graphql do
     type :activity_day
+    keyset_field :keyset
 
     relationships [:confessions, :kodases]
 

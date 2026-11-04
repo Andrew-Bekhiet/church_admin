@@ -10,6 +10,7 @@ defmodule ChurchAdmin.Places.AreaStreet do
 
   graphql do
     type :area_street
+    keyset_field :keyset
 
     relationships [:area, :street]
 

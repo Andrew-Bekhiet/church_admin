@@ -12,6 +12,7 @@ defmodule ChurchAdmin.Catalog.PersonType do
 
   graphql do
     type :person_type
+    keyset_field :keyset
 
     queries do
       get :person_type, :read

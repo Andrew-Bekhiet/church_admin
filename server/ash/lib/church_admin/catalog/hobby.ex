@@ -10,6 +10,7 @@ defmodule ChurchAdmin.Catalog.Hobby do
 
   graphql do
     type :hobby
+    keyset_field :keyset
 
     queries do
       get :hobby, :read

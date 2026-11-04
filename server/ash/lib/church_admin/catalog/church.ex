@@ -10,6 +10,7 @@ defmodule ChurchAdmin.Catalog.Church do
 
   graphql do
     type :church
+    keyset_field :keyset
 
     queries do
       get :church, :read

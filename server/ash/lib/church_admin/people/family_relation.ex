@@ -11,6 +11,7 @@ defmodule ChurchAdmin.People.FamilyRelation do
 
   graphql do
     type :family_relation
+    keyset_field :keyset
 
     relationships [:child, :parent]
 

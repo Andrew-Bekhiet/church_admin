@@ -24,6 +24,7 @@ defmodule ChurchAdmin.Places.Area do
 
   graphql do
     type :area
+    keyset_field :keyset
 
     relationships [
       :addresses,

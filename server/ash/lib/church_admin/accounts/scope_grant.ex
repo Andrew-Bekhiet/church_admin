@@ -15,6 +15,7 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
 
   graphql do
     type :scope_grant
+    keyset_field :keyset
 
     relationships [:user, :area, :service, :group, :study_year, :classes]
 

@@ -234,11 +234,19 @@ input ServiceMembershipSortInput {
 
 type ServiceMembership {
   personId: ID!
+
   serviceId: ID!
+
   person: Person
+
   service: Service
+
   serviceName: String
+
   isOutsideServiceStudyYears: Boolean!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum FamilyContactSortField {
@@ -465,20 +473,37 @@ input FamilyContactSortInput {
 
 type FamilyContact {
   id: ID!
+
   personId: ID
+
   familyId: ID
+
   personTypeId: ID
+
   label: String
+
   phone: String
+
   isMainPhone: Boolean
+
   createdAt: DateTime
+
   updatedAt: DateTime
+
   effectiveFamilyId: ID
+
   effectivePersonTypeId: ID
+
   person: Person
+
   personType: PersonType
+
   family: Family
+
   personTypeOrder: Int
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum PersonTagSortField {
@@ -563,9 +588,15 @@ input PersonTagSortInput {
 
 type PersonTag {
   personId: ID!
+
   tagId: ID!
+
   person: Person
+
   tagName: String
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum PersonHobbySortField {
@@ -650,9 +681,15 @@ input PersonHobbySortInput {
 
 type PersonHobby {
   personId: ID!
+
   hobbyId: ID!
+
   person: Person
+
   hobbyName: String
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :delete_person mutation"
@@ -1904,55 +1941,105 @@ input PersonSortInput {
 
 type Person {
   id: ID!
+
   name: String!
+
   birthdate: Date
+
   gender: Boolean!
+
   isShammas: Boolean!
+
   shammasLevelId: ID
+
   schoolId: ID
+
   collegeId: ID
+
   churchId: ID
+
   fatherId: ID
+
   isStudent: Boolean
+
   jobId: ID
+
   jobDescription: String
+
   qualificationId: ID
+
   personTypeId: ID
+
   stateId: ID
+
   isServant: Boolean!
+
   notes: String
+
   uid: ID
+
   familyId: ID
+
   storeId: ID
+
   studyYearId: Int
+
   color: Int
+
   photoUpdatedAt: DateTime
+
   blurhash: String
+
   workStatus: String
+
   martialStatus: String!
+
   servingChurchId: ID
+
   serviceType: String
+
   church: Church
+
   college: College
+
   family: Family
+
   father: Father
+
   job: Job
+
   personType: PersonType
+
   qualification: Qualification
+
   school: School
+
   servingChurch: Church
+
   shammasLevel: ShammasLevel
+
   state: PersonState
+
   store: Store
+
   studyYear: StudyYear
+
   user: User
+
   address: Address
+
   dataCheck: DataCheck
+
   mainContact: MainContact
+
   latestCall: LatestCall
+
   latestConfession: LatestConfession
+
   latestKodas: LatestKodas
+
   latestEdit: LatestEdit
+
   edits(
     "How to sort the records in the response"
     sort: [EditSortInput]
@@ -1966,7 +2053,9 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [Edit!]!
+
   latestVisit: LatestVisit
+
   visits(
     "How to sort the records in the response"
     sort: [VisitSortInput]
@@ -1980,6 +2069,7 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [Visit!]!
+
   contacts(
     "How to sort the records in the response"
     sort: [ContactSortInput]
@@ -1993,6 +2083,7 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [Contact!]!
+
   familyContacts(
     "How to sort the records in the response"
     sort: [FamilyContactSortInput]
@@ -2006,6 +2097,7 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [FamilyContact!]!
+
   searchablePhones(
     "How to sort the records in the response"
     sort: [FamilyContactSortInput]
@@ -2019,6 +2111,7 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [FamilyContact!]!
+
   attendanceRecords(
     "How to sort the records in the response"
     sort: [AttendanceRecordSortInput]
@@ -2032,6 +2125,7 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [AttendanceRecord!]!
+
   calls(
     "How to sort the records in the response"
     sort: [CallSortInput]
@@ -2045,6 +2139,7 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [Call!]!
+
   confessions(
     "How to sort the records in the response"
     sort: [ConfessionSortInput]
@@ -2058,6 +2153,7 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [Confession!]!
+
   kodases(
     "How to sort the records in the response"
     sort: [KodasSortInput]
@@ -2071,6 +2167,7 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [Kodas!]!
+
   classMemberships(
     "How to sort the records in the response"
     sort: [ClassMembershipSortInput]
@@ -2084,6 +2181,7 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [ClassMembership!]!
+
   groupMemberships(
     "How to sort the records in the response"
     sort: [GroupMembershipSortInput]
@@ -2097,6 +2195,7 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [GroupMembership!]!
+
   serviceMemberships(
     "How to sort the records in the response"
     sort: [ServiceMembershipSortInput]
@@ -2110,6 +2209,7 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [ServiceMembership!]!
+
   hobbies(
     "How to sort the records in the response"
     sort: [HobbySortInput]
@@ -2123,6 +2223,7 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [Hobby!]!
+
   tags(
     "How to sort the records in the response"
     sort: [TagSortInput]
@@ -2136,38 +2237,73 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [Tag!]!
+
   lastConfessionDay: Date
+
   lastConfessionDayUserName: String
+
   lastKodasDay: Date
+
   lastKodasDayUserName: String
+
   lastAttendedAt: DateTime
+
   lastVisitAt: DateTime
+
   lastVisitAtUserName: String
+
   mainPhone: String
+
   lastEdit: DateTime
+
   lastEditUserName: String
+
   lastCall: DateTime
+
   lastCallUserName: String
+
   familyName: String
+
   userName: String
+
   storeName: String
+
   churchName: String
+
   servingChurchName: String
+
   collegeName: String
+
   schoolName: String
+
   fatherName: String
+
   jobName: String
+
   qualificationName: String
+
   stateName: String
+
   personTypeOrder: Int
+
   shammasLevelOrder: Int
+
   studyYearOrder: Int
+
   addressAreaName: String
+
   addressStreetName: String
+
   addressDistrictName: String
+
   addressFullAddressText: String
+
   birthday: String
+
   userCanEdit: Boolean!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum MainContactSortField {
@@ -2272,10 +2408,17 @@ input MainContactSortInput {
 
 type MainContact {
   id: ID!
+
   personId: ID
+
   label: String
+
   phone: String
+
   person: Person
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum GroupMembershipSortField {
@@ -2361,10 +2504,17 @@ input GroupMembershipSortInput {
 
 type GroupMembership {
   personId: ID!
+
   groupId: ID!
+
   group: Group
+
   person: Person
+
   groupName: String
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum FamilyRelationSortField {
@@ -2470,11 +2620,19 @@ input FamilyRelationSortInput {
 
 type FamilyRelation {
   parentFamilyId: ID!
+
   childFamilyId: ID!
+
   child: Family
+
   parent: Family
+
   childName: String
+
   parentName: String
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :delete_family mutation"
@@ -2975,19 +3133,33 @@ input FamilySortInput {
 
 type Family {
   id: ID!
+
   name: String!
+
   notes: String
+
   color: Int
+
   photoUpdatedAt: DateTime
+
   blurhash: String
+
   status: String!
+
   deceasedSpouseName: String
+
   marriageDate: Date
+
   churchId: ID
+
   church: Church
+
   address: Address
+
   dataCheck: DataCheck
+
   latestEdit: LatestEdit
+
   edits(
     "How to sort the records in the response"
     sort: [EditSortInput]
@@ -3001,7 +3173,9 @@ type Family {
     "The number of records to skip."
     offset: Int
   ): [Edit!]!
+
   latestVisit: LatestVisit
+
   visits(
     "How to sort the records in the response"
     sort: [VisitSortInput]
@@ -3015,7 +3189,9 @@ type Family {
     "The number of records to skip."
     offset: Int
   ): [Visit!]!
+
   latestFatherVisit: LatestFatherVisit
+
   children(
     "How to sort the records in the response"
     sort: [FamilySortInput]
@@ -3029,6 +3205,7 @@ type Family {
     "The number of records to skip."
     offset: Int
   ): [Family!]!
+
   parents(
     "How to sort the records in the response"
     sort: [FamilySortInput]
@@ -3042,6 +3219,7 @@ type Family {
     "The number of records to skip."
     offset: Int
   ): [Family!]!
+
   contacts(
     "How to sort the records in the response"
     sort: [FamilyContactSortInput]
@@ -3055,6 +3233,7 @@ type Family {
     "The number of records to skip."
     offset: Int
   ): [FamilyContact!]!
+
   unclaimedContacts(
     "How to sort the records in the response"
     sort: [ContactSortInput]
@@ -3068,6 +3247,7 @@ type Family {
     "The number of records to skip."
     offset: Int
   ): [Contact!]!
+
   persons(
     "How to sort the records in the response"
     sort: [PersonSortInput]
@@ -3081,18 +3261,33 @@ type Family {
     "The number of records to skip."
     offset: Int
   ): [Person!]!
+
   lastEdit: DateTime
+
   lastEditUserName: String
+
   lastVisit: DateTime
+
   lastVisitUserName: String
+
   lastFatherVisit: DateTime
+
   lastFatherVisitUserName: String
+
   churchName: String
+
   addressAreaName: String
+
   addressStreetName: String
+
   addressDistrictName: String
+
   addressFullAddressText: String
+
   userCanEdit: Boolean!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum ContactSortField {
@@ -3274,17 +3469,31 @@ input ContactSortInput {
 
 type Contact {
   id: ID!
+
   personId: ID
+
   familyId: ID
+
   personTypeId: ID
+
   label: String
+
   phone: String!
+
   isMainPhone: Boolean!
+
   createdAt: DateTime!
+
   updatedAt: DateTime!
+
   family: Family
+
   person: Person
+
   personType: PersonType
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum ClassMembershipSortField {
@@ -3381,6 +3590,9 @@ type ClassMembership {
   person: Person
 
   className: String
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum SortOrder {
@@ -3764,18 +3976,31 @@ input ServiceSortInput {
 
 type Service {
   id: ID!
+
   name: String!
+
   studyYearFromId: Int
+
   studyYearToId: Int
+
   nextServiceId: ID
+
   color: Int
+
   photoUpdatedAt: DateTime
+
   blurhash: String
+
   defaultMeetingId: ID
+
   defaultMeeting: Meeting
+
   nextService: Service
+
   studyYearFrom: StudyYear
+
   studyYearTo: StudyYear
+
   classes(
     "How to sort the records in the response"
     sort: [ClassSortInput]
@@ -3789,6 +4014,7 @@ type Service {
     "The number of records to skip."
     offset: Int
   ): [Class!]!
+
   groups(
     "How to sort the records in the response"
     sort: [GroupSortInput]
@@ -3802,6 +4028,7 @@ type Service {
     "The number of records to skip."
     offset: Int
   ): [Group!]!
+
   meetings(
     "How to sort the records in the response"
     sort: [MeetingSortInput]
@@ -3815,6 +4042,7 @@ type Service {
     "The number of records to skip."
     offset: Int
   ): [Meeting!]!
+
   serviceMemberships(
     "How to sort the records in the response"
     sort: [ServiceMembershipSortInput]
@@ -3828,6 +4056,7 @@ type Service {
     "The number of records to skip."
     offset: Int
   ): [ServiceMembership!]!
+
   admins(
     "How to sort the records in the response"
     sort: [UserSortInput]
@@ -3841,14 +4070,25 @@ type Service {
     "The number of records to skip."
     offset: Int
   ): [User!]!
+
   latestEdit: LatestEdit
+
   nextServiceName: String
+
   defaultMeetingName: String
+
   lastEdit: DateTime
+
   lastEditUserName: String
+
   studyYearFromOrder: Int
+
   studyYearToOrder: Int
+
   userCanEdit: Boolean!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :delete_group mutation"
@@ -4150,15 +4390,25 @@ input GroupSortInput {
 
 type Group {
   id: ID!
+
   name: String!
+
   serviceId: ID!
+
   validity: String
+
   color: Int
+
   photoUpdatedAt: DateTime
+
   blurhash: String
+
   defaultMeetingId: ID
+
   defaultMeeting: Meeting
+
   service: Service
+
   meetings(
     "How to sort the records in the response"
     sort: [MeetingSortInput]
@@ -4172,6 +4422,7 @@ type Group {
     "The number of records to skip."
     offset: Int
   ): [Meeting!]!
+
   groupMemberships(
     "How to sort the records in the response"
     sort: [GroupMembershipSortInput]
@@ -4185,6 +4436,7 @@ type Group {
     "The number of records to skip."
     offset: Int
   ): [GroupMembership!]!
+
   admins(
     "How to sort the records in the response"
     sort: [UserSortInput]
@@ -4198,12 +4450,21 @@ type Group {
     "The number of records to skip."
     offset: Int
   ): [User!]!
+
   latestEdit: LatestEdit
+
   serviceName: String
+
   defaultMeetingName: String
+
   lastEdit: DateTime
+
   lastEditUserName: String
+
   userCanEdit: Boolean!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :delete_class mutation"
@@ -4534,17 +4795,29 @@ input ClassSortInput {
 
 type Class {
   id: ID!
+
   name: String!
+
   serviceId: ID!
+
   serviceStudyYear: Int!
+
   serviceGender: Boolean
+
   color: Int
+
   photoUpdatedAt: DateTime
+
   blurhash: String
+
   serviceStudyYearTo: Int!
+
   service: Service
+
   studyYearFrom: StudyYear
+
   studyYearTo: StudyYear
+
   classMemberships(
     "How to sort the records in the response"
     sort: [ClassMembershipSortInput]
@@ -4558,6 +4831,7 @@ type Class {
     "The number of records to skip."
     offset: Int
   ): [ClassMembership!]!
+
   meetings(
     "How to sort the records in the response"
     sort: [MeetingSortInput]
@@ -4571,7 +4845,9 @@ type Class {
     "The number of records to skip."
     offset: Int
   ): [Meeting!]!
+
   latestEdit: LatestEdit
+
   admins(
     "How to sort the records in the response"
     sort: [UserSortInput]
@@ -4585,12 +4861,21 @@ type Class {
     "The number of records to skip."
     offset: Int
   ): [User!]!
+
   serviceName: String
+
   lastEdit: DateTime
+
   lastEditUserName: String
+
   studyYearFromOrder: Int
+
   studyYearToOrder: Int
+
   userCanEdit: Boolean!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :delete_street mutation"
@@ -4902,11 +5187,17 @@ input StreetSortInput {
 
 type Street {
   id: ID!
+
   name: String!
+
   line: Json
+
   color: Int
+
   photoUpdatedAt: DateTime
+
   blurhash: String
+
   addresses(
     "How to sort the records in the response"
     sort: [AddressSortInput]
@@ -4920,6 +5211,7 @@ type Street {
     "The number of records to skip."
     offset: Int
   ): [Address!]!
+
   areaStreets(
     "How to sort the records in the response"
     sort: [AreaStreetSortInput]
@@ -4933,6 +5225,7 @@ type Street {
     "The number of records to skip."
     offset: Int
   ): [AreaStreet!]!
+
   areas(
     "How to sort the records in the response"
     sort: [AreaSortInput]
@@ -4946,7 +5239,9 @@ type Street {
     "The number of records to skip."
     offset: Int
   ): [Area!]!
+
   latestEdit: LatestEdit
+
   edits(
     "How to sort the records in the response"
     sort: [EditSortInput]
@@ -4960,7 +5255,9 @@ type Street {
     "The number of records to skip."
     offset: Int
   ): [Edit!]!
+
   latestVisit: LatestVisit
+
   visits(
     "How to sort the records in the response"
     sort: [VisitSortInput]
@@ -4974,13 +5271,23 @@ type Street {
     "The number of records to skip."
     offset: Int
   ): [Visit!]!
+
   lastEdit: DateTime
+
   lastEditUserName: String
+
   lastVisit: DateTime
+
   lastVisitUserName: String
+
   userCanEdit: Boolean!
+
   withinPolygon(polygon: Json!): Boolean
+
   withinDistance(from: Json!, meters: Float!): Boolean
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :delete_store mutation"
@@ -5332,14 +5639,23 @@ input StoreSortInput {
 
 type Store {
   id: ID!
+
   name: String!
+
   adminFamilyId: ID
+
   color: Int
+
   photoUpdatedAt: DateTime
+
   blurhash: String
+
   adminFamily: Family
+
   address: Address
+
   latestEdit: LatestEdit
+
   edits(
     "How to sort the records in the response"
     sort: [EditSortInput]
@@ -5353,7 +5669,9 @@ type Store {
     "The number of records to skip."
     offset: Int
   ): [Edit!]!
+
   latestVisit: LatestVisit
+
   visits(
     "How to sort the records in the response"
     sort: [VisitSortInput]
@@ -5367,15 +5685,27 @@ type Store {
     "The number of records to skip."
     offset: Int
   ): [Visit!]!
+
   addressAreaName: String
+
   addressStreetName: String
+
   addressDistrictName: String
+
   addressFullAddressText: String
+
   adminFamilyName: String
+
   lastEdit: DateTime
+
   lastEditUserName: String
+
   userCanEdit: Boolean!
+
   withinPolygon(polygon: Json!): Boolean
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :create_district mutation"
@@ -5458,7 +5788,9 @@ input DistrictSortInput {
 
 type District {
   id: ID!
+
   name: String!
+
   addresses(
     "How to sort the records in the response"
     sort: [AddressSortInput]
@@ -5472,6 +5804,9 @@ type District {
     "The number of records to skip."
     offset: Int
   ): [Address!]!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum AreaStreetSortField {
@@ -5546,6 +5881,9 @@ type AreaStreet {
   area: Area
 
   street: Street
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :delete_area mutation"
@@ -5855,11 +6193,17 @@ input AreaSortInput {
 
 type Area {
   id: ID!
+
   name: String!
+
   bounds: Json
+
   color: Int
+
   photoUpdatedAt: DateTime
+
   blurhash: String
+
   addresses(
     "How to sort the records in the response"
     sort: [AddressSortInput]
@@ -5873,6 +6217,7 @@ type Area {
     "The number of records to skip."
     offset: Int
   ): [Address!]!
+
   areaStreets(
     "How to sort the records in the response"
     sort: [AreaStreetSortInput]
@@ -5886,6 +6231,7 @@ type Area {
     "The number of records to skip."
     offset: Int
   ): [AreaStreet!]!
+
   streets(
     "How to sort the records in the response"
     sort: [StreetSortInput]
@@ -5899,6 +6245,7 @@ type Area {
     "The number of records to skip."
     offset: Int
   ): [Street!]!
+
   admins(
     "How to sort the records in the response"
     sort: [UserSortInput]
@@ -5912,7 +6259,9 @@ type Area {
     "The number of records to skip."
     offset: Int
   ): [User!]!
+
   latestEdit: LatestEdit
+
   edits(
     "How to sort the records in the response"
     sort: [EditSortInput]
@@ -5926,7 +6275,9 @@ type Area {
     "The number of records to skip."
     offset: Int
   ): [Edit!]!
+
   latestVisit: LatestVisit
+
   visits(
     "How to sort the records in the response"
     sort: [VisitSortInput]
@@ -5940,13 +6291,23 @@ type Area {
     "The number of records to skip."
     offset: Int
   ): [Visit!]!
+
   lastEdit: DateTime
+
   lastEditUserName: String
+
   lastVisit: DateTime
+
   lastVisitUserName: String
+
   userCanEdit: Boolean!
+
   withinPolygon(polygon: Json!): Boolean
+
   containsPoint(point: Json!): Boolean
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum AddressSortField {
@@ -6256,26 +6617,49 @@ input AddressSortInput {
 
 type Address {
   id: ID!
+
   countryIsoCode: String!
+
   districtId: ID
+
   areaId: ID
+
   streetId: ID
+
   substreetName: String
+
   geolocation: Json
+
   storeyNumber: Int
+
   houseNumber: Int
+
   apartmentNumber: Int
+
   specialLandmark: String
+
   familyId: ID
+
   storeId: ID
+
   houseCode: String
+
   area: Area
+
   district: District
+
   family: Family
+
   store: Store
+
   street: Street
+
   fullAddressText: String
+
   withinPolygon(polygon: Json!): Boolean
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum RosterEntrySortField {
@@ -6518,6 +6902,9 @@ type RosterEntry {
   meeting: Meeting
 
   person: Person
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum MeetingDaySortField {
@@ -6949,18 +7336,31 @@ input MeetingSortInput {
 
 type Meeting {
   id: ID!
+
   name: String!
+
   serviceId: ID
+
   serviceStudyYear: Int
+
   serviceGender: Boolean
+
   groupId: ID
+
   audience: MeetingAudience!
+
   isArchived: Boolean!
+
   color: Int
+
   showKodasCheckbox: Boolean!
+
   group: Group
+
   service: Service
+
   studyYear: StudyYear
+
   attendanceRecords(
     "How to sort the records in the response"
     sort: [AttendanceRecordSortInput]
@@ -6974,6 +7374,7 @@ type Meeting {
     "The number of records to skip."
     offset: Int
   ): [AttendanceRecord!]!
+
   days(
     "How to sort the records in the response"
     sort: [MeetingDaySortInput]
@@ -6987,6 +7388,7 @@ type Meeting {
     "The number of records to skip."
     offset: Int
   ): [MeetingDay!]!
+
   rosterEntries(
     "How to sort the records in the response"
     sort: [RosterEntrySortInput]
@@ -7000,10 +7402,17 @@ type Meeting {
     "The number of records to skip."
     offset: Int
   ): [RosterEntry!]!
+
   serviceName: String
+
   groupName: String
+
   studyYearOrder: Int
+
   heldDays(from: Date!, to: Date!): [Date!]
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :unmark_attendance mutation"
@@ -7259,20 +7668,37 @@ input AttendanceRecordSortInput {
 
 type AttendanceRecord {
   id: ID!
+
   meetingId: ID!
+
   personId: ID!
+
   datetime: DateTime!
+
   asServant: Boolean!
+
   recordedBy: ID!
+
   day: Date
+
   meeting: Meeting
+
   person: Person
+
   recordedByUser: User
+
   user: User
+
   meetingName: String
+
   personName: String
+
   recordedByUserName: String
+
   time: DateTime
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :record_visit mutation"
@@ -7418,13 +7844,23 @@ input VisitSortInput {
 
 type Visit {
   id: ID!
+
   visitId: ID!
+
   table: String!
+
   recordId: ID!
+
   time: DateTime!
+
   recordedBy: ID
+
   isFatherVisit: Boolean!
+
   user: User
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum LatestVisitSortField {
@@ -7552,6 +7988,9 @@ type LatestVisit {
   visitId: ID
 
   user: User
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum LatestKodasSortField {
@@ -7632,11 +8071,19 @@ input LatestKodasSortInput {
 
 type LatestKodas {
   id: ID!
+
   personId: ID!
+
   time: Date
+
   recordedBy: ID
+
   person: Person
+
   user: User
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum LatestFatherVisitSortField {
@@ -7764,6 +8211,9 @@ type LatestFatherVisit {
   visitId: ID
 
   user: User
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum LatestEditSortField {
@@ -7874,6 +8324,9 @@ type LatestEdit {
   recordedBy: ID
 
   user: User
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum LatestConfessionSortField {
@@ -7954,11 +8407,19 @@ input LatestConfessionSortInput {
 
 type LatestConfession {
   id: ID!
+
   personId: ID!
+
   time: Date
+
   recordedBy: ID
+
   person: Person
+
   user: User
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum LatestCallSortField {
@@ -8039,11 +8500,19 @@ input LatestCallSortInput {
 
 type LatestCall {
   id: ID!
+
   personId: ID!
+
   time: DateTime
+
   recordedBy: ID
+
   person: Person
+
   user: User
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :delete_kodas mutation"
@@ -8178,13 +8647,23 @@ input KodasSortInput {
 
 type Kodas {
   id: ID!
+
   dayId: Date!
+
   personId: ID!
+
   recordedBy: ID!
+
   time: Date
+
   day: ActivityDay
+
   person: Person
+
   user: User
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum EditSortField {
@@ -8284,10 +8763,17 @@ input EditSortInput {
 
 type Edit {
   table: String!
+
   recordId: ID!
+
   time: DateTime!
+
   recordedBy: ID
+
   user: User
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :record_confession mutation"
@@ -8413,13 +8899,23 @@ input ConfessionSortInput {
 
 type Confession {
   id: ID!
+
   dayId: Date!
+
   personId: ID!
+
   recordedBy: ID!
+
   time: Date
+
   day: ActivityDay
+
   person: Person
+
   user: User
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :record_call mutation"
@@ -8514,11 +9010,19 @@ input CallSortInput {
 
 type Call {
   id: ID!
+
   time: DateTime!
+
   personId: ID!
+
   recordedBy: ID
+
   person: Person
+
   user: User
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum ActivityDaySortField {
@@ -8569,7 +9073,9 @@ input ActivityDaySortInput {
 
 type ActivityDay {
   id: ID!
+
   day: Date!
+
   confessions(
     "How to sort the records in the response"
     sort: [ConfessionSortInput]
@@ -8583,6 +9089,7 @@ type ActivityDay {
     "The number of records to skip."
     offset: Int
   ): [Confession!]!
+
   kodases(
     "How to sort the records in the response"
     sort: [KodasSortInput]
@@ -8596,6 +9103,9 @@ type ActivityDay {
     "The number of records to skip."
     offset: Int
   ): [Kodas!]!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum UserPermissionSortField {
@@ -8672,6 +9182,9 @@ type UserPermission {
   permission: String!
 
   user: User
+
+  "The pagination keyset."
+  keyset: String
 }
 
 input ApplyInvitationCodeInput {
@@ -8962,16 +9475,27 @@ input UserSortInput {
 
 type User {
   id: ID!
+
   uid: ID!
+
   name: String!
+
   email: String
+
   photoUpdatedAt: DateTime
+
   blurhash: String
+
   authId: String
+
   invitation: Invitation
+
   person: Person
+
   preferences: UserPreferences
+
   latestEdit: LatestEdit
+
   scopeGrants(
     "How to sort the records in the response"
     sort: [ScopeGrantSortInput]
@@ -8985,6 +9509,7 @@ type User {
     "The number of records to skip."
     offset: Int
   ): [ScopeGrant!]!
+
   deviceTokens(
     "How to sort the records in the response"
     sort: [DeviceTokenSortInput]
@@ -8998,6 +9523,7 @@ type User {
     "The number of records to skip."
     offset: Int
   ): [DeviceToken!]!
+
   permissions(
     "How to sort the records in the response"
     sort: [UserPermissionSortInput]
@@ -9011,10 +9537,17 @@ type User {
     "The number of records to skip."
     offset: Int
   ): [UserPermission!]!
+
   lastEdit: DateTime
+
   lastEditUserName: String
+
   personName: String
+
   currentUserCanManageThisUser: Boolean!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum ScopeGrantSortField {
@@ -9384,33 +9917,61 @@ input ScopeGrantSortInput {
 
 type ScopeGrant {
   id: ID!
+
   permissionId: ID!
+
   uid: ID!
+
   adminOnService: ID
+
   serviceGender: Boolean
+
   serviceStudyYear: Int
+
   serviceAllowEdit: Boolean
+
   serviceAdminOnUsers: Boolean
+
   adminOnGroup: ID
+
   groupAllowEdit: Boolean
+
   groupAdminOnUsers: Boolean
+
   adminOnArea: ID
+
   areaAllowEdit: Boolean
+
   areaAdminOnUsers: Boolean
+
   serviceWriteRelatedFamilies: Boolean!
+
   groupWriteRelatedFamilies: Boolean!
+
   areaAllowExport: Boolean
+
   serviceAllowExport: Boolean
+
   groupAllowExport: Boolean
+
   serviceAllowRecordAttendance: Boolean
+
   serviceAllowRecordServantsAttendance: Boolean
+
   groupAllowRecordAttendance: Boolean
+
   groupAllowRecordServantsAttendance: Boolean
+
   area: Area
+
   group: Group
+
   service: Service
+
   user: User
+
   studyYear: StudyYear
+
   classes(
     "How to sort the records in the response"
     sort: [ClassSortInput]
@@ -9424,6 +9985,9 @@ type ScopeGrant {
     "The number of records to skip."
     offset: Int
   ): [Class!]!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :update_my_preferences mutation"
@@ -9893,7 +10457,11 @@ input UniversitySortInput {
 
 type University {
   id: ID!
+
   name: String!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :create_tag mutation"
@@ -9991,8 +10559,13 @@ input TagSortInput {
 
 type Tag {
   id: ID!
+
   name: String!
+
   color: Int
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum StudyYearSortField {
@@ -10061,8 +10634,13 @@ input StudyYearSortInput {
 
 type StudyYear {
   id: ID!
+
   name: String!
+
   order: Int!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum ShammasLevelSortField {
@@ -10146,8 +10724,13 @@ input ShammasLevelSortInput {
 
 type ShammasLevel {
   id: ID!
+
   name: String!
+
   order: Int!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :create_school mutation"
@@ -10229,7 +10812,11 @@ input SchoolSortInput {
 
 type School {
   id: ID!
+
   name: String!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :create_qualification mutation"
@@ -10311,7 +10898,11 @@ input QualificationSortInput {
 
 type Qualification {
   id: ID!
+
   name: String!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :create_person_type mutation"
@@ -10438,10 +11029,17 @@ input PersonTypeSortInput {
 
 type PersonType {
   id: ID!
+
   name: String!
+
   order: Int!
+
   isFamilyAdmin: Boolean!
+
   isHidden: Boolean!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum PersonStateSortField {
@@ -10525,8 +11123,13 @@ input PersonStateSortInput {
 
 type PersonState {
   id: ID!
+
   name: String!
+
   color: Int!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :create_job mutation"
@@ -10608,7 +11211,11 @@ input JobSortInput {
 
 type Job {
   id: ID!
+
   name: String!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :create_hobby mutation"
@@ -10706,8 +11313,13 @@ input HobbySortInput {
 
 type Hobby {
   id: ID!
+
   name: String!
+
   color: Int
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :create_father mutation"
@@ -10821,10 +11433,17 @@ input FatherSortInput {
 
 type Father {
   id: ID!
+
   name: String!
+
   churchId: ID
+
   isHidden: Boolean!
+
   church: Church
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :create_college mutation"
@@ -10923,9 +11542,15 @@ input CollegeSortInput {
 
 type College {
   id: ID!
+
   name: String!
+
   universityId: ID
+
   university: University
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :create_church mutation"
@@ -11022,8 +11647,13 @@ input ChurchSortInput {
 
 type Church {
   id: ID!
+
   name: String!
+
   isHidden: Boolean!
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :clear_data_check_override mutation"
@@ -11126,10 +11756,17 @@ input DataCheckOverrideSortInput {
 
 type DataCheckOverride {
   id: ID!
+
   familyId: ID!
+
   isComplete: Boolean!
+
   updatedBy: ID
+
   family: Family
+
+  "The pagination keyset."
+  keyset: String
 }
 
 enum DataCheckSortField {
@@ -11254,14 +11891,25 @@ input DataCheckSortInput {
 
 type DataCheck {
   id: ID!
+
   familyId: ID!
+
   userOverride: Boolean
+
   familyCheck: Boolean
+
   addressCheck: Boolean
+
   completenessPercent: Int
+
   isComplete: Boolean
+
   details: [JsonString!]
+
   family: Family
+
+  "The pagination keyset."
+  keyset: String
 }
 
 "The result of the :record_screen_capture_attempt mutation"

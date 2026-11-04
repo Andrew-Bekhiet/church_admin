@@ -11,6 +11,7 @@ defmodule ChurchAdmin.Catalog.College do
 
   graphql do
     type :college
+    keyset_field :keyset
 
     relationships [:university]
 

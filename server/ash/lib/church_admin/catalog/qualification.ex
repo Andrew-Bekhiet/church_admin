@@ -10,6 +10,7 @@ defmodule ChurchAdmin.Catalog.Qualification do
 
   graphql do
     type :qualification
+    keyset_field :keyset
 
     queries do
       get :qualification, :read

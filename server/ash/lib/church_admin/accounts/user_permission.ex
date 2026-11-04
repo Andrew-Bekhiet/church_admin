@@ -12,6 +12,7 @@ defmodule ChurchAdmin.Accounts.UserPermission do
 
   graphql do
     type :user_permission
+    keyset_field :keyset
 
     relationships [:user]
 

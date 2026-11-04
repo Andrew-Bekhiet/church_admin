@@ -12,6 +12,7 @@ defmodule ChurchAdmin.Activity.LatestCall do
 
   graphql do
     type :latest_call
+    keyset_field :keyset
 
     relationships [:person, :user]
 

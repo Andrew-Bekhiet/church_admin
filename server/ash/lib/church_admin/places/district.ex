@@ -11,6 +11,7 @@ defmodule ChurchAdmin.Places.District do
 
   graphql do
     type :district
+    keyset_field :keyset
 
     relationships [:addresses]
 

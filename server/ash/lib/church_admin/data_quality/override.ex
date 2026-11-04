@@ -14,6 +14,7 @@ defmodule ChurchAdmin.DataQuality.Override do
 
   graphql do
     type :data_check_override
+    keyset_field :keyset
 
     relationships [:family]
 

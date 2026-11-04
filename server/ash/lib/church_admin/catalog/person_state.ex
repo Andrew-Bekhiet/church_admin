@@ -10,6 +10,7 @@ defmodule ChurchAdmin.Catalog.PersonState do
 
   graphql do
     type :person_state
+    keyset_field :keyset
 
     queries do
       get :person_state, :read

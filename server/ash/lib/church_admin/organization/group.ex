@@ -24,6 +24,7 @@ defmodule ChurchAdmin.Organization.Group do
 
   graphql do
     type :group
+    keyset_field :keyset
 
     relationships [
       :service,

@@ -15,6 +15,7 @@ defmodule ChurchAdmin.Activity.Visit do
 
   graphql do
     type :visit
+    keyset_field :keyset
 
     relationships [:user]
 
