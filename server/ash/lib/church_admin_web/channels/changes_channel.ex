@@ -19,6 +19,10 @@ defmodule ChurchAdminWeb.ChangesChannel do
   full push. A viewer no longer approved or linked is disconnected. A registry restart loses every registration, so
   it disconnects too, and the client registers again on reconnecting.
 
+  `socket.assigns.actor` dates from the connect, which a rejoin after a crash
+  can long outlive, so joining reloads it too. The join queues that reload
+  before its reply reaches the client, so it precedes every `live:register`.
+
   A join after the socket's token expired is refused with `token_expired`,
   and the transport is closed at the moment it expires.
   """
@@ -40,6 +44,7 @@ defmodule ChurchAdminWeb.ChangesChannel do
         Process.send_after(self(), :token_expired, lifetime_ms)
         Process.monitor(Registry)
         Phoenix.PubSub.subscribe(ChurchAdmin.PubSub, Broadcaster.viewer_scope_topic())
+        send(self(), :viewer_scope_changed)
 
         {:ok, %{},
          socket

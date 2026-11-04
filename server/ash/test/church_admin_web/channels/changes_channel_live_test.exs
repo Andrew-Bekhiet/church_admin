@@ -6,6 +6,8 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
 
   alias ChurchAdmin.Realtime.Broadcaster
   alias ChurchAdmin.Realtime.Live.Registry
+  alias ChurchAdminWeb.ChangesChannel
+  alias ChurchAdminWeb.ChangesSocket
 
   @staleness_budget_ms 2_000
 
@@ -645,6 +647,21 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
                   @staleness_budget_ms
 
       assert :sys.get_state(socket.channel_pid).assigns.actor.family_id == other_family.id
+    end
+
+    test "made while the channel was down applies to the rejoin, not the socket's old actor", %{
+      writer: writer
+    } do
+      Factory.family!()
+      viewer = admin!()
+      {:ok, connected} = connect(ChangesSocket, %{"token" => token_for(viewer)})
+
+      revoke_permission(writer, viewer.uid, "readAllData")
+
+      {:ok, %{}, socket} = subscribe_and_join(connected, ChangesChannel, "changes", %{})
+      {:ok, %{}} = register(socket, window_payload("r1", @families))
+
+      assert_push "live:result", %{full: true, data: %{"families" => %{"results" => []}}}
     end
 
     test "of another uid changes nothing", %{writer: writer} do

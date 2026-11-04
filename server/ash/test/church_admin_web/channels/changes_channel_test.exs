@@ -19,7 +19,10 @@ defmodule ChurchAdminWeb.ChangesChannelTest do
   defp approved_user_token(claims \\ %{}) do
     user = Factory.user!()
     Factory.permissions!(user, ~w(approved))
+    token_for(user, claims)
+  end
 
+  defp token_for(user, claims \\ %{}) do
     user
     |> Factory.firebase_account!()
     |> Map.merge(claims)
@@ -28,6 +31,12 @@ defmodule ChurchAdminWeb.ChangesChannelTest do
   end
 
   defp join(socket), do: subscribe_and_join(socket, ChangesChannel, "changes", %{})
+
+  defp join_that_may_lose_its_channel(socket) do
+    join(socket)
+  catch
+    :exit, {{:shutdown, :viewer_lost_access}, _call} -> :ok
+  end
 
   test "a socket without a valid token is refused" do
     assert connect(ChangesSocket, %{}) == :error
@@ -40,6 +49,23 @@ defmodule ChurchAdminWeb.ChangesChannelTest do
   test "joining replies with an empty map", %{socket: socket} do
     assert {:ok, reply, _socket} = join(socket)
     assert reply == %{}
+  end
+
+  describe "a rejoin on a socket connected earlier" do
+    test "disconnects a viewer whose approval went while the channel was down" do
+      Process.flag(:trap_exit, true)
+      user = Factory.user!()
+      Factory.permissions!(user, ~w(approved))
+      {:ok, socket} = connect(ChangesSocket, %{"token" => token_for(user)})
+
+      ChurchAdmin.Repo.query!("delete from auth.users_permissions where uid = $1", [
+        Ecto.UUID.dump!(user.uid)
+      ])
+
+      join_that_may_lose_its_channel(socket)
+
+      assert_receive %Phoenix.Socket.Broadcast{event: "disconnect"}, 1_000
+    end
   end
 
   describe "the token's lifetime" do
