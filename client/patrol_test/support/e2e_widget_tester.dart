@@ -21,6 +21,19 @@ extension E2eWidgetTester on WidgetTester {
     return finder;
   }
 
+  Future<void> waitForSettledScrollable(Finder within) => waitFor(
+    find
+        .descendant(
+          of: within,
+          matching: find.byElementPredicate(
+            (element) =>
+                element.widget is Scrollable &&
+                (ModalRoute.of(element)?.animation?.isCompleted ?? true),
+          ),
+        )
+        .hitTestable(),
+  );
+
   Future<void> waitForAbsent(
     Finder finder, {
     Duration timeout = defaultTimeout,

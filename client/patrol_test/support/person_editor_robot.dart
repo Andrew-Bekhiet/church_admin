@@ -305,7 +305,7 @@ class PersonEditorRobot {
     final deadline = DateTime.now().add(E2eWidgetTester.defaultTimeout);
 
     await tester.waitFor(shownDetails);
-    await tester.waitFor(_scrollableOfSettledRoute<T>().hitTestable());
+    await tester.waitForSettledScrollable(find.byType(T));
     while (target.evaluate().isEmpty) {
       if (DateTime.now().isAfter(deadline)) {
         throw tester.failureShowingScreen(
@@ -319,15 +319,4 @@ class PersonEditorRobot {
     await tester.ensureVisible(target.first);
     await tester.waitFor(target.hitTestable());
   }
-
-  Finder _scrollableOfSettledRoute<T extends Widget>() => find
-      .descendant(
-        of: find.byType(T),
-        matching: find.byElementPredicate(
-          (element) =>
-              element.widget is Scrollable &&
-              (ModalRoute.of(element)?.animation?.isCompleted ?? true),
-        ),
-      )
-      .first;
 }

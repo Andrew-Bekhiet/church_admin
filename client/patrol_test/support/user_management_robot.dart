@@ -145,6 +145,7 @@ class UserManagementRobot {
           .descendant(of: personScreen, matching: find.byType(Scrollable))
           .first,
     );
+    await tester.waitForSettledScrollable(personScreen);
     await tester.scrollUntilVisible(
       linkedUserButton,
       300,
