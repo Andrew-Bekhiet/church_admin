@@ -42,8 +42,12 @@ defmodule ChurchAdmin.Realtime.Live.Document do
     end
   end
 
-  defp root_field(%{selection_set: %{selections: [%Language.Field{name: name}]}}), do: name
-  defp root_field(_several_or_a_spread), do: nil
+  defp root_field(%{selection_set: %{selections: selections}}) do
+    case Enum.reject(selections, &match?(%Language.Field{name: "__typename"}, &1)) do
+      [%Language.Field{name: name}] -> name
+      _several_or_a_spread_or_none -> nil
+    end
+  end
 
   defp parsed(hash, text) do
     with :error <- Cache.fetch(hash),

@@ -22,6 +22,28 @@ defmodule ChurchAdmin.Realtime.Live.DocumentTest do
     assert document.variables == MapSet.new(["first", "after"])
   end
 
+  describe "the root field" do
+    test "is the one field the operation selects" do
+      assert {:ok, %{root_field: "areas"}} = Document.prepare(@areas, nil)
+    end
+
+    test "ignores a root __typename, wherever it stands" do
+      for text <- ["query { __typename areas { count } }", "query { areas { count } __typename }"] do
+        assert {:ok, %{root_field: "areas"}} = Document.prepare(text, nil)
+      end
+    end
+
+    test "is nil for several fields, a spread, or nothing but __typename" do
+      assert {:ok, %{root_field: nil}} =
+               Document.prepare("{ areas { count } streets { count } }", nil)
+
+      assert {:ok, %{root_field: nil}} =
+               Document.prepare("{ ...F } fragment F on Query { __typename }", nil)
+
+      assert {:ok, %{root_field: nil}} = Document.prepare("{ __typename }", nil)
+    end
+  end
+
   test "the operation name may be left out when the document holds one operation" do
     assert {:ok, %{operation_name: "areas"}} = Document.prepare(@areas, nil)
   end

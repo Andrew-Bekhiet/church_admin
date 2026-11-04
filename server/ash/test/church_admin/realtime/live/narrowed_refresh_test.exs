@@ -12,9 +12,11 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
   @hobbies """
   query hobbies($filter: HobbyFilterInput, $sort: [HobbySortInput], $first: Int, $after: String) {
     hobbies(filter: $filter, sort: $sort, first: $first, after: $after) {
-      count endKeyset results { keyset id name }
+      count endKeyset results { keyset id ...HobbyFields __typename } __typename
     }
+    __typename
   }
+  fragment HobbyFields on Hobby { name __typename }
   """
 
   @relation {"public", "hobbies"}

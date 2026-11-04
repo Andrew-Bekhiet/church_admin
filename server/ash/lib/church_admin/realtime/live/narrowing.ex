@@ -5,8 +5,9 @@ defmodule ChurchAdmin.Realtime.Live.Narrowing do
 
   `plan/1` narrows a keyed window when every touched row it reads names ids
   of the list's own type. Anything else needs the window: entities, unkeyed
-  rows, a document without `$filter`, a group touched through a table that
-  names no root id, a group depending on everything, too many candidates.
+  rows, a document without `$filter`, a list whose filter has no `id`, a
+  group touched through a table that names no root id, a group depending on
+  everything, too many candidates.
 
   Narrowing assumes a row's JSON and visibility follow from that row alone.
   `rows_stand_alone?/2` proves it from a window run: no statement may reach
@@ -56,6 +57,7 @@ defmodule ChurchAdmin.Realtime.Live.Narrowing do
     row_type = Pipeline.list_row_type(document.root_field)
 
     if keyed?(result) and MapSet.member?(document.variables, "filter") and row_type != nil and
+         Pipeline.list_filters_by_id?(document.root_field) and
          touched_only_through?(input, row_type),
        do: candidates(input.changes, row_type),
        else: :window

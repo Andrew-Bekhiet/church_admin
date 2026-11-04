@@ -62,6 +62,17 @@ defmodule ChurchAdminWeb.Graphql.Pipeline do
     end
   end
 
+  @doc "Whether the filter of the list at root field `name` takes `id`, which not every key is."
+  @spec list_filters_by_id?(String.t() | nil) :: boolean()
+  def list_filters_by_id?(name) do
+    with %{args: %{filter: %{type: filter_type}}} <- root_field(name),
+         %{fields: fields} <- type(filter_type) do
+      field_named(fields, "id") != nil
+    else
+      _no_filter -> false
+    end
+  end
+
   @doc "Whether the rows of the list at root field `name` nest a field of their own type."
   @spec selects_type_inside_rows?(Language.Document.t(), String.t()) :: boolean()
   def selects_type_inside_rows?(%Language.Document{definitions: definitions}, name) do
