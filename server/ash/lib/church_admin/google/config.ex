@@ -3,7 +3,7 @@ defmodule ChurchAdmin.Google.Config do
   Settings for the Google APIs, read from `config :church_admin, ChurchAdmin.Google.Config`:
 
       project_id: "church-data-admin",
-      credentials: {:service_account, %{...}} | :emulator_owner,
+      credentials: {:service_account, %{...}} | :emulator_owner | :unconfigured,
       identity_toolkit: [adapter: module, base_url: url, req_options: keyword],
       storage: [base_url: url, req_options: keyword],
       messaging: [adapter: module, base_url: url, req_options: keyword, local_delivery: :log | :test_process]
@@ -84,6 +84,7 @@ defmodule ChurchAdmin.Google.Config do
   end
 
   defp credentials_problems({:service_account, %{}}), do: []
+  defp credentials_problems(:unconfigured), do: []
 
   defp credentials_problems(:emulator_owner),
     do: ["credentials send the emulator token `Bearer owner`"]

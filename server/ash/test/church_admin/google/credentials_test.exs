@@ -9,6 +9,15 @@ defmodule ChurchAdmin.Google.CredentialsTest do
     assert Credentials.fetch_token(:emulator_owner) == {:ok, "owner"}
   end
 
+  test "unconfigured credentials need no token server and fail where a token is needed" do
+    assert Credentials.child_specs(:unconfigured) == []
+
+    assert {:error, %Error{reason: :credentials, message: message}} =
+             Credentials.fetch_token(:unconfigured)
+
+    assert message =~ "GOOGLE_APPLICATION_CREDENTIALS_JSON"
+  end
+
   describe "a service account" do
     setup do
       private_key =
