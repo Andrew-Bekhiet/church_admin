@@ -115,7 +115,7 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependencies.Probe do
   defp read_view(connection) do
     case Postgrex.query!(connection, @functions_that_can_read_unreported_tables, []) do
       %{rows: [[function]]} ->
-        {:error, {:volatile_function, function}}
+        {:error, {:hidden_reader_function, function}}
 
       %{rows: []} ->
         %{rows: rows} = Postgrex.query!(connection, @tables_and_columns, [])

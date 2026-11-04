@@ -11,8 +11,8 @@ defmodule ChurchAdmin.Realtime.Live.Document do
   alias ChurchAdmin.Realtime.Live.Document.Cache
   alias ChurchAdmin.Realtime.Live.ResultHash
 
-  @enforce_keys [:hash, :parsed, :operation_name, :variables]
-  defstruct [:hash, :parsed, :operation_name, :variables, :root_field, :selected_fields]
+  @enforce_keys [:hash, :parsed, :operation_name, :declared_variables]
+  defstruct [:hash, :parsed, :operation_name, :declared_variables, :root_field, :selected_fields]
 
   @max_bytes 64 * 1024
 
@@ -20,7 +20,7 @@ defmodule ChurchAdmin.Realtime.Live.Document do
           hash: String.t(),
           parsed: Language.Document.t(),
           operation_name: String.t() | nil,
-          variables: MapSet.t(String.t()),
+          declared_variables: MapSet.t(String.t()),
           root_field: String.t() | nil,
           selected_fields: MapSet.t(String.t())
         }
@@ -39,7 +39,7 @@ defmodule ChurchAdmin.Realtime.Live.Document do
          hash: hash,
          parsed: parsed,
          operation_name: operation.name,
-         variables: MapSet.new(operation.variable_definitions, & &1.variable.name),
+         declared_variables: MapSet.new(operation.variable_definitions, & &1.variable.name),
          root_field: root_field(operation),
          selected_fields: selected_fields(parsed)
        }}

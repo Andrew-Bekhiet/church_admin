@@ -50,7 +50,7 @@ defmodule ChurchAdmin.Realtime.Live.NarrowingTest do
   defp plan(overrides), do: overrides |> input() |> Narrowing.plan()
 
   defp classify(rows, page \\ %{"count" => nil}, window, ids, returned) do
-    rows |> stored(page) |> Narrowing.classify(window, candidates(ids), returned)
+    rows |> stored(page) |> Narrowing.patch_or_window(window, candidates(ids), returned)
   end
 
   describe "plan/1 narrows" do
@@ -197,7 +197,8 @@ defmodule ChurchAdmin.Realtime.Live.NarrowingTest do
       data = %{"hobbies" => %{"endKeyset" => "e", "results" => [row("1"), row("2")]}}
       {:ok, stored} = Result.from_chunks([%{hash: "h", data: data}])
 
-      assert {:ok, _result} = Narrowing.classify(stored, @full_window, candidates(["9"]), [])
+      assert {:ok, _result} =
+               Narrowing.patch_or_window(stored, @full_window, candidates(["9"]), [])
     end
   end
 end

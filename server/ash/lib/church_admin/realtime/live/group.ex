@@ -91,7 +91,7 @@ defmodule ChurchAdmin.Realtime.Live.Group do
 
     joined =
       group
-      |> adopt_fresher_actor(registration.actor)
+      |> adopt_actor_if_scope_differs(registration.actor)
       |> put_in([Access.key!(:members), registration.id], member)
 
     if result_current?(joined),
@@ -135,7 +135,7 @@ defmodule ChurchAdmin.Realtime.Live.Group do
       variables: group.variables,
       window: group.window,
       actor: group.actor,
-      known_hashes: group.result && group.result.chunk_hashes,
+      stored_hashes: group.result && group.result.chunk_hashes,
       window_required?: group.run_again? or not result_current?(group),
       result: group.result,
       dependencies: group.dependencies,
@@ -228,8 +228,8 @@ defmodule ChurchAdmin.Realtime.Live.Group do
   Whether what happened during the last run calls for another, judged by
   what the group read before and during it; empties `touched` if not.
   """
-  @spec due_again?(t(), GroupDependencies.t() | nil) :: {boolean(), t()}
-  def due_again?(%__MODULE__{} = group, dependencies_before_run) do
+  @spec clear_touched_unless_due(t(), GroupDependencies.t() | nil) :: {boolean(), t()}
+  def clear_touched_unless_due(%__MODULE__{} = group, dependencies_before_run) do
     dependencies =
       GroupDependencies.merge(dependencies_before_run || %{}, group.dependencies || %{})
 
@@ -246,13 +246,13 @@ defmodule ChurchAdmin.Realtime.Live.Group do
   defp viewer_class(%Registration{actor: actor, document: document}),
     do: ViewerClass.key(actor, document.selected_fields)
 
-  defp adopt_fresher_actor(%{viewer_class: {:uid, _uid}} = group, %Actor{} = actor) do
+  defp adopt_actor_if_scope_differs(%{viewer_class: {:uid, _uid}} = group, %Actor{} = actor) do
     if ViewerClass.same_scope?(group.actor, actor),
       do: group,
       else: %{group | actor: actor, generation: make_ref()}
   end
 
-  defp adopt_fresher_actor(group, _actor), do: group
+  defp adopt_actor_if_scope_differs(group, _actor), do: group
 
   defp result_current?(%__MODULE__{result: nil}), do: false
   defp result_current?(group), do: group.result_generation == group.generation

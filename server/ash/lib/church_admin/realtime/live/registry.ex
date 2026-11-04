@@ -335,7 +335,7 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
     if Group.empty?(group) do
       drop_group(state, group)
     else
-      {due?, group} = Group.due_again?(group, dependencies_before_run)
+      {due?, group} = Group.clear_touched_unless_due(group, dependencies_before_run)
       state = put_in(state.groups[group.key], group)
 
       cond do

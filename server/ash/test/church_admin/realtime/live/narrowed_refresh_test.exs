@@ -49,7 +49,7 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
         variables: %{},
         window: @window,
         actor: context.actor,
-        known_hashes: nil,
+        stored_hashes: nil,
         window_required?: true,
         result: nil,
         dependencies: nil,
@@ -72,7 +72,7 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
       result: stored.result,
       dependencies: stored.dependencies,
       rows_stand_alone?: stored.rows_stand_alone?,
-      known_hashes: stored.result.chunk_hashes,
+      stored_hashes: stored.result.chunk_hashes,
       touched: [%{relation: @relation, op: :update, columns: :all, id_types: ["Hobby"]}],
       changes: changes
     ]

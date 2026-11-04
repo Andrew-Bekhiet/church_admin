@@ -126,12 +126,12 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependenciesTest do
 
   describe "for_sql/1 and functions that can read tables Postgres does not report" do
     test "rejects a non-immutable plpgsql function of any schema" do
-      assert {:error, {:volatile_function, "public.uuid_generate_v7"}} ==
+      assert {:error, {:hidden_reader_function, "public.uuid_generate_v7"}} ==
                StatementDependencies.for_sql("SELECT public.uuid_generate_v7()")
     end
 
     test "rejects a non-immutable sql function" do
-      assert {:error, {:volatile_function, "public.hypertable_size"}} ==
+      assert {:error, {:hidden_reader_function, "public.hypertable_size"}} ==
                StatementDependencies.for_sql("SELECT public.hypertable_size('persons'::regclass)")
     end
 
@@ -277,7 +277,7 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependenciesTest do
 
     test "answers a repeated volatile statement from the cache too" do
       sql = unique_sql("SELECT id FROM persons WHERE id = public.uuid_generate_v7()")
-      assert {:error, {:volatile_function, _}} = error = StatementDependencies.for_sql(sql)
+      assert {:error, {:hidden_reader_function, _}} = error = StatementDependencies.for_sql(sql)
       supervisor = ChurchAdmin.Realtime.Supervisor
 
       :ok = Supervisor.terminate_child(supervisor, StatementDependencies.Probe)

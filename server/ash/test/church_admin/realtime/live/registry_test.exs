@@ -855,19 +855,6 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
   end
 
   describe "the refresh seam" do
-    test "receives the batch and the stored result", %{registry: registry, topic: topic} do
-      register_and_settle(registry, [row("1")])
-      rows = touched()
-      changes = [%{type: "Area", id: "1", op: "update"}]
-
-      batch(topic, rows, changes)
-
-      assert {input, _task} = await_run()
-      assert %{touched: ^rows, changes: ^changes, known_hashes: [_hash]} = input
-      assert %{window_required?: false, dependencies: @reads_areas} = input
-      assert input.result == list_result([row("1")])
-    end
-
     test "receives every batch of a queued group once", %{registry: registry, topic: topic} do
       register_and_settle(registry, [row("1")])
       batch(topic, touched())

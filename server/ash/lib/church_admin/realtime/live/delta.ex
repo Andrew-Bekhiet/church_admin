@@ -16,7 +16,8 @@ defmodule ChurchAdmin.Realtime.Live.Delta do
 
   @spec between(Result.t(), Result.t()) :: comparison()
   def between(%Result{} = previous, %Result{} = next) do
-    if Result.list?(previous) and Result.list?(next) and same_page_shell?(previous, next) do
+    if Result.keeps_rows?(previous) and Result.keeps_rows?(next) and
+         same_page_shell?(previous, next) do
       %{changed: changed_ids(previous, next), page: page_changes(previous, next)}
     else
       :full
@@ -37,7 +38,7 @@ defmodule ChurchAdmin.Realtime.Live.Delta do
 
   defp same_page_shell?(previous, next), do: shell(previous) == shell(next)
 
-  defp shell(%Result{data: data, root: root}),
+  defp shell(%Result{data_without_rows: data, root: root}),
     do: Map.update!(data, root, &Map.drop(&1, ~w(count endKeyset)))
 
   defp changed_ids(previous, next) do
@@ -47,8 +48,8 @@ defmodule ChurchAdmin.Realtime.Live.Delta do
   end
 
   defp page_changes(previous, next) do
-    previous_page = previous.data[previous.root]
-    next_page = next.data[next.root]
+    previous_page = previous.data_without_rows[previous.root]
+    next_page = next.data_without_rows[next.root]
 
     %{}
     |> put_when(:order, Result.ids(next), Result.ids(previous) != Result.ids(next))

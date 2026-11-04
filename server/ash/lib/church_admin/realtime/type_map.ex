@@ -45,6 +45,9 @@ defmodule ChurchAdmin.Realtime.TypeMap do
   @spec relations(t()) :: [relation()]
   def relations(%__MODULE__{emitters: emitters}), do: Map.keys(emitters)
 
+  @spec viewer_scope_type() :: String.t()
+  def viewer_scope_type, do: @viewer_scope
+
   @doc "The columns beyond the own key that the emitters of `relation` read from a row."
   @spec columns_read(t(), relation()) :: [String.t()]
   def columns_read(%__MODULE__{emitters: emitters}, relation) do

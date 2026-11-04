@@ -77,7 +77,7 @@ defmodule ChurchAdminWeb.ChangesChannel do
     case socket.assigns.live_by_ref do
       %{^ref => %{id: id}} ->
         Registry.unregister(id)
-        {:reply, {:ok, %{}}, forget_registration(socket, ref)}
+        {:reply, {:ok, %{}}, forget_registration_and_answer_ok(socket, ref)}
 
       _unknown ->
         {:reply, {:ok, %{}}, socket}
@@ -125,21 +125,23 @@ defmodule ChurchAdminWeb.ChangesChannel do
     :ok = Registry.register(registration)
 
     socket
-    |> maybe_forget(previous)
+    |> maybe_forget_and_answer_ok(previous)
     |> update_assign(:live_by_ref, &Map.put(&1, ref, registration))
     |> update_assign(:ref_by_id, &Map.put(&1, registration.id, ref))
     |> await_reply(registration.id, reply_to)
   end
 
-  defp maybe_forget(socket, nil), do: socket
-  defp maybe_forget(socket, previous), do: forget_registration(socket, previous.ref)
+  defp maybe_forget_and_answer_ok(socket, nil), do: socket
+
+  defp maybe_forget_and_answer_ok(socket, previous),
+    do: forget_registration_and_answer_ok(socket, previous.ref)
 
   defp await_reply(socket, _id, nil), do: socket
 
   defp await_reply(socket, id, reply_to),
     do: update_assign(socket, :awaiting_reply, &Map.put(&1, id, reply_to))
 
-  defp forget_registration(socket, ref) do
+  defp forget_registration_and_answer_ok(socket, ref) do
     {%{id: id}, live_by_ref} = Map.pop!(socket.assigns.live_by_ref, ref)
 
     socket
@@ -184,7 +186,7 @@ defmodule ChurchAdminWeb.ChangesChannel do
     {:noreply, socket}
   end
 
-  def handle_info(:viewer_scope_changed, socket), do: reload_actor(socket)
+  def handle_info(:viewer_scope_changed, socket), do: reload_actor_or_disconnect(socket)
 
   def handle_info(:token_expired, socket), do: disconnect(socket, :token_expired)
 
@@ -195,12 +197,12 @@ defmodule ChurchAdminWeb.ChangesChannel do
     socket = answer_awaited_reply(socket, id, {:error, %{reason: reason}})
 
     case socket.assigns.ref_by_id do
-      %{^id => ref} -> forget_registration(socket, ref)
+      %{^id => ref} -> forget_registration_and_answer_ok(socket, ref)
       _replaced -> socket
     end
   end
 
-  defp reload_actor(%{assigns: %{actor: actor}} = socket) do
+  defp reload_actor_or_disconnect(%{assigns: %{actor: actor}} = socket) do
     case ActorLoader.load_for_principal(actor.principal) do
       {:ok, %Actor{approved?: true} = reloaded} ->
         {:noreply, adopt_actor(socket, reloaded)}

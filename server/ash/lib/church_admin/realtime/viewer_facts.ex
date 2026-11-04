@@ -16,8 +16,11 @@ defmodule ChurchAdmin.Realtime.ViewerFacts do
   @spec touched?(RowChange.t()) :: boolean()
   def touched?(%RowChange{relation: @persons, op: :truncate}), do: true
 
-  def touched?(%RowChange{relation: @persons, op: :delete, old: old}),
-    do: is_nil(old) or old["uid"] != nil or not Map.has_key?(old, "uid")
+  def touched?(%RowChange{relation: @persons, op: :delete, old: old}) do
+    old_row_hides_the_uid? = is_nil(old) or not Map.has_key?(old, "uid")
+
+    old_row_hides_the_uid? or linked?(old)
+  end
 
   def touched?(%RowChange{relation: @persons, new: %{} = new} = change) do
     if linked?(new) or linked?(change.old) do

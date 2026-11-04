@@ -24,7 +24,7 @@ defmodule ChurchAdmin.Realtime.Live.ClientListWindowsTest do
   defp list_documents do
     for {operation, text} <- ClientDocuments.queries_as_sent(),
         {:ok, document} = Document.prepare(text, operation),
-        MapSet.subset?(MapSet.new(~w(first after)), document.variables),
+        MapSet.subset?(MapSet.new(~w(first after)), document.declared_variables),
         do: {operation, document}
   end
 
@@ -34,7 +34,7 @@ defmodule ChurchAdmin.Realtime.Live.ClientListWindowsTest do
       variables: Map.get(@required_variables, operation, %{}),
       window: @window,
       actor: actor,
-      known_hashes: nil,
+      stored_hashes: nil,
       window_required?: true,
       result: nil,
       dependencies: nil,

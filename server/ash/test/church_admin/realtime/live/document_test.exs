@@ -19,7 +19,7 @@ defmodule ChurchAdmin.Realtime.Live.DocumentTest do
 
     assert document.hash == ResultHash.of(@areas)
     assert document.operation_name == "areas"
-    assert document.variables == MapSet.new(["first", "after"])
+    assert document.declared_variables == MapSet.new(["first", "after"])
   end
 
   describe "the root field" do

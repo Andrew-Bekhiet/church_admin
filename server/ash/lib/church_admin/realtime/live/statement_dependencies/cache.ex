@@ -26,7 +26,7 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependencies.Cache do
   end
 
   defp cacheable?({:ok, _dependencies}), do: true
-  defp cacheable?({:error, {:volatile_function, _name}}), do: true
+  defp cacheable?({:error, {:hidden_reader_function, _name}}), do: true
   defp cacheable?({:error, {:unplannable, _message}}), do: false
   defp cacheable?({:error, {:probe_unavailable, _reason}}), do: false
 
