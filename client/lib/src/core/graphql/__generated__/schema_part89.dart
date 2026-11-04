@@ -1,6 +1,1185 @@
 // Part 89 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_DataCheckFilterUserOverride<TRes> {
+  factory CopyWith_Input_DataCheckFilterUserOverride(
+    Input_DataCheckFilterUserOverride instance,
+    TRes Function(Input_DataCheckFilterUserOverride) then,
+  ) = _CopyWithImpl_Input_DataCheckFilterUserOverride;
+
+  factory CopyWith_Input_DataCheckFilterUserOverride.stub(TRes res) =
+      _CopyWithStubImpl_Input_DataCheckFilterUserOverride;
+
+  TRes call({
+    bool? isNil,
+    bool? eq,
+    bool? notEq,
+    List<bool?>? $in,
+    bool? lessThan,
+    bool? greaterThan,
+    bool? lessThanOrEqual,
+    bool? greaterThanOrEqual,
+    bool? isDistinctFrom,
+    bool? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_DataCheckFilterUserOverride<TRes>
+    implements CopyWith_Input_DataCheckFilterUserOverride<TRes> {
+  _CopyWithImpl_Input_DataCheckFilterUserOverride(this._instance, this._then);
+
+  final Input_DataCheckFilterUserOverride _instance;
+
+  final TRes Function(Input_DataCheckFilterUserOverride) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_DataCheckFilterUserOverride._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as bool?),
+      if (notEq != _undefined) 'notEq': (notEq as bool?),
+      if ($in != _undefined) 'in': ($in as List<bool?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as bool?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as bool?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as bool?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as bool?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as bool?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as bool?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_DataCheckFilterUserOverride<TRes>
+    implements CopyWith_Input_DataCheckFilterUserOverride<TRes> {
+  _CopyWithStubImpl_Input_DataCheckFilterUserOverride(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    bool? eq,
+    bool? notEq,
+    List<bool?>? $in,
+    bool? lessThan,
+    bool? greaterThan,
+    bool? lessThanOrEqual,
+    bool? greaterThanOrEqual,
+    bool? isDistinctFrom,
+    bool? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_DataCheckFilterFamilyId {
+  factory Input_DataCheckFilterFamilyId({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => Input_DataCheckFilterFamilyId._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_DataCheckFilterFamilyId._(this._$data);
+
+  factory Input_DataCheckFilterFamilyId.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = (l$eq as String?);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = (l$notEq as String?);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = (l$lessThan as String?);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = (l$greaterThan as String?);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+    }
+    return Input_DataCheckFilterFamilyId._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  String? get eq => (_$data['eq'] as String?);
+
+  String? get notEq => (_$data['notEq'] as String?);
+
+  List<String>? get $in => (_$data['in'] as List<String>?);
+
+  String? get lessThan => (_$data['lessThan'] as String?);
+
+  String? get greaterThan => (_$data['greaterThan'] as String?);
+
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq;
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq;
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan;
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan;
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom;
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_DataCheckFilterFamilyId<Input_DataCheckFilterFamilyId>
+  get copyWith => CopyWith_Input_DataCheckFilterFamilyId(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_DataCheckFilterFamilyId ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_DataCheckFilterFamilyId<TRes> {
+  factory CopyWith_Input_DataCheckFilterFamilyId(
+    Input_DataCheckFilterFamilyId instance,
+    TRes Function(Input_DataCheckFilterFamilyId) then,
+  ) = _CopyWithImpl_Input_DataCheckFilterFamilyId;
+
+  factory CopyWith_Input_DataCheckFilterFamilyId.stub(TRes res) =
+      _CopyWithStubImpl_Input_DataCheckFilterFamilyId;
+
+  TRes call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_DataCheckFilterFamilyId<TRes>
+    implements CopyWith_Input_DataCheckFilterFamilyId<TRes> {
+  _CopyWithImpl_Input_DataCheckFilterFamilyId(this._instance, this._then);
+
+  final Input_DataCheckFilterFamilyId _instance;
+
+  final TRes Function(Input_DataCheckFilterFamilyId) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_DataCheckFilterFamilyId._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_DataCheckFilterFamilyId<TRes>
+    implements CopyWith_Input_DataCheckFilterFamilyId<TRes> {
+  _CopyWithStubImpl_Input_DataCheckFilterFamilyId(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_DataCheckFilterInput {
+  factory Input_DataCheckFilterInput({
+    List<Input_DataCheckFilterInput>? and,
+    List<Input_DataCheckFilterInput>? or,
+    List<Input_DataCheckFilterInput>? not,
+    Input_DataCheckFilterFamilyId? familyId,
+    Input_DataCheckFilterUserOverride? userOverride,
+    Input_DataCheckFilterFamilyCheck? familyCheck,
+    Input_DataCheckFilterAddressCheck? addressCheck,
+    Input_DataCheckFilterCompletenessPercent? completenessPercent,
+    Input_DataCheckFilterIsComplete? isComplete,
+    Input_FamilyFilterInput? family,
+  }) => Input_DataCheckFilterInput._({
+    if (and != null) r'and': and,
+    if (or != null) r'or': or,
+    if (not != null) r'not': not,
+    if (familyId != null) r'familyId': familyId,
+    if (userOverride != null) r'userOverride': userOverride,
+    if (familyCheck != null) r'familyCheck': familyCheck,
+    if (addressCheck != null) r'addressCheck': addressCheck,
+    if (completenessPercent != null)
+      r'completenessPercent': completenessPercent,
+    if (isComplete != null) r'isComplete': isComplete,
+    if (family != null) r'family': family,
+  });
+
+  Input_DataCheckFilterInput._(this._$data);
+
+  factory Input_DataCheckFilterInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('and')) {
+      final l$and = data['and'];
+      result$data['and'] = (l$and as List<dynamic>?)
+          ?.map(
+            (e) => Input_DataCheckFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('or')) {
+      final l$or = data['or'];
+      result$data['or'] = (l$or as List<dynamic>?)
+          ?.map(
+            (e) => Input_DataCheckFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('not')) {
+      final l$not = data['not'];
+      result$data['not'] = (l$not as List<dynamic>?)
+          ?.map(
+            (e) => Input_DataCheckFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('familyId')) {
+      final l$familyId = data['familyId'];
+      result$data['familyId'] = l$familyId == null
+          ? null
+          : Input_DataCheckFilterFamilyId.fromJson(
+              (l$familyId as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('userOverride')) {
+      final l$userOverride = data['userOverride'];
+      result$data['userOverride'] = l$userOverride == null
+          ? null
+          : Input_DataCheckFilterUserOverride.fromJson(
+              (l$userOverride as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('familyCheck')) {
+      final l$familyCheck = data['familyCheck'];
+      result$data['familyCheck'] = l$familyCheck == null
+          ? null
+          : Input_DataCheckFilterFamilyCheck.fromJson(
+              (l$familyCheck as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('addressCheck')) {
+      final l$addressCheck = data['addressCheck'];
+      result$data['addressCheck'] = l$addressCheck == null
+          ? null
+          : Input_DataCheckFilterAddressCheck.fromJson(
+              (l$addressCheck as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('completenessPercent')) {
+      final l$completenessPercent = data['completenessPercent'];
+      result$data['completenessPercent'] = l$completenessPercent == null
+          ? null
+          : Input_DataCheckFilterCompletenessPercent.fromJson(
+              (l$completenessPercent as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('isComplete')) {
+      final l$isComplete = data['isComplete'];
+      result$data['isComplete'] = l$isComplete == null
+          ? null
+          : Input_DataCheckFilterIsComplete.fromJson(
+              (l$isComplete as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('family')) {
+      final l$family = data['family'];
+      result$data['family'] = l$family == null
+          ? null
+          : Input_FamilyFilterInput.fromJson(
+              (l$family as Map<String, dynamic>),
+            );
+    }
+    return Input_DataCheckFilterInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_DataCheckFilterInput>? get and =>
+      (_$data['and'] as List<Input_DataCheckFilterInput>?);
+
+  List<Input_DataCheckFilterInput>? get or =>
+      (_$data['or'] as List<Input_DataCheckFilterInput>?);
+
+  List<Input_DataCheckFilterInput>? get not =>
+      (_$data['not'] as List<Input_DataCheckFilterInput>?);
+
+  Input_DataCheckFilterFamilyId? get familyId =>
+      (_$data['familyId'] as Input_DataCheckFilterFamilyId?);
+
+  Input_DataCheckFilterUserOverride? get userOverride =>
+      (_$data['userOverride'] as Input_DataCheckFilterUserOverride?);
+
+  Input_DataCheckFilterFamilyCheck? get familyCheck =>
+      (_$data['familyCheck'] as Input_DataCheckFilterFamilyCheck?);
+
+  Input_DataCheckFilterAddressCheck? get addressCheck =>
+      (_$data['addressCheck'] as Input_DataCheckFilterAddressCheck?);
+
+  Input_DataCheckFilterCompletenessPercent? get completenessPercent =>
+      (_$data['completenessPercent']
+          as Input_DataCheckFilterCompletenessPercent?);
+
+  Input_DataCheckFilterIsComplete? get isComplete =>
+      (_$data['isComplete'] as Input_DataCheckFilterIsComplete?);
+
+  Input_FamilyFilterInput? get family =>
+      (_$data['family'] as Input_FamilyFilterInput?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('and')) {
+      final l$and = and;
+      result$data['and'] = l$and?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('or')) {
+      final l$or = or;
+      result$data['or'] = l$or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('not')) {
+      final l$not = not;
+      result$data['not'] = l$not?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('familyId')) {
+      final l$familyId = familyId;
+      result$data['familyId'] = l$familyId?.toJson();
+    }
+    if (_$data.containsKey('userOverride')) {
+      final l$userOverride = userOverride;
+      result$data['userOverride'] = l$userOverride?.toJson();
+    }
+    if (_$data.containsKey('familyCheck')) {
+      final l$familyCheck = familyCheck;
+      result$data['familyCheck'] = l$familyCheck?.toJson();
+    }
+    if (_$data.containsKey('addressCheck')) {
+      final l$addressCheck = addressCheck;
+      result$data['addressCheck'] = l$addressCheck?.toJson();
+    }
+    if (_$data.containsKey('completenessPercent')) {
+      final l$completenessPercent = completenessPercent;
+      result$data['completenessPercent'] = l$completenessPercent?.toJson();
+    }
+    if (_$data.containsKey('isComplete')) {
+      final l$isComplete = isComplete;
+      result$data['isComplete'] = l$isComplete?.toJson();
+    }
+    if (_$data.containsKey('family')) {
+      final l$family = family;
+      result$data['family'] = l$family?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_DataCheckFilterInput<Input_DataCheckFilterInput>
+  get copyWith => CopyWith_Input_DataCheckFilterInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_DataCheckFilterInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$and = and;
+    final lOther$and = other.and;
+    if (_$data.containsKey('and') != other._$data.containsKey('and')) {
+      return false;
+    }
+    if (l$and != null && lOther$and != null) {
+      if (l$and.length != lOther$and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$and.length; i++) {
+        final l$and$entry = l$and[i];
+        final lOther$and$entry = lOther$and[i];
+        if (l$and$entry != lOther$and$entry) {
+          return false;
+        }
+      }
+    } else if (l$and != lOther$and) {
+      return false;
+    }
+    final l$or = or;
+    final lOther$or = other.or;
+    if (_$data.containsKey('or') != other._$data.containsKey('or')) {
+      return false;
+    }
+    if (l$or != null && lOther$or != null) {
+      if (l$or.length != lOther$or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$or.length; i++) {
+        final l$or$entry = l$or[i];
+        final lOther$or$entry = lOther$or[i];
+        if (l$or$entry != lOther$or$entry) {
+          return false;
+        }
+      }
+    } else if (l$or != lOther$or) {
+      return false;
+    }
+    final l$not = not;
+    final lOther$not = other.not;
+    if (_$data.containsKey('not') != other._$data.containsKey('not')) {
+      return false;
+    }
+    if (l$not != null && lOther$not != null) {
+      if (l$not.length != lOther$not.length) {
+        return false;
+      }
+      for (int i = 0; i < l$not.length; i++) {
+        final l$not$entry = l$not[i];
+        final lOther$not$entry = lOther$not[i];
+        if (l$not$entry != lOther$not$entry) {
+          return false;
+        }
+      }
+    } else if (l$not != lOther$not) {
+      return false;
+    }
+    final l$familyId = familyId;
+    final lOther$familyId = other.familyId;
+    if (_$data.containsKey('familyId') !=
+        other._$data.containsKey('familyId')) {
+      return false;
+    }
+    if (l$familyId != lOther$familyId) {
+      return false;
+    }
+    final l$userOverride = userOverride;
+    final lOther$userOverride = other.userOverride;
+    if (_$data.containsKey('userOverride') !=
+        other._$data.containsKey('userOverride')) {
+      return false;
+    }
+    if (l$userOverride != lOther$userOverride) {
+      return false;
+    }
+    final l$familyCheck = familyCheck;
+    final lOther$familyCheck = other.familyCheck;
+    if (_$data.containsKey('familyCheck') !=
+        other._$data.containsKey('familyCheck')) {
+      return false;
+    }
+    if (l$familyCheck != lOther$familyCheck) {
+      return false;
+    }
+    final l$addressCheck = addressCheck;
+    final lOther$addressCheck = other.addressCheck;
+    if (_$data.containsKey('addressCheck') !=
+        other._$data.containsKey('addressCheck')) {
+      return false;
+    }
+    if (l$addressCheck != lOther$addressCheck) {
+      return false;
+    }
+    final l$completenessPercent = completenessPercent;
+    final lOther$completenessPercent = other.completenessPercent;
+    if (_$data.containsKey('completenessPercent') !=
+        other._$data.containsKey('completenessPercent')) {
+      return false;
+    }
+    if (l$completenessPercent != lOther$completenessPercent) {
+      return false;
+    }
+    final l$isComplete = isComplete;
+    final lOther$isComplete = other.isComplete;
+    if (_$data.containsKey('isComplete') !=
+        other._$data.containsKey('isComplete')) {
+      return false;
+    }
+    if (l$isComplete != lOther$isComplete) {
+      return false;
+    }
+    final l$family = family;
+    final lOther$family = other.family;
+    if (_$data.containsKey('family') != other._$data.containsKey('family')) {
+      return false;
+    }
+    if (l$family != lOther$family) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$and = and;
+    final l$or = or;
+    final l$not = not;
+    final l$familyId = familyId;
+    final l$userOverride = userOverride;
+    final l$familyCheck = familyCheck;
+    final l$addressCheck = addressCheck;
+    final l$completenessPercent = completenessPercent;
+    final l$isComplete = isComplete;
+    final l$family = family;
+    return Object.hashAll([
+      _$data.containsKey('and')
+          ? l$and == null
+                ? null
+                : Object.hashAll(l$and.map((v) => v))
+          : const {},
+      _$data.containsKey('or')
+          ? l$or == null
+                ? null
+                : Object.hashAll(l$or.map((v) => v))
+          : const {},
+      _$data.containsKey('not')
+          ? l$not == null
+                ? null
+                : Object.hashAll(l$not.map((v) => v))
+          : const {},
+      _$data.containsKey('familyId') ? l$familyId : const {},
+      _$data.containsKey('userOverride') ? l$userOverride : const {},
+      _$data.containsKey('familyCheck') ? l$familyCheck : const {},
+      _$data.containsKey('addressCheck') ? l$addressCheck : const {},
+      _$data.containsKey('completenessPercent')
+          ? l$completenessPercent
+          : const {},
+      _$data.containsKey('isComplete') ? l$isComplete : const {},
+      _$data.containsKey('family') ? l$family : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_DataCheckFilterInput<TRes> {
+  factory CopyWith_Input_DataCheckFilterInput(
+    Input_DataCheckFilterInput instance,
+    TRes Function(Input_DataCheckFilterInput) then,
+  ) = _CopyWithImpl_Input_DataCheckFilterInput;
+
+  factory CopyWith_Input_DataCheckFilterInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_DataCheckFilterInput;
+
+  TRes call({
+    List<Input_DataCheckFilterInput>? and,
+    List<Input_DataCheckFilterInput>? or,
+    List<Input_DataCheckFilterInput>? not,
+    Input_DataCheckFilterFamilyId? familyId,
+    Input_DataCheckFilterUserOverride? userOverride,
+    Input_DataCheckFilterFamilyCheck? familyCheck,
+    Input_DataCheckFilterAddressCheck? addressCheck,
+    Input_DataCheckFilterCompletenessPercent? completenessPercent,
+    Input_DataCheckFilterIsComplete? isComplete,
+    Input_FamilyFilterInput? family,
+  });
+  TRes and(
+    Iterable<Input_DataCheckFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_DataCheckFilterInput<Input_DataCheckFilterInput>
+      >?,
+    )
+    _fn,
+  );
+  TRes or(
+    Iterable<Input_DataCheckFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_DataCheckFilterInput<Input_DataCheckFilterInput>
+      >?,
+    )
+    _fn,
+  );
+  TRes not(
+    Iterable<Input_DataCheckFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_DataCheckFilterInput<Input_DataCheckFilterInput>
+      >?,
+    )
+    _fn,
+  );
+  CopyWith_Input_DataCheckFilterFamilyId<TRes> get familyId;
+  CopyWith_Input_DataCheckFilterUserOverride<TRes> get userOverride;
+  CopyWith_Input_DataCheckFilterFamilyCheck<TRes> get familyCheck;
+  CopyWith_Input_DataCheckFilterAddressCheck<TRes> get addressCheck;
+  CopyWith_Input_DataCheckFilterCompletenessPercent<TRes>
+  get completenessPercent;
+  CopyWith_Input_DataCheckFilterIsComplete<TRes> get isComplete;
+  CopyWith_Input_FamilyFilterInput<TRes> get family;
+}
+
+class _CopyWithImpl_Input_DataCheckFilterInput<TRes>
+    implements CopyWith_Input_DataCheckFilterInput<TRes> {
+  _CopyWithImpl_Input_DataCheckFilterInput(this._instance, this._then);
+
+  final Input_DataCheckFilterInput _instance;
+
+  final TRes Function(Input_DataCheckFilterInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? and = _undefined,
+    Object? or = _undefined,
+    Object? not = _undefined,
+    Object? familyId = _undefined,
+    Object? userOverride = _undefined,
+    Object? familyCheck = _undefined,
+    Object? addressCheck = _undefined,
+    Object? completenessPercent = _undefined,
+    Object? isComplete = _undefined,
+    Object? family = _undefined,
+  }) => _then(
+    Input_DataCheckFilterInput._({
+      ..._instance._$data,
+      if (and != _undefined) 'and': (and as List<Input_DataCheckFilterInput>?),
+      if (or != _undefined) 'or': (or as List<Input_DataCheckFilterInput>?),
+      if (not != _undefined) 'not': (not as List<Input_DataCheckFilterInput>?),
+      if (familyId != _undefined)
+        'familyId': (familyId as Input_DataCheckFilterFamilyId?),
+      if (userOverride != _undefined)
+        'userOverride': (userOverride as Input_DataCheckFilterUserOverride?),
+      if (familyCheck != _undefined)
+        'familyCheck': (familyCheck as Input_DataCheckFilterFamilyCheck?),
+      if (addressCheck != _undefined)
+        'addressCheck': (addressCheck as Input_DataCheckFilterAddressCheck?),
+      if (completenessPercent != _undefined)
+        'completenessPercent':
+            (completenessPercent as Input_DataCheckFilterCompletenessPercent?),
+      if (isComplete != _undefined)
+        'isComplete': (isComplete as Input_DataCheckFilterIsComplete?),
+      if (family != _undefined) 'family': (family as Input_FamilyFilterInput?),
+    }),
+  );
+
+  TRes and(
+    Iterable<Input_DataCheckFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_DataCheckFilterInput<Input_DataCheckFilterInput>
+      >?,
+    )
+    _fn,
+  ) => call(
+    and: _fn(
+      _instance.and?.map(
+        (e) => CopyWith_Input_DataCheckFilterInput(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  TRes or(
+    Iterable<Input_DataCheckFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_DataCheckFilterInput<Input_DataCheckFilterInput>
+      >?,
+    )
+    _fn,
+  ) => call(
+    or: _fn(
+      _instance.or?.map(
+        (e) => CopyWith_Input_DataCheckFilterInput(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  TRes not(
+    Iterable<Input_DataCheckFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_DataCheckFilterInput<Input_DataCheckFilterInput>
+      >?,
+    )
+    _fn,
+  ) => call(
+    not: _fn(
+      _instance.not?.map(
+        (e) => CopyWith_Input_DataCheckFilterInput(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  CopyWith_Input_DataCheckFilterFamilyId<TRes> get familyId {
+    final local$familyId = _instance.familyId;
+    return local$familyId == null
+        ? CopyWith_Input_DataCheckFilterFamilyId.stub(_then(_instance))
+        : CopyWith_Input_DataCheckFilterFamilyId(
+            local$familyId,
+            (e) => call(familyId: e),
+          );
+  }
+
+  CopyWith_Input_DataCheckFilterUserOverride<TRes> get userOverride {
+    final local$userOverride = _instance.userOverride;
+    return local$userOverride == null
+        ? CopyWith_Input_DataCheckFilterUserOverride.stub(_then(_instance))
+        : CopyWith_Input_DataCheckFilterUserOverride(
+            local$userOverride,
+            (e) => call(userOverride: e),
+          );
+  }
+
+  CopyWith_Input_DataCheckFilterFamilyCheck<TRes> get familyCheck {
+    final local$familyCheck = _instance.familyCheck;
+    return local$familyCheck == null
+        ? CopyWith_Input_DataCheckFilterFamilyCheck.stub(_then(_instance))
+        : CopyWith_Input_DataCheckFilterFamilyCheck(
+            local$familyCheck,
+            (e) => call(familyCheck: e),
+          );
+  }
+
+  CopyWith_Input_DataCheckFilterAddressCheck<TRes> get addressCheck {
+    final local$addressCheck = _instance.addressCheck;
+    return local$addressCheck == null
+        ? CopyWith_Input_DataCheckFilterAddressCheck.stub(_then(_instance))
+        : CopyWith_Input_DataCheckFilterAddressCheck(
+            local$addressCheck,
+            (e) => call(addressCheck: e),
+          );
+  }
+
+  CopyWith_Input_DataCheckFilterCompletenessPercent<TRes>
+  get completenessPercent {
+    final local$completenessPercent = _instance.completenessPercent;
+    return local$completenessPercent == null
+        ? CopyWith_Input_DataCheckFilterCompletenessPercent.stub(
+            _then(_instance),
+          )
+        : CopyWith_Input_DataCheckFilterCompletenessPercent(
+            local$completenessPercent,
+            (e) => call(completenessPercent: e),
+          );
+  }
+
+  CopyWith_Input_DataCheckFilterIsComplete<TRes> get isComplete {
+    final local$isComplete = _instance.isComplete;
+    return local$isComplete == null
+        ? CopyWith_Input_DataCheckFilterIsComplete.stub(_then(_instance))
+        : CopyWith_Input_DataCheckFilterIsComplete(
+            local$isComplete,
+            (e) => call(isComplete: e),
+          );
+  }
+
+  CopyWith_Input_FamilyFilterInput<TRes> get family {
+    final local$family = _instance.family;
+    return local$family == null
+        ? CopyWith_Input_FamilyFilterInput.stub(_then(_instance))
+        : CopyWith_Input_FamilyFilterInput(
+            local$family,
+            (e) => call(family: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_DataCheckFilterInput<TRes>
+    implements CopyWith_Input_DataCheckFilterInput<TRes> {
+  _CopyWithStubImpl_Input_DataCheckFilterInput(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_DataCheckFilterInput>? and,
+    List<Input_DataCheckFilterInput>? or,
+    List<Input_DataCheckFilterInput>? not,
+    Input_DataCheckFilterFamilyId? familyId,
+    Input_DataCheckFilterUserOverride? userOverride,
+    Input_DataCheckFilterFamilyCheck? familyCheck,
+    Input_DataCheckFilterAddressCheck? addressCheck,
+    Input_DataCheckFilterCompletenessPercent? completenessPercent,
+    Input_DataCheckFilterIsComplete? isComplete,
+    Input_FamilyFilterInput? family,
+  }) => _res;
+
+  and(_fn) => _res;
+
+  or(_fn) => _res;
+
+  not(_fn) => _res;
+
+  CopyWith_Input_DataCheckFilterFamilyId<TRes> get familyId =>
+      CopyWith_Input_DataCheckFilterFamilyId.stub(_res);
+
+  CopyWith_Input_DataCheckFilterUserOverride<TRes> get userOverride =>
+      CopyWith_Input_DataCheckFilterUserOverride.stub(_res);
+
+  CopyWith_Input_DataCheckFilterFamilyCheck<TRes> get familyCheck =>
+      CopyWith_Input_DataCheckFilterFamilyCheck.stub(_res);
+
+  CopyWith_Input_DataCheckFilterAddressCheck<TRes> get addressCheck =>
+      CopyWith_Input_DataCheckFilterAddressCheck.stub(_res);
+
+  CopyWith_Input_DataCheckFilterCompletenessPercent<TRes>
+  get completenessPercent =>
+      CopyWith_Input_DataCheckFilterCompletenessPercent.stub(_res);
+
+  CopyWith_Input_DataCheckFilterIsComplete<TRes> get isComplete =>
+      CopyWith_Input_DataCheckFilterIsComplete.stub(_res);
+
+  CopyWith_Input_FamilyFilterInput<TRes> get family =>
+      CopyWith_Input_FamilyFilterInput.stub(_res);
+}
+
+class Input_DataCheckSortInput {
+  factory Input_DataCheckSortInput({
+    Enum_SortOrder? order,
+    required Enum_DataCheckSortField field,
+  }) => Input_DataCheckSortInput._({
+    if (order != null) r'order': order,
+    r'field': field,
+  });
+
+  Input_DataCheckSortInput._(this._$data);
+
+  factory Input_DataCheckSortInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('order')) {
+      final l$order = data['order'];
+      result$data['order'] = l$order == null
+          ? null
+          : fromJson_Enum_SortOrder((l$order as String));
+    }
+    final l$field = data['field'];
+    result$data['field'] = fromJson_Enum_DataCheckSortField(
+      (l$field as String),
+    );
+    return Input_DataCheckSortInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_SortOrder? get order => (_$data['order'] as Enum_SortOrder?);
+
+  Enum_DataCheckSortField get field =>
+      (_$data['field'] as Enum_DataCheckSortField);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('order')) {
+      final l$order = order;
+      result$data['order'] = l$order == null
+          ? null
+          : toJson_Enum_SortOrder(l$order);
+    }
+    final l$field = field;
+    result$data['field'] = toJson_Enum_DataCheckSortField(l$field);
+    return result$data;
+  }
+
+  CopyWith_Input_DataCheckSortInput<Input_DataCheckSortInput> get copyWith =>
+      CopyWith_Input_DataCheckSortInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_DataCheckSortInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (_$data.containsKey('order') != other._$data.containsKey('order')) {
+      return false;
+    }
+    if (l$order != lOther$order) {
+      return false;
+    }
+    final l$field = field;
+    final lOther$field = other.field;
+    if (l$field != lOther$field) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$order = order;
+    final l$field = field;
+    return Object.hashAll([
+      _$data.containsKey('order') ? l$order : const {},
+      l$field,
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_DataCheckSortInput<TRes> {
   factory CopyWith_Input_DataCheckSortInput(
     Input_DataCheckSortInput instance,
@@ -40,6 +1219,109 @@ class _CopyWithStubImpl_Input_DataCheckSortInput<TRes>
   TRes _res;
 
   call({Enum_SortOrder? order, Enum_DataCheckSortField? field}) => _res;
+}
+
+class Input_RecordScreenCaptureAttemptInput {
+  factory Input_RecordScreenCaptureAttemptInput({
+    required Enum_ScreenCaptureKind captureKind,
+  }) => Input_RecordScreenCaptureAttemptInput._({r'captureKind': captureKind});
+
+  Input_RecordScreenCaptureAttemptInput._(this._$data);
+
+  factory Input_RecordScreenCaptureAttemptInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$captureKind = data['captureKind'];
+    result$data['captureKind'] = fromJson_Enum_ScreenCaptureKind(
+      (l$captureKind as String),
+    );
+    return Input_RecordScreenCaptureAttemptInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_ScreenCaptureKind get captureKind =>
+      (_$data['captureKind'] as Enum_ScreenCaptureKind);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$captureKind = captureKind;
+    result$data['captureKind'] = toJson_Enum_ScreenCaptureKind(l$captureKind);
+    return result$data;
+  }
+
+  CopyWith_Input_RecordScreenCaptureAttemptInput<
+    Input_RecordScreenCaptureAttemptInput
+  >
+  get copyWith =>
+      CopyWith_Input_RecordScreenCaptureAttemptInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_RecordScreenCaptureAttemptInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$captureKind = captureKind;
+    final lOther$captureKind = other.captureKind;
+    if (l$captureKind != lOther$captureKind) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$captureKind = captureKind;
+    return Object.hashAll([l$captureKind]);
+  }
+}
+
+abstract class CopyWith_Input_RecordScreenCaptureAttemptInput<TRes> {
+  factory CopyWith_Input_RecordScreenCaptureAttemptInput(
+    Input_RecordScreenCaptureAttemptInput instance,
+    TRes Function(Input_RecordScreenCaptureAttemptInput) then,
+  ) = _CopyWithImpl_Input_RecordScreenCaptureAttemptInput;
+
+  factory CopyWith_Input_RecordScreenCaptureAttemptInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_RecordScreenCaptureAttemptInput;
+
+  TRes call({Enum_ScreenCaptureKind? captureKind});
+}
+
+class _CopyWithImpl_Input_RecordScreenCaptureAttemptInput<TRes>
+    implements CopyWith_Input_RecordScreenCaptureAttemptInput<TRes> {
+  _CopyWithImpl_Input_RecordScreenCaptureAttemptInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_RecordScreenCaptureAttemptInput _instance;
+
+  final TRes Function(Input_RecordScreenCaptureAttemptInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? captureKind = _undefined}) => _then(
+    Input_RecordScreenCaptureAttemptInput._({
+      ..._instance._$data,
+      if (captureKind != _undefined && captureKind != null)
+        'captureKind': (captureKind as Enum_ScreenCaptureKind),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_RecordScreenCaptureAttemptInput<TRes>
+    implements CopyWith_Input_RecordScreenCaptureAttemptInput<TRes> {
+  _CopyWithStubImpl_Input_RecordScreenCaptureAttemptInput(this._res);
+
+  TRes _res;
+
+  call({Enum_ScreenCaptureKind? captureKind}) => _res;
 }
 
 enum Enum_AppPlatform {
@@ -140,6 +1422,39 @@ Enum_PhotoSubject fromJson_Enum_PhotoSubject(String value) {
       return Enum_PhotoSubject.USERS;
     default:
       return Enum_PhotoSubject.$unknown;
+  }
+}
+
+enum Enum_ScreenCaptureKind {
+  SCREEN_RECORDING,
+  SCREENSHOT,
+  $unknown;
+
+  factory Enum_ScreenCaptureKind.fromJson(String value) =>
+      fromJson_Enum_ScreenCaptureKind(value);
+
+  String toJson() => toJson_Enum_ScreenCaptureKind(this);
+}
+
+String toJson_Enum_ScreenCaptureKind(Enum_ScreenCaptureKind e) {
+  switch (e) {
+    case Enum_ScreenCaptureKind.SCREEN_RECORDING:
+      return r'SCREEN_RECORDING';
+    case Enum_ScreenCaptureKind.SCREENSHOT:
+      return r'SCREENSHOT';
+    case Enum_ScreenCaptureKind.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_ScreenCaptureKind fromJson_Enum_ScreenCaptureKind(String value) {
+  switch (value) {
+    case r'SCREEN_RECORDING':
+      return Enum_ScreenCaptureKind.SCREEN_RECORDING;
+    case r'SCREENSHOT':
+      return Enum_ScreenCaptureKind.SCREENSHOT;
+    default:
+      return Enum_ScreenCaptureKind.$unknown;
   }
 }
 
@@ -1203,1336 +2518,4 @@ enum Enum_ServiceSortField {
       fromJson_Enum_ServiceSortField(value);
 
   String toJson() => toJson_Enum_ServiceSortField(this);
-}
-
-String toJson_Enum_ServiceSortField(Enum_ServiceSortField e) {
-  switch (e) {
-    case Enum_ServiceSortField.ID:
-      return r'ID';
-    case Enum_ServiceSortField.NAME:
-      return r'NAME';
-    case Enum_ServiceSortField.STUDY_YEAR_FROM_ID:
-      return r'STUDY_YEAR_FROM_ID';
-    case Enum_ServiceSortField.STUDY_YEAR_TO_ID:
-      return r'STUDY_YEAR_TO_ID';
-    case Enum_ServiceSortField.NEXT_SERVICE_ID:
-      return r'NEXT_SERVICE_ID';
-    case Enum_ServiceSortField.COLOR:
-      return r'COLOR';
-    case Enum_ServiceSortField.PHOTO_UPDATED_AT:
-      return r'PHOTO_UPDATED_AT';
-    case Enum_ServiceSortField.BLURHASH:
-      return r'BLURHASH';
-    case Enum_ServiceSortField.DEFAULT_MEETING_ID:
-      return r'DEFAULT_MEETING_ID';
-    case Enum_ServiceSortField.USER_CAN_EDIT:
-      return r'USER_CAN_EDIT';
-    case Enum_ServiceSortField.NEXT_SERVICE_NAME:
-      return r'NEXT_SERVICE_NAME';
-    case Enum_ServiceSortField.DEFAULT_MEETING_NAME:
-      return r'DEFAULT_MEETING_NAME';
-    case Enum_ServiceSortField.LAST_EDIT:
-      return r'LAST_EDIT';
-    case Enum_ServiceSortField.LAST_EDIT_USER_NAME:
-      return r'LAST_EDIT_USER_NAME';
-    case Enum_ServiceSortField.STUDY_YEAR_FROM_ORDER:
-      return r'STUDY_YEAR_FROM_ORDER';
-    case Enum_ServiceSortField.STUDY_YEAR_TO_ORDER:
-      return r'STUDY_YEAR_TO_ORDER';
-    case Enum_ServiceSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_ServiceSortField fromJson_Enum_ServiceSortField(String value) {
-  switch (value) {
-    case r'ID':
-      return Enum_ServiceSortField.ID;
-    case r'NAME':
-      return Enum_ServiceSortField.NAME;
-    case r'STUDY_YEAR_FROM_ID':
-      return Enum_ServiceSortField.STUDY_YEAR_FROM_ID;
-    case r'STUDY_YEAR_TO_ID':
-      return Enum_ServiceSortField.STUDY_YEAR_TO_ID;
-    case r'NEXT_SERVICE_ID':
-      return Enum_ServiceSortField.NEXT_SERVICE_ID;
-    case r'COLOR':
-      return Enum_ServiceSortField.COLOR;
-    case r'PHOTO_UPDATED_AT':
-      return Enum_ServiceSortField.PHOTO_UPDATED_AT;
-    case r'BLURHASH':
-      return Enum_ServiceSortField.BLURHASH;
-    case r'DEFAULT_MEETING_ID':
-      return Enum_ServiceSortField.DEFAULT_MEETING_ID;
-    case r'USER_CAN_EDIT':
-      return Enum_ServiceSortField.USER_CAN_EDIT;
-    case r'NEXT_SERVICE_NAME':
-      return Enum_ServiceSortField.NEXT_SERVICE_NAME;
-    case r'DEFAULT_MEETING_NAME':
-      return Enum_ServiceSortField.DEFAULT_MEETING_NAME;
-    case r'LAST_EDIT':
-      return Enum_ServiceSortField.LAST_EDIT;
-    case r'LAST_EDIT_USER_NAME':
-      return Enum_ServiceSortField.LAST_EDIT_USER_NAME;
-    case r'STUDY_YEAR_FROM_ORDER':
-      return Enum_ServiceSortField.STUDY_YEAR_FROM_ORDER;
-    case r'STUDY_YEAR_TO_ORDER':
-      return Enum_ServiceSortField.STUDY_YEAR_TO_ORDER;
-    default:
-      return Enum_ServiceSortField.$unknown;
-  }
-}
-
-enum Enum_GroupSortField {
-  ID,
-  NAME,
-  SERVICE_ID,
-  VALIDITY,
-  COLOR,
-  PHOTO_UPDATED_AT,
-  BLURHASH,
-  DEFAULT_MEETING_ID,
-  USER_CAN_EDIT,
-  SERVICE_NAME,
-  DEFAULT_MEETING_NAME,
-  LAST_EDIT,
-  LAST_EDIT_USER_NAME,
-  $unknown;
-
-  factory Enum_GroupSortField.fromJson(String value) =>
-      fromJson_Enum_GroupSortField(value);
-
-  String toJson() => toJson_Enum_GroupSortField(this);
-}
-
-String toJson_Enum_GroupSortField(Enum_GroupSortField e) {
-  switch (e) {
-    case Enum_GroupSortField.ID:
-      return r'ID';
-    case Enum_GroupSortField.NAME:
-      return r'NAME';
-    case Enum_GroupSortField.SERVICE_ID:
-      return r'SERVICE_ID';
-    case Enum_GroupSortField.VALIDITY:
-      return r'VALIDITY';
-    case Enum_GroupSortField.COLOR:
-      return r'COLOR';
-    case Enum_GroupSortField.PHOTO_UPDATED_AT:
-      return r'PHOTO_UPDATED_AT';
-    case Enum_GroupSortField.BLURHASH:
-      return r'BLURHASH';
-    case Enum_GroupSortField.DEFAULT_MEETING_ID:
-      return r'DEFAULT_MEETING_ID';
-    case Enum_GroupSortField.USER_CAN_EDIT:
-      return r'USER_CAN_EDIT';
-    case Enum_GroupSortField.SERVICE_NAME:
-      return r'SERVICE_NAME';
-    case Enum_GroupSortField.DEFAULT_MEETING_NAME:
-      return r'DEFAULT_MEETING_NAME';
-    case Enum_GroupSortField.LAST_EDIT:
-      return r'LAST_EDIT';
-    case Enum_GroupSortField.LAST_EDIT_USER_NAME:
-      return r'LAST_EDIT_USER_NAME';
-    case Enum_GroupSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_GroupSortField fromJson_Enum_GroupSortField(String value) {
-  switch (value) {
-    case r'ID':
-      return Enum_GroupSortField.ID;
-    case r'NAME':
-      return Enum_GroupSortField.NAME;
-    case r'SERVICE_ID':
-      return Enum_GroupSortField.SERVICE_ID;
-    case r'VALIDITY':
-      return Enum_GroupSortField.VALIDITY;
-    case r'COLOR':
-      return Enum_GroupSortField.COLOR;
-    case r'PHOTO_UPDATED_AT':
-      return Enum_GroupSortField.PHOTO_UPDATED_AT;
-    case r'BLURHASH':
-      return Enum_GroupSortField.BLURHASH;
-    case r'DEFAULT_MEETING_ID':
-      return Enum_GroupSortField.DEFAULT_MEETING_ID;
-    case r'USER_CAN_EDIT':
-      return Enum_GroupSortField.USER_CAN_EDIT;
-    case r'SERVICE_NAME':
-      return Enum_GroupSortField.SERVICE_NAME;
-    case r'DEFAULT_MEETING_NAME':
-      return Enum_GroupSortField.DEFAULT_MEETING_NAME;
-    case r'LAST_EDIT':
-      return Enum_GroupSortField.LAST_EDIT;
-    case r'LAST_EDIT_USER_NAME':
-      return Enum_GroupSortField.LAST_EDIT_USER_NAME;
-    default:
-      return Enum_GroupSortField.$unknown;
-  }
-}
-
-enum Enum_ClassSortField {
-  ID,
-  NAME,
-  SERVICE_ID,
-  SERVICE_STUDY_YEAR,
-  SERVICE_GENDER,
-  COLOR,
-  PHOTO_UPDATED_AT,
-  BLURHASH,
-  SERVICE_STUDY_YEAR_TO,
-  USER_CAN_EDIT,
-  SERVICE_NAME,
-  LAST_EDIT,
-  LAST_EDIT_USER_NAME,
-  STUDY_YEAR_FROM_ORDER,
-  STUDY_YEAR_TO_ORDER,
-  $unknown;
-
-  factory Enum_ClassSortField.fromJson(String value) =>
-      fromJson_Enum_ClassSortField(value);
-
-  String toJson() => toJson_Enum_ClassSortField(this);
-}
-
-String toJson_Enum_ClassSortField(Enum_ClassSortField e) {
-  switch (e) {
-    case Enum_ClassSortField.ID:
-      return r'ID';
-    case Enum_ClassSortField.NAME:
-      return r'NAME';
-    case Enum_ClassSortField.SERVICE_ID:
-      return r'SERVICE_ID';
-    case Enum_ClassSortField.SERVICE_STUDY_YEAR:
-      return r'SERVICE_STUDY_YEAR';
-    case Enum_ClassSortField.SERVICE_GENDER:
-      return r'SERVICE_GENDER';
-    case Enum_ClassSortField.COLOR:
-      return r'COLOR';
-    case Enum_ClassSortField.PHOTO_UPDATED_AT:
-      return r'PHOTO_UPDATED_AT';
-    case Enum_ClassSortField.BLURHASH:
-      return r'BLURHASH';
-    case Enum_ClassSortField.SERVICE_STUDY_YEAR_TO:
-      return r'SERVICE_STUDY_YEAR_TO';
-    case Enum_ClassSortField.USER_CAN_EDIT:
-      return r'USER_CAN_EDIT';
-    case Enum_ClassSortField.SERVICE_NAME:
-      return r'SERVICE_NAME';
-    case Enum_ClassSortField.LAST_EDIT:
-      return r'LAST_EDIT';
-    case Enum_ClassSortField.LAST_EDIT_USER_NAME:
-      return r'LAST_EDIT_USER_NAME';
-    case Enum_ClassSortField.STUDY_YEAR_FROM_ORDER:
-      return r'STUDY_YEAR_FROM_ORDER';
-    case Enum_ClassSortField.STUDY_YEAR_TO_ORDER:
-      return r'STUDY_YEAR_TO_ORDER';
-    case Enum_ClassSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_ClassSortField fromJson_Enum_ClassSortField(String value) {
-  switch (value) {
-    case r'ID':
-      return Enum_ClassSortField.ID;
-    case r'NAME':
-      return Enum_ClassSortField.NAME;
-    case r'SERVICE_ID':
-      return Enum_ClassSortField.SERVICE_ID;
-    case r'SERVICE_STUDY_YEAR':
-      return Enum_ClassSortField.SERVICE_STUDY_YEAR;
-    case r'SERVICE_GENDER':
-      return Enum_ClassSortField.SERVICE_GENDER;
-    case r'COLOR':
-      return Enum_ClassSortField.COLOR;
-    case r'PHOTO_UPDATED_AT':
-      return Enum_ClassSortField.PHOTO_UPDATED_AT;
-    case r'BLURHASH':
-      return Enum_ClassSortField.BLURHASH;
-    case r'SERVICE_STUDY_YEAR_TO':
-      return Enum_ClassSortField.SERVICE_STUDY_YEAR_TO;
-    case r'USER_CAN_EDIT':
-      return Enum_ClassSortField.USER_CAN_EDIT;
-    case r'SERVICE_NAME':
-      return Enum_ClassSortField.SERVICE_NAME;
-    case r'LAST_EDIT':
-      return Enum_ClassSortField.LAST_EDIT;
-    case r'LAST_EDIT_USER_NAME':
-      return Enum_ClassSortField.LAST_EDIT_USER_NAME;
-    case r'STUDY_YEAR_FROM_ORDER':
-      return Enum_ClassSortField.STUDY_YEAR_FROM_ORDER;
-    case r'STUDY_YEAR_TO_ORDER':
-      return Enum_ClassSortField.STUDY_YEAR_TO_ORDER;
-    default:
-      return Enum_ClassSortField.$unknown;
-  }
-}
-
-enum Enum_StreetSortField {
-  ID,
-  NAME,
-  LINE,
-  COLOR,
-  PHOTO_UPDATED_AT,
-  BLURHASH,
-  USER_CAN_EDIT,
-  WITHIN_POLYGON,
-  WITHIN_DISTANCE,
-  LAST_EDIT,
-  LAST_EDIT_USER_NAME,
-  LAST_VISIT,
-  LAST_VISIT_USER_NAME,
-  $unknown;
-
-  factory Enum_StreetSortField.fromJson(String value) =>
-      fromJson_Enum_StreetSortField(value);
-
-  String toJson() => toJson_Enum_StreetSortField(this);
-}
-
-String toJson_Enum_StreetSortField(Enum_StreetSortField e) {
-  switch (e) {
-    case Enum_StreetSortField.ID:
-      return r'ID';
-    case Enum_StreetSortField.NAME:
-      return r'NAME';
-    case Enum_StreetSortField.LINE:
-      return r'LINE';
-    case Enum_StreetSortField.COLOR:
-      return r'COLOR';
-    case Enum_StreetSortField.PHOTO_UPDATED_AT:
-      return r'PHOTO_UPDATED_AT';
-    case Enum_StreetSortField.BLURHASH:
-      return r'BLURHASH';
-    case Enum_StreetSortField.USER_CAN_EDIT:
-      return r'USER_CAN_EDIT';
-    case Enum_StreetSortField.WITHIN_POLYGON:
-      return r'WITHIN_POLYGON';
-    case Enum_StreetSortField.WITHIN_DISTANCE:
-      return r'WITHIN_DISTANCE';
-    case Enum_StreetSortField.LAST_EDIT:
-      return r'LAST_EDIT';
-    case Enum_StreetSortField.LAST_EDIT_USER_NAME:
-      return r'LAST_EDIT_USER_NAME';
-    case Enum_StreetSortField.LAST_VISIT:
-      return r'LAST_VISIT';
-    case Enum_StreetSortField.LAST_VISIT_USER_NAME:
-      return r'LAST_VISIT_USER_NAME';
-    case Enum_StreetSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_StreetSortField fromJson_Enum_StreetSortField(String value) {
-  switch (value) {
-    case r'ID':
-      return Enum_StreetSortField.ID;
-    case r'NAME':
-      return Enum_StreetSortField.NAME;
-    case r'LINE':
-      return Enum_StreetSortField.LINE;
-    case r'COLOR':
-      return Enum_StreetSortField.COLOR;
-    case r'PHOTO_UPDATED_AT':
-      return Enum_StreetSortField.PHOTO_UPDATED_AT;
-    case r'BLURHASH':
-      return Enum_StreetSortField.BLURHASH;
-    case r'USER_CAN_EDIT':
-      return Enum_StreetSortField.USER_CAN_EDIT;
-    case r'WITHIN_POLYGON':
-      return Enum_StreetSortField.WITHIN_POLYGON;
-    case r'WITHIN_DISTANCE':
-      return Enum_StreetSortField.WITHIN_DISTANCE;
-    case r'LAST_EDIT':
-      return Enum_StreetSortField.LAST_EDIT;
-    case r'LAST_EDIT_USER_NAME':
-      return Enum_StreetSortField.LAST_EDIT_USER_NAME;
-    case r'LAST_VISIT':
-      return Enum_StreetSortField.LAST_VISIT;
-    case r'LAST_VISIT_USER_NAME':
-      return Enum_StreetSortField.LAST_VISIT_USER_NAME;
-    default:
-      return Enum_StreetSortField.$unknown;
-  }
-}
-
-enum Enum_StoreSortField {
-  ID,
-  NAME,
-  ADMIN_FAMILY_ID,
-  COLOR,
-  PHOTO_UPDATED_AT,
-  BLURHASH,
-  USER_CAN_EDIT,
-  WITHIN_POLYGON,
-  ADDRESS_AREA_NAME,
-  ADDRESS_STREET_NAME,
-  ADDRESS_DISTRICT_NAME,
-  ADDRESS_FULL_ADDRESS_TEXT,
-  ADMIN_FAMILY_NAME,
-  LAST_EDIT,
-  LAST_EDIT_USER_NAME,
-  $unknown;
-
-  factory Enum_StoreSortField.fromJson(String value) =>
-      fromJson_Enum_StoreSortField(value);
-
-  String toJson() => toJson_Enum_StoreSortField(this);
-}
-
-String toJson_Enum_StoreSortField(Enum_StoreSortField e) {
-  switch (e) {
-    case Enum_StoreSortField.ID:
-      return r'ID';
-    case Enum_StoreSortField.NAME:
-      return r'NAME';
-    case Enum_StoreSortField.ADMIN_FAMILY_ID:
-      return r'ADMIN_FAMILY_ID';
-    case Enum_StoreSortField.COLOR:
-      return r'COLOR';
-    case Enum_StoreSortField.PHOTO_UPDATED_AT:
-      return r'PHOTO_UPDATED_AT';
-    case Enum_StoreSortField.BLURHASH:
-      return r'BLURHASH';
-    case Enum_StoreSortField.USER_CAN_EDIT:
-      return r'USER_CAN_EDIT';
-    case Enum_StoreSortField.WITHIN_POLYGON:
-      return r'WITHIN_POLYGON';
-    case Enum_StoreSortField.ADDRESS_AREA_NAME:
-      return r'ADDRESS_AREA_NAME';
-    case Enum_StoreSortField.ADDRESS_STREET_NAME:
-      return r'ADDRESS_STREET_NAME';
-    case Enum_StoreSortField.ADDRESS_DISTRICT_NAME:
-      return r'ADDRESS_DISTRICT_NAME';
-    case Enum_StoreSortField.ADDRESS_FULL_ADDRESS_TEXT:
-      return r'ADDRESS_FULL_ADDRESS_TEXT';
-    case Enum_StoreSortField.ADMIN_FAMILY_NAME:
-      return r'ADMIN_FAMILY_NAME';
-    case Enum_StoreSortField.LAST_EDIT:
-      return r'LAST_EDIT';
-    case Enum_StoreSortField.LAST_EDIT_USER_NAME:
-      return r'LAST_EDIT_USER_NAME';
-    case Enum_StoreSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_StoreSortField fromJson_Enum_StoreSortField(String value) {
-  switch (value) {
-    case r'ID':
-      return Enum_StoreSortField.ID;
-    case r'NAME':
-      return Enum_StoreSortField.NAME;
-    case r'ADMIN_FAMILY_ID':
-      return Enum_StoreSortField.ADMIN_FAMILY_ID;
-    case r'COLOR':
-      return Enum_StoreSortField.COLOR;
-    case r'PHOTO_UPDATED_AT':
-      return Enum_StoreSortField.PHOTO_UPDATED_AT;
-    case r'BLURHASH':
-      return Enum_StoreSortField.BLURHASH;
-    case r'USER_CAN_EDIT':
-      return Enum_StoreSortField.USER_CAN_EDIT;
-    case r'WITHIN_POLYGON':
-      return Enum_StoreSortField.WITHIN_POLYGON;
-    case r'ADDRESS_AREA_NAME':
-      return Enum_StoreSortField.ADDRESS_AREA_NAME;
-    case r'ADDRESS_STREET_NAME':
-      return Enum_StoreSortField.ADDRESS_STREET_NAME;
-    case r'ADDRESS_DISTRICT_NAME':
-      return Enum_StoreSortField.ADDRESS_DISTRICT_NAME;
-    case r'ADDRESS_FULL_ADDRESS_TEXT':
-      return Enum_StoreSortField.ADDRESS_FULL_ADDRESS_TEXT;
-    case r'ADMIN_FAMILY_NAME':
-      return Enum_StoreSortField.ADMIN_FAMILY_NAME;
-    case r'LAST_EDIT':
-      return Enum_StoreSortField.LAST_EDIT;
-    case r'LAST_EDIT_USER_NAME':
-      return Enum_StoreSortField.LAST_EDIT_USER_NAME;
-    default:
-      return Enum_StoreSortField.$unknown;
-  }
-}
-
-enum Enum_DistrictSortField {
-  ID,
-  NAME,
-  $unknown;
-
-  factory Enum_DistrictSortField.fromJson(String value) =>
-      fromJson_Enum_DistrictSortField(value);
-
-  String toJson() => toJson_Enum_DistrictSortField(this);
-}
-
-String toJson_Enum_DistrictSortField(Enum_DistrictSortField e) {
-  switch (e) {
-    case Enum_DistrictSortField.ID:
-      return r'ID';
-    case Enum_DistrictSortField.NAME:
-      return r'NAME';
-    case Enum_DistrictSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_DistrictSortField fromJson_Enum_DistrictSortField(String value) {
-  switch (value) {
-    case r'ID':
-      return Enum_DistrictSortField.ID;
-    case r'NAME':
-      return Enum_DistrictSortField.NAME;
-    default:
-      return Enum_DistrictSortField.$unknown;
-  }
-}
-
-enum Enum_AreaStreetSortField {
-  AREA_ID,
-  STREET_ID,
-  $unknown;
-
-  factory Enum_AreaStreetSortField.fromJson(String value) =>
-      fromJson_Enum_AreaStreetSortField(value);
-
-  String toJson() => toJson_Enum_AreaStreetSortField(this);
-}
-
-String toJson_Enum_AreaStreetSortField(Enum_AreaStreetSortField e) {
-  switch (e) {
-    case Enum_AreaStreetSortField.AREA_ID:
-      return r'AREA_ID';
-    case Enum_AreaStreetSortField.STREET_ID:
-      return r'STREET_ID';
-    case Enum_AreaStreetSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_AreaStreetSortField fromJson_Enum_AreaStreetSortField(String value) {
-  switch (value) {
-    case r'AREA_ID':
-      return Enum_AreaStreetSortField.AREA_ID;
-    case r'STREET_ID':
-      return Enum_AreaStreetSortField.STREET_ID;
-    default:
-      return Enum_AreaStreetSortField.$unknown;
-  }
-}
-
-enum Enum_AreaSortField {
-  ID,
-  NAME,
-  BOUNDS,
-  COLOR,
-  PHOTO_UPDATED_AT,
-  BLURHASH,
-  USER_CAN_EDIT,
-  WITHIN_POLYGON,
-  CONTAINS_POINT,
-  LAST_EDIT,
-  LAST_EDIT_USER_NAME,
-  LAST_VISIT,
-  LAST_VISIT_USER_NAME,
-  $unknown;
-
-  factory Enum_AreaSortField.fromJson(String value) =>
-      fromJson_Enum_AreaSortField(value);
-
-  String toJson() => toJson_Enum_AreaSortField(this);
-}
-
-String toJson_Enum_AreaSortField(Enum_AreaSortField e) {
-  switch (e) {
-    case Enum_AreaSortField.ID:
-      return r'ID';
-    case Enum_AreaSortField.NAME:
-      return r'NAME';
-    case Enum_AreaSortField.BOUNDS:
-      return r'BOUNDS';
-    case Enum_AreaSortField.COLOR:
-      return r'COLOR';
-    case Enum_AreaSortField.PHOTO_UPDATED_AT:
-      return r'PHOTO_UPDATED_AT';
-    case Enum_AreaSortField.BLURHASH:
-      return r'BLURHASH';
-    case Enum_AreaSortField.USER_CAN_EDIT:
-      return r'USER_CAN_EDIT';
-    case Enum_AreaSortField.WITHIN_POLYGON:
-      return r'WITHIN_POLYGON';
-    case Enum_AreaSortField.CONTAINS_POINT:
-      return r'CONTAINS_POINT';
-    case Enum_AreaSortField.LAST_EDIT:
-      return r'LAST_EDIT';
-    case Enum_AreaSortField.LAST_EDIT_USER_NAME:
-      return r'LAST_EDIT_USER_NAME';
-    case Enum_AreaSortField.LAST_VISIT:
-      return r'LAST_VISIT';
-    case Enum_AreaSortField.LAST_VISIT_USER_NAME:
-      return r'LAST_VISIT_USER_NAME';
-    case Enum_AreaSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_AreaSortField fromJson_Enum_AreaSortField(String value) {
-  switch (value) {
-    case r'ID':
-      return Enum_AreaSortField.ID;
-    case r'NAME':
-      return Enum_AreaSortField.NAME;
-    case r'BOUNDS':
-      return Enum_AreaSortField.BOUNDS;
-    case r'COLOR':
-      return Enum_AreaSortField.COLOR;
-    case r'PHOTO_UPDATED_AT':
-      return Enum_AreaSortField.PHOTO_UPDATED_AT;
-    case r'BLURHASH':
-      return Enum_AreaSortField.BLURHASH;
-    case r'USER_CAN_EDIT':
-      return Enum_AreaSortField.USER_CAN_EDIT;
-    case r'WITHIN_POLYGON':
-      return Enum_AreaSortField.WITHIN_POLYGON;
-    case r'CONTAINS_POINT':
-      return Enum_AreaSortField.CONTAINS_POINT;
-    case r'LAST_EDIT':
-      return Enum_AreaSortField.LAST_EDIT;
-    case r'LAST_EDIT_USER_NAME':
-      return Enum_AreaSortField.LAST_EDIT_USER_NAME;
-    case r'LAST_VISIT':
-      return Enum_AreaSortField.LAST_VISIT;
-    case r'LAST_VISIT_USER_NAME':
-      return Enum_AreaSortField.LAST_VISIT_USER_NAME;
-    default:
-      return Enum_AreaSortField.$unknown;
-  }
-}
-
-enum Enum_AddressSortField {
-  ID,
-  COUNTRY_ISO_CODE,
-  DISTRICT_ID,
-  AREA_ID,
-  STREET_ID,
-  SUBSTREET_NAME,
-  GEOLOCATION,
-  STOREY_NUMBER,
-  HOUSE_NUMBER,
-  APARTMENT_NUMBER,
-  SPECIAL_LANDMARK,
-  FAMILY_ID,
-  STORE_ID,
-  HOUSE_CODE,
-  FULL_ADDRESS_TEXT,
-  WITHIN_POLYGON,
-  $unknown;
-
-  factory Enum_AddressSortField.fromJson(String value) =>
-      fromJson_Enum_AddressSortField(value);
-
-  String toJson() => toJson_Enum_AddressSortField(this);
-}
-
-String toJson_Enum_AddressSortField(Enum_AddressSortField e) {
-  switch (e) {
-    case Enum_AddressSortField.ID:
-      return r'ID';
-    case Enum_AddressSortField.COUNTRY_ISO_CODE:
-      return r'COUNTRY_ISO_CODE';
-    case Enum_AddressSortField.DISTRICT_ID:
-      return r'DISTRICT_ID';
-    case Enum_AddressSortField.AREA_ID:
-      return r'AREA_ID';
-    case Enum_AddressSortField.STREET_ID:
-      return r'STREET_ID';
-    case Enum_AddressSortField.SUBSTREET_NAME:
-      return r'SUBSTREET_NAME';
-    case Enum_AddressSortField.GEOLOCATION:
-      return r'GEOLOCATION';
-    case Enum_AddressSortField.STOREY_NUMBER:
-      return r'STOREY_NUMBER';
-    case Enum_AddressSortField.HOUSE_NUMBER:
-      return r'HOUSE_NUMBER';
-    case Enum_AddressSortField.APARTMENT_NUMBER:
-      return r'APARTMENT_NUMBER';
-    case Enum_AddressSortField.SPECIAL_LANDMARK:
-      return r'SPECIAL_LANDMARK';
-    case Enum_AddressSortField.FAMILY_ID:
-      return r'FAMILY_ID';
-    case Enum_AddressSortField.STORE_ID:
-      return r'STORE_ID';
-    case Enum_AddressSortField.HOUSE_CODE:
-      return r'HOUSE_CODE';
-    case Enum_AddressSortField.FULL_ADDRESS_TEXT:
-      return r'FULL_ADDRESS_TEXT';
-    case Enum_AddressSortField.WITHIN_POLYGON:
-      return r'WITHIN_POLYGON';
-    case Enum_AddressSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_AddressSortField fromJson_Enum_AddressSortField(String value) {
-  switch (value) {
-    case r'ID':
-      return Enum_AddressSortField.ID;
-    case r'COUNTRY_ISO_CODE':
-      return Enum_AddressSortField.COUNTRY_ISO_CODE;
-    case r'DISTRICT_ID':
-      return Enum_AddressSortField.DISTRICT_ID;
-    case r'AREA_ID':
-      return Enum_AddressSortField.AREA_ID;
-    case r'STREET_ID':
-      return Enum_AddressSortField.STREET_ID;
-    case r'SUBSTREET_NAME':
-      return Enum_AddressSortField.SUBSTREET_NAME;
-    case r'GEOLOCATION':
-      return Enum_AddressSortField.GEOLOCATION;
-    case r'STOREY_NUMBER':
-      return Enum_AddressSortField.STOREY_NUMBER;
-    case r'HOUSE_NUMBER':
-      return Enum_AddressSortField.HOUSE_NUMBER;
-    case r'APARTMENT_NUMBER':
-      return Enum_AddressSortField.APARTMENT_NUMBER;
-    case r'SPECIAL_LANDMARK':
-      return Enum_AddressSortField.SPECIAL_LANDMARK;
-    case r'FAMILY_ID':
-      return Enum_AddressSortField.FAMILY_ID;
-    case r'STORE_ID':
-      return Enum_AddressSortField.STORE_ID;
-    case r'HOUSE_CODE':
-      return Enum_AddressSortField.HOUSE_CODE;
-    case r'FULL_ADDRESS_TEXT':
-      return Enum_AddressSortField.FULL_ADDRESS_TEXT;
-    case r'WITHIN_POLYGON':
-      return Enum_AddressSortField.WITHIN_POLYGON;
-    default:
-      return Enum_AddressSortField.$unknown;
-  }
-}
-
-enum Enum_RosterEntrySortField {
-  MEETING_ID,
-  PERSON_ID,
-  AS_SERVANT,
-  NAME,
-  GENDER,
-  STUDY_YEAR_ID,
-  STUDY_YEAR_NAME,
-  COLOR,
-  PHOTO_UPDATED_AT,
-  BLURHASH,
-  $unknown;
-
-  factory Enum_RosterEntrySortField.fromJson(String value) =>
-      fromJson_Enum_RosterEntrySortField(value);
-
-  String toJson() => toJson_Enum_RosterEntrySortField(this);
-}
-
-String toJson_Enum_RosterEntrySortField(Enum_RosterEntrySortField e) {
-  switch (e) {
-    case Enum_RosterEntrySortField.MEETING_ID:
-      return r'MEETING_ID';
-    case Enum_RosterEntrySortField.PERSON_ID:
-      return r'PERSON_ID';
-    case Enum_RosterEntrySortField.AS_SERVANT:
-      return r'AS_SERVANT';
-    case Enum_RosterEntrySortField.NAME:
-      return r'NAME';
-    case Enum_RosterEntrySortField.GENDER:
-      return r'GENDER';
-    case Enum_RosterEntrySortField.STUDY_YEAR_ID:
-      return r'STUDY_YEAR_ID';
-    case Enum_RosterEntrySortField.STUDY_YEAR_NAME:
-      return r'STUDY_YEAR_NAME';
-    case Enum_RosterEntrySortField.COLOR:
-      return r'COLOR';
-    case Enum_RosterEntrySortField.PHOTO_UPDATED_AT:
-      return r'PHOTO_UPDATED_AT';
-    case Enum_RosterEntrySortField.BLURHASH:
-      return r'BLURHASH';
-    case Enum_RosterEntrySortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_RosterEntrySortField fromJson_Enum_RosterEntrySortField(String value) {
-  switch (value) {
-    case r'MEETING_ID':
-      return Enum_RosterEntrySortField.MEETING_ID;
-    case r'PERSON_ID':
-      return Enum_RosterEntrySortField.PERSON_ID;
-    case r'AS_SERVANT':
-      return Enum_RosterEntrySortField.AS_SERVANT;
-    case r'NAME':
-      return Enum_RosterEntrySortField.NAME;
-    case r'GENDER':
-      return Enum_RosterEntrySortField.GENDER;
-    case r'STUDY_YEAR_ID':
-      return Enum_RosterEntrySortField.STUDY_YEAR_ID;
-    case r'STUDY_YEAR_NAME':
-      return Enum_RosterEntrySortField.STUDY_YEAR_NAME;
-    case r'COLOR':
-      return Enum_RosterEntrySortField.COLOR;
-    case r'PHOTO_UPDATED_AT':
-      return Enum_RosterEntrySortField.PHOTO_UPDATED_AT;
-    case r'BLURHASH':
-      return Enum_RosterEntrySortField.BLURHASH;
-    default:
-      return Enum_RosterEntrySortField.$unknown;
-  }
-}
-
-enum Enum_MeetingDaySortField {
-  MEETING_ID,
-  DAY,
-  STUDY_YEAR_ID,
-  GENDER,
-  PERSONS_COUNT,
-  SERVANTS_COUNT,
-  TOTAL_COUNT,
-  $unknown;
-
-  factory Enum_MeetingDaySortField.fromJson(String value) =>
-      fromJson_Enum_MeetingDaySortField(value);
-
-  String toJson() => toJson_Enum_MeetingDaySortField(this);
-}
-
-String toJson_Enum_MeetingDaySortField(Enum_MeetingDaySortField e) {
-  switch (e) {
-    case Enum_MeetingDaySortField.MEETING_ID:
-      return r'MEETING_ID';
-    case Enum_MeetingDaySortField.DAY:
-      return r'DAY';
-    case Enum_MeetingDaySortField.STUDY_YEAR_ID:
-      return r'STUDY_YEAR_ID';
-    case Enum_MeetingDaySortField.GENDER:
-      return r'GENDER';
-    case Enum_MeetingDaySortField.PERSONS_COUNT:
-      return r'PERSONS_COUNT';
-    case Enum_MeetingDaySortField.SERVANTS_COUNT:
-      return r'SERVANTS_COUNT';
-    case Enum_MeetingDaySortField.TOTAL_COUNT:
-      return r'TOTAL_COUNT';
-    case Enum_MeetingDaySortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_MeetingDaySortField fromJson_Enum_MeetingDaySortField(String value) {
-  switch (value) {
-    case r'MEETING_ID':
-      return Enum_MeetingDaySortField.MEETING_ID;
-    case r'DAY':
-      return Enum_MeetingDaySortField.DAY;
-    case r'STUDY_YEAR_ID':
-      return Enum_MeetingDaySortField.STUDY_YEAR_ID;
-    case r'GENDER':
-      return Enum_MeetingDaySortField.GENDER;
-    case r'PERSONS_COUNT':
-      return Enum_MeetingDaySortField.PERSONS_COUNT;
-    case r'SERVANTS_COUNT':
-      return Enum_MeetingDaySortField.SERVANTS_COUNT;
-    case r'TOTAL_COUNT':
-      return Enum_MeetingDaySortField.TOTAL_COUNT;
-    default:
-      return Enum_MeetingDaySortField.$unknown;
-  }
-}
-
-enum Enum_MeetingSortField {
-  ID,
-  NAME,
-  SERVICE_ID,
-  SERVICE_STUDY_YEAR,
-  SERVICE_GENDER,
-  GROUP_ID,
-  AUDIENCE,
-  IS_ARCHIVED,
-  COLOR,
-  SHOW_KODAS_CHECKBOX,
-  SERVICE_NAME,
-  GROUP_NAME,
-  STUDY_YEAR_ORDER,
-  $unknown;
-
-  factory Enum_MeetingSortField.fromJson(String value) =>
-      fromJson_Enum_MeetingSortField(value);
-
-  String toJson() => toJson_Enum_MeetingSortField(this);
-}
-
-String toJson_Enum_MeetingSortField(Enum_MeetingSortField e) {
-  switch (e) {
-    case Enum_MeetingSortField.ID:
-      return r'ID';
-    case Enum_MeetingSortField.NAME:
-      return r'NAME';
-    case Enum_MeetingSortField.SERVICE_ID:
-      return r'SERVICE_ID';
-    case Enum_MeetingSortField.SERVICE_STUDY_YEAR:
-      return r'SERVICE_STUDY_YEAR';
-    case Enum_MeetingSortField.SERVICE_GENDER:
-      return r'SERVICE_GENDER';
-    case Enum_MeetingSortField.GROUP_ID:
-      return r'GROUP_ID';
-    case Enum_MeetingSortField.AUDIENCE:
-      return r'AUDIENCE';
-    case Enum_MeetingSortField.IS_ARCHIVED:
-      return r'IS_ARCHIVED';
-    case Enum_MeetingSortField.COLOR:
-      return r'COLOR';
-    case Enum_MeetingSortField.SHOW_KODAS_CHECKBOX:
-      return r'SHOW_KODAS_CHECKBOX';
-    case Enum_MeetingSortField.SERVICE_NAME:
-      return r'SERVICE_NAME';
-    case Enum_MeetingSortField.GROUP_NAME:
-      return r'GROUP_NAME';
-    case Enum_MeetingSortField.STUDY_YEAR_ORDER:
-      return r'STUDY_YEAR_ORDER';
-    case Enum_MeetingSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_MeetingSortField fromJson_Enum_MeetingSortField(String value) {
-  switch (value) {
-    case r'ID':
-      return Enum_MeetingSortField.ID;
-    case r'NAME':
-      return Enum_MeetingSortField.NAME;
-    case r'SERVICE_ID':
-      return Enum_MeetingSortField.SERVICE_ID;
-    case r'SERVICE_STUDY_YEAR':
-      return Enum_MeetingSortField.SERVICE_STUDY_YEAR;
-    case r'SERVICE_GENDER':
-      return Enum_MeetingSortField.SERVICE_GENDER;
-    case r'GROUP_ID':
-      return Enum_MeetingSortField.GROUP_ID;
-    case r'AUDIENCE':
-      return Enum_MeetingSortField.AUDIENCE;
-    case r'IS_ARCHIVED':
-      return Enum_MeetingSortField.IS_ARCHIVED;
-    case r'COLOR':
-      return Enum_MeetingSortField.COLOR;
-    case r'SHOW_KODAS_CHECKBOX':
-      return Enum_MeetingSortField.SHOW_KODAS_CHECKBOX;
-    case r'SERVICE_NAME':
-      return Enum_MeetingSortField.SERVICE_NAME;
-    case r'GROUP_NAME':
-      return Enum_MeetingSortField.GROUP_NAME;
-    case r'STUDY_YEAR_ORDER':
-      return Enum_MeetingSortField.STUDY_YEAR_ORDER;
-    default:
-      return Enum_MeetingSortField.$unknown;
-  }
-}
-
-enum Enum_AttendanceRecordSortField {
-  ID,
-  MEETING_ID,
-  PERSON_ID,
-  DATETIME,
-  AS_SERVANT,
-  RECORDED_BY,
-  DAY,
-  TIME,
-  MEETING_NAME,
-  PERSON_NAME,
-  RECORDED_BY_USER_NAME,
-  $unknown;
-
-  factory Enum_AttendanceRecordSortField.fromJson(String value) =>
-      fromJson_Enum_AttendanceRecordSortField(value);
-
-  String toJson() => toJson_Enum_AttendanceRecordSortField(this);
-}
-
-String toJson_Enum_AttendanceRecordSortField(Enum_AttendanceRecordSortField e) {
-  switch (e) {
-    case Enum_AttendanceRecordSortField.ID:
-      return r'ID';
-    case Enum_AttendanceRecordSortField.MEETING_ID:
-      return r'MEETING_ID';
-    case Enum_AttendanceRecordSortField.PERSON_ID:
-      return r'PERSON_ID';
-    case Enum_AttendanceRecordSortField.DATETIME:
-      return r'DATETIME';
-    case Enum_AttendanceRecordSortField.AS_SERVANT:
-      return r'AS_SERVANT';
-    case Enum_AttendanceRecordSortField.RECORDED_BY:
-      return r'RECORDED_BY';
-    case Enum_AttendanceRecordSortField.DAY:
-      return r'DAY';
-    case Enum_AttendanceRecordSortField.TIME:
-      return r'TIME';
-    case Enum_AttendanceRecordSortField.MEETING_NAME:
-      return r'MEETING_NAME';
-    case Enum_AttendanceRecordSortField.PERSON_NAME:
-      return r'PERSON_NAME';
-    case Enum_AttendanceRecordSortField.RECORDED_BY_USER_NAME:
-      return r'RECORDED_BY_USER_NAME';
-    case Enum_AttendanceRecordSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_AttendanceRecordSortField fromJson_Enum_AttendanceRecordSortField(
-  String value,
-) {
-  switch (value) {
-    case r'ID':
-      return Enum_AttendanceRecordSortField.ID;
-    case r'MEETING_ID':
-      return Enum_AttendanceRecordSortField.MEETING_ID;
-    case r'PERSON_ID':
-      return Enum_AttendanceRecordSortField.PERSON_ID;
-    case r'DATETIME':
-      return Enum_AttendanceRecordSortField.DATETIME;
-    case r'AS_SERVANT':
-      return Enum_AttendanceRecordSortField.AS_SERVANT;
-    case r'RECORDED_BY':
-      return Enum_AttendanceRecordSortField.RECORDED_BY;
-    case r'DAY':
-      return Enum_AttendanceRecordSortField.DAY;
-    case r'TIME':
-      return Enum_AttendanceRecordSortField.TIME;
-    case r'MEETING_NAME':
-      return Enum_AttendanceRecordSortField.MEETING_NAME;
-    case r'PERSON_NAME':
-      return Enum_AttendanceRecordSortField.PERSON_NAME;
-    case r'RECORDED_BY_USER_NAME':
-      return Enum_AttendanceRecordSortField.RECORDED_BY_USER_NAME;
-    default:
-      return Enum_AttendanceRecordSortField.$unknown;
-  }
-}
-
-enum Enum_VisitSortField {
-  VISIT_ID,
-  TABLE,
-  RECORD_ID,
-  TIME,
-  RECORDED_BY,
-  IS_FATHER_VISIT,
-  $unknown;
-
-  factory Enum_VisitSortField.fromJson(String value) =>
-      fromJson_Enum_VisitSortField(value);
-
-  String toJson() => toJson_Enum_VisitSortField(this);
-}
-
-String toJson_Enum_VisitSortField(Enum_VisitSortField e) {
-  switch (e) {
-    case Enum_VisitSortField.VISIT_ID:
-      return r'VISIT_ID';
-    case Enum_VisitSortField.TABLE:
-      return r'TABLE';
-    case Enum_VisitSortField.RECORD_ID:
-      return r'RECORD_ID';
-    case Enum_VisitSortField.TIME:
-      return r'TIME';
-    case Enum_VisitSortField.RECORDED_BY:
-      return r'RECORDED_BY';
-    case Enum_VisitSortField.IS_FATHER_VISIT:
-      return r'IS_FATHER_VISIT';
-    case Enum_VisitSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_VisitSortField fromJson_Enum_VisitSortField(String value) {
-  switch (value) {
-    case r'VISIT_ID':
-      return Enum_VisitSortField.VISIT_ID;
-    case r'TABLE':
-      return Enum_VisitSortField.TABLE;
-    case r'RECORD_ID':
-      return Enum_VisitSortField.RECORD_ID;
-    case r'TIME':
-      return Enum_VisitSortField.TIME;
-    case r'RECORDED_BY':
-      return Enum_VisitSortField.RECORDED_BY;
-    case r'IS_FATHER_VISIT':
-      return Enum_VisitSortField.IS_FATHER_VISIT;
-    default:
-      return Enum_VisitSortField.$unknown;
-  }
-}
-
-enum Enum_LatestVisitSortField {
-  TABLE,
-  RECORD_ID,
-  TIME,
-  RECORDED_BY,
-  VISIT_ID,
-  $unknown;
-
-  factory Enum_LatestVisitSortField.fromJson(String value) =>
-      fromJson_Enum_LatestVisitSortField(value);
-
-  String toJson() => toJson_Enum_LatestVisitSortField(this);
-}
-
-String toJson_Enum_LatestVisitSortField(Enum_LatestVisitSortField e) {
-  switch (e) {
-    case Enum_LatestVisitSortField.TABLE:
-      return r'TABLE';
-    case Enum_LatestVisitSortField.RECORD_ID:
-      return r'RECORD_ID';
-    case Enum_LatestVisitSortField.TIME:
-      return r'TIME';
-    case Enum_LatestVisitSortField.RECORDED_BY:
-      return r'RECORDED_BY';
-    case Enum_LatestVisitSortField.VISIT_ID:
-      return r'VISIT_ID';
-    case Enum_LatestVisitSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_LatestVisitSortField fromJson_Enum_LatestVisitSortField(String value) {
-  switch (value) {
-    case r'TABLE':
-      return Enum_LatestVisitSortField.TABLE;
-    case r'RECORD_ID':
-      return Enum_LatestVisitSortField.RECORD_ID;
-    case r'TIME':
-      return Enum_LatestVisitSortField.TIME;
-    case r'RECORDED_BY':
-      return Enum_LatestVisitSortField.RECORDED_BY;
-    case r'VISIT_ID':
-      return Enum_LatestVisitSortField.VISIT_ID;
-    default:
-      return Enum_LatestVisitSortField.$unknown;
-  }
-}
-
-enum Enum_LatestKodasSortField {
-  PERSON_ID,
-  TIME,
-  RECORDED_BY,
-  $unknown;
-
-  factory Enum_LatestKodasSortField.fromJson(String value) =>
-      fromJson_Enum_LatestKodasSortField(value);
-
-  String toJson() => toJson_Enum_LatestKodasSortField(this);
-}
-
-String toJson_Enum_LatestKodasSortField(Enum_LatestKodasSortField e) {
-  switch (e) {
-    case Enum_LatestKodasSortField.PERSON_ID:
-      return r'PERSON_ID';
-    case Enum_LatestKodasSortField.TIME:
-      return r'TIME';
-    case Enum_LatestKodasSortField.RECORDED_BY:
-      return r'RECORDED_BY';
-    case Enum_LatestKodasSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_LatestKodasSortField fromJson_Enum_LatestKodasSortField(String value) {
-  switch (value) {
-    case r'PERSON_ID':
-      return Enum_LatestKodasSortField.PERSON_ID;
-    case r'TIME':
-      return Enum_LatestKodasSortField.TIME;
-    case r'RECORDED_BY':
-      return Enum_LatestKodasSortField.RECORDED_BY;
-    default:
-      return Enum_LatestKodasSortField.$unknown;
-  }
-}
-
-enum Enum_LatestFatherVisitSortField {
-  TABLE,
-  RECORD_ID,
-  TIME,
-  RECORDED_BY,
-  VISIT_ID,
-  $unknown;
-
-  factory Enum_LatestFatherVisitSortField.fromJson(String value) =>
-      fromJson_Enum_LatestFatherVisitSortField(value);
-
-  String toJson() => toJson_Enum_LatestFatherVisitSortField(this);
-}
-
-String toJson_Enum_LatestFatherVisitSortField(
-  Enum_LatestFatherVisitSortField e,
-) {
-  switch (e) {
-    case Enum_LatestFatherVisitSortField.TABLE:
-      return r'TABLE';
-    case Enum_LatestFatherVisitSortField.RECORD_ID:
-      return r'RECORD_ID';
-    case Enum_LatestFatherVisitSortField.TIME:
-      return r'TIME';
-    case Enum_LatestFatherVisitSortField.RECORDED_BY:
-      return r'RECORDED_BY';
-    case Enum_LatestFatherVisitSortField.VISIT_ID:
-      return r'VISIT_ID';
-    case Enum_LatestFatherVisitSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_LatestFatherVisitSortField fromJson_Enum_LatestFatherVisitSortField(
-  String value,
-) {
-  switch (value) {
-    case r'TABLE':
-      return Enum_LatestFatherVisitSortField.TABLE;
-    case r'RECORD_ID':
-      return Enum_LatestFatherVisitSortField.RECORD_ID;
-    case r'TIME':
-      return Enum_LatestFatherVisitSortField.TIME;
-    case r'RECORDED_BY':
-      return Enum_LatestFatherVisitSortField.RECORDED_BY;
-    case r'VISIT_ID':
-      return Enum_LatestFatherVisitSortField.VISIT_ID;
-    default:
-      return Enum_LatestFatherVisitSortField.$unknown;
-  }
-}
-
-enum Enum_LatestEditSortField {
-  TABLE,
-  RECORD_ID,
-  TIME,
-  RECORDED_BY,
-  $unknown;
-
-  factory Enum_LatestEditSortField.fromJson(String value) =>
-      fromJson_Enum_LatestEditSortField(value);
-
-  String toJson() => toJson_Enum_LatestEditSortField(this);
-}
-
-String toJson_Enum_LatestEditSortField(Enum_LatestEditSortField e) {
-  switch (e) {
-    case Enum_LatestEditSortField.TABLE:
-      return r'TABLE';
-    case Enum_LatestEditSortField.RECORD_ID:
-      return r'RECORD_ID';
-    case Enum_LatestEditSortField.TIME:
-      return r'TIME';
-    case Enum_LatestEditSortField.RECORDED_BY:
-      return r'RECORDED_BY';
-    case Enum_LatestEditSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_LatestEditSortField fromJson_Enum_LatestEditSortField(String value) {
-  switch (value) {
-    case r'TABLE':
-      return Enum_LatestEditSortField.TABLE;
-    case r'RECORD_ID':
-      return Enum_LatestEditSortField.RECORD_ID;
-    case r'TIME':
-      return Enum_LatestEditSortField.TIME;
-    case r'RECORDED_BY':
-      return Enum_LatestEditSortField.RECORDED_BY;
-    default:
-      return Enum_LatestEditSortField.$unknown;
-  }
-}
-
-enum Enum_LatestConfessionSortField {
-  PERSON_ID,
-  TIME,
-  RECORDED_BY,
-  $unknown;
-
-  factory Enum_LatestConfessionSortField.fromJson(String value) =>
-      fromJson_Enum_LatestConfessionSortField(value);
-
-  String toJson() => toJson_Enum_LatestConfessionSortField(this);
-}
-
-String toJson_Enum_LatestConfessionSortField(Enum_LatestConfessionSortField e) {
-  switch (e) {
-    case Enum_LatestConfessionSortField.PERSON_ID:
-      return r'PERSON_ID';
-    case Enum_LatestConfessionSortField.TIME:
-      return r'TIME';
-    case Enum_LatestConfessionSortField.RECORDED_BY:
-      return r'RECORDED_BY';
-    case Enum_LatestConfessionSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_LatestConfessionSortField fromJson_Enum_LatestConfessionSortField(
-  String value,
-) {
-  switch (value) {
-    case r'PERSON_ID':
-      return Enum_LatestConfessionSortField.PERSON_ID;
-    case r'TIME':
-      return Enum_LatestConfessionSortField.TIME;
-    case r'RECORDED_BY':
-      return Enum_LatestConfessionSortField.RECORDED_BY;
-    default:
-      return Enum_LatestConfessionSortField.$unknown;
-  }
-}
-
-enum Enum_LatestCallSortField {
-  PERSON_ID,
-  TIME,
-  RECORDED_BY,
-  $unknown;
-
-  factory Enum_LatestCallSortField.fromJson(String value) =>
-      fromJson_Enum_LatestCallSortField(value);
-
-  String toJson() => toJson_Enum_LatestCallSortField(this);
-}
-
-String toJson_Enum_LatestCallSortField(Enum_LatestCallSortField e) {
-  switch (e) {
-    case Enum_LatestCallSortField.PERSON_ID:
-      return r'PERSON_ID';
-    case Enum_LatestCallSortField.TIME:
-      return r'TIME';
-    case Enum_LatestCallSortField.RECORDED_BY:
-      return r'RECORDED_BY';
-    case Enum_LatestCallSortField.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_LatestCallSortField fromJson_Enum_LatestCallSortField(String value) {
-  switch (value) {
-    case r'PERSON_ID':
-      return Enum_LatestCallSortField.PERSON_ID;
-    case r'TIME':
-      return Enum_LatestCallSortField.TIME;
-    case r'RECORDED_BY':
-      return Enum_LatestCallSortField.RECORDED_BY;
-    default:
-      return Enum_LatestCallSortField.$unknown;
-  }
-}
-
-enum Enum_KodasSortField {
-  ID,
-  DAY_ID,
-  PERSON_ID,
-  RECORDED_BY,
-  TIME,
-  $unknown;
-
-  factory Enum_KodasSortField.fromJson(String value) =>
-      fromJson_Enum_KodasSortField(value);
-
-  String toJson() => toJson_Enum_KodasSortField(this);
 }

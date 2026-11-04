@@ -1,6 +1,1338 @@
 // Part 90 of the schema
 part of "schema.graphql.dart";
 
+String toJson_Enum_ServiceSortField(Enum_ServiceSortField e) {
+  switch (e) {
+    case Enum_ServiceSortField.ID:
+      return r'ID';
+    case Enum_ServiceSortField.NAME:
+      return r'NAME';
+    case Enum_ServiceSortField.STUDY_YEAR_FROM_ID:
+      return r'STUDY_YEAR_FROM_ID';
+    case Enum_ServiceSortField.STUDY_YEAR_TO_ID:
+      return r'STUDY_YEAR_TO_ID';
+    case Enum_ServiceSortField.NEXT_SERVICE_ID:
+      return r'NEXT_SERVICE_ID';
+    case Enum_ServiceSortField.COLOR:
+      return r'COLOR';
+    case Enum_ServiceSortField.PHOTO_UPDATED_AT:
+      return r'PHOTO_UPDATED_AT';
+    case Enum_ServiceSortField.BLURHASH:
+      return r'BLURHASH';
+    case Enum_ServiceSortField.DEFAULT_MEETING_ID:
+      return r'DEFAULT_MEETING_ID';
+    case Enum_ServiceSortField.USER_CAN_EDIT:
+      return r'USER_CAN_EDIT';
+    case Enum_ServiceSortField.NEXT_SERVICE_NAME:
+      return r'NEXT_SERVICE_NAME';
+    case Enum_ServiceSortField.DEFAULT_MEETING_NAME:
+      return r'DEFAULT_MEETING_NAME';
+    case Enum_ServiceSortField.LAST_EDIT:
+      return r'LAST_EDIT';
+    case Enum_ServiceSortField.LAST_EDIT_USER_NAME:
+      return r'LAST_EDIT_USER_NAME';
+    case Enum_ServiceSortField.STUDY_YEAR_FROM_ORDER:
+      return r'STUDY_YEAR_FROM_ORDER';
+    case Enum_ServiceSortField.STUDY_YEAR_TO_ORDER:
+      return r'STUDY_YEAR_TO_ORDER';
+    case Enum_ServiceSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_ServiceSortField fromJson_Enum_ServiceSortField(String value) {
+  switch (value) {
+    case r'ID':
+      return Enum_ServiceSortField.ID;
+    case r'NAME':
+      return Enum_ServiceSortField.NAME;
+    case r'STUDY_YEAR_FROM_ID':
+      return Enum_ServiceSortField.STUDY_YEAR_FROM_ID;
+    case r'STUDY_YEAR_TO_ID':
+      return Enum_ServiceSortField.STUDY_YEAR_TO_ID;
+    case r'NEXT_SERVICE_ID':
+      return Enum_ServiceSortField.NEXT_SERVICE_ID;
+    case r'COLOR':
+      return Enum_ServiceSortField.COLOR;
+    case r'PHOTO_UPDATED_AT':
+      return Enum_ServiceSortField.PHOTO_UPDATED_AT;
+    case r'BLURHASH':
+      return Enum_ServiceSortField.BLURHASH;
+    case r'DEFAULT_MEETING_ID':
+      return Enum_ServiceSortField.DEFAULT_MEETING_ID;
+    case r'USER_CAN_EDIT':
+      return Enum_ServiceSortField.USER_CAN_EDIT;
+    case r'NEXT_SERVICE_NAME':
+      return Enum_ServiceSortField.NEXT_SERVICE_NAME;
+    case r'DEFAULT_MEETING_NAME':
+      return Enum_ServiceSortField.DEFAULT_MEETING_NAME;
+    case r'LAST_EDIT':
+      return Enum_ServiceSortField.LAST_EDIT;
+    case r'LAST_EDIT_USER_NAME':
+      return Enum_ServiceSortField.LAST_EDIT_USER_NAME;
+    case r'STUDY_YEAR_FROM_ORDER':
+      return Enum_ServiceSortField.STUDY_YEAR_FROM_ORDER;
+    case r'STUDY_YEAR_TO_ORDER':
+      return Enum_ServiceSortField.STUDY_YEAR_TO_ORDER;
+    default:
+      return Enum_ServiceSortField.$unknown;
+  }
+}
+
+enum Enum_GroupSortField {
+  ID,
+  NAME,
+  SERVICE_ID,
+  VALIDITY,
+  COLOR,
+  PHOTO_UPDATED_AT,
+  BLURHASH,
+  DEFAULT_MEETING_ID,
+  USER_CAN_EDIT,
+  SERVICE_NAME,
+  DEFAULT_MEETING_NAME,
+  LAST_EDIT,
+  LAST_EDIT_USER_NAME,
+  $unknown;
+
+  factory Enum_GroupSortField.fromJson(String value) =>
+      fromJson_Enum_GroupSortField(value);
+
+  String toJson() => toJson_Enum_GroupSortField(this);
+}
+
+String toJson_Enum_GroupSortField(Enum_GroupSortField e) {
+  switch (e) {
+    case Enum_GroupSortField.ID:
+      return r'ID';
+    case Enum_GroupSortField.NAME:
+      return r'NAME';
+    case Enum_GroupSortField.SERVICE_ID:
+      return r'SERVICE_ID';
+    case Enum_GroupSortField.VALIDITY:
+      return r'VALIDITY';
+    case Enum_GroupSortField.COLOR:
+      return r'COLOR';
+    case Enum_GroupSortField.PHOTO_UPDATED_AT:
+      return r'PHOTO_UPDATED_AT';
+    case Enum_GroupSortField.BLURHASH:
+      return r'BLURHASH';
+    case Enum_GroupSortField.DEFAULT_MEETING_ID:
+      return r'DEFAULT_MEETING_ID';
+    case Enum_GroupSortField.USER_CAN_EDIT:
+      return r'USER_CAN_EDIT';
+    case Enum_GroupSortField.SERVICE_NAME:
+      return r'SERVICE_NAME';
+    case Enum_GroupSortField.DEFAULT_MEETING_NAME:
+      return r'DEFAULT_MEETING_NAME';
+    case Enum_GroupSortField.LAST_EDIT:
+      return r'LAST_EDIT';
+    case Enum_GroupSortField.LAST_EDIT_USER_NAME:
+      return r'LAST_EDIT_USER_NAME';
+    case Enum_GroupSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_GroupSortField fromJson_Enum_GroupSortField(String value) {
+  switch (value) {
+    case r'ID':
+      return Enum_GroupSortField.ID;
+    case r'NAME':
+      return Enum_GroupSortField.NAME;
+    case r'SERVICE_ID':
+      return Enum_GroupSortField.SERVICE_ID;
+    case r'VALIDITY':
+      return Enum_GroupSortField.VALIDITY;
+    case r'COLOR':
+      return Enum_GroupSortField.COLOR;
+    case r'PHOTO_UPDATED_AT':
+      return Enum_GroupSortField.PHOTO_UPDATED_AT;
+    case r'BLURHASH':
+      return Enum_GroupSortField.BLURHASH;
+    case r'DEFAULT_MEETING_ID':
+      return Enum_GroupSortField.DEFAULT_MEETING_ID;
+    case r'USER_CAN_EDIT':
+      return Enum_GroupSortField.USER_CAN_EDIT;
+    case r'SERVICE_NAME':
+      return Enum_GroupSortField.SERVICE_NAME;
+    case r'DEFAULT_MEETING_NAME':
+      return Enum_GroupSortField.DEFAULT_MEETING_NAME;
+    case r'LAST_EDIT':
+      return Enum_GroupSortField.LAST_EDIT;
+    case r'LAST_EDIT_USER_NAME':
+      return Enum_GroupSortField.LAST_EDIT_USER_NAME;
+    default:
+      return Enum_GroupSortField.$unknown;
+  }
+}
+
+enum Enum_ClassSortField {
+  ID,
+  NAME,
+  SERVICE_ID,
+  SERVICE_STUDY_YEAR,
+  SERVICE_GENDER,
+  COLOR,
+  PHOTO_UPDATED_AT,
+  BLURHASH,
+  SERVICE_STUDY_YEAR_TO,
+  USER_CAN_EDIT,
+  SERVICE_NAME,
+  LAST_EDIT,
+  LAST_EDIT_USER_NAME,
+  STUDY_YEAR_FROM_ORDER,
+  STUDY_YEAR_TO_ORDER,
+  $unknown;
+
+  factory Enum_ClassSortField.fromJson(String value) =>
+      fromJson_Enum_ClassSortField(value);
+
+  String toJson() => toJson_Enum_ClassSortField(this);
+}
+
+String toJson_Enum_ClassSortField(Enum_ClassSortField e) {
+  switch (e) {
+    case Enum_ClassSortField.ID:
+      return r'ID';
+    case Enum_ClassSortField.NAME:
+      return r'NAME';
+    case Enum_ClassSortField.SERVICE_ID:
+      return r'SERVICE_ID';
+    case Enum_ClassSortField.SERVICE_STUDY_YEAR:
+      return r'SERVICE_STUDY_YEAR';
+    case Enum_ClassSortField.SERVICE_GENDER:
+      return r'SERVICE_GENDER';
+    case Enum_ClassSortField.COLOR:
+      return r'COLOR';
+    case Enum_ClassSortField.PHOTO_UPDATED_AT:
+      return r'PHOTO_UPDATED_AT';
+    case Enum_ClassSortField.BLURHASH:
+      return r'BLURHASH';
+    case Enum_ClassSortField.SERVICE_STUDY_YEAR_TO:
+      return r'SERVICE_STUDY_YEAR_TO';
+    case Enum_ClassSortField.USER_CAN_EDIT:
+      return r'USER_CAN_EDIT';
+    case Enum_ClassSortField.SERVICE_NAME:
+      return r'SERVICE_NAME';
+    case Enum_ClassSortField.LAST_EDIT:
+      return r'LAST_EDIT';
+    case Enum_ClassSortField.LAST_EDIT_USER_NAME:
+      return r'LAST_EDIT_USER_NAME';
+    case Enum_ClassSortField.STUDY_YEAR_FROM_ORDER:
+      return r'STUDY_YEAR_FROM_ORDER';
+    case Enum_ClassSortField.STUDY_YEAR_TO_ORDER:
+      return r'STUDY_YEAR_TO_ORDER';
+    case Enum_ClassSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_ClassSortField fromJson_Enum_ClassSortField(String value) {
+  switch (value) {
+    case r'ID':
+      return Enum_ClassSortField.ID;
+    case r'NAME':
+      return Enum_ClassSortField.NAME;
+    case r'SERVICE_ID':
+      return Enum_ClassSortField.SERVICE_ID;
+    case r'SERVICE_STUDY_YEAR':
+      return Enum_ClassSortField.SERVICE_STUDY_YEAR;
+    case r'SERVICE_GENDER':
+      return Enum_ClassSortField.SERVICE_GENDER;
+    case r'COLOR':
+      return Enum_ClassSortField.COLOR;
+    case r'PHOTO_UPDATED_AT':
+      return Enum_ClassSortField.PHOTO_UPDATED_AT;
+    case r'BLURHASH':
+      return Enum_ClassSortField.BLURHASH;
+    case r'SERVICE_STUDY_YEAR_TO':
+      return Enum_ClassSortField.SERVICE_STUDY_YEAR_TO;
+    case r'USER_CAN_EDIT':
+      return Enum_ClassSortField.USER_CAN_EDIT;
+    case r'SERVICE_NAME':
+      return Enum_ClassSortField.SERVICE_NAME;
+    case r'LAST_EDIT':
+      return Enum_ClassSortField.LAST_EDIT;
+    case r'LAST_EDIT_USER_NAME':
+      return Enum_ClassSortField.LAST_EDIT_USER_NAME;
+    case r'STUDY_YEAR_FROM_ORDER':
+      return Enum_ClassSortField.STUDY_YEAR_FROM_ORDER;
+    case r'STUDY_YEAR_TO_ORDER':
+      return Enum_ClassSortField.STUDY_YEAR_TO_ORDER;
+    default:
+      return Enum_ClassSortField.$unknown;
+  }
+}
+
+enum Enum_StreetSortField {
+  ID,
+  NAME,
+  LINE,
+  COLOR,
+  PHOTO_UPDATED_AT,
+  BLURHASH,
+  USER_CAN_EDIT,
+  WITHIN_POLYGON,
+  WITHIN_DISTANCE,
+  LAST_EDIT,
+  LAST_EDIT_USER_NAME,
+  LAST_VISIT,
+  LAST_VISIT_USER_NAME,
+  $unknown;
+
+  factory Enum_StreetSortField.fromJson(String value) =>
+      fromJson_Enum_StreetSortField(value);
+
+  String toJson() => toJson_Enum_StreetSortField(this);
+}
+
+String toJson_Enum_StreetSortField(Enum_StreetSortField e) {
+  switch (e) {
+    case Enum_StreetSortField.ID:
+      return r'ID';
+    case Enum_StreetSortField.NAME:
+      return r'NAME';
+    case Enum_StreetSortField.LINE:
+      return r'LINE';
+    case Enum_StreetSortField.COLOR:
+      return r'COLOR';
+    case Enum_StreetSortField.PHOTO_UPDATED_AT:
+      return r'PHOTO_UPDATED_AT';
+    case Enum_StreetSortField.BLURHASH:
+      return r'BLURHASH';
+    case Enum_StreetSortField.USER_CAN_EDIT:
+      return r'USER_CAN_EDIT';
+    case Enum_StreetSortField.WITHIN_POLYGON:
+      return r'WITHIN_POLYGON';
+    case Enum_StreetSortField.WITHIN_DISTANCE:
+      return r'WITHIN_DISTANCE';
+    case Enum_StreetSortField.LAST_EDIT:
+      return r'LAST_EDIT';
+    case Enum_StreetSortField.LAST_EDIT_USER_NAME:
+      return r'LAST_EDIT_USER_NAME';
+    case Enum_StreetSortField.LAST_VISIT:
+      return r'LAST_VISIT';
+    case Enum_StreetSortField.LAST_VISIT_USER_NAME:
+      return r'LAST_VISIT_USER_NAME';
+    case Enum_StreetSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_StreetSortField fromJson_Enum_StreetSortField(String value) {
+  switch (value) {
+    case r'ID':
+      return Enum_StreetSortField.ID;
+    case r'NAME':
+      return Enum_StreetSortField.NAME;
+    case r'LINE':
+      return Enum_StreetSortField.LINE;
+    case r'COLOR':
+      return Enum_StreetSortField.COLOR;
+    case r'PHOTO_UPDATED_AT':
+      return Enum_StreetSortField.PHOTO_UPDATED_AT;
+    case r'BLURHASH':
+      return Enum_StreetSortField.BLURHASH;
+    case r'USER_CAN_EDIT':
+      return Enum_StreetSortField.USER_CAN_EDIT;
+    case r'WITHIN_POLYGON':
+      return Enum_StreetSortField.WITHIN_POLYGON;
+    case r'WITHIN_DISTANCE':
+      return Enum_StreetSortField.WITHIN_DISTANCE;
+    case r'LAST_EDIT':
+      return Enum_StreetSortField.LAST_EDIT;
+    case r'LAST_EDIT_USER_NAME':
+      return Enum_StreetSortField.LAST_EDIT_USER_NAME;
+    case r'LAST_VISIT':
+      return Enum_StreetSortField.LAST_VISIT;
+    case r'LAST_VISIT_USER_NAME':
+      return Enum_StreetSortField.LAST_VISIT_USER_NAME;
+    default:
+      return Enum_StreetSortField.$unknown;
+  }
+}
+
+enum Enum_StoreSortField {
+  ID,
+  NAME,
+  ADMIN_FAMILY_ID,
+  COLOR,
+  PHOTO_UPDATED_AT,
+  BLURHASH,
+  USER_CAN_EDIT,
+  WITHIN_POLYGON,
+  ADDRESS_AREA_NAME,
+  ADDRESS_STREET_NAME,
+  ADDRESS_DISTRICT_NAME,
+  ADDRESS_FULL_ADDRESS_TEXT,
+  ADMIN_FAMILY_NAME,
+  LAST_EDIT,
+  LAST_EDIT_USER_NAME,
+  $unknown;
+
+  factory Enum_StoreSortField.fromJson(String value) =>
+      fromJson_Enum_StoreSortField(value);
+
+  String toJson() => toJson_Enum_StoreSortField(this);
+}
+
+String toJson_Enum_StoreSortField(Enum_StoreSortField e) {
+  switch (e) {
+    case Enum_StoreSortField.ID:
+      return r'ID';
+    case Enum_StoreSortField.NAME:
+      return r'NAME';
+    case Enum_StoreSortField.ADMIN_FAMILY_ID:
+      return r'ADMIN_FAMILY_ID';
+    case Enum_StoreSortField.COLOR:
+      return r'COLOR';
+    case Enum_StoreSortField.PHOTO_UPDATED_AT:
+      return r'PHOTO_UPDATED_AT';
+    case Enum_StoreSortField.BLURHASH:
+      return r'BLURHASH';
+    case Enum_StoreSortField.USER_CAN_EDIT:
+      return r'USER_CAN_EDIT';
+    case Enum_StoreSortField.WITHIN_POLYGON:
+      return r'WITHIN_POLYGON';
+    case Enum_StoreSortField.ADDRESS_AREA_NAME:
+      return r'ADDRESS_AREA_NAME';
+    case Enum_StoreSortField.ADDRESS_STREET_NAME:
+      return r'ADDRESS_STREET_NAME';
+    case Enum_StoreSortField.ADDRESS_DISTRICT_NAME:
+      return r'ADDRESS_DISTRICT_NAME';
+    case Enum_StoreSortField.ADDRESS_FULL_ADDRESS_TEXT:
+      return r'ADDRESS_FULL_ADDRESS_TEXT';
+    case Enum_StoreSortField.ADMIN_FAMILY_NAME:
+      return r'ADMIN_FAMILY_NAME';
+    case Enum_StoreSortField.LAST_EDIT:
+      return r'LAST_EDIT';
+    case Enum_StoreSortField.LAST_EDIT_USER_NAME:
+      return r'LAST_EDIT_USER_NAME';
+    case Enum_StoreSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_StoreSortField fromJson_Enum_StoreSortField(String value) {
+  switch (value) {
+    case r'ID':
+      return Enum_StoreSortField.ID;
+    case r'NAME':
+      return Enum_StoreSortField.NAME;
+    case r'ADMIN_FAMILY_ID':
+      return Enum_StoreSortField.ADMIN_FAMILY_ID;
+    case r'COLOR':
+      return Enum_StoreSortField.COLOR;
+    case r'PHOTO_UPDATED_AT':
+      return Enum_StoreSortField.PHOTO_UPDATED_AT;
+    case r'BLURHASH':
+      return Enum_StoreSortField.BLURHASH;
+    case r'USER_CAN_EDIT':
+      return Enum_StoreSortField.USER_CAN_EDIT;
+    case r'WITHIN_POLYGON':
+      return Enum_StoreSortField.WITHIN_POLYGON;
+    case r'ADDRESS_AREA_NAME':
+      return Enum_StoreSortField.ADDRESS_AREA_NAME;
+    case r'ADDRESS_STREET_NAME':
+      return Enum_StoreSortField.ADDRESS_STREET_NAME;
+    case r'ADDRESS_DISTRICT_NAME':
+      return Enum_StoreSortField.ADDRESS_DISTRICT_NAME;
+    case r'ADDRESS_FULL_ADDRESS_TEXT':
+      return Enum_StoreSortField.ADDRESS_FULL_ADDRESS_TEXT;
+    case r'ADMIN_FAMILY_NAME':
+      return Enum_StoreSortField.ADMIN_FAMILY_NAME;
+    case r'LAST_EDIT':
+      return Enum_StoreSortField.LAST_EDIT;
+    case r'LAST_EDIT_USER_NAME':
+      return Enum_StoreSortField.LAST_EDIT_USER_NAME;
+    default:
+      return Enum_StoreSortField.$unknown;
+  }
+}
+
+enum Enum_DistrictSortField {
+  ID,
+  NAME,
+  $unknown;
+
+  factory Enum_DistrictSortField.fromJson(String value) =>
+      fromJson_Enum_DistrictSortField(value);
+
+  String toJson() => toJson_Enum_DistrictSortField(this);
+}
+
+String toJson_Enum_DistrictSortField(Enum_DistrictSortField e) {
+  switch (e) {
+    case Enum_DistrictSortField.ID:
+      return r'ID';
+    case Enum_DistrictSortField.NAME:
+      return r'NAME';
+    case Enum_DistrictSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_DistrictSortField fromJson_Enum_DistrictSortField(String value) {
+  switch (value) {
+    case r'ID':
+      return Enum_DistrictSortField.ID;
+    case r'NAME':
+      return Enum_DistrictSortField.NAME;
+    default:
+      return Enum_DistrictSortField.$unknown;
+  }
+}
+
+enum Enum_AreaStreetSortField {
+  AREA_ID,
+  STREET_ID,
+  $unknown;
+
+  factory Enum_AreaStreetSortField.fromJson(String value) =>
+      fromJson_Enum_AreaStreetSortField(value);
+
+  String toJson() => toJson_Enum_AreaStreetSortField(this);
+}
+
+String toJson_Enum_AreaStreetSortField(Enum_AreaStreetSortField e) {
+  switch (e) {
+    case Enum_AreaStreetSortField.AREA_ID:
+      return r'AREA_ID';
+    case Enum_AreaStreetSortField.STREET_ID:
+      return r'STREET_ID';
+    case Enum_AreaStreetSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AreaStreetSortField fromJson_Enum_AreaStreetSortField(String value) {
+  switch (value) {
+    case r'AREA_ID':
+      return Enum_AreaStreetSortField.AREA_ID;
+    case r'STREET_ID':
+      return Enum_AreaStreetSortField.STREET_ID;
+    default:
+      return Enum_AreaStreetSortField.$unknown;
+  }
+}
+
+enum Enum_AreaSortField {
+  ID,
+  NAME,
+  BOUNDS,
+  COLOR,
+  PHOTO_UPDATED_AT,
+  BLURHASH,
+  USER_CAN_EDIT,
+  WITHIN_POLYGON,
+  CONTAINS_POINT,
+  LAST_EDIT,
+  LAST_EDIT_USER_NAME,
+  LAST_VISIT,
+  LAST_VISIT_USER_NAME,
+  $unknown;
+
+  factory Enum_AreaSortField.fromJson(String value) =>
+      fromJson_Enum_AreaSortField(value);
+
+  String toJson() => toJson_Enum_AreaSortField(this);
+}
+
+String toJson_Enum_AreaSortField(Enum_AreaSortField e) {
+  switch (e) {
+    case Enum_AreaSortField.ID:
+      return r'ID';
+    case Enum_AreaSortField.NAME:
+      return r'NAME';
+    case Enum_AreaSortField.BOUNDS:
+      return r'BOUNDS';
+    case Enum_AreaSortField.COLOR:
+      return r'COLOR';
+    case Enum_AreaSortField.PHOTO_UPDATED_AT:
+      return r'PHOTO_UPDATED_AT';
+    case Enum_AreaSortField.BLURHASH:
+      return r'BLURHASH';
+    case Enum_AreaSortField.USER_CAN_EDIT:
+      return r'USER_CAN_EDIT';
+    case Enum_AreaSortField.WITHIN_POLYGON:
+      return r'WITHIN_POLYGON';
+    case Enum_AreaSortField.CONTAINS_POINT:
+      return r'CONTAINS_POINT';
+    case Enum_AreaSortField.LAST_EDIT:
+      return r'LAST_EDIT';
+    case Enum_AreaSortField.LAST_EDIT_USER_NAME:
+      return r'LAST_EDIT_USER_NAME';
+    case Enum_AreaSortField.LAST_VISIT:
+      return r'LAST_VISIT';
+    case Enum_AreaSortField.LAST_VISIT_USER_NAME:
+      return r'LAST_VISIT_USER_NAME';
+    case Enum_AreaSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AreaSortField fromJson_Enum_AreaSortField(String value) {
+  switch (value) {
+    case r'ID':
+      return Enum_AreaSortField.ID;
+    case r'NAME':
+      return Enum_AreaSortField.NAME;
+    case r'BOUNDS':
+      return Enum_AreaSortField.BOUNDS;
+    case r'COLOR':
+      return Enum_AreaSortField.COLOR;
+    case r'PHOTO_UPDATED_AT':
+      return Enum_AreaSortField.PHOTO_UPDATED_AT;
+    case r'BLURHASH':
+      return Enum_AreaSortField.BLURHASH;
+    case r'USER_CAN_EDIT':
+      return Enum_AreaSortField.USER_CAN_EDIT;
+    case r'WITHIN_POLYGON':
+      return Enum_AreaSortField.WITHIN_POLYGON;
+    case r'CONTAINS_POINT':
+      return Enum_AreaSortField.CONTAINS_POINT;
+    case r'LAST_EDIT':
+      return Enum_AreaSortField.LAST_EDIT;
+    case r'LAST_EDIT_USER_NAME':
+      return Enum_AreaSortField.LAST_EDIT_USER_NAME;
+    case r'LAST_VISIT':
+      return Enum_AreaSortField.LAST_VISIT;
+    case r'LAST_VISIT_USER_NAME':
+      return Enum_AreaSortField.LAST_VISIT_USER_NAME;
+    default:
+      return Enum_AreaSortField.$unknown;
+  }
+}
+
+enum Enum_AddressSortField {
+  ID,
+  COUNTRY_ISO_CODE,
+  DISTRICT_ID,
+  AREA_ID,
+  STREET_ID,
+  SUBSTREET_NAME,
+  GEOLOCATION,
+  STOREY_NUMBER,
+  HOUSE_NUMBER,
+  APARTMENT_NUMBER,
+  SPECIAL_LANDMARK,
+  FAMILY_ID,
+  STORE_ID,
+  HOUSE_CODE,
+  FULL_ADDRESS_TEXT,
+  WITHIN_POLYGON,
+  $unknown;
+
+  factory Enum_AddressSortField.fromJson(String value) =>
+      fromJson_Enum_AddressSortField(value);
+
+  String toJson() => toJson_Enum_AddressSortField(this);
+}
+
+String toJson_Enum_AddressSortField(Enum_AddressSortField e) {
+  switch (e) {
+    case Enum_AddressSortField.ID:
+      return r'ID';
+    case Enum_AddressSortField.COUNTRY_ISO_CODE:
+      return r'COUNTRY_ISO_CODE';
+    case Enum_AddressSortField.DISTRICT_ID:
+      return r'DISTRICT_ID';
+    case Enum_AddressSortField.AREA_ID:
+      return r'AREA_ID';
+    case Enum_AddressSortField.STREET_ID:
+      return r'STREET_ID';
+    case Enum_AddressSortField.SUBSTREET_NAME:
+      return r'SUBSTREET_NAME';
+    case Enum_AddressSortField.GEOLOCATION:
+      return r'GEOLOCATION';
+    case Enum_AddressSortField.STOREY_NUMBER:
+      return r'STOREY_NUMBER';
+    case Enum_AddressSortField.HOUSE_NUMBER:
+      return r'HOUSE_NUMBER';
+    case Enum_AddressSortField.APARTMENT_NUMBER:
+      return r'APARTMENT_NUMBER';
+    case Enum_AddressSortField.SPECIAL_LANDMARK:
+      return r'SPECIAL_LANDMARK';
+    case Enum_AddressSortField.FAMILY_ID:
+      return r'FAMILY_ID';
+    case Enum_AddressSortField.STORE_ID:
+      return r'STORE_ID';
+    case Enum_AddressSortField.HOUSE_CODE:
+      return r'HOUSE_CODE';
+    case Enum_AddressSortField.FULL_ADDRESS_TEXT:
+      return r'FULL_ADDRESS_TEXT';
+    case Enum_AddressSortField.WITHIN_POLYGON:
+      return r'WITHIN_POLYGON';
+    case Enum_AddressSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AddressSortField fromJson_Enum_AddressSortField(String value) {
+  switch (value) {
+    case r'ID':
+      return Enum_AddressSortField.ID;
+    case r'COUNTRY_ISO_CODE':
+      return Enum_AddressSortField.COUNTRY_ISO_CODE;
+    case r'DISTRICT_ID':
+      return Enum_AddressSortField.DISTRICT_ID;
+    case r'AREA_ID':
+      return Enum_AddressSortField.AREA_ID;
+    case r'STREET_ID':
+      return Enum_AddressSortField.STREET_ID;
+    case r'SUBSTREET_NAME':
+      return Enum_AddressSortField.SUBSTREET_NAME;
+    case r'GEOLOCATION':
+      return Enum_AddressSortField.GEOLOCATION;
+    case r'STOREY_NUMBER':
+      return Enum_AddressSortField.STOREY_NUMBER;
+    case r'HOUSE_NUMBER':
+      return Enum_AddressSortField.HOUSE_NUMBER;
+    case r'APARTMENT_NUMBER':
+      return Enum_AddressSortField.APARTMENT_NUMBER;
+    case r'SPECIAL_LANDMARK':
+      return Enum_AddressSortField.SPECIAL_LANDMARK;
+    case r'FAMILY_ID':
+      return Enum_AddressSortField.FAMILY_ID;
+    case r'STORE_ID':
+      return Enum_AddressSortField.STORE_ID;
+    case r'HOUSE_CODE':
+      return Enum_AddressSortField.HOUSE_CODE;
+    case r'FULL_ADDRESS_TEXT':
+      return Enum_AddressSortField.FULL_ADDRESS_TEXT;
+    case r'WITHIN_POLYGON':
+      return Enum_AddressSortField.WITHIN_POLYGON;
+    default:
+      return Enum_AddressSortField.$unknown;
+  }
+}
+
+enum Enum_RosterEntrySortField {
+  MEETING_ID,
+  PERSON_ID,
+  AS_SERVANT,
+  NAME,
+  GENDER,
+  STUDY_YEAR_ID,
+  STUDY_YEAR_NAME,
+  COLOR,
+  PHOTO_UPDATED_AT,
+  BLURHASH,
+  $unknown;
+
+  factory Enum_RosterEntrySortField.fromJson(String value) =>
+      fromJson_Enum_RosterEntrySortField(value);
+
+  String toJson() => toJson_Enum_RosterEntrySortField(this);
+}
+
+String toJson_Enum_RosterEntrySortField(Enum_RosterEntrySortField e) {
+  switch (e) {
+    case Enum_RosterEntrySortField.MEETING_ID:
+      return r'MEETING_ID';
+    case Enum_RosterEntrySortField.PERSON_ID:
+      return r'PERSON_ID';
+    case Enum_RosterEntrySortField.AS_SERVANT:
+      return r'AS_SERVANT';
+    case Enum_RosterEntrySortField.NAME:
+      return r'NAME';
+    case Enum_RosterEntrySortField.GENDER:
+      return r'GENDER';
+    case Enum_RosterEntrySortField.STUDY_YEAR_ID:
+      return r'STUDY_YEAR_ID';
+    case Enum_RosterEntrySortField.STUDY_YEAR_NAME:
+      return r'STUDY_YEAR_NAME';
+    case Enum_RosterEntrySortField.COLOR:
+      return r'COLOR';
+    case Enum_RosterEntrySortField.PHOTO_UPDATED_AT:
+      return r'PHOTO_UPDATED_AT';
+    case Enum_RosterEntrySortField.BLURHASH:
+      return r'BLURHASH';
+    case Enum_RosterEntrySortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_RosterEntrySortField fromJson_Enum_RosterEntrySortField(String value) {
+  switch (value) {
+    case r'MEETING_ID':
+      return Enum_RosterEntrySortField.MEETING_ID;
+    case r'PERSON_ID':
+      return Enum_RosterEntrySortField.PERSON_ID;
+    case r'AS_SERVANT':
+      return Enum_RosterEntrySortField.AS_SERVANT;
+    case r'NAME':
+      return Enum_RosterEntrySortField.NAME;
+    case r'GENDER':
+      return Enum_RosterEntrySortField.GENDER;
+    case r'STUDY_YEAR_ID':
+      return Enum_RosterEntrySortField.STUDY_YEAR_ID;
+    case r'STUDY_YEAR_NAME':
+      return Enum_RosterEntrySortField.STUDY_YEAR_NAME;
+    case r'COLOR':
+      return Enum_RosterEntrySortField.COLOR;
+    case r'PHOTO_UPDATED_AT':
+      return Enum_RosterEntrySortField.PHOTO_UPDATED_AT;
+    case r'BLURHASH':
+      return Enum_RosterEntrySortField.BLURHASH;
+    default:
+      return Enum_RosterEntrySortField.$unknown;
+  }
+}
+
+enum Enum_MeetingDaySortField {
+  MEETING_ID,
+  DAY,
+  STUDY_YEAR_ID,
+  GENDER,
+  PERSONS_COUNT,
+  SERVANTS_COUNT,
+  TOTAL_COUNT,
+  $unknown;
+
+  factory Enum_MeetingDaySortField.fromJson(String value) =>
+      fromJson_Enum_MeetingDaySortField(value);
+
+  String toJson() => toJson_Enum_MeetingDaySortField(this);
+}
+
+String toJson_Enum_MeetingDaySortField(Enum_MeetingDaySortField e) {
+  switch (e) {
+    case Enum_MeetingDaySortField.MEETING_ID:
+      return r'MEETING_ID';
+    case Enum_MeetingDaySortField.DAY:
+      return r'DAY';
+    case Enum_MeetingDaySortField.STUDY_YEAR_ID:
+      return r'STUDY_YEAR_ID';
+    case Enum_MeetingDaySortField.GENDER:
+      return r'GENDER';
+    case Enum_MeetingDaySortField.PERSONS_COUNT:
+      return r'PERSONS_COUNT';
+    case Enum_MeetingDaySortField.SERVANTS_COUNT:
+      return r'SERVANTS_COUNT';
+    case Enum_MeetingDaySortField.TOTAL_COUNT:
+      return r'TOTAL_COUNT';
+    case Enum_MeetingDaySortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_MeetingDaySortField fromJson_Enum_MeetingDaySortField(String value) {
+  switch (value) {
+    case r'MEETING_ID':
+      return Enum_MeetingDaySortField.MEETING_ID;
+    case r'DAY':
+      return Enum_MeetingDaySortField.DAY;
+    case r'STUDY_YEAR_ID':
+      return Enum_MeetingDaySortField.STUDY_YEAR_ID;
+    case r'GENDER':
+      return Enum_MeetingDaySortField.GENDER;
+    case r'PERSONS_COUNT':
+      return Enum_MeetingDaySortField.PERSONS_COUNT;
+    case r'SERVANTS_COUNT':
+      return Enum_MeetingDaySortField.SERVANTS_COUNT;
+    case r'TOTAL_COUNT':
+      return Enum_MeetingDaySortField.TOTAL_COUNT;
+    default:
+      return Enum_MeetingDaySortField.$unknown;
+  }
+}
+
+enum Enum_MeetingSortField {
+  ID,
+  NAME,
+  SERVICE_ID,
+  SERVICE_STUDY_YEAR,
+  SERVICE_GENDER,
+  GROUP_ID,
+  AUDIENCE,
+  IS_ARCHIVED,
+  COLOR,
+  SHOW_KODAS_CHECKBOX,
+  SERVICE_NAME,
+  GROUP_NAME,
+  STUDY_YEAR_ORDER,
+  $unknown;
+
+  factory Enum_MeetingSortField.fromJson(String value) =>
+      fromJson_Enum_MeetingSortField(value);
+
+  String toJson() => toJson_Enum_MeetingSortField(this);
+}
+
+String toJson_Enum_MeetingSortField(Enum_MeetingSortField e) {
+  switch (e) {
+    case Enum_MeetingSortField.ID:
+      return r'ID';
+    case Enum_MeetingSortField.NAME:
+      return r'NAME';
+    case Enum_MeetingSortField.SERVICE_ID:
+      return r'SERVICE_ID';
+    case Enum_MeetingSortField.SERVICE_STUDY_YEAR:
+      return r'SERVICE_STUDY_YEAR';
+    case Enum_MeetingSortField.SERVICE_GENDER:
+      return r'SERVICE_GENDER';
+    case Enum_MeetingSortField.GROUP_ID:
+      return r'GROUP_ID';
+    case Enum_MeetingSortField.AUDIENCE:
+      return r'AUDIENCE';
+    case Enum_MeetingSortField.IS_ARCHIVED:
+      return r'IS_ARCHIVED';
+    case Enum_MeetingSortField.COLOR:
+      return r'COLOR';
+    case Enum_MeetingSortField.SHOW_KODAS_CHECKBOX:
+      return r'SHOW_KODAS_CHECKBOX';
+    case Enum_MeetingSortField.SERVICE_NAME:
+      return r'SERVICE_NAME';
+    case Enum_MeetingSortField.GROUP_NAME:
+      return r'GROUP_NAME';
+    case Enum_MeetingSortField.STUDY_YEAR_ORDER:
+      return r'STUDY_YEAR_ORDER';
+    case Enum_MeetingSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_MeetingSortField fromJson_Enum_MeetingSortField(String value) {
+  switch (value) {
+    case r'ID':
+      return Enum_MeetingSortField.ID;
+    case r'NAME':
+      return Enum_MeetingSortField.NAME;
+    case r'SERVICE_ID':
+      return Enum_MeetingSortField.SERVICE_ID;
+    case r'SERVICE_STUDY_YEAR':
+      return Enum_MeetingSortField.SERVICE_STUDY_YEAR;
+    case r'SERVICE_GENDER':
+      return Enum_MeetingSortField.SERVICE_GENDER;
+    case r'GROUP_ID':
+      return Enum_MeetingSortField.GROUP_ID;
+    case r'AUDIENCE':
+      return Enum_MeetingSortField.AUDIENCE;
+    case r'IS_ARCHIVED':
+      return Enum_MeetingSortField.IS_ARCHIVED;
+    case r'COLOR':
+      return Enum_MeetingSortField.COLOR;
+    case r'SHOW_KODAS_CHECKBOX':
+      return Enum_MeetingSortField.SHOW_KODAS_CHECKBOX;
+    case r'SERVICE_NAME':
+      return Enum_MeetingSortField.SERVICE_NAME;
+    case r'GROUP_NAME':
+      return Enum_MeetingSortField.GROUP_NAME;
+    case r'STUDY_YEAR_ORDER':
+      return Enum_MeetingSortField.STUDY_YEAR_ORDER;
+    default:
+      return Enum_MeetingSortField.$unknown;
+  }
+}
+
+enum Enum_AttendanceRecordSortField {
+  ID,
+  MEETING_ID,
+  PERSON_ID,
+  DATETIME,
+  AS_SERVANT,
+  RECORDED_BY,
+  DAY,
+  TIME,
+  MEETING_NAME,
+  PERSON_NAME,
+  RECORDED_BY_USER_NAME,
+  $unknown;
+
+  factory Enum_AttendanceRecordSortField.fromJson(String value) =>
+      fromJson_Enum_AttendanceRecordSortField(value);
+
+  String toJson() => toJson_Enum_AttendanceRecordSortField(this);
+}
+
+String toJson_Enum_AttendanceRecordSortField(Enum_AttendanceRecordSortField e) {
+  switch (e) {
+    case Enum_AttendanceRecordSortField.ID:
+      return r'ID';
+    case Enum_AttendanceRecordSortField.MEETING_ID:
+      return r'MEETING_ID';
+    case Enum_AttendanceRecordSortField.PERSON_ID:
+      return r'PERSON_ID';
+    case Enum_AttendanceRecordSortField.DATETIME:
+      return r'DATETIME';
+    case Enum_AttendanceRecordSortField.AS_SERVANT:
+      return r'AS_SERVANT';
+    case Enum_AttendanceRecordSortField.RECORDED_BY:
+      return r'RECORDED_BY';
+    case Enum_AttendanceRecordSortField.DAY:
+      return r'DAY';
+    case Enum_AttendanceRecordSortField.TIME:
+      return r'TIME';
+    case Enum_AttendanceRecordSortField.MEETING_NAME:
+      return r'MEETING_NAME';
+    case Enum_AttendanceRecordSortField.PERSON_NAME:
+      return r'PERSON_NAME';
+    case Enum_AttendanceRecordSortField.RECORDED_BY_USER_NAME:
+      return r'RECORDED_BY_USER_NAME';
+    case Enum_AttendanceRecordSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AttendanceRecordSortField fromJson_Enum_AttendanceRecordSortField(
+  String value,
+) {
+  switch (value) {
+    case r'ID':
+      return Enum_AttendanceRecordSortField.ID;
+    case r'MEETING_ID':
+      return Enum_AttendanceRecordSortField.MEETING_ID;
+    case r'PERSON_ID':
+      return Enum_AttendanceRecordSortField.PERSON_ID;
+    case r'DATETIME':
+      return Enum_AttendanceRecordSortField.DATETIME;
+    case r'AS_SERVANT':
+      return Enum_AttendanceRecordSortField.AS_SERVANT;
+    case r'RECORDED_BY':
+      return Enum_AttendanceRecordSortField.RECORDED_BY;
+    case r'DAY':
+      return Enum_AttendanceRecordSortField.DAY;
+    case r'TIME':
+      return Enum_AttendanceRecordSortField.TIME;
+    case r'MEETING_NAME':
+      return Enum_AttendanceRecordSortField.MEETING_NAME;
+    case r'PERSON_NAME':
+      return Enum_AttendanceRecordSortField.PERSON_NAME;
+    case r'RECORDED_BY_USER_NAME':
+      return Enum_AttendanceRecordSortField.RECORDED_BY_USER_NAME;
+    default:
+      return Enum_AttendanceRecordSortField.$unknown;
+  }
+}
+
+enum Enum_VisitSortField {
+  VISIT_ID,
+  TABLE,
+  RECORD_ID,
+  TIME,
+  RECORDED_BY,
+  IS_FATHER_VISIT,
+  $unknown;
+
+  factory Enum_VisitSortField.fromJson(String value) =>
+      fromJson_Enum_VisitSortField(value);
+
+  String toJson() => toJson_Enum_VisitSortField(this);
+}
+
+String toJson_Enum_VisitSortField(Enum_VisitSortField e) {
+  switch (e) {
+    case Enum_VisitSortField.VISIT_ID:
+      return r'VISIT_ID';
+    case Enum_VisitSortField.TABLE:
+      return r'TABLE';
+    case Enum_VisitSortField.RECORD_ID:
+      return r'RECORD_ID';
+    case Enum_VisitSortField.TIME:
+      return r'TIME';
+    case Enum_VisitSortField.RECORDED_BY:
+      return r'RECORDED_BY';
+    case Enum_VisitSortField.IS_FATHER_VISIT:
+      return r'IS_FATHER_VISIT';
+    case Enum_VisitSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_VisitSortField fromJson_Enum_VisitSortField(String value) {
+  switch (value) {
+    case r'VISIT_ID':
+      return Enum_VisitSortField.VISIT_ID;
+    case r'TABLE':
+      return Enum_VisitSortField.TABLE;
+    case r'RECORD_ID':
+      return Enum_VisitSortField.RECORD_ID;
+    case r'TIME':
+      return Enum_VisitSortField.TIME;
+    case r'RECORDED_BY':
+      return Enum_VisitSortField.RECORDED_BY;
+    case r'IS_FATHER_VISIT':
+      return Enum_VisitSortField.IS_FATHER_VISIT;
+    default:
+      return Enum_VisitSortField.$unknown;
+  }
+}
+
+enum Enum_LatestVisitSortField {
+  TABLE,
+  RECORD_ID,
+  TIME,
+  RECORDED_BY,
+  VISIT_ID,
+  $unknown;
+
+  factory Enum_LatestVisitSortField.fromJson(String value) =>
+      fromJson_Enum_LatestVisitSortField(value);
+
+  String toJson() => toJson_Enum_LatestVisitSortField(this);
+}
+
+String toJson_Enum_LatestVisitSortField(Enum_LatestVisitSortField e) {
+  switch (e) {
+    case Enum_LatestVisitSortField.TABLE:
+      return r'TABLE';
+    case Enum_LatestVisitSortField.RECORD_ID:
+      return r'RECORD_ID';
+    case Enum_LatestVisitSortField.TIME:
+      return r'TIME';
+    case Enum_LatestVisitSortField.RECORDED_BY:
+      return r'RECORDED_BY';
+    case Enum_LatestVisitSortField.VISIT_ID:
+      return r'VISIT_ID';
+    case Enum_LatestVisitSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_LatestVisitSortField fromJson_Enum_LatestVisitSortField(String value) {
+  switch (value) {
+    case r'TABLE':
+      return Enum_LatestVisitSortField.TABLE;
+    case r'RECORD_ID':
+      return Enum_LatestVisitSortField.RECORD_ID;
+    case r'TIME':
+      return Enum_LatestVisitSortField.TIME;
+    case r'RECORDED_BY':
+      return Enum_LatestVisitSortField.RECORDED_BY;
+    case r'VISIT_ID':
+      return Enum_LatestVisitSortField.VISIT_ID;
+    default:
+      return Enum_LatestVisitSortField.$unknown;
+  }
+}
+
+enum Enum_LatestKodasSortField {
+  PERSON_ID,
+  TIME,
+  RECORDED_BY,
+  $unknown;
+
+  factory Enum_LatestKodasSortField.fromJson(String value) =>
+      fromJson_Enum_LatestKodasSortField(value);
+
+  String toJson() => toJson_Enum_LatestKodasSortField(this);
+}
+
+String toJson_Enum_LatestKodasSortField(Enum_LatestKodasSortField e) {
+  switch (e) {
+    case Enum_LatestKodasSortField.PERSON_ID:
+      return r'PERSON_ID';
+    case Enum_LatestKodasSortField.TIME:
+      return r'TIME';
+    case Enum_LatestKodasSortField.RECORDED_BY:
+      return r'RECORDED_BY';
+    case Enum_LatestKodasSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_LatestKodasSortField fromJson_Enum_LatestKodasSortField(String value) {
+  switch (value) {
+    case r'PERSON_ID':
+      return Enum_LatestKodasSortField.PERSON_ID;
+    case r'TIME':
+      return Enum_LatestKodasSortField.TIME;
+    case r'RECORDED_BY':
+      return Enum_LatestKodasSortField.RECORDED_BY;
+    default:
+      return Enum_LatestKodasSortField.$unknown;
+  }
+}
+
+enum Enum_LatestFatherVisitSortField {
+  TABLE,
+  RECORD_ID,
+  TIME,
+  RECORDED_BY,
+  VISIT_ID,
+  $unknown;
+
+  factory Enum_LatestFatherVisitSortField.fromJson(String value) =>
+      fromJson_Enum_LatestFatherVisitSortField(value);
+
+  String toJson() => toJson_Enum_LatestFatherVisitSortField(this);
+}
+
+String toJson_Enum_LatestFatherVisitSortField(
+  Enum_LatestFatherVisitSortField e,
+) {
+  switch (e) {
+    case Enum_LatestFatherVisitSortField.TABLE:
+      return r'TABLE';
+    case Enum_LatestFatherVisitSortField.RECORD_ID:
+      return r'RECORD_ID';
+    case Enum_LatestFatherVisitSortField.TIME:
+      return r'TIME';
+    case Enum_LatestFatherVisitSortField.RECORDED_BY:
+      return r'RECORDED_BY';
+    case Enum_LatestFatherVisitSortField.VISIT_ID:
+      return r'VISIT_ID';
+    case Enum_LatestFatherVisitSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_LatestFatherVisitSortField fromJson_Enum_LatestFatherVisitSortField(
+  String value,
+) {
+  switch (value) {
+    case r'TABLE':
+      return Enum_LatestFatherVisitSortField.TABLE;
+    case r'RECORD_ID':
+      return Enum_LatestFatherVisitSortField.RECORD_ID;
+    case r'TIME':
+      return Enum_LatestFatherVisitSortField.TIME;
+    case r'RECORDED_BY':
+      return Enum_LatestFatherVisitSortField.RECORDED_BY;
+    case r'VISIT_ID':
+      return Enum_LatestFatherVisitSortField.VISIT_ID;
+    default:
+      return Enum_LatestFatherVisitSortField.$unknown;
+  }
+}
+
+enum Enum_LatestEditSortField {
+  TABLE,
+  RECORD_ID,
+  TIME,
+  RECORDED_BY,
+  $unknown;
+
+  factory Enum_LatestEditSortField.fromJson(String value) =>
+      fromJson_Enum_LatestEditSortField(value);
+
+  String toJson() => toJson_Enum_LatestEditSortField(this);
+}
+
+String toJson_Enum_LatestEditSortField(Enum_LatestEditSortField e) {
+  switch (e) {
+    case Enum_LatestEditSortField.TABLE:
+      return r'TABLE';
+    case Enum_LatestEditSortField.RECORD_ID:
+      return r'RECORD_ID';
+    case Enum_LatestEditSortField.TIME:
+      return r'TIME';
+    case Enum_LatestEditSortField.RECORDED_BY:
+      return r'RECORDED_BY';
+    case Enum_LatestEditSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_LatestEditSortField fromJson_Enum_LatestEditSortField(String value) {
+  switch (value) {
+    case r'TABLE':
+      return Enum_LatestEditSortField.TABLE;
+    case r'RECORD_ID':
+      return Enum_LatestEditSortField.RECORD_ID;
+    case r'TIME':
+      return Enum_LatestEditSortField.TIME;
+    case r'RECORDED_BY':
+      return Enum_LatestEditSortField.RECORDED_BY;
+    default:
+      return Enum_LatestEditSortField.$unknown;
+  }
+}
+
+enum Enum_LatestConfessionSortField {
+  PERSON_ID,
+  TIME,
+  RECORDED_BY,
+  $unknown;
+
+  factory Enum_LatestConfessionSortField.fromJson(String value) =>
+      fromJson_Enum_LatestConfessionSortField(value);
+
+  String toJson() => toJson_Enum_LatestConfessionSortField(this);
+}
+
+String toJson_Enum_LatestConfessionSortField(Enum_LatestConfessionSortField e) {
+  switch (e) {
+    case Enum_LatestConfessionSortField.PERSON_ID:
+      return r'PERSON_ID';
+    case Enum_LatestConfessionSortField.TIME:
+      return r'TIME';
+    case Enum_LatestConfessionSortField.RECORDED_BY:
+      return r'RECORDED_BY';
+    case Enum_LatestConfessionSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_LatestConfessionSortField fromJson_Enum_LatestConfessionSortField(
+  String value,
+) {
+  switch (value) {
+    case r'PERSON_ID':
+      return Enum_LatestConfessionSortField.PERSON_ID;
+    case r'TIME':
+      return Enum_LatestConfessionSortField.TIME;
+    case r'RECORDED_BY':
+      return Enum_LatestConfessionSortField.RECORDED_BY;
+    default:
+      return Enum_LatestConfessionSortField.$unknown;
+  }
+}
+
+enum Enum_LatestCallSortField {
+  PERSON_ID,
+  TIME,
+  RECORDED_BY,
+  $unknown;
+
+  factory Enum_LatestCallSortField.fromJson(String value) =>
+      fromJson_Enum_LatestCallSortField(value);
+
+  String toJson() => toJson_Enum_LatestCallSortField(this);
+}
+
+String toJson_Enum_LatestCallSortField(Enum_LatestCallSortField e) {
+  switch (e) {
+    case Enum_LatestCallSortField.PERSON_ID:
+      return r'PERSON_ID';
+    case Enum_LatestCallSortField.TIME:
+      return r'TIME';
+    case Enum_LatestCallSortField.RECORDED_BY:
+      return r'RECORDED_BY';
+    case Enum_LatestCallSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_LatestCallSortField fromJson_Enum_LatestCallSortField(String value) {
+  switch (value) {
+    case r'PERSON_ID':
+      return Enum_LatestCallSortField.PERSON_ID;
+    case r'TIME':
+      return Enum_LatestCallSortField.TIME;
+    case r'RECORDED_BY':
+      return Enum_LatestCallSortField.RECORDED_BY;
+    default:
+      return Enum_LatestCallSortField.$unknown;
+  }
+}
+
+enum Enum_KodasSortField {
+  ID,
+  DAY_ID,
+  PERSON_ID,
+  RECORDED_BY,
+  TIME,
+  $unknown;
+
+  factory Enum_KodasSortField.fromJson(String value) =>
+      fromJson_Enum_KodasSortField(value);
+
+  String toJson() => toJson_Enum_KodasSortField(this);
+}
+
 String toJson_Enum_KodasSortField(Enum_KodasSortField e) {
   switch (e) {
     case Enum_KodasSortField.ID:

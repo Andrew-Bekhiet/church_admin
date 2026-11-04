@@ -1,6 +1,670 @@
 // Part 82 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_QualificationFilterId<TRes> {
+  factory CopyWith_Input_QualificationFilterId(
+    Input_QualificationFilterId instance,
+    TRes Function(Input_QualificationFilterId) then,
+  ) = _CopyWithImpl_Input_QualificationFilterId;
+
+  factory CopyWith_Input_QualificationFilterId.stub(TRes res) =
+      _CopyWithStubImpl_Input_QualificationFilterId;
+
+  TRes call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_QualificationFilterId<TRes>
+    implements CopyWith_Input_QualificationFilterId<TRes> {
+  _CopyWithImpl_Input_QualificationFilterId(this._instance, this._then);
+
+  final Input_QualificationFilterId _instance;
+
+  final TRes Function(Input_QualificationFilterId) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_QualificationFilterId._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_QualificationFilterId<TRes>
+    implements CopyWith_Input_QualificationFilterId<TRes> {
+  _CopyWithStubImpl_Input_QualificationFilterId(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_QualificationFilterInput {
+  factory Input_QualificationFilterInput({
+    List<Input_QualificationFilterInput>? and,
+    List<Input_QualificationFilterInput>? or,
+    List<Input_QualificationFilterInput>? not,
+    Input_QualificationFilterId? id,
+    Input_QualificationFilterName? name,
+  }) => Input_QualificationFilterInput._({
+    if (and != null) r'and': and,
+    if (or != null) r'or': or,
+    if (not != null) r'not': not,
+    if (id != null) r'id': id,
+    if (name != null) r'name': name,
+  });
+
+  Input_QualificationFilterInput._(this._$data);
+
+  factory Input_QualificationFilterInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('and')) {
+      final l$and = data['and'];
+      result$data['and'] = (l$and as List<dynamic>?)
+          ?.map(
+            (e) => Input_QualificationFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('or')) {
+      final l$or = data['or'];
+      result$data['or'] = (l$or as List<dynamic>?)
+          ?.map(
+            (e) => Input_QualificationFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('not')) {
+      final l$not = data['not'];
+      result$data['not'] = (l$not as List<dynamic>?)
+          ?.map(
+            (e) => Input_QualificationFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : Input_QualificationFilterId.fromJson(
+              (l$id as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : Input_QualificationFilterName.fromJson(
+              (l$name as Map<String, dynamic>),
+            );
+    }
+    return Input_QualificationFilterInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_QualificationFilterInput>? get and =>
+      (_$data['and'] as List<Input_QualificationFilterInput>?);
+
+  List<Input_QualificationFilterInput>? get or =>
+      (_$data['or'] as List<Input_QualificationFilterInput>?);
+
+  List<Input_QualificationFilterInput>? get not =>
+      (_$data['not'] as List<Input_QualificationFilterInput>?);
+
+  Input_QualificationFilterId? get id =>
+      (_$data['id'] as Input_QualificationFilterId?);
+
+  Input_QualificationFilterName? get name =>
+      (_$data['name'] as Input_QualificationFilterName?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('and')) {
+      final l$and = and;
+      result$data['and'] = l$and?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('or')) {
+      final l$or = or;
+      result$data['or'] = l$or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('not')) {
+      final l$not = not;
+      result$data['not'] = l$not?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id?.toJson();
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_QualificationFilterInput<Input_QualificationFilterInput>
+  get copyWith => CopyWith_Input_QualificationFilterInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_QualificationFilterInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$and = and;
+    final lOther$and = other.and;
+    if (_$data.containsKey('and') != other._$data.containsKey('and')) {
+      return false;
+    }
+    if (l$and != null && lOther$and != null) {
+      if (l$and.length != lOther$and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$and.length; i++) {
+        final l$and$entry = l$and[i];
+        final lOther$and$entry = lOther$and[i];
+        if (l$and$entry != lOther$and$entry) {
+          return false;
+        }
+      }
+    } else if (l$and != lOther$and) {
+      return false;
+    }
+    final l$or = or;
+    final lOther$or = other.or;
+    if (_$data.containsKey('or') != other._$data.containsKey('or')) {
+      return false;
+    }
+    if (l$or != null && lOther$or != null) {
+      if (l$or.length != lOther$or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$or.length; i++) {
+        final l$or$entry = l$or[i];
+        final lOther$or$entry = lOther$or[i];
+        if (l$or$entry != lOther$or$entry) {
+          return false;
+        }
+      }
+    } else if (l$or != lOther$or) {
+      return false;
+    }
+    final l$not = not;
+    final lOther$not = other.not;
+    if (_$data.containsKey('not') != other._$data.containsKey('not')) {
+      return false;
+    }
+    if (l$not != null && lOther$not != null) {
+      if (l$not.length != lOther$not.length) {
+        return false;
+      }
+      for (int i = 0; i < l$not.length; i++) {
+        final l$not$entry = l$not[i];
+        final lOther$not$entry = lOther$not[i];
+        if (l$not$entry != lOther$not$entry) {
+          return false;
+        }
+      }
+    } else if (l$not != lOther$not) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$and = and;
+    final l$or = or;
+    final l$not = not;
+    final l$id = id;
+    final l$name = name;
+    return Object.hashAll([
+      _$data.containsKey('and')
+          ? l$and == null
+                ? null
+                : Object.hashAll(l$and.map((v) => v))
+          : const {},
+      _$data.containsKey('or')
+          ? l$or == null
+                ? null
+                : Object.hashAll(l$or.map((v) => v))
+          : const {},
+      _$data.containsKey('not')
+          ? l$not == null
+                ? null
+                : Object.hashAll(l$not.map((v) => v))
+          : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('name') ? l$name : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_QualificationFilterInput<TRes> {
+  factory CopyWith_Input_QualificationFilterInput(
+    Input_QualificationFilterInput instance,
+    TRes Function(Input_QualificationFilterInput) then,
+  ) = _CopyWithImpl_Input_QualificationFilterInput;
+
+  factory CopyWith_Input_QualificationFilterInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_QualificationFilterInput;
+
+  TRes call({
+    List<Input_QualificationFilterInput>? and,
+    List<Input_QualificationFilterInput>? or,
+    List<Input_QualificationFilterInput>? not,
+    Input_QualificationFilterId? id,
+    Input_QualificationFilterName? name,
+  });
+  TRes and(
+    Iterable<Input_QualificationFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_QualificationFilterInput<Input_QualificationFilterInput>
+      >?,
+    )
+    _fn,
+  );
+  TRes or(
+    Iterable<Input_QualificationFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_QualificationFilterInput<Input_QualificationFilterInput>
+      >?,
+    )
+    _fn,
+  );
+  TRes not(
+    Iterable<Input_QualificationFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_QualificationFilterInput<Input_QualificationFilterInput>
+      >?,
+    )
+    _fn,
+  );
+  CopyWith_Input_QualificationFilterId<TRes> get id;
+  CopyWith_Input_QualificationFilterName<TRes> get name;
+}
+
+class _CopyWithImpl_Input_QualificationFilterInput<TRes>
+    implements CopyWith_Input_QualificationFilterInput<TRes> {
+  _CopyWithImpl_Input_QualificationFilterInput(this._instance, this._then);
+
+  final Input_QualificationFilterInput _instance;
+
+  final TRes Function(Input_QualificationFilterInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? and = _undefined,
+    Object? or = _undefined,
+    Object? not = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+  }) => _then(
+    Input_QualificationFilterInput._({
+      ..._instance._$data,
+      if (and != _undefined)
+        'and': (and as List<Input_QualificationFilterInput>?),
+      if (or != _undefined) 'or': (or as List<Input_QualificationFilterInput>?),
+      if (not != _undefined)
+        'not': (not as List<Input_QualificationFilterInput>?),
+      if (id != _undefined) 'id': (id as Input_QualificationFilterId?),
+      if (name != _undefined) 'name': (name as Input_QualificationFilterName?),
+    }),
+  );
+
+  TRes and(
+    Iterable<Input_QualificationFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_QualificationFilterInput<Input_QualificationFilterInput>
+      >?,
+    )
+    _fn,
+  ) => call(
+    and: _fn(
+      _instance.and?.map(
+        (e) => CopyWith_Input_QualificationFilterInput(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  TRes or(
+    Iterable<Input_QualificationFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_QualificationFilterInput<Input_QualificationFilterInput>
+      >?,
+    )
+    _fn,
+  ) => call(
+    or: _fn(
+      _instance.or?.map(
+        (e) => CopyWith_Input_QualificationFilterInput(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  TRes not(
+    Iterable<Input_QualificationFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_QualificationFilterInput<Input_QualificationFilterInput>
+      >?,
+    )
+    _fn,
+  ) => call(
+    not: _fn(
+      _instance.not?.map(
+        (e) => CopyWith_Input_QualificationFilterInput(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  CopyWith_Input_QualificationFilterId<TRes> get id {
+    final local$id = _instance.id;
+    return local$id == null
+        ? CopyWith_Input_QualificationFilterId.stub(_then(_instance))
+        : CopyWith_Input_QualificationFilterId(local$id, (e) => call(id: e));
+  }
+
+  CopyWith_Input_QualificationFilterName<TRes> get name {
+    final local$name = _instance.name;
+    return local$name == null
+        ? CopyWith_Input_QualificationFilterName.stub(_then(_instance))
+        : CopyWith_Input_QualificationFilterName(
+            local$name,
+            (e) => call(name: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_QualificationFilterInput<TRes>
+    implements CopyWith_Input_QualificationFilterInput<TRes> {
+  _CopyWithStubImpl_Input_QualificationFilterInput(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_QualificationFilterInput>? and,
+    List<Input_QualificationFilterInput>? or,
+    List<Input_QualificationFilterInput>? not,
+    Input_QualificationFilterId? id,
+    Input_QualificationFilterName? name,
+  }) => _res;
+
+  and(_fn) => _res;
+
+  or(_fn) => _res;
+
+  not(_fn) => _res;
+
+  CopyWith_Input_QualificationFilterId<TRes> get id =>
+      CopyWith_Input_QualificationFilterId.stub(_res);
+
+  CopyWith_Input_QualificationFilterName<TRes> get name =>
+      CopyWith_Input_QualificationFilterName.stub(_res);
+}
+
+class Input_QualificationSortInput {
+  factory Input_QualificationSortInput({
+    Enum_SortOrder? order,
+    required Enum_QualificationSortField field,
+  }) => Input_QualificationSortInput._({
+    if (order != null) r'order': order,
+    r'field': field,
+  });
+
+  Input_QualificationSortInput._(this._$data);
+
+  factory Input_QualificationSortInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('order')) {
+      final l$order = data['order'];
+      result$data['order'] = l$order == null
+          ? null
+          : fromJson_Enum_SortOrder((l$order as String));
+    }
+    final l$field = data['field'];
+    result$data['field'] = fromJson_Enum_QualificationSortField(
+      (l$field as String),
+    );
+    return Input_QualificationSortInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_SortOrder? get order => (_$data['order'] as Enum_SortOrder?);
+
+  Enum_QualificationSortField get field =>
+      (_$data['field'] as Enum_QualificationSortField);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('order')) {
+      final l$order = order;
+      result$data['order'] = l$order == null
+          ? null
+          : toJson_Enum_SortOrder(l$order);
+    }
+    final l$field = field;
+    result$data['field'] = toJson_Enum_QualificationSortField(l$field);
+    return result$data;
+  }
+
+  CopyWith_Input_QualificationSortInput<Input_QualificationSortInput>
+  get copyWith => CopyWith_Input_QualificationSortInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_QualificationSortInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (_$data.containsKey('order') != other._$data.containsKey('order')) {
+      return false;
+    }
+    if (l$order != lOther$order) {
+      return false;
+    }
+    final l$field = field;
+    final lOther$field = other.field;
+    if (l$field != lOther$field) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$order = order;
+    final l$field = field;
+    return Object.hashAll([
+      _$data.containsKey('order') ? l$order : const {},
+      l$field,
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_QualificationSortInput<TRes> {
+  factory CopyWith_Input_QualificationSortInput(
+    Input_QualificationSortInput instance,
+    TRes Function(Input_QualificationSortInput) then,
+  ) = _CopyWithImpl_Input_QualificationSortInput;
+
+  factory CopyWith_Input_QualificationSortInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_QualificationSortInput;
+
+  TRes call({Enum_SortOrder? order, Enum_QualificationSortField? field});
+}
+
+class _CopyWithImpl_Input_QualificationSortInput<TRes>
+    implements CopyWith_Input_QualificationSortInput<TRes> {
+  _CopyWithImpl_Input_QualificationSortInput(this._instance, this._then);
+
+  final Input_QualificationSortInput _instance;
+
+  final TRes Function(Input_QualificationSortInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? order = _undefined, Object? field = _undefined}) => _then(
+    Input_QualificationSortInput._({
+      ..._instance._$data,
+      if (order != _undefined) 'order': (order as Enum_SortOrder?),
+      if (field != _undefined && field != null)
+        'field': (field as Enum_QualificationSortField),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_QualificationSortInput<TRes>
+    implements CopyWith_Input_QualificationSortInput<TRes> {
+  _CopyWithStubImpl_Input_QualificationSortInput(this._res);
+
+  TRes _res;
+
+  call({Enum_SortOrder? order, Enum_QualificationSortField? field}) => _res;
+}
+
+class Input_CreatePersonTypeInput {
+  factory Input_CreatePersonTypeInput({required String name}) =>
+      Input_CreatePersonTypeInput._({r'name': name});
+
+  Input_CreatePersonTypeInput._(this._$data);
+
+  factory Input_CreatePersonTypeInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    return Input_CreatePersonTypeInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    return result$data;
+  }
+
+  CopyWith_Input_CreatePersonTypeInput<Input_CreatePersonTypeInput>
+  get copyWith => CopyWith_Input_CreatePersonTypeInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreatePersonTypeInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    return Object.hashAll([l$name]);
+  }
+}
+
+abstract class CopyWith_Input_CreatePersonTypeInput<TRes> {
+  factory CopyWith_Input_CreatePersonTypeInput(
+    Input_CreatePersonTypeInput instance,
+    TRes Function(Input_CreatePersonTypeInput) then,
+  ) = _CopyWithImpl_Input_CreatePersonTypeInput;
+
+  factory CopyWith_Input_CreatePersonTypeInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreatePersonTypeInput;
+
+  TRes call({String? name});
+}
+
 class _CopyWithImpl_Input_CreatePersonTypeInput<TRes>
     implements CopyWith_Input_CreatePersonTypeInput<TRes> {
   _CopyWithImpl_Input_CreatePersonTypeInput(this._instance, this._then);
@@ -1933,699 +2597,6 @@ class Input_PersonTypeFilterId {
           : const {},
       _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
       _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_PersonTypeFilterId<TRes> {
-  factory CopyWith_Input_PersonTypeFilterId(
-    Input_PersonTypeFilterId instance,
-    TRes Function(Input_PersonTypeFilterId) then,
-  ) = _CopyWithImpl_Input_PersonTypeFilterId;
-
-  factory CopyWith_Input_PersonTypeFilterId.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonTypeFilterId;
-
-  TRes call({
-    bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-  });
-}
-
-class _CopyWithImpl_Input_PersonTypeFilterId<TRes>
-    implements CopyWith_Input_PersonTypeFilterId<TRes> {
-  _CopyWithImpl_Input_PersonTypeFilterId(this._instance, this._then);
-
-  final Input_PersonTypeFilterId _instance;
-
-  final TRes Function(Input_PersonTypeFilterId) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? isNil = _undefined,
-    Object? eq = _undefined,
-    Object? notEq = _undefined,
-    Object? $in = _undefined,
-    Object? lessThan = _undefined,
-    Object? greaterThan = _undefined,
-    Object? lessThanOrEqual = _undefined,
-    Object? greaterThanOrEqual = _undefined,
-    Object? isDistinctFrom = _undefined,
-    Object? isNotDistinctFrom = _undefined,
-  }) => _then(
-    Input_PersonTypeFilterId._({
-      ..._instance._$data,
-      if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as String?),
-      if (notEq != _undefined) 'notEq': (notEq as String?),
-      if ($in != _undefined) 'in': ($in as List<String>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
-      if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as String?),
-      if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as String?),
-      if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as String?),
-      if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as String?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_PersonTypeFilterId<TRes>
-    implements CopyWith_Input_PersonTypeFilterId<TRes> {
-  _CopyWithStubImpl_Input_PersonTypeFilterId(this._res);
-
-  TRes _res;
-
-  call({
-    bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-  }) => _res;
-}
-
-class Input_PersonTypeFilterInput {
-  factory Input_PersonTypeFilterInput({
-    List<Input_PersonTypeFilterInput>? and,
-    List<Input_PersonTypeFilterInput>? or,
-    List<Input_PersonTypeFilterInput>? not,
-    Input_PersonTypeFilterId? id,
-    Input_PersonTypeFilterName? name,
-    Input_PersonTypeFilterOrder? order,
-    Input_PersonTypeFilterIsFamilyAdmin? isFamilyAdmin,
-    Input_PersonTypeFilterIsHidden? isHidden,
-  }) => Input_PersonTypeFilterInput._({
-    if (and != null) r'and': and,
-    if (or != null) r'or': or,
-    if (not != null) r'not': not,
-    if (id != null) r'id': id,
-    if (name != null) r'name': name,
-    if (order != null) r'order': order,
-    if (isFamilyAdmin != null) r'isFamilyAdmin': isFamilyAdmin,
-    if (isHidden != null) r'isHidden': isHidden,
-  });
-
-  Input_PersonTypeFilterInput._(this._$data);
-
-  factory Input_PersonTypeFilterInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('and')) {
-      final l$and = data['and'];
-      result$data['and'] = (l$and as List<dynamic>?)
-          ?.map(
-            (e) => Input_PersonTypeFilterInput.fromJson(
-              (e as Map<String, dynamic>),
-            ),
-          )
-          .toList();
-    }
-    if (data.containsKey('or')) {
-      final l$or = data['or'];
-      result$data['or'] = (l$or as List<dynamic>?)
-          ?.map(
-            (e) => Input_PersonTypeFilterInput.fromJson(
-              (e as Map<String, dynamic>),
-            ),
-          )
-          .toList();
-    }
-    if (data.containsKey('not')) {
-      final l$not = data['not'];
-      result$data['not'] = (l$not as List<dynamic>?)
-          ?.map(
-            (e) => Input_PersonTypeFilterInput.fromJson(
-              (e as Map<String, dynamic>),
-            ),
-          )
-          .toList();
-    }
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] = l$id == null
-          ? null
-          : Input_PersonTypeFilterId.fromJson((l$id as Map<String, dynamic>));
-    }
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = l$name == null
-          ? null
-          : Input_PersonTypeFilterName.fromJson(
-              (l$name as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('order')) {
-      final l$order = data['order'];
-      result$data['order'] = l$order == null
-          ? null
-          : Input_PersonTypeFilterOrder.fromJson(
-              (l$order as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('isFamilyAdmin')) {
-      final l$isFamilyAdmin = data['isFamilyAdmin'];
-      result$data['isFamilyAdmin'] = l$isFamilyAdmin == null
-          ? null
-          : Input_PersonTypeFilterIsFamilyAdmin.fromJson(
-              (l$isFamilyAdmin as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('isHidden')) {
-      final l$isHidden = data['isHidden'];
-      result$data['isHidden'] = l$isHidden == null
-          ? null
-          : Input_PersonTypeFilterIsHidden.fromJson(
-              (l$isHidden as Map<String, dynamic>),
-            );
-    }
-    return Input_PersonTypeFilterInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  List<Input_PersonTypeFilterInput>? get and =>
-      (_$data['and'] as List<Input_PersonTypeFilterInput>?);
-
-  List<Input_PersonTypeFilterInput>? get or =>
-      (_$data['or'] as List<Input_PersonTypeFilterInput>?);
-
-  List<Input_PersonTypeFilterInput>? get not =>
-      (_$data['not'] as List<Input_PersonTypeFilterInput>?);
-
-  Input_PersonTypeFilterId? get id =>
-      (_$data['id'] as Input_PersonTypeFilterId?);
-
-  Input_PersonTypeFilterName? get name =>
-      (_$data['name'] as Input_PersonTypeFilterName?);
-
-  Input_PersonTypeFilterOrder? get order =>
-      (_$data['order'] as Input_PersonTypeFilterOrder?);
-
-  Input_PersonTypeFilterIsFamilyAdmin? get isFamilyAdmin =>
-      (_$data['isFamilyAdmin'] as Input_PersonTypeFilterIsFamilyAdmin?);
-
-  Input_PersonTypeFilterIsHidden? get isHidden =>
-      (_$data['isHidden'] as Input_PersonTypeFilterIsHidden?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('and')) {
-      final l$and = and;
-      result$data['and'] = l$and?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('or')) {
-      final l$or = or;
-      result$data['or'] = l$or?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('not')) {
-      final l$not = not;
-      result$data['not'] = l$not?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id?.toJson();
-    }
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name?.toJson();
-    }
-    if (_$data.containsKey('order')) {
-      final l$order = order;
-      result$data['order'] = l$order?.toJson();
-    }
-    if (_$data.containsKey('isFamilyAdmin')) {
-      final l$isFamilyAdmin = isFamilyAdmin;
-      result$data['isFamilyAdmin'] = l$isFamilyAdmin?.toJson();
-    }
-    if (_$data.containsKey('isHidden')) {
-      final l$isHidden = isHidden;
-      result$data['isHidden'] = l$isHidden?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_PersonTypeFilterInput<Input_PersonTypeFilterInput>
-  get copyWith => CopyWith_Input_PersonTypeFilterInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_PersonTypeFilterInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$and = and;
-    final lOther$and = other.and;
-    if (_$data.containsKey('and') != other._$data.containsKey('and')) {
-      return false;
-    }
-    if (l$and != null && lOther$and != null) {
-      if (l$and.length != lOther$and.length) {
-        return false;
-      }
-      for (int i = 0; i < l$and.length; i++) {
-        final l$and$entry = l$and[i];
-        final lOther$and$entry = lOther$and[i];
-        if (l$and$entry != lOther$and$entry) {
-          return false;
-        }
-      }
-    } else if (l$and != lOther$and) {
-      return false;
-    }
-    final l$or = or;
-    final lOther$or = other.or;
-    if (_$data.containsKey('or') != other._$data.containsKey('or')) {
-      return false;
-    }
-    if (l$or != null && lOther$or != null) {
-      if (l$or.length != lOther$or.length) {
-        return false;
-      }
-      for (int i = 0; i < l$or.length; i++) {
-        final l$or$entry = l$or[i];
-        final lOther$or$entry = lOther$or[i];
-        if (l$or$entry != lOther$or$entry) {
-          return false;
-        }
-      }
-    } else if (l$or != lOther$or) {
-      return false;
-    }
-    final l$not = not;
-    final lOther$not = other.not;
-    if (_$data.containsKey('not') != other._$data.containsKey('not')) {
-      return false;
-    }
-    if (l$not != null && lOther$not != null) {
-      if (l$not.length != lOther$not.length) {
-        return false;
-      }
-      for (int i = 0; i < l$not.length; i++) {
-        final l$not$entry = l$not[i];
-        final lOther$not$entry = lOther$not[i];
-        if (l$not$entry != lOther$not$entry) {
-          return false;
-        }
-      }
-    } else if (l$not != lOther$not) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$order = order;
-    final lOther$order = other.order;
-    if (_$data.containsKey('order') != other._$data.containsKey('order')) {
-      return false;
-    }
-    if (l$order != lOther$order) {
-      return false;
-    }
-    final l$isFamilyAdmin = isFamilyAdmin;
-    final lOther$isFamilyAdmin = other.isFamilyAdmin;
-    if (_$data.containsKey('isFamilyAdmin') !=
-        other._$data.containsKey('isFamilyAdmin')) {
-      return false;
-    }
-    if (l$isFamilyAdmin != lOther$isFamilyAdmin) {
-      return false;
-    }
-    final l$isHidden = isHidden;
-    final lOther$isHidden = other.isHidden;
-    if (_$data.containsKey('isHidden') !=
-        other._$data.containsKey('isHidden')) {
-      return false;
-    }
-    if (l$isHidden != lOther$isHidden) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$and = and;
-    final l$or = or;
-    final l$not = not;
-    final l$id = id;
-    final l$name = name;
-    final l$order = order;
-    final l$isFamilyAdmin = isFamilyAdmin;
-    final l$isHidden = isHidden;
-    return Object.hashAll([
-      _$data.containsKey('and')
-          ? l$and == null
-                ? null
-                : Object.hashAll(l$and.map((v) => v))
-          : const {},
-      _$data.containsKey('or')
-          ? l$or == null
-                ? null
-                : Object.hashAll(l$or.map((v) => v))
-          : const {},
-      _$data.containsKey('not')
-          ? l$not == null
-                ? null
-                : Object.hashAll(l$not.map((v) => v))
-          : const {},
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('order') ? l$order : const {},
-      _$data.containsKey('isFamilyAdmin') ? l$isFamilyAdmin : const {},
-      _$data.containsKey('isHidden') ? l$isHidden : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_PersonTypeFilterInput<TRes> {
-  factory CopyWith_Input_PersonTypeFilterInput(
-    Input_PersonTypeFilterInput instance,
-    TRes Function(Input_PersonTypeFilterInput) then,
-  ) = _CopyWithImpl_Input_PersonTypeFilterInput;
-
-  factory CopyWith_Input_PersonTypeFilterInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonTypeFilterInput;
-
-  TRes call({
-    List<Input_PersonTypeFilterInput>? and,
-    List<Input_PersonTypeFilterInput>? or,
-    List<Input_PersonTypeFilterInput>? not,
-    Input_PersonTypeFilterId? id,
-    Input_PersonTypeFilterName? name,
-    Input_PersonTypeFilterOrder? order,
-    Input_PersonTypeFilterIsFamilyAdmin? isFamilyAdmin,
-    Input_PersonTypeFilterIsHidden? isHidden,
-  });
-  TRes and(
-    Iterable<Input_PersonTypeFilterInput>? Function(
-      Iterable<
-        CopyWith_Input_PersonTypeFilterInput<Input_PersonTypeFilterInput>
-      >?,
-    )
-    _fn,
-  );
-  TRes or(
-    Iterable<Input_PersonTypeFilterInput>? Function(
-      Iterable<
-        CopyWith_Input_PersonTypeFilterInput<Input_PersonTypeFilterInput>
-      >?,
-    )
-    _fn,
-  );
-  TRes not(
-    Iterable<Input_PersonTypeFilterInput>? Function(
-      Iterable<
-        CopyWith_Input_PersonTypeFilterInput<Input_PersonTypeFilterInput>
-      >?,
-    )
-    _fn,
-  );
-  CopyWith_Input_PersonTypeFilterId<TRes> get id;
-  CopyWith_Input_PersonTypeFilterName<TRes> get name;
-  CopyWith_Input_PersonTypeFilterOrder<TRes> get order;
-  CopyWith_Input_PersonTypeFilterIsFamilyAdmin<TRes> get isFamilyAdmin;
-  CopyWith_Input_PersonTypeFilterIsHidden<TRes> get isHidden;
-}
-
-class _CopyWithImpl_Input_PersonTypeFilterInput<TRes>
-    implements CopyWith_Input_PersonTypeFilterInput<TRes> {
-  _CopyWithImpl_Input_PersonTypeFilterInput(this._instance, this._then);
-
-  final Input_PersonTypeFilterInput _instance;
-
-  final TRes Function(Input_PersonTypeFilterInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? and = _undefined,
-    Object? or = _undefined,
-    Object? not = _undefined,
-    Object? id = _undefined,
-    Object? name = _undefined,
-    Object? order = _undefined,
-    Object? isFamilyAdmin = _undefined,
-    Object? isHidden = _undefined,
-  }) => _then(
-    Input_PersonTypeFilterInput._({
-      ..._instance._$data,
-      if (and != _undefined) 'and': (and as List<Input_PersonTypeFilterInput>?),
-      if (or != _undefined) 'or': (or as List<Input_PersonTypeFilterInput>?),
-      if (not != _undefined) 'not': (not as List<Input_PersonTypeFilterInput>?),
-      if (id != _undefined) 'id': (id as Input_PersonTypeFilterId?),
-      if (name != _undefined) 'name': (name as Input_PersonTypeFilterName?),
-      if (order != _undefined) 'order': (order as Input_PersonTypeFilterOrder?),
-      if (isFamilyAdmin != _undefined)
-        'isFamilyAdmin':
-            (isFamilyAdmin as Input_PersonTypeFilterIsFamilyAdmin?),
-      if (isHidden != _undefined)
-        'isHidden': (isHidden as Input_PersonTypeFilterIsHidden?),
-    }),
-  );
-
-  TRes and(
-    Iterable<Input_PersonTypeFilterInput>? Function(
-      Iterable<
-        CopyWith_Input_PersonTypeFilterInput<Input_PersonTypeFilterInput>
-      >?,
-    )
-    _fn,
-  ) => call(
-    and: _fn(
-      _instance.and?.map(
-        (e) => CopyWith_Input_PersonTypeFilterInput(e, (i) => i),
-      ),
-    )?.toList(),
-  );
-
-  TRes or(
-    Iterable<Input_PersonTypeFilterInput>? Function(
-      Iterable<
-        CopyWith_Input_PersonTypeFilterInput<Input_PersonTypeFilterInput>
-      >?,
-    )
-    _fn,
-  ) => call(
-    or: _fn(
-      _instance.or?.map(
-        (e) => CopyWith_Input_PersonTypeFilterInput(e, (i) => i),
-      ),
-    )?.toList(),
-  );
-
-  TRes not(
-    Iterable<Input_PersonTypeFilterInput>? Function(
-      Iterable<
-        CopyWith_Input_PersonTypeFilterInput<Input_PersonTypeFilterInput>
-      >?,
-    )
-    _fn,
-  ) => call(
-    not: _fn(
-      _instance.not?.map(
-        (e) => CopyWith_Input_PersonTypeFilterInput(e, (i) => i),
-      ),
-    )?.toList(),
-  );
-
-  CopyWith_Input_PersonTypeFilterId<TRes> get id {
-    final local$id = _instance.id;
-    return local$id == null
-        ? CopyWith_Input_PersonTypeFilterId.stub(_then(_instance))
-        : CopyWith_Input_PersonTypeFilterId(local$id, (e) => call(id: e));
-  }
-
-  CopyWith_Input_PersonTypeFilterName<TRes> get name {
-    final local$name = _instance.name;
-    return local$name == null
-        ? CopyWith_Input_PersonTypeFilterName.stub(_then(_instance))
-        : CopyWith_Input_PersonTypeFilterName(local$name, (e) => call(name: e));
-  }
-
-  CopyWith_Input_PersonTypeFilterOrder<TRes> get order {
-    final local$order = _instance.order;
-    return local$order == null
-        ? CopyWith_Input_PersonTypeFilterOrder.stub(_then(_instance))
-        : CopyWith_Input_PersonTypeFilterOrder(
-            local$order,
-            (e) => call(order: e),
-          );
-  }
-
-  CopyWith_Input_PersonTypeFilterIsFamilyAdmin<TRes> get isFamilyAdmin {
-    final local$isFamilyAdmin = _instance.isFamilyAdmin;
-    return local$isFamilyAdmin == null
-        ? CopyWith_Input_PersonTypeFilterIsFamilyAdmin.stub(_then(_instance))
-        : CopyWith_Input_PersonTypeFilterIsFamilyAdmin(
-            local$isFamilyAdmin,
-            (e) => call(isFamilyAdmin: e),
-          );
-  }
-
-  CopyWith_Input_PersonTypeFilterIsHidden<TRes> get isHidden {
-    final local$isHidden = _instance.isHidden;
-    return local$isHidden == null
-        ? CopyWith_Input_PersonTypeFilterIsHidden.stub(_then(_instance))
-        : CopyWith_Input_PersonTypeFilterIsHidden(
-            local$isHidden,
-            (e) => call(isHidden: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_PersonTypeFilterInput<TRes>
-    implements CopyWith_Input_PersonTypeFilterInput<TRes> {
-  _CopyWithStubImpl_Input_PersonTypeFilterInput(this._res);
-
-  TRes _res;
-
-  call({
-    List<Input_PersonTypeFilterInput>? and,
-    List<Input_PersonTypeFilterInput>? or,
-    List<Input_PersonTypeFilterInput>? not,
-    Input_PersonTypeFilterId? id,
-    Input_PersonTypeFilterName? name,
-    Input_PersonTypeFilterOrder? order,
-    Input_PersonTypeFilterIsFamilyAdmin? isFamilyAdmin,
-    Input_PersonTypeFilterIsHidden? isHidden,
-  }) => _res;
-
-  and(_fn) => _res;
-
-  or(_fn) => _res;
-
-  not(_fn) => _res;
-
-  CopyWith_Input_PersonTypeFilterId<TRes> get id =>
-      CopyWith_Input_PersonTypeFilterId.stub(_res);
-
-  CopyWith_Input_PersonTypeFilterName<TRes> get name =>
-      CopyWith_Input_PersonTypeFilterName.stub(_res);
-
-  CopyWith_Input_PersonTypeFilterOrder<TRes> get order =>
-      CopyWith_Input_PersonTypeFilterOrder.stub(_res);
-
-  CopyWith_Input_PersonTypeFilterIsFamilyAdmin<TRes> get isFamilyAdmin =>
-      CopyWith_Input_PersonTypeFilterIsFamilyAdmin.stub(_res);
-
-  CopyWith_Input_PersonTypeFilterIsHidden<TRes> get isHidden =>
-      CopyWith_Input_PersonTypeFilterIsHidden.stub(_res);
-}
-
-class Input_PersonTypeSortInput {
-  factory Input_PersonTypeSortInput({
-    Enum_SortOrder? order,
-    required Enum_PersonTypeSortField field,
-  }) => Input_PersonTypeSortInput._({
-    if (order != null) r'order': order,
-    r'field': field,
-  });
-
-  Input_PersonTypeSortInput._(this._$data);
-
-  factory Input_PersonTypeSortInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('order')) {
-      final l$order = data['order'];
-      result$data['order'] = l$order == null
-          ? null
-          : fromJson_Enum_SortOrder((l$order as String));
-    }
-    final l$field = data['field'];
-    result$data['field'] = fromJson_Enum_PersonTypeSortField(
-      (l$field as String),
-    );
-    return Input_PersonTypeSortInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_SortOrder? get order => (_$data['order'] as Enum_SortOrder?);
-
-  Enum_PersonTypeSortField get field =>
-      (_$data['field'] as Enum_PersonTypeSortField);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('order')) {
-      final l$order = order;
-      result$data['order'] = l$order == null
-          ? null
-          : toJson_Enum_SortOrder(l$order);
-    }
-    final l$field = field;
-    result$data['field'] = toJson_Enum_PersonTypeSortField(l$field);
-    return result$data;
-  }
-
-  CopyWith_Input_PersonTypeSortInput<Input_PersonTypeSortInput> get copyWith =>
-      CopyWith_Input_PersonTypeSortInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_PersonTypeSortInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$order = order;
-    final lOther$order = other.order;
-    if (_$data.containsKey('order') != other._$data.containsKey('order')) {
-      return false;
-    }
-    if (l$order != lOther$order) {
-      return false;
-    }
-    final l$field = field;
-    final lOther$field = other.field;
-    if (l$field != lOther$field) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$order = order;
-    final l$field = field;
-    return Object.hashAll([
-      _$data.containsKey('order') ? l$order : const {},
-      l$field,
     ]);
   }
 }

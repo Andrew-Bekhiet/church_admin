@@ -3666,6 +3666,1051 @@ const documentNodeQuerypersonMemberships = DocumentNode(
   ],
 );
 
+class Variables_Query_personsPhoneContacts {
+  factory Variables_Query_personsPhoneContacts({
+    Input_PersonFilterInput? filter,
+    Input_FamilyContactFilterInput? familyContactsFilter,
+    int? first,
+    String? after,
+  }) => Variables_Query_personsPhoneContacts._({
+    if (filter != null) r'filter': filter,
+    if (familyContactsFilter != null)
+      r'familyContactsFilter': familyContactsFilter,
+    if (first != null) r'first': first,
+    if (after != null) r'after': after,
+  });
+
+  Variables_Query_personsPhoneContacts._(this._$data);
+
+  factory Variables_Query_personsPhoneContacts.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_PersonFilterInput.fromJson(
+              (l$filter as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('familyContactsFilter')) {
+      final l$familyContactsFilter = data['familyContactsFilter'];
+      result$data['familyContactsFilter'] = l$familyContactsFilter == null
+          ? null
+          : Input_FamilyContactFilterInput.fromJson(
+              (l$familyContactsFilter as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('first')) {
+      final l$first = data['first'];
+      result$data['first'] = (l$first as int?);
+    }
+    if (data.containsKey('after')) {
+      final l$after = data['after'];
+      result$data['after'] = (l$after as String?);
+    }
+    return Variables_Query_personsPhoneContacts._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_PersonFilterInput? get filter =>
+      (_$data['filter'] as Input_PersonFilterInput?);
+
+  Input_FamilyContactFilterInput? get familyContactsFilter =>
+      (_$data['familyContactsFilter'] as Input_FamilyContactFilterInput?);
+
+  int? get first => (_$data['first'] as int?);
+
+  String? get after => (_$data['after'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    if (_$data.containsKey('familyContactsFilter')) {
+      final l$familyContactsFilter = familyContactsFilter;
+      result$data['familyContactsFilter'] = l$familyContactsFilter?.toJson();
+    }
+    if (_$data.containsKey('first')) {
+      final l$first = first;
+      result$data['first'] = l$first;
+    }
+    if (_$data.containsKey('after')) {
+      final l$after = after;
+      result$data['after'] = l$after;
+    }
+    return result$data;
+  }
+
+  CopyWith_Variables_Query_personsPhoneContacts<
+    Variables_Query_personsPhoneContacts
+  >
+  get copyWith => CopyWith_Variables_Query_personsPhoneContacts(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Query_personsPhoneContacts ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$familyContactsFilter = familyContactsFilter;
+    final lOther$familyContactsFilter = other.familyContactsFilter;
+    if (_$data.containsKey('familyContactsFilter') !=
+        other._$data.containsKey('familyContactsFilter')) {
+      return false;
+    }
+    if (l$familyContactsFilter != lOther$familyContactsFilter) {
+      return false;
+    }
+    final l$first = first;
+    final lOther$first = other.first;
+    if (_$data.containsKey('first') != other._$data.containsKey('first')) {
+      return false;
+    }
+    if (l$first != lOther$first) {
+      return false;
+    }
+    final l$after = after;
+    final lOther$after = other.after;
+    if (_$data.containsKey('after') != other._$data.containsKey('after')) {
+      return false;
+    }
+    if (l$after != lOther$after) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$filter = filter;
+    final l$familyContactsFilter = familyContactsFilter;
+    final l$first = first;
+    final l$after = after;
+    return Object.hashAll([
+      _$data.containsKey('filter') ? l$filter : const {},
+      _$data.containsKey('familyContactsFilter')
+          ? l$familyContactsFilter
+          : const {},
+      _$data.containsKey('first') ? l$first : const {},
+      _$data.containsKey('after') ? l$after : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Variables_Query_personsPhoneContacts<TRes> {
+  factory CopyWith_Variables_Query_personsPhoneContacts(
+    Variables_Query_personsPhoneContacts instance,
+    TRes Function(Variables_Query_personsPhoneContacts) then,
+  ) = _CopyWithImpl_Variables_Query_personsPhoneContacts;
+
+  factory CopyWith_Variables_Query_personsPhoneContacts.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Query_personsPhoneContacts;
+
+  TRes call({
+    Input_PersonFilterInput? filter,
+    Input_FamilyContactFilterInput? familyContactsFilter,
+    int? first,
+    String? after,
+  });
+}
+
+class _CopyWithImpl_Variables_Query_personsPhoneContacts<TRes>
+    implements CopyWith_Variables_Query_personsPhoneContacts<TRes> {
+  _CopyWithImpl_Variables_Query_personsPhoneContacts(
+    this._instance,
+    this._then,
+  );
+
+  final Variables_Query_personsPhoneContacts _instance;
+
+  final TRes Function(Variables_Query_personsPhoneContacts) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? filter = _undefined,
+    Object? familyContactsFilter = _undefined,
+    Object? first = _undefined,
+    Object? after = _undefined,
+  }) => _then(
+    Variables_Query_personsPhoneContacts._({
+      ..._instance._$data,
+      if (filter != _undefined) 'filter': (filter as Input_PersonFilterInput?),
+      if (familyContactsFilter != _undefined)
+        'familyContactsFilter':
+            (familyContactsFilter as Input_FamilyContactFilterInput?),
+      if (first != _undefined) 'first': (first as int?),
+      if (after != _undefined) 'after': (after as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Variables_Query_personsPhoneContacts<TRes>
+    implements CopyWith_Variables_Query_personsPhoneContacts<TRes> {
+  _CopyWithStubImpl_Variables_Query_personsPhoneContacts(this._res);
+
+  TRes _res;
+
+  call({
+    Input_PersonFilterInput? filter,
+    Input_FamilyContactFilterInput? familyContactsFilter,
+    int? first,
+    String? after,
+  }) => _res;
+}
+
+class Query_personsPhoneContacts {
+  Query_personsPhoneContacts({
+    this.persons,
+    this.$__typename = 'RootQueryType',
+  });
+
+  factory Query_personsPhoneContacts.fromJson(Map<String, dynamic> json) {
+    final l$persons = json['persons'];
+    final l$$__typename = json['__typename'];
+    return Query_personsPhoneContacts(
+      persons: l$persons == null
+          ? null
+          : Query_personsPhoneContacts_persons.fromJson(
+              (l$persons as Map<String, dynamic>),
+            ),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query_personsPhoneContacts_persons? persons;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$persons = persons;
+    _resultData['persons'] = l$persons?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$persons = persons;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$persons, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_personsPhoneContacts ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$persons = persons;
+    final lOther$persons = other.persons;
+    if (l$persons != lOther$persons) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_personsPhoneContacts
+    on Query_personsPhoneContacts {
+  CopyWith_Query_personsPhoneContacts<Query_personsPhoneContacts>
+  get copyWith => CopyWith_Query_personsPhoneContacts(this, (i) => i);
+}
+
+abstract class CopyWith_Query_personsPhoneContacts<TRes> {
+  factory CopyWith_Query_personsPhoneContacts(
+    Query_personsPhoneContacts instance,
+    TRes Function(Query_personsPhoneContacts) then,
+  ) = _CopyWithImpl_Query_personsPhoneContacts;
+
+  factory CopyWith_Query_personsPhoneContacts.stub(TRes res) =
+      _CopyWithStubImpl_Query_personsPhoneContacts;
+
+  TRes call({Query_personsPhoneContacts_persons? persons, String? $__typename});
+  CopyWith_Query_personsPhoneContacts_persons<TRes> get persons;
+}
+
+class _CopyWithImpl_Query_personsPhoneContacts<TRes>
+    implements CopyWith_Query_personsPhoneContacts<TRes> {
+  _CopyWithImpl_Query_personsPhoneContacts(this._instance, this._then);
+
+  final Query_personsPhoneContacts _instance;
+
+  final TRes Function(Query_personsPhoneContacts) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? persons = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Query_personsPhoneContacts(
+          persons: persons == _undefined
+              ? _instance.persons
+              : (persons as Query_personsPhoneContacts_persons?),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
+
+  CopyWith_Query_personsPhoneContacts_persons<TRes> get persons {
+    final local$persons = _instance.persons;
+    return local$persons == null
+        ? CopyWith_Query_personsPhoneContacts_persons.stub(_then(_instance))
+        : CopyWith_Query_personsPhoneContacts_persons(
+            local$persons,
+            (e) => call(persons: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Query_personsPhoneContacts<TRes>
+    implements CopyWith_Query_personsPhoneContacts<TRes> {
+  _CopyWithStubImpl_Query_personsPhoneContacts(this._res);
+
+  TRes _res;
+
+  call({Query_personsPhoneContacts_persons? persons, String? $__typename}) =>
+      _res;
+
+  CopyWith_Query_personsPhoneContacts_persons<TRes> get persons =>
+      CopyWith_Query_personsPhoneContacts_persons.stub(_res);
+}
+
+const documentNodeQuerypersonsPhoneContacts = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'personsPhoneContacts'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'filter')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'PersonFilterInput'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'familyContactsFilter')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'FamilyContactFilterInput'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'first')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'after')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'String'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'persons'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'filter'),
+                value: VariableNode(name: NameNode(value: 'filter')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'first'),
+                value: VariableNode(name: NameNode(value: 'first')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'after'),
+                value: VariableNode(name: NameNode(value: 'after')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'endKeyset'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'results'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'contacts'),
+                        alias: null,
+                        arguments: [
+                          ArgumentNode(
+                            name: NameNode(value: 'sort'),
+                            value: ListValueNode(
+                              values: [
+                                ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'field'),
+                                      value: EnumValueNode(
+                                        name: NameNode(value: 'IS_MAIN_PHONE'),
+                                      ),
+                                    ),
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'order'),
+                                      value: EnumValueNode(
+                                        name: NameNode(value: 'DESC'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'field'),
+                                      value: EnumValueNode(
+                                        name: NameNode(value: 'CREATED_AT'),
+                                      ),
+                                    ),
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'order'),
+                                      value: EnumValueNode(
+                                        name: NameNode(value: 'ASC'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                        directives: [],
+                        selectionSet: SelectionSetNode(
+                          selections: [
+                            FragmentSpreadNode(
+                              name: NameNode(value: 'Contact'),
+                              directives: [],
+                            ),
+                            FieldNode(
+                              name: NameNode(value: '__typename'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null,
+                            ),
+                          ],
+                        ),
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'familyContacts'),
+                        alias: null,
+                        arguments: [
+                          ArgumentNode(
+                            name: NameNode(value: 'filter'),
+                            value: VariableNode(
+                              name: NameNode(value: 'familyContactsFilter'),
+                            ),
+                          ),
+                          ArgumentNode(
+                            name: NameNode(value: 'sort'),
+                            value: ListValueNode(
+                              values: [
+                                ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'field'),
+                                      value: EnumValueNode(
+                                        name: NameNode(
+                                          value: 'PERSON_TYPE_ORDER',
+                                        ),
+                                      ),
+                                    ),
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'order'),
+                                      value: EnumValueNode(
+                                        name: NameNode(value: 'ASC'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'field'),
+                                      value: EnumValueNode(
+                                        name: NameNode(value: 'IS_MAIN_PHONE'),
+                                      ),
+                                    ),
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'order'),
+                                      value: EnumValueNode(
+                                        name: NameNode(value: 'DESC'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'field'),
+                                      value: EnumValueNode(
+                                        name: NameNode(value: 'CREATED_AT'),
+                                      ),
+                                    ),
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'order'),
+                                      value: EnumValueNode(
+                                        name: NameNode(value: 'ASC'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                        directives: [],
+                        selectionSet: SelectionSetNode(
+                          selections: [
+                            FragmentSpreadNode(
+                              name: NameNode(value: 'FamilyContact'),
+                              directives: [],
+                            ),
+                            FieldNode(
+                              name: NameNode(value: '__typename'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null,
+                            ),
+                          ],
+                        ),
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
+    fragmentDefinitionContact,
+    fragmentDefinitionFamilyContact,
+    fragmentDefinitionPersonType,
+  ],
+);
+
+class Query_personsPhoneContacts_persons {
+  Query_personsPhoneContacts_persons({
+    this.endKeyset,
+    this.results,
+    this.$__typename = 'KeysetPageOfPerson',
+  });
+
+  factory Query_personsPhoneContacts_persons.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$endKeyset = json['endKeyset'];
+    final l$results = json['results'];
+    final l$$__typename = json['__typename'];
+    return Query_personsPhoneContacts_persons(
+      endKeyset: (l$endKeyset as String?),
+      results: (l$results as List<dynamic>?)
+          ?.map(
+            (e) => Query_personsPhoneContacts_persons_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? endKeyset;
+
+  final List<Query_personsPhoneContacts_persons_results>? results;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$endKeyset = endKeyset;
+    _resultData['endKeyset'] = l$endKeyset;
+    final l$results = results;
+    _resultData['results'] = l$results?.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$endKeyset = endKeyset;
+    final l$results = results;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$endKeyset,
+      l$results == null ? null : Object.hashAll(l$results.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_personsPhoneContacts_persons ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$endKeyset = endKeyset;
+    final lOther$endKeyset = other.endKeyset;
+    if (l$endKeyset != lOther$endKeyset) {
+      return false;
+    }
+    final l$results = results;
+    final lOther$results = other.results;
+    if (l$results != null && lOther$results != null) {
+      if (l$results.length != lOther$results.length) {
+        return false;
+      }
+      for (int i = 0; i < l$results.length; i++) {
+        final l$results$entry = l$results[i];
+        final lOther$results$entry = lOther$results[i];
+        if (l$results$entry != lOther$results$entry) {
+          return false;
+        }
+      }
+    } else if (l$results != lOther$results) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_personsPhoneContacts_persons
+    on Query_personsPhoneContacts_persons {
+  CopyWith_Query_personsPhoneContacts_persons<
+    Query_personsPhoneContacts_persons
+  >
+  get copyWith => CopyWith_Query_personsPhoneContacts_persons(this, (i) => i);
+}
+
+abstract class CopyWith_Query_personsPhoneContacts_persons<TRes> {
+  factory CopyWith_Query_personsPhoneContacts_persons(
+    Query_personsPhoneContacts_persons instance,
+    TRes Function(Query_personsPhoneContacts_persons) then,
+  ) = _CopyWithImpl_Query_personsPhoneContacts_persons;
+
+  factory CopyWith_Query_personsPhoneContacts_persons.stub(TRes res) =
+      _CopyWithStubImpl_Query_personsPhoneContacts_persons;
+
+  TRes call({
+    String? endKeyset,
+    List<Query_personsPhoneContacts_persons_results>? results,
+    String? $__typename,
+  });
+  TRes results(
+    Iterable<Query_personsPhoneContacts_persons_results>? Function(
+      Iterable<
+        CopyWith_Query_personsPhoneContacts_persons_results<
+          Query_personsPhoneContacts_persons_results
+        >
+      >?,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl_Query_personsPhoneContacts_persons<TRes>
+    implements CopyWith_Query_personsPhoneContacts_persons<TRes> {
+  _CopyWithImpl_Query_personsPhoneContacts_persons(this._instance, this._then);
+
+  final Query_personsPhoneContacts_persons _instance;
+
+  final TRes Function(Query_personsPhoneContacts_persons) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? endKeyset = _undefined,
+    Object? results = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_personsPhoneContacts_persons(
+      endKeyset: endKeyset == _undefined
+          ? _instance.endKeyset
+          : (endKeyset as String?),
+      results: results == _undefined
+          ? _instance.results
+          : (results as List<Query_personsPhoneContacts_persons_results>?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  TRes results(
+    Iterable<Query_personsPhoneContacts_persons_results>? Function(
+      Iterable<
+        CopyWith_Query_personsPhoneContacts_persons_results<
+          Query_personsPhoneContacts_persons_results
+        >
+      >?,
+    )
+    _fn,
+  ) => call(
+    results: _fn(
+      _instance.results?.map(
+        (e) => CopyWith_Query_personsPhoneContacts_persons_results(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+}
+
+class _CopyWithStubImpl_Query_personsPhoneContacts_persons<TRes>
+    implements CopyWith_Query_personsPhoneContacts_persons<TRes> {
+  _CopyWithStubImpl_Query_personsPhoneContacts_persons(this._res);
+
+  TRes _res;
+
+  call({
+    String? endKeyset,
+    List<Query_personsPhoneContacts_persons_results>? results,
+    String? $__typename,
+  }) => _res;
+
+  results(_fn) => _res;
+}
+
+class Query_personsPhoneContacts_persons_results {
+  Query_personsPhoneContacts_persons_results({
+    required this.id,
+    required this.name,
+    required this.contacts,
+    required this.familyContacts,
+    this.$__typename = 'Person',
+  });
+
+  factory Query_personsPhoneContacts_persons_results.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$contacts = json['contacts'];
+    final l$familyContacts = json['familyContacts'];
+    final l$$__typename = json['__typename'];
+    return Query_personsPhoneContacts_persons_results(
+      id: (l$id as String),
+      name: (l$name as String),
+      contacts: (l$contacts as List<dynamic>)
+          .map((e) => Fragment_Contact.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      familyContacts: (l$familyContacts as List<dynamic>)
+          .map(
+            (e) => Fragment_FamilyContact.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String name;
+
+  final List<Fragment_Contact> contacts;
+
+  final List<Fragment_FamilyContact> familyContacts;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$contacts = contacts;
+    _resultData['contacts'] = l$contacts.map((e) => e.toJson()).toList();
+    final l$familyContacts = familyContacts;
+    _resultData['familyContacts'] = l$familyContacts
+        .map((e) => e.toJson())
+        .toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$contacts = contacts;
+    final l$familyContacts = familyContacts;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      Object.hashAll(l$contacts.map((v) => v)),
+      Object.hashAll(l$familyContacts.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_personsPhoneContacts_persons_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$contacts = contacts;
+    final lOther$contacts = other.contacts;
+    if (l$contacts.length != lOther$contacts.length) {
+      return false;
+    }
+    for (int i = 0; i < l$contacts.length; i++) {
+      final l$contacts$entry = l$contacts[i];
+      final lOther$contacts$entry = lOther$contacts[i];
+      if (l$contacts$entry != lOther$contacts$entry) {
+        return false;
+      }
+    }
+    final l$familyContacts = familyContacts;
+    final lOther$familyContacts = other.familyContacts;
+    if (l$familyContacts.length != lOther$familyContacts.length) {
+      return false;
+    }
+    for (int i = 0; i < l$familyContacts.length; i++) {
+      final l$familyContacts$entry = l$familyContacts[i];
+      final lOther$familyContacts$entry = lOther$familyContacts[i];
+      if (l$familyContacts$entry != lOther$familyContacts$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_personsPhoneContacts_persons_results
+    on Query_personsPhoneContacts_persons_results {
+  CopyWith_Query_personsPhoneContacts_persons_results<
+    Query_personsPhoneContacts_persons_results
+  >
+  get copyWith =>
+      CopyWith_Query_personsPhoneContacts_persons_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_personsPhoneContacts_persons_results<TRes> {
+  factory CopyWith_Query_personsPhoneContacts_persons_results(
+    Query_personsPhoneContacts_persons_results instance,
+    TRes Function(Query_personsPhoneContacts_persons_results) then,
+  ) = _CopyWithImpl_Query_personsPhoneContacts_persons_results;
+
+  factory CopyWith_Query_personsPhoneContacts_persons_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_personsPhoneContacts_persons_results;
+
+  TRes call({
+    String? id,
+    String? name,
+    List<Fragment_Contact>? contacts,
+    List<Fragment_FamilyContact>? familyContacts,
+    String? $__typename,
+  });
+  TRes contacts(
+    Iterable<Fragment_Contact> Function(
+      Iterable<CopyWith_Fragment_Contact<Fragment_Contact>>,
+    )
+    _fn,
+  );
+  TRes familyContacts(
+    Iterable<Fragment_FamilyContact> Function(
+      Iterable<CopyWith_Fragment_FamilyContact<Fragment_FamilyContact>>,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl_Query_personsPhoneContacts_persons_results<TRes>
+    implements CopyWith_Query_personsPhoneContacts_persons_results<TRes> {
+  _CopyWithImpl_Query_personsPhoneContacts_persons_results(
+    this._instance,
+    this._then,
+  );
+
+  final Query_personsPhoneContacts_persons_results _instance;
+
+  final TRes Function(Query_personsPhoneContacts_persons_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? contacts = _undefined,
+    Object? familyContacts = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_personsPhoneContacts_persons_results(
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      contacts: contacts == _undefined || contacts == null
+          ? _instance.contacts
+          : (contacts as List<Fragment_Contact>),
+      familyContacts: familyContacts == _undefined || familyContacts == null
+          ? _instance.familyContacts
+          : (familyContacts as List<Fragment_FamilyContact>),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  TRes contacts(
+    Iterable<Fragment_Contact> Function(
+      Iterable<CopyWith_Fragment_Contact<Fragment_Contact>>,
+    )
+    _fn,
+  ) => call(
+    contacts: _fn(
+      _instance.contacts.map((e) => CopyWith_Fragment_Contact(e, (i) => i)),
+    ).toList(),
+  );
+
+  TRes familyContacts(
+    Iterable<Fragment_FamilyContact> Function(
+      Iterable<CopyWith_Fragment_FamilyContact<Fragment_FamilyContact>>,
+    )
+    _fn,
+  ) => call(
+    familyContacts: _fn(
+      _instance.familyContacts.map(
+        (e) => CopyWith_Fragment_FamilyContact(e, (i) => i),
+      ),
+    ).toList(),
+  );
+}
+
+class _CopyWithStubImpl_Query_personsPhoneContacts_persons_results<TRes>
+    implements CopyWith_Query_personsPhoneContacts_persons_results<TRes> {
+  _CopyWithStubImpl_Query_personsPhoneContacts_persons_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? name,
+    List<Fragment_Contact>? contacts,
+    List<Fragment_FamilyContact>? familyContacts,
+    String? $__typename,
+  }) => _res;
+
+  contacts(_fn) => _res;
+
+  familyContacts(_fn) => _res;
+}
+
 class Variables_Query_personHistoryAnalysis {
   factory Variables_Query_personHistoryAnalysis({
     required String id,

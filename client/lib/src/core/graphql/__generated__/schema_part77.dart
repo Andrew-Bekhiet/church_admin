@@ -1,6 +1,402 @@
 // Part 77 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_InvitationFilterClaimedAt<TRes> {
+  factory CopyWith_Input_InvitationFilterClaimedAt(
+    Input_InvitationFilterClaimedAt instance,
+    TRes Function(Input_InvitationFilterClaimedAt) then,
+  ) = _CopyWithImpl_Input_InvitationFilterClaimedAt;
+
+  factory CopyWith_Input_InvitationFilterClaimedAt.stub(TRes res) =
+      _CopyWithStubImpl_Input_InvitationFilterClaimedAt;
+
+  TRes call({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime?>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_InvitationFilterClaimedAt<TRes>
+    implements CopyWith_Input_InvitationFilterClaimedAt<TRes> {
+  _CopyWithImpl_Input_InvitationFilterClaimedAt(this._instance, this._then);
+
+  final Input_InvitationFilterClaimedAt _instance;
+
+  final TRes Function(Input_InvitationFilterClaimedAt) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_InvitationFilterClaimedAt._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as DateTime?),
+      if (notEq != _undefined) 'notEq': (notEq as DateTime?),
+      if ($in != _undefined) 'in': ($in as List<DateTime?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as DateTime?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as DateTime?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as DateTime?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as DateTime?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as DateTime?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_InvitationFilterClaimedAt<TRes>
+    implements CopyWith_Input_InvitationFilterClaimedAt<TRes> {
+  _CopyWithStubImpl_Input_InvitationFilterClaimedAt(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime?>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_InvitationFilterExpiresAt {
+  factory Input_InvitationFilterExpiresAt({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  }) => Input_InvitationFilterExpiresAt._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_InvitationFilterExpiresAt._(this._$data);
+
+  factory Input_InvitationFilterExpiresAt.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = l$eq == null ? null : tstzFromString(l$eq);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = l$notEq == null ? null : tstzFromString(l$notEq);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => tstzFromString(e))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = l$lessThan == null
+          ? null
+          : tstzFromString(l$lessThan);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = l$greaterThan == null
+          ? null
+          : tstzFromString(l$greaterThan);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
+          ? null
+          : tstzFromString(l$lessThanOrEqual);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
+          ? null
+          : tstzFromString(l$greaterThanOrEqual);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = l$isDistinctFrom == null
+          ? null
+          : tstzFromString(l$isDistinctFrom);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
+          ? null
+          : tstzFromString(l$isNotDistinctFrom);
+    }
+    return Input_InvitationFilterExpiresAt._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  DateTime? get eq => (_$data['eq'] as DateTime?);
+
+  DateTime? get notEq => (_$data['notEq'] as DateTime?);
+
+  List<DateTime>? get $in => (_$data['in'] as List<DateTime>?);
+
+  DateTime? get lessThan => (_$data['lessThan'] as DateTime?);
+
+  DateTime? get greaterThan => (_$data['greaterThan'] as DateTime?);
+
+  DateTime? get lessThanOrEqual => (_$data['lessThanOrEqual'] as DateTime?);
+
+  DateTime? get greaterThanOrEqual =>
+      (_$data['greaterThanOrEqual'] as DateTime?);
+
+  DateTime? get isDistinctFrom => (_$data['isDistinctFrom'] as DateTime?);
+
+  DateTime? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq == null ? null : tstzToString(l$eq);
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq == null ? null : tstzToString(l$notEq);
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => tstzToString(e)).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan == null
+          ? null
+          : tstzToString(l$lessThan);
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan == null
+          ? null
+          : tstzToString(l$greaterThan);
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
+          ? null
+          : tstzToString(l$lessThanOrEqual);
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
+          ? null
+          : tstzToString(l$greaterThanOrEqual);
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom == null
+          ? null
+          : tstzToString(l$isDistinctFrom);
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
+          ? null
+          : tstzToString(l$isNotDistinctFrom);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_InvitationFilterExpiresAt<Input_InvitationFilterExpiresAt>
+  get copyWith => CopyWith_Input_InvitationFilterExpiresAt(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_InvitationFilterExpiresAt ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_InvitationFilterExpiresAt<TRes> {
   factory CopyWith_Input_InvitationFilterExpiresAt(
     Input_InvitationFilterExpiresAt instance,
@@ -2342,355 +2738,5 @@ class Input_RegisterFcmTokenInput {
   int get hashCode {
     final l$token = token;
     return Object.hashAll([l$token]);
-  }
-}
-
-abstract class CopyWith_Input_RegisterFcmTokenInput<TRes> {
-  factory CopyWith_Input_RegisterFcmTokenInput(
-    Input_RegisterFcmTokenInput instance,
-    TRes Function(Input_RegisterFcmTokenInput) then,
-  ) = _CopyWithImpl_Input_RegisterFcmTokenInput;
-
-  factory CopyWith_Input_RegisterFcmTokenInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_RegisterFcmTokenInput;
-
-  TRes call({String? token});
-}
-
-class _CopyWithImpl_Input_RegisterFcmTokenInput<TRes>
-    implements CopyWith_Input_RegisterFcmTokenInput<TRes> {
-  _CopyWithImpl_Input_RegisterFcmTokenInput(this._instance, this._then);
-
-  final Input_RegisterFcmTokenInput _instance;
-
-  final TRes Function(Input_RegisterFcmTokenInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? token = _undefined}) => _then(
-    Input_RegisterFcmTokenInput._({
-      ..._instance._$data,
-      if (token != _undefined && token != null) 'token': (token as String),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_RegisterFcmTokenInput<TRes>
-    implements CopyWith_Input_RegisterFcmTokenInput<TRes> {
-  _CopyWithStubImpl_Input_RegisterFcmTokenInput(this._res);
-
-  TRes _res;
-
-  call({String? token}) => _res;
-}
-
-class Input_DeviceTokenFilterCreatedAt {
-  factory Input_DeviceTokenFilterCreatedAt({
-    bool? isNil,
-    DateTime? eq,
-    DateTime? notEq,
-    List<DateTime>? $in,
-    DateTime? lessThan,
-    DateTime? greaterThan,
-    DateTime? lessThanOrEqual,
-    DateTime? greaterThanOrEqual,
-    DateTime? isDistinctFrom,
-    DateTime? isNotDistinctFrom,
-  }) => Input_DeviceTokenFilterCreatedAt._({
-    if (isNil != null) r'isNil': isNil,
-    if (eq != null) r'eq': eq,
-    if (notEq != null) r'notEq': notEq,
-    if ($in != null) r'in': $in,
-    if (lessThan != null) r'lessThan': lessThan,
-    if (greaterThan != null) r'greaterThan': greaterThan,
-    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
-    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
-    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
-    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
-  });
-
-  Input_DeviceTokenFilterCreatedAt._(this._$data);
-
-  factory Input_DeviceTokenFilterCreatedAt.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('isNil')) {
-      final l$isNil = data['isNil'];
-      result$data['isNil'] = (l$isNil as bool?);
-    }
-    if (data.containsKey('eq')) {
-      final l$eq = data['eq'];
-      result$data['eq'] = l$eq == null ? null : tstzFromString(l$eq);
-    }
-    if (data.containsKey('notEq')) {
-      final l$notEq = data['notEq'];
-      result$data['notEq'] = l$notEq == null ? null : tstzFromString(l$notEq);
-    }
-    if (data.containsKey('in')) {
-      final l$$in = data['in'];
-      result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => tstzFromString(e))
-          .toList();
-    }
-    if (data.containsKey('lessThan')) {
-      final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = l$lessThan == null
-          ? null
-          : tstzFromString(l$lessThan);
-    }
-    if (data.containsKey('greaterThan')) {
-      final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = l$greaterThan == null
-          ? null
-          : tstzFromString(l$greaterThan);
-    }
-    if (data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
-          ? null
-          : tstzFromString(l$lessThanOrEqual);
-    }
-    if (data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
-          ? null
-          : tstzFromString(l$greaterThanOrEqual);
-    }
-    if (data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = l$isDistinctFrom == null
-          ? null
-          : tstzFromString(l$isDistinctFrom);
-    }
-    if (data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
-          ? null
-          : tstzFromString(l$isNotDistinctFrom);
-    }
-    return Input_DeviceTokenFilterCreatedAt._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  bool? get isNil => (_$data['isNil'] as bool?);
-
-  DateTime? get eq => (_$data['eq'] as DateTime?);
-
-  DateTime? get notEq => (_$data['notEq'] as DateTime?);
-
-  List<DateTime>? get $in => (_$data['in'] as List<DateTime>?);
-
-  DateTime? get lessThan => (_$data['lessThan'] as DateTime?);
-
-  DateTime? get greaterThan => (_$data['greaterThan'] as DateTime?);
-
-  DateTime? get lessThanOrEqual => (_$data['lessThanOrEqual'] as DateTime?);
-
-  DateTime? get greaterThanOrEqual =>
-      (_$data['greaterThanOrEqual'] as DateTime?);
-
-  DateTime? get isDistinctFrom => (_$data['isDistinctFrom'] as DateTime?);
-
-  DateTime? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as DateTime?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('isNil')) {
-      final l$isNil = isNil;
-      result$data['isNil'] = l$isNil;
-    }
-    if (_$data.containsKey('eq')) {
-      final l$eq = eq;
-      result$data['eq'] = l$eq == null ? null : tstzToString(l$eq);
-    }
-    if (_$data.containsKey('notEq')) {
-      final l$notEq = notEq;
-      result$data['notEq'] = l$notEq == null ? null : tstzToString(l$notEq);
-    }
-    if (_$data.containsKey('in')) {
-      final l$$in = $in;
-      result$data['in'] = l$$in?.map((e) => tstzToString(e)).toList();
-    }
-    if (_$data.containsKey('lessThan')) {
-      final l$lessThan = lessThan;
-      result$data['lessThan'] = l$lessThan == null
-          ? null
-          : tstzToString(l$lessThan);
-    }
-    if (_$data.containsKey('greaterThan')) {
-      final l$greaterThan = greaterThan;
-      result$data['greaterThan'] = l$greaterThan == null
-          ? null
-          : tstzToString(l$greaterThan);
-    }
-    if (_$data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = lessThanOrEqual;
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
-          ? null
-          : tstzToString(l$lessThanOrEqual);
-    }
-    if (_$data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = greaterThanOrEqual;
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
-          ? null
-          : tstzToString(l$greaterThanOrEqual);
-    }
-    if (_$data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = isDistinctFrom;
-      result$data['isDistinctFrom'] = l$isDistinctFrom == null
-          ? null
-          : tstzToString(l$isDistinctFrom);
-    }
-    if (_$data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = isNotDistinctFrom;
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
-          ? null
-          : tstzToString(l$isNotDistinctFrom);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_DeviceTokenFilterCreatedAt<Input_DeviceTokenFilterCreatedAt>
-  get copyWith => CopyWith_Input_DeviceTokenFilterCreatedAt(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_DeviceTokenFilterCreatedAt ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$isNil = isNil;
-    final lOther$isNil = other.isNil;
-    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
-      return false;
-    }
-    if (l$isNil != lOther$isNil) {
-      return false;
-    }
-    final l$eq = eq;
-    final lOther$eq = other.eq;
-    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
-      return false;
-    }
-    if (l$eq != lOther$eq) {
-      return false;
-    }
-    final l$notEq = notEq;
-    final lOther$notEq = other.notEq;
-    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
-      return false;
-    }
-    if (l$notEq != lOther$notEq) {
-      return false;
-    }
-    final l$$in = $in;
-    final lOther$$in = other.$in;
-    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
-      return false;
-    }
-    if (l$$in != null && lOther$$in != null) {
-      if (l$$in.length != lOther$$in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$in.length; i++) {
-        final l$$in$entry = l$$in[i];
-        final lOther$$in$entry = lOther$$in[i];
-        if (l$$in$entry != lOther$$in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$in != lOther$$in) {
-      return false;
-    }
-    final l$lessThan = lessThan;
-    final lOther$lessThan = other.lessThan;
-    if (_$data.containsKey('lessThan') !=
-        other._$data.containsKey('lessThan')) {
-      return false;
-    }
-    if (l$lessThan != lOther$lessThan) {
-      return false;
-    }
-    final l$greaterThan = greaterThan;
-    final lOther$greaterThan = other.greaterThan;
-    if (_$data.containsKey('greaterThan') !=
-        other._$data.containsKey('greaterThan')) {
-      return false;
-    }
-    if (l$greaterThan != lOther$greaterThan) {
-      return false;
-    }
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final lOther$lessThanOrEqual = other.lessThanOrEqual;
-    if (_$data.containsKey('lessThanOrEqual') !=
-        other._$data.containsKey('lessThanOrEqual')) {
-      return false;
-    }
-    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
-      return false;
-    }
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
-    if (_$data.containsKey('greaterThanOrEqual') !=
-        other._$data.containsKey('greaterThanOrEqual')) {
-      return false;
-    }
-    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
-      return false;
-    }
-    final l$isDistinctFrom = isDistinctFrom;
-    final lOther$isDistinctFrom = other.isDistinctFrom;
-    if (_$data.containsKey('isDistinctFrom') !=
-        other._$data.containsKey('isDistinctFrom')) {
-      return false;
-    }
-    if (l$isDistinctFrom != lOther$isDistinctFrom) {
-      return false;
-    }
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
-    if (_$data.containsKey('isNotDistinctFrom') !=
-        other._$data.containsKey('isNotDistinctFrom')) {
-      return false;
-    }
-    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$isNil = isNil;
-    final l$eq = eq;
-    final l$notEq = notEq;
-    final l$$in = $in;
-    final l$lessThan = lessThan;
-    final l$greaterThan = greaterThan;
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final l$isDistinctFrom = isDistinctFrom;
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    return Object.hashAll([
-      _$data.containsKey('isNil') ? l$isNil : const {},
-      _$data.containsKey('eq') ? l$eq : const {},
-      _$data.containsKey('notEq') ? l$notEq : const {},
-      _$data.containsKey('in')
-          ? l$$in == null
-                ? null
-                : Object.hashAll(l$$in.map((v) => v))
-          : const {},
-      _$data.containsKey('lessThan') ? l$lessThan : const {},
-      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
-      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
-      _$data.containsKey('greaterThanOrEqual')
-          ? l$greaterThanOrEqual
-          : const {},
-      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
-      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
-    ]);
   }
 }

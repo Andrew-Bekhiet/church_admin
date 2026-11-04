@@ -101,17 +101,13 @@ class ClassFields {
     },
   );
 
-  final FieldMetadata<bool> serviceGender = FieldMetadata<bool>(
+  final FieldMetadata<Gender> serviceGender = FieldMetadata<Gender>(
     getValue: (obj) => obj is Class ? obj.serviceGender : null,
     parentType: Class,
     name: 'serviceGender',
     label: 'نوع المخدومين المسؤول عنهم',
     isCodeOnly: false,
-    operators: {
-      ...BooleanOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull,
-    },
+    operators: {...GenderOperator.values},
   );
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
@@ -174,6 +170,9 @@ Class _$ClassFromJson(Map json) => Class(
   id: json['id'] as String? ?? '',
   name: json['name'] as String? ?? '',
   userCanEdit: json['userCanEdit'] as bool? ?? false,
+  serviceGender: json['serviceGender'] == null
+      ? Gender.any
+      : const GenderIsMaleConverter().fromJson(json['serviceGender'] as bool?),
   color: colorFromInt((json['color'] as num?)?.toInt()),
   photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
     json['photoUpdatedAt'],
@@ -196,7 +195,6 @@ Class _$ClassFromJson(Map json) => Class(
           Map<String, Object?>.from(json['studyYearTo'] as Map),
         ),
   serviceStudyYearTo: (json['serviceStudyYearTo'] as num?)?.toInt(),
-  serviceGender: json['serviceGender'] as bool?,
   lastEdit: json['latestEdit'] == null
       ? null
       : LastRecordedByInfo.fromJson(
@@ -222,7 +220,7 @@ Map<String, dynamic> _$ClassToJson(Class instance) => <String, dynamic>{
   'serviceStudyYear': instance.serviceStudyYear,
   'studyYearTo': instance.studyYearTo?.toJson(),
   'serviceStudyYearTo': instance.serviceStudyYearTo,
-  'serviceGender': instance.serviceGender,
+  'serviceGender': const GenderIsMaleConverter().toJson(instance.serviceGender),
   'latestEdit': instance.lastEdit?.toJson(),
   'admins': instance.adminUsers?.map((e) => e.toJson()).toList(),
 };
