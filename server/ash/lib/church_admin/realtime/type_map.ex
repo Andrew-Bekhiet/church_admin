@@ -59,6 +59,18 @@ defmodule ChurchAdmin.Realtime.TypeMap do
     |> Enum.uniq()
   end
 
+  @doc "The table of the resource behind GraphQL type `type`."
+  @spec relation_of_type(String.t(), [module()]) :: relation() | nil
+  def relation_of_type(type, domains \\ Application.fetch_env!(:church_admin, :ash_domains)) do
+    domains
+    |> Enum.flat_map(&Ash.Domain.Info.resources/1)
+    |> Enum.find_value(fn resource ->
+      if Ash.DataLayer.data_layer(resource) == AshPostgres.DataLayer and
+           type_name(resource) == type,
+         do: relation(resource)
+    end)
+  end
+
   @spec changes_for(t(), RowChange.t()) :: [change()]
   def changes_for(%__MODULE__{emitters: emitters}, %RowChange{relation: relation} = change) do
     emitters

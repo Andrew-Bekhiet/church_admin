@@ -74,9 +74,23 @@ defmodule ChurchAdmin.Realtime.BroadcasterTest do
            ]
 
     assert rows == [
-             %{relation: {"public", "hobbies"}, op: :update, columns: :all},
-             %{relation: {"public", "hobbies"}, op: :insert, columns: :all}
+             %{relation: {"public", "hobbies"}, op: :update, columns: :all, id_types: ["Hobby"]},
+             %{relation: {"public", "hobbies"}, op: :insert, columns: :all, id_types: ["Hobby"]}
            ]
+  end
+
+  test "a row names only the types it really carries an id of", %{broadcaster: b} do
+    family_contact = %RowChange{
+      relation: {"public", "contacts"},
+      op: :update,
+      new: %{"id" => @hobby_a, "family_id" => @hobby_b, "person_id" => nil}
+    }
+
+    Broadcaster.commit(b, [family_contact])
+
+    assert %{rows: [%{id_types: id_types}]} = receive_batch()
+    assert "Family" in id_types
+    refute "Person" in id_types
   end
 
   test "a batch names the columns of an update whose old row replicated in full", %{

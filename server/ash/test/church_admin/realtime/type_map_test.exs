@@ -177,4 +177,11 @@ defmodule ChurchAdmin.Realtime.TypeMapTest do
     assert %{type: "Person", id: nil, op: "update"} in emitted
     assert %{type: "LatestKodas", id: nil, op: "delete"} in emitted
   end
+
+  describe "relation_of_type/1" do
+    test "names the table behind a GraphQL type" do
+      assert TypeMap.relation_of_type("Person") == {"public", "persons"}
+      assert TypeMap.relation_of_type("Unknown") == nil
+    end
+  end
 end

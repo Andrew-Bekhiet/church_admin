@@ -4,7 +4,7 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
   `ChurchAdmin.PubSub` as `{:realtime_changes, %{changes, rows}}`: `changes`
   are the `ChurchAdmin.Realtime.TypeMap` invalidations and `rows` say which
   columns of which relations the commits touched, for the live queries to
-  match against what they read.
+  match against what they read, and which types' ids each row names.
 
   Commits arriving within `coalesce_ms` of the first pending one go out as
   one deduplicated batch. Oban's tables never reach a batch: nothing a client
@@ -28,7 +28,8 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
   @type touched_row :: %{
           relation: TypeMap.relation(),
           op: :insert | :update | :delete | :truncate,
-          columns: MapSet.t(String.t()) | :all
+          columns: MapSet.t(String.t()) | :all,
+          id_types: [String.t()]
         }
   @type batch :: %{changes: [TypeMap.change()], rows: [touched_row()]}
 
@@ -102,17 +103,34 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
     changes =
       row_changes |> Enum.flat_map(&TypeMap.changes_for(state.type_map, &1)) |> Enum.uniq()
 
-    announce(state, {:realtime_changes, %{changes: changes, rows: touched_rows(row_changes)}})
+    announce(
+      state,
+      {:realtime_changes, %{changes: changes, rows: touched_rows(row_changes, state.type_map)}}
+    )
 
     if viewer_scope_changed?(changes, row_changes), do: announce_viewer_scope(state)
 
     %{state | pending: [], flush_ref: nil}
   end
 
-  defp touched_rows(row_changes) do
+  defp touched_rows(row_changes, type_map) do
     row_changes
-    |> Enum.map(&%{relation: &1.relation, op: &1.op, columns: RowChange.changed_columns(&1)})
+    |> Enum.map(fn %RowChange{relation: relation} = change ->
+      %{
+        relation: relation,
+        op: change.op,
+        columns: RowChange.changed_columns(change),
+        id_types: types_named_by(change, type_map)
+      }
+    end)
     |> Enum.uniq()
+  end
+
+  defp types_named_by(change, type_map) do
+    for %{type: type, id: id} <- TypeMap.changes_for(type_map, change),
+        id != nil,
+        uniq: true,
+        do: type
   end
 
   defp viewer_scope_changed?(changes, row_changes) do
