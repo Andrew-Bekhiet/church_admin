@@ -3,7 +3,7 @@ defmodule ChurchAdmin.Accounts.DisconnectSocketsOnRevokedApproval do
   Notifier of `ChurchAdmin.Accounts.UserPermission`: when a user's `approved`
   permission is destroyed (unapproving, editing the permissions, or deleting
   the account, which removes them all), the user's realtime sockets are
-  disconnected, because `ChurchAdminWeb.ChangesSocket` admits approved users
+  disconnected, because `ChurchAdminWeb.LiveQueriesSocket` admits approved users
   only. Notifications go out after the commit, so a rolled-back revocation
   disconnects nobody.
   """
@@ -16,7 +16,7 @@ defmodule ChurchAdmin.Accounts.DisconnectSocketsOnRevokedApproval do
         data: %{uid: uid, permission: "approved"}
       }) do
     uid
-    |> ChurchAdminWeb.ChangesSocket.id_for()
+    |> ChurchAdminWeb.LiveQueriesSocket.id_for()
     |> ChurchAdminWeb.Endpoint.broadcast("disconnect", %{})
   end
 

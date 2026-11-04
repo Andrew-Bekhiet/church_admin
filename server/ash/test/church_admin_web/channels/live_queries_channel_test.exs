@@ -1,18 +1,18 @@
-defmodule ChurchAdminWeb.ChangesChannelTest do
+defmodule ChurchAdminWeb.LiveQueriesChannelTest do
   use ExUnit.Case, async: false
 
   import Phoenix.ChannelTest
 
   alias ChurchAdmin.Factory
   alias ChurchAdmin.FirebaseTokens
-  alias ChurchAdminWeb.ChangesChannel
-  alias ChurchAdminWeb.ChangesSocket
+  alias ChurchAdminWeb.LiveQueriesChannel
+  alias ChurchAdminWeb.LiveQueriesSocket
 
   @endpoint ChurchAdminWeb.Endpoint
 
   setup tags do
     ChurchAdmin.DataCase.setup_sandbox(tags)
-    {:ok, socket} = connect(ChangesSocket, %{"token" => approved_user_token()})
+    {:ok, socket} = connect(LiveQueriesSocket, %{"token" => approved_user_token()})
     {:ok, socket: socket}
   end
 
@@ -30,7 +30,7 @@ defmodule ChurchAdminWeb.ChangesChannelTest do
     |> FirebaseTokens.unsigned()
   end
 
-  defp join(socket), do: subscribe_and_join(socket, ChangesChannel, "changes", %{})
+  defp join(socket), do: subscribe_and_join(socket, LiveQueriesChannel, "live_queries", %{})
 
   defp join_that_may_lose_its_channel(socket) do
     join(socket)
@@ -39,11 +39,11 @@ defmodule ChurchAdminWeb.ChangesChannelTest do
   end
 
   test "a socket without a valid token is refused" do
-    assert connect(ChangesSocket, %{}) == :error
-    assert connect(ChangesSocket, %{"token" => "not-a-jwt"}) == :error
+    assert connect(LiveQueriesSocket, %{}) == :error
+    assert connect(LiveQueriesSocket, %{"token" => "not-a-jwt"}) == :error
 
     expired = FirebaseTokens.valid_claims(%{"exp" => System.os_time(:second) - 1})
-    assert connect(ChangesSocket, %{"token" => FirebaseTokens.unsigned(expired)}) == :error
+    assert connect(LiveQueriesSocket, %{"token" => FirebaseTokens.unsigned(expired)}) == :error
   end
 
   test "joining replies with an empty map", %{socket: socket} do
@@ -56,7 +56,7 @@ defmodule ChurchAdminWeb.ChangesChannelTest do
       Process.flag(:trap_exit, true)
       user = Factory.user!()
       Factory.permissions!(user, ~w(approved))
-      {:ok, socket} = connect(ChangesSocket, %{"token" => token_for(user)})
+      {:ok, socket} = connect(LiveQueriesSocket, %{"token" => token_for(user)})
 
       ChurchAdmin.Repo.query!("delete from auth.users_permissions where uid = $1", [
         Ecto.UUID.dump!(user.uid)
@@ -74,7 +74,7 @@ defmodule ChurchAdminWeb.ChangesChannelTest do
       expires_at = System.os_time(:second) + 2
 
       {:ok, socket} =
-        connect(ChangesSocket, %{"token" => approved_user_token(%{"exp" => expires_at})})
+        connect(LiveQueriesSocket, %{"token" => approved_user_token(%{"exp" => expires_at})})
 
       {:ok, _reply, _channel} = join(socket)
 
@@ -85,7 +85,7 @@ defmodule ChurchAdminWeb.ChangesChannelTest do
       expires_at = System.os_time(:second) + 1
 
       {:ok, socket} =
-        connect(ChangesSocket, %{"token" => approved_user_token(%{"exp" => expires_at})})
+        connect(LiveQueriesSocket, %{"token" => approved_user_token(%{"exp" => expires_at})})
 
       Process.sleep(1_100)
 

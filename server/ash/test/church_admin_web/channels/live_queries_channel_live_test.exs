@@ -1,4 +1,4 @@
-defmodule ChurchAdminWeb.ChangesChannelLiveTest do
+defmodule ChurchAdminWeb.LiveQueriesChannelLiveTest do
   use ChurchAdmin.LiveCase, async: false
 
   import Plug.Conn, only: [put_req_header: 3]
@@ -6,8 +6,8 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
 
   alias ChurchAdmin.Realtime.Broadcaster
   alias ChurchAdmin.Realtime.Live.Registry
-  alias ChurchAdminWeb.ChangesChannel
-  alias ChurchAdminWeb.ChangesSocket
+  alias ChurchAdminWeb.LiveQueriesChannel
+  alias ChurchAdminWeb.LiveQueriesSocket
 
   @staleness_budget_ms 2_000
   @restore_hobbies_if_moved "alter table if exists hobbies_elsewhere rename to hobbies"
@@ -693,11 +693,11 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
     } do
       Factory.family!()
       viewer = admin!()
-      {:ok, connected} = connect(ChangesSocket, %{"token" => token_for(viewer)})
+      {:ok, connected} = connect(LiveQueriesSocket, %{"token" => token_for(viewer)})
 
       revoke_permission(writer, viewer.uid, "readAllData")
 
-      {:ok, %{}, socket} = subscribe_and_join(connected, ChangesChannel, "changes", %{})
+      {:ok, %{}, socket} = subscribe_and_join(connected, LiveQueriesChannel, "live_queries", %{})
       {:ok, %{}} = register(socket, window_payload("r1", @families))
 
       assert_push "live:result", %{full: true, data: %{"families" => %{"results" => []}}}

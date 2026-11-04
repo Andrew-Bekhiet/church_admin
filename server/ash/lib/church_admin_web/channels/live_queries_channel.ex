@@ -1,6 +1,6 @@
-defmodule ChurchAdminWeb.ChangesChannel do
+defmodule ChurchAdminWeb.LiveQueriesChannel do
   @moduledoc """
-  Topic `changes`: live queries. Join with `{}`; the reply is `{}`.
+  Topic `live_queries`: live queries. Join with `{}`; the reply is `{}`.
 
   `live:register {ref, document, operationName?, variables, window?,
   resultHashes?}` replies `{}` once the query's first result is known, or
@@ -40,7 +40,7 @@ defmodule ChurchAdminWeb.ChangesChannel do
   @max_registrations 100
 
   @impl Phoenix.Channel
-  def join("changes", _payload, socket) do
+  def join("live_queries", _payload, socket) do
     case remaining_token_lifetime_ms(socket) do
       lifetime_ms when lifetime_ms > 0 ->
         Process.send_after(self(), :token_expired, lifetime_ms)

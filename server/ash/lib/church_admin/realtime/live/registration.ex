@@ -1,7 +1,7 @@
 defmodule ChurchAdmin.Realtime.Live.Registration do
   @moduledoc """
   One `live:register` of a socket. `from_payload/1` validates what the client
-  sent; `ChurchAdminWeb.ChangesChannel` fills in who registers and which
+  sent; `ChurchAdminWeb.LiveQueriesChannel` fills in who registers and which
   registration this one replaces. `id` is unique per registration, unlike
   the client's `ref`, so a result of a replaced registration can be told
   from one of its replacement.

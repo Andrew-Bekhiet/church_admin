@@ -12,7 +12,7 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
   still has members runs again by itself, the wait doubling with each
   failure in a row up to `@max_retry_ms`.
 
-  A restart loses every group. `ChurchAdminWeb.ChangesChannel` monitors this
+  A restart loses every group. `ChurchAdminWeb.LiveQueriesChannel` monitors this
   process and disconnects, and the client registers again.
   """
 

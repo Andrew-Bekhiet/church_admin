@@ -1,14 +1,14 @@
-defmodule ChurchAdminWeb.ChangesSocket do
+defmodule ChurchAdminWeb.LiveQueriesSocket do
   @moduledoc """
   The realtime socket at `/socket`. The `token` connect param is a Firebase
   ID token, verified like the `Authorization` header of `/gql`. The socket is
   admitted only for an onboarded account, whose uid claim names the user
   linked to its Firebase account, and whose user is approved, with the
   actor `ChurchAdmin.Authz.ActorLoader` builds for the uid, and its id is
-  `changes_socket:<uid>` so
+  `live_queries_socket:<uid>` so
   `ChurchAdmin.Accounts.DisconnectSocketsOnRevokedApproval` can drop a user's
   sockets. The token's expiry is kept in
-  `assigns.token_expires_at` for `ChurchAdminWeb.ChangesChannel` to enforce.
+  `assigns.token_expires_at` for `ChurchAdminWeb.LiveQueriesChannel` to enforce.
   """
 
   use Phoenix.Socket
@@ -17,9 +17,9 @@ defmodule ChurchAdminWeb.ChangesSocket do
   alias ChurchAdmin.Auth.TokenVerifier
   alias ChurchAdmin.Authz.{Actor, ActorLoader}
 
-  channel "changes", ChurchAdminWeb.ChangesChannel
+  channel "live_queries", ChurchAdminWeb.LiveQueriesChannel
 
-  @id_prefix "changes_socket:"
+  @id_prefix "live_queries_socket:"
 
   @spec id_for(String.t()) :: String.t()
   def id_for(uid), do: @id_prefix <> uid

@@ -14,8 +14,8 @@ defmodule ChurchAdmin.LiveCase do
 
   alias ChurchAdmin.Factory
   alias ChurchAdmin.FirebaseTokens
-  alias ChurchAdminWeb.ChangesChannel
-  alias ChurchAdminWeb.ChangesSocket
+  alias ChurchAdminWeb.LiveQueriesChannel
+  alias ChurchAdminWeb.LiveQueriesSocket
 
   @endpoint ChurchAdminWeb.Endpoint
   @run_event [:church_admin, :realtime, :live, :run]
@@ -67,8 +67,8 @@ defmodule ChurchAdmin.LiveCase do
 
   @doc "Connects and joins as `user`, ready for `register/2`."
   def join_as(user, claims \\ %{}) do
-    {:ok, socket} = connect(ChangesSocket, %{"token" => token_for(user, claims)})
-    {:ok, %{}, joined} = subscribe_and_join(socket, ChangesChannel, "changes", %{})
+    {:ok, socket} = connect(LiveQueriesSocket, %{"token" => token_for(user, claims)})
+    {:ok, %{}, joined} = subscribe_and_join(socket, LiveQueriesChannel, "live_queries", %{})
     joined
   end
 
