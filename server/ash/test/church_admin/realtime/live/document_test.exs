@@ -44,6 +44,17 @@ defmodule ChurchAdmin.Realtime.Live.DocumentTest do
     end
   end
 
+  test "the selected fields hold every field name at every depth, fragments included" do
+    text = """
+    query q { persons { results { editable: userCanEdit ...Row ... on Person { family { id } } } } }
+    fragment Row on Person { name }
+    """
+
+    assert {:ok, %{selected_fields: fields}} = Document.prepare(text, nil)
+
+    assert fields == MapSet.new(~w(persons results userCanEdit name family id))
+  end
+
   test "the operation name may be left out when the document holds one operation" do
     assert {:ok, %{operation_name: "areas"}} = Document.prepare(@areas, nil)
   end

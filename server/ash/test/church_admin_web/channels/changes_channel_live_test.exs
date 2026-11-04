@@ -380,11 +380,35 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
       assert runs(runs) == 1
     end
 
-    test "two read-only global readers do not share persons" do
+    test "two read-only global readers share a document selecting nothing about them" do
+      Factory.person!(%{family_id: Factory.family!().id})
+      runs = count_runs()
+
       {:ok, %{}} = register(join_as(admin!()), window_payload("a", @persons))
       {:ok, %{}} = register(join_as(admin!()), window_payload("b", @persons))
 
-      assert Registry.group_count() == 2
+      assert runs(runs) == 1
+    end
+
+    test "two read-only global readers do not share what depends on them, however it is named" do
+      Factory.person!(%{family_id: Factory.family!().id})
+
+      for operation <- ["query renamed", "query"] do
+        runs = count_runs()
+
+        document = """
+        #{operation}($first: Int, $after: String) {
+          persons(first: $first, after: $after) {
+            endKeyset results { keyset id userCanEdit }
+          }
+        }
+        """
+
+        {:ok, %{}} = register(join_as(admin!()), window_payload("a", document))
+        {:ok, %{}} = register(join_as(admin!()), window_payload("b", document))
+
+        assert runs(runs) == 2
+      end
     end
 
     test "a scoped user does not share with an admin" do

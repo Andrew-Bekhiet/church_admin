@@ -3,6 +3,8 @@ defmodule ChurchAdmin.Realtime.Live.Document do
   A document a client registers: at most `@max_bytes` long and selecting a
   `query` operation, the one check `ChurchAdminWeb.Graphql.Pipeline`'s limits
   do not make. Parsed documents are cached by the sha256 of their text.
+  `selected_fields` names every field at every depth, fragments included,
+  whatever the client called its operation or aliased the field to.
   """
 
   alias Absinthe.Language
@@ -10,7 +12,7 @@ defmodule ChurchAdmin.Realtime.Live.Document do
   alias ChurchAdmin.Realtime.Live.ResultHash
 
   @enforce_keys [:hash, :parsed, :operation_name, :variables]
-  defstruct [:hash, :parsed, :operation_name, :variables, :root_field]
+  defstruct [:hash, :parsed, :operation_name, :variables, :root_field, :selected_fields]
 
   @max_bytes 64 * 1024
 
@@ -19,7 +21,8 @@ defmodule ChurchAdmin.Realtime.Live.Document do
           parsed: Language.Document.t(),
           operation_name: String.t() | nil,
           variables: MapSet.t(String.t()),
-          root_field: String.t() | nil
+          root_field: String.t() | nil,
+          selected_fields: MapSet.t(String.t())
         }
 
   @spec prepare(String.t(), String.t() | nil) ::
@@ -37,7 +40,8 @@ defmodule ChurchAdmin.Realtime.Live.Document do
          parsed: parsed,
          operation_name: operation.name,
          variables: MapSet.new(operation.variable_definitions, & &1.variable.name),
-         root_field: root_field(operation)
+         root_field: root_field(operation),
+         selected_fields: selected_fields(parsed)
        }}
     end
   end
@@ -48,6 +52,17 @@ defmodule ChurchAdmin.Realtime.Live.Document do
       _several_or_a_spread_or_none -> nil
     end
   end
+
+  defp selected_fields(%Language.Document{definitions: definitions}),
+    do: definitions |> Enum.flat_map(&fields_under/1) |> MapSet.new()
+
+  defp fields_under(%{selection_set: %Language.SelectionSet{selections: selections}}),
+    do: Enum.flat_map(selections, &field_names/1)
+
+  defp fields_under(_leaf_or_spread), do: []
+
+  defp field_names(%Language.Field{name: name} = field), do: [name | fields_under(field)]
+  defp field_names(spread_or_inline_fragment), do: fields_under(spread_or_inline_fragment)
 
   defp parsed(hash, text) do
     with :error <- Cache.fetch(hash),

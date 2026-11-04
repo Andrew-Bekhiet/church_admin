@@ -3,7 +3,10 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassTest do
 
   alias ChurchAdmin.Auth.Principal
   alias ChurchAdmin.Authz.{Actor, Grant}
+  alias ChurchAdmin.Realtime.Live.Document
   alias ChurchAdmin.Realtime.Live.ViewerClass
+
+  @plain_fields MapSet.new(~w(hobbies results id name))
 
   defp global_reader(overrides \\ []) do
     struct!(
@@ -34,12 +37,12 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassTest do
   end
 
   test "two global readers that differ only in identity share a class" do
-    assert ViewerClass.key(global_reader(), "hobbies") ==
-             ViewerClass.key(global_reader_with_other_identity(), "hobbies")
+    assert ViewerClass.key(global_reader(), @plain_fields) ==
+             ViewerClass.key(global_reader_with_other_identity(), @plain_fields)
   end
 
   test "any difference in a flag, a permission or a grant splits the class" do
-    base = ViewerClass.key(global_reader(), "hobbies")
+    base = ViewerClass.key(global_reader(), @plain_fields)
     with_grant = [%Grant{id: "g", scope_id: "s"}]
 
     for different <- [
@@ -50,7 +53,7 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassTest do
           global_reader(group_grants: with_grant),
           global_reader(area_grants: with_grant)
         ] do
-      assert ViewerClass.key(different, "hobbies") != base
+      assert ViewerClass.key(different, @plain_fields) != base
     end
   end
 
@@ -62,41 +65,60 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassTest do
     written_first = global_reader(service_grants: [first, second])
     written_last = global_reader(service_grants: same_rights)
 
-    assert ViewerClass.key(written_first, "hobbies") == ViewerClass.key(written_last, "hobbies")
+    assert ViewerClass.key(written_first, @plain_fields) ==
+             ViewerClass.key(written_last, @plain_fields)
   end
 
   test "an actor without a global read is keyed by its uid" do
     actor = %Actor{uid: "uid-a", approved?: true}
 
-    assert ViewerClass.key(actor, "hobbies") == {:uid, "uid-a"}
+    assert ViewerClass.key(actor, @plain_fields) == {:uid, "uid-a"}
   end
 
-  test "every operation that depends on identity is keyed by uid for a read-only global reader" do
-    operations =
-      ViewerClass.operations_per_uid_for_everyone() ++
-        ViewerClass.operations_per_uid_below_full_write()
+  defp fields_of(text) do
+    {:ok, document} = Document.prepare(text, nil)
+    document.selected_fields
+  end
 
-    for operation <- operations do
-      assert ViewerClass.key(global_reader(), operation) == {:uid, "uid-a"}
+  test "every field that depends on identity is keyed by uid for a read-only global reader" do
+    fields =
+      ViewerClass.fields_per_uid_for_everyone() ++ ViewerClass.fields_per_uid_below_full_write()
+
+    for field <- fields do
+      assert ViewerClass.key(global_reader(), MapSet.new(["persons", field])) == {:uid, "uid-a"}
     end
   end
 
-  test "a full admin is keyed by uid only for operations that depend on identity for everyone" do
+  test "a full admin is keyed by uid only for fields that depend on identity for everyone" do
     admin = global_reader(write_all?: true, manage_all_users?: true)
 
-    for operation <- ViewerClass.operations_per_uid_for_everyone() do
-      assert ViewerClass.key(admin, operation) == {:uid, "uid-a"}
+    for field <- ViewerClass.fields_per_uid_for_everyone() do
+      assert ViewerClass.key(admin, MapSet.new([field])) == {:uid, "uid-a"}
     end
 
-    for operation <- ViewerClass.operations_per_uid_below_full_write() do
-      assert {:global_reader, _facts} = ViewerClass.key(admin, operation)
+    for field <- ViewerClass.fields_per_uid_below_full_write() do
+      assert {:global_reader, _facts} = ViewerClass.key(admin, MapSet.new([field]))
     end
   end
 
   test "write-all without manage-all is not a full writer" do
     writer = global_reader(write_all?: true)
 
-    assert ViewerClass.key(writer, "users") == {:uid, "uid-a"}
+    assert ViewerClass.key(writer, MapSet.new(["currentUserCanManageThisUser"])) ==
+             {:uid, "uid-a"}
+  end
+
+  test "what decides is the document's selection, however the client names or hides it" do
+    for text <- [
+          "query renamed { persons { results { userCanEdit } } }",
+          "{ persons { results { userCanEdit } } }",
+          "{ persons { results { editable: userCanEdit } } }",
+          "{ persons { results { ...Row } } } fragment Row on Person { userCanEdit }",
+          "{ persons { results { ... on Person { userCanEdit } } } }",
+          "{ persons { results { family { persons { userCanEdit } } } } }"
+        ] do
+      assert ViewerClass.key(global_reader(), fields_of(text)) == {:uid, "uid-a"}, text
+    end
   end
 
   test "same_scope? ignores the token and notices a change in identity-bound facts" do
@@ -112,8 +134,10 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassTest do
     refute ViewerClass.same_scope?(reader, %{reader | family_id: "family-z"})
   end
 
-  test "an anonymous operation of a global reader still shares" do
-    assert ViewerClass.key(global_reader(), nil) ==
-             ViewerClass.key(global_reader_with_other_identity(), nil)
+  test "an anonymous document selecting nothing identity-bound still shares" do
+    fields = fields_of("{ persons { results { id name } } }")
+
+    assert ViewerClass.key(global_reader(), fields) ==
+             ViewerClass.key(global_reader_with_other_identity(), fields)
   end
 end

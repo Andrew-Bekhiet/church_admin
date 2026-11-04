@@ -216,7 +216,7 @@ defmodule ChurchAdmin.Realtime.Live.Group do
   defp idle(%__MODULE__{} = group), do: %{group | status: :idle, run_ref: nil}
 
   defp viewer_class(%Registration{actor: actor, document: document}),
-    do: ViewerClass.key(actor, document.operation_name)
+    do: ViewerClass.key(actor, document.selected_fields)
 
   defp adopt_fresher_actor(%{viewer_class: {:uid, _uid}} = group, %Actor{} = actor) do
     if ViewerClass.same_scope?(group.actor, actor),
