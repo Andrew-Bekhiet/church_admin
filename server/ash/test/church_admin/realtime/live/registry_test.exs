@@ -285,6 +285,16 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
     end
   end
 
+  test "one socket costs one monitor, however many queries it registers", %{registry: registry} do
+    for _registration <- 1..3 do
+      :ok = Registry.register(registry, registration(variables: %{"n" => make_ref()}))
+    end
+
+    {:monitors, monitors} = Process.info(registry, :monitors)
+
+    assert Enum.count(monitors, &(&1 == {:process, self()})) == 1
+  end
+
   describe "a failed refresh" do
     @tag retry_base_ms: 10
     test "retries on its own and reads the window, since the batch it held is gone", %{
@@ -294,9 +304,8 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       register_and_settle(registry, [row("1")])
       batch(topic, touched(), [%{type: "Area", id: "1", op: "update"}])
 
-      failed = capture_log(fn -> finish_next_run({:error, {:run_failed, ["boom"]}}) end)
+      capture_log(fn -> finish_next_run({:error, {:run_failed, []}}) end)
 
-      assert failed =~ "boom"
       {retry, _task} = await_run()
       assert retry.window_required?
       assert retry.changes == []

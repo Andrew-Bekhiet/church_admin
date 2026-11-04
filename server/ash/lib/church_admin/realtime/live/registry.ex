@@ -177,12 +177,13 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
   end
 
   defp track_socket(state, pid, id) do
-    sockets =
-      Map.update(state.sockets, pid, {Process.monitor(pid), MapSet.new([id])}, fn {monitor, ids} ->
-        {monitor, MapSet.put(ids, id)}
-      end)
+    tracked =
+      case state.sockets do
+        %{^pid => {monitor, ids}} -> {monitor, MapSet.put(ids, id)}
+        _first_registration -> {Process.monitor(pid), MapSet.new([id])}
+      end
 
-    %{state | sockets: sockets}
+    %{state | sockets: Map.put(state.sockets, pid, tracked)}
   end
 
   defp untrack_socket(state, pid, id) do
