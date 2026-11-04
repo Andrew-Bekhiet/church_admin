@@ -78,6 +78,6 @@ Review each test for what it proves:
 ## Not findings here
 
 - `!` and magic numbers are unenforced house style (`client/AGENTS.md`). Raise them only in code the PR adds, as a single Trivial finding listing every location, and never in moved code.
-- Established conventions that are not findings: a `<Widget>Keys` companion class in the widget's file, a sealed family kept in one file, `*Fields` extensions beside their models with a reasoned lint ignore, and private mocks and fakes inside the test file that uses them, as long as `test/src/fakes/` has no shared copy of the same class.
+- Established conventions that are not findings: a `<Widget>Keys` companion class in the widget's file, a sealed family kept in one file, `*Fields` subclasses of the generated private base beside their models with a reasoned lint ignore, and private mocks and fakes inside the test file that uses them, as long as `test/src/fakes/` has no shared copy of the same class.
 - Arrange and Act steps written out again in each test. In tests, visible setup is worth more than shared helpers, so leave the repetition.
 - `.g.dart` output. Review the generator in `packages/church_admin_generator` instead.
