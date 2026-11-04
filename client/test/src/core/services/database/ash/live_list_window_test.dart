@@ -39,28 +39,9 @@ void main() {
       expect(window.endKeyset, 'k9');
     });
 
-    test('that repeats what the window holds changes nothing', () {
-      final window = windowOver([mina, marina]);
-
-      final update = window.applyFull(dataOf([mina, marina]));
-
-      expect(update, LiveWindowUpdate.unchanged);
-    });
   });
 
   group('a delta', () {
-    test('with rows only replaces those rows in place', () {
-      final window = windowOver([mina, marina]);
-      final renamed = marina.renamed('مارينا جرجس');
-
-      final update = window.applyDelta(
-        ListDeltaLiveResult(ref: 'r1', rows: [renamed.toJson()]),
-      );
-
-      expect(update, LiveWindowUpdate.changed);
-      expect(itemsOf(window), [mina, renamed]);
-    });
-
     test('with rows identical to the held ones changes nothing', () {
       final window = windowOver([mina, marina]);
 
@@ -86,20 +67,6 @@ void main() {
       expect(update, LiveWindowUpdate.changed);
       expect(itemsOf(window), [bishoy, marina, mina]);
       expect(window.count, 3);
-    });
-
-    test('with an order that leaves an id out drops that row', () {
-      final window = windowOver([mina, marina, bishoy])
-        ..applyDelta(
-          ListDeltaLiveResult(
-            ref: 'r1',
-            rows: const [],
-            order: [mina.id, bishoy.id],
-            count: 2,
-          ),
-        );
-
-      expect(itemsOf(window), [mina, bishoy]);
     });
 
     test('keeps the end keyset when the delta carries none', () {

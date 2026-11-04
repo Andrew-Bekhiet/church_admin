@@ -11,10 +11,12 @@ void main() {
   const mina = AshTestItem(id: 'mina', name: 'مينا');
   const settleTime = Duration(seconds: 5);
 
-  test('the server never sees more than four refetches at once', () {
+  test('the server never sees more refetches at once than the registry '
+      'allows', () {
     fakeAsync((async) {
+      const refetchesAtOnce = LiveQueryRegistry.maxConcurrentRefetches;
       final rows = [
-        for (var index = 0; index < 8; index++)
+        for (var index = 0; index < 2 * refetchesAtOnce; index++)
           AshTestItem(id: 'item$index', name: 'اسم $index'),
       ];
       final harness = LiveQueryHarness(
@@ -31,7 +33,7 @@ void main() {
       harness.goOnline();
       async.elapse(settleTime);
 
-      expect(harness.server.maxRequestsInFlight, 4);
+      expect(harness.server.maxRequestsInFlight, refetchesAtOnce);
 
       for (final subscription in subscriptions) {
         unawaited(subscription.cancel());

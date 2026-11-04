@@ -173,9 +173,11 @@ void main() {
 
       unawaited(harness.changeFeedServer.dropConnection());
       async.elapse(const Duration(seconds: 10));
+      final registeredAfterDrop = {...harness.changeFeedServer.registrations};
       harness.changeFeedServer.pushFull(ref, listData([marina]));
       async.elapse(settleTime);
 
+      expect(registeredAfterDrop.keys, [ref]);
       expect(emitted.last, [marina]);
 
       unawaited(subscription.cancel());
