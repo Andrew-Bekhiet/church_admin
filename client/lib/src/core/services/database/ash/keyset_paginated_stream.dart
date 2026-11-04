@@ -7,8 +7,8 @@ import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
 /// A list loaded in keyset pages and kept live as one window: the loaded
-/// window is registered with the server after each network load, and its
-/// pushes edit the rows held in [_window]. Loads fetch chunks of at most
+/// window is registered with the server after each network load once
+/// something listens, and its pushes edit the rows held in [_window]. Loads fetch chunks of at most
 /// [maxPageSize] chained by their end keysets.
 class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     implements LiveQueryTarget {
@@ -22,7 +22,7 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
   final LiveQueryRegistry _registry;
 
   late final BehaviorSubject<PaginatableStreamData<T>> _subject =
-      BehaviorSubject(onListen: () => _registry.notifyListened(this));
+      BehaviorSubject(onListen: _onListened);
   final BehaviorSubject<bool> _loading = BehaviorSubject.seeded(true);
   late final StreamSubscription<P> _parametersSubscription;
 
@@ -33,6 +33,7 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
   int _pageIndex = 0;
   LiveListWindow? _window;
   KeysetPageQuery<T>? _loadedQuery;
+  LiveQueryRequest? _requestAwaitingListener;
   bool _awaitingResync = false;
 
   @override
@@ -120,6 +121,7 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     _hasParameters = true;
     final generation = ++_generation;
     _pageIndex = 0;
+    _requestAwaitingListener = null;
     _registry.stopLive(this);
     unawaited(
       _serialized(() async {
@@ -172,6 +174,7 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
       if (generation != _generation) return;
 
       _registry.stopLive(this);
+      _requestAwaitingListener = null;
       _awaitingResync = false;
       if (pageIndex != null) _pageIndex = pageIndex;
       _storeAndPublishLoaded(query, keep, chunks, requestedRows: rows);
@@ -259,16 +262,29 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
   }) {
     final hashes = [for (final chunk in chunks) chunk.resultHash];
     final isEveryChunkHashKnown = isFromFirstRow && !hashes.contains(null);
-    _registry.startLive(
-      this,
-      LiveQueryRequest(
-        document: query.document,
-        operationName: query.operationName,
-        variables: variables,
-        window: LiveWindowSize(rows: _windowSize, chunk: maxPageSize),
-        resultHashes: isEveryChunkHashKnown ? hashes.cast<String>() : null,
-      ),
+    final request = LiveQueryRequest(
+      document: query.document,
+      operationName: query.operationName,
+      variables: variables,
+      window: LiveWindowSize(rows: _windowSize, chunk: maxPageSize),
+      resultHashes: isEveryChunkHashKnown ? hashes.cast<String>() : null,
     );
+    _requestAwaitingListener = request;
+    scheduleMicrotask(_startRequestIfListened);
+  }
+
+  void _onListened() {
+    _registry.notifyListened(this);
+    _startRequestIfListened();
+  }
+
+  void _startRequestIfListened() {
+    if (!isListened) return;
+
+    if (_requestAwaitingListener case final request?) {
+      _requestAwaitingListener = null;
+      _registry.startLive(this, request);
+    }
   }
 
   @override
@@ -337,6 +353,7 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
   @override
   Future<void> dispose() async {
     _generation++;
+    _requestAwaitingListener = null;
     _registry.detach(this);
     await _parametersSubscription.cancel();
     await _loading.close();

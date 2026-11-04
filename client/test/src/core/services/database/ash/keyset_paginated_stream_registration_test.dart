@@ -334,6 +334,55 @@ void main() {
       });
     });
 
+    test('a list that was read once and disposed is never registered', () {
+      fakeAsync((async) {
+        final harness = LiveQueryHarness(KeysetStreamHarness.rowsNamed(10));
+        final stream = KeysetStreamHarness.streamOver(harness);
+        List<AshTestItem>? firstRows;
+
+        unawaited(
+          stream.first.then((rows) async {
+            firstRows = rows;
+            await stream.dispose();
+          }),
+        );
+        async.elapse(settleTime);
+
+        expect(firstRows, harness.server.rows.take(pageSize));
+        expect(harness.liveQueriesServer.registeredRefs, isEmpty);
+        expect(harness.liveQueriesServer.unregisteredRefs, isEmpty);
+
+        harness.dispose();
+      });
+    });
+
+    test('a list loaded before anyone listens is registered when it is '
+        'listened to', () {
+      fakeAsync((async) {
+        final harness = LiveQueryHarness(KeysetStreamHarness.rowsNamed(10));
+        final stream = KeysetStreamHarness.streamOver(harness);
+        async.elapse(settleTime);
+        final registeredBeforeListening = [
+          ...harness.liveQueriesServer.registeredRefs,
+        ];
+
+        final emitted = <List<AshTestItem>>[];
+        final subscription = stream.listen(emitted.add);
+        async.elapse(settleTime);
+        final ref = harness.liveQueriesServer.registeredRefs.single;
+        final renamed = harness.server.rows[1].renamed('اسم جديد');
+        harness.liveQueriesServer.pushDelta(ref, rows: [renamed.toJson()]);
+        async.elapse(settleTime);
+
+        expect(registeredBeforeListening, isEmpty);
+        expect(emitted.last[1], renamed);
+
+        unawaited(subscription.cancel());
+        unawaited(stream.dispose());
+        harness.dispose();
+      });
+    });
+
     test('disposing the list unregisters it', () {
       fakeAsync((async) {
         final harness = LiveQueryHarness(KeysetStreamHarness.rowsNamed(10));
