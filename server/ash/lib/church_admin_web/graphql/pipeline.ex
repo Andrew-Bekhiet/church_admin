@@ -17,10 +17,14 @@ defmodule ChurchAdminWeb.Graphql.Pipeline do
   `extensions.resultHash` (`ChurchAdminWeb.Graphql.Phase.PutResultHash`).
   """
 
+  alias Absinthe.Language
   alias Absinthe.Phase.Document.Result
   alias Absinthe.Phase.Document.Validation.NoFragmentCycles
+  alias Absinthe.Phase.Parse
+  alias ChurchAdmin.Authz.Actor
   alias ChurchAdminWeb.Graphql.Phase.{LimitDepth, PutResultHash}
 
+  @schema ChurchAdminWeb.GraphqlSchema
   @max_complexity 150_000
   @max_depth 10
 
@@ -43,5 +47,21 @@ defmodule ChurchAdminWeb.Graphql.Pipeline do
     |> Absinthe.Pipeline.replace(Result, {Result, spec_compliant_errors: true})
     |> Absinthe.Pipeline.insert_after(Result, PutResultHash)
     |> Absinthe.Pipeline.insert_after(Result, ChurchAdminWeb.Graphql.FillMissingErrorCodes)
+  end
+
+  @doc "Runs an already parsed query outside a request, through the same phases as `/gql`."
+  @spec run_parsed(Language.Document.t(), String.t() | nil, map(), Actor.t()) :: map()
+  def run_parsed(%Language.Document{} = document, operation_name, variables, %Actor{} = actor) do
+    phases =
+      %{schema_mod: @schema, conn_private: %{http_method: "POST"}}
+      |> pipeline(
+        context: %{actor: actor, tenant: nil, context: %{}},
+        operation_name: operation_name,
+        variables: variables
+      )
+      |> Absinthe.Pipeline.without(Parse)
+
+    {:ok, %{result: result}, _phases} = Absinthe.Pipeline.run(document, phases)
+    result
   end
 end

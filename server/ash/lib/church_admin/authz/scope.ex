@@ -39,6 +39,9 @@ defmodule ChurchAdmin.Authz.Scope do
     user: User
   }
 
+  @spec entities() :: [entity()]
+  def entities, do: Map.keys(@resources)
+
   @spec resource(entity()) :: module()
   def resource(entity), do: Map.fetch!(@resources, entity)
 
