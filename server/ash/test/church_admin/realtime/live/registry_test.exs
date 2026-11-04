@@ -240,6 +240,22 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       assert Registry.group_count(registry) == 0
     end
 
+    test "a refused registration leaves nothing behind for its socket to clean up", %{
+      registry: registry
+    } do
+      socket = socket()
+      :ok = Registry.register(registry, registration(pid: socket))
+
+      capture_log(fn ->
+        finish_next_run_and_settle(registry, {:error, [%{message: "boom"}]})
+        await_exit(socket, fn -> Process.exit(socket, :kill) end)
+        settle(registry)
+      end)
+
+      assert Process.alive?(registry)
+      assert Registry.group_count(registry) == 0
+    end
+
     test "a first run that crashes is refused and leaves no group", %{registry: registry} do
       %{id: id} = registration = registration()
       :ok = Registry.register(registry, registration)

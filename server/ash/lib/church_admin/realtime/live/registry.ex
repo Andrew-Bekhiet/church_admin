@@ -286,6 +286,7 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
     dependencies_before_run = group.dependencies
     {group, messages} = Group.finish_run(group, outcome)
     deliver(messages)
+    state = forget_refused_members(state, messages)
 
     index =
       DependencyIndex.put(
@@ -296,6 +297,13 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
       )
 
     settle_finished_group(%{state | index: index}, group, dependencies_before_run)
+  end
+
+  defp forget_refused_members(state, messages) do
+    for {pid, {:live_refused, id}} <- messages, reduce: state do
+      state ->
+        untrack_socket(%{state | registrations: Map.delete(state.registrations, id)}, pid, id)
+    end
   end
 
   defp settle_finished_group(state, group, dependencies_before_run) do
