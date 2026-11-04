@@ -59,16 +59,15 @@ void main() {
 
   test('a screenshot while signed in is stored', () async {
     final link = RecordingGraphQLLink({
-      'insertOperationsScreenCaptureAttempts': {'affectedRows': 1},
+      'recordScreenCaptureAttempt': {'result': null},
     });
     recording = recorderOver(link).recordAttemptsWhileSignedIn();
 
     await captureScreen(ScreenCaptureKind.screenshot);
 
-    expect(
-      link.requests.single.variables,
-      {'captureKind': ScreenCaptureKind.screenshot.value},
-    );
+    expect(link.requests.single.variables, {
+      'input': {'captureKind': 'SCREENSHOT'},
+    });
   });
 
   test(

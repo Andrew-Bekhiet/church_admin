@@ -1,5 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/screen_capture_attempts/__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/screen_capture_attempts/__generated__/mutations.graphql.dart';
 import 'package:graphql/client.dart';
 
 class ScreenCaptureAttemptsDAO {
@@ -13,7 +13,13 @@ class ScreenCaptureAttemptsDAO {
         document: documentNodeMutationrecordScreenCaptureAttempt,
         operationName: 'recordScreenCaptureAttempt',
         variables: Variables_Mutation_recordScreenCaptureAttempt(
-          captureKind: kind.value,
+          input: Input_RecordScreenCaptureAttemptInput(
+            captureKind: switch (kind) {
+              ScreenCaptureKind.screenshot => Enum_ScreenCaptureKind.SCREENSHOT,
+              ScreenCaptureKind.screenRecording =>
+                Enum_ScreenCaptureKind.SCREEN_RECORDING,
+            },
+          ),
         ).toJson(),
       ),
     );
