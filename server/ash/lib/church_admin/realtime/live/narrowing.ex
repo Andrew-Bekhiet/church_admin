@@ -94,10 +94,24 @@ defmodule ChurchAdmin.Realtime.Live.Narrowing do
     quoted = ~s("#{table}")
 
     named_once? = length(String.split(statement, quoted)) == 2
-    after_first_from = statement |> String.split(" FROM ", parts: 2) |> List.last()
 
-    named_once? and main_table_is?(after_first_from, quoted)
+    named_once? and main_table_is?(after_top_level_from(statement), quoted)
   end
+
+  defp after_top_level_from(statement), do: after_top_level_from(statement, 0)
+
+  defp after_top_level_from(<<"(", rest::binary>>, depth),
+    do: after_top_level_from(rest, depth + 1)
+
+  defp after_top_level_from(<<")", rest::binary>>, depth),
+    do: after_top_level_from(rest, depth - 1)
+
+  defp after_top_level_from(<<" FROM ", rest::binary>>, 0), do: rest
+
+  defp after_top_level_from(<<_char, rest::binary>>, depth),
+    do: after_top_level_from(rest, depth)
+
+  defp after_top_level_from(<<>>, _depth), do: ""
 
   defp main_table_is?(after_from, quoted) do
     String.starts_with?(after_from, quoted) or

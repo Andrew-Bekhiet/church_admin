@@ -5,6 +5,7 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
   alias ChurchAdmin.Authz.ActorLoader
   alias ChurchAdmin.Factory
   alias ChurchAdmin.Realtime.Live.Document
+  alias ChurchAdmin.Realtime.Live.Narrowing
   alias ChurchAdmin.Realtime.Live.Refresh
   alias ChurchAdmin.Realtime.Live.Result
 
@@ -304,6 +305,49 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
                run.result |> Result.data() |> get_in(["persons", "results"]) |> hd()
 
       refute run.rows_stand_alone?
+    end
+
+    test "persons with a subquery in their select list still do: it reads another table" do
+      {:ok, document} =
+        Document.prepare(
+          """
+          query persons($first: Int, $after: String) {
+            persons(first: $first, after: $after) {
+              results { keyset id name userCanEdit }
+            }
+          }
+          """,
+          nil
+        )
+
+      statement = """
+      SELECT p0."id", p0."name", ((exists((SELECT 1 AS "result" FROM "public"."persons_services" AS sp0 WHERE (p0."id" = sp0."person_id"))))::boolean) FROM "persons" AS p0 WHERE (p0."deleted_at"::timestamptz(6) IS NULL) ORDER BY p0."name" ASC NULLS LAST, p0."id" LIMIT $1
+      """
+
+      assert Narrowing.rows_stand_alone?(document, [String.trim(statement)])
+    end
+
+    test "persons read again by a subquery of the statement do not" do
+      {:ok, document} =
+        Document.prepare(
+          """
+          query persons($first: Int, $after: String) {
+            persons(first: $first, after: $after) {
+              results { keyset id name }
+            }
+          }
+          """,
+          nil
+        )
+
+      statement =
+        ~s|SELECT p0."id" FROM "persons" AS p0 WHERE (p0."deleted_at" IS NULL) ORDER BY p0."id" LIMIT $1|
+
+      assert Narrowing.rows_stand_alone?(document, [statement])
+
+      refute Narrowing.rows_stand_alone?(document, [
+               ~s|SELECT p0."id", (SELECT count(*) FROM "persons" AS p1) FROM "persons" AS p0 LIMIT $1|
+             ])
     end
 
     test "persons nesting their own type do not", context do
