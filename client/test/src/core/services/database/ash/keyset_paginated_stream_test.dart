@@ -384,6 +384,38 @@ void main() {
       });
     });
 
+    test('a push that arrives while the next page loads is dropped', () {
+      fakeAsync((async) {
+        final harness = LiveQueryHarness(
+          rowsNamed(10),
+          latency: const Duration(seconds: 2),
+        );
+        final stream = streamOver(harness);
+        final emitted = <List<AshTestItem>>[];
+        final subscription = stream.listen(emitted.add);
+        async.elapse(settleTime);
+        final ref = harness.changeFeedServer.registeredRefs.single;
+
+        unawaited(stream.listenToNextPage());
+        async.elapse(const Duration(milliseconds: 100));
+        harness.changeFeedServer.pushFull(
+          ref,
+          pageData([const AshTestItem(id: 'stale', name: 'قديم')]),
+        );
+        async.elapse(settleTime);
+
+        expect(
+          emitted.expand((items) => items.map((item) => item.id)),
+          isNot(contains('stale')),
+        );
+        expect(emitted.last, harness.server.rows.take(2 * pageSize));
+
+        unawaited(subscription.cancel());
+        unawaited(stream.dispose());
+        harness.dispose();
+      });
+    });
+
     test('a reconnect registers the window again and the rows stay shown '
         'meanwhile', () {
       fakeAsync((async) {

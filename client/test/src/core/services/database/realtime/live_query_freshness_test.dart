@@ -69,6 +69,7 @@ void main() {
 
           expect(emittedOffline, isEmpty);
           expect(opened.emitted.last, [mina]);
+          expect(harness.changeFeedServer.registrations, isNotEmpty);
 
           opened.close();
           harness.dispose();
