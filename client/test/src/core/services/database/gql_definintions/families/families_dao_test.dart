@@ -230,9 +230,7 @@ void main() {
         async.elapse(FakeAshBackend.settleTime);
 
         table.add(const FamilyRow(boulos));
-        backend.announce([
-          EntityChange(type: 'Family', id: boulos.id, op: 'insert'),
-        ]);
+        backend.announce();
         async.elapse(FakeAshBackend.settleTime);
 
         expect(emitted.last, [boulos, george, mark]);

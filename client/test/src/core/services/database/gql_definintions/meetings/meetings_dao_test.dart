@@ -73,13 +73,7 @@ void main() {
         async.elapse(FakeAshBackend.settleTime);
 
         table.add(const MeetingRow(MeetingFixtures.youthMeeting));
-        backend.announce([
-          EntityChange(
-            type: 'Meeting',
-            id: MeetingFixtures.youthMeeting.id,
-            op: 'insert',
-          ),
-        ]);
+        backend.announce();
         async.elapse(FakeAshBackend.settleTime);
 
         expect(

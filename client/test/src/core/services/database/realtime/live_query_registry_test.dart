@@ -9,64 +9,7 @@ import '../../../../fakes/fake_ash_server.dart';
 
 void main() {
   const mina = AshTestItem(id: 'mina', name: 'مينا');
-  const marina = AshTestItem(id: 'marina', name: 'مارينا');
   const settleTime = Duration(seconds: 5);
-
-  test('a resync refreshes every active query', () {
-    fakeAsync((async) {
-      final harness = LiveQueryHarness([mina, marina]);
-      final listEmissions = <List<AshTestItem>>[];
-      final entityEmissions = <AshTestItem?>[];
-      final subscriptions = [
-        harness.watchList().listen(listEmissions.add),
-        harness.watchEntity(marina.id).listen(entityEmissions.add),
-      ];
-      async.flushMicrotasks();
-
-      harness.server
-        ..rename(mina.id, 'مينا جرجس')
-        ..rename(marina.id, 'مارينا جرجس');
-      harness.changeFeed.add(const ResyncRequired());
-      async.elapse(settleTime);
-
-      expect(listEmissions.last, [
-        mina.renamed('مينا جرجس'),
-        marina.renamed('مارينا جرجس'),
-      ]);
-      expect(entityEmissions.last, marina.renamed('مارينا جرجس'));
-
-      for (final subscription in subscriptions) {
-        unawaited(subscription.cancel());
-      }
-      harness.dispose();
-    });
-  });
-
-  test('a burst of changes within the debounce refetches a list once', () {
-    fakeAsync((async) {
-      final harness = LiveQueryHarness([mina]);
-      final emitted = <List<AshTestItem>>[];
-      final subscription = harness.watchList().listen(emitted.add);
-      async.elapse(Duration.zero);
-      final emissionsBeforeBurst = emitted.length;
-
-      for (var version = 1; version <= 20; version++) {
-        harness.server.rename(mina.id, 'مينا $version');
-        harness.announce([
-          EntityChange(type: AshTestItem.typename, id: mina.id, op: 'update'),
-        ]);
-        async.elapse(const Duration(milliseconds: 20));
-      }
-      async.elapse(settleTime);
-
-      expect(emitted.skip(emissionsBeforeBurst), [
-        [mina.renamed('مينا 20')],
-      ]);
-
-      unawaited(subscription.cancel());
-      harness.dispose();
-    });
-  });
 
   test('the server never sees more than four refetches at once', () {
     fakeAsync((async) {
@@ -77,14 +20,15 @@ void main() {
       final harness = LiveQueryHarness(
         rows,
         latency: const Duration(milliseconds: 300),
-      );
+      )..goOffline();
       final subscriptions = [
-        for (final row in rows) harness.watchEntity(row.id).listen(null),
+        for (final row in rows)
+          harness.watchEntity(row.id).listen(null, onError: (Object _) {}),
       ];
       async.elapse(settleTime);
       harness.server.maxRequestsInFlight = 0;
 
-      harness.changeFeed.add(const ResyncRequired());
+      harness.goOnline();
       async.elapse(settleTime);
 
       expect(harness.server.maxRequestsInFlight, 4);
@@ -98,18 +42,122 @@ void main() {
 
   test('a cancelled query is no longer refetched', () {
     fakeAsync((async) {
-      final harness = LiveQueryHarness([mina]);
-      final subscription = harness.watchList().listen(null);
-      async.elapse(Duration.zero);
+      final harness = LiveQueryHarness([mina])..goOffline();
+      final subscription = harness.watchList().listen(
+        null,
+        onError: (Object _) {},
+      );
+      async.elapse(settleTime);
       unawaited(subscription.cancel());
       async.flushMicrotasks();
       final requestsWhileListened = harness.server.requestCount;
 
-      harness.changeFeed.add(const ResyncRequired());
+      harness.goOnline();
       async.elapse(settleTime);
 
       expect(harness.server.requestCount, requestsWhileListened);
 
+      harness.dispose();
+    });
+  });
+
+  group('a registration', () {
+    test('the channel fails to take is sent again after a delay', () {
+      fakeAsync((async) {
+        final harness = LiveQueryHarness([mina]);
+        harness.changeFeedServer.failRegistrations = true;
+        final emitted = <List<AshTestItem>>[];
+        final subscription = harness.watchList().listen(emitted.add);
+        async.elapse(settleTime);
+        final registeredWhileFailing = {
+          ...harness.changeFeedServer.registrations,
+        };
+
+        harness.changeFeedServer.failRegistrations = false;
+        async.elapse(
+          LiveQueryRegistry.registerRetryDelay + const Duration(seconds: 15),
+        );
+        final ref = harness.changeFeedServer.registeredRefs.single;
+        harness.changeFeedServer.pushFull(ref, {
+          '__typename': 'Query',
+          'testItems': AshResponses.page([mina.renamed('مينا جرجس').toJson()]),
+        });
+        async.elapse(settleTime);
+
+        expect(registeredWhileFailing, isEmpty);
+        expect(emitted.last, [mina.renamed('مينا جرجس')]);
+
+        unawaited(subscription.cancel());
+        harness.dispose();
+      });
+    });
+
+    test('the server refuses is not sent again, and the query keeps its '
+        'rows', () {
+      fakeAsync((async) {
+        final harness = LiveQueryHarness([mina]);
+        var attempts = 0;
+        harness.changeFeedServer.refusalFor = (_) {
+          attempts++;
+
+          return 'too_many';
+        };
+        final emitted = <List<AshTestItem>>[];
+        final subscription = harness.watchList().listen(emitted.add);
+
+        async.elapse(const Duration(minutes: 1));
+
+        expect(attempts, 1);
+        expect(emitted.last, [mina]);
+
+        unawaited(subscription.cancel());
+        harness.dispose();
+      });
+    });
+
+    test('is dropped with its results once the query is cancelled', () {
+      fakeAsync((async) {
+        final harness = LiveQueryHarness([mina]);
+        final emitted = <List<AshTestItem>>[];
+        final subscription = harness.watchList().listen(emitted.add);
+        async.elapse(settleTime);
+        final ref = harness.changeFeedServer.registeredRefs.single;
+
+        unawaited(subscription.cancel());
+        async.elapse(settleTime);
+        harness.changeFeedServer.pushFull(ref, {
+          '__typename': 'Query',
+          'testItems': AshResponses.page([
+            mina.renamed('بعد الإلغاء').toJson(),
+          ]),
+        });
+        async.elapse(settleTime);
+
+        expect(harness.changeFeedServer.unregisteredRefs, [ref]);
+        expect(emitted.last, [mina]);
+
+        harness.dispose();
+      });
+    });
+  });
+
+  test('a result for a registration nobody holds is dropped', () {
+    fakeAsync((async) {
+      final harness = LiveQueryHarness([mina]);
+      final emitted = <List<AshTestItem>>[];
+      final subscription = harness.watchList().listen(emitted.add);
+      async.elapse(settleTime);
+      final emittedBeforePush = [...emitted];
+
+      harness.changeFeedServer.pushFull('nobody', {
+        '__typename': 'Query',
+        'testItems': AshResponses.page([mina.renamed('مجهول').toJson()]),
+      });
+      async.elapse(settleTime);
+
+      expect(emitted, emittedBeforePush);
+
+      unawaited(subscription.cancel());
       harness.dispose();
     });
   });

@@ -166,9 +166,7 @@ void main() {
         async.elapse(FakeAshBackend.settleTime);
 
         table.add(OrganizationRow.service(preparatory));
-        backend.announce([
-          EntityChange(type: 'Service', id: preparatory.id, op: 'insert'),
-        ]);
+        backend.announce();
         async.elapse(FakeAshBackend.settleTime);
 
         expect(emitted.last, [primary, preparatory]);

@@ -35,14 +35,14 @@ class KeysetPageQuery<T> {
   final DBGraphQLClient client;
   final DocumentNode document;
   final String? operationName;
-  final KeysetPage<T> Function(Json data) _parsePage;
+  final KeysetPage<T> Function(Json data) parsePage;
 
   KeysetPageQuery({
     required this.client,
     required this.document,
     required T Function(Json) fromJson,
     this.operationName,
-  }) : _parsePage = AshResultParser(document).page(fromJson);
+  }) : parsePage = AshResultParser(document).page(fromJson);
 
   Future<KeysetChunk<T>> fetch({
     required Json variables,
@@ -58,7 +58,7 @@ class KeysetPageQuery<T> {
           'first': chunk.first,
           if (chunk.after case final after?) 'after': after,
         },
-        parserFn: _parsePage,
+        parserFn: parsePage,
       ),
       autoChangeFetchPolicy: false,
     );
@@ -67,6 +67,7 @@ class KeysetPageQuery<T> {
       QueryResult(:final data?, :final parsedData?) => KeysetChunk(
         page: parsedData,
         data: data,
+        resultHash: result.resultHash,
       ),
       _ => throw BackendUnknownException(
         '${AshResultParser.rootFieldOf(document)} answered without data',
@@ -93,5 +94,13 @@ class KeysetChunk<T> {
   final KeysetPage<T> page;
   final Json data;
 
-  const KeysetChunk({required this.page, required this.data});
+  /// The server's hash of [data], present only for a chunk that came from the
+  /// network.
+  final String? resultHash;
+
+  const KeysetChunk({
+    required this.page,
+    required this.data,
+    this.resultHash,
+  });
 }

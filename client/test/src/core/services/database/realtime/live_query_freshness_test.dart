@@ -14,7 +14,6 @@ typedef _Opened = ({
 
 void main() {
   const mina = AshTestItem(id: 'mina', name: 'مينا');
-  const marina = AshTestItem(id: 'marina', name: 'مارينا');
   const settleTime = Duration(seconds: 5);
 
   _Opened openLiveList(LiveQueryHarness harness) {
@@ -36,7 +35,8 @@ void main() {
     final stream = KeysetPaginatedStream<AshTestItem, void>(
       registry: harness.registry,
       parametersStream: Stream.value(null),
-      fetchChunk: (_, chunk) => query.fetch(variables: {}, chunk: chunk),
+      pageQueryFor: (_) => query,
+      variablesFor: (_) => {},
     );
     final emitted = <List<AshTestItem>>[];
     final subscription = stream.listen(emitted.add, onError: (Object _) {});
@@ -74,62 +74,6 @@ void main() {
           harness.dispose();
         });
       });
-
-      test('shows a row announced while its first load was in flight', () {
-        fakeAsync((async) {
-          final harness = LiveQueryHarness(
-            [mina],
-            latency: const Duration(seconds: 2),
-          );
-          final opened = open(harness);
-          async.elapse(const Duration(milliseconds: 100));
-
-          harness.server.rows.add(marina);
-          harness.announce([
-            EntityChange(
-              type: AshTestItem.typename,
-              id: marina.id,
-              op: 'insert',
-            ),
-          ]);
-          async.elapse(settleTime);
-
-          expect(opened.emitted.last, [mina, marina]);
-
-          opened.close();
-          harness.dispose();
-        });
-      });
-
-      test('a steady stream of changes still refreshes it every few '
-          'seconds', () {
-        fakeAsync((async) {
-          final harness = LiveQueryHarness([mina]);
-          final opened = open(harness);
-          async.elapse(Duration.zero);
-          final emittedBeforeStream = opened.emitted.length;
-
-          for (var version = 1; version <= 20; version++) {
-            harness.server.rename(mina.id, 'مينا $version');
-            harness.announce([
-              EntityChange(
-                type: AshTestItem.typename,
-                id: mina.id,
-                op: 'update',
-              ),
-            ]);
-            async.elapse(const Duration(milliseconds: 600));
-          }
-
-          expect(
-            opened.emitted.length - emittedBeforeStream,
-            greaterThanOrEqualTo(3),
-          );
-
-          opened.close();
-          harness.dispose();
-        });
-      });
     });
   }
 
@@ -162,12 +106,12 @@ void main() {
 
         first.close();
         async.elapse(const Duration(seconds: 1));
-        final connectedBetweenScreens = harness.changeFeed.hasListener;
+        final connectedBetweenScreens = harness.changeFeedServer.isConnected;
         final second = openLiveList(harness);
         async.elapse(Duration.zero);
 
         expect(connectedBetweenScreens, isTrue);
-        expect(harness.changeFeed.hasListener, isTrue);
+        expect(harness.changeFeedServer.isConnected, isTrue);
 
         second.close();
         harness.dispose();
@@ -185,7 +129,7 @@ void main() {
           LiveQueryRegistry.changeFeedGracePeriod + const Duration(seconds: 1),
         );
 
-        expect(harness.changeFeed.hasListener, isFalse);
+        expect(harness.changeFeedServer.isConnected, isFalse);
 
         harness.dispose();
       });

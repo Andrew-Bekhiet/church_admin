@@ -41,10 +41,8 @@ mixin KeysetStreamableDAO<T extends ViewableWithID> on DAOBase<T>
       orderBy: orderBy,
       secondLineField: secondLineField,
     ).distinct(),
-    fetchChunk: (parameters, chunk) => _pageQuery(
-      streamAllConfig,
-      parameters,
-    ).fetch(variables: streamAllConfig.variablesFor(parameters), chunk: chunk),
+    pageQueryFor: (parameters) => _pageQuery(streamAllConfig, parameters),
+    variablesFor: streamAllConfig.variablesFor,
   );
 
   @override
@@ -98,7 +96,6 @@ mixin KeysetStreamableDAO<T extends ViewableWithID> on DAOBase<T>
     return LiveQuery<T?>(
       client: graphQLClient,
       registry: db.liveQueries,
-      kind: LiveQueryKind.entity,
       options: WatchQueryOptions(
         document: document,
         operationName: streamSingleByIdConfig.effectiveOperationName,

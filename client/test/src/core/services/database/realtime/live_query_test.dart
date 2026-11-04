@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gql/language.dart';
 
 import '../../../../fakes/ash_responses.dart';
 import '../../../../fakes/fake_ash_server.dart';
@@ -11,104 +12,128 @@ void main() {
   const mina = AshTestItem(id: 'mina', name: 'مينا');
   const marina = AshTestItem(id: 'marina', name: 'مارينا');
   const renamedName = 'مينا جرجس';
-  const listSettleTime = Duration(seconds: 2);
+  const settleTime = Duration(seconds: 2);
 
-  test('a list emits the refetched rows after a change to a type it shows', () {
+  Json entityData(AshTestItem? item) => {
+    '__typename': 'Query',
+    'testItem': item?.toJson(),
+  };
+
+  Json listData(List<AshTestItem> items) => {
+    '__typename': 'Query',
+    'testItems': AshResponses.page([for (final item in items) item.toJson()]),
+  };
+
+  test('a record registers its document and variables after loading, '
+      'without a window', () {
     fakeAsync((async) {
       final harness = LiveQueryHarness([mina, marina]);
-      final emitted = <List<AshTestItem>>[];
-      final subscription = harness.watchList().listen(emitted.add);
-      async.elapse(Duration.zero);
+      final subscription = harness.watchEntity(mina.id).listen(null);
+      async.elapse(settleTime);
 
-      harness.server.rename(mina.id, renamedName);
-      harness.announce([
-        EntityChange(type: AshTestItem.typename, id: mina.id, op: 'update'),
-      ]);
-      async.elapse(listSettleTime);
-
-      expect(emitted.last, [mina.renamed(renamedName), marina]);
+      final registration = harness.changeFeedServer.registrations.values.single;
+      expect(
+        registration['document'],
+        printNode(LiveQueryHarness.entityDocument),
+      );
+      expect(registration['variables'], {'id': mina.id});
+      expect(registration['window'], isNull);
 
       unawaited(subscription.cancel());
       harness.dispose();
     });
   });
 
-  test('a change to a type the list does not show emits nothing new', () {
+  test('a record sends the hash the server issued for its result', () {
     fakeAsync((async) {
-      final harness = LiveQueryHarness([mina, marina]);
-      final emitted = <List<AshTestItem>>[];
-      final subscription = harness.watchList().listen(emitted.add);
-      async.elapse(Duration.zero);
-      final emittedBeforeChange = [...emitted];
+      final harness = LiveQueryHarness([mina]);
+      harness.server.sendsResultHashes = true;
+      final subscription = harness.watchEntity(mina.id).listen(null);
+      async.elapse(settleTime);
 
-      harness.server.rename(mina.id, renamedName);
-      harness.announce([
-        const EntityChange(type: 'Family', id: 'f1', op: 'update'),
-      ]);
-      async.elapse(listSettleTime);
-
-      expect(emitted, emittedBeforeChange);
+      final registration = harness.changeFeedServer.registrations.values.single;
+      expect(registration['resultHashes'], harness.server.issuedResultHashes);
 
       unawaited(subscription.cancel());
       harness.dispose();
     });
   });
 
-  test('an empty list still follows inserts of its item type', () {
-    fakeAsync((async) {
-      final harness = LiveQueryHarness([]);
-      final emitted = <List<AshTestItem>>[];
-      final subscription = harness.watchList().listen(emitted.add);
-      async.elapse(Duration.zero);
-
-      harness.server.rows.add(mina);
-      harness.announce([
-        EntityChange(type: AshTestItem.typename, id: mina.id, op: 'insert'),
-      ]);
-      async.elapse(listSettleTime);
-
-      expect(emitted.last, [mina]);
-
-      unawaited(subscription.cancel());
-      harness.dispose();
-    });
-  });
-
-  test('a single record ignores a change to another record of its type', () {
+  test('a single record emits the data of a full push', () {
     fakeAsync((async) {
       final harness = LiveQueryHarness([mina, marina]);
       final emitted = <AshTestItem?>[];
       final subscription = harness.watchEntity(mina.id).listen(emitted.add);
-      async.elapse(Duration.zero);
-      final emittedBeforeChange = [...emitted];
+      async.elapse(settleTime);
 
-      harness.server.rename(mina.id, renamedName);
-      harness.announce([
-        EntityChange(type: AshTestItem.typename, id: marina.id, op: 'update'),
-      ]);
-      async.elapse(listSettleTime);
-
-      expect(emitted, emittedBeforeChange);
-
-      unawaited(subscription.cancel());
-      harness.dispose();
-    });
-  });
-
-  test('a single record emits its refetched data after its own change', () {
-    fakeAsync((async) {
-      final harness = LiveQueryHarness([mina, marina]);
-      final emitted = <AshTestItem?>[];
-      final subscription = harness.watchEntity(mina.id).listen(emitted.add);
-      async.elapse(Duration.zero);
-
-      harness.server.rename(mina.id, renamedName);
-      harness.announce([
-        EntityChange(type: AshTestItem.typename, id: mina.id, op: 'update'),
-      ]);
-      async.elapse(listSettleTime);
+      harness.changeFeedServer.pushFull(
+        harness.changeFeedServer.registeredRefs.single,
+        entityData(mina.renamed(renamedName)),
+      );
+      async.elapse(settleTime);
 
       expect(emitted.last, mina.renamed(renamedName));
+
+      unawaited(subscription.cancel());
+      harness.dispose();
+    });
+  });
+
+  test('a single record emits null when a full push says it is gone', () {
+    fakeAsync((async) {
+      final harness = LiveQueryHarness([mina]);
+      final emitted = <AshTestItem?>[];
+      final subscription = harness.watchEntity(mina.id).listen(emitted.add);
+      async.elapse(settleTime);
+
+      harness.changeFeedServer.pushFull(
+        harness.changeFeedServer.registeredRefs.single,
+        entityData(null),
+      );
+      async.elapse(settleTime);
+
+      expect(emitted.last, isNull);
+
+      unawaited(subscription.cancel());
+      harness.dispose();
+    });
+  });
+
+  test('a list query emits the rows of a full push', () {
+    fakeAsync((async) {
+      final harness = LiveQueryHarness([mina]);
+      final emitted = <List<AshTestItem>>[];
+      final subscription = harness.watchList().listen(emitted.add);
+      async.elapse(settleTime);
+
+      harness.changeFeedServer.pushFull(
+        harness.changeFeedServer.registeredRefs.single,
+        listData([marina, mina.renamed(renamedName)]),
+      );
+      async.elapse(settleTime);
+
+      expect(emitted.last, [marina, mina.renamed(renamedName)]);
+
+      unawaited(subscription.cancel());
+      harness.dispose();
+    });
+  });
+
+  test('a full push the cache cannot store is answered by refetching', () {
+    fakeAsync((async) {
+      final harness = LiveQueryHarness([mina]);
+      final emitted = <List<AshTestItem>>[];
+      final subscription = harness.watchList().listen(emitted.add);
+      async.elapse(settleTime);
+      harness.server.rename(mina.id, renamedName);
+
+      harness.changeFeedServer.pushFull(
+        harness.changeFeedServer.registeredRefs.single,
+        {'testItems': AshResponses.page(const [])},
+      );
+      async.elapse(settleTime);
+
+      expect(emitted.last, [mina.renamed(renamedName)]);
 
       unawaited(subscription.cancel());
       harness.dispose();
@@ -120,16 +145,16 @@ void main() {
       final harness = LiveQueryHarness([mina]);
       final emitted = <List<AshTestItem>>[];
       final subscription = harness.watchList().listen(emitted.add);
-      async.elapse(Duration.zero);
+      async.elapse(settleTime);
 
       subscription.pause();
-      harness.server.rename(mina.id, renamedName);
-      harness.announce([
-        EntityChange(type: AshTestItem.typename, id: mina.id, op: 'update'),
-      ]);
-      async.elapse(listSettleTime);
+      harness.changeFeedServer.pushFull(
+        harness.changeFeedServer.registeredRefs.single,
+        listData([mina.renamed(renamedName)]),
+      );
+      async.elapse(settleTime);
       subscription.resume();
-      async.elapse(listSettleTime);
+      async.elapse(settleTime);
 
       expect(emitted.last, [mina.renamed(renamedName)]);
 
@@ -138,25 +163,20 @@ void main() {
     });
   });
 
-  test('a change seen offline is fetched once the connection returns', () {
+  test('a reconnect registers the query again', () {
     fakeAsync((async) {
       final harness = LiveQueryHarness([mina]);
       final emitted = <List<AshTestItem>>[];
       final subscription = harness.watchList().listen(emitted.add);
-      async.elapse(Duration.zero);
+      async.elapse(settleTime);
+      final ref = harness.changeFeedServer.registeredRefs.single;
 
-      harness.connectivity.add(false);
-      harness.server.rename(mina.id, renamedName);
-      harness.announce([
-        EntityChange(type: AshTestItem.typename, id: mina.id, op: 'update'),
-      ]);
-      async.elapse(listSettleTime);
-      final emittedOffline = [...emitted];
-      harness.connectivity.add(true);
-      async.elapse(listSettleTime);
+      unawaited(harness.changeFeedServer.dropConnection());
+      async.elapse(const Duration(seconds: 10));
+      harness.changeFeedServer.pushFull(ref, listData([marina]));
+      async.elapse(settleTime);
 
-      expect(emittedOffline.last, [mina]);
-      expect(emitted.last, [mina.renamed(renamedName)]);
+      expect(emitted.last, [marina]);
 
       unawaited(subscription.cancel());
       harness.dispose();

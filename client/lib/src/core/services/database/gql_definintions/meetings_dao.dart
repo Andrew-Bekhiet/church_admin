@@ -136,7 +136,6 @@ class MeetingsDAO extends DAOBase<Meeting>
     return LiveQuery<List<AttendanceRecord>>(
       client: graphQLClient,
       registry: db.liveQueries,
-      kind: LiveQueryKind.list,
       options: WatchQueryOptions(
         document: document,
         operationName: 'attendanceRecords',
@@ -245,8 +244,8 @@ class MeetingsDAO extends DAOBase<Meeting>
       registry: db.liveQueries,
       pageSize: limit ?? PaginatableStream.defaultPageSize,
       parametersStream: Stream.value(null),
-      fetchChunk: (_, chunk) =>
-          pageQuery.fetch(variables: variables, chunk: chunk),
+      pageQueryFor: (_) => pageQuery,
+      variablesFor: (_) => variables,
     );
   }
 

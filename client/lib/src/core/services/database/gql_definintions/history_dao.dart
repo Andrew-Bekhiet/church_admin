@@ -24,8 +24,8 @@ class HistoryDAO {
     return KeysetPaginatedStream<LastRecordedByInfo, void>(
       registry: db.liveQueries,
       parametersStream: Stream.value(null),
-      fetchChunk: (_, chunk) =>
-          pageQuery.fetch(variables: variables, chunk: chunk),
+      pageQueryFor: (_) => pageQuery,
+      variablesFor: (_) => variables,
     );
   }
 
@@ -177,7 +177,6 @@ class HistoryDAO {
     return LiveQuery<List<KodasRecord>>(
       client: graphQLClient,
       registry: db.liveQueries,
-      kind: LiveQueryKind.list,
       options: WatchQueryOptions(
         document: document,
         operationName: 'dayKodases',

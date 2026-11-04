@@ -137,9 +137,7 @@ void main() {
         async.elapse(FakeAshBackend.settleTime);
 
         table.add(marina);
-        backend.announce([
-          EntityChange(type: 'User', id: marina.uid, op: 'insert'),
-        ]);
+        backend.announce();
         async.elapse(FakeAshBackend.settleTime);
 
         expect(emitted.last.map((user) => user.uid), [
@@ -165,22 +163,7 @@ void main() {
       final reopened = withOpenUser(
         body: (backend, emitted) {
           backend.server.table('User').rows.first['name'] = 'مينا يوسف';
-          backend.announce([
-            EntityChange(type: 'User', id: mina.uid, op: 'update'),
-          ]);
-
-          return emitted;
-        },
-      );
-
-      expect(reopened.last?.name, 'مينا يوسف');
-    });
-
-    test('a change of the viewer scope refetches the open user', () {
-      final reopened = withOpenUser(
-        body: (backend, emitted) {
-          backend.server.table('User').rows.first['name'] = 'مينا يوسف';
-          backend.resync();
+          backend.announce();
 
           return emitted;
         },

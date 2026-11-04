@@ -154,13 +154,7 @@ void main() {
         async.elapse(FakeAshBackend.settleTime);
 
         table.add(AttendanceRow(records.last));
-        backend.announce([
-          EntityChange(
-            type: 'AttendanceRecord',
-            id: records.last.id,
-            op: 'insert',
-          ),
-        ]);
+        backend.announce();
         async.elapse(FakeAshBackend.settleTime);
 
         expect(emitted.last, records.reversed.map(timeOf));
@@ -223,9 +217,7 @@ void main() {
 
       final listed = historyAfter(server, (backend, async) {
         server.records.add(AttendanceRow(late));
-        backend.announce([
-          EntityChange(type: 'AttendanceRecord', id: late.id, op: 'insert'),
-        ]);
+        backend.announce();
         async.elapse(FakeAshBackend.settleTime);
       });
 

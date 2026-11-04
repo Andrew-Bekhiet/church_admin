@@ -45,9 +45,7 @@ void main() {
 
           final added = lookup.listed.last;
           table.add(added as ToJson);
-          backend.announce([
-            EntityChange(type: lookup.typename, id: added.id, op: 'insert'),
-          ]);
+          backend.announce();
           async.elapse(FakeAshBackend.settleTime);
 
           expect(emitted.last, lookup.listed);

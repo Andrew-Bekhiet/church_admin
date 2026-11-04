@@ -138,9 +138,7 @@ void main() {
         async.elapse(FakeAshBackend.settleTime);
 
         table.add(heliopolis);
-        backend.announce([
-          EntityChange(type: 'Area', id: heliopolis.id, op: 'insert'),
-        ]);
+        backend.announce();
         async.elapse(FakeAshBackend.settleTime);
 
         expect(emitted.last, [newCairo, shubra, heliopolis]);

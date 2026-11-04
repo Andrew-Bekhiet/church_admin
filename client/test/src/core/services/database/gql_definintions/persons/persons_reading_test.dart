@@ -150,9 +150,7 @@ void main() {
         async.elapse(FakeAshBackend.settleTime);
 
         table.add(PersonRow(abanoub));
-        backend.announce([
-          EntityChange(type: 'Person', id: abanoub.id, op: 'insert'),
-        ]);
+        backend.announce();
         async.elapse(FakeAshBackend.settleTime);
 
         expect(emitted.last.map((p) => p.id), [abanoub.id, mina.id]);

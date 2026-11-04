@@ -154,9 +154,7 @@ void main() {
         async.elapse(FakeAshBackend.settleTime);
 
         table.add(corniche);
-        backend.announce([
-          EntityChange(type: 'Street', id: corniche.id, op: 'insert'),
-        ]);
+        backend.announce();
         async.elapse(FakeAshBackend.settleTime);
 
         expect(emitted.last, [corniche, ramses, nile]);

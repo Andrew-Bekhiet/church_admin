@@ -7,6 +7,7 @@ import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'ash_responses.dart';
+import 'fake_change_feed_server.dart';
 
 /// An Ash GraphQL server over an in-memory table of [AshTestItem]s: a request
 /// with an `id` variable reads one row, any other reads a keyset page
@@ -15,6 +16,11 @@ class FakeAshServerLink extends Link {
   final List<AshTestItem> rows;
   Duration latency;
   bool reachable = true;
+
+  /// Answers each request with an `extensions.resultHash`, kept in
+  /// [issuedResultHashes].
+  bool sendsResultHashes = false;
+  final List<String> issuedResultHashes = [];
 
   int requestCount = 0;
   int maxRequestsInFlight = 0;
@@ -46,8 +52,21 @@ class FakeAshServerLink extends Link {
       Future.delayed(latency, () {
         _requestsInFlight--;
 
-        return Response(data: data, response: const {});
+        return Response(
+          data: data,
+          response: const {},
+          context: sendsResultHashes ? _hashContext() : const Context(),
+        );
       }),
+    );
+  }
+
+  Context _hashContext() {
+    final hash = 'hash-${issuedResultHashes.length}';
+    issuedResultHashes.add(hash);
+
+    return const Context().withEntry(
+      ResponseExtensions({'resultHash': hash}),
     );
   }
 
@@ -124,9 +143,23 @@ class LiveQueryHarness {
   ''');
 
   final FakeAshServerLink server;
-  final StreamController<ChangeFeedEvent> changeFeed =
-      StreamController.broadcast();
+  final FakeChangeFeedServer changeFeedServer = FakeChangeFeedServer();
   final BehaviorSubject<bool> connectivity = BehaviorSubject.seeded(true);
+  final BehaviorSubject<AuthLinkCredentials?> credentials =
+      BehaviorSubject.seeded(
+        const AuthLinkCredentials(
+          uid: 'uid',
+          hasuraUserId: 'userId',
+          idToken: 'idToken',
+        ),
+      );
+
+  late final ChangeFeedClient changeFeed = ChangeFeedClient(
+    socketUrl: Uri.parse('ws://localhost:4000/socket/websocket'),
+    credentials: credentials,
+    idToken: ({forceRefresh = false}) async => 'idToken',
+    webSocketChannelFactory: changeFeedServer.connect,
+  );
 
   late final DBGraphQLClient client = DBGraphQLClient(
     connectivityStream: connectivity,
@@ -134,7 +167,7 @@ class LiveQueryHarness {
     cache: GraphQLCache(store: InMemoryStore()),
   );
   late final LiveQueryRegistry registry = LiveQueryRegistry(
-    changeFeedEvents: changeFeed.stream,
+    changeFeed: changeFeed,
     connectivity: connectivity,
   );
 
@@ -144,7 +177,6 @@ class LiveQueryHarness {
   LiveQuery<List<AshTestItem>> watchList() => LiveQuery(
     client: client,
     registry: registry,
-    kind: LiveQueryKind.list,
     options: WatchQueryOptions(
       document: listDocument,
       parserFn: (data) =>
@@ -155,7 +187,6 @@ class LiveQueryHarness {
   LiveQuery<AshTestItem?> watchEntity(String id) => LiveQuery(
     client: client,
     registry: registry,
-    kind: LiveQueryKind.entity,
     options: WatchQueryOptions(
       document: entityDocument,
       variables: {'id': id},
@@ -163,8 +194,7 @@ class LiveQueryHarness {
     ),
   );
 
-  void announce(List<EntityChange> changes) =>
-      changeFeed.add(ChangesReceived(changes));
+  void announce() => unawaited(changeFeedServer.pushCurrentResults(server));
 
   void goOffline() {
     server.reachable = false;
@@ -177,7 +207,8 @@ class LiveQueryHarness {
   }
 
   void dispose() {
-    unawaited(changeFeed.close());
+    changeFeed.dispose();
+    unawaited(credentials.close());
     unawaited(connectivity.close());
   }
 }
