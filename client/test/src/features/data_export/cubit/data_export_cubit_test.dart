@@ -153,7 +153,7 @@ void main() {
     blocTest<DataExportCubit, DataExportState>(
       'starting an export is tracked by how many of each type were selected',
       setUp: () => when(
-        () => fixture.functionsService.exportData(
+        () => fixture.exportsDao.exportData(
           areasIds: any(named: 'areasIds'),
           servicesIds: any(named: 'servicesIds'),
           classesIds: any(named: 'classesIds'),
@@ -179,7 +179,7 @@ void main() {
     blocTest<DataExportCubit, DataExportState>(
       'a failed export is tracked as finishing unsuccessfully',
       setUp: () => when(
-        () => fixture.functionsService.exportData(
+        () => fixture.exportsDao.exportData(
           areasIds: any(named: 'areasIds'),
           servicesIds: any(named: 'servicesIds'),
           classesIds: any(named: 'classesIds'),

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/users_preferences/__generated__/fragments.gql.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -16,11 +15,6 @@ void main() {
   const uid = 'uid';
   final sentText =
       'اهلا ${MessageTemplate.tokenOf(WhatsappMessageFields.firstName)}';
-
-  setUpAll(() {
-    registerFallbackValue(Input_UsersPreferencesSetInput());
-    registerFallbackValue(Input_UsersPreferencesAppendInput());
-  });
 
   late MockUserPreferencesDAO userPreferencesDAO;
   late MockDatabaseService databaseService;
@@ -60,11 +54,11 @@ void main() {
 
   void keepServerWritesPending() => when(
     () => userPreferencesDAO.updatePreferences(
-      uid: any(named: 'uid'),
-      set: any(named: 'set'),
-      append: any(named: 'append'),
+      scalars: any(named: 'scalars'),
+      orderByPatch: any(named: 'orderByPatch'),
+      secondLinePatch: any(named: 'secondLinePatch'),
     ),
-  ).thenAnswer((_) => Completer<Fragment_UserPreferences>().future);
+  ).thenAnswer((_) => Completer<UserPreferences>().future);
 
   test('without a sent WhatsApp message there is no text', () {
     signInWith();
@@ -99,15 +93,15 @@ void main() {
     await unit.setLastWhatsappMessageText(sentText);
     await Future<void>.delayed(Duration.zero);
 
-    final sentSet =
+    final sentScalars =
         verify(
               () => userPreferencesDAO.updatePreferences(
-                uid: uid,
-                set: captureAny(named: 'set'),
-                append: any(named: 'append'),
+                scalars: captureAny(named: 'scalars'),
+                orderByPatch: any(named: 'orderByPatch'),
+                secondLinePatch: any(named: 'secondLinePatch'),
               ),
             ).captured.single
-            as Input_UsersPreferencesSetInput;
-    expect(sentSet.lastWhatsappMessageText, sentText);
+            as Json;
+    expect(sentScalars['lastWhatsappMessageText'], sentText);
   });
 }

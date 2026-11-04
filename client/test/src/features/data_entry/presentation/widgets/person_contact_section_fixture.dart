@@ -41,7 +41,7 @@ class PersonContactSectionFixture {
         personId: any(named: 'personId'),
         lastCall: any(named: 'lastCall'),
       ),
-    ).thenAnswer((_) async => null);
+    ).thenAnswer((_) async => LastRecordedByInfo(time: DateTime(2026)));
     final database = MockDatabaseService();
     when(() => database.history).thenReturn(history);
 
