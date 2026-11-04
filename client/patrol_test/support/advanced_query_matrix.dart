@@ -128,6 +128,7 @@ class AdvancedQueryMatrix {
       PhoneOperator() => '01000000000',
       BirthdayOperator() => '10-%',
       BooleanOperator() => true,
+      GenderOperator() => Gender.male,
       ColorOperator() => const Color(0xFF2196F3),
       DateTimeOperator() => _sampleDate,
       DateRangeOperator() => DateTimeRange(
