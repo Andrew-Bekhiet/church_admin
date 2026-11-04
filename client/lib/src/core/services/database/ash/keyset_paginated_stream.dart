@@ -156,8 +156,6 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     final effectivePolicy = fetchPolicy ?? _networkPolicy;
     final isCachePreview = effectivePolicy == FetchPolicy.cacheOnly;
     if (effectivePolicy == FetchPolicy.cacheFirst) _registry.markStale(this);
-    _registry.stopLive(this);
-    _awaitingResync = false;
     _loading.add(true);
     try {
       final query = _pageQueryFor(_parameters);
@@ -171,6 +169,8 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
       );
       if (generation != _generation) return;
 
+      _registry.stopLive(this);
+      _awaitingResync = false;
       _emitLoaded(query, keep, chunks, requestedRows: rows);
       if (effectivePolicy == FetchPolicy.networkOnly) {
         _startLive(query, variables, chunks, isFromFirstRow: keep.isEmpty);

@@ -90,7 +90,8 @@ void main() {
       });
     });
 
-    test('a push that arrives while the next page loads is dropped', () {
+    test('a push that arrives while the list refetches is replaced by the '
+        'rows the refetch loads', () {
       fakeAsync((async) {
         final harness = LiveQueryHarness(
           KeysetStreamHarness.rowsNamed(10),
@@ -101,20 +102,55 @@ void main() {
         final subscription = stream.listen(emitted.add);
         async.elapse(settleTime);
         final ref = harness.changeFeedServer.registeredRefs.single;
+        final [first, second, third, ...] = harness.server.rows;
+        final renamed = second.renamed('اسم جديد');
 
-        unawaited(stream.listenToNextPage());
+        unawaited(stream.refetch());
         async.elapse(const Duration(milliseconds: 100));
         harness.changeFeedServer.pushFull(
           ref,
-          KeysetStreamHarness.pageData([const AshTestItem(id: 'stale', name: 'قديم')]),
+          KeysetStreamHarness.pageData([
+            const AshTestItem(id: 'other', name: 'آخر'),
+          ]),
+        );
+        async.elapse(settleTime);
+        final shownAfterRefetch = [...emitted.last];
+        harness.changeFeedServer.pushDelta(
+          harness.changeFeedServer.registeredRefs.last,
+          rows: [renamed.toJson()],
         );
         async.elapse(settleTime);
 
-        expect(
-          emitted.expand((items) => items.map((item) => item.id)),
-          isNot(contains('stale')),
+        expect(shownAfterRefetch, [first, second, third]);
+        expect(emitted.last, [first, renamed, third]);
+
+        unawaited(subscription.cancel());
+        unawaited(stream.dispose());
+        harness.dispose();
+      });
+    });
+
+    test('a next page that fails to load leaves the list live', () {
+      fakeAsync((async) {
+        final harness = LiveQueryHarness(KeysetStreamHarness.rowsNamed(10));
+        final stream = KeysetStreamHarness.streamOver(harness);
+        final emitted = <List<AshTestItem>>[];
+        final subscription = stream.listen(
+          emitted.add,
+          onError: (Object _) {},
         );
-        expect(emitted.last, harness.server.rows.take(2 * pageSize));
+        async.elapse(settleTime);
+        final ref = harness.changeFeedServer.registeredRefs.single;
+        final [first, second, third, ...] = harness.server.rows;
+        final renamed = second.renamed('اسم جديد');
+
+        harness.server.reachable = false;
+        unawaited(stream.listenToNextPage());
+        async.elapse(settleTime);
+        harness.changeFeedServer.pushDelta(ref, rows: [renamed.toJson()]);
+        async.elapse(settleTime);
+
+        expect(emitted.last, [first, renamed, third]);
 
         unawaited(subscription.cancel());
         unawaited(stream.dispose());
