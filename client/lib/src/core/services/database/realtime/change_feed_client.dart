@@ -59,7 +59,9 @@ class ChangeFeedClient {
 
   Future<LiveRegisterOutcome> register(LiveRegistration registration) async {
     final channel = _channel;
-    if (channel == null || !_isJoined) return LiveRegisterOutcome.notJoined;
+    if (channel == null || !_isJoined || !channel.canPush) {
+      return LiveRegisterOutcome.notJoined;
+    }
 
     try {
       final reply = await channel
@@ -83,7 +85,7 @@ class ChangeFeedClient {
 
   void _pushLiveCommand(String event, String ref) {
     final channel = _channel;
-    if (channel == null || !_isJoined) return;
+    if (channel == null || !_isJoined || !channel.canPush) return;
 
     channel.push(event, {'ref': ref}).future.ignore();
   }
