@@ -19,7 +19,7 @@ class DatabaseService {
 
   late final LiveQueryRegistry liveQueries =
       _liveQueries ??
-      LiveQueryRegistry.withoutChangeFeed(
+      LiveQueryRegistry.withoutLiveQueries(
         connectivity: graphQLClient.connectivityStream,
       );
 

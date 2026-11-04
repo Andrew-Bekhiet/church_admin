@@ -1,5 +1,5 @@
-export 'realtime/change_feed_client.dart';
-export 'realtime/change_feed_event.dart';
+export 'realtime/live_queries_client.dart';
+export 'realtime/live_queries_event.dart';
 export 'realtime/live_query.dart';
 export 'realtime/live_query_registry.dart';
 export 'realtime/live_query_request.dart';
@@ -7,4 +7,5 @@ export 'realtime/live_query_target.dart';
 export 'realtime/live_register_outcome.dart';
 export 'realtime/live_registration.dart';
 export 'realtime/live_result.dart';
+export 'realtime/live_window_size.dart';
 export 'realtime/query_result_hash.dart';

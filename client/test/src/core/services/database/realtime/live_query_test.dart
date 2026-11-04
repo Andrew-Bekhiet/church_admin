@@ -31,7 +31,8 @@ void main() {
       final subscription = harness.watchEntity(mina.id).listen(null);
       async.elapse(settleTime);
 
-      final registration = harness.changeFeedServer.registrations.values.single;
+      final registration =
+          harness.liveQueriesServer.registrations.values.single;
       expect(
         registration['document'],
         printNode(LiveQueryHarness.entityDocument),
@@ -51,7 +52,8 @@ void main() {
       final subscription = harness.watchEntity(mina.id).listen(null);
       async.elapse(settleTime);
 
-      final registration = harness.changeFeedServer.registrations.values.single;
+      final registration =
+          harness.liveQueriesServer.registrations.values.single;
       expect(registration['resultHashes'], harness.server.issuedResultHashes);
 
       unawaited(subscription.cancel());
@@ -66,8 +68,8 @@ void main() {
       final subscription = harness.watchEntity(mina.id).listen(emitted.add);
       async.elapse(settleTime);
 
-      harness.changeFeedServer.pushFull(
-        harness.changeFeedServer.registeredRefs.single,
+      harness.liveQueriesServer.pushFull(
+        harness.liveQueriesServer.registeredRefs.single,
         entityData(mina.renamed(renamedName)),
       );
       async.elapse(settleTime);
@@ -86,8 +88,8 @@ void main() {
       final subscription = harness.watchEntity(mina.id).listen(emitted.add);
       async.elapse(settleTime);
 
-      harness.changeFeedServer.pushFull(
-        harness.changeFeedServer.registeredRefs.single,
+      harness.liveQueriesServer.pushFull(
+        harness.liveQueriesServer.registeredRefs.single,
         entityData(null),
       );
       async.elapse(settleTime);
@@ -106,8 +108,8 @@ void main() {
       final subscription = harness.watchList().listen(emitted.add);
       async.elapse(settleTime);
 
-      harness.changeFeedServer.pushFull(
-        harness.changeFeedServer.registeredRefs.single,
+      harness.liveQueriesServer.pushFull(
+        harness.liveQueriesServer.registeredRefs.single,
         listData([marina, mina.renamed(renamedName)]),
       );
       async.elapse(settleTime);
@@ -127,8 +129,8 @@ void main() {
       async.elapse(settleTime);
       harness.server.rename(mina.id, renamedName);
 
-      harness.changeFeedServer.pushFull(
-        harness.changeFeedServer.registeredRefs.single,
+      harness.liveQueriesServer.pushFull(
+        harness.liveQueriesServer.registeredRefs.single,
         {'testItems': AshResponses.page(const [])},
       );
       async.elapse(settleTime);
@@ -148,8 +150,8 @@ void main() {
       async.elapse(settleTime);
 
       subscription.pause();
-      harness.changeFeedServer.pushFull(
-        harness.changeFeedServer.registeredRefs.single,
+      harness.liveQueriesServer.pushFull(
+        harness.liveQueriesServer.registeredRefs.single,
         listData([mina.renamed(renamedName)]),
       );
       async.elapse(settleTime);
@@ -169,13 +171,15 @@ void main() {
       final emitted = <List<AshTestItem>>[];
       final subscription = harness.watchList().listen(emitted.add);
       async.elapse(settleTime);
-      final ref = harness.changeFeedServer.registeredRefs.single;
+      final ref = harness.liveQueriesServer.registeredRefs.single;
 
-      unawaited(harness.changeFeedServer.dropConnection());
+      unawaited(harness.liveQueriesServer.dropConnection());
       async.elapse(const Duration(seconds: 10));
-      harness.changeFeedServer.pushFull(ref, listData([marina]));
+      final registeredAfterDrop = {...harness.liveQueriesServer.registrations};
+      harness.liveQueriesServer.pushFull(ref, listData([marina]));
       async.elapse(settleTime);
 
+      expect(registeredAfterDrop.keys, [ref]);
       expect(emitted.last, [marina]);
 
       unawaited(subscription.cancel());

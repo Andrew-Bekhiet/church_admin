@@ -4,11 +4,11 @@ import 'package:church_admin/church_admin.dart';
 import 'package:phoenix_socket/phoenix_socket.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-typedef ChangeFeedIdentity = ({String uid, String? userId});
+typedef LiveQueriesIdentity = ({String uid, String? userId});
 
 typedef IdTokenFetcher = Future<String?> Function({bool forceRefresh});
 
-/// The client of the server's `changes` channel. It connects while
+/// The client of the server's `live_queries` channel. It connects while
 /// [events] has a listener and someone is signed in. Live queries are
 /// registered, unregistered and resynced through it, and the channel's
 /// `live:result` pushes arrive as [LiveResultReceived]. The server keeps no
@@ -16,13 +16,14 @@ typedef IdTokenFetcher = Future<String?> Function({bool forceRefresh});
 /// Every connect asks for a current ID token; a join refused for an expired
 /// token reconnects with a refreshed one. A refused connect backs off
 /// between attempts and retries at once when the credentials change.
-class ChangeFeedClient {
-  static const topic = 'changes';
+class LiveQueriesClient {
+  static const topic = 'live_queries';
   static const liveResultEvent = 'live:result';
   static const registerEvent = 'live:register';
   static const unregisterEvent = 'live:unregister';
   static const resyncEvent = 'live:resync';
   static const tokenExpiredReason = 'token_expired';
+  static const runFailedReason = 'run_failed';
   static const Duration defaultRejoinDelay = Duration(seconds: 5);
 
   final Uri socketUrl;
@@ -31,14 +32,14 @@ class ChangeFeedClient {
   final WebSocketChannel Function(Uri uri)? _webSocketChannelFactory;
   final Duration rejoinDelay;
 
-  late final StreamController<ChangeFeedEvent> _events =
+  late final StreamController<LiveQueriesEvent> _events =
       StreamController.broadcast(onListen: _start, onCancel: _stop);
 
   StreamSubscription<AuthLinkCredentials?>? _credentialsSubscription;
   bool _refreshTokenOnNextConnect = false;
 
   PhoenixSocket? _socket;
-  ChangeFeedIdentity? _socketIdentity;
+  LiveQueriesIdentity? _socketIdentity;
   bool _socketFailedToOpen = false;
   List<StreamSubscription<Object?>> _socketSubscriptions = [];
 
@@ -47,9 +48,9 @@ class ChangeFeedClient {
   Timer? _rejoinTimer;
   bool _isJoined = false;
 
-  Stream<ChangeFeedEvent> get events => _events.stream;
+  Stream<LiveQueriesEvent> get events => _events.stream;
 
-  ChangeFeedClient({
+  LiveQueriesClient({
     required this.socketUrl,
     required this._credentials,
     required this._idToken,
@@ -59,7 +60,9 @@ class ChangeFeedClient {
 
   Future<LiveRegisterOutcome> register(LiveRegistration registration) async {
     final channel = _channel;
-    if (channel == null || !_isJoined) return LiveRegisterOutcome.notJoined;
+    if (channel == null || !_isJoined || !channel.canPush) {
+      return LiveRegisterOutcome.notJoined;
+    }
 
     try {
       final reply = await channel
@@ -68,6 +71,8 @@ class ChangeFeedClient {
 
       return switch (reply) {
         PushResponse(isOk: true) => LiveRegisterOutcome.accepted,
+        PushResponse(response: {'reason': runFailedReason}) =>
+          LiveRegisterOutcome.failed,
         PushResponse(response: {'reason': String _}) =>
           LiveRegisterOutcome.refused,
         _ => LiveRegisterOutcome.failed,
@@ -83,7 +88,7 @@ class ChangeFeedClient {
 
   void _pushLiveCommand(String event, String ref) {
     final channel = _channel;
-    if (channel == null || !_isJoined) return;
+    if (channel == null || !_isJoined || !channel.canPush) return;
 
     channel.push(event, {'ref': ref}).future.ignore();
   }
@@ -115,7 +120,7 @@ class ChangeFeedClient {
     if (identity != null) _connect(identity);
   }
 
-  void _connect(ChangeFeedIdentity identity) {
+  void _connect(LiveQueriesIdentity identity) {
     final socket = PhoenixSocket(
       socketUrl.toString(),
       socketOptions: PhoenixSocketOptions(dynamicParams: _connectParams),
@@ -169,19 +174,30 @@ class ChangeFeedClient {
 
     final channel = socket.addChannel(topic: topic);
     _channel = channel;
-    _channelSubscription = channel.messages
-        .where((message) => message.event.value == liveResultEvent)
-        .listen(
-          (message) => _emit(
-            LiveResultReceived(LiveResult.fromJson(message.payload as Json)),
-          ),
-        );
+    _channelSubscription = channel.messages.listen(
+      (message) => _onChannelMessage(channel, message),
+    );
     unawaited(
       channel.join().future.then(
         (reply) => _onJoinReply(channel, reply),
         onError: (_) => _rejoinLater(channel),
       ),
     );
+  }
+
+  void _onChannelMessage(PhoenixChannel channel, Message message) {
+    if (message.event == PhoenixChannelEvent.error) {
+      _onChannelCrashed(channel);
+    } else if (message.event.value == liveResultEvent) {
+      _emit(LiveResultReceived(LiveResult.fromJson(message.payload as Json)));
+    }
+  }
+
+  void _onChannelCrashed(PhoenixChannel channel) {
+    if (!identical(channel, _channel)) return;
+
+    _isJoined = false;
+    _rejoinLater(channel);
   }
 
   void _onJoinReply(PhoenixChannel channel, PushResponse reply) {
@@ -221,13 +237,16 @@ class ChangeFeedClient {
     _channel = null;
     if (channel == null) return;
 
-    if (leave && channel.state == PhoenixChannelState.joined) {
+    final holdsLibraryRejoinTimer =
+        channel.state == PhoenixChannelState.errored;
+    final mustTellServer = leave && channel.state == PhoenixChannelState.joined;
+    if (holdsLibraryRejoinTimer || mustTellServer) {
       channel.leave().future.ignore();
     }
     channel.close();
   }
 
-  void _emit(ChangeFeedEvent event) {
+  void _emit(LiveQueriesEvent event) {
     if (!_events.isClosed) _events.add(event);
   }
 

@@ -7,12 +7,13 @@ import 'package:web_socket/web_socket.dart';
 import 'package:web_socket_channel/adapter_web_socket_channel.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+import 'failable_web_socket_channel.dart';
 import 'fake_live_results.dart';
 
-/// A Phoenix server speaking the V2 serializer on the `changes` topic. It
+/// A Phoenix server speaking the V2 serializer on the `live_queries` topic. It
 /// keeps the live queries a client registers by `ref`, and pushes results
 /// for them when a test says so.
-class FakeChangeFeedServer {
+class FakeLiveQueriesServer {
   final List<Uri> connectedUris = [];
 
   /// The `live:register` payloads the server holds, by ref.
@@ -20,6 +21,9 @@ class FakeChangeFeedServer {
   final List<String> registeredRefs = [];
   final List<String> unregisteredRefs = [];
   final List<String> resyncedRefs = [];
+
+  /// The join ref of every `phx_join` the server received, in order.
+  final List<String?> joinRefs = [];
 
   /// The `reason` a `live:register` is refused with, or null to accept it.
   String? Function(Json payload) refusalFor = (_) => null;
@@ -35,6 +39,7 @@ class FakeChangeFeedServer {
   /// Tokens whose joins are refused with `token_expired`.
   final Set<String> expiredTokens = {};
 
+  FailableWebSocketChannel? _clientChannel;
   WebSocket? _serverSocket;
   String? _serverSocketToken;
   String? _joinRef;
@@ -44,7 +49,7 @@ class FakeChangeFeedServer {
   List<String?> get connectedTokens =>
       connectedUris.map((uri) => uri.queryParameters['token']).toList();
 
-  FakeChangeFeedServer();
+  FakeLiveQueriesServer();
 
   WebSocketChannel connect(Uri uri) {
     connectedUris.add(uri);
@@ -73,7 +78,7 @@ class FakeChangeFeedServer {
       }
     });
 
-    return AdapterWebSocketChannel(client);
+    return _clientChannel = FailableWebSocketChannel(client);
   }
 
   Future<void> pushCurrentResults(Link backend) async {
@@ -103,10 +108,31 @@ class FakeChangeFeedServer {
   void _pushLiveResult(Json payload) => _send(_serverSocket, [
     _joinRef,
     null,
-    ChangeFeedClient.topic,
-    ChangeFeedClient.liveResultEvent,
+    LiveQueriesClient.topic,
+    LiveQueriesClient.liveResultEvent,
     payload,
   ]);
+
+  /// Crashes the channel process, as the server does on an unhandled error:
+  /// the socket stays open, `phx_error` reaches the client and the
+  /// registrations are gone.
+  void crashChannel() {
+    registrations.clear();
+    _send(_serverSocket, [
+      _joinRef,
+      null,
+      LiveQueriesClient.topic,
+      'phx_error',
+      <String, Object?>{},
+    ]);
+  }
+
+  /// Breaks the connection with a socket error rather than a close, as a
+  /// lost network does.
+  void failConnection() {
+    registrations.clear();
+    _clientChannel?.fail(WebSocketChannelException('connection lost'));
+  }
 
   Future<void> dropConnection() async {
     final socket = _serverSocket;
@@ -135,6 +161,7 @@ class FakeChangeFeedServer {
 
       case 'phx_join':
         _joinRef = joinRef as String?;
+        joinRefs.add(_joinRef);
         _reply(socket, joinRef, ref, topic, {});
 
       case 'live:register':

@@ -115,9 +115,9 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
   },
 );
 
-final changeFeedClientProvider = Provider<ChangeFeedClient>((ref) {
-  final client = ChangeFeedClient(
-    socketUrl: ref.watch(apiEndpointsProvider).changeFeedSocket,
+final liveQueriesClientProvider = Provider<LiveQueriesClient>((ref) {
+  final client = LiveQueriesClient(
+    socketUrl: ref.watch(apiEndpointsProvider).liveQueriesSocket,
     credentials: ref.watch(authLinkCredentialsProvider),
     idToken: ref.watch(authRepositoryProvider).idToken,
   );
@@ -128,7 +128,7 @@ final changeFeedClientProvider = Provider<ChangeFeedClient>((ref) {
 
 final liveQueryRegistryProvider = Provider<LiveQueryRegistry>(
   (ref) => LiveQueryRegistry(
-    changeFeed: ref.watch(changeFeedClientProvider),
+    liveQueries: ref.watch(liveQueriesClientProvider),
     connectivity: ref.watch(connectivityServiceProvider).connectivityStream,
   ),
 );

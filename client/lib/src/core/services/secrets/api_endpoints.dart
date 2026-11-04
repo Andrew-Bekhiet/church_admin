@@ -7,7 +7,7 @@ class ApiEndpoints extends Equatable {
 
   Uri get healthCheck => _serverUri.replace(path: '/healthz');
 
-  Uri get changeFeedSocket => _serverUri.replace(
+  Uri get liveQueriesSocket => _serverUri.replace(
     scheme: _serverUri.isScheme('https') ? 'wss' : 'ws',
     path: '/socket/websocket',
   );

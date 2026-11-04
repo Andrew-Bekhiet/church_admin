@@ -17,10 +17,7 @@ class LiveRegistration with Equatable {
     'document': request.document,
     'operationName': request.operationName,
     'variables': request.variables,
-    'window': switch (request.window) {
-      (:final rows, :final chunk) => {'rows': rows, 'chunk': chunk},
-      null => null,
-    },
+    'window': request.window?.toJson(),
     'resultHashes': request.resultHashes,
   };
 }

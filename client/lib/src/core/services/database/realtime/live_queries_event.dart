@@ -1,11 +1,11 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
-sealed class ChangeFeedEvent with Equatable {
-  const ChangeFeedEvent();
+sealed class LiveQueriesEvent with Equatable {
+  const LiveQueriesEvent();
 }
 
-class LiveResultReceived extends ChangeFeedEvent {
+class LiveResultReceived extends LiveQueriesEvent {
   final LiveResult result;
 
   @override
@@ -16,7 +16,7 @@ class LiveResultReceived extends ChangeFeedEvent {
 
 /// The channel was joined: the server holds none of the registrations the
 /// client made before.
-class ChannelJoined extends ChangeFeedEvent {
+class ChannelJoined extends LiveQueriesEvent {
   @override
   List<Object?> get props => [];
 

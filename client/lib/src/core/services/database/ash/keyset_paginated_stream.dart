@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:church_admin/church_admin.dart';
+import 'package:collection/collection.dart';
 import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -93,13 +94,15 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
       final missingRows = (pageIndex + 1) * pageSize - currentItems.length;
       if (generation != _generation || !hasMore || missingRows <= 0) return;
 
+      final loadedPageIndex = _pageIndex;
       _pageIndex = pageIndex;
-      await _load(
+      final didLoad = await _load(
         generation,
         rows: missingRows,
         after: _window?.endKeyset,
         keep: currentItems,
       );
+      if (!didLoad && generation == _generation) _pageIndex = loadedPageIndex;
     });
   }
 
@@ -146,7 +149,7 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     }
   }
 
-  Future<void> _load(
+  Future<bool> _load(
     int generation, {
     required int rows,
     required String? after,
@@ -156,8 +159,6 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     final effectivePolicy = fetchPolicy ?? _networkPolicy;
     final isCachePreview = effectivePolicy == FetchPolicy.cacheOnly;
     if (effectivePolicy == FetchPolicy.cacheFirst) _registry.markStale(this);
-    _registry.stopLive(this);
-    _awaitingResync = false;
     _loading.add(true);
     try {
       final query = _pageQueryFor(_parameters);
@@ -169,18 +170,24 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
         after: after,
         fetchPolicy: effectivePolicy,
       );
-      if (generation != _generation) return;
+      if (generation != _generation) return false;
 
-      _emitLoaded(query, keep, chunks, requestedRows: rows);
+      _registry.stopLive(this);
+      _awaitingResync = false;
+      _storeAndPublishLoaded(query, keep, chunks, requestedRows: rows);
       if (effectivePolicy == FetchPolicy.networkOnly) {
         _startLive(query, variables, chunks, isFromFirstRow: keep.isEmpty);
       }
+
+      return true;
     } on Object catch (error, stackTrace) {
-      if (generation != _generation) return;
+      if (generation != _generation) return false;
       if (isCachePreview) rethrow;
 
       _registry.markStale(this);
       _subject.addError(error, stackTrace);
+
+      return false;
     } finally {
       if (generation == _generation) _loading.add(false);
     }
@@ -208,29 +215,25 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     );
   }
 
-  void _emitLoaded(
+  void _storeAndPublishLoaded(
     KeysetPageQuery<T> query,
     List<T> keep,
     List<KeysetChunk<T>> chunks, {
     required int requestedRows,
   }) {
-    final items = [
-      ...keep,
-      for (final chunk in chunks) ...chunk.page.items,
-    ];
-    final fetchedRows = items.length - keep.length;
+    final fetchedRows = chunks.map((chunk) => chunk.page.items.length).sum;
     final chunksData = [for (final chunk in chunks) chunk.data];
     _loadedQuery = query;
-    if (keep.isEmpty) {
-      _window = LiveListWindow(
-        rootField: AshResultParser.rootFieldOf(query.document),
-      )..replaceWith(chunksData);
-    } else {
-      _window?.append(chunksData);
-    }
+    final window = _window =
+        (keep.isEmpty ? null : _window) ??
+              LiveListWindow(
+                rootField: AshResultParser.rootFieldOf(query.document),
+              )
+          ..append(chunksData);
+    final page = query.parsePage(window.pageData);
     _publish(
-      items,
-      count: chunks.lastOrNull?.page.count,
+      page.items,
+      count: page.count,
       hasMore: fetchedRows >= requestedRows,
     );
   }
@@ -259,16 +262,15 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     required bool isFromFirstRow,
   }) {
     final hashes = [for (final chunk in chunks) chunk.resultHash];
+    final isEveryChunkHashKnown = isFromFirstRow && !hashes.contains(null);
     _registry.startLive(
       this,
       LiveQueryRequest(
         document: query.document,
         operationName: query.operationName,
         variables: variables,
-        window: (rows: _windowSize, chunk: maxPageSize),
-        resultHashes: isFromFirstRow && !hashes.contains(null)
-            ? hashes.cast<String>()
-            : null,
+        window: LiveWindowSize(rows: _windowSize, chunk: maxPageSize),
+        resultHashes: isEveryChunkHashKnown ? hashes.cast<String>() : null,
       ),
     );
   }
@@ -288,7 +290,7 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
       case LiveWindowUpdate.unchanged:
         return;
 
-      case LiveWindowUpdate.missingRow:
+      case LiveWindowUpdate.needsResync:
         _awaitingResync = true;
         _registry.requestResync(this);
 

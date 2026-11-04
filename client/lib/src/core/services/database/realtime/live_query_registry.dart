@@ -4,22 +4,25 @@ import 'dart:collection';
 import 'package:church_admin/church_admin.dart';
 import 'package:rxdart/rxdart.dart';
 
-/// Keeps active queries live through the change feed: each target holds at
+/// Keeps active queries live through the live queries channel: each target holds at
 /// most one registration, under a ref of its own that the server answers
 /// to. A result for a ref no target holds any more is dropped. Every join of
 /// the channel re-sends all registrations, because the server keeps none
-/// across a join. A registration the channel fails to take is sent again
-/// after [registerRetryDelay]; one the server refuses is not. An unheard or
-/// offline target that missed a load only turns stale until it is heard or
-/// online again, and at most [maxConcurrentRefetches] stale refetches run at
-/// once. The change feed stays subscribed for [changeFeedGracePeriod] after
-/// the last target leaves, so moving between screens does not reconnect it.
+/// across a join. A registration the channel fails to take, or whose first
+/// run fails on the server, is sent again after [registerRetryDelay] up to
+/// [maxRegisterAttempts] times, then its target turns stale; one the server
+/// refuses is not. An unheard or offline target that missed a load only turns
+/// stale until it is heard or online again, and at most
+/// [maxConcurrentRefetches] stale refetches run at once. The client stays
+/// subscribed for [liveQueriesGracePeriod] after the last target leaves, so
+/// moving between screens does not reconnect it.
 class LiveQueryRegistry {
   static const maxConcurrentRefetches = 4;
-  static const changeFeedGracePeriod = Duration(seconds: 30);
+  static const liveQueriesGracePeriod = Duration(seconds: 30);
   static const registerRetryDelay = Duration(seconds: 5);
+  static const maxRegisterAttempts = 5;
 
-  final ChangeFeedClient? _changeFeed;
+  final LiveQueriesClient? _liveQueries;
   final ValueStream<bool> _connectivity;
 
   final Map<LiveQueryTarget, LiveQueryTargetState> _states = {};
@@ -28,27 +31,29 @@ class LiveQueryRegistry {
   int _refetchesRunning = 0;
   int _refCounter = 0;
 
-  StreamSubscription<ChangeFeedEvent>? _changeFeedSubscription;
+  StreamSubscription<LiveQueriesEvent>? _liveQueriesSubscription;
   StreamSubscription<bool>? _connectivitySubscription;
-  Timer? _changeFeedRelease;
+  Timer? _liveQueriesRelease;
   Timer? _registerRetry;
 
   bool get isOnline => _connectivity.valueOrNull ?? true;
 
   LiveQueryRegistry({
-    required this._changeFeed,
+    required this._liveQueries,
     required this._connectivity,
   });
 
-  LiveQueryRegistry.withoutChangeFeed({
+  LiveQueryRegistry.withoutLiveQueries({
     required ValueStream<bool> connectivity,
-  }) : this(changeFeed: null, connectivity: connectivity);
+  }) : this(liveQueries: null, connectivity: connectivity);
 
   void attach(LiveQueryTarget target) {
-    _changeFeedRelease?.cancel();
-    _changeFeedRelease = null;
+    _liveQueriesRelease?.cancel();
+    _liveQueriesRelease = null;
     _states[target] = LiveQueryTargetState();
-    _changeFeedSubscription ??= _changeFeed?.events.listen(_onChangeFeedEvent);
+    _liveQueriesSubscription ??= _liveQueries?.events.listen(
+      _onLiveQueriesEvent,
+    );
     _connectivitySubscription ??= _connectivity
         .distinct()
         .where((online) => online)
@@ -61,8 +66,8 @@ class LiveQueryRegistry {
     _refetchQueue.remove(target);
     if (_states.isNotEmpty) return;
 
-    _changeFeedRelease?.cancel();
-    _changeFeedRelease = Timer(changeFeedGracePeriod, _releaseChangeFeed);
+    _liveQueriesRelease?.cancel();
+    _liveQueriesRelease = Timer(liveQueriesGracePeriod, _releaseLiveQueries);
   }
 
   /// Registers [request] for [target] under a new ref, replacing the
@@ -78,7 +83,7 @@ class LiveQueryRegistry {
     );
     state.live = live;
     _targetsByRef[live.ref] = target;
-    unawaited(_sendRegistration(target, live));
+    unawaited(_sendRegistrationOrRetryOrMarkStale(target, live));
   }
 
   void stopLive(LiveQueryTarget target) {
@@ -87,11 +92,11 @@ class LiveQueryRegistry {
 
     _states[target]?.live = null;
     _targetsByRef.remove(live.ref);
-    _changeFeed?.unregister(live.ref);
+    _liveQueries?.unregister(live.ref);
   }
 
   void requestResync(LiveQueryTarget target) {
-    if (_states[target]?.live case final live?) _changeFeed?.resync(live.ref);
+    if (_states[target]?.live case final live?) _liveQueries?.resync(live.ref);
   }
 
   /// Makes [target] refetch once it is heard and online, for a load that
@@ -106,15 +111,15 @@ class LiveQueryRegistry {
     _enqueue(target);
   }
 
-  void _releaseChangeFeed() {
-    _changeFeedRelease = null;
-    unawaited(_changeFeedSubscription?.cancel());
-    _changeFeedSubscription = null;
+  void _releaseLiveQueries() {
+    _liveQueriesRelease = null;
+    unawaited(_liveQueriesSubscription?.cancel());
+    _liveQueriesSubscription = null;
     unawaited(_connectivitySubscription?.cancel());
     _connectivitySubscription = null;
   }
 
-  void _onChangeFeedEvent(ChangeFeedEvent event) {
+  void _onLiveQueriesEvent(LiveQueriesEvent event) {
     switch (event) {
       case LiveResultReceived(:final result):
         _route(result);
@@ -129,28 +134,38 @@ class LiveQueryRegistry {
     final live = _states[target]?.live;
     if (target == null || live == null) return;
 
-    live.request = live.request.withoutResultHashes();
+    _forgetResultHashes(live);
     target.onLiveResult(result);
   }
+
+  void _forgetResultHashes(LiveRegistrationState live) =>
+      live.request = live.request.withoutResultHashes();
 
   void _registerAgain() {
     for (final MapEntry(key: target, value: state) in _states.entries) {
       if (state.live case final live?) {
-        unawaited(_sendRegistration(target, live));
+        live.failedAttempts = 0;
+        unawaited(_sendRegistrationOrRetryOrMarkStale(target, live));
       }
     }
   }
 
-  Future<void> _sendRegistration(
+  Future<void> _sendRegistrationOrRetryOrMarkStale(
     LiveQueryTarget target,
     LiveRegistrationState live,
   ) async {
     live.needsRetry = false;
-    final outcome = await _changeFeed?.register(
+    final outcome = await _liveQueries?.register(
       LiveRegistration(ref: live.ref, request: live.request),
     );
     if (outcome != LiveRegisterOutcome.failed) return;
     if (!identical(_states[target]?.live, live)) return;
+
+    if (++live.failedAttempts >= maxRegisterAttempts) {
+      markStale(target);
+
+      return;
+    }
 
     live.needsRetry = true;
     _registerRetry ??= Timer(registerRetryDelay, _retryFailedRegistrations);
@@ -161,7 +176,7 @@ class LiveQueryRegistry {
     for (final MapEntry(key: target, value: state) in _states.entries) {
       if (state.live
           case LiveRegistrationState(needsRetry: true) && final live) {
-        unawaited(_sendRegistration(target, live));
+        unawaited(_sendRegistrationOrRetryOrMarkStale(target, live));
       }
     }
   }
@@ -227,6 +242,7 @@ class LiveRegistrationState {
   final String ref;
   LiveQueryRequest request;
   bool needsRetry = false;
+  int failedAttempts = 0;
 
   LiveRegistrationState({required this.ref, required this.request});
 }

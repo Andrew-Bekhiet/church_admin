@@ -11,10 +11,12 @@ void main() {
   const mina = AshTestItem(id: 'mina', name: 'مينا');
   const settleTime = Duration(seconds: 5);
 
-  test('the server never sees more than four refetches at once', () {
+  test('the server never sees more refetches at once than the registry '
+      'allows', () {
     fakeAsync((async) {
+      const refetchesAtOnce = LiveQueryRegistry.maxConcurrentRefetches;
       final rows = [
-        for (var index = 0; index < 8; index++)
+        for (var index = 0; index < 2 * refetchesAtOnce; index++)
           AshTestItem(id: 'item$index', name: 'اسم $index'),
       ];
       final harness = LiveQueryHarness(
@@ -31,7 +33,7 @@ void main() {
       harness.goOnline();
       async.elapse(settleTime);
 
-      expect(harness.server.maxRequestsInFlight, 4);
+      expect(harness.server.maxRequestsInFlight, refetchesAtOnce);
 
       for (final subscription in subscriptions) {
         unawaited(subscription.cancel());
@@ -65,20 +67,20 @@ void main() {
     test('the channel fails to take is sent again after a delay', () {
       fakeAsync((async) {
         final harness = LiveQueryHarness([mina]);
-        harness.changeFeedServer.failRegistrations = true;
+        harness.liveQueriesServer.failRegistrations = true;
         final emitted = <List<AshTestItem>>[];
         final subscription = harness.watchList().listen(emitted.add);
         async.elapse(settleTime);
         final registeredWhileFailing = {
-          ...harness.changeFeedServer.registrations,
+          ...harness.liveQueriesServer.registrations,
         };
 
-        harness.changeFeedServer.failRegistrations = false;
+        harness.liveQueriesServer.failRegistrations = false;
         async.elapse(
           LiveQueryRegistry.registerRetryDelay + const Duration(seconds: 15),
         );
-        final ref = harness.changeFeedServer.registeredRefs.single;
-        harness.changeFeedServer.pushFull(ref, {
+        final ref = harness.liveQueriesServer.registeredRefs.single;
+        harness.liveQueriesServer.pushFull(ref, {
           '__typename': 'Query',
           'testItems': AshResponses.page([mina.renamed('مينا جرجس').toJson()]),
         });
@@ -92,12 +94,85 @@ void main() {
       });
     });
 
+    test('the server fails to run is sent again, up to a bound, and the '
+        'query turns stale', () {
+      fakeAsync((async) {
+        final harness = LiveQueryHarness([mina]);
+        var attempts = 0;
+        harness.liveQueriesServer.refusalFor = (_) {
+          attempts++;
+
+          return LiveQueriesClient.runFailedReason;
+        };
+        final subscription = harness.watchList().listen(null);
+        async.elapse(const Duration(minutes: 1));
+        final attemptsBeforeStaleRefetch = attempts;
+        final requestsBeforeStale = harness.server.requestCount;
+
+        harness
+          ..goOffline()
+          ..goOnline();
+        async.elapse(settleTime);
+
+        expect(
+          attemptsBeforeStaleRefetch,
+          LiveQueryRegistry.maxRegisterAttempts,
+        );
+        expect(harness.server.requestCount, greaterThan(requestsBeforeStale));
+
+        unawaited(subscription.cancel());
+        harness.dispose();
+      });
+    });
+
+    test('the server fails to run once and then runs is live and not '
+        'stale', () {
+      fakeAsync((async) {
+        final harness = LiveQueryHarness([mina]);
+        var attempts = 0;
+        harness.liveQueriesServer.refusalFor = (_) =>
+            attempts++ == 0 ? LiveQueriesClient.runFailedReason : null;
+        final subscription = harness.watchList().listen(null);
+        async.elapse(const Duration(minutes: 1));
+        final requestsWhenLive = harness.server.requestCount;
+
+        harness
+          ..goOffline()
+          ..goOnline();
+        async.elapse(settleTime);
+
+        expect(harness.liveQueriesServer.registrations, isNotEmpty);
+        expect(harness.server.requestCount, requestsWhenLive);
+
+        unawaited(subscription.cancel());
+        harness.dispose();
+      });
+    });
+
+    test('is made again, once, after the connection fails with an error', () {
+      fakeAsync((async) {
+        final harness = LiveQueryHarness([mina]);
+        final subscription = harness.watchList().listen(null);
+        async.elapse(settleTime);
+        final ref = harness.liveQueriesServer.registeredRefs.single;
+
+        harness.liveQueriesServer.failConnection();
+        async.elapse(const Duration(minutes: 1));
+
+        expect(harness.liveQueriesServer.joinRefs, hasLength(2));
+        expect(harness.liveQueriesServer.registrations.keys, [ref]);
+
+        unawaited(subscription.cancel());
+        harness.dispose();
+      });
+    });
+
     test('the server refuses is not sent again, and the query keeps its '
         'rows', () {
       fakeAsync((async) {
         final harness = LiveQueryHarness([mina]);
         var attempts = 0;
-        harness.changeFeedServer.refusalFor = (_) {
+        harness.liveQueriesServer.refusalFor = (_) {
           attempts++;
 
           return 'too_many';
@@ -121,11 +196,11 @@ void main() {
         final emitted = <List<AshTestItem>>[];
         final subscription = harness.watchList().listen(emitted.add);
         async.elapse(settleTime);
-        final ref = harness.changeFeedServer.registeredRefs.single;
+        final ref = harness.liveQueriesServer.registeredRefs.single;
 
         unawaited(subscription.cancel());
         async.elapse(settleTime);
-        harness.changeFeedServer.pushFull(ref, {
+        harness.liveQueriesServer.pushFull(ref, {
           '__typename': 'Query',
           'testItems': AshResponses.page([
             mina.renamed('بعد الإلغاء').toJson(),
@@ -133,7 +208,7 @@ void main() {
         });
         async.elapse(settleTime);
 
-        expect(harness.changeFeedServer.unregisteredRefs, [ref]);
+        expect(harness.liveQueriesServer.unregisteredRefs, [ref]);
         expect(emitted.last, [mina]);
 
         harness.dispose();
@@ -149,7 +224,7 @@ void main() {
       async.elapse(settleTime);
       final emittedBeforePush = [...emitted];
 
-      harness.changeFeedServer.pushFull('nobody', {
+      harness.liveQueriesServer.pushFull('nobody', {
         '__typename': 'Query',
         'testItems': AshResponses.page([mina.renamed('مجهول').toJson()]),
       });

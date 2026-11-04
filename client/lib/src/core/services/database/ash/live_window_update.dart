@@ -1,1 +1,1 @@
-enum LiveWindowUpdate { changed, unchanged, missingRow }
+enum LiveWindowUpdate { changed, unchanged, needsResync }

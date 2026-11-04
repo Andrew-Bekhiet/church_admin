@@ -7,7 +7,7 @@ import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'fake_ash_tables_link.dart';
-import 'fake_change_feed_server.dart';
+import 'fake_live_queries_server.dart';
 
 /// A [DatabaseService] wired to a [FakeAshTablesLink] and a change feed whose
 /// server answers every registered live query with [announce], so real DAOs
@@ -36,7 +36,7 @@ class FakeAshBackend {
 
   final FakeAshTablesLink server;
   final Dio? dio;
-  final FakeChangeFeedServer changeFeedServer = FakeChangeFeedServer();
+  final FakeLiveQueriesServer liveQueriesServer = FakeLiveQueriesServer();
   final BehaviorSubject<bool> _connectivity = BehaviorSubject.seeded(true);
   final BehaviorSubject<AuthLinkCredentials?> _credentials =
       BehaviorSubject.seeded(
@@ -47,11 +47,11 @@ class FakeAshBackend {
         ),
       );
 
-  late final ChangeFeedClient changeFeed = ChangeFeedClient(
+  late final LiveQueriesClient liveQueries = LiveQueriesClient(
     socketUrl: Uri.parse('ws://localhost:4000/socket/websocket'),
     credentials: _credentials,
     idToken: ({forceRefresh = false}) async => 'idToken',
-    webSocketChannelFactory: changeFeedServer.connect,
+    webSocketChannelFactory: liveQueriesServer.connect,
   );
 
   late final DatabaseService db = DatabaseService(
@@ -64,7 +64,7 @@ class FakeAshBackend {
       ),
     ),
     liveQueries: LiveQueryRegistry(
-      changeFeed: changeFeed,
+      liveQueries: liveQueries,
       connectivity: _connectivity,
     ),
     dio: dio,
@@ -81,10 +81,10 @@ class FakeAshBackend {
          actions: actions,
        );
 
-  void announce() => unawaited(changeFeedServer.pushCurrentResults(server));
+  void announce() => unawaited(liveQueriesServer.pushCurrentResults(server));
 
   void dispose() {
-    changeFeed.dispose();
+    liveQueries.dispose();
     unawaited(_credentials.close());
     unawaited(_connectivity.close());
   }

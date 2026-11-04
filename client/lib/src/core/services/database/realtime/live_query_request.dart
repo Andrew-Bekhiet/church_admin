@@ -4,8 +4,6 @@ import 'package:gql/ast.dart';
 import 'package:gql/language.dart';
 import 'package:meta/meta.dart';
 
-typedef LiveWindowSize = ({int rows, int chunk});
-
 /// A query the server is asked to keep fresh, as a `live:register` payload
 /// without its `ref`. The registry gives every registration its own `ref`.
 @immutable
