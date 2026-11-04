@@ -33,7 +33,7 @@ abstract final class UserFixtures {
     permissionId: 'grant-service',
     service: secondary,
     serviceStudyYearData: firstSecondary,
-    serviceGender: true,
+    serviceGender: Gender.male,
     serviceAllowEdit: true,
     serviceAdminOnUsers: false,
   );
@@ -70,7 +70,7 @@ abstract final class UserFixtures {
     lastEdit: LastRecordedByInfo(time: editedAt, user: editor),
     preferences: UserPreferences(
       uid: 'user-1',
-      darkTheme: true,
+      themeChoice: ThemeChoice.dark,
       greatFeastTheme: false,
       orderByPreferences: const {
         'persons': [

@@ -191,7 +191,7 @@ void main() {
       addTearDown(backend.dispose);
       final edited = hope.copyWith(
         name: 'فصل السلام',
-        serviceGender: null,
+        serviceGender: Gender.any,
         serviceStudyYearTo: OrganizationFixtures.secondGrade.order,
       );
 
@@ -201,7 +201,7 @@ void main() {
       );
 
       expect(answered?.name, edited.name);
-      expect(answered?.serviceGender, isNull);
+      expect(answered?.serviceGender, edited.serviceGender);
       expect(answered?.serviceStudyYearTo, edited.serviceStudyYearTo);
       expect(answered?.serviceStudyYear, hope.serviceStudyYear);
     });

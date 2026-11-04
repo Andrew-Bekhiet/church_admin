@@ -88,7 +88,7 @@ void main() {
 
       await backend.db.users.createUser(
         CreateUserRequest.fromDraft(
-          draftFor(const CreateNewPerson(name: 'مينا', gender: false)),
+          draftFor(const CreateNewPerson(name: 'مينا', gender: Gender.female)),
         ),
       );
 
@@ -103,7 +103,7 @@ void main() {
       await backend.db.users.createUser(
         CreateUserRequest.fromDraft(
           draftFor(
-            const CreateNewPerson(name: 'مينا', gender: true),
+            const CreateNewPerson(name: 'مينا', gender: Gender.male),
           ).copyWith(email: ''),
         ),
       );
@@ -117,7 +117,7 @@ void main() {
       await backend.db.users.createUser(
         CreateUserRequest.fromDraft(
           draftFor(
-            const CreateNewPerson(name: 'مينا', gender: true),
+            const CreateNewPerson(name: 'مينا', gender: Gender.male),
           ).copyWith(invitation: const NoInvitation()),
         ),
       );
@@ -141,7 +141,9 @@ void main() {
         await expectLater(
           backend.db.users.createUser(
             CreateUserRequest.fromDraft(
-              draftFor(const CreateNewPerson(name: 'مينا', gender: true)),
+              draftFor(
+                const CreateNewPerson(name: 'مينا', gender: Gender.male),
+              ),
             ),
           ),
           throwsA(

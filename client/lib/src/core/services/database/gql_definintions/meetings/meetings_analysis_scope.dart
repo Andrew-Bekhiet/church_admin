@@ -68,7 +68,7 @@ class MeetingsAnalysisScope {
         (final from?, final to?) => (from: from, to: to),
         _ => null,
       },
-      gender: class$.serviceGender,
+      gender: class$.serviceGender.isMale,
     );
   }
 

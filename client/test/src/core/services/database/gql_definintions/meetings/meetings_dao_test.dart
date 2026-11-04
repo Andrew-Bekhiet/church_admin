@@ -126,7 +126,7 @@ void main() {
       color: const Color(0xFFFF9800),
       serviceId: MeetingFixtures.sundaySchool.id,
       serviceStudyYear: MeetingFixtures.firstYear.order,
-      serviceGender: false,
+      serviceGender: Gender.female,
     );
 
     test('creating answers the meeting the server stored', () {
@@ -152,7 +152,7 @@ void main() {
             'showKodasCheckbox': draft.showKodasCheckbox,
             'serviceId': draft.serviceId,
             'serviceStudyYear': draft.serviceStudyYear,
-            'serviceGender': draft.serviceGender,
+            'serviceGender': draft.serviceGender.isMale,
           },
         });
       });

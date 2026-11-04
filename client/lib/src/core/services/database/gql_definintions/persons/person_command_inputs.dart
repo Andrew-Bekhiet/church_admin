@@ -53,7 +53,7 @@ class PersonCommandInputs {
   Input_CreatePersonInput get create => Input_CreatePersonInput(
     name: person.name,
     birthdate: person.birthdate,
-    gender: person.gender,
+    gender: person.gender.isMale,
     isShammas: person.isShammas,
     shammasLevelId: person.shammasLevel?.id,
     schoolId: person.school?.id,
@@ -94,7 +94,7 @@ class PersonCommandInputs {
     ...Input_UpdatePersonInput(
       name: person.name,
       birthdate: person.birthdate,
-      gender: person.gender,
+      gender: person.gender.isMale,
       isShammas: person.isShammas,
       shammasLevelId: person.shammasLevel?.id,
       schoolId: person.school?.id,

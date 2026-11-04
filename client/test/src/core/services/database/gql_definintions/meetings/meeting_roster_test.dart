@@ -114,7 +114,7 @@ void main() {
         Person(
           id: mina.personId,
           name: mina.name,
-          gender: mina.gender!,
+          gender: Gender.fromIsMale(mina.gender),
           color: mina.color,
           studyYearId: mina.studyYearId,
           studyYear: StudyYear(

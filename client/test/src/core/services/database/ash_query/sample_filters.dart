@@ -47,6 +47,7 @@ class SampleFilters {
         PhoneOperator() => '0100',
         PrimitiveOperator() => _primitiveFor(field.type),
         BooleanOperator() => true,
+        GenderOperator() => Gender.male,
         ColorOperator() => const Color(0xFF112233),
         DateTimeOperator() => DateTime.utc(2024, 5, 6),
         DateRangeOperator() => DateTimeRange(

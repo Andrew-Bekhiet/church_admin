@@ -2,12 +2,11 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 
 enum GenderOperator implements Operator<Gender?> {
-  is$('_eq', 'يساوي'),
-  isNot('_neq', 'لا يساوي');
+  is$('يساوي'),
+  isNot('لا يساوي');
 
   @override
   final String label;
-  final String _operatorValue;
 
   @override
   String get serializationId => 'GenderOperator.$name';
@@ -15,16 +14,7 @@ enum GenderOperator implements Operator<Gender?> {
   @override
   bool get acceptsValue => true;
 
-  const GenderOperator(this._operatorValue, this.label);
-
-  @override
-  Json queryToJson(FieldMetadata field, Gender? filterValue) {
-    if (filterValue?.isMale case final isMale?) {
-      return field.queryToJson({_operatorValue: isMale});
-    }
-
-    return field.queryToJson({'_isNull': this == GenderOperator.is$});
-  }
+  const GenderOperator(this.label);
 
   @override
   Object? serializeValue(Gender? value) => value?.name;

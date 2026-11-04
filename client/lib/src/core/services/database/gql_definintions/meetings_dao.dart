@@ -49,7 +49,7 @@ class MeetingsDAO extends DAOBase<Meeting>
         showKodasCheckbox: newObject.showKodasCheckbox,
         serviceId: newObject.service?.id ?? newObject.serviceId,
         serviceStudyYear: newObject.serviceStudyYear,
-        serviceGender: newObject.serviceGender,
+        serviceGender: newObject.serviceGender.isMale,
         groupId: newObject.group?.id ?? newObject.groupId,
       ),
     ).toJson(),

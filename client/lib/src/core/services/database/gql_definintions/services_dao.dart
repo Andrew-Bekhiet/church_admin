@@ -39,7 +39,7 @@ class ServicesDAO extends FullCRUDDAO<Service> {
             isArchived: meeting.isArchived,
             showKodasCheckbox: meeting.showKodasCheckbox,
             serviceStudyYear: meeting.serviceStudyYear,
-            serviceGender: meeting.serviceGender,
+            serviceGender: meeting.serviceGender.isMale,
           ),
           null => null,
         },

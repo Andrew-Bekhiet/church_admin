@@ -58,10 +58,10 @@ class AdminOnData with _$AdminOnData implements ToJson {
     b.serviceStudyYearData?.order,
   );
 
-  static int _genderRank(bool? gender) => switch (gender) {
-    null => 0,
-    true => 1,
-    false => 2,
+  static int _genderRank(Gender gender) => switch (gender) {
+    Gender.any => 0,
+    Gender.male => 1,
+    Gender.female => 2,
   };
 
   static int _byServiceGenderBoysFirst(AdminOnData a, AdminOnData b) =>

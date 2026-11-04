@@ -26,7 +26,7 @@ class SingleDayRosterMember {
         personId: row['personId'] as String,
         studyYearId: row['studyYearId'] as int?,
         studyYearName: row['studyYearName'] as String?,
-        gender: row['gender'] as bool?,
+        gender: Gender.fromIsMale(row['gender'] as bool?),
         attended: (row['attendanceRecords'] as List? ?? const []).isNotEmpty,
       );
 }

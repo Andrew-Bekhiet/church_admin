@@ -42,6 +42,7 @@ class AshFilterTranslator {
         _onTheWire(field, value),
       ),
       BooleanOperator() => _boolean(path, operator, value as bool?),
+      GenderOperator() => _gender(path, operator, value as Gender?),
       ColorOperator() => _color(path, operator, value as Color?),
       DateTimeOperator() => path.wrap({
         _dateComparison(operator): _onTheWire(
@@ -161,6 +162,17 @@ class AshFilterTranslator {
       BooleanOperator.is$ => path.wrap({'eq': value}),
       BooleanOperator.isNot => path.wrap({'notEq': value}),
     };
+  }
+
+  Json _gender(AshFieldPath path, GenderOperator operator, Gender? value) {
+    if (value?.isMale case final isMale?) {
+      return switch (operator) {
+        GenderOperator.is$ => path.wrap({'eq': isMale}),
+        GenderOperator.isNot => path.wrap({'notEq': isMale}),
+      };
+    }
+
+    return path.wrap({'isNil': operator == GenderOperator.is$});
   }
 
   Json _color(AshFieldPath path, ColorOperator operator, Color? value) {

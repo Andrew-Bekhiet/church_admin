@@ -141,7 +141,7 @@ abstract final class OrganizationFixtures {
     serviceStudyYearTo: firstGrade.order,
     studyYear: firstGrade,
     studyYearTo: firstGrade,
-    serviceGender: true,
+    serviceGender: Gender.male,
   );
 
   static final Class faithClass = Class(
@@ -152,7 +152,7 @@ abstract final class OrganizationFixtures {
     serviceStudyYearTo: firstGrade.order,
     studyYear: firstGrade,
     studyYearTo: firstGrade,
-    serviceGender: false,
+    serviceGender: Gender.female,
   );
 
   static final Class loveClass = Class(

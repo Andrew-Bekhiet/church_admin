@@ -7,7 +7,7 @@ typedef RosterMemberSummary = ({
   String personId,
   int? studyYearId,
   String? studyYearName,
-  bool? gender,
+  Gender gender,
   bool attended,
 });
 
@@ -81,7 +81,7 @@ void main() {
         MeetingDayDemographicCounts(
           day: row.day,
           studyYearId: row.studyYearId,
-          gender: row.gender,
+          gender: Gender.fromIsMale(row.gender),
           personsCount: row.personsCount,
           servantsCount: row.servantsCount,
           totalCount: row.totalCount,
@@ -157,7 +157,7 @@ void main() {
               name: 'فصل أولى',
               service: MeetingFixtures.sundaySchool,
               serviceStudyYear: 1,
-              serviceGender: true,
+              serviceGender: Gender.male,
             ),
           ),
         );
@@ -223,7 +223,7 @@ void main() {
         2 => MeetingFixtures.secondYear.name,
         _ => null,
       },
-      gender: gender,
+      gender: Gender.fromIsMale(gender),
       attended: attended,
     );
 
@@ -275,7 +275,7 @@ void main() {
               name: 'فصل أولى',
               service: MeetingFixtures.sundaySchool,
               serviceStudyYear: 1,
-              serviceGender: true,
+              serviceGender: Gender.male,
             ),
           ),
         );

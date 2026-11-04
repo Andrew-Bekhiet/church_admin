@@ -37,7 +37,7 @@ class ClassesDAO extends FullCRUDDAO<Class> {
             )),
         serviceStudyYearTo:
             newObject.serviceStudyYearTo ?? newObject.serviceStudyYear,
-        serviceGender: newObject.serviceGender,
+        serviceGender: newObject.serviceGender.isMale,
       ),
     ).toJson(),
   );
@@ -53,7 +53,7 @@ class ClassesDAO extends FullCRUDDAO<Class> {
         'serviceId': newObject.service?.id ?? newObject.serviceId,
         'serviceStudyYear': newObject.serviceStudyYear,
         'serviceStudyYearTo': newObject.serviceStudyYearTo,
-        'serviceGender': newObject.serviceGender,
+        'serviceGender': newObject.serviceGender.isMale,
       }),
     ).toJson(),
   );

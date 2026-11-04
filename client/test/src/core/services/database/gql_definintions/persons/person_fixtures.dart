@@ -161,7 +161,7 @@ abstract final class PersonFixtures {
     family: hannaFamily,
     familyId: hannaFamily.id,
     studyYear: firstYear,
-    gender: false,
+    gender: Gender.female,
   );
 
   static final Person abanoub = Person(

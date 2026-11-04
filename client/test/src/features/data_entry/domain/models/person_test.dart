@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/persons/person_command_inputs.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -41,20 +42,26 @@ void main() {
       ),
     );
 
-    test('to female stops being a shammas', () {
-      final input = shammas
-          .copyWith(gender: Gender.female)
-          .toUpdateInput(shammas);
+    test('to female tells the server, which clears the shammas fields', () {
+      final female = shammas.copyWith(gender: Gender.female);
 
-      expect((input.isShammas, input.shammasLevelId), (false, null));
+      final input = PersonCommandInputs(person: female, saved: shammas).update;
+
+      expect(input.gender, female.gender.isMale);
     });
 
     test('back to male keeps being a shammas', () {
       final female = shammas.copyWith(gender: Gender.female);
 
-      final input = shammas.toUpdateInput(female);
+      final input = PersonCommandInputs(person: shammas, saved: female).update;
 
-      expect(input.isShammas, isTrue);
+      expect(
+        (input.gender, input.isShammas),
+        (
+          shammas.gender.isMale,
+          shammas.isShammas,
+        ),
+      );
     });
   });
 }

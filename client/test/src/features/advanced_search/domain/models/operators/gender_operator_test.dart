@@ -2,42 +2,42 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  const translator = AshFilterTranslator();
+
   group('filtering by gender', () {
     test('a specific gender matches the database boolean', () {
       expect(
-        Filter(
-          PersonFields().gender,
-          GenderOperator.is$,
-          Gender.female,
-        ).queryToJson(),
+        translator.toFilterInput([
+          Filter(PersonFields().gender, GenderOperator.is$, Gender.female),
+        ]),
         {
-          'gender': {'_eq': false},
+          'gender': {'eq': false},
         },
       );
     });
 
     test('excluding a specific gender negates the database boolean', () {
       expect(
-        Filter(
-          ClassFields().serviceGender,
-          GenderOperator.isNot,
-          Gender.male,
-        ).queryToJson(),
+        translator.toFilterInput([
+          Filter(
+            ClassFields().serviceGender,
+            GenderOperator.isNot,
+            Gender.male,
+          ),
+        ]),
         {
-          'serviceGender': {'_neq': true},
+          'serviceGender': {'notEq': true},
         },
       );
     });
 
     test('any gender matches rows that set no gender', () {
       expect(
-        Filter(
-          ClassFields().serviceGender,
-          GenderOperator.is$,
-          Gender.any,
-        ).queryToJson(),
+        translator.toFilterInput([
+          Filter(ClassFields().serviceGender, GenderOperator.is$, Gender.any),
+        ]),
         {
-          'serviceGender': {'_isNull': true},
+          'serviceGender': {'isNil': true},
         },
       );
     });
@@ -46,13 +46,11 @@ void main() {
       'a filter whose gender is not chosen yet matches rows without one',
       () {
         expect(
-          Filter(
-            ClassFields().serviceGender,
-            GenderOperator.is$,
-            null,
-          ).queryToJson(),
+          translator.toFilterInput([
+            Filter(ClassFields().serviceGender, GenderOperator.is$, null),
+          ]),
           {
-            'serviceGender': {'_isNull': true},
+            'serviceGender': {'isNil': true},
           },
         );
       },
@@ -60,13 +58,11 @@ void main() {
 
     test('excluding any gender matches rows that set a gender', () {
       expect(
-        Filter(
-          ClassFields().serviceGender,
-          GenderOperator.isNot,
-          Gender.any,
-        ).queryToJson(),
+        translator.toFilterInput([
+          Filter(ClassFields().serviceGender, GenderOperator.isNot, Gender.any),
+        ]),
         {
-          'serviceGender': {'_isNull': false},
+          'serviceGender': {'isNil': false},
         },
       );
     });

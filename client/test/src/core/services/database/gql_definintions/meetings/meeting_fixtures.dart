@@ -191,7 +191,7 @@ abstract final class MeetingFixtures {
     service: sundaySchool,
     serviceStudyYear: 1,
     studyYear: firstYear,
-    serviceGender: true,
+    serviceGender: Gender.male,
   );
 
   static const Meeting retired = Meeting(

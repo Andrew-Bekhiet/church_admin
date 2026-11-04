@@ -93,7 +93,13 @@ class UsersDAO extends DAOBase<User>
         newPerson: switch (request.person) {
           CreateNewPerson(:final name, :final gender) => Input_NewPersonInput(
             name: name,
-            gender: gender,
+            gender:
+                gender.isMale ??
+                (throw ArgumentError.value(
+                  gender,
+                  'gender',
+                  'A new person is either male or female',
+                )),
           ),
           NoPersonSelected() => Input_NewPersonInput(name: '', gender: true),
           LinkExistingPerson() => null,
