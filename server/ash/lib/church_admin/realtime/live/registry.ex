@@ -211,6 +211,7 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
     %{
       state
       | groups: Map.delete(state.groups, group.key),
+        queue: :queue.delete(group.key, state.queue),
         index: DependencyIndex.delete(state.index, group.key, group.dependencies)
     }
   end

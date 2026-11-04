@@ -744,6 +744,39 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       refute_received {:live_ready, ^id}
     end
 
+    @tag max_concurrent_runs: 1
+    test "an emptied group that waits for a slot never runs", %{registry: registry} do
+      :ok = Registry.register(registry, registration(variables: %{"name" => "holds the slot"}))
+      {_input, holding_the_slot} = await_run()
+
+      %{id: id} =
+        registration(variables: %{"name" => "gives up"}) |> tap(&Registry.register(registry, &1))
+
+      :ok = Registry.unregister(registry, id)
+      send(holding_the_slot, {:finish, success([])})
+
+      refute_receive {:run, _input, _task}, 100
+    end
+
+    @tag max_concurrent_runs: 1
+    test "an emptied group that waited for a slot does not keep its place in the queue", %{
+      registry: registry
+    } do
+      :ok = Registry.register(registry, registration(variables: %{"name" => "holds the slot"}))
+      {_input, holding_the_slot} = await_run()
+      %{id: gave_up} = early = registration(variables: %{"name" => "early"})
+      :ok = Registry.register(registry, early)
+      :ok = Registry.register(registry, registration(variables: %{"name" => "waits"}))
+
+      :ok = Registry.unregister(registry, gave_up)
+      :ok = Registry.register(registry, registration(variables: %{"name" => "early"}))
+      send(holding_the_slot, {:finish, success([])})
+
+      {%{variables: %{"name" => "waits"}}, waits} = await_run()
+      send(waits, {:finish, success([])})
+      assert {%{variables: %{"name" => "early"}}, _early} = await_run()
+    end
+
     test "of an unknown id is a no-op", %{registry: registry} do
       assert Registry.unregister(registry, make_ref()) == :ok
     end
