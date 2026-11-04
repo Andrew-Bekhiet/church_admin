@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -50,10 +49,7 @@ void main() {
     blocTest<CreateUserCubit, UserFormState>(
       'a name already taken on the server is tracked as the failure kind',
       setUp: () => when(() => usersDao.createUser(any())).thenThrow(
-        FirebaseFunctionsException(
-          code: 'already-exists',
-          message: 'user/name-taken',
-        ),
+        const BackendRejectedException('name taken', code: 'user/name-taken'),
       ),
       build: buildCubit,
       act: (cubit) => cubit.save(),

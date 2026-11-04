@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -161,23 +160,13 @@ void main() {
         ),
       ),
       (
-        'a person linked elsewhere fails as person_already_linked',
-        UserCreate(
-          draft,
-          UserManagementAnalyticsEvent.failedOutcomeOf(
-            PersonAlreadyLinkedException(linkedPerson.id),
-          ),
-        ),
-        containsPair('failure_kind', 'person_already_linked'),
-      ),
-      (
         'a server-side person link conflict fails as person_already_linked',
         UserCreate(
           draft,
           UserManagementAnalyticsEvent.failedOutcomeOf(
-            FirebaseFunctionsException(
-              code: 'already-exists',
-              message: 'user/person-already-linked',
+            const BackendRejectedException(
+              'rejected',
+              code: 'user/person-already-linked',
             ),
           ),
         ),
@@ -188,9 +177,9 @@ void main() {
         UserCreate(
           draft,
           UserManagementAnalyticsEvent.failedOutcomeOf(
-            FirebaseFunctionsException(
-              code: 'already-exists',
-              message: 'user/email-taken',
+            const BackendRejectedException(
+              'rejected',
+              code: 'user/email-taken',
             ),
           ),
         ),
@@ -201,10 +190,7 @@ void main() {
         UserCreate(
           draft,
           UserManagementAnalyticsEvent.failedOutcomeOf(
-            FirebaseFunctionsException(
-              code: 'already-exists',
-              message: 'user/name-taken',
-            ),
+            const BackendRejectedException('rejected', code: 'user/name-taken'),
           ),
         ),
         containsPair('failure_kind', 'name_taken'),
@@ -214,9 +200,9 @@ void main() {
         UserCreate(
           draft,
           UserManagementAnalyticsEvent.failedOutcomeOf(
-            FirebaseFunctionsException(
-              code: 'failed-precondition',
-              message: 'invitation/scope-required',
+            const BackendRejectedException(
+              'rejected',
+              code: 'invitation/scope-required',
             ),
           ),
         ),
@@ -227,9 +213,9 @@ void main() {
         UserCreate(
           draft,
           UserManagementAnalyticsEvent.failedOutcomeOf(
-            FirebaseFunctionsException(
-              code: 'permission-denied',
-              message: 'invitation/scope-not-manageable',
+            const BackendRejectedException(
+              'rejected',
+              code: 'invitation/scope-not-manageable',
             ),
           ),
         ),

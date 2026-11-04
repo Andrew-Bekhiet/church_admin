@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:collection/collection.dart';
 
 part 'package:church_admin/src/features/attendance/domain/analytics/attendance_analytics_event.dart';

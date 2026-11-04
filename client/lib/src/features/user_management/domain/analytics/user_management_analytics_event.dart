@@ -4,17 +4,13 @@ sealed class UserManagementAnalyticsEvent extends AnalyticsEvent {
   static AttemptFailed failedOutcomeOf(Object error) => AttemptFailed(
     switch (error) {
       UserFormValidationError() => 'validation',
-      PersonAlreadyLinkedException() ||
-      FirebaseFunctionsException(
-        message: 'user/person-already-linked',
-      ) => 'person_already_linked',
-      FirebaseFunctionsException(message: 'user/email-taken') => 'email_taken',
-      FirebaseFunctionsException(message: 'user/name-taken') => 'name_taken',
-      FirebaseFunctionsException(message: 'invitation/scope-required') =>
+      BackendRejectedException(code: 'user/person-already-linked') =>
+        'person_already_linked',
+      BackendRejectedException(code: 'user/email-taken') => 'email_taken',
+      BackendRejectedException(code: 'user/name-taken') => 'name_taken',
+      BackendRejectedException(code: 'invitation/scope-required') =>
         'scope_required',
-      FirebaseFunctionsException(
-        message: 'invitation/scope-not-manageable',
-      ) =>
+      BackendRejectedException(code: 'invitation/scope-not-manageable') =>
         'scope_not_manageable',
       _ => 'unknown',
     },
