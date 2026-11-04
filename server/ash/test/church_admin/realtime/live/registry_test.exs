@@ -749,8 +749,8 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       :ok = Registry.register(registry, registration(variables: %{"name" => "holds the slot"}))
       {_input, holding_the_slot} = await_run()
 
-      %{id: id} =
-        registration(variables: %{"name" => "gives up"}) |> tap(&Registry.register(registry, &1))
+      %{id: id} = gives_up = registration(variables: %{"name" => "gives up"})
+      :ok = Registry.register(registry, gives_up)
 
       :ok = Registry.unregister(registry, id)
       send(holding_the_slot, {:finish, success([])})
