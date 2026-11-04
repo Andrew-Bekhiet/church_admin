@@ -10,6 +10,7 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
   alias ChurchAdminWeb.ChangesSocket
 
   @staleness_budget_ms 2_000
+  @restore_hobbies_if_moved "alter table if exists hobbies_elsewhere rename to hobbies"
 
   @hobbies """
   query hobbies($first: Int, $after: String) {
@@ -178,6 +179,19 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
                    "window" => nil
                  })
                )
+    end
+
+    test "a first run the database fails is run_failed, and a retry can succeed", %{
+      writer: writer
+    } do
+      socket = join_as(admin!())
+      move_hobbies_away(writer)
+
+      assert {:error, %{reason: "run_failed"}} = register(socket, window_payload("r1", @hobbies))
+
+      restore_hobbies(writer)
+
+      assert {:ok, %{}} = register(socket, window_payload("r1", @hobbies))
     end
 
     test "a socket holds at most 100 registrations, and replacing does not count" do
@@ -664,6 +678,20 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
       assert_push "live:result", %{full: true, data: %{"families" => %{"results" => []}}}
     end
 
+    test "whose new run the database fails disconnects, as no reply can tell the client", %{
+      writer: writer
+    } do
+      Process.flag(:trap_exit, true)
+      viewer = approved_viewer!()
+      socket = join_as(viewer)
+      {:ok, %{}} = register(socket, window_payload("r1", @hobbies))
+
+      move_hobbies_away(writer)
+      grant_permission(writer, viewer.uid, "readAllData")
+
+      assert_receive %Phoenix.Socket.Broadcast{event: "disconnect"}, @staleness_budget_ms
+    end
+
     test "of another uid changes nothing", %{writer: writer} do
       socket = join_as(admin!())
       {:ok, %{}} = register(socket, window_payload("r1", @hobbies))
@@ -692,6 +720,13 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
       assert_receive %Phoenix.Socket.Broadcast{event: "disconnect"}, 3_500
     end
   end
+
+  defp move_hobbies_away(writer) do
+    Postgrex.query!(writer, "alter table hobbies rename to hobbies_elsewhere", [])
+    ChurchAdmin.RealtimeCase.cleanup_sql([@restore_hobbies_if_moved])
+  end
+
+  defp restore_hobbies(writer), do: Postgrex.query!(writer, @restore_hobbies_if_moved, [])
 
   defp grant_permission(writer, uid, permission) do
     Postgrex.query!(

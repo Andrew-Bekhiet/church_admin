@@ -326,6 +326,39 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
     end
   end
 
+  describe "a window run that fails" do
+    test "refuses a document the schema refuses", context do
+      {:ok, document} = Document.prepare("query q { unknownField }", nil)
+
+      assert {:error, {:document_refused, _errors}} =
+               context |> input(document: document, window: nil) |> Refresh.run()
+    end
+
+    test "refuses a filter the resource refuses", context do
+      invalid = %{"id" => %{"in" => ["not-a-uuid"]}}
+
+      assert {:error, {:document_refused, _errors}} =
+               context |> input(variables: %{"filter" => invalid}) |> Refresh.run()
+    end
+
+    test "refuses a list document that returns no page", context do
+      {:ok, document} =
+        Document.prepare(
+          "query q($first: Int, $after: String) { hobbies(first: $first, after: $after) { count } }",
+          nil
+        )
+
+      assert {:error, {:document_refused, :not_a_list}} =
+               context |> input(document: document) |> Refresh.run()
+    end
+
+    test "only failed when the database did", context do
+      sql!("alter table hobbies rename to hobbies_elsewhere", [])
+
+      assert {:error, {:run_failed, _errors}} = context |> input([]) |> Refresh.run()
+    end
+  end
+
   test "a change a nested view shows on another row re-runs the window", context do
     family = Factory.family!()
     Factory.person!(%{family_id: family.id})

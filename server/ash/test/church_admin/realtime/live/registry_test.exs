@@ -231,7 +231,7 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
 
       log =
         capture_log(fn ->
-          finish_next_run({:error, [%{message: "boom"}]})
+          finish_next_run({:error, {:document_refused, [%{message: "boom"}]}})
           assert_receive {:live_refused, ^id}
           settle(registry)
         end)
@@ -247,7 +247,7 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       :ok = Registry.register(registry, registration(pid: socket))
 
       capture_log(fn ->
-        finish_next_run_and_settle(registry, {:error, [%{message: "boom"}]})
+        finish_next_run_and_settle(registry, {:error, {:run_failed, [%{message: "boom"}]}})
         await_exit(socket, fn -> Process.exit(socket, :kill) end)
         settle(registry)
       end)
@@ -256,14 +256,27 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       assert Registry.group_count(registry) == 0
     end
 
-    test "a first run that crashes is refused and leaves no group", %{registry: registry} do
+    test "a first run that only failed says so and leaves no group", %{registry: registry} do
+      %{id: id} = registration = registration()
+      :ok = Registry.register(registry, registration)
+
+      capture_log(fn ->
+        finish_next_run({:error, {:run_failed, [%{message: "boom"}]}})
+        assert_receive {:live_run_failed, ^id}
+        settle(registry)
+      end)
+
+      assert Registry.group_count(registry) == 0
+    end
+
+    test "a first run that crashes only failed and leaves no group", %{registry: registry} do
       %{id: id} = registration = registration()
       :ok = Registry.register(registry, registration)
       {_input, task} = await_run()
 
       capture_log(fn ->
         Process.exit(task, :kill)
-        assert_receive {:live_refused, ^id}
+        assert_receive {:live_run_failed, ^id}
         settle(registry)
       end)
 
@@ -386,7 +399,7 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
     } do
       log =
         capture_log(fn ->
-          finish_next_run_and_settle(registry, {:error, [%{message: "boom"}]})
+          finish_next_run_and_settle(registry, {:error, {:run_failed, [%{message: "boom"}]}})
         end)
 
       assert log =~ "boom"
@@ -697,7 +710,7 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       :ok = Registry.register(registry, refused_registration)
 
       capture_log(fn ->
-        finish_next_run({:error, [%{message: "boom"}]})
+        finish_next_run({:error, {:document_refused, [%{message: "boom"}]}})
         assert_receive {:live_refused, ^refused}
       end)
 

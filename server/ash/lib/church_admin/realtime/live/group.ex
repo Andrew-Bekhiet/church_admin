@@ -4,7 +4,8 @@ defmodule ChurchAdmin.Realtime.Live.Group do
   on, and who has received what. Pure: transitions return the group with
   the messages to send, as `{pid, message}`, and
   `ChurchAdmin.Realtime.Live.Registry` delivers them. The messages are
-  `{:live_ready, id}`, `{:live_refused, id}` and `{:live_result, id, payload}`.
+  `{:live_ready, id}`, `{:live_refused, id}`, `{:live_run_failed, id}` and
+  `{:live_result, id, payload}`.
 
   `generation` changes when a scoped member registers under fresher
   authorization facts. A run started under an older generation is discarded,
@@ -163,19 +164,20 @@ defmodule ChurchAdmin.Realtime.Live.Group do
 
   @doc """
   Ends a run. A run of an older generation is discarded and another follows.
-  A failed run keeps the stored result and refuses the members still waiting
-  for a baseline; a group failing its first run is left without members.
+  A failed run keeps the stored result and turns away the members still
+  waiting for a baseline; a group failing its first run is left without
+  members.
   """
   @spec finish_run(t(), Refresh.outcome()) :: {t(), [message()]}
   def finish_run(%__MODULE__{generation: generation, run_generation: run_generation} = group, _)
       when generation != run_generation,
       do: {%{idle(group) | run_again?: true}, []}
 
-  def finish_run(%__MODULE__{} = group, {:error, _errors}) do
-    refused = for {id, %{awaiting_baseline?: true, pid: pid}} <- group.members, do: {id, pid}
+  def finish_run(%__MODULE__{} = group, {:error, {failure, _errors}}) do
+    turned_away = for {id, %{awaiting_baseline?: true, pid: pid}} <- group.members, do: {id, pid}
 
-    {%{idle(group) | members: Map.drop(group.members, Enum.map(refused, &elem(&1, 0)))},
-     for({id, pid} <- refused, do: {pid, {:live_refused, id}})}
+    {%{idle(group) | members: Map.drop(group.members, Enum.map(turned_away, &elem(&1, 0)))},
+     for({id, pid} <- turned_away, do: {pid, message_for(failure, id)})}
   end
 
   def finish_run(%__MODULE__{} = group, {:ok, %{result: :unchanged} = run}) do
@@ -214,6 +216,9 @@ defmodule ChurchAdmin.Realtime.Live.Group do
   end
 
   defp idle(%__MODULE__{} = group), do: %{group | status: :idle, run_ref: nil}
+
+  defp message_for(:document_refused, id), do: {:live_refused, id}
+  defp message_for(:run_failed, id), do: {:live_run_failed, id}
 
   defp viewer_class(%Registration{actor: actor, document: document}),
     do: ViewerClass.key(actor, document.selected_fields)

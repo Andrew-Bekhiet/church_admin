@@ -4,8 +4,9 @@ defmodule ChurchAdminWeb.ChangesChannel do
 
   `live:register {ref, document, operationName?, variables, window?,
   resultHashes?}` replies `{}` once the query's first result is known, or
-  `{reason}` (`not_a_query`, `too_large`, `too_many`, `invalid`). Registering
-  an existing `ref` replaces its registration. `live:unregister {ref}` and
+  `{reason}` (`not_a_query`, `too_large`, `too_many`, `invalid`, or
+  `run_failed` when the first run failed for a reason that a retry can fix).
+  Registering an existing `ref` replaces its registration. `live:unregister {ref}` and
   `live:resync {ref}` reply `{}`; a resync is followed by a full push.
   Results arrive as `live:result` events, see
   `ChurchAdmin.Realtime.Live.Delta`.
@@ -17,7 +18,8 @@ defmodule ChurchAdminWeb.ChangesChannel do
   user's grants move the sets of users others manage or may see. When the
   facts changed, every query registers again under the new actor, with a
   full push. A viewer no longer approved or linked is disconnected. A registry restart loses every registration, so
-  it disconnects too, and the client registers again on reconnecting.
+  it disconnects too, and the client registers again on reconnecting. So
+  does a run that failed with no reply left to say so, after a scope change.
 
   `socket.assigns.actor` dates from the connect, which a rejoin after a crash
   can long outlive, so joining reloads it too. The join queues that reload
@@ -163,13 +165,14 @@ defmodule ChurchAdminWeb.ChangesChannel do
   def handle_info({:live_ready, id}, socket),
     do: {:noreply, answer_awaited_reply(socket, id, {:ok, %{}})}
 
-  def handle_info({:live_refused, id}, socket) do
-    socket = answer_awaited_reply(socket, id, {:error, %{reason: "invalid"}})
+  def handle_info({:live_refused, id}, socket),
+    do: {:noreply, refuse_registration(socket, id, "invalid")}
 
-    case socket.assigns.ref_by_id do
-      %{^id => ref} -> {:noreply, forget_registration(socket, ref)}
-      _replaced -> {:noreply, socket}
-    end
+  def handle_info({:live_run_failed, id}, socket) do
+    if not is_map_key(socket.assigns.awaiting_reply, id) and
+         is_map_key(socket.assigns.ref_by_id, id),
+       do: disconnect(socket, :live_run_failed),
+       else: {:noreply, refuse_registration(socket, id, "run_failed")}
   end
 
   def handle_info({:live_result, id, payload}, socket) do
@@ -187,6 +190,15 @@ defmodule ChurchAdminWeb.ChangesChannel do
 
   def handle_info({:DOWN, _monitor, :process, _registry, _reason}, socket),
     do: disconnect(socket, :live_registry_restarted)
+
+  defp refuse_registration(socket, id, reason) do
+    socket = answer_awaited_reply(socket, id, {:error, %{reason: reason}})
+
+    case socket.assigns.ref_by_id do
+      %{^id => ref} -> forget_registration(socket, ref)
+      _replaced -> socket
+    end
+  end
 
   defp reload_actor(%{assigns: %{actor: actor}} = socket) do
     case ActorLoader.load_for_principal(actor.principal) do

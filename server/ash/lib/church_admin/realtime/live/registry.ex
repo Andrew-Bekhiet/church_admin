@@ -103,7 +103,8 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
 
   def handle_info({:DOWN, ref, :process, _task, reason}, %{running: running} = state)
       when is_map_key(running, ref) do
-    {:noreply, finish_run(state, ref, {:error, [%{message: "run crashed: #{inspect(reason)}"}]})}
+    failure = {:run_failed, [%{message: "run crashed: #{inspect(reason)}"}]}
+    {:noreply, finish_run(state, ref, {:error, failure})}
   end
 
   def handle_info({:DOWN, _monitor, :process, pid, _reason}, state) do
@@ -287,7 +288,7 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
     dependencies_before_run = group.dependencies
     {group, messages} = Group.finish_run(group, outcome)
     deliver(messages)
-    state = forget_refused_members(state, messages)
+    state = forget_turned_away_members(state, messages)
 
     index =
       DependencyIndex.put(
@@ -300,8 +301,10 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
     settle_finished_group(%{state | index: index}, group, dependencies_before_run)
   end
 
-  defp forget_refused_members(state, messages) do
-    for {pid, {:live_refused, id}} <- messages, reduce: state do
+  defp forget_turned_away_members(state, messages) do
+    for {pid, {refusal, id}} <- messages,
+        refusal in [:live_refused, :live_run_failed],
+        reduce: state do
       state ->
         untrack_socket(%{state | registrations: Map.delete(state.registrations, id)}, pid, id)
     end
@@ -317,7 +320,7 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
     end
   end
 
-  defp log_failure(group, {:error, errors}) do
+  defp log_failure(group, {:error, {_failure, errors}}) do
     Logger.warning(
       "live query #{group.document.operation_name || "(anonymous)"} failed: #{inspect(errors)}"
     )
