@@ -36,7 +36,7 @@ Read the diff against the PR description.
 
 ## Do not flag
 
-- **Anything CI enforces.** That covers `dart analyze --fatal-infos` with solid_lints (`client/analysis_options.yaml`), `dart format`, and the generated-code and schema-drift checks (`generated-code.yml`). If the analyzer accepts something, its config chose to.
+- **Anything CI enforces.** That covers `dart analyze --fatal-infos` with solid_lints (`client/analysis_options.yaml`), `dart format`, the generated-code check (`generated-code.yml`), and for `server/ash` `mix precommit` (format, credo, tests) plus the migration and `schema.graphql` drift check `mix ash.codegen --check` (`server.yml`). If the analyzer accepts something, its config chose to.
 - **Generated files** (`*.g.dart`, `*.graphql.dart`, `__generated__/`, `schema.graphql`). Fix the generator or the source, not the output.
 - **Missing doc comments, or a low docstring count.** The repo writes no comments by design (`AGENTS.md`, under Comments).
 - **Dart 3.13 semantics that look like bugs.** The SDK floor is 3.13: `required this._form` declares a private named parameter that callers pass as `form:`; a `late final` local runs its initializer on first read, so a branch that never reads it never runs it; a mocktail stub matches a call that omits a named parameter, because the forwarder fills in the default. CI compiles every PR, so a claimed compile error needs the analyzer output that shows it.

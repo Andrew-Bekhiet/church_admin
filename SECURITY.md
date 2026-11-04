@@ -26,7 +26,7 @@ Out of scope:
 
 ## Deploying your own instance
 
-- **Name your first administrator.** Signing up first grants nothing. Run `bin/church_admin eval 'ChurchAdmin.Release.bootstrap_admin("you@example.com")'` once, then sign up with that email; the account claims the seeded administrator row.
+- **Name your first administrator.** Signing up first grants nothing. Sign up with the email, then run `bin/church_admin eval 'ChurchAdmin.Release.bootstrap_admin("you@example.com")'` once; it links that account to the administrator row. Running it before sign-up works only with `ACCOUNT_CLAIMING_BY_EMAIL=true`, which makes the later sign-up claim the seeded row; production defaults it to false.
 - Leave `AUTH_MODE` unset in production: unsigned emulator tokens are accepted only in dev and test, and the app refuses to boot otherwise.
 - Do not expose Postgres to the internet. The Ash backend is the only thing that needs to reach it.
 - Restrict your Firebase API keys to your app's package name, bundle ID and web domain in the Google Cloud console, and set a billing budget alert.
