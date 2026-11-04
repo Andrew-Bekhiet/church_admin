@@ -78,6 +78,9 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependencies.Probe do
       {:error, {:view_rejected, _message}} -> read_from_plan(inlined)
       other -> other
     end
+  rescue
+    error in [DBConnection.ConnectionError, Postgrex.Error] ->
+      {:error, {:probe_unavailable, error}}
   catch
     :exit, reason -> {:error, {:probe_unavailable, reason}}
   end
@@ -105,13 +108,14 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependencies.Probe do
     case Postgrex.query(connection, "CREATE TEMP VIEW #{@view} AS " <> sql, []) do
       {:ok, _result} -> read_view(connection)
       {:error, %Postgrex.Error{} = error} -> {:error, {:view_rejected, Exception.message(error)}}
+      {:error, %DBConnection.ConnectionError{} = error} -> {:error, {:probe_unavailable, error}}
     end
   end
 
   defp read_view(connection) do
     case Postgrex.query!(connection, @functions_that_can_read_unreported_tables, []) do
       %{rows: [[function]]} ->
-        {:error, {:volatile_function, function}}
+        {:error, {:hidden_reader_function, function}}
 
       %{rows: []} ->
         %{rows: rows} = Postgrex.query!(connection, @tables_and_columns, [])

@@ -4,13 +4,19 @@ defmodule ChurchAdmin.Realtime.Live.Group do
   on, and who has received what. Pure: transitions return the group with
   the messages to send, as `{pid, message}`, and
   `ChurchAdmin.Realtime.Live.Registry` delivers them. The messages are
-  `{:live_ready, id}`, `{:live_refused, id}` and `{:live_result, id, payload}`.
+  `{:live_ready, id}`, `{:live_refused, id}`, `{:live_run_failed, id}` and
+  `{:live_result, id, payload}`.
 
   `generation` changes when a scoped member registers under fresher
   authorization facts. A run started under an older generation is discarded,
   so it cannot reach a member. Batches that arrive while a run is queued or
   running collect in `touched` and `changes`, because the run may discover
   dependencies that make them matter.
+
+  A failed run has lost the batches it collected, so the result stops being
+  current: the next run reads the window, and the
+  `ChurchAdmin.Realtime.Live.Registry` schedules it after `failed_runs`
+  backoffs if nothing else does first.
   """
 
   alias ChurchAdmin.Authz.Actor
@@ -41,6 +47,8 @@ defmodule ChurchAdmin.Realtime.Live.Group do
     touched: [],
     changes: [],
     run_again?: false,
+    failed_runs: 0,
+    retry_scheduled?: false,
     members: %{}
   ]
 
@@ -83,7 +91,7 @@ defmodule ChurchAdmin.Realtime.Live.Group do
 
     joined =
       group
-      |> adopt_fresher_actor(registration.actor)
+      |> adopt_actor_if_scope_differs(registration.actor)
       |> put_in([Access.key!(:members), registration.id], member)
 
     if result_current?(joined),
@@ -127,7 +135,7 @@ defmodule ChurchAdmin.Realtime.Live.Group do
       variables: group.variables,
       window: group.window,
       actor: group.actor,
-      known_hashes: group.result && group.result.chunk_hashes,
+      stored_hashes: group.result && group.result.chunk_hashes,
       window_required?: group.run_again? or not result_current?(group),
       result: group.result,
       dependencies: group.dependencies,
@@ -163,25 +171,31 @@ defmodule ChurchAdmin.Realtime.Live.Group do
 
   @doc """
   Ends a run. A run of an older generation is discarded and another follows.
-  A failed run keeps the stored result and refuses the members still waiting
-  for a baseline; a group failing its first run is left without members.
+  A failed run keeps the stored result and turns away the members still
+  waiting for a baseline; a group failing its first run is left without
+  members.
   """
   @spec finish_run(t(), Refresh.outcome()) :: {t(), [message()]}
   def finish_run(%__MODULE__{generation: generation, run_generation: run_generation} = group, _)
       when generation != run_generation,
       do: {%{idle(group) | run_again?: true}, []}
 
-  def finish_run(%__MODULE__{} = group, {:error, _errors}) do
-    refused = for {id, %{awaiting_baseline?: true, pid: pid}} <- group.members, do: {id, pid}
+  def finish_run(%__MODULE__{} = group, {:error, {failure, _errors}}) do
+    turned_away = for {id, %{awaiting_baseline?: true, pid: pid}} <- group.members, do: {id, pid}
 
-    {%{idle(group) | members: Map.drop(group.members, Enum.map(refused, &elem(&1, 0)))},
-     for({id, pid} <- refused, do: {pid, {:live_refused, id}})}
+    {%{
+       idle(group)
+       | members: Map.drop(group.members, Enum.map(turned_away, &elem(&1, 0))),
+         result_generation: nil,
+         failed_runs: group.failed_runs + 1
+     }, for({id, pid} <- turned_away, do: {pid, message_for(failure, id)})}
   end
 
   def finish_run(%__MODULE__{} = group, {:ok, %{result: :unchanged} = run}) do
     settle_awaiting_members(%{
       idle(group)
       | result_generation: group.generation,
+        failed_runs: 0,
         dependencies: run.dependencies,
         rows_stand_alone?: run.rows_stand_alone?
     })
@@ -192,6 +206,7 @@ defmodule ChurchAdmin.Realtime.Live.Group do
       idle(group)
       | result: result,
         result_generation: group.generation,
+        failed_runs: 0,
         dependencies: run.dependencies,
         rows_stand_alone?: run.rows_stand_alone?
     }
@@ -199,12 +214,22 @@ defmodule ChurchAdmin.Realtime.Live.Group do
     |> settle_awaiting_members_after()
   end
 
+  @doc "Whether the last run failed and no retry is on its way."
+  @spec needs_retry?(t()) :: boolean()
+  def needs_retry?(%__MODULE__{status: :idle, retry_scheduled?: false, failed_runs: failed_runs}),
+    do: failed_runs > 0
+
+  def needs_retry?(%__MODULE__{}), do: false
+
+  @spec mark_retry(t(), boolean()) :: t()
+  def mark_retry(%__MODULE__{} = group, scheduled?), do: %{group | retry_scheduled?: scheduled?}
+
   @doc """
   Whether what happened during the last run calls for another, judged by
   what the group read before and during it; empties `touched` if not.
   """
-  @spec due_again?(t(), GroupDependencies.t() | nil) :: {boolean(), t()}
-  def due_again?(%__MODULE__{} = group, dependencies_before_run) do
+  @spec clear_touched_unless_due(t(), GroupDependencies.t() | nil) :: {boolean(), t()}
+  def clear_touched_unless_due(%__MODULE__{} = group, dependencies_before_run) do
     dependencies =
       GroupDependencies.merge(dependencies_before_run || %{}, group.dependencies || %{})
 
@@ -215,16 +240,19 @@ defmodule ChurchAdmin.Realtime.Live.Group do
 
   defp idle(%__MODULE__{} = group), do: %{group | status: :idle, run_ref: nil}
 
-  defp viewer_class(%Registration{actor: actor, document: document}),
-    do: ViewerClass.key(actor, document.operation_name)
+  defp message_for(:document_refused, id), do: {:live_refused, id}
+  defp message_for(:run_failed, id), do: {:live_run_failed, id}
 
-  defp adopt_fresher_actor(%{viewer_class: {:uid, _uid}} = group, %Actor{} = actor) do
+  defp viewer_class(%Registration{actor: actor, document: document}),
+    do: ViewerClass.key(actor, document.selected_fields)
+
+  defp adopt_actor_if_scope_differs(%{viewer_class: {:uid, _uid}} = group, %Actor{} = actor) do
     if ViewerClass.same_scope?(group.actor, actor),
       do: group,
       else: %{group | actor: actor, generation: make_ref()}
   end
 
-  defp adopt_fresher_actor(group, _actor), do: group
+  defp adopt_actor_if_scope_differs(group, _actor), do: group
 
   defp result_current?(%__MODULE__{result: nil}), do: false
   defp result_current?(group), do: group.result_generation == group.generation

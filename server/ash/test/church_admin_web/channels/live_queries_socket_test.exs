@@ -1,10 +1,10 @@
-defmodule ChurchAdminWeb.ChangesSocketTest do
+defmodule ChurchAdminWeb.LiveQueriesSocketTest do
   use ChurchAdmin.AccountsCase, async: false
 
   import Phoenix.ChannelTest
 
   alias ChurchAdmin.FirebaseTokens
-  alias ChurchAdminWeb.ChangesSocket
+  alias ChurchAdminWeb.LiveQueriesSocket
 
   @endpoint ChurchAdminWeb.Endpoint
 
@@ -17,7 +17,7 @@ defmodule ChurchAdminWeb.ChangesSocketTest do
     test "admits an approved user and assigns the loaded actor" do
       user = user_with!(~w(approved readAllData))
 
-      assert {:ok, socket} = connect(ChangesSocket, %{"token" => token_for(user)})
+      assert {:ok, socket} = connect(LiveQueriesSocket, %{"token" => token_for(user)})
       assert socket.assigns.actor.approved?
       assert socket.assigns.actor.read_all?
       assert socket.assigns.actor.principal.uid == user.uid
@@ -26,13 +26,13 @@ defmodule ChurchAdminWeb.ChangesSocketTest do
     test "refuses an account that is not onboarded" do
       claims = FirebaseTokens.valid_claims() |> Map.delete("x-hasura-user-id")
 
-      assert connect(ChangesSocket, %{"token" => FirebaseTokens.unsigned(claims)}) == :error
+      assert connect(LiveQueriesSocket, %{"token" => FirebaseTokens.unsigned(claims)}) == :error
     end
 
     test "refuses a user who is not approved" do
       user = user_with!(~w(readAllData))
 
-      assert connect(ChangesSocket, %{"token" => token_for(user)}) == :error
+      assert connect(LiveQueriesSocket, %{"token" => token_for(user)}) == :error
     end
 
     test "refuses a uid claim that belongs to another account" do
@@ -40,28 +40,28 @@ defmodule ChurchAdminWeb.ChangesSocketTest do
       other_account = Factory.firebase_account!(Factory.user!())
       claims = %{other_account | "x-hasura-user-id" => user.uid}
 
-      assert connect(ChangesSocket, %{"token" => token_with(claims)}) == :error
+      assert connect(LiveQueriesSocket, %{"token" => token_with(claims)}) == :error
     end
 
     test "refuses a uid claim that no user has" do
       account = ~w(approved) |> user_with!() |> Factory.firebase_account!()
       claims = %{account | "x-hasura-user-id" => Ash.UUID.generate()}
 
-      assert connect(ChangesSocket, %{"token" => token_with(claims)}) == :error
+      assert connect(LiveQueriesSocket, %{"token" => token_with(claims)}) == :error
     end
 
     test "refuses a token whose subject is no user's account" do
       user = user_with!(~w(approved))
       claims = %{Factory.firebase_account!(user) | "sub" => "firebase-nobody"}
 
-      assert connect(ChangesSocket, %{"token" => token_with(claims)}) == :error
+      assert connect(LiveQueriesSocket, %{"token" => token_with(claims)}) == :error
     end
 
     test "is keyed by the uid, so a user's sockets can be disconnected together" do
       user = user_with!(~w(approved))
-      {:ok, socket} = connect(ChangesSocket, %{"token" => token_for(user)})
+      {:ok, socket} = connect(LiveQueriesSocket, %{"token" => token_for(user)})
 
-      assert ChangesSocket.id(socket) == "changes_socket:" <> user.uid
+      assert LiveQueriesSocket.id(socket) == "live_queries_socket:" <> user.uid
     end
   end
 
@@ -69,7 +69,7 @@ defmodule ChurchAdminWeb.ChangesSocketTest do
     setup do
       user = user_with!(~w(approved))
       manager = user_with!()
-      ChurchAdminWeb.Endpoint.subscribe("changes_socket:" <> user.uid)
+      ChurchAdminWeb.Endpoint.subscribe("live_queries_socket:" <> user.uid)
 
       {:ok, user: user, manager: actor_for(manager)}
     end
@@ -93,7 +93,7 @@ defmodule ChurchAdminWeb.ChangesSocketTest do
       user =
         user_with!(~w(approved), %{auth_id: "firebase-#{System.unique_integer([:positive])}"})
 
-      ChurchAdminWeb.Endpoint.subscribe("changes_socket:" <> user.uid)
+      ChurchAdminWeb.Endpoint.subscribe("live_queries_socket:" <> user.uid)
       stub_identity_toolkit()
 
       {:ok, true} =
@@ -103,7 +103,7 @@ defmodule ChurchAdminWeb.ChangesSocketTest do
 
       assert_receive %Phoenix.Socket.Broadcast{
         event: "disconnect",
-        topic: "changes_socket:" <> _uid
+        topic: "live_queries_socket:" <> _uid
       }
     end
 
@@ -111,7 +111,7 @@ defmodule ChurchAdminWeb.ChangesSocketTest do
       user =
         user_with!(~w(approved), %{auth_id: "firebase-#{System.unique_integer([:positive])}"})
 
-      ChurchAdminWeb.Endpoint.subscribe("changes_socket:" <> user.uid)
+      ChurchAdminWeb.Endpoint.subscribe("live_queries_socket:" <> user.uid)
       stub_identity_toolkit(fn _method, _body -> google_failure() end)
 
       {:error, _error} =

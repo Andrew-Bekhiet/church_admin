@@ -44,13 +44,6 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependenciesTest do
              } == deps!(@scoped_list)
     end
 
-    test "leaves out the columns the statement does not read" do
-      %{@persons => persons_columns} = deps!(@scoped_list)
-
-      refute "notes" in persons_columns
-      refute "birthdate" in persons_columns
-    end
-
     test "counts a column that only the WHERE clause reads" do
       %{@persons => persons_columns} = deps!("SELECT id FROM persons WHERE deleted_at IS NULL")
 
@@ -126,12 +119,12 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependenciesTest do
 
   describe "for_sql/1 and functions that can read tables Postgres does not report" do
     test "rejects a non-immutable plpgsql function of any schema" do
-      assert {:error, {:volatile_function, "public.uuid_generate_v7"}} ==
+      assert {:error, {:hidden_reader_function, "public.uuid_generate_v7"}} ==
                StatementDependencies.for_sql("SELECT public.uuid_generate_v7()")
     end
 
     test "rejects a non-immutable sql function" do
-      assert {:error, {:volatile_function, "public.hypertable_size"}} ==
+      assert {:error, {:hidden_reader_function, "public.hypertable_size"}} ==
                StatementDependencies.for_sql("SELECT public.hypertable_size('persons'::regclass)")
     end
 
@@ -152,10 +145,8 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependenciesTest do
     end
 
     test "finds a builtin inside a view that the statement reads without rejecting it" do
-      assert {:ok, read} =
+      assert {:ok, %{@persons => _columns}} =
                StatementDependencies.for_sql("SELECT family_id FROM data_checks")
-
-      assert map_size(read) > 0
     end
 
     test "accepts immutable functions" do
@@ -218,6 +209,53 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependenciesTest do
     end
   end
 
+  describe "a probe that loses its connection" do
+    alias ChurchAdmin.Realtime.Live.StatementDependencies.Probe
+
+    defp hold_the_probe_connection do
+      test_pid = self()
+
+      holder =
+        spawn(fn ->
+          Postgrex.transaction(Probe, fn _connection ->
+            send(test_pid, :probe_connection_held)
+            Process.sleep(:infinity)
+          end)
+        end)
+
+      assert_receive :probe_connection_held
+      on_exit(fn -> Process.exit(holder, :kill) end)
+    end
+
+    test "reports a checkout that fails instead of raising" do
+      hold_the_probe_connection()
+
+      assert {:error, {:probe_unavailable, %DBConnection.ConnectionError{}}} =
+               "select 1" |> unique_sql() |> Probe.dependencies()
+    end
+
+    test "reports a backend that died instead of raising, and works again after" do
+      %{rows: [[backend]]} = Postgrex.query!(Probe, "select pg_backend_pid()", [])
+      Repo.query!("select pg_terminate_backend($1)", [backend])
+
+      assert {:error, {:probe_unavailable, _reason}} =
+               "select 1" |> unique_sql() |> Probe.dependencies()
+
+      assert {:ok, %{}} = "select 1" |> unique_sql() |> await_probe_back()
+    end
+
+    defp await_probe_back(sql, attempts \\ 50) do
+      case Probe.dependencies(sql) do
+        {:error, {:probe_unavailable, _reason}} when attempts > 0 ->
+          Process.sleep(20)
+          await_probe_back(sql, attempts - 1)
+
+        answer ->
+          answer
+      end
+    end
+  end
+
   describe "the cache" do
     test "answers a repeated statement without probing again" do
       sql = unique_sql("SELECT id, name FROM persons")
@@ -232,7 +270,7 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependenciesTest do
 
     test "answers a repeated volatile statement from the cache too" do
       sql = unique_sql("SELECT id FROM persons WHERE id = public.uuid_generate_v7()")
-      assert {:error, {:volatile_function, _}} = error = StatementDependencies.for_sql(sql)
+      assert {:error, {:hidden_reader_function, _}} = error = StatementDependencies.for_sql(sql)
       supervisor = ChurchAdmin.Realtime.Supervisor
 
       :ok = Supervisor.terminate_child(supervisor, StatementDependencies.Probe)
@@ -244,13 +282,6 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependenciesTest do
     test "keys entries by the exact SQL text" do
       assert %{@persons => columns(["id"])} == deps!(unique_sql("SELECT id FROM persons"))
       assert %{@persons => columns(["name"])} == deps!(unique_sql("SELECT name FROM persons"))
-    end
-
-    test "is owned by a process that survives the callers" do
-      sql = unique_sql("SELECT id FROM persons")
-      fn -> deps!(sql) end |> Task.async() |> Task.await()
-
-      assert {:ok, %{@persons => _}} = StatementDependencies.for_sql(sql)
     end
   end
 

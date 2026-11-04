@@ -142,7 +142,7 @@ defmodule ChurchAdmin.Realtime.BroadcasterTest do
     Broadcaster.commit(b, [hobby_inserted(@hobby_a)])
 
     receive_batch()
-    refute_received :viewer_scope_changed
+    refute_receive :viewer_scope_changed, @coalesce_ms * 4
   end
 
   test "a reset is announced at once, to live queries and to viewers", %{broadcaster: b} do

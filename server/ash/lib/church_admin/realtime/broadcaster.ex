@@ -34,7 +34,6 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
   @type batch :: %{changes: [TypeMap.change()], rows: [touched_row()]}
 
   @topic "realtime:changes"
-  @viewer_scope_type "ViewerScope"
 
   @spec topic() :: String.t()
   def topic, do: @topic
@@ -134,7 +133,7 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
   end
 
   defp viewer_scope_changed?(changes, row_changes) do
-    Enum.any?(changes, &(&1.type == @viewer_scope_type)) or
+    Enum.any?(changes, &(&1.type == TypeMap.viewer_scope_type())) or
       Enum.any?(row_changes, &ViewerFacts.touched?/1)
   end
 

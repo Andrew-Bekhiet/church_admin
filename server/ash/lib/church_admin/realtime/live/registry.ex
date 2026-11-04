@@ -8,9 +8,11 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
   A batch runs each affected group once. A group already queued or running
   collects the batch, and runs once more if the batch touches what the run
   turned out to read. Members are monitored, so a socket that dies leaves
-  its groups, and an empty group is dropped.
+  its groups, and an empty group is dropped. A group whose run failed and
+  still has members runs again by itself, the wait doubling with each
+  failure in a row up to `@max_retry_ms`.
 
-  A restart loses every group. `ChurchAdminWeb.ChangesChannel` monitors this
+  A restart loses every group. `ChurchAdminWeb.LiveQueriesChannel` monitors this
   process and disconnects, and the client registers again.
   """
 
@@ -26,6 +28,8 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
   require Logger
 
   @default_max_concurrent_runs 3
+  @default_retry_base_ms 1_000
+  @max_retry_ms 30_000
 
   def start_link(opts),
     do: GenServer.start_link(__MODULE__, opts, name: Keyword.get(opts, :name, __MODULE__))
@@ -40,9 +44,6 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
   @spec resync(GenServer.server(), reference()) :: :ok
   def resync(server \\ __MODULE__, id), do: GenServer.call(server, {:resync, id})
 
-  @spec group_count(GenServer.server()) :: non_neg_integer()
-  def group_count(server \\ __MODULE__), do: GenServer.call(server, :group_count)
-
   @impl GenServer
   def init(opts) do
     Process.flag(:message_queue_data, :off_heap)
@@ -53,6 +54,7 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
        refresh: Keyword.get(opts, :refresh, &Refresh.run/1),
        task_supervisor: Keyword.get(opts, :task_supervisor, ChurchAdmin.Realtime.Live.Runs),
        max_concurrent_runs: Keyword.get(opts, :max_concurrent_runs, @default_max_concurrent_runs),
+       retry_base_ms: Keyword.get(opts, :retry_base_ms, @default_retry_base_ms),
        groups: %{},
        registrations: %{},
        sockets: %{},
@@ -83,8 +85,6 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
     end
   end
 
-  def handle_call(:group_count, _from, state), do: {:reply, map_size(state.groups), state}
-
   @impl GenServer
   def handle_info({:realtime_changes, batch}, state) do
     {:noreply,
@@ -96,6 +96,21 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
      state.groups |> Map.keys() |> Enum.reduce(state, &run_again/2) |> start_queued_runs()}
   end
 
+  def handle_info({:retry_run, key}, state) do
+    case state.groups do
+      %{^key => group} ->
+        group = Group.mark_retry(group, false)
+
+        {:noreply,
+         %{state | groups: Map.put(state.groups, key, group)}
+         |> enqueue_if_needed(group)
+         |> start_queued_runs()}
+
+      _dropped_meanwhile ->
+        {:noreply, state}
+    end
+  end
+
   def handle_info({ref, outcome}, %{running: running} = state) when is_map_key(running, ref) do
     Process.demonitor(ref, [:flush])
     {:noreply, finish_run(state, ref, outcome)}
@@ -103,7 +118,8 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
 
   def handle_info({:DOWN, ref, :process, _task, reason}, %{running: running} = state)
       when is_map_key(running, ref) do
-    {:noreply, finish_run(state, ref, {:error, [%{message: "run crashed: #{inspect(reason)}"}]})}
+    failure = {:run_failed, [%{message: "run crashed: #{inspect(reason)}"}]}
+    {:noreply, finish_run(state, ref, {:error, failure})}
   end
 
   def handle_info({:DOWN, _monitor, :process, pid, _reason}, state) do
@@ -156,12 +172,13 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
   end
 
   defp track_socket(state, pid, id) do
-    sockets =
-      Map.update(state.sockets, pid, {Process.monitor(pid), MapSet.new([id])}, fn {monitor, ids} ->
-        {monitor, MapSet.put(ids, id)}
-      end)
+    tracked =
+      case state.sockets do
+        %{^pid => {monitor, ids}} -> {monitor, MapSet.put(ids, id)}
+        _first_registration -> {Process.monitor(pid), MapSet.new([id])}
+      end
 
-    %{state | sockets: sockets}
+    %{state | sockets: Map.put(state.sockets, pid, tracked)}
   end
 
   defp untrack_socket(state, pid, id) do
@@ -287,7 +304,7 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
     dependencies_before_run = group.dependencies
     {group, messages} = Group.finish_run(group, outcome)
     deliver(messages)
-    state = forget_refused_members(state, messages)
+    state = forget_turned_away_members(state, messages)
 
     index =
       DependencyIndex.put(
@@ -300,8 +317,10 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
     settle_finished_group(%{state | index: index}, group, dependencies_before_run)
   end
 
-  defp forget_refused_members(state, messages) do
-    for {pid, {:live_refused, id}} <- messages, reduce: state do
+  defp forget_turned_away_members(state, messages) do
+    for {pid, {refusal, id}} <- messages,
+        refusal in [:live_refused, :live_run_failed],
+        reduce: state do
       state ->
         untrack_socket(%{state | registrations: Map.delete(state.registrations, id)}, pid, id)
     end
@@ -311,13 +330,24 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
     if Group.empty?(group) do
       drop_group(state, group)
     else
-      {due?, group} = Group.due_again?(group, dependencies_before_run)
+      {due?, group} = Group.clear_touched_unless_due(group, dependencies_before_run)
       state = put_in(state.groups[group.key], group)
-      if due?, do: enqueue(state, group.key), else: state
+
+      cond do
+        due? -> enqueue(state, group.key)
+        Group.needs_retry?(group) -> schedule_retry(state, group)
+        true -> state
+      end
     end
   end
 
-  defp log_failure(group, {:error, errors}) do
+  defp schedule_retry(state, group) do
+    wait_ms = min(state.retry_base_ms * 2 ** (group.failed_runs - 1), @max_retry_ms)
+    Process.send_after(self(), {:retry_run, group.key}, wait_ms)
+    put_in(state.groups[group.key], Group.mark_retry(group, true))
+  end
+
+  defp log_failure(group, {:error, {_failure, errors}}) do
     Logger.warning(
       "live query #{group.document.operation_name || "(anonymous)"} failed: #{inspect(errors)}"
     )

@@ -8,7 +8,9 @@ defmodule ChurchAdmin.Realtime.Live.Refresh do
   Each window run records its statements, so a group's dependencies follow
   what its document actually reads for this viewer, and whether its rows
   stand alone. A narrowed run sees only part of that, so it adds to the
-  dependencies and leaves the verdict. Reads emit
+  dependencies and leaves the verdict. A failure either refuses the document
+  (the schema, its limits or a policy will answer the same again) or only
+  failed the run. Reads emit
   `[:church_admin, :realtime, :live, :run]` with `kind` `:window` or
   `:narrowed`.
   """
@@ -26,7 +28,7 @@ defmodule ChurchAdmin.Realtime.Live.Refresh do
           required(:variables) => map(),
           required(:window) => ChurchAdmin.Realtime.Live.Registration.window() | nil,
           required(:actor) => ChurchAdmin.Authz.Actor.t(),
-          required(:known_hashes) => [String.t()] | nil,
+          required(:stored_hashes) => [String.t()] | nil,
           required(:window_required?) => boolean(),
           required(:result) => Result.t() | nil,
           required(:dependencies) => GroupDependencies.t() | nil,
@@ -42,7 +44,11 @@ defmodule ChurchAdmin.Realtime.Live.Refresh do
              dependencies: GroupDependencies.t(),
              rows_stand_alone?: boolean()
            }}
-          | {:error, term()}
+          | {:error, failure()}
+
+  @type failure :: {:document_refused, term()} | {:run_failed, term()}
+
+  @failed_on_our_side "something_went_wrong"
 
   @spec run(input()) :: outcome()
   def run(input) do
@@ -51,18 +57,29 @@ defmodule ChurchAdmin.Realtime.Live.Refresh do
     with {kind, {:ok, result}} <- fetched do
       {:ok,
        %{
-         result: unless_known(result, input.known_hashes),
+         result: unless_stored(result, input.stored_hashes),
          dependencies: dependencies_after(kind, input, statements),
          rows_stand_alone?: rows_stand_alone_after(kind, input, statements)
        }}
     else
-      {_kind, {:error, errors}} -> {:error, errors}
+      {_kind, {:error, errors}} -> {:error, failure(errors)}
     end
   end
 
+  defp failure(errors) when is_list(errors) do
+    if Enum.all?(errors, &refuses_the_document?/1),
+      do: {:document_refused, errors},
+      else: {:run_failed, errors}
+  end
+
+  defp failure(:not_a_list), do: {:document_refused, :not_a_list}
+
+  defp refuses_the_document?(%{extensions: %{code: code}}), do: code != @failed_on_our_side
+  defp refuses_the_document?(_no_code), do: false
+
   defp fetch(input) do
     case Narrowing.plan(input) do
-      {:narrow, candidates} -> fetch_narrowed(input, candidates)
+      {:narrow, candidates} -> fetch_narrowed_or_window(input, candidates)
       :window -> fetch_window(input)
     end
   end
@@ -72,12 +89,12 @@ defmodule ChurchAdmin.Realtime.Live.Refresh do
     {:window, Window.fetch(input)}
   end
 
-  defp fetch_narrowed(input, candidates) do
+  defp fetch_narrowed_or_window(input, candidates) do
     announce_run(input, :narrowed)
 
     with {:ok, rows} <- Window.fetch_rows(input, candidates.to_query),
          {:ok, result} <-
-           Narrowing.classify(input.result, input.window, candidates.ids, rows) do
+           Narrowing.patch_or_window(input.result, input.window, candidates.ids, rows) do
       {:narrowed, {:ok, result}}
     else
       _needs_the_window -> fetch_window(input)
@@ -106,6 +123,6 @@ defmodule ChurchAdmin.Realtime.Live.Refresh do
 
   defp rows_stand_alone_after(:narrowed, input, _statements), do: input.rows_stand_alone?
 
-  defp unless_known(%Result{chunk_hashes: hashes}, hashes), do: :unchanged
-  defp unless_known(result, _known_hashes), do: result
+  defp unless_stored(%Result{chunk_hashes: hashes}, hashes), do: :unchanged
+  defp unless_stored(result, _stored_hashes), do: result
 end

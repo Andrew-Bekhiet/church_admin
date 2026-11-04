@@ -5,8 +5,9 @@ defmodule ChurchAdmin.Realtime.Live.Narrowing do
 
   `plan/1` narrows a keyed window when every touched row it reads names ids
   of the list's own type. Anything else needs the window: entities, unkeyed
-  rows, a document without `$filter`, a group touched through a table that
-  names no root id, a group depending on everything, too many candidates.
+  rows, a document without `$filter`, a list whose filter has no `id`, a
+  group touched through a table that names no root id, a group depending on
+  everything, too many candidates.
 
   Narrowing assumes a row's JSON and visibility follow from that row alone.
   `rows_stand_alone?/2` proves it from a window run: no statement may reach
@@ -15,7 +16,7 @@ defmodule ChurchAdmin.Realtime.Live.Narrowing do
   itself, or a nested selection of the row type each let one row's change
   reach another, which no candidate would name.
 
-  `classify/4` applies the table below. The narrowed `count` reflects the
+  `patch_or_window/4` applies the table below. The narrowed `count` reflects the
   narrowed filter, so it is never used. A patch cannot change membership, so
   the stored count stands. Only a window that holds the whole list can take
   a leave: it knows the new count, and has no next row to bring in. In a
@@ -33,6 +34,7 @@ defmodule ChurchAdmin.Realtime.Live.Narrowing do
 
   alias ChurchAdmin.Realtime.Live.Document
   alias ChurchAdmin.Realtime.Live.GroupDependencies
+  alias ChurchAdmin.Realtime.Live.Refresh
   alias ChurchAdmin.Realtime.Live.Result
   alias ChurchAdmin.Realtime.Live.StatementDependencies
   alias ChurchAdmin.Realtime.TypeMap
@@ -45,7 +47,7 @@ defmodule ChurchAdmin.Realtime.Live.Narrowing do
   @spec max_candidates() :: pos_integer()
   def max_candidates, do: @max_candidates
 
-  @spec plan(map()) :: :window | {:narrow, candidates()}
+  @spec plan(Refresh.input()) :: :window | {:narrow, candidates()}
   def plan(%{window_required?: true}), do: :window
   def plan(%{rows_stand_alone?: false}), do: :window
   def plan(%{window: nil}), do: :window
@@ -55,7 +57,11 @@ defmodule ChurchAdmin.Realtime.Live.Narrowing do
   def plan(%{document: %Document{} = document, result: %Result{} = result} = input) do
     row_type = Pipeline.list_row_type(document.root_field)
 
-    if keyed?(result) and MapSet.member?(document.variables, "filter") and row_type != nil and
+    narrows_through_filter? =
+      MapSet.member?(document.declared_variables, "filter") and
+        Pipeline.list_filters_by_id?(document.root_field)
+
+    if keyed?(result) and narrows_through_filter? and row_type != nil and
          touched_only_through?(input, row_type),
        do: candidates(input.changes, row_type),
        else: :window
@@ -87,8 +93,10 @@ defmodule ChurchAdmin.Realtime.Live.Narrowing do
   defp selects_from_table_once?(statement, table) do
     quoted = ~s("#{table}")
 
-    length(String.split(statement, quoted)) == 2 and
-      statement |> String.split(" FROM ", parts: 2) |> List.last() |> main_table_is?(quoted)
+    named_once? = length(String.split(statement, quoted)) == 2
+    after_first_from = statement |> String.split(" FROM ", parts: 2) |> List.last()
+
+    named_once? and main_table_is?(after_first_from, quoted)
   end
 
   defp main_table_is?(after_from, quoted) do
@@ -103,9 +111,9 @@ defmodule ChurchAdmin.Realtime.Live.Narrowing do
   def filter(client_filter, ids),
     do: %{"and" => [client_filter, %{"id" => %{"in" => ids}}]}
 
-  @spec classify(Result.t(), map(), MapSet.t(String.t()), [map()]) ::
+  @spec patch_or_window(Result.t(), map(), MapSet.t(String.t()), [map()]) ::
           :window | {:ok, Result.t()}
-  def classify(%Result{} = stored, window, candidate_ids, returned_rows) do
+  def patch_or_window(%Result{} = stored, window, candidate_ids, returned_rows) do
     held = Map.new(stored.rows, fn {id, keyset, _row} -> {id, keyset} end)
     returned = Map.new(returned_rows, &{&1["id"], &1})
     {held_candidates, unheld_candidates} = Enum.split_with(candidate_ids, &is_map_key(held, &1))
@@ -142,7 +150,10 @@ defmodule ChurchAdmin.Realtime.Live.Narrowing do
     of_type = for %{type: ^row_type} = change <- changes, do: change
     ids = of_type |> Enum.map(& &1.id) |> Enum.uniq()
 
-    if ids == [] or nil in ids or length(ids) > @max_candidates do
+    names_no_row? = ids == []
+    invalidates_every_row? = nil in ids
+
+    if names_no_row? or invalidates_every_row? or length(ids) > @max_candidates do
       :window
     else
       {:narrow, %{ids: MapSet.new(ids), to_query: ids_still_there(of_type)}}

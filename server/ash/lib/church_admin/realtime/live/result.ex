@@ -1,9 +1,9 @@
 defmodule ChurchAdmin.Realtime.Live.Result do
   @moduledoc """
   A group's stored result. `chunk_hashes` are the `ResultHash`es of the
-  chunks as HTTP would answer them. An entity keeps its data whole in `data`;
-  a list keeps its page without `results` in `data` and the rows in order in
-  `rows`, as `{id, keyset, row}`.
+  chunks as HTTP would answer them. An entity keeps its data whole in
+  `data_without_rows`; a list keeps its page without `results` there and the
+  rows in order in `rows`, as `{id, keyset, row}`.
 
   A list whose rows do not all have an id cannot be sent as a delta, so it
   is kept whole like an entity.
@@ -11,21 +11,21 @@ defmodule ChurchAdmin.Realtime.Live.Result do
 
   alias ChurchAdmin.Realtime.Live.ResultHash
 
-  @enforce_keys [:chunk_hashes, :data]
-  defstruct [:chunk_hashes, :data, :root, :rows]
+  @enforce_keys [:chunk_hashes, :data_without_rows]
+  defstruct [:chunk_hashes, :data_without_rows, :root, :rows]
 
   @type chunk :: %{hash: String.t(), data: map()}
   @type row :: {id :: String.t(), keyset :: String.t() | nil, row :: map()}
   @type t :: %__MODULE__{
           chunk_hashes: [String.t()],
-          data: map(),
+          data_without_rows: map(),
           root: String.t() | nil,
           rows: [row()] | nil
         }
 
   @spec from_entity(chunk()) :: {:ok, t()}
   def from_entity(%{hash: hash, data: data}),
-    do: {:ok, %__MODULE__{chunk_hashes: [hash], data: data}}
+    do: {:ok, %__MODULE__{chunk_hashes: [hash], data_without_rows: data}}
 
   @spec from_chunks([chunk(), ...]) :: {:ok, t()} | {:error, :not_a_list}
   def from_chunks(chunks) do
@@ -41,9 +41,9 @@ defmodule ChurchAdmin.Realtime.Live.Result do
   end
 
   @spec data(t()) :: map()
-  def data(%__MODULE__{rows: nil, data: data}), do: data
+  def data(%__MODULE__{rows: nil, data_without_rows: data}), do: data
 
-  def data(%__MODULE__{rows: rows, data: data, root: root}) do
+  def data(%__MODULE__{rows: rows, data_without_rows: data, root: root}) do
     results = Enum.map(rows, fn {_id, _keyset, row} -> row end)
     put_in(data, [root, "results"], results)
   end
@@ -52,16 +52,17 @@ defmodule ChurchAdmin.Realtime.Live.Result do
   def ids(%__MODULE__{rows: nil}), do: []
   def ids(%__MODULE__{rows: rows}), do: Enum.map(rows, &elem(&1, 0))
 
-  @spec list?(t()) :: boolean()
-  def list?(%__MODULE__{rows: rows}), do: rows != nil
+  @spec keeps_rows?(t()) :: boolean()
+  def keeps_rows?(%__MODULE__{rows: rows}), do: rows != nil
 
   @spec counted?(t()) :: boolean()
-  def counted?(%__MODULE__{data: data, root: root}), do: is_integer(data[root]["count"])
+  def counted?(%__MODULE__{data_without_rows: data, root: root}),
+    do: is_integer(data[root]["count"])
 
   @doc "Whether the rows are all there is: a short window, or as many as the count."
   @spec holds_whole_list?(t(), %{rows: pos_integer()}) :: boolean()
   def holds_whole_list?(%__MODULE__{rows: rows} = result, %{rows: window_rows}) do
-    length(rows) < window_rows or result.data[result.root]["count"] == length(rows)
+    length(rows) < window_rows or result.data_without_rows[result.root]["count"] == length(rows)
   end
 
   @doc """
@@ -71,14 +72,15 @@ defmodule ChurchAdmin.Realtime.Live.Result do
   @spec replace_rows(t(), [row()], %{rows: pos_integer(), chunk: pos_integer()}) :: t()
   def replace_rows(%__MODULE__{root: root} = result, rows, window) do
     left = length(result.rows) - length(rows)
-    page = result.data[root] |> update_when_present("count", &(&1 - left))
+    data = result.data_without_rows
+    page = data[root] |> update_when_present("count", &(&1 - left))
     pages = rows |> chunks(window.rows, window.chunk) |> Enum.map(&page_of_rows(page, &1))
 
     %{
       result
       | rows: rows,
-        data: %{result.data | root => %{List.last(pages) | "results" => []}},
-        chunk_hashes: Enum.map(pages, &ResultHash.of(%{result.data | root => &1}))
+        data_without_rows: %{data | root => %{List.last(pages) | "results" => []}},
+        chunk_hashes: Enum.map(pages, &ResultHash.of(%{data | root => &1}))
     }
   end
 
@@ -113,13 +115,11 @@ defmodule ChurchAdmin.Realtime.Live.Result do
   defp update_end_keyset(page, _last_row), do: page
 
   defp list_root(data) do
-    case for {root, %{"results" => results}} <- data, is_list(results), do: root do
-      [root]
-      when map_size(data) == 1 or (map_size(data) == 2 and is_map_key(data, "__typename")) ->
-        {:ok, root}
+    selects_nothing_else? = data |> Map.delete("__typename") |> map_size() == 1
 
-      _not_one_page ->
-        {:error, :not_a_list}
+    case for {root, %{"results" => results}} <- data, is_list(results), do: root do
+      [root] when selects_nothing_else? -> {:ok, root}
+      _not_one_page -> {:error, :not_a_list}
     end
   end
 
@@ -131,11 +131,14 @@ defmodule ChurchAdmin.Realtime.Live.Result do
       %__MODULE__{
         chunk_hashes: chunk_hashes,
         root: root,
-        data: put_in(last_data, [root, "results"], []),
+        data_without_rows: put_in(last_data, [root, "results"], []),
         rows: Enum.map(results, &{&1["id"], &1["keyset"], &1})
       }
     else
-      %__MODULE__{chunk_hashes: chunk_hashes, data: put_in(last_data, [root, "results"], results)}
+      %__MODULE__{
+        chunk_hashes: chunk_hashes,
+        data_without_rows: put_in(last_data, [root, "results"], results)
+      }
     end
   end
 end

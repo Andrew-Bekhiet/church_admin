@@ -21,7 +21,7 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependencies do
   @type columns :: MapSet.t(String.t()) | :all
   @type dependencies :: %{relation() => columns()}
   @type reason ::
-          {:volatile_function, String.t()}
+          {:hidden_reader_function, String.t()}
           | {:unplannable, String.t()}
           | {:probe_unavailable, term()}
 

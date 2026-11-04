@@ -27,7 +27,7 @@ defmodule ChurchAdmin.Realtime.Live.ClientListDependenciesTest do
         variables: %{},
         window: %{rows: 10, chunk: 10},
         actor: actor,
-        known_hashes: nil,
+        stored_hashes: nil,
         window_required?: true,
         result: nil,
         dependencies: nil,

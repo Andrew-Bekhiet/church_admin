@@ -31,6 +31,7 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
          topic: topic,
          task_supervisor: {:global, {__MODULE__, context.test, :tasks}},
          max_concurrent_runs: Map.get(context, :max_concurrent_runs, 4),
+         retry_base_ms: Map.get(context, :retry_base_ms, :timer.minutes(10)),
          refresh: fn input ->
            send(test_pid, {:run, input, self()})
 
@@ -127,12 +128,27 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
   defp settle(registry), do: :sys.get_state(registry)
 
   defp register_and_settle(registry, rows, overrides \\ []) do
+    {dependencies, overrides} = Keyword.pop(overrides, :dependencies, @reads_areas)
     registration = registration(overrides)
     :ok = Registry.register(registry, registration)
-    finish_next_run(success(rows))
+    finish_next_run(success(rows, dependencies))
     id = registration.id
     assert_receive {:live_ready, ^id}, 1_000
     registration
+  end
+
+  defp groups_left(registry, topic) do
+    Phoenix.PubSub.broadcast(ChurchAdmin.PubSub, topic, :realtime_reset)
+    settle(registry)
+    count_runs_started(0)
+  end
+
+  defp count_runs_started(started) do
+    receive do
+      {:run, _input, _task} -> count_runs_started(started + 1)
+    after
+      50 -> started
+    end
   end
 
   defp socket(fun \\ fn -> Process.sleep(:infinity) end) do
@@ -198,7 +214,6 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
 
       assert_receive {:live_ready, ^id}
       refute_receive {:run, _input, _task}, 50
-      assert Registry.group_count(registry) == 1
     end
 
     test "a member that joins during the first run is answered by that run", %{
@@ -222,52 +237,159 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       :ok = Registry.register(registry, registration())
       :ok = Registry.register(registry, registration(variables: %{"name" => "x"}))
 
-      assert Registry.group_count(registry) == 2
+      await_run()
+      await_run()
     end
 
-    test "a first run with errors is refused and leaves no group", %{registry: registry} do
+    test "a first run with errors is refused and leaves no group", %{
+      registry: registry,
+      topic: topic
+    } do
       %{id: id} = registration = registration()
       :ok = Registry.register(registry, registration)
 
-      log =
-        capture_log(fn ->
-          finish_next_run({:error, [%{message: "boom"}]})
-          assert_receive {:live_refused, ^id}
-          settle(registry)
-        end)
+      capture_log(fn ->
+        finish_next_run({:error, {:document_refused, [%{message: "boom"}]}})
+        assert_receive {:live_refused, ^id}
+        settle(registry)
+      end)
 
-      assert log =~ "boom"
-      assert Registry.group_count(registry) == 0
+      assert groups_left(registry, topic) == 0
     end
 
     test "a refused registration leaves nothing behind for its socket to clean up", %{
-      registry: registry
+      registry: registry,
+      topic: topic
     } do
       socket = socket()
       :ok = Registry.register(registry, registration(pid: socket))
 
       capture_log(fn ->
-        finish_next_run_and_settle(registry, {:error, [%{message: "boom"}]})
+        finish_next_run_and_settle(registry, {:error, {:run_failed, [%{message: "boom"}]}})
         await_exit(socket, fn -> Process.exit(socket, :kill) end)
         settle(registry)
       end)
 
       assert Process.alive?(registry)
-      assert Registry.group_count(registry) == 0
+      assert groups_left(registry, topic) == 0
     end
 
-    test "a first run that crashes is refused and leaves no group", %{registry: registry} do
+    test "a first run that only failed says so and leaves no group", %{
+      registry: registry,
+      topic: topic
+    } do
+      %{id: id} = registration = registration()
+      :ok = Registry.register(registry, registration)
+
+      capture_log(fn ->
+        finish_next_run({:error, {:run_failed, [%{message: "boom"}]}})
+        assert_receive {:live_run_failed, ^id}
+        settle(registry)
+      end)
+
+      assert groups_left(registry, topic) == 0
+    end
+
+    test "a first run that crashes only failed and leaves no group", %{
+      registry: registry,
+      topic: topic
+    } do
       %{id: id} = registration = registration()
       :ok = Registry.register(registry, registration)
       {_input, task} = await_run()
 
       capture_log(fn ->
         Process.exit(task, :kill)
-        assert_receive {:live_refused, ^id}
+        assert_receive {:live_run_failed, ^id}
         settle(registry)
       end)
 
-      assert Registry.group_count(registry) == 0
+      assert groups_left(registry, topic) == 0
+    end
+  end
+
+  test "one socket costs one monitor, however many queries it registers", %{registry: registry} do
+    for _registration <- 1..3 do
+      :ok = Registry.register(registry, registration(variables: %{"n" => make_ref()}))
+    end
+
+    {:monitors, monitors} = Process.info(registry, :monitors)
+
+    assert Enum.count(monitors, &(&1 == {:process, self()})) == 1
+  end
+
+  describe "a failed refresh" do
+    @tag retry_base_ms: 10
+    test "retries on its own and reads the window, since the batch it held is gone", %{
+      registry: registry,
+      topic: topic
+    } do
+      register_and_settle(registry, [row("1")])
+      batch(topic, touched(), [%{type: "Area", id: "1", op: "update"}])
+
+      capture_log(fn -> finish_next_run({:error, {:run_failed, []}}) end)
+
+      {retry, _task} = await_run()
+      assert retry.window_required?
+      assert retry.changes == []
+    end
+
+    @tag retry_base_ms: 10
+    test "waits twice as long after each failure in a row", %{registry: registry, topic: topic} do
+      register_and_settle(registry, [row("1")])
+      batch(topic, touched())
+      {_input, first_task} = await_run()
+
+      capture_log(fn ->
+        Enum.reduce([10, 20, 40], first_task, fn shortest_wait_ms, task ->
+          failed_at = System.monotonic_time(:millisecond)
+          send(task, {:finish, {:error, {:run_failed, []}}})
+          {_input, next_task} = await_run()
+
+          assert System.monotonic_time(:millisecond) - failed_at >= shortest_wait_ms
+          next_task
+        end)
+      end)
+    end
+
+    @tag retry_base_ms: 10
+    test "stops retrying once a run succeeds", %{registry: registry, topic: topic} do
+      register_and_settle(registry, [row("1")])
+      batch(topic, touched())
+      capture_log(fn -> finish_next_run({:error, {:run_failed, []}}) end)
+
+      finish_next_run(unchanged())
+
+      refute_receive {:run, _input, _task}, 100
+    end
+
+    @tag retry_base_ms: 10
+    test "is not retried once its last member has left", %{registry: registry, topic: topic} do
+      %{id: id} = register_and_settle(registry, [row("1")])
+      batch(topic, touched())
+      {_input, task} = await_run()
+      :ok = Registry.unregister(registry, id)
+
+      capture_log(fn -> send(task, {:finish, {:error, {:run_failed, []}}}) end)
+
+      refute_receive {:run, _input, _task}, 100
+    end
+
+    test "gives the next member a new window run, not the stale result", %{
+      registry: registry,
+      topic: topic
+    } do
+      register_and_settle(registry, [row("1")])
+      batch(topic, touched())
+
+      capture_log(fn -> finish_next_run_and_settle(registry, {:error, {:run_failed, []}}) end)
+
+      %{id: later} = later_registration = registration()
+      :ok = Registry.register(registry, later_registration)
+
+      refute_received {:live_ready, ^later}
+      {input, _task} = await_run()
+      assert input.window_required?
     end
   end
 
@@ -285,7 +407,8 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       registry: registry,
       topic: topic
     } do
-      register_and_settle(registry, [row("1")])
+      reads_the_name_of_areas = %{@areas => MapSet.new(["name"])}
+      register_and_settle(registry, [row("1")], dependencies: reads_the_name_of_areas)
 
       batch(topic, touched(@areas, MapSet.new(["color"])))
       batch(topic, touched(@streets))
@@ -365,15 +488,15 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
   end
 
   describe "a run that follows a batch" do
-    setup %{registry: registry, topic: topic} do
+    setup %{registry: registry} do
       rows = [row("1"), row("2")]
       %{id: id} = register_and_settle(registry, rows)
       assert_receive {:live_result, ^id, %{full: true}}
-      batch(topic, touched())
       {:ok, id: id, rows: rows}
     end
 
-    test "pushes nothing when the result did not change", %{id: id} do
+    test "pushes nothing when the result did not change", %{topic: topic, id: id} do
+      batch(topic, touched())
       finish_next_run(unchanged())
 
       refute_receive {:live_result, ^id, _payload}, 50
@@ -384,12 +507,12 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       topic: topic,
       id: id
     } do
-      log =
-        capture_log(fn ->
-          finish_next_run_and_settle(registry, {:error, [%{message: "boom"}]})
-        end)
+      batch(topic, touched())
 
-      assert log =~ "boom"
+      capture_log(fn ->
+        finish_next_run_and_settle(registry, {:error, {:run_failed, [%{message: "boom"}]}})
+      end)
+
       refute_received {:live_result, ^id, _payload}
 
       batch(topic, touched())
@@ -399,7 +522,8 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       assert_receive {:live_result, ^id, %{full: false, rows: [^renamed]}}
     end
 
-    test "that crashes keeps the stored result", %{registry: registry, id: id} do
+    test "that crashes keeps the stored result", %{registry: registry, topic: topic, id: id} do
+      batch(topic, touched())
       {_input, task} = await_run()
 
       capture_log(fn ->
@@ -408,13 +532,14 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       end)
 
       refute_received {:live_result, ^id, _payload}
-      assert Registry.group_count(registry) == 1
+      assert groups_left(registry, topic) == 1
     end
 
     test "that shrinks the window and grows it again sends the row again", %{
       id: id,
       topic: topic
     } do
+      batch(topic, touched())
       finish_next_run(success([row("1")]))
       assert_receive {:live_result, ^id, %{rows: [], order: ["1"]}}
 
@@ -433,8 +558,10 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
 
       Phoenix.PubSub.broadcast(ChurchAdmin.PubSub, topic, :realtime_reset)
 
-      await_run()
-      await_run()
+      {first, _task} = await_run()
+      {second, _task} = await_run()
+      assert Enum.sort([first.variables, second.variables]) == [%{}, %{"name" => "x"}]
+      refute_receive {:run, _input, _task}, 50
     end
 
     test "during a run runs the group once more", %{registry: registry, topic: topic} do
@@ -476,19 +603,21 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
   end
 
   describe "a socket that dies" do
-    test "takes its registrations along and drops the empty group", %{registry: registry} do
+    test "takes its registrations along and drops the empty group", %{
+      registry: registry,
+      topic: topic
+    } do
       socket = socket()
       :ok = Registry.register(registry, registration(pid: socket))
       finish_next_run(success([row("1")]))
       settle(registry)
-      assert Registry.group_count(registry) == 1
 
       Process.exit(socket, :kill)
       ref = Process.monitor(socket)
       assert_receive {:DOWN, ^ref, :process, ^socket, _reason}
       settle(registry)
 
-      assert Registry.group_count(registry) == 0
+      assert groups_left(registry, topic) == 0
     end
 
     test "leaves a group that has another member", %{registry: registry, topic: topic} do
@@ -503,7 +632,6 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       ref = Process.monitor(socket)
       assert_receive {:DOWN, ^ref, :process, ^socket, _reason}
       settle(registry)
-      assert Registry.group_count(registry) == 1
 
       batch(topic, touched())
       finish_next_run(success([row("1", "renamed")]))
@@ -538,12 +666,13 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       refute_received {:live_result, ^old, _payload}
     end
 
-    test "drops the old group when it empties", %{registry: registry} do
+    test "drops the old group when it empties", %{registry: registry, topic: topic} do
       %{id: old} = register_and_settle(registry, [row("1")])
 
       :ok = Registry.register(registry, registration(variables: %{"name" => "x"}, replaces: old))
+      await_run()
 
-      assert Registry.group_count(registry) == 1
+      assert groups_left(registry, topic) == 0
     end
   end
 
@@ -557,7 +686,6 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       :ok = Registry.register(registry, retry)
 
       refute_receive {:run, _input, _task}, 50
-      assert Registry.group_count(registry) == 1
 
       send(task, {:finish, success([row("1")])})
       assert_receive {:live_ready, ^retry_id}
@@ -583,16 +711,19 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
   end
 
   describe "unregistering" do
-    test "drops an emptied group and ignores its running run", %{registry: registry} do
+    test "drops an emptied group and ignores its running run", %{
+      registry: registry,
+      topic: topic
+    } do
       %{id: id} = registration = registration()
       :ok = Registry.register(registry, registration)
       {_input, task} = await_run()
 
       :ok = Registry.unregister(registry, id)
-      assert Registry.group_count(registry) == 0
 
       send(task, {:finish, success([row("1")])})
       settle(registry)
+      assert groups_left(registry, topic) == 0
       refute_received {:live_ready, ^id}
     end
 
@@ -697,7 +828,7 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       :ok = Registry.register(registry, refused_registration)
 
       capture_log(fn ->
-        finish_next_run({:error, [%{message: "boom"}]})
+        finish_next_run({:error, {:document_refused, [%{message: "boom"}]}})
         assert_receive {:live_refused, ^refused}
       end)
 
@@ -756,19 +887,6 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
   end
 
   describe "the refresh seam" do
-    test "receives the batch and the stored result", %{registry: registry, topic: topic} do
-      register_and_settle(registry, [row("1")])
-      rows = touched()
-      changes = [%{type: "Area", id: "1", op: "update"}]
-
-      batch(topic, rows, changes)
-
-      assert {input, _task} = await_run()
-      assert %{touched: ^rows, changes: ^changes, known_hashes: [_hash]} = input
-      assert %{window_required?: false, dependencies: @reads_areas} = input
-      assert input.result == list_result([row("1")])
-    end
-
     test "receives every batch of a queued group once", %{registry: registry, topic: topic} do
       register_and_settle(registry, [row("1")])
       batch(topic, touched())

@@ -116,21 +116,46 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassCompletenessTest do
     end
   end
 
-  defp operations_that_differ(first, second, ids) do
+  defp fields_that_differ(first, second, ids) do
     for {operation, text} <- ClientDocuments.queries(),
         operation not in @registered_never_since_they_mint_links,
         variables <- variable_sets(operation, ids),
-        results_of(text, operation, variables, first) !=
-          results_of(text, operation, variables, second),
+        field <-
+          different_fields(
+            results_of(text, operation, variables, first),
+            results_of(text, operation, variables, second)
+          ),
         uniq: true,
-        do: operation
+        do: field
+  end
+
+  defp different_fields(%{} = first, %{} = second) do
+    Enum.flat_map(first, fn {field, value} -> difference(field, value, second[field]) end)
+  end
+
+  defp difference(_field, same, same), do: []
+
+  defp difference(field, %{} = first, %{} = second) do
+    if first["id"] == second["id"], do: different_fields(first, second), else: [field]
+  end
+
+  defp difference(field, first, second)
+       when is_list(first) and length(first) == length(second) do
+    first |> Enum.zip(second) |> Enum.flat_map(fn {a, b} -> difference(field, a, b) end)
+  end
+
+  defp difference(field, _first, _second), do: [field]
+
+  defp key_of(text, actor) do
+    {:ok, document} = Document.prepare(text, nil)
+    ViewerClass.key(actor, document.selected_fields)
   end
 
   test "the fixture's readers differ only in the fields the viewer class blanks" do
     {first, second, _ids} = world(@read_only_reader, 1)
 
     assert ViewerClass.global_reader?(first)
-    assert ViewerClass.key(first, nil) == ViewerClass.key(second, nil)
+    assert ViewerClass.key(first, MapSet.new()) == ViewerClass.key(second, MapSet.new())
     assert first.uid != second.uid
     assert first.person_id != second.person_id
     assert first.family_id != second.family_id
@@ -140,39 +165,51 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassCompletenessTest do
     assert second.visible_servant_uids == [first.uid]
   end
 
-  describe "the per-uid lists are exactly the operations whose results differ" do
-    test "for everyone: the operations that differ between two full admins" do
+  describe "the per-uid lists are exactly the fields whose values differ" do
+    test "for everyone: the fields that differ between two full admins" do
       {first, second, ids} = world(@full_admin, 2)
 
       assert first.write_all? and first.manage_all_users?
 
-      assert Enum.sort(ViewerClass.operations_per_uid_for_everyone()) ==
-               first |> operations_that_differ(second, ids) |> Enum.sort()
+      assert Enum.sort(ViewerClass.fields_per_uid_for_everyone()) ==
+               first |> fields_that_differ(second, ids) |> Enum.sort()
     end
 
     test "below full write: the rest of what differs between two read-only global readers" do
       {first, second, ids} = world(@read_only_reader, 1)
 
-      assert Enum.sort(ViewerClass.operations_per_uid_below_full_write()) ==
+      assert Enum.sort(ViewerClass.fields_per_uid_below_full_write()) ==
                Enum.sort(
-                 operations_that_differ(first, second, ids) --
-                   ViewerClass.operations_per_uid_for_everyone()
+                 fields_that_differ(first, second, ids) --
+                   ViewerClass.fields_per_uid_for_everyone()
                )
     end
 
-    test "write-all without manage-all differs on users, so it is below full write" do
+    test "write-all without manage-all differs on managing users, so it is below full write" do
       {first, second, ids} = world(@write_all_without_manage_all, 3)
 
       assert first.write_all?
       refute first.manage_all_users?
 
-      differ = operations_that_differ(first, second, ids)
+      differ = fields_that_differ(first, second, ids)
 
-      assert "users" in differ
+      assert "currentUserCanManageThisUser" in differ
 
       assert differ --
-               (ViewerClass.operations_per_uid_for_everyone() ++
-                  ViewerClass.operations_per_uid_below_full_write()) == []
+               (ViewerClass.fields_per_uid_for_everyone() ++
+                  ViewerClass.fields_per_uid_below_full_write()) == []
+    end
+
+    test "a client document whose results differ is keyed per viewer" do
+      {first, second, ids} = world(@read_only_reader, 1)
+
+      for {operation, text} <- ClientDocuments.queries(),
+          operation not in @registered_never_since_they_mint_links,
+          variables <- variable_sets(operation, ids),
+          results_of(text, operation, variables, first) !=
+            results_of(text, operation, variables, second) do
+        assert key_of(text, first) != key_of(text, second), operation
+      end
     end
   end
 end

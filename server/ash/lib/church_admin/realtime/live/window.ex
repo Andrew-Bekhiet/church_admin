@@ -8,10 +8,11 @@ defmodule ChurchAdmin.Realtime.Live.Window do
   """
 
   alias ChurchAdmin.Realtime.Live.Narrowing
+  alias ChurchAdmin.Realtime.Live.Refresh
   alias ChurchAdmin.Realtime.Live.Result
   alias ChurchAdminWeb.Graphql.Pipeline
 
-  @spec fetch(map()) :: {:ok, Result.t()} | {:error, term()}
+  @spec fetch(Refresh.input()) :: {:ok, Result.t()} | {:error, term()}
   def fetch(%{window: nil} = input) do
     with {:ok, chunk} <- run_document(input, input.variables) do
       Result.from_entity(chunk)
@@ -25,7 +26,7 @@ defmodule ChurchAdmin.Realtime.Live.Window do
   end
 
   @doc "The rows of `ids` this viewer may see under the client's filter, as one page."
-  @spec fetch_rows(map(), [String.t()]) :: {:ok, [map()]} | {:error, term()}
+  @spec fetch_rows(Refresh.input(), [String.t()]) :: {:ok, [map()]} | {:error, term()}
   def fetch_rows(_input, []), do: {:ok, []}
 
   def fetch_rows(input, ids) do
