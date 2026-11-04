@@ -33,7 +33,6 @@ class HistoryLog {
     HistoryLog(
       typename: 'Edit',
       listRoot: 'edits',
-      rowsCarryIds: false,
       listing: (history, {required personId}) =>
           history.paginateEditHistory<Person>(id: personId),
       rowFor: (info, {required personId, required number}) => HistoryRow(
@@ -106,14 +105,12 @@ class HistoryLog {
     required int number,
   })
   rowFor;
-  final bool rowsCarryIds;
 
   HistoryLog({
     required this.typename,
     required this.listRoot,
     required this.listing,
     required this.rowFor,
-    this.rowsCarryIds = true,
   });
 
   FakeAshTable table({

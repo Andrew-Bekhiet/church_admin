@@ -259,8 +259,6 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     required bool isFromFirstRow,
   }) {
     final hashes = [for (final chunk in chunks) chunk.resultHash];
-    if (_window?.isKeyed != true) return;
-
     _registry.startLive(
       this,
       LiveQueryRequest(

@@ -165,7 +165,68 @@ void main() {
       expect(window.endKeyset, 'k2');
     });
 
-    test('rows without an id cannot be kept live', () {
+    test('rows without an id are held in order and replaced by a full '
+        'push', () {
+      const unkeyed = {'__typename': 'Edit', 'time': '2026-01-01'};
+      const newer = {'__typename': 'Edit', 'time': '2026-01-02'};
+      final window = LiveListWindow(rootField: rootField)
+        ..replaceWith([
+          {
+            rootField: AshResponses.page([unkeyed, unkeyed]),
+          },
+        ])
+        ..applyFull({
+          rootField: AshResponses.page([newer, unkeyed]),
+        });
+
+      expect(window.isKeyed, isFalse);
+      expect(
+        (window.pageData[rootField] as Map)['results'],
+        [newer, unkeyed],
+      );
+    });
+
+    test('appending to rows without an id keeps all of them in order', () {
+      const first = {'__typename': 'Edit', 'time': '2026-01-01'};
+      const second = {'__typename': 'Edit', 'time': '2026-01-02'};
+      final window = LiveListWindow(rootField: rootField)
+        ..replaceWith([
+          {
+            rootField: AshResponses.page([first]),
+          },
+        ])
+        ..append([
+          {
+            rootField: AshResponses.page([second]),
+          },
+        ]);
+
+      expect((window.pageData[rootField] as Map)['results'], [first, second]);
+    });
+
+    test('a window mixing rows with and without an id keeps every row in '
+        'order', () {
+      const unkeyed = {'__typename': 'Edit', 'time': '2026-01-01'};
+      final window = LiveListWindow(rootField: rootField)
+        ..replaceWith([
+          dataOf([mina]),
+        ])
+        ..append([
+          {
+            rootField: AshResponses.page([unkeyed]),
+          },
+          dataOf([marina]),
+        ]);
+
+      expect(window.isKeyed, isFalse);
+      expect((window.pageData[rootField] as Map)['results'], [
+        mina.toJson(),
+        unkeyed,
+        marina.toJson(),
+      ]);
+    });
+
+    test('a delta cannot be applied to rows without an id', () {
       final window = LiveListWindow(rootField: rootField)
         ..replaceWith([
           {
@@ -175,7 +236,11 @@ void main() {
           },
         ]);
 
-      expect(window.isKeyed, isFalse);
+      final update = window.applyDelta(
+        const ListDeltaLiveResult(ref: 'r1', rows: []),
+      );
+
+      expect(update, LiveWindowUpdate.missingRow);
     });
   });
 }

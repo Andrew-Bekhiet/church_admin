@@ -10,6 +10,7 @@ class LiveListWindow {
   final String rootField;
 
   Map<String, Json> _rowsById = {};
+  List<Json> _rows = [];
   bool _isKeyed = true;
 
   int? count;
@@ -19,7 +20,7 @@ class LiveListWindow {
 
   Json get pageData => {
     rootField: {
-      'results': _rowsById.values.toList(),
+      'results': _isKeyed ? _rowsById.values.toList() : _rows,
       'count': count,
       'endKeyset': endKeyset,
     },
@@ -29,6 +30,7 @@ class LiveListWindow {
 
   void replaceWith(Iterable<Json> chunksData) {
     _rowsById = {};
+    _rows = [];
     _isKeyed = true;
     append(chunksData);
   }
@@ -38,6 +40,7 @@ class LiveListWindow {
       final page = chunkData[rootField] as Map;
       for (final row in page['results'] as List? ?? const []) {
         final json = (row as Map).cast<String, dynamic>();
+        _rows.add(json);
         if (json['id'] case final String id) {
           _rowsById[id] = json;
         } else {
@@ -57,6 +60,8 @@ class LiveListWindow {
   }
 
   LiveWindowUpdate applyDelta(ListDeltaLiveResult delta) {
+    if (!_isKeyed) return LiveWindowUpdate.missingRow;
+
     final before = pageData;
     final received = {
       for (final row in delta.rows)

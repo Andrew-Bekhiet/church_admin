@@ -67,62 +67,37 @@ void main() {
         });
       });
 
-      test('registers for live results only when its rows carry an id', () {
+      test('follows the change feed', () {
+        final entries = HistoryLog.entries(3);
+
         fakeAsync((async) {
-          final backend = FakeAshBackend([
-            log.table(ofPerson: HistoryLog.entries(2)),
-          ]);
+          final table = log.table(ofPerson: entries.take(2).toList());
+          final backend = FakeAshBackend([table]);
           final stream = log.listing(
             backend.db.history,
             personId: HistoryLog.personId,
           );
-          final subscription = stream.listen(null);
+          final emitted = <List<LastRecordedByInfo>>[];
+          final subscription = stream.listen(emitted.add);
           async.elapse(FakeAshBackend.settleTime);
 
-          expect(
-            backend.changeFeedServer.registrations.isNotEmpty,
-            log.rowsCarryIds,
+          table.add(
+            log.rowFor(
+              entries.last,
+              personId: HistoryLog.personId,
+              number: 2,
+            ),
           );
+          backend.announce();
+          async.elapse(FakeAshBackend.settleTime);
+
+          expect(emitted.last, entries.reversed);
 
           unawaited(subscription.cancel());
           unawaited(stream.dispose());
           backend.dispose();
         });
       });
-
-      if (log.rowsCarryIds) {
-        test('follows the change feed', () {
-          final entries = HistoryLog.entries(3);
-
-          fakeAsync((async) {
-            final table = log.table(ofPerson: entries.take(2).toList());
-            final backend = FakeAshBackend([table]);
-            final stream = log.listing(
-              backend.db.history,
-              personId: HistoryLog.personId,
-            );
-            final emitted = <List<LastRecordedByInfo>>[];
-            final subscription = stream.listen(emitted.add);
-            async.elapse(FakeAshBackend.settleTime);
-
-            table.add(
-              log.rowFor(
-                entries.last,
-                personId: HistoryLog.personId,
-                number: 2,
-              ),
-            );
-            backend.announce();
-            async.elapse(FakeAshBackend.settleTime);
-
-            expect(emitted.last, entries.reversed);
-
-            unawaited(subscription.cancel());
-            unawaited(stream.dispose());
-            backend.dispose();
-          });
-        });
-      }
     });
   }
 }
