@@ -34,12 +34,12 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassTest do
   end
 
   test "two global readers that differ only in identity share a class" do
-    assert ViewerClass.key(global_reader(), "persons") ==
-             ViewerClass.key(global_reader_with_other_identity(), "persons")
+    assert ViewerClass.key(global_reader(), "hobbies") ==
+             ViewerClass.key(global_reader_with_other_identity(), "hobbies")
   end
 
   test "any difference in a flag, a permission or a grant splits the class" do
-    base = ViewerClass.key(global_reader(), "persons")
+    base = ViewerClass.key(global_reader(), "hobbies")
     with_grant = [%Grant{id: "g", scope_id: "s"}]
 
     for different <- [
@@ -50,7 +50,7 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassTest do
           global_reader(group_grants: with_grant),
           global_reader(area_grants: with_grant)
         ] do
-      assert ViewerClass.key(different, "persons") != base
+      assert ViewerClass.key(different, "hobbies") != base
     end
   end
 
@@ -59,14 +59,14 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassTest do
     second = %Grant{id: "2", scope_id: "s2"}
     same_rights = [%{second | id: "3"}, %{first | id: "4"}]
 
-    assert ViewerClass.key(global_reader(service_grants: [first, second]), "persons") ==
-             ViewerClass.key(global_reader(service_grants: same_rights), "persons")
+    assert ViewerClass.key(global_reader(service_grants: [first, second]), "hobbies") ==
+             ViewerClass.key(global_reader(service_grants: same_rights), "hobbies")
   end
 
   test "an actor without a global read is keyed by its uid" do
     actor = %Actor{uid: "uid-a", approved?: true}
 
-    assert ViewerClass.key(actor, "persons") == {:uid, "uid-a"}
+    assert ViewerClass.key(actor, "hobbies") == {:uid, "uid-a"}
   end
 
   test "an operation on the per-uid list is keyed by uid even for a global reader" do
@@ -75,6 +75,19 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassTest do
     for operation <- per_uid do
       assert ViewerClass.key(global_reader(), operation) == {:uid, "uid-a"}
     end
+  end
+
+  test "same_scope? ignores the token and notices a change in identity-bound facts" do
+    reader = global_reader()
+
+    other_token = %{
+      reader
+      | principal: %Principal{uid: "uid-a", auth_id: "a", claims: %{"n" => 1}}
+    }
+
+    assert ViewerClass.same_scope?(reader, other_token)
+    refute ViewerClass.same_scope?(reader, %{reader | managed_user_uids: ["uid-z"]})
+    refute ViewerClass.same_scope?(reader, %{reader | family_id: "family-z"})
   end
 
   test "an anonymous operation of a global reader still shares" do

@@ -15,7 +15,16 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClass do
   alias ChurchAdmin.Authz.{Actor, Grant, Scope}
 
   @entities_outside_scope_resources [:history_record, :contact, :resolved_contact]
-  @per_uid_operations []
+  @per_uid_operations ~w(
+    geolocatedPersons
+    homeSearch
+    person
+    personHistoryAnalysis
+    personMemberships
+    persons
+    user
+    users
+  )
 
   @type t :: {:uid, String.t()} | {:global_reader, Actor.t()}
 

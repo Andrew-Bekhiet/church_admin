@@ -25,6 +25,14 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
   }
   """
 
+  @families """
+  query families($first: Int, $after: String) {
+    families(first: $first, after: $after) {
+      count endKeyset results { keyset id name }
+    }
+  }
+  """
+
   @person "query person($id: ID!) { person(id: $id) { id name } }"
 
   defp hobby!(writer, name \\ "chess") do
@@ -107,7 +115,7 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
       assert_push "live:result", %{ref: "r1", full: true}
     end
 
-    test "a single entity is pushed full, also when it is null", %{writer: writer} do
+    test "a single entity is pushed full, also when it is null" do
       socket = join_as(admin!())
       id = uuid()
 
@@ -119,8 +127,6 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
                })
 
       assert_push "live:result", %{ref: "r1", full: true, data: %{"person" => nil}}
-
-      Postgrex.query!(writer, "select 1", [])
     end
 
     test "a list without a window runs once with its variables and pushes full", %{writer: writer} do
@@ -294,7 +300,7 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
       refute_push "live:result", _payload
     end
 
-    test "is pushed in full for a window whose rows have no id", %{writer: writer} do
+    test "is pushed in full for a window whose rows have no id" do
       person = Factory.person!(%{family_id: Factory.family!().id})
       Factory.edit_row!("persons", person.id)
 
@@ -316,8 +322,6 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
       assert_push "live:result",
                   %{full: true, data: %{"edits" => %{"results" => [_first, _second]}}},
                   @staleness_budget_ms
-
-      _ = writer
     end
   end
 
@@ -496,19 +500,19 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
     end
 
     test "narrows a demoted admin's results and leaves the shared group", %{writer: writer} do
-      Factory.person!(%{family_id: Factory.family!().id})
+      Factory.family!()
       admin = admin!()
       other_admin = join_as(admin!())
       socket = join_as(admin)
-      {:ok, %{}} = register(other_admin, window_payload("a", @persons))
-      {:ok, %{}} = register(socket, window_payload("b", @persons))
+      {:ok, %{}} = register(other_admin, window_payload("a", @families))
+      {:ok, %{}} = register(socket, window_payload("b", @families))
       assert_push "live:result", %{ref: "b", full: true}
       assert Registry.group_count() == 1
 
       revoke_permission(writer, admin.uid, "readAllData")
 
       assert_push "live:result",
-                  %{ref: "b", full: true, data: %{"persons" => %{"results" => []}}},
+                  %{ref: "b", full: true, data: %{"families" => %{"results" => []}}},
                   @staleness_budget_ms
 
       assert Registry.group_count() == 2
