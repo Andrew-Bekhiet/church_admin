@@ -21,10 +21,9 @@ defmodule ChurchAdmin.RealtimeCase do
   setup context do
     writer = start_supervised!({Postgrex, writer_options()}, id: :writer)
     {broadcaster, topic} = start_broadcaster(context)
-    head_before = Broadcaster.head(broadcaster)
-    stream = start_supervised!({ReplicationStream, broadcaster: broadcaster})
     Phoenix.PubSub.subscribe(ChurchAdmin.PubSub, topic)
-    await_reset(broadcaster, head_before)
+    stream = start_supervised!({ReplicationStream, broadcaster: broadcaster})
+    await_reset()
 
     {:ok, writer: writer, broadcaster: broadcaster, stream: stream}
   end
@@ -53,21 +52,12 @@ defmodule ChurchAdmin.RealtimeCase do
 
   def uuid, do: Ash.UUID.generate()
 
-  @doc """
-  Waits until a stream has reset `broadcaster` from a new slot. A slot's
-  consistent point lies beyond every earlier commit, so the head moves.
-  """
-  def await_reset(broadcaster, head_before, attempts \\ 100) do
-    cond do
-      Broadcaster.head(broadcaster) != head_before ->
-        :ok
-
-      attempts == 0 ->
-        flunk("the replication stream did not reset the broadcaster from a new slot")
-
-      true ->
-        Process.sleep(50)
-        await_reset(broadcaster, head_before, attempts - 1)
+  @doc "Waits until a stream has reset the broadcaster from a new slot."
+  def await_reset do
+    receive do
+      :realtime_reset -> :ok
+    after
+      5_000 -> flunk("the replication stream did not reset the broadcaster from a new slot")
     end
   end
 

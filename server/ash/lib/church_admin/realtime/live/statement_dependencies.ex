@@ -5,8 +5,11 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependencies do
   `:all` when it references the table only as a whole. The keys are
   `ChurchAdmin.Realtime.RowChange` relations, `{schema, table}`.
 
-  A statement that calls a function that is not immutable is refused, since
-  its result can change without any table changing.
+  A statement that calls a non-immutable function in language `sql` or
+  `plpgsql` is refused, in any schema: such a function can read tables
+  Postgres does not report. Builtin and C functions read no table behind
+  its back, so they pass, `now()` and `random()` among them; a result that
+  changes with time alone does not re-run a query.
 
   Results are cached by SQL text for the life of the node.
   """

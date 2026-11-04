@@ -17,10 +17,15 @@ defmodule ChurchAdminWeb.Graphql.Pipeline do
   `extensions.resultHash` (`ChurchAdminWeb.Graphql.Phase.PutResultHash`).
   """
 
+  alias Absinthe.Adapter.LanguageConventions
+  alias Absinthe.Language
   alias Absinthe.Phase.Document.Result
   alias Absinthe.Phase.Document.Validation.NoFragmentCycles
+  alias Absinthe.Phase.Parse
+  alias ChurchAdmin.Authz.Actor
   alias ChurchAdminWeb.Graphql.Phase.{LimitDepth, PutResultHash}
 
+  @schema ChurchAdminWeb.GraphqlSchema
   @max_complexity 150_000
   @max_depth 10
 
@@ -43,5 +48,94 @@ defmodule ChurchAdminWeb.Graphql.Pipeline do
     |> Absinthe.Pipeline.replace(Result, {Result, spec_compliant_errors: true})
     |> Absinthe.Pipeline.insert_after(Result, PutResultHash)
     |> Absinthe.Pipeline.insert_after(Result, ChurchAdminWeb.Graphql.FillMissingErrorCodes)
+  end
+
+  @doc "The GraphQL type name of the rows of the keyset list at root field `name`, if it is one."
+  @spec list_row_type(String.t() | nil) :: String.t() | nil
+  def list_row_type(name) do
+    with %{type: page_type} <- root_field(name),
+         %{fields: %{results: %{type: rows}}} <- type(page_type),
+         %{name: row_type} <- type(rows) do
+      row_type
+    else
+      _not_a_keyset_list -> nil
+    end
+  end
+
+  @doc "Whether the rows of the list at root field `name` nest a field of their own type."
+  @spec selects_type_inside_rows?(Language.Document.t(), String.t()) :: boolean()
+  def selects_type_inside_rows?(%Language.Document{definitions: definitions}, name) do
+    fragments =
+      for %Language.Fragment{} = fragment <- definitions, into: %{}, do: {fragment.name, fragment}
+
+    row_type = list_row_type(name)
+
+    definitions
+    |> Enum.flat_map(&selections_of_list(&1, name))
+    |> Enum.any?(&nests_type?(&1, type_named(row_type), row_type, fragments))
+  end
+
+  defp selections_of_list(%Language.OperationDefinition{selection_set: root}, name) do
+    for %Language.Field{name: ^name, selection_set: page} <- root.selections,
+        %Language.Field{name: "results", selection_set: rows} <- page.selections,
+        selection <- rows.selections,
+        do: selection
+  end
+
+  defp selections_of_list(_fragment, _name), do: []
+
+  defp nests_type?(%Language.Field{selection_set: nil}, _parent, _row_type, _fragments), do: false
+
+  defp nests_type?(%Language.Field{} = field, parent, row_type, fragments) do
+    child = parent.fields |> field_named(field.name) |> Map.fetch!(:type) |> type()
+
+    child.name == row_type or
+      Enum.any?(field.selection_set.selections, &nests_type?(&1, child, row_type, fragments))
+  end
+
+  defp nests_type?(%Language.FragmentSpread{name: name}, _parent, row_type, fragments) do
+    %{type_condition: condition, selection_set: selection_set} = Map.fetch!(fragments, name)
+    on_type = type_named(condition.name)
+
+    Enum.any?(selection_set.selections, &nests_type?(&1, on_type, row_type, fragments))
+  end
+
+  defp nests_type?(%Language.InlineFragment{} = inline, parent, row_type, fragments) do
+    on_type = if inline.type_condition, do: type_named(inline.type_condition.name), else: parent
+
+    Enum.any?(inline.selection_set.selections, &nests_type?(&1, on_type, row_type, fragments))
+  end
+
+  defp type_named(name), do: Absinthe.Schema.lookup_type(@schema, name)
+
+  defp field_named(fields, name) do
+    fields
+    |> Map.values()
+    |> Enum.find(&(LanguageConventions.to_external_name(&1.name, :field) == name))
+  end
+
+  defp root_field(name) do
+    @schema
+    |> Absinthe.Schema.lookup_type(:query)
+    |> Map.fetch!(:fields)
+    |> field_named(name)
+  end
+
+  defp type(wrapped), do: Absinthe.Schema.lookup_type(@schema, Absinthe.Type.unwrap(wrapped))
+
+  @doc "Runs an already parsed query outside a request, through the same phases as `/gql`."
+  @spec run_parsed(Language.Document.t(), String.t() | nil, map(), Actor.t()) :: map()
+  def run_parsed(%Language.Document{} = document, operation_name, variables, %Actor{} = actor) do
+    phases =
+      %{schema_mod: @schema, conn_private: %{http_method: "POST"}}
+      |> pipeline(
+        context: %{actor: actor, tenant: nil, context: %{}},
+        operation_name: operation_name,
+        variables: variables
+      )
+      |> Absinthe.Pipeline.without(Parse)
+
+    {:ok, %{result: result}, _phases} = Absinthe.Pipeline.run(document, phases)
+    result
   end
 end

@@ -124,20 +124,38 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependenciesTest do
     end
   end
 
-  describe "for_sql/1 and volatile functions" do
-    test "rejects a statement that calls a volatile function of the schema" do
-      assert {:error, {:volatile_function, "public.generate_uuidv7"}} ==
-               StatementDependencies.for_sql(
-                 "SELECT id FROM persons WHERE id = generate_uuidv7()"
-               )
+  describe "for_sql/1 and functions that can read tables Postgres does not report" do
+    test "rejects a non-immutable plpgsql function of any schema" do
+      assert {:error, {:volatile_function, "public.uuid_generate_v7"}} ==
+               StatementDependencies.for_sql("SELECT public.uuid_generate_v7()")
     end
 
-    test "rejects a volatile built-in and a stable one" do
-      assert {:error, {:volatile_function, "pg_catalog.random"}} ==
-               StatementDependencies.for_sql("SELECT id FROM persons WHERE random() < 0.5")
+    test "rejects a non-immutable sql function" do
+      assert {:error, {:volatile_function, "public.hypertable_size"}} ==
+               StatementDependencies.for_sql("SELECT public.hypertable_size('persons'::regclass)")
+    end
 
-      assert {:error, {:volatile_function, "pg_catalog.now"}} ==
-               StatementDependencies.for_sql("SELECT id FROM persons WHERE deleted_at < now()")
+    test "accepts builtin functions whatever their volatility" do
+      for sql <- [
+            "SELECT random()",
+            "SELECT id FROM persons WHERE deleted_at < now()",
+            "SELECT jsonb_build_array(id) FROM persons",
+            "SELECT concat_ws(' ', name) FROM persons",
+            "SELECT gen_random_uuid()"
+          ] do
+        assert {:ok, %{}} = StatementDependencies.for_sql(sql)
+      end
+    end
+
+    test "accepts PostGIS C functions" do
+      assert {:ok, %{}} = StatementDependencies.for_sql("SELECT public.postgis_lib_version()")
+    end
+
+    test "finds a builtin inside a view that the statement reads without rejecting it" do
+      assert {:ok, read} =
+               StatementDependencies.for_sql("SELECT family_id FROM data_checks")
+
+      assert map_size(read) > 0
     end
 
     test "accepts immutable functions" do
@@ -150,7 +168,7 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependenciesTest do
     test "leaves no temp view behind after a success, a fallback and an error" do
       deps!(unique_sql("SELECT id FROM persons"))
       deps!(unique_sql("SELECT p.id, p.id FROM persons AS p"))
-      {:error, _} = StatementDependencies.for_sql("SELECT generate_uuidv7() FROM persons")
+      {:error, _} = StatementDependencies.for_sql("SELECT public.uuid_generate_v7() FROM persons")
 
       {:error, _} =
         StatementDependencies.for_sql("SELECT FROM nowhere_#{System.unique_integer([:positive])}")
@@ -213,7 +231,7 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependenciesTest do
     end
 
     test "answers a repeated volatile statement from the cache too" do
-      sql = unique_sql("SELECT id FROM persons WHERE id = generate_uuidv7()")
+      sql = unique_sql("SELECT id FROM persons WHERE id = public.uuid_generate_v7()")
       assert {:error, {:volatile_function, _}} = error = StatementDependencies.for_sql(sql)
       supervisor = ChurchAdmin.Realtime.Supervisor
 
