@@ -60,7 +60,7 @@ void main() {
   ) async {
     when(
       () => releases.appDownloadLink(
-        platform: DownloadPlatform.ios.backendPlatform,
+        platform: Enum_AppPlatform.IOS,
       ),
     ).thenAnswer((_) async => link);
 
@@ -74,7 +74,7 @@ void main() {
   ) async {
     when(
       () => releases.appDownloadLink(
-        platform: DownloadPlatform.android.backendPlatform,
+        platform: Enum_AppPlatform.ANDROID,
       ),
     ).thenAnswer((_) async => link);
 

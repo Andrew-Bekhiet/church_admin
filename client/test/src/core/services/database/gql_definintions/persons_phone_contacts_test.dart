@@ -96,16 +96,35 @@ void main() {
   });
 
   test('a phone changed on the server replaces the one read before', () async {
-    final persons = dao();
-    await persons.personsPhoneContacts(personsIds: [mina.id]);
-    final renumbered = mina.copyWith(
-      contacts: const [PhoneContact(id: 'renumbered', phone: '+201003333333')],
+    Json cacheablePageOf(PhoneContact contact) => {
+      '__typename': 'KeysetPageOfPerson',
+      'endKeyset': null,
+      'results': [
+        {
+          '__typename': 'Person',
+          'id': mina.id,
+          'name': mina.name,
+          'contacts': [
+            {'__typename': 'Contact', ...contact.toJson()},
+          ],
+          'familyContacts': const <Json>[],
+        },
+      ],
+    };
+
+    const changedPhone = PhoneContact(
+      id: '00000000-0000-0000-0000-00000000c003',
+      phone: '+201003333333',
     );
-    link.data['persons'] = pageOf([renumbered]);
+    final persons = dao();
+    link.data['__typename'] = 'RootQueryType';
+    link.data['persons'] = cacheablePageOf(ownPhone);
+    await persons.personsPhoneContacts(personsIds: [mina.id]);
+    link.data['persons'] = cacheablePageOf(changedPhone);
 
     final fetched = await persons.personsPhoneContacts(personsIds: [mina.id]);
 
-    expect(fetched.single.contacts, renumbered.contacts);
+    expect(fetched.single.contacts, [changedPhone]);
   });
 
   test('a selection larger than a page comes back whole', () async {
