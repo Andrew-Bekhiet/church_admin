@@ -218,6 +218,51 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependenciesTest do
     end
   end
 
+  describe "a probe that loses its connection" do
+    alias ChurchAdmin.Realtime.Live.StatementDependencies.Probe
+
+    defp hold_the_probe_connection do
+      test_pid = self()
+
+      holder =
+        spawn(fn ->
+          Postgrex.transaction(Probe, fn _connection ->
+            send(test_pid, :probe_connection_held)
+            Process.sleep(:infinity)
+          end)
+        end)
+
+      assert_receive :probe_connection_held
+      on_exit(fn -> Process.exit(holder, :kill) end)
+    end
+
+    test "reports a checkout that fails instead of raising" do
+      hold_the_probe_connection()
+
+      assert {:error, {:probe_unavailable, %DBConnection.ConnectionError{}}} =
+               Probe.dependencies(unique_sql("select 1"))
+    end
+
+    test "reports a backend that died instead of raising, and works again after" do
+      %{rows: [[backend]]} = Postgrex.query!(Probe, "select pg_backend_pid()", [])
+      Repo.query!("select pg_terminate_backend($1)", [backend])
+
+      assert {:error, {:probe_unavailable, _reason}} = Probe.dependencies(unique_sql("select 1"))
+      assert {:ok, %{}} = await_probe_back(unique_sql("select 1"))
+    end
+
+    defp await_probe_back(sql, attempts \\ 50) do
+      case Probe.dependencies(sql) do
+        {:error, {:probe_unavailable, _reason}} when attempts > 0 ->
+          Process.sleep(20)
+          await_probe_back(sql, attempts - 1)
+
+        answer ->
+          answer
+      end
+    end
+  end
+
   describe "the cache" do
     test "answers a repeated statement without probing again" do
       sql = unique_sql("SELECT id, name FROM persons")
