@@ -1,8 +1,6 @@
 defmodule ChurchAdmin.Realtime.ReplicationStreamTest do
   use ChurchAdmin.RealtimeCase, async: false
 
-  alias ChurchAdmin.Realtime.Broadcaster
-
   defp insert_family_and_person(writer) do
     family = uuid()
     person = uuid()
@@ -135,32 +133,49 @@ defmodule ChurchAdmin.Realtime.ReplicationStreamTest do
       for %{changes: changes} <- earlier ++ [batch], %{type: "Hobby", id: id} <- changes, do: id
 
     assert hobby_ids == [second, first]
+  end
 
-    versions =
-      for %{from: from, to: to, changes: [_ | _]} <- earlier ++ [batch], do: {from, to}
+  test "an update of a table replicated in full names its changed columns", %{writer: writer} do
+    {_family, person} = insert_family_and_person(writer)
+    hobby = insert_hobby(writer)
 
-    assert Enum.all?(versions, fn {from, to} -> to > from end)
+    sql!(writer, "insert into persons_hobbies (person_id, hobby_id) values ($1, $2)", [
+      person,
+      hobby
+    ])
+
+    await_change(%{type: "Person", id: person, op: "update"})
+
+    other_hobby = insert_hobby(writer)
+    cleanup_sql(["delete from persons_hobbies where person_id = '#{person}'"])
+
+    sql!(writer, "update persons_hobbies set hobby_id = $1 where person_id = $2", [
+      other_hobby,
+      person
+    ])
+
+    {%{rows: rows}, _earlier} = await_change(%{type: "Person", id: person, op: "update"})
+
+    assert %{op: :update, columns: columns} =
+             Enum.find(rows, &(&1.relation == {"public", "persons_hobbies"}))
+
+    assert MapSet.equal?(columns, MapSet.new(["hobby_id"]))
   end
 
   @tag :capture_log
-  test "a dropped connection restarts streaming on a new slot", %{writer: writer, broadcaster: b} do
+  test "a dropped connection restarts streaming on a new slot", %{writer: writer} do
     %{rows: [[old_slot]]} =
       sql!(
         writer,
         "select slot_name::text from pg_replication_slots where slot_name like 'church_admin_realtime_%'"
       )
 
-    head_before = Broadcaster.head(b)
-
     sql!(
       writer,
       "select pg_terminate_backend(active_pid) from pg_replication_slots where slot_name = '#{old_slot}'"
     )
 
-    await_reset(b, head_before)
-    new_head = Broadcaster.head(b)
-    assert new_head > head_before
-    assert_receive {:realtime_changes, %{from: ^new_head, to: ^new_head, changes: []}}
+    await_reset()
 
     hobby = insert_hobby(writer)
     await_change(%{type: "Hobby", id: hobby, op: "insert"})

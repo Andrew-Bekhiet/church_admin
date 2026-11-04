@@ -1,16 +1,20 @@
 defmodule ChurchAdmin.Realtime.Broadcaster do
   @moduledoc """
-  Turns replicated commits into invalidation batches and broadcasts them on
-  `ChurchAdmin.PubSub` as `{:realtime_changes, %{from, to, changes}}`.
+  Turns replicated commits into batches and broadcasts them on
+  `ChurchAdmin.PubSub` as `{:realtime_changes, %{changes, rows}}`: `changes`
+  are the `ChurchAdmin.Realtime.TypeMap` invalidations and `rows` say which
+  columns of which relations the commits touched, for the live queries to
+  match against what they read.
 
-  Versions are commit LSNs. Commits arriving within `coalesce_ms` of the
-  first pending one go out as one batch from the current head to the last
-  commit's LSN, deduplicated. Batches stay replayable for `retention_ms`.
-  `reset/2` starts a new history (a new replication slot): the backlog and
-  pending commits are dropped, so clients behind it must refetch. The reset
-  is announced at once as an empty batch from the new head to itself: no
-  joined client has seen that version, so each one rejoins from its last
-  version, is told `complete: false` and refetches.
+  Commits arriving within `coalesce_ms` of the first pending one go out as
+  one deduplicated batch. Oban's tables never reach a batch: nothing a client
+  reads comes from them, and every job tick would count as a change.
+
+  `reset/1` follows a replication gap. Pending commits are dropped and
+  `:realtime_reset` goes out at once, because the gap can hide any change.
+
+  Viewers learn about scope changes on `viewer_scope_topic/1`, as
+  `{:viewer_scope_changed, uids | :everyone}`; a reset concerns everyone.
   """
 
   use GenServer
@@ -18,31 +22,31 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
   alias ChurchAdmin.Realtime.RowChange
   alias ChurchAdmin.Realtime.TypeMap
 
-  @type version :: non_neg_integer()
-  @type batch :: %{from: version(), to: version(), changes: [TypeMap.change()]}
+  @type touched_row :: %{
+          relation: TypeMap.relation(),
+          op: :insert | :update | :delete | :truncate,
+          columns: MapSet.t(String.t()) | :all
+        }
+  @type batch :: %{changes: [TypeMap.change()], rows: [touched_row()]}
 
   @topic "realtime:changes"
+  @viewer_scope_type "ViewerScope"
 
   @spec topic() :: String.t()
   def topic, do: @topic
 
+  @spec viewer_scope_topic(String.t()) :: String.t()
+  def viewer_scope_topic(topic \\ @topic), do: topic <> ":viewer_scope"
+
   def start_link(opts),
     do: GenServer.start_link(__MODULE__, opts, name: Keyword.get(opts, :name, __MODULE__))
 
-  @spec reset(GenServer.server(), version()) :: :ok
-  def reset(server \\ __MODULE__, version), do: GenServer.call(server, {:reset, version})
+  @spec reset(GenServer.server()) :: :ok
+  def reset(server \\ __MODULE__), do: GenServer.call(server, :reset)
 
-  @spec commit(GenServer.server(), version(), [RowChange.t()]) :: :ok
-  def commit(server \\ __MODULE__, commit_lsn, row_changes),
-    do: GenServer.cast(server, {:commit, commit_lsn, row_changes})
-
-  @spec head(GenServer.server()) :: version()
-  def head(server \\ __MODULE__), do: GenServer.call(server, :head)
-
-  @doc "The batches after `version`, or `:unknown` when `version` is neither the head nor a buffered batch start."
-  @spec batches_since(GenServer.server(), version()) :: {:ok, [batch()]} | :unknown
-  def batches_since(server \\ __MODULE__, version),
-    do: GenServer.call(server, {:batches_since, version})
+  @spec commit(GenServer.server(), [RowChange.t()]) :: :ok
+  def commit(server \\ __MODULE__, row_changes),
+    do: GenServer.cast(server, {:commit, row_changes})
 
   @impl GenServer
   def init(opts) do
@@ -51,44 +55,24 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
        type_map: Keyword.get_lazy(opts, :type_map, &TypeMap.build/0),
        topic: Keyword.get(opts, :topic, @topic),
        coalesce_ms: Keyword.get(opts, :coalesce_ms, 500),
-       retention_ms: Keyword.get(opts, :retention_ms, :timer.minutes(10)),
-       head: 0,
-       buffered: :queue.new(),
        pending: [],
-       pending_to: nil,
        flush_ref: nil
      }}
   end
 
   @impl GenServer
-  def handle_call({:reset, version}, _from, state) do
-    Phoenix.PubSub.broadcast(
-      ChurchAdmin.PubSub,
-      state.topic,
-      {:realtime_changes, %{from: version, to: version, changes: []}}
-    )
+  def handle_call(:reset, _from, state) do
+    announce(state, :realtime_reset)
+    announce_viewer_scope(state, :everyone)
 
-    {:reply, :ok,
-     %{
-       state
-       | head: version,
-         buffered: :queue.new(),
-         pending: [],
-         pending_to: nil,
-         flush_ref: nil
-     }}
+    {:reply, :ok, %{state | pending: [], flush_ref: nil}}
   end
 
-  def handle_call(:head, _from, state), do: {:reply, state.head, state}
-
-  def handle_call({:batches_since, version}, _from, state),
-    do: {:reply, batches_since_version(state, version), state}
-
   @impl GenServer
-  def handle_cast({:commit, commit_lsn, row_changes}, state) do
-    case Enum.flat_map(row_changes, &TypeMap.changes_for(state.type_map, &1)) do
+  def handle_cast({:commit, row_changes}, state) do
+    case Enum.reject(row_changes, &background_job_row?/1) do
       [] -> {:noreply, state}
-      changes -> {:noreply, state |> add_pending(commit_lsn, changes) |> schedule_flush()}
+      kept -> {:noreply, schedule_flush(%{state | pending: [kept | state.pending]})}
     end
   end
 
@@ -98,8 +82,8 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
 
   def handle_info({:flush, _stale_ref}, state), do: {:noreply, state}
 
-  defp add_pending(state, commit_lsn, changes),
-    do: %{state | pending: [changes | state.pending], pending_to: commit_lsn}
+  defp background_job_row?(%RowChange{relation: {_schema, table}}),
+    do: String.starts_with?(table, "oban_")
 
   defp schedule_flush(%{flush_ref: nil} = state) do
     ref = make_ref()
@@ -110,44 +94,48 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
   defp schedule_flush(state), do: state
 
   defp flush(state) do
-    batch = %{
-      from: state.head,
-      to: state.pending_to,
-      changes: state.pending |> Enum.reverse() |> Enum.concat() |> Enum.uniq()
-    }
+    row_changes = state.pending |> Enum.reverse() |> Enum.concat()
 
-    now = System.monotonic_time(:millisecond)
+    changes =
+      row_changes |> Enum.flat_map(&TypeMap.changes_for(state.type_map, &1)) |> Enum.uniq()
 
-    buffered =
-      state.buffered
-      |> drop_expired(now - state.retention_ms)
-      |> then(&:queue.in({now, batch}, &1))
+    announce(state, {:realtime_changes, %{changes: changes, rows: touched_rows(row_changes)}})
+    announce_viewer_scope(state, viewers_of(changes))
 
-    Phoenix.PubSub.broadcast(ChurchAdmin.PubSub, state.topic, {:realtime_changes, batch})
-
-    %{state | head: batch.to, buffered: buffered, pending: [], pending_to: nil, flush_ref: nil}
+    %{state | pending: [], flush_ref: nil}
   end
 
-  defp drop_expired(buffered, oldest_kept) do
-    case :queue.peek(buffered) do
-      {:value, {at, _batch}} when at < oldest_kept ->
-        drop_expired(:queue.drop(buffered), oldest_kept)
+  defp touched_rows(row_changes) do
+    row_changes
+    |> Enum.map(&%{relation: &1.relation, op: &1.op, columns: RowChange.changed_columns(&1)})
+    |> Enum.uniq()
+  end
 
-      _empty_or_fresh ->
-        buffered
+  defp viewers_of(changes) do
+    case for %{type: @viewer_scope_type, id: id} <- changes, do: id do
+      [] -> MapSet.new()
+      ids -> if nil in ids, do: :everyone, else: MapSet.new(ids)
     end
   end
 
-  defp batches_since_version(%{head: version}, version), do: {:ok, []}
+  defp announce(state, message),
+    do: Phoenix.PubSub.broadcast(ChurchAdmin.PubSub, state.topic, message)
 
-  defp batches_since_version(state, version) do
-    state.buffered
-    |> :queue.to_list()
-    |> Enum.map(&elem(&1, 1))
-    |> Enum.drop_while(&(&1.from != version))
-    |> case do
-      [] -> :unknown
-      batches -> {:ok, batches}
+  defp announce_viewer_scope(state, :everyone) do
+    Phoenix.PubSub.broadcast(
+      ChurchAdmin.PubSub,
+      viewer_scope_topic(state.topic),
+      {:viewer_scope_changed, :everyone}
+    )
+  end
+
+  defp announce_viewer_scope(state, uids) do
+    if MapSet.size(uids) > 0 do
+      Phoenix.PubSub.broadcast(
+        ChurchAdmin.PubSub,
+        viewer_scope_topic(state.topic),
+        {:viewer_scope_changed, uids}
+      )
     end
   end
 end

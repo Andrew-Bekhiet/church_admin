@@ -1,13 +1,13 @@
 defmodule ChurchAdmin.Realtime.ReplicationStream do
   @moduledoc """
   Streams the `church_admin_changes` publication from a temporary logical
-  replication slot (`pgoutput`) and hands each commit's row changes, with
-  its commit LSN, to `ChurchAdmin.Realtime.Broadcaster`.
+  replication slot (`pgoutput`) and hands each commit's row changes to
+  `ChurchAdmin.Realtime.Broadcaster`.
 
   The slot lives only as long as the connection, so a stopped app never
   pins WAL. Every (re)connect creates a fresh slot and resets the
-  broadcaster to the slot's consistent point: commits made while no slot
-  existed are not replayed, and clients behind it refetch everything.
+  broadcaster: commits made while no slot existed are not replayed, so
+  every live query runs again.
   """
 
   use Postgrex.ReplicationConnection
@@ -66,13 +66,12 @@ defmodule ChurchAdmin.Realtime.ReplicationStream do
 
   @impl Postgrex.ReplicationConnection
   def handle_result(
-        [%Postgrex.Result{rows: [[slot, consistent_point | _]]}],
+        [%Postgrex.Result{rows: [[slot | _]]}],
         %{
           step: {:creating_slot, slot}
         } = state
       ) do
-    {:ok, consistent_lsn} = Postgrex.ReplicationConnection.decode_lsn(consistent_point)
-    :ok = Broadcaster.reset(state.broadcaster, consistent_lsn)
+    :ok = Broadcaster.reset(state.broadcaster)
 
     {:stream,
      "START_REPLICATION SLOT #{slot} LOGICAL 0/0 (proto_version '1', publication_names '#{@publication}')",
@@ -111,9 +110,9 @@ defmodule ChurchAdmin.Realtime.ReplicationStream do
     %{state | row_changes: Enum.reverse(truncated, state.row_changes)}
   end
 
-  defp handle_message({:commit, commit_lsn, _end_lsn}, state) do
+  defp handle_message({:commit, _commit_lsn, _end_lsn}, state) do
     if state.row_changes != [] do
-      Broadcaster.commit(state.broadcaster, commit_lsn, Enum.reverse(state.row_changes))
+      Broadcaster.commit(state.broadcaster, Enum.reverse(state.row_changes))
     end
 
     %{state | row_changes: []}
@@ -128,7 +127,8 @@ defmodule ChurchAdmin.Realtime.ReplicationStream do
       relation: relation_name(relation),
       op: op,
       old: old_row(relation, old),
-      new: new_values && row(relation, new_values)
+      new: new_values && row(relation, new_values),
+      old_complete?: match?({:full, _values}, old)
     }
 
     %{state | row_changes: [change | state.row_changes]}

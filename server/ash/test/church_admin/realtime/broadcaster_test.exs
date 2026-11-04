@@ -6,22 +6,16 @@ defmodule ChurchAdmin.Realtime.BroadcasterTest do
 
   @hobby_a "8d4f3a10-2222-4c1e-9e0a-00000000000a"
   @hobby_b "8d4f3a10-2222-4c1e-9e0a-00000000000b"
+  @user_uid "8d4f3a10-2222-4c1e-9e0a-00000000000c"
   @coalesce_ms 30
 
   setup context do
     topic = "realtime-test:#{inspect(context.test)}"
     name = {:global, {__MODULE__, System.unique_integer([:positive])}}
 
-    opts =
-      Keyword.merge(
-        [name: name, topic: topic, coalesce_ms: @coalesce_ms],
-        Map.get(context, :broadcaster_opts, [])
-      )
-
-    start_supervised!({Broadcaster, opts})
+    start_supervised!({Broadcaster, name: name, topic: topic, coalesce_ms: @coalesce_ms})
     Phoenix.PubSub.subscribe(ChurchAdmin.PubSub, topic)
-    Broadcaster.reset(name, 100)
-    assert_receive {:realtime_changes, %{from: 100, to: 100, changes: []}}
+    Phoenix.PubSub.subscribe(ChurchAdmin.PubSub, Broadcaster.viewer_scope_topic(topic))
     {:ok, broadcaster: name}
   end
 
@@ -31,8 +25,29 @@ defmodule ChurchAdmin.Realtime.BroadcasterTest do
   defp hobby_updated(id),
     do: %RowChange{relation: {"public", "hobbies"}, op: :update, new: %{"id" => id}}
 
-  defp unmapped,
+  defp hobby_renamed(id) do
+    %RowChange{
+      relation: {"public", "hobbies"},
+      op: :update,
+      old: %{"id" => id, "name" => "old"},
+      new: %{"id" => id, "name" => "new"},
+      old_complete?: true
+    }
+  end
+
+  defp oban_job,
     do: %RowChange{relation: {"public", "oban_jobs"}, op: :insert, new: %{"id" => "1"}}
+
+  defp table_without_a_graphql_type,
+    do: %RowChange{relation: {"history", "internal_log"}, op: :insert, new: %{"id" => "1"}}
+
+  defp permission_granted(uid) do
+    %RowChange{
+      relation: {"auth", "users_permissions"},
+      op: :insert,
+      new: %{"uid" => uid, "permission" => "readAllData"}
+    }
+  end
 
   defp receive_batch do
     assert_receive {:realtime_changes, batch}, 1_000
@@ -40,96 +55,80 @@ defmodule ChurchAdmin.Realtime.BroadcasterTest do
   end
 
   test "commits within the coalesce window go out as one deduplicated batch", %{broadcaster: b} do
-    Broadcaster.commit(b, 110, [hobby_updated(@hobby_a), hobby_inserted(@hobby_b)])
-    Broadcaster.commit(b, 120, [hobby_updated(@hobby_a)])
+    Broadcaster.commit(b, [hobby_updated(@hobby_a), hobby_inserted(@hobby_b)])
+    Broadcaster.commit(b, [hobby_updated(@hobby_a)])
 
-    assert %{from: 100, to: 120, changes: changes} = receive_batch()
+    assert %{changes: changes, rows: rows} = receive_batch()
 
     assert changes == [
              %{type: "Hobby", id: @hobby_a, op: "update"},
              %{type: "Hobby", id: @hobby_b, op: "insert"}
            ]
 
-    assert Broadcaster.head(b) == 120
+    assert rows == [
+             %{relation: {"public", "hobbies"}, op: :update, columns: :all},
+             %{relation: {"public", "hobbies"}, op: :insert, columns: :all}
+           ]
   end
 
-  test "each batch starts where the previous one ended", %{broadcaster: b} do
-    Broadcaster.commit(b, 110, [hobby_updated(@hobby_a)])
-    first = receive_batch()
-    Broadcaster.commit(b, 130, [hobby_updated(@hobby_b)])
-    second = receive_batch()
+  test "a batch names the columns of an update whose old row replicated in full", %{
+    broadcaster: b
+  } do
+    Broadcaster.commit(b, [hobby_renamed(@hobby_a)])
 
-    assert {first.from, first.to, second.from, second.to} == {100, 110, 110, 130}
+    assert %{rows: [%{op: :update, columns: columns}]} = receive_batch()
+    assert columns == MapSet.new(["name"])
   end
 
-  test "a commit that touches only unmapped tables is not broadcast", %{broadcaster: b} do
-    Broadcaster.commit(b, 110, [unmapped()])
+  test "a commit to a table without a GraphQL type still reaches the batch", %{broadcaster: b} do
+    Broadcaster.commit(b, [table_without_a_graphql_type()])
+
+    assert %{changes: [], rows: [%{relation: {"history", "internal_log"}}]} = receive_batch()
+  end
+
+  test "a commit that touches only Oban's tables is not broadcast", %{broadcaster: b} do
+    Broadcaster.commit(b, [oban_job()])
 
     refute_receive {:realtime_changes, _batch}, @coalesce_ms * 4
-    assert Broadcaster.head(b) == 100
   end
 
-  test "the backlog after a buffered version replays every later batch", %{broadcaster: b} do
-    Broadcaster.commit(b, 110, [hobby_updated(@hobby_a)])
-    first = receive_batch()
-    Broadcaster.commit(b, 130, [hobby_updated(@hobby_b)])
-    second = receive_batch()
+  test "Oban's rows leave a batch that carries others", %{broadcaster: b} do
+    Broadcaster.commit(b, [oban_job(), hobby_inserted(@hobby_a)])
 
-    assert Broadcaster.batches_since(b, 100) == {:ok, [first, second]}
-    assert Broadcaster.batches_since(b, 110) == {:ok, [second]}
-    assert Broadcaster.batches_since(b, 130) == {:ok, []}
+    assert %{rows: [%{relation: {"public", "hobbies"}}]} = receive_batch()
   end
 
-  test "a version that is not a batch boundary has no backlog", %{broadcaster: b} do
-    Broadcaster.commit(b, 110, [hobby_updated(@hobby_a)])
-    receive_batch()
+  test "a batch that changes a viewer's scope announces the uid", %{broadcaster: b} do
+    Broadcaster.commit(b, [permission_granted(@user_uid), hobby_inserted(@hobby_a)])
 
-    assert Broadcaster.batches_since(b, 105) == :unknown
-    assert Broadcaster.batches_since(b, 999) == :unknown
+    assert_receive {:viewer_scope_changed, uids}, 1_000
+    assert uids == MapSet.new([@user_uid])
   end
 
-  @tag broadcaster_opts: [retention_ms: 1]
-  test "batches older than the retention leave the backlog", %{broadcaster: b} do
-    Broadcaster.commit(b, 110, [hobby_updated(@hobby_a)])
-    receive_batch()
-    Process.sleep(5)
-    Broadcaster.commit(b, 130, [hobby_updated(@hobby_b)])
-    receive_batch()
+  test "a truncated permission table announces everyone", %{broadcaster: b} do
+    Broadcaster.commit(b, [%RowChange{relation: {"auth", "users_permissions"}, op: :truncate}])
 
-    assert Broadcaster.batches_since(b, 100) == :unknown
-    assert {:ok, [%{from: 110}]} = Broadcaster.batches_since(b, 110)
+    assert_receive {:viewer_scope_changed, :everyone}, 1_000
   end
 
-  test "a reset starts a new history at the given version", %{broadcaster: b} do
-    Broadcaster.commit(b, 110, [hobby_updated(@hobby_a)])
+  test "a batch without a scope change announces nothing", %{broadcaster: b} do
+    Broadcaster.commit(b, [hobby_inserted(@hobby_a)])
+
     receive_batch()
-
-    Broadcaster.reset(b, 500)
-    assert %{changes: []} = receive_batch()
-    Broadcaster.commit(b, 510, [hobby_updated(@hobby_b)])
-
-    assert %{from: 500, to: 510} = receive_batch()
-    assert Broadcaster.batches_since(b, 110) == :unknown
+    refute_received {:viewer_scope_changed, _uids}
   end
 
-  test "a reset broadcasts an empty batch that starts at the new head", %{broadcaster: b} do
-    Broadcaster.commit(b, 110, [hobby_updated(@hobby_a)])
-    receive_batch()
+  test "a reset is announced at once, to live queries and to viewers", %{broadcaster: b} do
+    :ok = Broadcaster.reset(b)
 
-    Broadcaster.reset(b, 500)
-
-    assert %{from: 500, to: 500, changes: []} = receive_batch()
-    assert Broadcaster.head(b) == 500
-    assert Broadcaster.batches_since(b, 110) == :unknown
-    assert Broadcaster.batches_since(b, 500) == {:ok, []}
+    assert_received :realtime_reset
+    assert_received {:viewer_scope_changed, :everyone}
   end
 
   test "a reset drops commits still waiting for the coalesce window", %{broadcaster: b} do
-    Broadcaster.commit(b, 110, [hobby_updated(@hobby_a)])
-    Broadcaster.reset(b, 500)
+    Broadcaster.commit(b, [hobby_updated(@hobby_a)])
+    Broadcaster.reset(b)
 
-    assert %{from: 500, to: 500, changes: []} = receive_batch()
     refute_receive {:realtime_changes, _batch}, @coalesce_ms * 4
-    assert Broadcaster.head(b) == 500
   end
 end
