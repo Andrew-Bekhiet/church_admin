@@ -8,7 +8,9 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
   A batch runs each affected group once. A group already queued or running
   collects the batch, and runs once more if the batch touches what the run
   turned out to read. Members are monitored, so a socket that dies leaves
-  its groups, and an empty group is dropped.
+  its groups, and an empty group is dropped. A group whose run failed and
+  still has members runs again by itself, the wait doubling with each
+  failure in a row up to `@max_retry_ms`.
 
   A restart loses every group. `ChurchAdminWeb.ChangesChannel` monitors this
   process and disconnects, and the client registers again.
@@ -26,6 +28,8 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
   require Logger
 
   @default_max_concurrent_runs 3
+  @default_retry_base_ms 1_000
+  @max_retry_ms 30_000
 
   def start_link(opts),
     do: GenServer.start_link(__MODULE__, opts, name: Keyword.get(opts, :name, __MODULE__))
@@ -53,6 +57,7 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
        refresh: Keyword.get(opts, :refresh, &Refresh.run/1),
        task_supervisor: Keyword.get(opts, :task_supervisor, ChurchAdmin.Realtime.Live.Runs),
        max_concurrent_runs: Keyword.get(opts, :max_concurrent_runs, @default_max_concurrent_runs),
+       retry_base_ms: Keyword.get(opts, :retry_base_ms, @default_retry_base_ms),
        groups: %{},
        registrations: %{},
        sockets: %{},
@@ -94,6 +99,21 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
   def handle_info(:realtime_reset, state) do
     {:noreply,
      state.groups |> Map.keys() |> Enum.reduce(state, &run_again/2) |> start_queued_runs()}
+  end
+
+  def handle_info({:retry_run, key}, state) do
+    case state.groups do
+      %{^key => group} ->
+        group = Group.mark_retry(group, false)
+
+        {:noreply,
+         %{state | groups: Map.put(state.groups, key, group)}
+         |> enqueue_if_needed(group)
+         |> start_queued_runs()}
+
+      _dropped_meanwhile ->
+        {:noreply, state}
+    end
   end
 
   def handle_info({ref, outcome}, %{running: running} = state) when is_map_key(running, ref) do
@@ -316,8 +336,19 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
     else
       {due?, group} = Group.due_again?(group, dependencies_before_run)
       state = put_in(state.groups[group.key], group)
-      if due?, do: enqueue(state, group.key), else: state
+
+      cond do
+        due? -> enqueue(state, group.key)
+        Group.needs_retry?(group) -> schedule_retry(state, group)
+        true -> state
+      end
     end
+  end
+
+  defp schedule_retry(state, group) do
+    wait_ms = min(state.retry_base_ms * 2 ** (group.failed_runs - 1), @max_retry_ms)
+    Process.send_after(self(), {:retry_run, group.key}, wait_ms)
+    put_in(state.groups[group.key], Group.mark_retry(group, true))
   end
 
   defp log_failure(group, {:error, {_failure, errors}}) do

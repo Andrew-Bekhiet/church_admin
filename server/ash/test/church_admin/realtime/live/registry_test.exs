@@ -31,6 +31,7 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
          topic: topic,
          task_supervisor: {:global, {__MODULE__, context.test, :tasks}},
          max_concurrent_runs: Map.get(context, :max_concurrent_runs, 4),
+         retry_base_ms: Map.get(context, :retry_base_ms, :timer.minutes(10)),
          refresh: fn input ->
            send(test_pid, {:run, input, self()})
 
@@ -281,6 +282,82 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       end)
 
       assert Registry.group_count(registry) == 0
+    end
+  end
+
+  describe "a failed refresh" do
+    @tag retry_base_ms: 10
+    test "retries on its own and reads the window, since the batch it held is gone", %{
+      registry: registry,
+      topic: topic
+    } do
+      register_and_settle(registry, [row("1")])
+      batch(topic, touched(), [%{type: "Area", id: "1", op: "update"}])
+
+      failed = capture_log(fn -> finish_next_run({:error, {:run_failed, ["boom"]}}) end)
+
+      assert failed =~ "boom"
+      {retry, _task} = await_run()
+      assert retry.window_required?
+      assert retry.changes == []
+    end
+
+    @tag retry_base_ms: 10
+    test "waits twice as long after each failure in a row", %{registry: registry, topic: topic} do
+      register_and_settle(registry, [row("1")])
+      batch(topic, touched())
+      {_input, first_task} = await_run()
+
+      capture_log(fn ->
+        Enum.reduce([10, 20, 40], first_task, fn shortest_wait_ms, task ->
+          failed_at = System.monotonic_time(:millisecond)
+          send(task, {:finish, {:error, {:run_failed, []}}})
+          {_input, next_task} = await_run()
+
+          assert System.monotonic_time(:millisecond) - failed_at >= shortest_wait_ms
+          next_task
+        end)
+      end)
+    end
+
+    @tag retry_base_ms: 10
+    test "stops retrying once a run succeeds", %{registry: registry, topic: topic} do
+      register_and_settle(registry, [row("1")])
+      batch(topic, touched())
+      capture_log(fn -> finish_next_run({:error, {:run_failed, []}}) end)
+
+      finish_next_run(unchanged())
+
+      refute_receive {:run, _input, _task}, 100
+    end
+
+    @tag retry_base_ms: 10
+    test "is not retried once its last member has left", %{registry: registry, topic: topic} do
+      %{id: id} = register_and_settle(registry, [row("1")])
+      batch(topic, touched())
+      {_input, task} = await_run()
+      :ok = Registry.unregister(registry, id)
+
+      capture_log(fn -> send(task, {:finish, {:error, {:run_failed, []}}}) end)
+
+      refute_receive {:run, _input, _task}, 100
+    end
+
+    test "gives the next member a new window run, not the stale result", %{
+      registry: registry,
+      topic: topic
+    } do
+      register_and_settle(registry, [row("1")])
+      batch(topic, touched())
+
+      capture_log(fn -> finish_next_run_and_settle(registry, {:error, {:run_failed, []}}) end)
+
+      %{id: later} = later_registration = registration()
+      :ok = Registry.register(registry, later_registration)
+
+      refute_received {:live_ready, ^later}
+      {input, _task} = await_run()
+      assert input.window_required?
     end
   end
 

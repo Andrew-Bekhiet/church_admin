@@ -12,6 +12,11 @@ defmodule ChurchAdmin.Realtime.Live.Group do
   so it cannot reach a member. Batches that arrive while a run is queued or
   running collect in `touched` and `changes`, because the run may discover
   dependencies that make them matter.
+
+  A failed run has lost the batches it collected, so the result stops being
+  current: the next run reads the window, and the
+  `ChurchAdmin.Realtime.Live.Registry` schedules it after `failed_runs`
+  backoffs if nothing else does first.
   """
 
   alias ChurchAdmin.Authz.Actor
@@ -42,6 +47,8 @@ defmodule ChurchAdmin.Realtime.Live.Group do
     touched: [],
     changes: [],
     run_again?: false,
+    failed_runs: 0,
+    retry_scheduled?: false,
     members: %{}
   ]
 
@@ -176,14 +183,19 @@ defmodule ChurchAdmin.Realtime.Live.Group do
   def finish_run(%__MODULE__{} = group, {:error, {failure, _errors}}) do
     turned_away = for {id, %{awaiting_baseline?: true, pid: pid}} <- group.members, do: {id, pid}
 
-    {%{idle(group) | members: Map.drop(group.members, Enum.map(turned_away, &elem(&1, 0)))},
-     for({id, pid} <- turned_away, do: {pid, message_for(failure, id)})}
+    {%{
+       idle(group)
+       | members: Map.drop(group.members, Enum.map(turned_away, &elem(&1, 0))),
+         result_generation: nil,
+         failed_runs: group.failed_runs + 1
+     }, for({id, pid} <- turned_away, do: {pid, message_for(failure, id)})}
   end
 
   def finish_run(%__MODULE__{} = group, {:ok, %{result: :unchanged} = run}) do
     settle_awaiting_members(%{
       idle(group)
       | result_generation: group.generation,
+        failed_runs: 0,
         dependencies: run.dependencies,
         rows_stand_alone?: run.rows_stand_alone?
     })
@@ -194,12 +206,23 @@ defmodule ChurchAdmin.Realtime.Live.Group do
       idle(group)
       | result: result,
         result_generation: group.generation,
+        failed_runs: 0,
         dependencies: run.dependencies,
         rows_stand_alone?: run.rows_stand_alone?
     }
     |> push_to_settled_members(group.result)
     |> settle_awaiting_members_after()
   end
+
+  @doc "Whether the last run failed and no retry is on its way."
+  @spec needs_retry?(t()) :: boolean()
+  def needs_retry?(%__MODULE__{status: :idle, retry_scheduled?: false, failed_runs: failed_runs}),
+    do: failed_runs > 0
+
+  def needs_retry?(%__MODULE__{}), do: false
+
+  @spec mark_retry(t(), boolean()) :: t()
+  def mark_retry(%__MODULE__{} = group, scheduled?), do: %{group | retry_scheduled?: scheduled?}
 
   @doc """
   Whether what happened during the last run calls for another, judged by
