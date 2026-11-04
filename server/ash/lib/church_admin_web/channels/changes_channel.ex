@@ -65,7 +65,7 @@ defmodule ChurchAdminWeb.ChangesChannel do
     end
   end
 
-  def handle_in("live:unregister", %{"ref" => ref}, socket) do
+  def handle_in("live:unregister", %{"ref" => ref}, socket) when is_binary(ref) do
     case socket.assigns.live_by_ref do
       %{^ref => %{id: id}} ->
         Registry.unregister(id)
@@ -76,7 +76,7 @@ defmodule ChurchAdminWeb.ChangesChannel do
     end
   end
 
-  def handle_in("live:resync", %{"ref" => ref}, socket) do
+  def handle_in("live:resync", %{"ref" => ref}, socket) when is_binary(ref) do
     case socket.assigns.live_by_ref do
       %{^ref => %{id: id}} -> Registry.resync(id)
       _unknown -> :ok
@@ -84,6 +84,10 @@ defmodule ChurchAdminWeb.ChangesChannel do
 
     {:reply, {:ok, %{}}, socket}
   end
+
+  def handle_in(event, _payload_without_a_ref, socket)
+      when event in ["live:unregister", "live:resync"],
+      do: {:reply, {:error, %{reason: "invalid"}}, socket}
 
   defp validated_registration(payload, socket) do
     with {:ok, registration} <- Registration.from_payload(payload) do

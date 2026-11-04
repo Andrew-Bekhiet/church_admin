@@ -427,6 +427,14 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
       assert_reply push(socket, "live:resync", %{"ref" => "x"}), :ok, %{}
     end
 
+    test "unregister and resync without a ref are refused, and the channel lives on" do
+      socket = join_as(admin!())
+
+      assert_reply push(socket, "live:unregister", %{}), :error, %{reason: "invalid"}
+      assert_reply push(socket, "live:resync", %{"ref" => 1}), :error, %{reason: "invalid"}
+      assert Process.alive?(socket.channel_pid)
+    end
+
     test "a reconnect gets fresh results", %{writer: writer} do
       Process.flag(:trap_exit, true)
       user = admin!()
