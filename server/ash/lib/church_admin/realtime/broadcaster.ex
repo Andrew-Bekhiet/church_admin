@@ -13,14 +13,17 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
   `reset/1` follows a replication gap. Pending commits are dropped and
   `:realtime_reset` goes out at once, because the gap can hide any change.
 
-  Viewers learn about scope changes on `viewer_scope_topic/1`, as
-  `{:viewer_scope_changed, uids | :everyone}`; a reset concerns everyone.
+  Viewers learn on `viewer_scope_topic/1`, as `:viewer_scope_changed`, that
+  their facts may have changed. It concerns everyone: a change to one user's
+  grants moves the sets of users others manage or may see. A reset says the
+  same.
   """
 
   use GenServer
 
   alias ChurchAdmin.Realtime.RowChange
   alias ChurchAdmin.Realtime.TypeMap
+  alias ChurchAdmin.Realtime.ViewerFacts
 
   @type touched_row :: %{
           relation: TypeMap.relation(),
@@ -63,7 +66,7 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
   @impl GenServer
   def handle_call(:reset, _from, state) do
     announce(state, :realtime_reset)
-    announce_viewer_scope(state, :everyone)
+    announce_viewer_scope(state)
 
     {:reply, :ok, %{state | pending: [], flush_ref: nil}}
   end
@@ -100,7 +103,8 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
       row_changes |> Enum.flat_map(&TypeMap.changes_for(state.type_map, &1)) |> Enum.uniq()
 
     announce(state, {:realtime_changes, %{changes: changes, rows: touched_rows(row_changes)}})
-    announce_viewer_scope(state, viewers_of(changes))
+
+    if viewer_scope_changed?(changes, row_changes), do: announce_viewer_scope(state)
 
     %{state | pending: [], flush_ref: nil}
   end
@@ -111,31 +115,19 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
     |> Enum.uniq()
   end
 
-  defp viewers_of(changes) do
-    case for %{type: @viewer_scope_type, id: id} <- changes, do: id do
-      [] -> MapSet.new()
-      ids -> if nil in ids, do: :everyone, else: MapSet.new(ids)
-    end
+  defp viewer_scope_changed?(changes, row_changes) do
+    Enum.any?(changes, &(&1.type == @viewer_scope_type)) or
+      Enum.any?(row_changes, &ViewerFacts.touched?/1)
   end
 
   defp announce(state, message),
     do: Phoenix.PubSub.broadcast(ChurchAdmin.PubSub, state.topic, message)
 
-  defp announce_viewer_scope(state, :everyone) do
+  defp announce_viewer_scope(state) do
     Phoenix.PubSub.broadcast(
       ChurchAdmin.PubSub,
       viewer_scope_topic(state.topic),
-      {:viewer_scope_changed, :everyone}
+      :viewer_scope_changed
     )
-  end
-
-  defp announce_viewer_scope(state, uids) do
-    if MapSet.size(uids) > 0 do
-      Phoenix.PubSub.broadcast(
-        ChurchAdmin.PubSub,
-        viewer_scope_topic(state.topic),
-        {:viewer_scope_changed, uids}
-      )
-    end
   end
 end

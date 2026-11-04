@@ -49,6 +49,14 @@ defmodule ChurchAdmin.Realtime.BroadcasterTest do
     }
   end
 
+  defp linked_person_updated do
+    %RowChange{
+      relation: {"public", "persons"},
+      op: :update,
+      new: %{"id" => @hobby_a, "uid" => @user_uid, "family_id" => @hobby_b}
+    }
+  end
+
   defp receive_batch do
     assert_receive {:realtime_changes, batch}, 1_000
     batch
@@ -98,31 +106,36 @@ defmodule ChurchAdmin.Realtime.BroadcasterTest do
     assert %{rows: [%{relation: {"public", "hobbies"}}]} = receive_batch()
   end
 
-  test "a batch that changes a viewer's scope announces the uid", %{broadcaster: b} do
+  test "a batch that changes any viewer's scope is announced", %{broadcaster: b} do
     Broadcaster.commit(b, [permission_granted(@user_uid), hobby_inserted(@hobby_a)])
 
-    assert_receive {:viewer_scope_changed, uids}, 1_000
-    assert uids == MapSet.new([@user_uid])
+    assert_receive :viewer_scope_changed, 1_000
   end
 
-  test "a truncated permission table announces everyone", %{broadcaster: b} do
+  test "a truncated permission table is announced", %{broadcaster: b} do
     Broadcaster.commit(b, [%RowChange{relation: {"auth", "users_permissions"}, op: :truncate}])
 
-    assert_receive {:viewer_scope_changed, :everyone}, 1_000
+    assert_receive :viewer_scope_changed, 1_000
+  end
+
+  test "a linked person whose facts may have changed is announced", %{broadcaster: b} do
+    Broadcaster.commit(b, [linked_person_updated()])
+
+    assert_receive :viewer_scope_changed, 1_000
   end
 
   test "a batch without a scope change announces nothing", %{broadcaster: b} do
     Broadcaster.commit(b, [hobby_inserted(@hobby_a)])
 
     receive_batch()
-    refute_received {:viewer_scope_changed, _uids}
+    refute_received :viewer_scope_changed
   end
 
   test "a reset is announced at once, to live queries and to viewers", %{broadcaster: b} do
     :ok = Broadcaster.reset(b)
 
     assert_received :realtime_reset
-    assert_received {:viewer_scope_changed, :everyone}
+    assert_received :viewer_scope_changed
   end
 
   test "a reset drops commits still waiting for the coalesce window", %{broadcaster: b} do

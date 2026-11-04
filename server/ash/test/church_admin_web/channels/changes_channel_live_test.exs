@@ -274,11 +274,9 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
       assert runs(runs) == 0
     end
 
-    test "to anything re-runs a group that depends on everything, and pushes only a difference",
-         %{writer: writer} do
+    test "to a table a dataCheck list does not read neither runs nor pushes", %{writer: writer} do
       socket = join_as(admin!())
-      family = Factory.family!()
-      Factory.person!(%{family_id: family.id})
+      Factory.person!(%{family_id: Factory.family!().id})
 
       document = """
       query persons($first: Int, $after: String) {
@@ -296,7 +294,7 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
       hobby!(writer)
       await_batch_passed()
 
-      assert runs(runs) == 1
+      assert runs(runs) == 0
       refute_push "live:result", _payload
     end
 
@@ -543,6 +541,62 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
                   @staleness_budget_ms
 
       assert Registry.group_count() == 2
+    end
+
+    test "reaches a manager through the managed user's grant, without a reconnect", %{
+      writer: writer
+    } do
+      service = Factory.service!()
+      manager = approved_viewer!()
+      managed = approved_viewer!()
+      Factory.grant!(manager, :service, service.id, edit?: true, manage_users?: true)
+      Factory.grant!(managed, :service, service.id)
+      socket = join_as(manager)
+
+      document = """
+      query users($first: Int, $after: String) {
+        users(first: $first, after: $after, filter: {uid: {eq: "#{managed.uid}"}}) {
+          endKeyset results { keyset id currentUserCanManageThisUser }
+        }
+      }
+      """
+
+      {:ok, %{}} = register(socket, window_payload("r1", document))
+      assert_push "live:result", %{data: %{"users" => %{"results" => [row]}}}
+      assert row["currentUserCanManageThisUser"] == true
+
+      Postgrex.query!(writer, "delete from auth.users_admin_on where uid = $1", [
+        dump(managed.uid)
+      ])
+
+      assert_push "live:result",
+                  %{ref: "r1", full: true, data: %{"users" => %{"results" => [row]}}},
+                  @staleness_budget_ms
+
+      assert row["currentUserCanManageThisUser"] == false
+      assert :sys.get_state(socket.channel_pid).assigns.actor.managed_user_uids == []
+    end
+
+    test "reaches a viewer when their linked person moves to another family", %{writer: writer} do
+      viewer = approved_viewer!()
+      person = Factory.person!(%{family_id: Factory.family!().id, uid: viewer.uid})
+      other_family = Factory.family!()
+      socket = join_as(viewer)
+      {:ok, %{}} = register(socket, window_payload("r1", @families))
+      assert_push "live:result", %{data: %{"families" => %{"results" => [_own]}}}
+
+      Postgrex.query!(writer, "update persons set family_id = $1 where id = $2", [
+        dump(other_family.id),
+        dump(person.id)
+      ])
+
+      other_family_id = other_family.id
+
+      assert_push "live:result",
+                  %{data: %{"families" => %{"results" => [%{"id" => ^other_family_id}]}}},
+                  @staleness_budget_ms
+
+      assert :sys.get_state(socket.channel_pid).assigns.actor.family_id == other_family.id
     end
 
     test "of another uid changes nothing", %{writer: writer} do

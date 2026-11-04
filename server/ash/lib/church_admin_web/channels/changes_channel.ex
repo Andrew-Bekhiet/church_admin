@@ -13,9 +13,10 @@ defmodule ChurchAdminWeb.ChangesChannel do
   Each registration has an id of its own. A result still in this process's
   mailbox when its `ref` is replaced carries the old id, and is dropped.
 
-  When the viewer's scope changes the actor is reloaded and every query
-  registers again under it, with a full push. A viewer no longer approved or
-  linked is disconnected. A registry restart loses every registration, so
+  Any viewer's scope change reloads the actor of every socket, because one
+  user's grants move the sets of users others manage or may see. When the
+  facts changed, every query registers again under the new actor, with a
+  full push. A viewer no longer approved or linked is disconnected. A registry restart loses every registration, so
   it disconnects too, and the client registers again on reconnecting.
 
   A join after the socket's token expired is refused with `token_expired`,
@@ -175,19 +176,12 @@ defmodule ChurchAdminWeb.ChangesChannel do
     {:noreply, socket}
   end
 
-  def handle_info({:viewer_scope_changed, viewers}, socket) do
-    if concerns_viewer?(viewers, socket.assigns.actor),
-      do: reload_actor(socket),
-      else: {:noreply, socket}
-  end
+  def handle_info(:viewer_scope_changed, socket), do: reload_actor(socket)
 
   def handle_info(:token_expired, socket), do: disconnect(socket, :token_expired)
 
   def handle_info({:DOWN, _monitor, :process, _registry, _reason}, socket),
     do: disconnect(socket, :live_registry_restarted)
-
-  defp concerns_viewer?(:everyone, _actor), do: true
-  defp concerns_viewer?(uids, %Actor{uid: uid}), do: MapSet.member?(uids, uid)
 
   defp reload_actor(%{assigns: %{actor: actor}} = socket) do
     case ActorLoader.load_for_principal(actor.principal) do
