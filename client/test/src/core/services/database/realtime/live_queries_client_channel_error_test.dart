@@ -101,4 +101,40 @@ void main() {
       });
     });
   });
+
+  group('a socket error', () {
+    test('is followed by one join on the new connection, not a second one '
+        'from the old channel', () {
+      fakeAsync((async) {
+        final feed = LiveQueriesTestFeed.start(async);
+
+        feed.server.failConnection();
+        async.elapse(const Duration(minutes: 1));
+
+        expect(feed.server.joinRefs, hasLength(2));
+        expect(feed.events, [const ChannelJoined(), const ChannelJoined()]);
+
+        feed.dispose();
+      });
+    });
+  });
+
+  group('a socket close right after a channel crash', () {
+    test('is followed by one join on the new connection, not a second one '
+        'from the crashed channel', () {
+      fakeAsync((async) {
+        final feed = LiveQueriesTestFeed.start(async);
+
+        feed.server.crashChannel();
+        async.elapse(const Duration(milliseconds: 10));
+        unawaited(feed.server.dropConnection());
+        async.elapse(const Duration(minutes: 1));
+
+        expect(feed.server.joinRefs, hasLength(2));
+        expect(feed.events, [const ChannelJoined(), const ChannelJoined()]);
+
+        feed.dispose();
+      });
+    });
+  });
 }

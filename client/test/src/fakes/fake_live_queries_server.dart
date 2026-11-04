@@ -7,9 +7,10 @@ import 'package:web_socket/web_socket.dart';
 import 'package:web_socket_channel/adapter_web_socket_channel.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+import 'failable_web_socket_channel.dart';
 import 'fake_live_results.dart';
 
-/// A Phoenix server speaking the V2 serializer on the `changes` topic. It
+/// A Phoenix server speaking the V2 serializer on the `live_queries` topic. It
 /// keeps the live queries a client registers by `ref`, and pushes results
 /// for them when a test says so.
 class FakeLiveQueriesServer {
@@ -38,6 +39,7 @@ class FakeLiveQueriesServer {
   /// Tokens whose joins are refused with `token_expired`.
   final Set<String> expiredTokens = {};
 
+  FailableWebSocketChannel? _clientChannel;
   WebSocket? _serverSocket;
   String? _serverSocketToken;
   String? _joinRef;
@@ -76,7 +78,7 @@ class FakeLiveQueriesServer {
       }
     });
 
-    return AdapterWebSocketChannel(client);
+    return _clientChannel = FailableWebSocketChannel(client);
   }
 
   Future<void> pushCurrentResults(Link backend) async {
@@ -123,6 +125,13 @@ class FakeLiveQueriesServer {
       'phx_error',
       <String, Object?>{},
     ]);
+  }
+
+  /// Breaks the connection with a socket error rather than a close, as a
+  /// lost network does.
+  void failConnection() {
+    registrations.clear();
+    _clientChannel?.fail(WebSocketChannelException('connection lost'));
   }
 
   Future<void> dropConnection() async {

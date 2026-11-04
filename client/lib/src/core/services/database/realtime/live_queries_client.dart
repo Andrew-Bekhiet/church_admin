@@ -25,10 +25,6 @@ class LiveQueriesClient {
   static const tokenExpiredReason = 'token_expired';
   static const runFailedReason = 'run_failed';
   static const Duration defaultRejoinDelay = Duration(seconds: 5);
-  static const _leavableStates = {
-    PhoenixChannelState.joined,
-    PhoenixChannelState.errored,
-  };
 
   final Uri socketUrl;
   final Stream<AuthLinkCredentials?> _credentials;
@@ -241,7 +237,10 @@ class LiveQueriesClient {
     _channel = null;
     if (channel == null) return;
 
-    if (leave && _leavableStates.contains(channel.state)) {
+    final holdsLibraryRejoinTimer =
+        channel.state == PhoenixChannelState.errored;
+    final mustTellServer = leave && channel.state == PhoenixChannelState.joined;
+    if (holdsLibraryRejoinTimer || mustTellServer) {
       channel.leave().future.ignore();
     }
     channel.close();

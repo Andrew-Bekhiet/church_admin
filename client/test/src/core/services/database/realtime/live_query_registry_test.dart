@@ -149,6 +149,24 @@ void main() {
       });
     });
 
+    test('is made again, once, after the connection fails with an error', () {
+      fakeAsync((async) {
+        final harness = LiveQueryHarness([mina]);
+        final subscription = harness.watchList().listen(null);
+        async.elapse(settleTime);
+        final ref = harness.liveQueriesServer.registeredRefs.single;
+
+        harness.liveQueriesServer.failConnection();
+        async.elapse(const Duration(minutes: 1));
+
+        expect(harness.liveQueriesServer.joinRefs, hasLength(2));
+        expect(harness.liveQueriesServer.registrations.keys, [ref]);
+
+        unawaited(subscription.cancel());
+        harness.dispose();
+      });
+    });
+
     test('the server refuses is not sent again, and the query keeps its '
         'rows', () {
       fakeAsync((async) {
