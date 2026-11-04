@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:gql/language.dart';
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gql/language.dart';
 import 'package:phoenix_socket/phoenix_socket.dart';
 
 import '../../../../fakes/live_queries_test_feed.dart';

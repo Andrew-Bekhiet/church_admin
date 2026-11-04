@@ -109,8 +109,9 @@ void main() {
         final attemptsBeforeStaleRefetch = attempts;
         final requestsBeforeStale = harness.server.requestCount;
 
-        harness.goOffline();
-        harness.goOnline();
+        harness
+          ..goOffline()
+          ..goOnline();
         async.elapse(settleTime);
 
         expect(
@@ -135,8 +136,9 @@ void main() {
         async.elapse(const Duration(minutes: 1));
         final requestsWhenLive = harness.server.requestCount;
 
-        harness.goOffline();
-        harness.goOnline();
+        harness
+          ..goOffline()
+          ..goOnline();
         async.elapse(settleTime);
 
         expect(harness.liveQueriesServer.registrations, isNotEmpty);
