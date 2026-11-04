@@ -285,6 +285,29 @@ defmodule ChurchAdmin.People.PersonCommandsTest do
 
       assert employed_person.job_description == "teacher"
     end
+
+    test "a shammas changed to female stops being a shammas", ctx do
+      level = Ash.Seed.seed!(ChurchAdmin.Catalog.ShammasLevel, %{name: "level", order: 1})
+
+      {:ok, shammas} =
+        People.create_person(
+          %{
+            name: "p",
+            family_id: ctx.family.id,
+            gender: true,
+            is_shammas: true,
+            shammas_level_id: level.id
+          },
+          actor: ctx.actor
+        )
+
+      assert shammas.is_shammas
+      assert shammas.shammas_level_id == level.id
+
+      {:ok, person} = People.update_person(shammas, %{gender: false}, actor: ctx.actor)
+
+      assert %{is_shammas: false, shammas_level_id: nil} = person
+    end
   end
 
   describe "deletePerson" do
