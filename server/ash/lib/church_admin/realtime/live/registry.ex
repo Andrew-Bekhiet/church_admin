@@ -66,8 +66,8 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
   def handle_call({:register, %Registration{} = registration}, _from, state) do
     state =
       state
-      |> remove_member(registration.replaces)
       |> add_member(registration)
+      |> remove_member(registration.replaces)
       |> start_queued_runs()
 
     {:reply, :ok, state}

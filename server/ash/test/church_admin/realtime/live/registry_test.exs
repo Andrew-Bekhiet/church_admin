@@ -547,6 +547,41 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
     end
   end
 
+  describe "a retry of the same ref" do
+    test "while the first run is running keeps it, with no second run", %{registry: registry} do
+      first = registration()
+      :ok = Registry.register(registry, first)
+      {_input, task} = await_run()
+
+      %{id: retry_id} = retry = registration(replaces: first.id)
+      :ok = Registry.register(registry, retry)
+
+      refute_receive {:run, _input, _task}, 50
+      assert Registry.group_count(registry) == 1
+
+      send(task, {:finish, success([row("1")])})
+      assert_receive {:live_ready, ^retry_id}
+      refute_receive {:run, _input, _task}, 50
+    end
+
+    @tag max_concurrent_runs: 1
+    test "while the first run is queued keeps it, with one run", %{registry: registry} do
+      :ok = Registry.register(registry, registration(variables: %{"name" => "holds the slot"}))
+      {_input, holding_the_slot} = await_run()
+
+      first = registration()
+      :ok = Registry.register(registry, first)
+      %{id: retry_id} = retry = registration(replaces: first.id)
+      :ok = Registry.register(registry, retry)
+
+      send(holding_the_slot, {:finish, success([])})
+      finish_next_run(success([row("1")]))
+
+      assert_receive {:live_ready, ^retry_id}
+      refute_receive {:run, _input, _task}, 50
+    end
+  end
+
   describe "unregistering" do
     test "drops an emptied group and ignores its running run", %{registry: registry} do
       %{id: id} = registration = registration()
