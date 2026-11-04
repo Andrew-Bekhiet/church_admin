@@ -153,7 +153,7 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
 
       assert_receive {:live_ready, ^id}
       assert_receive {:live_result, ^id, payload}
-      assert payload == Delta.full(list_result([row("1")]))
+      assert payload == [row("1")] |> list_result() |> Delta.full()
     end
 
     test "hashes that match push nothing", %{registry: registry} do
@@ -658,7 +658,8 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
     test "that fails keeps the old actor's result from later members", %{registry: registry} do
       register_and_settle(registry, [row("old scope")])
       regranted = %Actor{actor() | permissions: MapSet.new(["approved", "x"])}
-      %{id: refused} = registration(actor: regranted) |> tap(&Registry.register(registry, &1))
+      %{id: refused} = refused_registration = registration(actor: regranted)
+      :ok = Registry.register(registry, refused_registration)
 
       capture_log(fn ->
         finish_next_run({:error, [%{message: "boom"}]})
@@ -667,7 +668,8 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
 
       refute_receive {:run, _input, _task}, 50
 
-      %{id: later} = registration(actor: regranted) |> tap(&Registry.register(registry, &1))
+      %{id: later} = later_registration = registration(actor: regranted)
+      :ok = Registry.register(registry, later_registration)
 
       refute_received {:live_ready, ^later}
       finish_next_run(success([row("new scope")]))

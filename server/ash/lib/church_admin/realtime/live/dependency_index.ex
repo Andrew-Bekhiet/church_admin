@@ -28,7 +28,9 @@ defmodule ChurchAdmin.Realtime.Live.DependencyIndex do
 
   def delete(index, key, dependencies) do
     by_relation =
-      Enum.reduce(Map.keys(dependencies), index.by_relation, fn relation, by_relation ->
+      dependencies
+      |> Map.keys()
+      |> Enum.reduce(index.by_relation, fn relation, by_relation ->
         keys = by_relation |> Map.get(relation, MapSet.new()) |> MapSet.delete(key)
 
         if MapSet.size(keys) == 0,
@@ -54,7 +56,9 @@ defmodule ChurchAdmin.Realtime.Live.DependencyIndex do
 
   defp add(index, key, dependencies) do
     by_relation =
-      Enum.reduce(Map.keys(dependencies), index.by_relation, fn relation, by_relation ->
+      dependencies
+      |> Map.keys()
+      |> Enum.reduce(index.by_relation, fn relation, by_relation ->
         Map.update(by_relation, relation, MapSet.new([key]), &MapSet.put(&1, key))
       end)
 

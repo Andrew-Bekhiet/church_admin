@@ -59,8 +59,10 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassTest do
     second = %Grant{id: "2", scope_id: "s2"}
     same_rights = [%{second | id: "3"}, %{first | id: "4"}]
 
-    assert ViewerClass.key(global_reader(service_grants: [first, second]), "hobbies") ==
-             ViewerClass.key(global_reader(service_grants: same_rights), "hobbies")
+    written_first = global_reader(service_grants: [first, second])
+    written_last = global_reader(service_grants: same_rights)
+
+    assert ViewerClass.key(written_first, "hobbies") == ViewerClass.key(written_last, "hobbies")
   end
 
   test "an actor without a global read is keyed by its uid" do

@@ -1,5 +1,5 @@
 defmodule ChurchAdminWeb.ChangesChannelLiveTest do
-  use ChurchAdmin.LiveCase
+  use ChurchAdmin.LiveCase, async: false
 
   import Plug.Conn, only: [put_req_header: 3]
   import Phoenix.ConnTest, only: [build_conn: 0, post: 3, json_response: 2]
@@ -82,7 +82,7 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
 
       assert_push "live:result", %{ref: "r1", full: true, data: data}
       assert %{"hobbies" => %{"count" => 3, "results" => rows}} = data
-      assert Enum.sort(Enum.map(rows, & &1["id"])) == Enum.sort(ids)
+      assert rows |> Enum.map(& &1["id"]) |> Enum.sort() == Enum.sort(ids)
       assert Enum.all?(rows, &(&1["__typename"] == "Hobby"))
     end
 
@@ -468,7 +468,7 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
 
       channel = Process.monitor(socket.channel_pid)
 
-      Process.exit(Process.whereis(Registry), :kill)
+      Registry |> Process.whereis() |> Process.exit(:kill)
 
       assert_receive %Phoenix.Socket.Broadcast{event: "disconnect"}, 1_000
       assert_receive {:DOWN, ^channel, :process, _pid, _reason}, 1_000
@@ -495,7 +495,7 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
                   %{ref: "r1", full: true, data: %{"persons" => %{"results" => rows}}},
                   @staleness_budget_ms
 
-      assert Enum.sort(Enum.map(rows, & &1["id"])) == Enum.sort([visible.id, hidden.id])
+      assert rows |> Enum.map(& &1["id"]) |> Enum.sort() == Enum.sort([visible.id, hidden.id])
       assert :sys.get_state(socket.channel_pid).assigns.actor.read_all?
     end
 

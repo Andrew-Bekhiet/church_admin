@@ -79,14 +79,14 @@ defmodule ChurchAdmin.Realtime.Live.Group do
       known_hashes: registration.known_hashes
     }
 
-    group =
+    joined =
       group
       |> adopt_fresher_actor(registration.actor)
       |> put_in([Access.key!(:members), registration.id], member)
 
-    if result_current?(group),
-      do: settle_member(group, registration.id),
-      else: {group, []}
+    if result_current?(joined),
+      do: settle_member(joined, registration.id),
+      else: {joined, []}
   end
 
   @spec leave(t(), reference()) :: t()
@@ -129,15 +129,13 @@ defmodule ChurchAdmin.Realtime.Live.Group do
       touched: group.touched
     }
 
-    group = %{
-      group
-      | status: :running,
-        run_generation: group.generation,
-        touched: [],
-        run_again?: false
-    }
-
-    {group, input}
+    {%{
+       group
+       | status: :running,
+         run_generation: group.generation,
+         touched: [],
+         run_again?: false
+     }, input}
   end
 
   @spec track_run(t(), reference()) :: t()
@@ -176,18 +174,14 @@ defmodule ChurchAdmin.Realtime.Live.Group do
   end
 
   def finish_run(%__MODULE__{} = group, {:ok, %{result: %Result{} = result} = run}) do
-    previous = group.result
-
-    group = %{
+    %{
       idle(group)
       | result: result,
         result_generation: group.generation,
         dependencies: run.dependencies
     }
-
-    {group, pushes} = push_to_settled_members(group, previous)
-    {group, baselines} = settle_awaiting_members(group)
-    {group, pushes ++ baselines}
+    |> push_to_settled_members(group.result)
+    |> settle_awaiting_members_after()
   end
 
   @doc """
@@ -220,7 +214,7 @@ defmodule ChurchAdmin.Realtime.Live.Group do
   defp result_current?(%__MODULE__{result: nil}), do: false
   defp result_current?(group), do: group.result_generation == group.generation
 
-  defp sent_ids(%Result{} = result), do: MapSet.new(Result.ids(result))
+  defp sent_ids(%Result{} = result), do: result |> Result.ids() |> MapSet.new()
 
   defp push_to_settled_members(%__MODULE__{} = group, nil), do: {group, []}
 
@@ -241,6 +235,11 @@ defmodule ChurchAdmin.Realtime.Live.Group do
     {%{group | members: Map.new(members)}, messages}
   end
 
+  defp settle_awaiting_members_after({group, pushes}) do
+    {group, baselines} = settle_awaiting_members(group)
+    {group, pushes ++ baselines}
+  end
+
   defp settle_awaiting_members(%__MODULE__{} = group) do
     awaiting = for {id, %{awaiting_baseline?: true}} <- group.members, do: id
 
@@ -253,7 +252,7 @@ defmodule ChurchAdmin.Realtime.Live.Group do
   defp settle_member(%__MODULE__{result: result} = group, id) do
     %{pid: pid, known_hashes: known_hashes} = group.members[id]
 
-    group =
+    settled =
       update_in(
         group.members[id],
         &%{&1 | sent: sent_ids(result), awaiting_baseline?: false, known_hashes: nil}
@@ -262,7 +261,7 @@ defmodule ChurchAdmin.Realtime.Live.Group do
     ready = {pid, {:live_ready, id}}
 
     if known_hashes == result.chunk_hashes,
-      do: {group, [ready]},
-      else: {group, [ready, {pid, {:live_result, id, Delta.full(result)}}]}
+      do: {settled, [ready]},
+      else: {settled, [ready, {pid, {:live_result, id, Delta.full(result)}}]}
   end
 end

@@ -65,7 +65,7 @@ defmodule ChurchAdmin.Realtime.Live.Registration do
 
   defp window(%{"rows" => rows, "chunk" => chunk}, document)
        when rows in 1..@max_window_rows//1 and chunk in 1..@max_chunk_rows//1 do
-    if MapSet.subset?(MapSet.new(~w(first after)), document.variables),
+    if ~w(first after) |> MapSet.new() |> MapSet.subset?(document.variables),
       do: {:ok, %{rows: rows, chunk: chunk}},
       else: {:error, :invalid}
   end

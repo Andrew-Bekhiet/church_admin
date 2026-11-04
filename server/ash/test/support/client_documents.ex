@@ -15,7 +15,8 @@ defmodule ChurchAdmin.ClientDocuments do
     fragments = for {:fragment, name, text} <- definitions, into: %{}, do: {name, text}
 
     for {:query, name, text} <- definitions, into: %{} do
-      {name, Enum.join([text | fragment_texts(text, fragments, MapSet.new()) |> elem(0)], "\n")}
+      {spread_fragments, _seen} = fragment_texts(text, fragments, MapSet.new())
+      {name, Enum.join([text | spread_fragments], "\n")}
     end
   end
 

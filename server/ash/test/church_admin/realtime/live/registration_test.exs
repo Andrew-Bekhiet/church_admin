@@ -32,7 +32,7 @@ defmodule ChurchAdmin.Realtime.Live.RegistrationTest do
     variables = %{"first" => 5, "after" => "x", "filter" => %{}}
 
     assert {:ok, %{variables: kept}} =
-             Registration.from_payload(payload(%{"variables" => variables}))
+             %{"variables" => variables} |> payload() |> Registration.from_payload()
 
     assert kept == %{"filter" => %{}}
   end
@@ -61,9 +61,9 @@ defmodule ChurchAdmin.Realtime.Live.RegistrationTest do
 
   test "a window needs a document that declares first and after" do
     assert {:error, :invalid} =
-             Registration.from_payload(
-               payload(%{"document" => @no_after, "operationName" => nil})
-             )
+             %{"document" => @no_after, "operationName" => nil}
+             |> payload()
+             |> Registration.from_payload()
   end
 
   test "malformed fields are invalid" do
@@ -81,17 +81,19 @@ defmodule ChurchAdmin.Realtime.Live.RegistrationTest do
           %{"resultHashes" => "a"},
           %{"resultHashes" => [1]}
         ] do
-      assert {:error, :invalid} = Registration.from_payload(payload(overrides))
+      assert {:error, :invalid} = overrides |> payload() |> Registration.from_payload()
     end
   end
 
   test "document refusals come through" do
     assert {:error, :not_a_query} =
-             Registration.from_payload(
-               payload(%{"document" => "mutation m { x }", "operationName" => nil})
-             )
+             %{"document" => "mutation m { x }", "operationName" => nil}
+             |> payload()
+             |> Registration.from_payload()
 
     assert {:error, :too_large} =
-             Registration.from_payload(payload(%{"document" => String.duplicate(" ", 70_000)}))
+             %{"document" => String.duplicate(" ", 70_000)}
+             |> payload()
+             |> Registration.from_payload()
   end
 end

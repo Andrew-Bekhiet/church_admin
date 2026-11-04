@@ -55,8 +55,8 @@ defmodule ChurchAdmin.Realtime.Live.DocumentTest do
   end
 
   test "a document of 64 KB is accepted and a larger one refused" do
-    assert {:ok, _document} = Document.prepare(document_with_size(64 * 1024), nil)
-    assert {:error, :too_large} = Document.prepare(document_with_size(64 * 1024 + 1), nil)
+    assert {:ok, _document} = (64 * 1024) |> document_with_size() |> Document.prepare(nil)
+    assert {:error, :too_large} = (64 * 1024 + 1) |> document_with_size() |> Document.prepare(nil)
   end
 
   test "a document that was parsed once comes from the cache" do

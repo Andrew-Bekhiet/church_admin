@@ -36,7 +36,7 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassCompletenessTest do
     %{user: user, person: person, family: family}
   end
 
-  defp world(permissions) do
+  defp world(permissions, study_year_order) do
     service = Factory.service!()
     first = reader!(permissions, service)
     second = reader!(permissions, service)
@@ -44,7 +44,7 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassCompletenessTest do
     area = Factory.area!()
     street = Factory.street!(area)
     store = Factory.store!()
-    year = Factory.study_year!(System.unique_integer([:positive]))
+    year = Factory.study_year!(study_year_order)
     class = Factory.class!(service, service_study_year: year.order)
     meeting = Factory.meeting!(service_id: service.id)
 
@@ -126,7 +126,7 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassCompletenessTest do
   end
 
   test "the fixture's readers differ only in the fields the viewer class blanks" do
-    {first, second, _ids} = world(@read_only_reader)
+    {first, second, _ids} = world(@read_only_reader, 1)
 
     assert ViewerClass.global_reader?(first)
     assert ViewerClass.key(first, nil) == ViewerClass.key(second, nil)
@@ -140,8 +140,8 @@ defmodule ChurchAdmin.Realtime.Live.ViewerClassCompletenessTest do
   end
 
   test "the per-uid list is exactly the operations whose results differ between global readers" do
-    {read_only_first, read_only_second, read_only_ids} = world(@read_only_reader)
-    {admin_first, admin_second, admin_ids} = world(@full_admin)
+    {read_only_first, read_only_second, read_only_ids} = world(@read_only_reader, 1)
+    {admin_first, admin_second, admin_ids} = world(@full_admin, 2)
 
     differ =
       operations_that_differ(read_only_first, read_only_second, read_only_ids) ++

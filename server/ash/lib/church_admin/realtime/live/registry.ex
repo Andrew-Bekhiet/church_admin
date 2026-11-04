@@ -92,15 +92,8 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
   end
 
   def handle_info(:realtime_reset, state) do
-    state =
-      Enum.reduce(Map.keys(state.groups), state, fn key, state ->
-        case state.groups[key] do
-          %{status: :idle} -> enqueue(state, key)
-          _queued_or_running -> update_in(state.groups[key], &Group.mark_run_again/1)
-        end
-      end)
-
-    {:noreply, start_queued_runs(state)}
+    {:noreply,
+     state.groups |> Map.keys() |> Enum.reduce(state, &run_again/2) |> start_queued_runs()}
   end
 
   def handle_info({ref, outcome}, %{running: running} = state) when is_map_key(running, ref) do
@@ -120,21 +113,30 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
     end
   end
 
+  defp run_again(key, state) do
+    case state.groups[key] do
+      %{status: :idle} -> enqueue(state, key)
+      _queued_or_running -> update_in(state.groups[key], &Group.mark_run_again/1)
+    end
+  end
+
   defp add_member(state, %Registration{} = registration) do
     key = Group.key(registration)
-    group = Map.get_lazy(state.groups, key, fn -> Group.new(registration) end)
-    {group, messages} = Group.join(group, registration)
+    existing = Map.get_lazy(state.groups, key, fn -> Group.new(registration) end)
+    {group, messages} = Group.join(existing, registration)
     deliver(messages)
 
-    state = %{
+    %{
       state
       | groups: Map.put(state.groups, key, group),
         registrations: Map.put(state.registrations, registration.id, key)
     }
+    |> track_socket(registration.pid, registration.id)
+    |> enqueue_if_needed(group)
+  end
 
-    state = track_socket(state, registration.pid, registration.id)
-
-    if Group.needs_run?(group), do: enqueue(state, key), else: state
+  defp enqueue_if_needed(state, group) do
+    if Group.needs_run?(group), do: enqueue(state, group.key), else: state
   end
 
   defp remove_member(state, nil), do: state
@@ -195,7 +197,7 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
   end
 
   defp collect_in_busy_groups(state, rows) do
-    busy = Enum.concat(Map.values(state.running), :queue.to_list(state.queue))
+    busy = state.running |> Map.values() |> Enum.concat(:queue.to_list(state.queue))
 
     Enum.reduce(busy, state, fn key, state ->
       case state.groups do
@@ -218,8 +220,7 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
 
   defp enqueue_if_touched(state, group, rows) do
     if GroupDependencies.touched?(group.dependencies, rows) do
-      put_in(state.groups[group.key], Group.collect_touched(group, rows))
-      |> enqueue(group.key)
+      enqueue(put_in(state.groups[group.key], Group.collect_touched(group, rows)), group.key)
     else
       state
     end

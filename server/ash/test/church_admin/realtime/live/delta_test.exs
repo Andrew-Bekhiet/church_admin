@@ -7,13 +7,15 @@ defmodule ChurchAdmin.Realtime.Live.DeltaTest do
   defp row(id, name \\ "same"), do: %{"id" => id, "keyset" => "k#{id}", "name" => name}
 
   defp list(rows, opts \\ []) do
-    page = %{
-      "count" => Keyword.get(opts, :count, length(rows)),
-      "endKeyset" => Keyword.get(opts, :end_keyset, "end"),
-      "results" => rows
-    }
-
-    page = Map.merge(page, Keyword.get(opts, :extra, %{}))
+    page =
+      Map.merge(
+        %{
+          "count" => Keyword.get(opts, :count, length(rows)),
+          "endKeyset" => Keyword.get(opts, :end_keyset, "end"),
+          "results" => rows
+        },
+        Keyword.get(opts, :extra, %{})
+      )
 
     {:ok, result} = Result.from_chunks([%{hash: inspect(rows), data: %{"areas" => page}}])
     result
@@ -25,9 +27,9 @@ defmodule ChurchAdmin.Realtime.Live.DeltaTest do
   end
 
   defp payload(previous, next, sent \\ nil) do
-    sent = sent || MapSet.new(Result.ids(previous))
-
-    previous |> Delta.between(next) |> Delta.payload(next, sent)
+    previous
+    |> Delta.between(next)
+    |> Delta.payload(next, sent || previous |> Result.ids() |> MapSet.new())
   end
 
   test "a full payload carries the merged data" do
