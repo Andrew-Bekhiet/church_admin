@@ -27,7 +27,7 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
         form: _form,
         dao: DatabaseService.I.groups,
         photoUploader: RemotePhotoUploader(DatabaseService.I.photos),
-    analyticsService: AnalyticsService.I,
+        analyticsService: AnalyticsService.I,
         meetingOwner: _form,
         meetingsDAO: DatabaseService.I.meetings,
       );
