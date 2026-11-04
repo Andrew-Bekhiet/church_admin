@@ -4,7 +4,7 @@ defmodule ChurchAdmin.Realtime.Supervisor do
   start_replication_stream?: true`, the replication stream feeding it. A
   restarted broadcaster has lost its history, so the stream restarts after
   it and resets it from a new slot. The live-query helpers (statement
-  capture) start last, so a crash in
+  capture, dependency cache and probe connection) start last, so a crash in
   them leaves the broadcaster and the stream alone.
   """
 
@@ -12,6 +12,7 @@ defmodule ChurchAdmin.Realtime.Supervisor do
 
   alias ChurchAdmin.Realtime.Broadcaster
   alias ChurchAdmin.Realtime.Live.StatementCapture
+  alias ChurchAdmin.Realtime.Live.StatementDependencies
   alias ChurchAdmin.Realtime.ReplicationStream
 
   def start_link(opts), do: Supervisor.start_link(__MODULE__, opts, name: __MODULE__)
@@ -23,7 +24,7 @@ defmodule ChurchAdmin.Realtime.Supervisor do
         do: [ReplicationStream],
         else: []
 
-    live = [StatementCapture.Collectors]
+    live = [StatementCapture.Collectors, StatementDependencies.Cache, StatementDependencies.Probe]
 
     Supervisor.init([Broadcaster | stream] ++ live, strategy: :rest_for_one)
   end
