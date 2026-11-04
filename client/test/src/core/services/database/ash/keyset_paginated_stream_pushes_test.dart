@@ -22,7 +22,7 @@ void main() {
         async.elapse(settleTime);
 
         final registration =
-            harness.changeFeedServer.registrations.values.single;
+            harness.liveQueriesServer.registrations.values.single;
         expect(
           registration['document'],
           printNode(LiveQueryHarness.listDocument),
@@ -50,7 +50,7 @@ void main() {
         async.elapse(settleTime);
 
         final registration =
-            harness.changeFeedServer.registrations.values.single;
+            harness.liveQueriesServer.registrations.values.single;
         expect(registration['resultHashes'], harness.server.issuedResultHashes);
         expect(registration['resultHashes'], hasLength(2));
 
@@ -72,8 +72,8 @@ void main() {
           harness.server.rows[2],
         ];
 
-        harness.changeFeedServer.pushFull(
-          harness.changeFeedServer.registeredRefs.single,
+        harness.liveQueriesServer.pushFull(
+          harness.liveQueriesServer.registeredRefs.single,
           KeysetStreamHarness.pageData(pushed, count: 4),
         );
         async.elapse(settleTime);
@@ -96,9 +96,12 @@ void main() {
         async.elapse(settleTime);
         final emittedBeforePush = [...emitted];
 
-        harness.changeFeedServer.pushFull(
-          harness.changeFeedServer.registeredRefs.single,
-          KeysetStreamHarness.pageData(harness.server.rows.take(pageSize), count: 10),
+        harness.liveQueriesServer.pushFull(
+          harness.liveQueriesServer.registeredRefs.single,
+          KeysetStreamHarness.pageData(
+            harness.server.rows.take(pageSize),
+            count: 10,
+          ),
         );
         async.elapse(settleTime);
 
@@ -120,8 +123,8 @@ void main() {
         final shown = [...emitted.last];
         final renamed = shown[1].renamed('اسم جديد');
 
-        harness.changeFeedServer.pushDelta(
-          harness.changeFeedServer.registeredRefs.single,
+        harness.liveQueriesServer.pushDelta(
+          harness.liveQueriesServer.registeredRefs.single,
           rows: [renamed.toJson()],
         );
         async.elapse(settleTime);
@@ -146,8 +149,8 @@ void main() {
         final [first, second, ...] = harness.server.rows;
         harness.server.rows.insert(1, inserted);
 
-        harness.changeFeedServer.pushDelta(
-          harness.changeFeedServer.registeredRefs.single,
+        harness.liveQueriesServer.pushDelta(
+          harness.liveQueriesServer.registeredRefs.single,
           rows: [inserted.toJson()],
           order: [first.id, inserted.id, second.id],
           count: 11,
@@ -176,8 +179,8 @@ void main() {
         async.elapse(settleTime);
         final [first, _, third, fourth, ...] = harness.server.rows;
 
-        harness.changeFeedServer.pushDelta(
-          harness.changeFeedServer.registeredRefs.single,
+        harness.liveQueriesServer.pushDelta(
+          harness.liveQueriesServer.registeredRefs.single,
           rows: [fourth.toJson()],
           order: [first.id, third.id, fourth.id],
           count: 9,
@@ -201,17 +204,20 @@ void main() {
         final subscription = stream.listen(emitted.add);
         async.elapse(settleTime);
         final shown = [...emitted.last];
-        final ref = harness.changeFeedServer.registeredRefs.single;
+        final ref = harness.liveQueriesServer.registeredRefs.single;
 
-        harness.changeFeedServer
+        harness.liveQueriesServer
           ..pushDelta(ref, rows: const [], order: [shown.first.id, 'unknown'])
           ..pushDelta(ref, rows: const [], order: ['unknown', 'another']);
         async.elapse(settleTime);
         final shownAfterBrokenDeltas = [...emitted.last];
-        final resyncRequests = [...harness.changeFeedServer.resyncedRefs];
-        harness.changeFeedServer.pushFull(
+        final resyncRequests = [...harness.liveQueriesServer.resyncedRefs];
+        harness.liveQueriesServer.pushFull(
           ref,
-          KeysetStreamHarness.pageData(harness.server.rows.skip(5).take(pageSize), count: 10),
+          KeysetStreamHarness.pageData(
+            harness.server.rows.skip(5).take(pageSize),
+            count: 10,
+          ),
         );
         async.elapse(settleTime);
 
@@ -224,6 +230,5 @@ void main() {
         harness.dispose();
       });
     });
-
   });
 }

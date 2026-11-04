@@ -5,7 +5,7 @@ import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gql/language.dart';
 
-import '../../../../fakes/change_feed_test_feed.dart';
+import '../../../../fakes/live_queries_test_feed.dart';
 
 void main() {
   final document = parseString(r'query people($filter: String) { people }');
@@ -20,7 +20,7 @@ void main() {
 
   Future<LiveRegisterOutcome> register(
     FakeAsync async,
-    ChangeFeedTestFeed feed,
+    LiveQueriesTestFeed feed,
   ) => feed.register(
     async,
     LiveRegistration(ref: ref, request: request),
@@ -28,7 +28,7 @@ void main() {
 
   test('joining the channel is announced', () {
     fakeAsync((async) {
-      final feed = ChangeFeedTestFeed.start(async);
+      final feed = LiveQueriesTestFeed.start(async);
 
       expect(feed.events, [const ChannelJoined()]);
 
@@ -40,7 +40,7 @@ void main() {
     test('reaches the server with the document, the variables and the '
         'window', () {
       fakeAsync((async) {
-        final feed = ChangeFeedTestFeed.start(async);
+        final feed = LiveQueriesTestFeed.start(async);
 
         unawaited(register(async, feed));
 
@@ -59,7 +59,7 @@ void main() {
 
     test('is accepted when the server replies', () {
       fakeAsync((async) {
-        final feed = ChangeFeedTestFeed.start(async);
+        final feed = LiveQueriesTestFeed.start(async);
         LiveRegisterOutcome? outcome;
 
         unawaited(register(async, feed).then((value) => outcome = value));
@@ -73,7 +73,7 @@ void main() {
 
     test('keeps the paging variables of a query without a window', () {
       fakeAsync((async) {
-        final feed = ChangeFeedTestFeed.start(async);
+        final feed = LiveQueriesTestFeed.start(async);
         final entityRequest = LiveQueryRequest(
           document: document,
           operationName: 'people',
@@ -96,7 +96,7 @@ void main() {
 
     test('the server refuses is reported as refused', () {
       fakeAsync((async) {
-        final feed = ChangeFeedTestFeed.start(
+        final feed = LiveQueriesTestFeed.start(
           async,
           prepareServer: (server) => server.refusalFor = (_) => 'too_many',
         );
@@ -113,7 +113,7 @@ void main() {
 
     test('the server fails without a reason is reported as failed', () {
       fakeAsync((async) {
-        final feed = ChangeFeedTestFeed.start(
+        final feed = LiveQueriesTestFeed.start(
           async,
           prepareServer: (server) => server.failRegistrations = true,
         );
@@ -130,10 +130,10 @@ void main() {
 
     test('the server fails to run the first time is reported as failed', () {
       fakeAsync((async) {
-        final feed = ChangeFeedTestFeed.start(
+        final feed = LiveQueriesTestFeed.start(
           async,
           prepareServer: (server) =>
-              server.refusalFor = (_) => ChangeFeedClient.runFailedReason,
+              server.refusalFor = (_) => LiveQueriesClient.runFailedReason,
         );
         LiveRegisterOutcome? outcome;
 
@@ -148,7 +148,7 @@ void main() {
 
     test('before the channel is joined is reported as not joined', () {
       fakeAsync((async) {
-        final feed = ChangeFeedTestFeed.start(async, initialCredentials: null);
+        final feed = LiveQueriesTestFeed.start(async, initialCredentials: null);
         LiveRegisterOutcome? outcome;
 
         unawaited(register(async, feed).then((value) => outcome = value));
@@ -163,7 +163,7 @@ void main() {
 
     test('is withdrawn when unregistered', () {
       fakeAsync((async) {
-        final feed = ChangeFeedTestFeed.start(async);
+        final feed = LiveQueriesTestFeed.start(async);
         unawaited(register(async, feed));
 
         feed.client.unregister(ref);
@@ -177,7 +177,7 @@ void main() {
 
     test('is asked to resync', () {
       fakeAsync((async) {
-        final feed = ChangeFeedTestFeed.start(async);
+        final feed = LiveQueriesTestFeed.start(async);
         unawaited(register(async, feed));
 
         feed.client.resync(ref);
@@ -193,7 +193,7 @@ void main() {
   group('a result push', () {
     test('with the full data arrives as a full result', () {
       fakeAsync((async) {
-        final feed = ChangeFeedTestFeed.start(async);
+        final feed = LiveQueriesTestFeed.start(async);
         const data = {'people': 3};
 
         feed.server.pushFull(ref, data);
@@ -213,7 +213,7 @@ void main() {
     test('with rows, an order, a count and an end keyset arrives as a '
         'list delta', () {
       fakeAsync((async) {
-        final feed = ChangeFeedTestFeed.start(async);
+        final feed = LiveQueriesTestFeed.start(async);
         const row = {'id': 'a', 'name': 'مينا'};
 
         feed.server.pushDelta(
@@ -244,7 +244,7 @@ void main() {
 
     test('with rows only arrives without an order', () {
       fakeAsync((async) {
-        final feed = ChangeFeedTestFeed.start(async);
+        final feed = LiveQueriesTestFeed.start(async);
 
         feed.server.pushDelta(ref, rows: const []);
         async.elapse(const Duration(milliseconds: 10));

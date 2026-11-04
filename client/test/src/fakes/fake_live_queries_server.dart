@@ -12,7 +12,7 @@ import 'fake_live_results.dart';
 /// A Phoenix server speaking the V2 serializer on the `changes` topic. It
 /// keeps the live queries a client registers by `ref`, and pushes results
 /// for them when a test says so.
-class FakeChangeFeedServer {
+class FakeLiveQueriesServer {
   final List<Uri> connectedUris = [];
 
   /// The `live:register` payloads the server holds, by ref.
@@ -47,7 +47,7 @@ class FakeChangeFeedServer {
   List<String?> get connectedTokens =>
       connectedUris.map((uri) => uri.queryParameters['token']).toList();
 
-  FakeChangeFeedServer();
+  FakeLiveQueriesServer();
 
   WebSocketChannel connect(Uri uri) {
     connectedUris.add(uri);
@@ -106,8 +106,8 @@ class FakeChangeFeedServer {
   void _pushLiveResult(Json payload) => _send(_serverSocket, [
     _joinRef,
     null,
-    ChangeFeedClient.topic,
-    ChangeFeedClient.liveResultEvent,
+    LiveQueriesClient.topic,
+    LiveQueriesClient.liveResultEvent,
     payload,
   ]);
 
@@ -119,7 +119,7 @@ class FakeChangeFeedServer {
     _send(_serverSocket, [
       _joinRef,
       null,
-      ChangeFeedClient.topic,
+      LiveQueriesClient.topic,
       'phx_error',
       <String, Object?>{},
     ]);

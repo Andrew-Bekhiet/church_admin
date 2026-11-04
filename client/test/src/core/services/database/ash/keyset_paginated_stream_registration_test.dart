@@ -23,26 +23,28 @@ void main() {
         final emitted = <List<AshTestItem>>[];
         final subscription = stream.listen(emitted.add);
         async.elapse(settleTime);
-        final oldRef = harness.changeFeedServer.registeredRefs.single;
+        final oldRef = harness.liveQueriesServer.registeredRefs.single;
 
         unawaited(stream.listenToNextPage());
         async.elapse(settleTime);
-        final newRef = harness.changeFeedServer.registeredRefs.last;
+        final newRef = harness.liveQueriesServer.registeredRefs.last;
         final shownAfterGrowth = [...emitted.last];
-        harness.changeFeedServer.pushFull(
+        harness.liveQueriesServer.pushFull(
           oldRef,
-          KeysetStreamHarness.pageData([const AshTestItem(id: 'stale', name: 'قديم')]),
+          KeysetStreamHarness.pageData([
+            const AshTestItem(id: 'stale', name: 'قديم'),
+          ]),
         );
         async.elapse(settleTime);
 
-        expect(harness.changeFeedServer.registrations.keys, [newRef]);
+        expect(harness.liveQueriesServer.registrations.keys, [newRef]);
         expect(newRef, isNot(oldRef));
-        expect(harness.changeFeedServer.registrations[newRef]?['window'], {
+        expect(harness.liveQueriesServer.registrations[newRef]?['window'], {
           'rows': 2 * pageSize,
           'chunk': AshPagination.maxPageSize,
         });
         expect(
-          harness.changeFeedServer.registrations[newRef]?['resultHashes'],
+          harness.liveQueriesServer.registrations[newRef]?['resultHashes'],
           isNull,
         );
         expect(emitted.last, shownAfterGrowth);
@@ -63,18 +65,23 @@ void main() {
         );
         final onlyIds = BehaviorSubject<List<String>?>.seeded(null);
         addTearDown(onlyIds.close);
-        final stream = KeysetStreamHarness.streamOver(harness, onlyIds: onlyIds);
+        final stream = KeysetStreamHarness.streamOver(
+          harness,
+          onlyIds: onlyIds,
+        );
         final emitted = <List<AshTestItem>>[];
         final subscription = stream.listen(emitted.add);
         async.elapse(settleTime);
-        final oldRef = harness.changeFeedServer.registeredRefs.single;
+        final oldRef = harness.liveQueriesServer.registeredRefs.single;
         final wanted = [harness.server.rows[7], harness.server.rows[8]];
 
         onlyIds.add([for (final row in wanted) row.id]);
         async.elapse(const Duration(milliseconds: 100));
-        harness.changeFeedServer.pushFull(
+        harness.liveQueriesServer.pushFull(
           oldRef,
-          KeysetStreamHarness.pageData([const AshTestItem(id: 'stale', name: 'قديم')]),
+          KeysetStreamHarness.pageData([
+            const AshTestItem(id: 'stale', name: 'قديم'),
+          ]),
         );
         async.elapse(settleTime);
 
@@ -101,13 +108,13 @@ void main() {
         final emitted = <List<AshTestItem>>[];
         final subscription = stream.listen(emitted.add);
         async.elapse(settleTime);
-        final ref = harness.changeFeedServer.registeredRefs.single;
+        final ref = harness.liveQueriesServer.registeredRefs.single;
         final [first, second, third, ...] = harness.server.rows;
         final renamed = second.renamed('اسم جديد');
 
         unawaited(stream.refetch());
         async.elapse(const Duration(milliseconds: 100));
-        harness.changeFeedServer.pushFull(
+        harness.liveQueriesServer.pushFull(
           ref,
           KeysetStreamHarness.pageData([
             const AshTestItem(id: 'other', name: 'آخر'),
@@ -115,8 +122,8 @@ void main() {
         );
         async.elapse(settleTime);
         final shownAfterRefetch = [...emitted.last];
-        harness.changeFeedServer.pushDelta(
-          harness.changeFeedServer.registeredRefs.last,
+        harness.liveQueriesServer.pushDelta(
+          harness.liveQueriesServer.registeredRefs.last,
           rows: [renamed.toJson()],
         );
         async.elapse(settleTime);
@@ -140,14 +147,14 @@ void main() {
           onError: (Object _) {},
         );
         async.elapse(settleTime);
-        final ref = harness.changeFeedServer.registeredRefs.single;
+        final ref = harness.liveQueriesServer.registeredRefs.single;
         final [first, second, third, ...] = harness.server.rows;
         final renamed = second.renamed('اسم جديد');
 
         harness.server.reachable = false;
         unawaited(stream.listenToNextPage());
         async.elapse(settleTime);
-        harness.changeFeedServer.pushDelta(ref, rows: [renamed.toJson()]);
+        harness.liveQueriesServer.pushDelta(ref, rows: [renamed.toJson()]);
         async.elapse(settleTime);
 
         expect(emitted.last, [first, renamed, third]);
@@ -166,21 +173,24 @@ void main() {
         final emitted = <List<AshTestItem>>[];
         final subscription = stream.listen(emitted.add);
         async.elapse(settleTime);
-        final ref = harness.changeFeedServer.registeredRefs.single;
+        final ref = harness.liveQueriesServer.registeredRefs.single;
         final shown = [...emitted.last];
 
-        unawaited(harness.changeFeedServer.dropConnection());
+        unawaited(harness.liveQueriesServer.dropConnection());
         async.elapse(const Duration(milliseconds: 100));
         final shownWhileDisconnected = [...emitted.last];
         async.elapse(settleTime);
-        harness.changeFeedServer.pushFull(
+        harness.liveQueriesServer.pushFull(
           ref,
-          KeysetStreamHarness.pageData(harness.server.rows.skip(3).take(pageSize), count: 10),
+          KeysetStreamHarness.pageData(
+            harness.server.rows.skip(3).take(pageSize),
+            count: 10,
+          ),
         );
         async.elapse(settleTime);
 
         expect(shownWhileDisconnected, shown);
-        expect(harness.changeFeedServer.registrations.keys, [ref]);
+        expect(harness.liveQueriesServer.registrations.keys, [ref]);
         expect(emitted.last, harness.server.rows.skip(3).take(pageSize));
 
         unawaited(subscription.cancel());
@@ -196,16 +206,16 @@ void main() {
         final stream = KeysetStreamHarness.streamOver(harness);
         final subscription = stream.listen(null);
         async.elapse(settleTime);
-        final ref = harness.changeFeedServer.registeredRefs.single;
-        harness.changeFeedServer.pushDelta(ref, rows: const []);
+        final ref = harness.liveQueriesServer.registeredRefs.single;
+        harness.liveQueriesServer.pushDelta(ref, rows: const []);
         async.elapse(settleTime);
 
-        unawaited(harness.changeFeedServer.dropConnection());
+        unawaited(harness.liveQueriesServer.dropConnection());
         async.elapse(settleTime);
 
-        expect(harness.changeFeedServer.registrations, contains(ref));
+        expect(harness.liveQueriesServer.registrations, contains(ref));
         expect(
-          harness.changeFeedServer.registrations[ref]?['resultHashes'],
+          harness.liveQueriesServer.registrations[ref]?['resultHashes'],
           isNull,
         );
 
@@ -221,14 +231,14 @@ void main() {
         final stream = KeysetStreamHarness.streamOver(harness);
         final subscription = stream.listen(null);
         async.elapse(settleTime);
-        final ref = harness.changeFeedServer.registeredRefs.single;
+        final ref = harness.liveQueriesServer.registeredRefs.single;
 
         unawaited(subscription.cancel());
         unawaited(stream.dispose());
         async.elapse(settleTime);
 
-        expect(harness.changeFeedServer.unregisteredRefs, [ref]);
-        expect(harness.changeFeedServer.registrations, isEmpty);
+        expect(harness.liveQueriesServer.unregisteredRefs, [ref]);
+        expect(harness.liveQueriesServer.registrations, isEmpty);
 
         harness.dispose();
       });

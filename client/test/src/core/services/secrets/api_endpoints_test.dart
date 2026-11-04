@@ -9,7 +9,7 @@ void main() {
       expect(unit.graphql, Uri.parse('http://localhost:4100/gql'));
       expect(unit.healthCheck, Uri.parse('http://localhost:4100/healthz'));
       expect(
-        unit.changeFeedSocket,
+        unit.liveQueriesSocket,
         Uri.parse('ws://localhost:4100/socket/websocket'),
       );
     });
@@ -19,7 +19,7 @@ void main() {
 
       expect(unit.graphql, Uri.parse('https://api.example.com/gql'));
       expect(
-        unit.changeFeedSocket,
+        unit.liveQueriesSocket,
         Uri.parse('wss://api.example.com/socket/websocket'),
       );
     });

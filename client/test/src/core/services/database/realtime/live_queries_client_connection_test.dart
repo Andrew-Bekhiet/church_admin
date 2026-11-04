@@ -6,12 +6,12 @@ import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:phoenix_socket/phoenix_socket.dart';
 
-import '../../../../fakes/change_feed_test_feed.dart';
+import '../../../../fakes/live_queries_test_feed.dart';
 
 void main() {
   test('rejoining after the connection dropped is announced again', () {
     fakeAsync((async) {
-      final feed = ChangeFeedTestFeed.start(async);
+      final feed = LiveQueriesTestFeed.start(async);
 
       unawaited(feed.server.dropConnection());
       async.elapse(const Duration(seconds: 5));
@@ -25,7 +25,7 @@ void main() {
 
   test('the server forgets a registration when the connection drops', () {
     fakeAsync((async) {
-      final feed = ChangeFeedTestFeed.start(async);
+      final feed = LiveQueriesTestFeed.start(async);
       unawaited(
         feed.register(
           async,
@@ -54,7 +54,7 @@ void main() {
   test('a join refused for an expired token reconnects with a refreshed '
       'token', () {
     fakeAsync((async) {
-      final feed = ChangeFeedTestFeed.start(
+      final feed = LiveQueriesTestFeed.start(
         async,
         prepareServer: (server) => server.expiredTokens.add('token-1'),
       );
@@ -70,7 +70,7 @@ void main() {
 
   test('a refused connection backs off instead of retrying at once', () {
     fakeAsync((async) {
-      final feed = ChangeFeedTestFeed.start(
+      final feed = LiveQueriesTestFeed.start(
         async,
         prepareServer: (server) => server.refuseConnections = true,
       );
@@ -89,14 +89,14 @@ void main() {
 
   test('a refused connection retries as soon as the auth state changes', () {
     fakeAsync((async) {
-      final feed = ChangeFeedTestFeed.start(
+      final feed = LiveQueriesTestFeed.start(
         async,
         prepareServer: (server) => server.refuseConnections = true,
       );
       async.elapse(const Duration(seconds: 20));
 
       feed.server.refuseConnections = false;
-      feed.credentials.add(ChangeFeedTestFeed.anotherUser);
+      feed.credentials.add(LiveQueriesTestFeed.anotherUser);
       async.elapse(const Duration(seconds: 2));
 
       expect(feed.server.isConnected, isTrue);
@@ -108,9 +108,9 @@ void main() {
 
   test('another user signing in reconnects and joins again', () {
     fakeAsync((async) {
-      final feed = ChangeFeedTestFeed.start(async);
+      final feed = LiveQueriesTestFeed.start(async);
 
-      feed.credentials.add(ChangeFeedTestFeed.anotherUser);
+      feed.credentials.add(LiveQueriesTestFeed.anotherUser);
       async.elapse(const Duration(seconds: 1));
 
       expect(feed.server.connectedUris, hasLength(2));
@@ -122,7 +122,7 @@ void main() {
 
   test('signing out disconnects', () {
     fakeAsync((async) {
-      final feed = ChangeFeedTestFeed.start(async);
+      final feed = LiveQueriesTestFeed.start(async);
 
       feed.credentials.add(null);
       async.elapse(const Duration(seconds: 1));
@@ -135,7 +135,7 @@ void main() {
 
   test('nothing connects while signed out', () {
     fakeAsync((async) {
-      final feed = ChangeFeedTestFeed.start(async, initialCredentials: null);
+      final feed = LiveQueriesTestFeed.start(async, initialCredentials: null);
 
       expect(feed.server.connectedUris, isEmpty);
 

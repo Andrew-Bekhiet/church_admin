@@ -3,11 +3,11 @@ import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'fake_change_feed_server.dart';
+import 'fake_live_queries_server.dart';
 
-/// A [ChangeFeedClient] connected to a [FakeChangeFeedServer], with the
+/// A [LiveQueriesClient] connected to a [FakeLiveQueriesServer], with the
 /// events it announced.
-class ChangeFeedTestFeed {
+class LiveQueriesTestFeed {
   static const signedIn = AuthLinkCredentials(
     uid: 'firebaseUid',
     hasuraUserId: 'currentUserId',
@@ -19,13 +19,13 @@ class ChangeFeedTestFeed {
     idToken: 'unused',
   );
 
-  final ChangeFeedClient client;
-  final FakeChangeFeedServer server;
-  final List<ChangeFeedEvent> events;
+  final LiveQueriesClient client;
+  final FakeLiveQueriesServer server;
+  final List<LiveQueriesEvent> events;
   final BehaviorSubject<AuthLinkCredentials?> credentials;
-  final ChangeFeedTestIdTokens idTokens;
+  final LiveQueriesTestIdTokens idTokens;
 
-  ChangeFeedTestFeed._({
+  LiveQueriesTestFeed._({
     required this.client,
     required this.server,
     required this.events,
@@ -33,29 +33,29 @@ class ChangeFeedTestFeed {
     required this.idTokens,
   });
 
-  factory ChangeFeedTestFeed.start(
+  factory LiveQueriesTestFeed.start(
     FakeAsync async, {
     AuthLinkCredentials? initialCredentials = signedIn,
-    void Function(FakeChangeFeedServer server)? prepareServer,
+    void Function(FakeLiveQueriesServer server)? prepareServer,
   }) {
-    final server = FakeChangeFeedServer();
+    final server = FakeLiveQueriesServer();
     prepareServer?.call(server);
     final credentials = BehaviorSubject<AuthLinkCredentials?>.seeded(
       initialCredentials,
     );
     addTearDown(credentials.close);
-    final idTokens = ChangeFeedTestIdTokens();
-    final client = ChangeFeedClient(
+    final idTokens = LiveQueriesTestIdTokens();
+    final client = LiveQueriesClient(
       socketUrl: Uri.parse('ws://localhost:4000/socket/websocket'),
       credentials: credentials,
       idToken: idTokens.call,
       webSocketChannelFactory: server.connect,
     );
-    final events = <ChangeFeedEvent>[];
+    final events = <LiveQueriesEvent>[];
     client.events.listen(events.add);
     async.elapse(const Duration(seconds: 1));
 
-    return ChangeFeedTestFeed._(
+    return LiveQueriesTestFeed._(
       client: client,
       server: server,
       events: events,
@@ -79,7 +79,7 @@ class ChangeFeedTestFeed {
 
 /// Hands out the token Firebase has cached, and a new one once a refresh is
 /// forced.
-class ChangeFeedTestIdTokens {
+class LiveQueriesTestIdTokens {
   final List<bool> forceRefreshes = [];
   int _minted = 1;
 

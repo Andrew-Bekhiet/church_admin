@@ -7,7 +7,7 @@ import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'ash_responses.dart';
-import 'fake_change_feed_server.dart';
+import 'fake_live_queries_server.dart';
 
 /// An Ash GraphQL server over an in-memory table of [AshTestItem]s: a request
 /// with an `id` variable reads one row, any other reads a keyset page
@@ -143,7 +143,7 @@ class LiveQueryHarness {
   ''');
 
   final FakeAshServerLink server;
-  final FakeChangeFeedServer changeFeedServer = FakeChangeFeedServer();
+  final FakeLiveQueriesServer liveQueriesServer = FakeLiveQueriesServer();
   final BehaviorSubject<bool> connectivity = BehaviorSubject.seeded(true);
   final BehaviorSubject<AuthLinkCredentials?> credentials =
       BehaviorSubject.seeded(
@@ -154,11 +154,11 @@ class LiveQueryHarness {
         ),
       );
 
-  late final ChangeFeedClient changeFeed = ChangeFeedClient(
+  late final LiveQueriesClient liveQueries = LiveQueriesClient(
     socketUrl: Uri.parse('ws://localhost:4000/socket/websocket'),
     credentials: credentials,
     idToken: ({forceRefresh = false}) async => 'idToken',
-    webSocketChannelFactory: changeFeedServer.connect,
+    webSocketChannelFactory: liveQueriesServer.connect,
   );
 
   late final DBGraphQLClient client = DBGraphQLClient(
@@ -167,7 +167,7 @@ class LiveQueryHarness {
     cache: GraphQLCache(store: InMemoryStore()),
   );
   late final LiveQueryRegistry registry = LiveQueryRegistry(
-    changeFeed: changeFeed,
+    liveQueries: liveQueries,
     connectivity: connectivity,
   );
 
@@ -194,7 +194,7 @@ class LiveQueryHarness {
     ),
   );
 
-  void announce() => unawaited(changeFeedServer.pushCurrentResults(server));
+  void announce() => unawaited(liveQueriesServer.pushCurrentResults(server));
 
   void goOffline() {
     server.reachable = false;
@@ -207,7 +207,7 @@ class LiveQueryHarness {
   }
 
   void dispose() {
-    changeFeed.dispose();
+    liveQueries.dispose();
     unawaited(credentials.close());
     unawaited(connectivity.close());
   }

@@ -4,7 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:phoenix_socket/phoenix_socket.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-typedef ChangeFeedIdentity = ({String uid, String? userId});
+typedef LiveQueriesIdentity = ({String uid, String? userId});
 
 typedef IdTokenFetcher = Future<String?> Function({bool forceRefresh});
 
@@ -16,7 +16,7 @@ typedef IdTokenFetcher = Future<String?> Function({bool forceRefresh});
 /// Every connect asks for a current ID token; a join refused for an expired
 /// token reconnects with a refreshed one. A refused connect backs off
 /// between attempts and retries at once when the credentials change.
-class ChangeFeedClient {
+class LiveQueriesClient {
   static const topic = 'live_queries';
   static const liveResultEvent = 'live:result';
   static const registerEvent = 'live:register';
@@ -36,14 +36,14 @@ class ChangeFeedClient {
   final WebSocketChannel Function(Uri uri)? _webSocketChannelFactory;
   final Duration rejoinDelay;
 
-  late final StreamController<ChangeFeedEvent> _events =
+  late final StreamController<LiveQueriesEvent> _events =
       StreamController.broadcast(onListen: _start, onCancel: _stop);
 
   StreamSubscription<AuthLinkCredentials?>? _credentialsSubscription;
   bool _refreshTokenOnNextConnect = false;
 
   PhoenixSocket? _socket;
-  ChangeFeedIdentity? _socketIdentity;
+  LiveQueriesIdentity? _socketIdentity;
   bool _socketFailedToOpen = false;
   List<StreamSubscription<Object?>> _socketSubscriptions = [];
 
@@ -52,9 +52,9 @@ class ChangeFeedClient {
   Timer? _rejoinTimer;
   bool _isJoined = false;
 
-  Stream<ChangeFeedEvent> get events => _events.stream;
+  Stream<LiveQueriesEvent> get events => _events.stream;
 
-  ChangeFeedClient({
+  LiveQueriesClient({
     required this.socketUrl,
     required this._credentials,
     required this._idToken,
@@ -124,7 +124,7 @@ class ChangeFeedClient {
     if (identity != null) _connect(identity);
   }
 
-  void _connect(ChangeFeedIdentity identity) {
+  void _connect(LiveQueriesIdentity identity) {
     final socket = PhoenixSocket(
       socketUrl.toString(),
       socketOptions: PhoenixSocketOptions(dynamicParams: _connectParams),
@@ -247,7 +247,7 @@ class ChangeFeedClient {
     channel.close();
   }
 
-  void _emit(ChangeFeedEvent event) {
+  void _emit(LiveQueriesEvent event) {
     if (!_events.isClosed) _events.add(event);
   }
 

@@ -5,7 +5,7 @@ import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gql/language.dart';
 
-import '../../../../fakes/change_feed_test_feed.dart';
+import '../../../../fakes/live_queries_test_feed.dart';
 
 void main() {
   const ref = 'ref-1';
@@ -21,7 +21,7 @@ void main() {
   group('while the channel is errored', () {
     test('withdrawing and resyncing a registration raises nothing', () {
       fakeAsync((async) {
-        final feed = ChangeFeedTestFeed.start(async);
+        final feed = LiveQueriesTestFeed.start(async);
         unawaited(feed.register(async, registration));
         feed.server.crashChannel();
         async.flushMicrotasks();
@@ -35,7 +35,7 @@ void main() {
 
     test('a registration is reported as not joined', () {
       fakeAsync((async) {
-        final feed = ChangeFeedTestFeed.start(async);
+        final feed = LiveQueriesTestFeed.start(async);
         feed.server.crashChannel();
         async.flushMicrotasks();
         LiveRegisterOutcome? outcome;
@@ -52,14 +52,14 @@ void main() {
     });
   });
 
-    group('a channel crash on the server', () {
+  group('a channel crash on the server', () {
     test('is announced as a join again, so registrations are made again', () {
       fakeAsync((async) {
-        final feed = ChangeFeedTestFeed.start(async);
+        final feed = LiveQueriesTestFeed.start(async);
         unawaited(feed.register(async, registration));
 
         feed.server.crashChannel();
-        async.elapse(ChangeFeedClient.defaultRejoinDelay * 2);
+        async.elapse(LiveQueriesClient.defaultRejoinDelay * 2);
 
         expect(feed.events, [const ChannelJoined(), const ChannelJoined()]);
 
@@ -70,7 +70,7 @@ void main() {
     test('leaves one joined channel, not a second one from the library '
         'rejoin timer', () {
       fakeAsync((async) {
-        final feed = ChangeFeedTestFeed.start(async);
+        final feed = LiveQueriesTestFeed.start(async);
 
         feed.server.crashChannel();
         async.elapse(const Duration(minutes: 1));
@@ -84,15 +84,13 @@ void main() {
 
     test('can be registered on again once the channel is joined again', () {
       fakeAsync((async) {
-        final feed = ChangeFeedTestFeed.start(async);
+        final feed = LiveQueriesTestFeed.start(async);
         feed.server.crashChannel();
-        async.elapse(ChangeFeedClient.defaultRejoinDelay * 2);
+        async.elapse(LiveQueriesClient.defaultRejoinDelay * 2);
         LiveRegisterOutcome? outcome;
 
         unawaited(
-          feed
-              .register(async, registration)
-              .then((value) => outcome = value),
+          feed.register(async, registration).then((value) => outcome = value),
         );
         async.flushMicrotasks();
 

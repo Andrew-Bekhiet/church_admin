@@ -1,5 +1,5 @@
-export 'realtime/change_feed_client.dart';
-export 'realtime/change_feed_event.dart';
+export 'realtime/live_queries_client.dart';
+export 'realtime/live_queries_event.dart';
 export 'realtime/live_query.dart';
 export 'realtime/live_query_registry.dart';
 export 'realtime/live_query_request.dart';

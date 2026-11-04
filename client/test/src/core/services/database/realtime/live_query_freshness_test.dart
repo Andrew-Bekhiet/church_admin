@@ -69,7 +69,7 @@ void main() {
 
           expect(emittedOffline, isEmpty);
           expect(opened.emitted.last, [mina]);
-          expect(harness.changeFeedServer.registrations, isNotEmpty);
+          expect(harness.liveQueriesServer.registrations, isNotEmpty);
 
           opened.close();
           harness.dispose();
@@ -107,12 +107,12 @@ void main() {
 
         first.close();
         async.elapse(const Duration(seconds: 1));
-        final connectedBetweenScreens = harness.changeFeedServer.isConnected;
+        final connectedBetweenScreens = harness.liveQueriesServer.isConnected;
         final second = openLiveList(harness);
         async.elapse(Duration.zero);
 
         expect(connectedBetweenScreens, isTrue);
-        expect(harness.changeFeedServer.isConnected, isTrue);
+        expect(harness.liveQueriesServer.isConnected, isTrue);
 
         second.close();
         harness.dispose();
@@ -127,10 +127,10 @@ void main() {
 
         opened.close();
         async.elapse(
-          LiveQueryRegistry.changeFeedGracePeriod + const Duration(seconds: 1),
+          LiveQueryRegistry.liveQueriesGracePeriod + const Duration(seconds: 1),
         );
 
-        expect(harness.changeFeedServer.isConnected, isFalse);
+        expect(harness.liveQueriesServer.isConnected, isFalse);
 
         harness.dispose();
       });

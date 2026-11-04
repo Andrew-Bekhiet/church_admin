@@ -67,20 +67,20 @@ void main() {
     test('the channel fails to take is sent again after a delay', () {
       fakeAsync((async) {
         final harness = LiveQueryHarness([mina]);
-        harness.changeFeedServer.failRegistrations = true;
+        harness.liveQueriesServer.failRegistrations = true;
         final emitted = <List<AshTestItem>>[];
         final subscription = harness.watchList().listen(emitted.add);
         async.elapse(settleTime);
         final registeredWhileFailing = {
-          ...harness.changeFeedServer.registrations,
+          ...harness.liveQueriesServer.registrations,
         };
 
-        harness.changeFeedServer.failRegistrations = false;
+        harness.liveQueriesServer.failRegistrations = false;
         async.elapse(
           LiveQueryRegistry.registerRetryDelay + const Duration(seconds: 15),
         );
-        final ref = harness.changeFeedServer.registeredRefs.single;
-        harness.changeFeedServer.pushFull(ref, {
+        final ref = harness.liveQueriesServer.registeredRefs.single;
+        harness.liveQueriesServer.pushFull(ref, {
           '__typename': 'Query',
           'testItems': AshResponses.page([mina.renamed('مينا جرجس').toJson()]),
         });
@@ -99,10 +99,10 @@ void main() {
       fakeAsync((async) {
         final harness = LiveQueryHarness([mina]);
         var attempts = 0;
-        harness.changeFeedServer.refusalFor = (_) {
+        harness.liveQueriesServer.refusalFor = (_) {
           attempts++;
 
-          return ChangeFeedClient.runFailedReason;
+          return LiveQueriesClient.runFailedReason;
         };
         final subscription = harness.watchList().listen(null);
         async.elapse(const Duration(minutes: 1));
@@ -129,8 +129,8 @@ void main() {
       fakeAsync((async) {
         final harness = LiveQueryHarness([mina]);
         var attempts = 0;
-        harness.changeFeedServer.refusalFor = (_) =>
-            attempts++ == 0 ? ChangeFeedClient.runFailedReason : null;
+        harness.liveQueriesServer.refusalFor = (_) =>
+            attempts++ == 0 ? LiveQueriesClient.runFailedReason : null;
         final subscription = harness.watchList().listen(null);
         async.elapse(const Duration(minutes: 1));
         final requestsWhenLive = harness.server.requestCount;
@@ -139,7 +139,7 @@ void main() {
         harness.goOnline();
         async.elapse(settleTime);
 
-        expect(harness.changeFeedServer.registrations, isNotEmpty);
+        expect(harness.liveQueriesServer.registrations, isNotEmpty);
         expect(harness.server.requestCount, requestsWhenLive);
 
         unawaited(subscription.cancel());
@@ -152,7 +152,7 @@ void main() {
       fakeAsync((async) {
         final harness = LiveQueryHarness([mina]);
         var attempts = 0;
-        harness.changeFeedServer.refusalFor = (_) {
+        harness.liveQueriesServer.refusalFor = (_) {
           attempts++;
 
           return 'too_many';
@@ -176,11 +176,11 @@ void main() {
         final emitted = <List<AshTestItem>>[];
         final subscription = harness.watchList().listen(emitted.add);
         async.elapse(settleTime);
-        final ref = harness.changeFeedServer.registeredRefs.single;
+        final ref = harness.liveQueriesServer.registeredRefs.single;
 
         unawaited(subscription.cancel());
         async.elapse(settleTime);
-        harness.changeFeedServer.pushFull(ref, {
+        harness.liveQueriesServer.pushFull(ref, {
           '__typename': 'Query',
           'testItems': AshResponses.page([
             mina.renamed('بعد الإلغاء').toJson(),
@@ -188,7 +188,7 @@ void main() {
         });
         async.elapse(settleTime);
 
-        expect(harness.changeFeedServer.unregisteredRefs, [ref]);
+        expect(harness.liveQueriesServer.unregisteredRefs, [ref]);
         expect(emitted.last, [mina]);
 
         harness.dispose();
@@ -204,7 +204,7 @@ void main() {
       async.elapse(settleTime);
       final emittedBeforePush = [...emitted];
 
-      harness.changeFeedServer.pushFull('nobody', {
+      harness.liveQueriesServer.pushFull('nobody', {
         '__typename': 'Query',
         'testItems': AshResponses.page([mina.renamed('مجهول').toJson()]),
       });
