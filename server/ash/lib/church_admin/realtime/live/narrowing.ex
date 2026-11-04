@@ -10,7 +10,7 @@ defmodule ChurchAdmin.Realtime.Live.Narrowing do
 
   Narrowing assumes a row's JSON and visibility follow from that row alone.
   `rows_stand_alone?/2` proves it from a window run: no statement may reach
-  the list's table except the list's own, once. A view that reads the table
+  the list's table except as its main `FROM`, once. A view that reads the table
   (`dataCheck` reads a person's whole family), a scope that joins it to
   itself, or a nested selection of the row type each let one row's change
   reach another, which no candidate would name.
@@ -67,21 +67,31 @@ defmodule ChurchAdmin.Realtime.Live.Narrowing do
 
     with true <- row_type != nil,
          false <- Pipeline.selects_type_inside_rows?(document.parsed, document.root_field),
-         {_schema, table} <- TypeMap.relation_of_type(row_type) do
-      Enum.all?(Enum.uniq(statements), &reads_table_only_as_the_list?(&1, table, row_type))
+         {_schema, table} = relation <- TypeMap.relation_of_type(row_type) do
+      Enum.all?(Enum.uniq(statements), &reads_table_only_as_the_list?(&1, table, relation))
     else
       _not_provably_alone -> false
     end
   end
 
-  defp reads_table_only_as_the_list?(statement, table, row_type) do
-    relation = TypeMap.relation_of_type(row_type)
-
+  defp reads_table_only_as_the_list?(statement, table, relation) do
     case StatementDependencies.for_sql(statement) do
-      {:ok, %{^relation => _columns}} -> length(String.split(statement, ~s("#{table}"))) == 2
+      {:ok, %{^relation => _columns}} -> selects_from_table_once?(statement, table)
       {:ok, _reads_other_tables} -> true
       {:error, _reason} -> false
     end
+  end
+
+  defp selects_from_table_once?(statement, table) do
+    quoted = ~s("#{table}")
+
+    length(String.split(statement, quoted)) == 2 and
+      statement |> String.split(" FROM ", parts: 2) |> List.last() |> main_table_is?(quoted)
+  end
+
+  defp main_table_is?(after_from, quoted) do
+    String.starts_with?(after_from, quoted) or
+      after_from =~ ~r/^"[^"]+"\.#{Regex.escape(quoted)}/
   end
 
   @spec filter(map() | nil, [String.t()]) :: map()

@@ -263,6 +263,41 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
              """)
     end
 
+    test "persons selecting dataCheck do not for a scoped viewer either", context do
+      service = Factory.service!()
+      viewer = Factory.user!()
+      Factory.permissions!(viewer, ~w(approved))
+      Factory.grant!(viewer, :service, service.id)
+      person = Factory.person!(%{family_id: Factory.family!().id})
+      Factory.in_service!(person, service)
+
+      {:ok, document} =
+        Document.prepare(
+          """
+          query persons($first: Int, $after: String) {
+            persons(first: $first, after: $after) {
+              results { keyset id dataCheck { id isComplete } }
+            }
+          }
+          """,
+          nil
+        )
+
+      scoped = %{
+        ActorLoader.load(viewer.uid)
+        | principal: %Principal{uid: viewer.uid, auth_id: "firebase", claims: %{}}
+      }
+
+      run = window!(context, document: document, actor: scoped)
+
+      assert [_row] = run.result.rows
+
+      assert %{"dataCheck" => %{}} =
+               run.result |> Result.data() |> get_in(["persons", "results"]) |> hd()
+
+      refute run.rows_stand_alone?
+    end
+
     test "persons nesting their own type do not", context do
       Factory.person!(%{family_id: Factory.family!().id})
 
