@@ -5,14 +5,10 @@ import 'package:church_admin/church_admin.dart';
 import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
-typedef KeysetChunkFetcher<T, P> = Future<KeysetChunk<T>> Function(
-  P parameters,
-  KeysetChunkRequest chunk,
-);
-
-/// A list loaded in keyset pages and kept live as one window: every loaded
-/// row is refetched from the start when the change feed touches the list,
-/// in chunks of at most [maxPageSize] chained by their end keysets.
+/// A list loaded in keyset pages and kept live as one window: the loaded
+/// window is registered with the server after each network load, and its
+/// pushes edit the rows held in [_window]. Loads fetch chunks of at most
+/// [maxPageSize] chained by their end keysets.
 class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     implements LiveQueryTarget {
   @override
@@ -20,7 +16,8 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
   final int? totalLimit;
   final int maxPageSize;
 
-  final KeysetChunkFetcher<T, P> _fetchChunk;
+  final KeysetPageQuery<T> Function(P parameters) _pageQueryFor;
+  final Json Function(P parameters) _variablesFor;
   final LiveQueryRegistry _registry;
 
   late final BehaviorSubject<PaginatableStreamData<T>> _subject =
@@ -33,13 +30,9 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
   bool _hasParameters = false;
   late P _parameters;
   int _pageIndex = 0;
-  String? _endKeyset;
-
-  @override
-  LiveQueryDependencies dependencies = LiveQueryDependencies.unknown;
-
-  @override
-  LiveQueryKind get kind => LiveQueryKind.list;
+  LiveListWindow? _window;
+  KeysetPageQuery<T>? _loadedQuery;
+  bool _awaitingResync = false;
 
   @override
   bool get isListened => _subject.hasListener;
@@ -79,13 +72,14 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
 
   KeysetPaginatedStream({
     required Stream<P> parametersStream,
-    required this._fetchChunk,
+    required this._pageQueryFor,
+    required this._variablesFor,
     required this._registry,
     int pageSize = PaginatableStream.defaultPageSize,
     this.maxPageSize = AshPagination.maxPageSize,
     this.totalLimit,
   }) : pageSize = totalLimit ?? pageSize {
-    _registry.register(this);
+    _registry.attach(this);
     _parametersSubscription = parametersStream.listen(_onParameters);
   }
 
@@ -103,7 +97,7 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
       await _load(
         generation,
         rows: missingRows,
-        after: _endKeyset,
+        after: _window?.endKeyset,
         keep: currentItems,
       );
     });
@@ -125,6 +119,7 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     _hasParameters = true;
     final generation = ++_generation;
     _pageIndex = 0;
+    _registry.stopLive(this);
     unawaited(
       _serialized(() async {
         if (generation != _generation) return;
@@ -161,16 +156,25 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     final effectivePolicy = fetchPolicy ?? _networkPolicy;
     final isCachePreview = effectivePolicy == FetchPolicy.cacheOnly;
     if (effectivePolicy == FetchPolicy.cacheFirst) _registry.markStale(this);
+    _registry.stopLive(this);
+    _awaitingResync = false;
     _loading.add(true);
     try {
+      final query = _pageQueryFor(_parameters);
+      final variables = _variablesFor(_parameters);
       final chunks = await _fetchChunks(
+        query,
+        variables,
         rows: rows,
         after: after,
         fetchPolicy: effectivePolicy,
       );
       if (generation != _generation) return;
 
-      _emit(keep, chunks, requestedRows: rows);
+      _emitLoaded(query, keep, chunks, requestedRows: rows);
+      if (effectivePolicy == FetchPolicy.networkOnly) {
+        _startLive(query, variables, chunks, isFromFirstRow: keep.isEmpty);
+      }
     } on Object catch (error, stackTrace) {
       if (generation != _generation) return;
       if (isCachePreview) rethrow;
@@ -182,7 +186,9 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     }
   }
 
-  Future<List<KeysetChunk<T>>> _fetchChunks({
+  Future<List<KeysetChunk<T>>> _fetchChunks(
+    KeysetPageQuery<T> query,
+    Json variables, {
     required int rows,
     required String? after,
     required FetchPolicy fetchPolicy,
@@ -191,9 +197,9 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
       rows: rows,
       after: after,
       maxPageSize: maxPageSize,
-      fetchChunk: (first, after) => _fetchChunk(
-        _parameters,
-        KeysetChunkRequest(
+      fetchChunk: (first, after) => query.fetch(
+        variables: variables,
+        chunk: KeysetChunkRequest(
           first: first,
           after: after,
           fetchPolicy: fetchPolicy,
@@ -202,7 +208,8 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     );
   }
 
-  void _emit(
+  void _emitLoaded(
+    KeysetPageQuery<T> query,
     List<T> keep,
     List<KeysetChunk<T>> chunks, {
     required int requestedRows,
@@ -212,15 +219,27 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
       for (final chunk in chunks) ...chunk.page.items,
     ];
     final fetchedRows = items.length - keep.length;
-    final hasMore = fetchedRows >= requestedRows;
-    _endKeyset = chunks.lastOrNull?.page.endKeyset ?? _endKeyset;
-    final loadedDependencies = LiveQueryDependencies.ofResult([
-      for (final chunk in chunks) chunk.data,
-    ]);
-    dependencies = keep.isEmpty
-        ? loadedDependencies
-        : dependencies.union(loadedDependencies);
-    final count = chunks.lastOrNull?.page.count;
+    final chunksData = [for (final chunk in chunks) chunk.data];
+    _loadedQuery = query;
+    if (keep.isEmpty) {
+      _window = LiveListWindow(
+        rootField: AshResultParser.rootFieldOf(query.document),
+      )..replaceWith(chunksData);
+    } else {
+      _window?.append(chunksData);
+    }
+    _publish(
+      items,
+      count: chunks.lastOrNull?.page.count,
+      hasMore: fetchedRows >= requestedRows,
+    );
+  }
+
+  void _publish(
+    List<T> items, {
+    required int? count,
+    required bool hasMore,
+  }) {
     _subject.add(
       PaginatableStreamData(
         items: items,
@@ -231,6 +250,62 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
         },
       ),
     );
+  }
+
+  void _startLive(
+    KeysetPageQuery<T> query,
+    Json variables,
+    List<KeysetChunk<T>> chunks, {
+    required bool isFromFirstRow,
+  }) {
+    final hashes = [for (final chunk in chunks) chunk.resultHash];
+    _registry.startLive(
+      this,
+      LiveQueryRequest(
+        document: query.document,
+        operationName: query.operationName,
+        variables: variables,
+        window: (rows: _windowSize, chunk: maxPageSize),
+        resultHashes: isFromFirstRow && !hashes.contains(null)
+            ? hashes.cast<String>()
+            : null,
+      ),
+    );
+  }
+
+  @override
+  void onLiveResult(LiveResult result) {
+    final window = _window;
+    final query = _loadedQuery;
+    if (window == null || query == null) return;
+
+    final update = switch (result) {
+      FullLiveResult(:final data) => _applyFull(window, data),
+      ListDeltaLiveResult() when _awaitingResync => LiveWindowUpdate.unchanged,
+      final ListDeltaLiveResult delta => window.applyDelta(delta),
+    };
+    switch (update) {
+      case LiveWindowUpdate.unchanged:
+        return;
+
+      case LiveWindowUpdate.missingRow:
+        _awaitingResync = true;
+        _registry.requestResync(this);
+
+      case LiveWindowUpdate.changed:
+        final page = query.parsePage(window.pageData);
+        _publish(
+          page.items,
+          count: page.count,
+          hasMore: page.items.length >= _windowSize,
+        );
+    }
+  }
+
+  LiveWindowUpdate _applyFull(LiveListWindow window, Json data) {
+    _awaitingResync = false;
+
+    return window.applyFull(data);
   }
 
   Future<void> _serialized(Future<void> Function() operation) =>
@@ -264,7 +339,7 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
   @override
   Future<void> dispose() async {
     _generation++;
-    _registry.unregister(this);
+    _registry.detach(this);
     await _parametersSubscription.cancel();
     await _loading.close();
     await _subject.close();

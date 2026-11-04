@@ -5,18 +5,20 @@ sealed class ChangeFeedEvent with Equatable {
   const ChangeFeedEvent();
 }
 
-class ChangesReceived extends ChangeFeedEvent {
-  final List<EntityChange> changes;
+class LiveResultReceived extends ChangeFeedEvent {
+  final LiveResult result;
 
   @override
-  List<Object?> get props => [changes];
+  List<Object?> get props => [result];
 
-  const ChangesReceived(this.changes);
+  const LiveResultReceived(this.result);
 }
 
-class ResyncRequired extends ChangeFeedEvent {
+/// The channel was joined: the server holds none of the registrations the
+/// client made before.
+class ChannelJoined extends ChangeFeedEvent {
   @override
   List<Object?> get props => [];
 
-  const ResyncRequired();
+  const ChannelJoined();
 }

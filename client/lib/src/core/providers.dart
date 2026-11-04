@@ -128,7 +128,7 @@ final changeFeedClientProvider = Provider<ChangeFeedClient>((ref) {
 
 final liveQueryRegistryProvider = Provider<LiveQueryRegistry>(
   (ref) => LiveQueryRegistry(
-    changeFeedEvents: ref.watch(changeFeedClientProvider).events,
+    changeFeed: ref.watch(changeFeedClientProvider),
     connectivity: ref.watch(connectivityServiceProvider).connectivityStream,
   ),
 );

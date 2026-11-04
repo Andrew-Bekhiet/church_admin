@@ -41,9 +41,7 @@ void main() {
       async.elapse(settleTime);
 
       harness.server.rows.add(marina);
-      harness.announce([
-        EntityChange(type: AshTestItem.typename, id: marina.id, op: 'insert'),
-      ]);
+      harness.announce();
       async.elapse(settleTime);
 
       expect(emitted.last, [mina, marina]);

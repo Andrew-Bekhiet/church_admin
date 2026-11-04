@@ -82,11 +82,13 @@ void main() {
           async.elapse(FakeAshBackend.settleTime);
 
           table.add(
-            log.rowFor(entries.last, personId: HistoryLog.personId, number: 2),
+            log.rowFor(
+              entries.last,
+              personId: HistoryLog.personId,
+              number: 2,
+            ),
           );
-          backend.announce([
-            EntityChange(type: log.typename, id: null, op: 'insert'),
-          ]);
+          backend.announce();
           async.elapse(FakeAshBackend.settleTime);
 
           expect(emitted.last, entries.reversed);

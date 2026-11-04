@@ -177,9 +177,7 @@ void main() {
             dayId: '2026-10-18',
           ),
         );
-        backend.announce([
-          const EntityChange(type: 'Kodas', id: 'kodas-1', op: 'insert'),
-        ]);
+        backend.announce();
         async.elapse(FakeAshBackend.settleTime);
 
         expect(emitted.last, [

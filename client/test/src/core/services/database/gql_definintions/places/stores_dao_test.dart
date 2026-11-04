@@ -99,9 +99,7 @@ void main() {
         async.elapse(FakeAshBackend.settleTime);
 
         table.add(pharmacy);
-        backend.announce([
-          EntityChange(type: 'Store', id: pharmacy.id, op: 'insert'),
-        ]);
+        backend.announce();
         async.elapse(FakeAshBackend.settleTime);
 
         expect(emitted.last, [pharmacy, bakery, bookshop]);

@@ -7,13 +7,12 @@ import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'fake_ash_tables_link.dart';
+import 'fake_change_feed_server.dart';
 
-/// A [DatabaseService] wired to a [FakeAshTablesLink] and a change feed the
-/// test drives with [announce], so real DAOs read, write and refetch the
-/// way they do against the Ash server.
+/// A [DatabaseService] wired to a [FakeAshTablesLink] and a change feed whose
+/// server answers every registered live query with [announce], so real DAOs
+/// read, write and follow the data the way they do against the Ash server.
 class FakeAshBackend {
-  /// Longer than every live query debounce, so a test that elapses it sees
-  /// the refetched data.
   static const settleTime = Duration(seconds: 5);
 
   /// The list [listing] shows once it settles over a backend serving
@@ -37,9 +36,23 @@ class FakeAshBackend {
 
   final FakeAshTablesLink server;
   final Dio? dio;
-  final StreamController<ChangeFeedEvent> _changeFeed =
-      StreamController.broadcast();
+  final FakeChangeFeedServer changeFeedServer = FakeChangeFeedServer();
   final BehaviorSubject<bool> _connectivity = BehaviorSubject.seeded(true);
+  final BehaviorSubject<AuthLinkCredentials?> _credentials =
+      BehaviorSubject.seeded(
+        const AuthLinkCredentials(
+          uid: 'uid',
+          hasuraUserId: 'userId',
+          idToken: 'idToken',
+        ),
+      );
+
+  late final ChangeFeedClient changeFeed = ChangeFeedClient(
+    socketUrl: Uri.parse('ws://localhost:4000/socket/websocket'),
+    credentials: _credentials,
+    idToken: ({forceRefresh = false}) async => 'idToken',
+    webSocketChannelFactory: changeFeedServer.connect,
+  );
 
   late final DatabaseService db = DatabaseService(
     DBGraphQLClient(
@@ -51,7 +64,7 @@ class FakeAshBackend {
       ),
     ),
     liveQueries: LiveQueryRegistry(
-      changeFeedEvents: _changeFeed.stream,
+      changeFeed: changeFeed,
       connectivity: _connectivity,
     ),
     dio: dio,
@@ -68,13 +81,11 @@ class FakeAshBackend {
          actions: actions,
        );
 
-  void announce(List<EntityChange> changes) =>
-      _changeFeed.add(ChangesReceived(changes));
-
-  void resync() => _changeFeed.add(const ResyncRequired());
+  void announce() => unawaited(changeFeedServer.pushCurrentResults(server));
 
   void dispose() {
-    unawaited(_changeFeed.close());
+    changeFeed.dispose();
+    unawaited(_credentials.close());
     unawaited(_connectivity.close());
   }
 }

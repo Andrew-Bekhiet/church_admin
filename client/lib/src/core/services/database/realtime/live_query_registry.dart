@@ -4,61 +4,107 @@ import 'dart:collection';
 import 'package:church_admin/church_admin.dart';
 import 'package:rxdart/rxdart.dart';
 
-/// Decides which active queries a change feed event invalidates and when
-/// they refetch: each target debounces by its [LiveQueryKind], an unheard or
-/// offline target only turns stale until it is heard or online again, and
-/// at most [maxConcurrentRefetches] refetches run at once. The change feed
-/// stays subscribed for [changeFeedGracePeriod] after the last target
-/// leaves, so moving between screens does not reconnect it.
+/// Keeps active queries live through the change feed: each target holds at
+/// most one registration, under a ref of its own that the server answers
+/// to. A result for a ref no target holds any more is dropped. Every join of
+/// the channel re-sends all registrations, because the server keeps none
+/// across a join. A registration the channel fails to take is sent again
+/// after [registerRetryDelay]; one the server refuses is not. An unheard or
+/// offline target that missed a load only turns stale until it is heard or
+/// online again, and at most [maxConcurrentRefetches] stale refetches run at
+/// once. The change feed stays subscribed for [changeFeedGracePeriod] after
+/// the last target leaves, so moving between screens does not reconnect it.
 class LiveQueryRegistry {
   static const maxConcurrentRefetches = 4;
   static const changeFeedGracePeriod = Duration(seconds: 30);
+  static const registerRetryDelay = Duration(seconds: 5);
 
-  final Stream<ChangeFeedEvent> _changeFeedEvents;
+  final ChangeFeedClient? _changeFeed;
   final ValueStream<bool> _connectivity;
 
-  final Map<LiveQueryTarget, LiveQueryTargetSchedule> _schedules = {};
+  final Map<LiveQueryTarget, LiveQueryTargetState> _states = {};
+  final Map<String, LiveQueryTarget> _targetsByRef = {};
   final Queue<LiveQueryTarget> _refetchQueue = Queue();
   int _refetchesRunning = 0;
+  int _refCounter = 0;
 
   StreamSubscription<ChangeFeedEvent>? _changeFeedSubscription;
   StreamSubscription<bool>? _connectivitySubscription;
   Timer? _changeFeedRelease;
+  Timer? _registerRetry;
 
   bool get isOnline => _connectivity.valueOrNull ?? true;
 
   LiveQueryRegistry({
-    required this._changeFeedEvents,
+    required this._changeFeed,
     required this._connectivity,
   });
 
   LiveQueryRegistry.withoutChangeFeed({
     required ValueStream<bool> connectivity,
-  }) : this(changeFeedEvents: const Stream.empty(), connectivity: connectivity);
+  }) : this(changeFeed: null, connectivity: connectivity);
 
-  void register(LiveQueryTarget target) {
+  void attach(LiveQueryTarget target) {
     _changeFeedRelease?.cancel();
     _changeFeedRelease = null;
-    _schedules[target] = LiveQueryTargetSchedule();
-    _changeFeedSubscription ??= _changeFeedEvents.listen(_onChangeFeedEvent);
+    _states[target] = LiveQueryTargetState();
+    _changeFeedSubscription ??= _changeFeed?.events.listen(_onChangeFeedEvent);
     _connectivitySubscription ??= _connectivity
         .distinct()
         .where((online) => online)
         .listen((_) => _refetchStaleListenedTargets());
   }
 
-  void unregister(LiveQueryTarget target) {
-    _schedules.remove(target)?.cancelTimers();
+  void detach(LiveQueryTarget target) {
+    stopLive(target);
+    _states.remove(target);
     _refetchQueue.remove(target);
-    if (_schedules.isNotEmpty) return;
+    if (_states.isNotEmpty) return;
 
     _changeFeedRelease?.cancel();
     _changeFeedRelease = Timer(changeFeedGracePeriod, _releaseChangeFeed);
   }
 
+  /// Registers [request] for [target] under a new ref, replacing the
+  /// registration it held, so that no result of the old one applies again.
+  void startLive(LiveQueryTarget target, LiveQueryRequest request) {
+    final state = _states[target];
+    if (state == null) return;
+
+    stopLive(target);
+    final live = LiveRegistrationState(
+      ref: 'live-${_refCounter++}',
+      request: request,
+    );
+    state.live = live;
+    _targetsByRef[live.ref] = target;
+    unawaited(_sendRegistration(target, live));
+  }
+
+  void stopLive(LiveQueryTarget target) {
+    final live = _states[target]?.live;
+    if (live == null) return;
+
+    _states[target]?.live = null;
+    _targetsByRef.remove(live.ref);
+    _changeFeed?.unregister(live.ref);
+  }
+
+  void requestResync(LiveQueryTarget target) {
+    if (_states[target]?.live case final live?) _changeFeed?.resync(live.ref);
+  }
+
   /// Makes [target] refetch once it is heard and online, for a load that
   /// could not reach the server.
-  void markStale(LiveQueryTarget target) => _schedules[target]?.stale = true;
+  void markStale(LiveQueryTarget target) => _states[target]?.stale = true;
+
+  void notifyListened(LiveQueryTarget target) {
+    final state = _states[target];
+    if (state == null || !state.stale) return;
+
+    state.stale = false;
+    _enqueue(target);
+  }
 
   void _releaseChangeFeed() {
     _changeFeedRelease = null;
@@ -68,67 +114,72 @@ class LiveQueryRegistry {
     _connectivitySubscription = null;
   }
 
-  void notifyListened(LiveQueryTarget target) {
-    final schedule = _schedules[target];
-    if (schedule == null || !schedule.stale) return;
-
-    schedule.stale = false;
-    _enqueue(target);
-  }
-
   void _onChangeFeedEvent(ChangeFeedEvent event) {
-    final invalidated = switch (event) {
-      ResyncRequired() => _schedules.keys.toList(),
-      ChangesReceived(:final changes) => [
-        for (final target in _schedules.keys)
-          if (changes.any(
-            (change) => target.dependencies.isAffectedBy(change, target.kind),
-          ))
-            target,
-      ],
-    };
-    for (final target in invalidated) {
-      _invalidate(target);
+    switch (event) {
+      case LiveResultReceived(:final result):
+        _route(result);
+
+      case ChannelJoined():
+        _registerAgain();
     }
   }
 
-  void _invalidate(LiveQueryTarget target) {
-    final schedule = _schedules[target];
-    if (schedule == null) return;
+  void _route(LiveResult result) {
+    final target = _targetsByRef[result.ref];
+    final live = _states[target]?.live;
+    if (target == null || live == null) return;
 
-    schedule
-      ..debounce?.cancel()
-      ..debounce = Timer(target.kind.debounce, () => _onDue(target))
-      ..maxWait ??= Timer(target.kind.maxWait, () => _onDue(target));
+    live.request = live.request.withoutResultHashes();
+    target.onLiveResult(result);
   }
 
-  void _onDue(LiveQueryTarget target) {
-    final schedule = _schedules[target];
-    if (schedule == null) return;
-
-    schedule.cancelTimers();
-    if (!target.isListened || !isOnline) {
-      schedule.stale = true;
-
-      return;
+  void _registerAgain() {
+    for (final MapEntry(key: target, value: state) in _states.entries) {
+      if (state.live case final live?) {
+        unawaited(_sendRegistration(target, live));
+      }
     }
-    _enqueue(target);
+  }
+
+  Future<void> _sendRegistration(
+    LiveQueryTarget target,
+    LiveRegistrationState live,
+  ) async {
+    live.needsRetry = false;
+    final outcome = await _changeFeed?.register(
+      LiveRegistration(ref: live.ref, request: live.request),
+    );
+    if (outcome != LiveRegisterOutcome.failed) return;
+    if (!identical(_states[target]?.live, live)) return;
+
+    live.needsRetry = true;
+    _registerRetry ??= Timer(registerRetryDelay, _retryFailedRegistrations);
+  }
+
+  void _retryFailedRegistrations() {
+    _registerRetry = null;
+    for (final MapEntry(key: target, value: state) in _states.entries) {
+      if (state.live
+          case LiveRegistrationState(needsRetry: true) && final live) {
+        unawaited(_sendRegistration(target, live));
+      }
+    }
   }
 
   void _refetchStaleListenedTargets() {
-    for (final MapEntry(key: target, value: schedule) in _schedules.entries) {
-      if (!schedule.stale || !target.isListened) continue;
+    for (final MapEntry(key: target, value: state) in _states.entries) {
+      if (!state.stale || !target.isListened) continue;
 
-      schedule.stale = false;
+      state.stale = false;
       _enqueue(target);
     }
   }
 
   void _enqueue(LiveQueryTarget target) {
-    final schedule = _schedules[target];
-    if (schedule == null) return;
-    if (schedule.refetching) {
-      schedule.refetchAgain = true;
+    final state = _states[target];
+    if (state == null) return;
+    if (state.refetching) {
+      state.refetchAgain = true;
 
       return;
     }
@@ -140,45 +191,42 @@ class LiveQueryRegistry {
     while (_refetchesRunning < maxConcurrentRefetches &&
         _refetchQueue.isNotEmpty) {
       final target = _refetchQueue.removeFirst();
-      final schedule = _schedules[target];
-      if (schedule == null) continue;
+      final state = _states[target];
+      if (state == null) continue;
 
       _refetchesRunning++;
-      schedule.refetching = true;
+      state.refetching = true;
       unawaited(
         target
             .refetch()
             .catchError((Object _) => null)
-            .whenComplete(() => _onRefetchDone(target, schedule)),
+            .whenComplete(() => _onRefetchDone(target, state)),
       );
     }
   }
 
-  void _onRefetchDone(
-    LiveQueryTarget target,
-    LiveQueryTargetSchedule schedule,
-  ) {
+  void _onRefetchDone(LiveQueryTarget target, LiveQueryTargetState state) {
     _refetchesRunning--;
-    schedule.refetching = false;
-    if (schedule.refetchAgain) {
-      schedule.refetchAgain = false;
+    state.refetching = false;
+    if (state.refetchAgain) {
+      state.refetchAgain = false;
       _enqueue(target);
     }
     _startQueuedRefetches();
   }
 }
 
-class LiveQueryTargetSchedule {
-  Timer? debounce;
-  Timer? maxWait;
+class LiveQueryTargetState {
+  LiveRegistrationState? live;
   bool stale = false;
   bool refetching = false;
   bool refetchAgain = false;
+}
 
-  void cancelTimers() {
-    debounce?.cancel();
-    debounce = null;
-    maxWait?.cancel();
-    maxWait = null;
-  }
+class LiveRegistrationState {
+  final String ref;
+  LiveQueryRequest request;
+  bool needsRetry = false;
+
+  LiveRegistrationState({required this.ref, required this.request});
 }

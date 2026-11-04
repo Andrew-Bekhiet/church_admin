@@ -9,14 +9,19 @@ typedef ChangeFeedIdentity = ({String uid, String? userId});
 typedef IdTokenFetcher = Future<String?> Function({bool forceRefresh});
 
 /// The client of the server's `changes` channel. It connects while
-/// [events] has a listener and someone is signed in, and turns the
-/// channel's versioned pushes into [ChangeFeedEvent]s. Every connect asks
-/// for a current ID token; a join refused for an expired token reconnects
-/// with a refreshed one. A refused connect backs off between attempts and
-/// retries at once when the credentials change.
+/// [events] has a listener and someone is signed in. Live queries are
+/// registered, unregistered and resynced through it, and the channel's
+/// `live:result` pushes arrive as [LiveResultReceived]. The server keeps no
+/// registration across a join, so every join is announced as [ChannelJoined].
+/// Every connect asks for a current ID token; a join refused for an expired
+/// token reconnects with a refreshed one. A refused connect backs off
+/// between attempts and retries at once when the credentials change.
 class ChangeFeedClient {
   static const topic = 'changes';
-  static const changesEvent = 'changes';
+  static const liveResultEvent = 'live:result';
+  static const registerEvent = 'live:register';
+  static const unregisterEvent = 'live:unregister';
+  static const resyncEvent = 'live:resync';
   static const tokenExpiredReason = 'token_expired';
   static const Duration defaultRejoinDelay = Duration(seconds: 5);
 
@@ -40,11 +45,7 @@ class ChangeFeedClient {
   PhoenixChannel? _channel;
   StreamSubscription<Message>? _channelSubscription;
   Timer? _rejoinTimer;
-  bool _awaitingJoinReply = false;
-  final List<Json> _pushesBeforeJoinReply = [];
-
-  String? _lastSeenVersion;
-  ChangeFeedIdentity? _lastSeenVersionOwner;
+  bool _isJoined = false;
 
   Stream<ChangeFeedEvent> get events => _events.stream;
 
@@ -55,6 +56,37 @@ class ChangeFeedClient {
     this.rejoinDelay = defaultRejoinDelay,
     this._webSocketChannelFactory,
   });
+
+  Future<LiveRegisterOutcome> register(LiveRegistration registration) async {
+    final channel = _channel;
+    if (channel == null || !_isJoined) return LiveRegisterOutcome.notJoined;
+
+    try {
+      final reply = await channel
+          .push(registerEvent, registration.toJson())
+          .future;
+
+      return switch (reply) {
+        PushResponse(isOk: true) => LiveRegisterOutcome.accepted,
+        PushResponse(response: {'reason': String _}) =>
+          LiveRegisterOutcome.refused,
+        _ => LiveRegisterOutcome.failed,
+      };
+    } on Object {
+      return LiveRegisterOutcome.failed;
+    }
+  }
+
+  void unregister(String ref) => _pushLiveCommand(unregisterEvent, ref);
+
+  void resync(String ref) => _pushLiveCommand(resyncEvent, ref);
+
+  void _pushLiveCommand(String event, String ref) {
+    final channel = _channel;
+    if (channel == null || !_isJoined) return;
+
+    channel.push(event, {'ref': ref}).future.ignore();
+  }
 
   void _start() =>
       _credentialsSubscription ??= _credentials.listen(_onCredentials);
@@ -80,10 +112,6 @@ class ChangeFeedClient {
     }
 
     _disconnect();
-    if (identity != _lastSeenVersionOwner) {
-      _lastSeenVersion = null;
-      _lastSeenVersionOwner = identity;
-    }
     if (identity != null) _connect(identity);
   }
 
@@ -139,15 +167,15 @@ class ChangeFeedClient {
     final socket = _socket;
     if (socket == null || !socket.isConnected) return;
 
-    final channel = socket.addChannel(
-      topic: topic,
-      parameters: {'since': _lastSeenVersion},
-    );
+    final channel = socket.addChannel(topic: topic);
     _channel = channel;
-    _awaitingJoinReply = true;
     _channelSubscription = channel.messages
-        .where((message) => message.event.value == changesEvent)
-        .listen((message) => _onPush(message.payload as Json));
+        .where((message) => message.event.value == liveResultEvent)
+        .listen(
+          (message) => _emit(
+            LiveResultReceived(LiveResult.fromJson(message.payload as Json)),
+          ),
+        );
     unawaited(
       channel.join().future.then(
         (reply) => _onJoinReply(channel, reply),
@@ -158,19 +186,9 @@ class ChangeFeedClient {
 
   void _onJoinReply(PhoenixChannel channel, PushResponse reply) {
     if (!identical(channel, _channel)) return;
-    if (reply case PushResponse(
-      isOk: true,
-      response: {
-        'version': final String version,
-        'complete': final bool complete,
-      },
-    )) {
-      _lastSeenVersion = version;
-      _awaitingJoinReply = false;
-      if (!complete) _emit(const ResyncRequired());
-      final pushes = [..._pushesBeforeJoinReply];
-      _pushesBeforeJoinReply.clear();
-      pushes.forEach(_onPush);
+    if (reply.isOk) {
+      _isJoined = true;
+      _emit(const ChannelJoined());
 
       return;
     }
@@ -186,31 +204,6 @@ class ChangeFeedClient {
     _rejoinLater(channel);
   }
 
-  void _onPush(Json push) {
-    if (_awaitingJoinReply) {
-      _pushesBeforeJoinReply.add(push);
-
-      return;
-    }
-    if (push['from'] != _lastSeenVersion) {
-      _join();
-
-      return;
-    }
-
-    _lastSeenVersion = push['to'] as String?;
-    final changes = [
-      for (final change in push['changes'] as List? ?? const [])
-        EntityChange.fromJson((change as Map).cast<String, dynamic>()),
-    ];
-    final viewerUserId = _socketIdentity?.userId;
-    _emit(
-      changes.any((change) => change.affectsViewer(viewerUserId))
-          ? const ResyncRequired()
-          : ChangesReceived(changes),
-    );
-  }
-
   void _rejoinLater(PhoenixChannel channel) {
     if (!identical(channel, _channel)) return;
 
@@ -223,7 +216,7 @@ class ChangeFeedClient {
     _rejoinTimer = null;
     unawaited(_channelSubscription?.cancel());
     _channelSubscription = null;
-    _pushesBeforeJoinReply.clear();
+    _isJoined = false;
     final channel = _channel;
     _channel = null;
     if (channel == null) return;

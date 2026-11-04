@@ -4,19 +4,13 @@ import 'package:church_admin/church_admin.dart';
 import 'package:graphql/client.dart';
 
 /// A query whose stream stays current: it emits the cached then the network
-/// result, rebroadcasts cache writes (own mutations) and refetches when the
-/// [LiveQueryRegistry] sees a change to what it showed. Single subscription:
-/// the query runs from listen until cancel.
+/// result, rebroadcasts cache writes (own mutations), and registers with the
+/// server after each network result so that its pushes are written to the
+/// cache. Single subscription: the query runs from listen until cancel.
 class LiveQuery<T> extends Stream<T> implements LiveQueryTarget {
   final DBGraphQLClient _client;
   final LiveQueryRegistry _registry;
   final WatchQueryOptions<T> _options;
-
-  @override
-  final LiveQueryKind kind;
-
-  @override
-  LiveQueryDependencies dependencies = LiveQueryDependencies.unknown;
 
   StreamController<T>? _controller;
   ObservableQuery<T>? _query;
@@ -33,7 +27,6 @@ class LiveQuery<T> extends Stream<T> implements LiveQueryTarget {
     required this._client,
     required this._registry,
     required this._options,
-    required this.kind,
   });
 
   @override
@@ -75,13 +68,15 @@ class LiveQuery<T> extends Stream<T> implements LiveQueryTarget {
       _options,
     );
     _query = query;
-    _registry.register(this);
+    _registry.attach(this);
     if (!_registry.isOnline) _registry.markStale(this);
     _resultsSubscription = results
         .where((result) => result.isNotLoading)
         .listen(
           (result) {
-            dependencies = LiveQueryDependencies.ofResult(result.data);
+            if (result.source == QueryResultSource.network) {
+              _startLive(result);
+            }
             _controller?.add(result.parsedData as T);
           },
           onError: (Object error, StackTrace stackTrace) {
@@ -91,8 +86,36 @@ class LiveQuery<T> extends Stream<T> implements LiveQueryTarget {
         );
   }
 
+  void _startLive(QueryResult<T> result) {
+    final resultHash = result.resultHash;
+    _registry.startLive(
+      this,
+      LiveQueryRequest(
+        document: _options.document,
+        operationName: _options.operationName,
+        variables: _options.variables,
+        resultHashes: resultHash == null ? null : [resultHash],
+      ),
+    );
+  }
+
+  @override
+  void onLiveResult(LiveResult result) {
+    switch (result) {
+      case FullLiveResult(:final data):
+        try {
+          _client.writeQuery(_options.asRequest, data: data);
+        } on PartialDataException {
+          refetch().ignore();
+        }
+
+      case ListDeltaLiveResult():
+        _registry.requestResync(this);
+    }
+  }
+
   Future<void> _stop() async {
-    _registry.unregister(this);
+    _registry.detach(this);
     unawaited(_controller?.close());
     await _resultsSubscription?.cancel();
     await _query?.close();

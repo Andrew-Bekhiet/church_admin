@@ -93,9 +93,7 @@ void main() {
         async.elapse(FakeAshBackend.settleTime);
 
         table.add(OrganizationRow.klass(faith));
-        backend.announce([
-          EntityChange(type: 'Class', id: faith.id, op: 'insert'),
-        ]);
+        backend.announce();
         async.elapse(FakeAshBackend.settleTime);
 
         expect(emitted.last, [hope, faith]);

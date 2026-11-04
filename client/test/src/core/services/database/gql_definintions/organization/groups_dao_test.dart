@@ -58,9 +58,7 @@ void main() {
         async.elapse(FakeAshBackend.settleTime);
 
         table.add(OrganizationRow.group(reading));
-        backend.announce([
-          EntityChange(type: 'Group', id: reading.id, op: 'insert'),
-        ]);
+        backend.announce();
         async.elapse(FakeAshBackend.settleTime);
 
         expect(emitted.last, [choir, reading]);

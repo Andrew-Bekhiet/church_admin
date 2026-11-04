@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gql/language.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../../fakes/fake_change_feed_server.dart';
@@ -13,21 +14,22 @@ void main() {
     hasuraUserId: 'currentUserId',
     idToken: 'firstToken',
   );
-  const personChange = EntityChange(type: 'Person', id: 'p1', op: 'update');
-  const familyChange = EntityChange(type: 'Family', id: 'f1', op: 'insert');
-
-  JoinReply alwaysReplayable(String? since) =>
-      (version: since ?? 'v1', complete: since != null);
+  final document = parseString(r'query people($filter: String) { people }');
+  final request = LiveQueryRequest(
+    document: document,
+    operationName: 'people',
+    variables: const {'filter': 'مينا', 'first': 10},
+    window: (rows: 20, chunk: 10),
+    resultHashes: const ['abc'],
+  );
+  const ref = 'ref-1';
 
   _Feed startFeed(
     FakeAsync async, {
-    JoinReply Function(String? since)? replyToJoin,
     AuthLinkCredentials? initialCredentials = signedIn,
     void Function(FakeChangeFeedServer server)? prepareServer,
   }) {
-    final server = FakeChangeFeedServer(
-      replyToJoin: replyToJoin ?? alwaysReplayable,
-    );
+    final server = FakeChangeFeedServer();
     prepareServer?.call(server);
     final credentials = BehaviorSubject<AuthLinkCredentials?>.seeded(
       initialCredentials,
@@ -59,88 +61,244 @@ void main() {
     feed.client.dispose();
   }
 
-  test('the first join asks for a full resync', () {
+  Future<LiveRegisterOutcome> register(FakeAsync async, _Feed feed) {
+    final outcome = feed.client.register(
+      LiveRegistration(ref: ref, request: request),
+    );
+    async.elapse(const Duration(seconds: 1));
+
+    return outcome;
+  }
+
+  test('joining the channel is announced', () {
     fakeAsync((async) {
       final feed = startFeed(async);
 
-      expect(feed.events, [const ResyncRequired()]);
-      expect(feed.server.joinedSince, [null]);
+      expect(feed.events, [const ChannelJoined()]);
 
       tearDownFeed(feed);
     });
   });
 
-  test('a push that follows the last version arrives as its changes', () {
-    fakeAsync((async) {
-      final feed = startFeed(async);
+  group('a registration', () {
+    test('reaches the server with the document, the variables and the '
+        'window', () {
+      fakeAsync((async) {
+        final feed = startFeed(async);
 
-      feed.server.push(from: 'v1', to: 'v2', changes: [personChange]);
-      async.elapse(const Duration(milliseconds: 10));
+        unawaited(register(async, feed));
 
-      expect(feed.events, [
-        const ResyncRequired(),
-        const ChangesReceived([personChange]),
-      ]);
+        expect(feed.server.registrations[ref], {
+          'ref': ref,
+          'document': printNode(document),
+          'operationName': request.operationName,
+          'variables': {'filter': 'مينا'},
+          'window': {'rows': 20, 'chunk': 10},
+          'resultHashes': ['abc'],
+        });
 
-      tearDownFeed(feed);
+        tearDownFeed(feed);
+      });
+    });
+
+    test('is accepted when the server replies', () {
+      fakeAsync((async) {
+        final feed = startFeed(async);
+        LiveRegisterOutcome? outcome;
+
+        unawaited(register(async, feed).then((value) => outcome = value));
+        async.flushMicrotasks();
+
+        expect(outcome, LiveRegisterOutcome.accepted);
+
+        tearDownFeed(feed);
+      });
+    });
+
+    test('keeps the paging variables of a query without a window', () {
+      fakeAsync((async) {
+        final feed = startFeed(async);
+        final entityRequest = LiveQueryRequest(
+          document: document,
+          operationName: 'people',
+          variables: const {'first': 10},
+        );
+
+        unawaited(
+          feed.client.register(
+            LiveRegistration(ref: ref, request: entityRequest),
+          ),
+        );
+        async.elapse(const Duration(seconds: 1));
+
+        expect(feed.server.registrations[ref]?['variables'], {'first': 10});
+        expect(feed.server.registrations[ref]?['window'], isNull);
+
+        tearDownFeed(feed);
+      });
+    });
+
+    test('the server refuses is reported as refused', () {
+      fakeAsync((async) {
+        final feed = startFeed(
+          async,
+          prepareServer: (server) => server.refusalFor = (_) => 'too_many',
+        );
+        LiveRegisterOutcome? outcome;
+
+        unawaited(register(async, feed).then((value) => outcome = value));
+        async.flushMicrotasks();
+
+        expect(outcome, LiveRegisterOutcome.refused);
+
+        tearDownFeed(feed);
+      });
+    });
+
+    test('the server fails without a reason is reported as failed', () {
+      fakeAsync((async) {
+        final feed = startFeed(
+          async,
+          prepareServer: (server) => server.failRegistrations = true,
+        );
+        LiveRegisterOutcome? outcome;
+
+        unawaited(register(async, feed).then((value) => outcome = value));
+        async.flushMicrotasks();
+
+        expect(outcome, LiveRegisterOutcome.failed);
+
+        tearDownFeed(feed);
+      });
+    });
+
+    test('before the channel is joined is reported as not joined', () {
+      fakeAsync((async) {
+        final feed = startFeed(async, initialCredentials: null);
+        LiveRegisterOutcome? outcome;
+
+        unawaited(register(async, feed).then((value) => outcome = value));
+        async.flushMicrotasks();
+
+        expect(outcome, LiveRegisterOutcome.notJoined);
+        expect(feed.server.registrations, isEmpty);
+
+        tearDownFeed(feed);
+      });
+    });
+
+    test('can be withdrawn and asked to resync', () {
+      fakeAsync((async) {
+        final feed = startFeed(async);
+        unawaited(register(async, feed));
+
+        feed.client
+          ..resync(ref)
+          ..unregister(ref);
+        async.elapse(const Duration(seconds: 1));
+
+        expect(feed.server.resyncedRefs, [ref]);
+        expect(feed.server.registrations, isEmpty);
+
+        tearDownFeed(feed);
+      });
     });
   });
 
-  test('a push after a gap rejoins from the last version and replays '
-      'the missed changes in order', () {
-    fakeAsync((async) {
-      final feed = startFeed(async);
+  group('a result push', () {
+    test('with the full data arrives as a full result', () {
+      fakeAsync((async) {
+        final feed = startFeed(async);
+        const data = {'people': 3};
 
-      feed.server
-        ..replyToJoin = (since) {
-          scheduleMicrotask(() {
-            feed.server
-              ..push(from: 'v1', to: 'v2', changes: [personChange])
-              ..push(from: 'v2', to: 'v3', changes: [familyChange]);
-          });
+        feed.server.pushFull(ref, data);
+        async.elapse(const Duration(milliseconds: 10));
 
-          return (version: since ?? 'v3', complete: true);
-        }
-        ..push(from: 'v2', to: 'v3', changes: [familyChange]);
-      async.elapse(const Duration(seconds: 1));
+        expect(
+          feed.events.last,
+          const LiveResultReceived(
+            FullLiveResult(ref: ref, data: data),
+          ),
+        );
 
-      expect(feed.server.joinedSince, [null, 'v1']);
-      expect(feed.events, [
-        const ResyncRequired(),
-        const ChangesReceived([personChange]),
-        const ChangesReceived([familyChange]),
-      ]);
+        tearDownFeed(feed);
+      });
+    });
 
-      tearDownFeed(feed);
+    test('with rows, an order, a count and an end keyset arrives as a '
+        'list delta', () {
+      fakeAsync((async) {
+        final feed = startFeed(async);
+        const row = {'id': 'a', 'name': 'مينا'};
+
+        feed.server.pushDelta(
+          ref,
+          rows: [row],
+          order: ['b', 'a'],
+          count: 2,
+          endKeyset: 'k',
+        );
+        async.elapse(const Duration(milliseconds: 10));
+
+        expect(
+          feed.events.last,
+          const LiveResultReceived(
+            ListDeltaLiveResult(
+              ref: ref,
+              rows: [row],
+              order: ['b', 'a'],
+              count: 2,
+              endKeyset: 'k',
+            ),
+          ),
+        );
+
+        tearDownFeed(feed);
+      });
+    });
+
+    test('with rows only arrives without an order', () {
+      fakeAsync((async) {
+        final feed = startFeed(async);
+
+        feed.server.pushDelta(ref, rows: const []);
+        async.elapse(const Duration(milliseconds: 10));
+
+        expect(
+          feed.events.last,
+          const LiveResultReceived(
+            ListDeltaLiveResult(ref: ref, rows: []),
+          ),
+        );
+
+        tearDownFeed(feed);
+      });
     });
   });
 
-  test('a join the server cannot replay asks for a full resync', () {
+  test('rejoining after the connection dropped is announced again', () {
     fakeAsync((async) {
       final feed = startFeed(async);
 
-      feed.server.replyToJoin = (_) => (version: 'v9', complete: false);
-      unawaited(feed.server.dropConnection());
-      async.elapse(const Duration(seconds: 5));
-
-      expect(feed.server.joinedSince, [null, 'v1']);
-      expect(feed.events, [const ResyncRequired(), const ResyncRequired()]);
-
-      tearDownFeed(feed);
-    });
-  });
-
-  test('a reconnect rejoins from the last version with a fresh token', () {
-    fakeAsync((async) {
-      final feed = startFeed(async);
-
-      feed.server.push(from: 'v1', to: 'v2', changes: [personChange]);
-      async.elapse(const Duration(milliseconds: 10));
       unawaited(feed.server.dropConnection());
       async.elapse(const Duration(seconds: 5));
 
       expect(feed.server.connectedTokens, ['token-1', 'token-2']);
-      expect(feed.server.joinedSince, [null, 'v2']);
+      expect(feed.events, [const ChannelJoined(), const ChannelJoined()]);
+
+      tearDownFeed(feed);
+    });
+  });
+
+  test('the server forgets a registration when the connection drops', () {
+    fakeAsync((async) {
+      final feed = startFeed(async);
+      unawaited(register(async, feed));
+
+      unawaited(feed.server.dropConnection());
+      async.elapse(const Duration(seconds: 5));
+
+      expect(feed.server.registrations, isEmpty);
 
       tearDownFeed(feed);
     });
@@ -157,7 +315,7 @@ void main() {
 
       expect(feed.idTokens.forceRefreshes, [false, true]);
       expect(feed.server.connectedTokens, ['token-1', 'token-2']);
-      expect(feed.events, [const ResyncRequired()]);
+      expect(feed.events, [const ChannelJoined()]);
 
       tearDownFeed(feed);
     });
@@ -197,71 +355,14 @@ void main() {
       async.elapse(const Duration(seconds: 2));
 
       expect(feed.server.isConnected, isTrue);
-      expect(feed.events, [const ResyncRequired()]);
+      expect(feed.events, [const ChannelJoined()]);
 
       tearDownFeed(feed);
     });
   });
 
-  test('a permission change of the current user asks for a full resync', () {
-    fakeAsync((async) {
-      final feed = startFeed(async);
-
-      feed.server.push(
-        from: 'v1',
-        to: 'v2',
-        changes: [
-          EntityChange(
-            type: EntityChange.viewerScopeType,
-            id: signedIn.hasuraUserId,
-            op: 'update',
-          ),
-        ],
-      );
-      async.elapse(const Duration(milliseconds: 10));
-
-      expect(feed.events, [const ResyncRequired(), const ResyncRequired()]);
-
-      tearDownFeed(feed);
-    });
-  });
-
-  test("another user's permission change arrives as a plain change", () {
-    fakeAsync((async) {
-      final feed = startFeed(async);
-      const otherUsersScope = EntityChange(
-        type: EntityChange.viewerScopeType,
-        id: 'anotherUserId',
-        op: 'update',
-      );
-
-      feed.server.push(from: 'v1', to: 'v2', changes: [otherUsersScope]);
-      async.elapse(const Duration(milliseconds: 10));
-
-      expect(feed.events, [
-        const ResyncRequired(),
-        const ChangesReceived([otherUsersScope]),
-      ]);
-
-      tearDownFeed(feed);
-    });
-  });
-
-  test('a change with an unknown op still arrives', () {
-    fakeAsync((async) {
-      final feed = startFeed(async);
-      const truncated = EntityChange(type: 'Person', id: null, op: 'truncate');
-
-      feed.server.push(from: 'v1', to: 'v2', changes: [truncated]);
-      async.elapse(const Duration(milliseconds: 10));
-
-      expect(feed.events.last, const ChangesReceived([truncated]));
-
-      tearDownFeed(feed);
-    });
-  });
-
-  test('another user signing in reconnects with their token and resyncs', () {
+  test('another user signing in reconnects with their token and joins '
+      'again', () {
     fakeAsync((async) {
       final feed = startFeed(async);
 
@@ -275,24 +376,23 @@ void main() {
       async.elapse(const Duration(seconds: 1));
 
       expect(feed.server.connectedTokens, ['token-1', 'token-2']);
-      expect(feed.server.joinedSince, [null, null]);
-      expect(feed.events, [const ResyncRequired(), const ResyncRequired()]);
+      expect(feed.events, [const ChannelJoined(), const ChannelJoined()]);
 
       tearDownFeed(feed);
     });
   });
 
-  test('signing out disconnects and no further changes arrive', () {
+  test('signing out disconnects and no further results arrive', () {
     fakeAsync((async) {
       final feed = startFeed(async);
 
       feed.credentials.add(null);
       async.elapse(const Duration(seconds: 1));
-      feed.server.push(from: 'v1', to: 'v2', changes: [personChange]);
+      feed.server.pushFull(ref, const {});
       async.elapse(const Duration(seconds: 5));
 
       expect(feed.server.isConnected, isFalse);
-      expect(feed.events, [const ResyncRequired()]);
+      expect(feed.events, [const ChannelJoined()]);
 
       tearDownFeed(feed);
     });

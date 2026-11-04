@@ -1,8 +1,10 @@
 export 'realtime/change_feed_client.dart';
 export 'realtime/change_feed_event.dart';
-export 'realtime/entity_change.dart';
 export 'realtime/live_query.dart';
-export 'realtime/live_query_dependencies.dart';
-export 'realtime/live_query_kind.dart';
 export 'realtime/live_query_registry.dart';
+export 'realtime/live_query_request.dart';
 export 'realtime/live_query_target.dart';
+export 'realtime/live_register_outcome.dart';
+export 'realtime/live_registration.dart';
+export 'realtime/live_result.dart';
+export 'realtime/query_result_hash.dart';
