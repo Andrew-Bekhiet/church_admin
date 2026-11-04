@@ -42,6 +42,16 @@ defmodule ChurchAdmin.Realtime.Live.ResultTest do
     assert row1 == row("1")
   end
 
+  test "a root __typename beside the page, which every client document selects, does not hide the list" do
+    chunk =
+      update_in(chunk([row("1")], "k1", 1), [:data], &Map.put(&1, "__typename", "RootQueryType"))
+
+    assert {:ok, result} = Result.from_chunks([chunk])
+    assert Result.ids(result) == ["1"]
+    assert Result.data(result)["__typename"] == "RootQueryType"
+    assert {:ok, %{"results" => [_row]}} = Result.page_of(chunk)
+  end
+
   test "a window that starts empty has one empty chunk" do
     assert {:ok, result} = Result.from_chunks([chunk([], nil, 0)])
 

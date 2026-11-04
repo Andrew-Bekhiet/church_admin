@@ -114,8 +114,12 @@ defmodule ChurchAdmin.Realtime.Live.Result do
 
   defp list_root(data) do
     case for {root, %{"results" => results}} <- data, is_list(results), do: root do
-      [root] when map_size(data) == 1 -> {:ok, root}
-      _not_one_page -> {:error, :not_a_list}
+      [root]
+      when map_size(data) == 1 or (map_size(data) == 2 and is_map_key(data, "__typename")) ->
+        {:ok, root}
+
+      _not_one_page ->
+        {:error, :not_a_list}
     end
   end
 
