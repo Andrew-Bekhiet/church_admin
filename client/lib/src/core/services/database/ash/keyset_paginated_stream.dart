@@ -94,15 +94,13 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
       final missingRows = (pageIndex + 1) * pageSize - currentItems.length;
       if (generation != _generation || !hasMore || missingRows <= 0) return;
 
-      final loadedPageIndex = _pageIndex;
-      _pageIndex = pageIndex;
-      final didLoad = await _load(
+      await _load(
         generation,
         rows: missingRows,
         after: _window?.endKeyset,
         keep: currentItems,
+        pageIndex: pageIndex,
       );
-      if (!didLoad && generation == _generation) _pageIndex = loadedPageIndex;
     });
   }
 
@@ -149,11 +147,12 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     }
   }
 
-  Future<bool> _load(
+  Future<void> _load(
     int generation, {
     required int rows,
     required String? after,
     required List<T> keep,
+    int? pageIndex,
     FetchPolicy? fetchPolicy,
   }) async {
     final effectivePolicy = fetchPolicy ?? _networkPolicy;
@@ -170,24 +169,21 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
         after: after,
         fetchPolicy: effectivePolicy,
       );
-      if (generation != _generation) return false;
+      if (generation != _generation) return;
 
       _registry.stopLive(this);
       _awaitingResync = false;
+      if (pageIndex != null) _pageIndex = pageIndex;
       _storeAndPublishLoaded(query, keep, chunks, requestedRows: rows);
       if (effectivePolicy == FetchPolicy.networkOnly) {
         _startLive(query, variables, chunks, isFromFirstRow: keep.isEmpty);
       }
-
-      return true;
     } on Object catch (error, stackTrace) {
-      if (generation != _generation) return false;
+      if (generation != _generation) return;
       if (isCachePreview) rethrow;
 
       _registry.markStale(this);
       _subject.addError(error, stackTrace);
-
-      return false;
     } finally {
       if (generation == _generation) _loading.add(false);
     }

@@ -574,6 +574,23 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
 
       await_run()
     end
+
+    @tag max_concurrent_runs: 1
+    test "makes a group still queued read its window, whatever batch reaches it first", %{
+      registry: registry,
+      topic: topic
+    } do
+      register_and_settle(registry, [row("1")], variables: %{"name" => "first"})
+      register_and_settle(registry, [row("2")], variables: %{"name" => "second"})
+
+      Phoenix.PubSub.broadcast(ChurchAdmin.PubSub, topic, :realtime_reset)
+      {_running, running_task} = await_run()
+      batch(topic, touched())
+      settle(registry)
+      send(running_task, {:finish, success([row("1")])})
+
+      assert {%{window_required?: true}, _task} = await_run()
+    end
   end
 
   describe "bounded concurrency" do

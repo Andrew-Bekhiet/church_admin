@@ -130,9 +130,11 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
   end
 
   defp run_again(key, state) do
-    case state.groups[key] do
-      %{status: :idle} -> enqueue(state, key)
-      _queued_or_running -> update_in(state.groups[key], &Group.mark_run_again/1)
+    marked = update_in(state.groups[key], &Group.mark_run_again/1)
+
+    case marked.groups[key] do
+      %{status: :idle} -> enqueue(marked, key)
+      _queued_or_running -> marked
     end
   end
 
