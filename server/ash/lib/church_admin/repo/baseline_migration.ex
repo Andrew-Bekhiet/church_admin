@@ -24,6 +24,9 @@ defmodule ChurchAdmin.Repo.BaselineMigration do
     |> Enum.sort()
   end
 
+  @spec last_version() :: pos_integer()
+  def last_version, do: folders() |> List.last() |> version()
+
   @spec run!(Ecto.Repo.t(), String.t()) :: :ok
   def run!(repo, folder) do
     path = folder |> folder_path() |> Path.join("up.sql")
