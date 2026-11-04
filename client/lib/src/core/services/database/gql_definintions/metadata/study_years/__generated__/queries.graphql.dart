@@ -434,6 +434,13 @@ const documentNodeQuerystudyYears = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'StudyYear'),
                         directives: [],
@@ -489,7 +496,11 @@ class Query_studyYears_studyYears {
       count: (l$count as int?),
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
-          ?.map((e) => Fragment_StudyYear.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Query_studyYears_studyYears_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -499,7 +510,7 @@ class Query_studyYears_studyYears {
 
   final String? endKeyset;
 
-  final List<Fragment_StudyYear>? results;
+  final List<Query_studyYears_studyYears_results>? results;
 
   final String $__typename;
 
@@ -592,12 +603,16 @@ abstract class CopyWith_Query_studyYears_studyYears<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_StudyYear>? results,
+    List<Query_studyYears_studyYears_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_StudyYear>? Function(
-      Iterable<CopyWith_Fragment_StudyYear<Fragment_StudyYear>>?,
+    Iterable<Query_studyYears_studyYears_results>? Function(
+      Iterable<
+        CopyWith_Query_studyYears_studyYears_results<
+          Query_studyYears_studyYears_results
+        >
+      >?,
     )
     _fn,
   );
@@ -626,7 +641,7 @@ class _CopyWithImpl_Query_studyYears_studyYears<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_StudyYear>?),
+          : (results as List<Query_studyYears_studyYears_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -634,13 +649,19 @@ class _CopyWithImpl_Query_studyYears_studyYears<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_StudyYear>? Function(
-      Iterable<CopyWith_Fragment_StudyYear<Fragment_StudyYear>>?,
+    Iterable<Query_studyYears_studyYears_results>? Function(
+      Iterable<
+        CopyWith_Query_studyYears_studyYears_results<
+          Query_studyYears_studyYears_results
+        >
+      >?,
     )
     _fn,
   ) => call(
     results: _fn(
-      _instance.results?.map((e) => CopyWith_Fragment_StudyYear(e, (i) => i)),
+      _instance.results?.map(
+        (e) => CopyWith_Query_studyYears_studyYears_results(e, (i) => i),
+      ),
     )?.toList(),
   );
 }
@@ -654,11 +675,184 @@ class _CopyWithStubImpl_Query_studyYears_studyYears<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_StudyYear>? results,
+    List<Query_studyYears_studyYears_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_studyYears_studyYears_results implements Fragment_StudyYear {
+  Query_studyYears_studyYears_results({
+    this.keyset,
+    required this.id,
+    required this.name,
+    required this.order,
+    this.$__typename = 'StudyYear',
+  });
+
+  factory Query_studyYears_studyYears_results.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$order = json['order'];
+    final l$$__typename = json['__typename'];
+    return Query_studyYears_studyYears_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      name: (l$name as String),
+      order: (l$order as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final String name;
+
+  final int order;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$order = order;
+    _resultData['order'] = l$order;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$name = name;
+    final l$order = order;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$keyset, l$id, l$name, l$order, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_studyYears_studyYears_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (l$order != lOther$order) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_studyYears_studyYears_results
+    on Query_studyYears_studyYears_results {
+  CopyWith_Query_studyYears_studyYears_results<
+    Query_studyYears_studyYears_results
+  >
+  get copyWith => CopyWith_Query_studyYears_studyYears_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_studyYears_studyYears_results<TRes> {
+  factory CopyWith_Query_studyYears_studyYears_results(
+    Query_studyYears_studyYears_results instance,
+    TRes Function(Query_studyYears_studyYears_results) then,
+  ) = _CopyWithImpl_Query_studyYears_studyYears_results;
+
+  factory CopyWith_Query_studyYears_studyYears_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_studyYears_studyYears_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? order,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Query_studyYears_studyYears_results<TRes>
+    implements CopyWith_Query_studyYears_studyYears_results<TRes> {
+  _CopyWithImpl_Query_studyYears_studyYears_results(this._instance, this._then);
+
+  final Query_studyYears_studyYears_results _instance;
+
+  final TRes Function(Query_studyYears_studyYears_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? order = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_studyYears_studyYears_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      order: order == _undefined || order == null
+          ? _instance.order
+          : (order as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Query_studyYears_studyYears_results<TRes>
+    implements CopyWith_Query_studyYears_studyYears_results<TRes> {
+  _CopyWithStubImpl_Query_studyYears_studyYears_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? order,
+    String? $__typename,
+  }) => _res;
 }
 
 class Variables_Query_studyYear {

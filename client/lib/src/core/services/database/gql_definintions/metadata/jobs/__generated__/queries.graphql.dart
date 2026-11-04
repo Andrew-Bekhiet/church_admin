@@ -417,6 +417,13 @@ const documentNodeQueryjobs = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'Job'),
                         directives: [],
@@ -472,7 +479,10 @@ class Query_jobs_jobs {
       count: (l$count as int?),
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
-          ?.map((e) => Fragment_Job.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) =>
+                Query_jobs_jobs_results.fromJson((e as Map<String, dynamic>)),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -482,7 +492,7 @@ class Query_jobs_jobs {
 
   final String? endKeyset;
 
-  final List<Fragment_Job>? results;
+  final List<Query_jobs_jobs_results>? results;
 
   final String $__typename;
 
@@ -573,12 +583,12 @@ abstract class CopyWith_Query_jobs_jobs<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_Job>? results,
+    List<Query_jobs_jobs_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_Job>? Function(
-      Iterable<CopyWith_Fragment_Job<Fragment_Job>>?,
+    Iterable<Query_jobs_jobs_results>? Function(
+      Iterable<CopyWith_Query_jobs_jobs_results<Query_jobs_jobs_results>>?,
     )
     _fn,
   );
@@ -607,7 +617,7 @@ class _CopyWithImpl_Query_jobs_jobs<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_Job>?),
+          : (results as List<Query_jobs_jobs_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -615,13 +625,15 @@ class _CopyWithImpl_Query_jobs_jobs<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_Job>? Function(
-      Iterable<CopyWith_Fragment_Job<Fragment_Job>>?,
+    Iterable<Query_jobs_jobs_results>? Function(
+      Iterable<CopyWith_Query_jobs_jobs_results<Query_jobs_jobs_results>>?,
     )
     _fn,
   ) => call(
     results: _fn(
-      _instance.results?.map((e) => CopyWith_Fragment_Job(e, (i) => i)),
+      _instance.results?.map(
+        (e) => CopyWith_Query_jobs_jobs_results(e, (i) => i),
+      ),
     )?.toList(),
   );
 }
@@ -635,9 +647,147 @@ class _CopyWithStubImpl_Query_jobs_jobs<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_Job>? results,
+    List<Query_jobs_jobs_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_jobs_jobs_results implements Fragment_Job {
+  Query_jobs_jobs_results({
+    this.keyset,
+    required this.id,
+    required this.name,
+    this.$__typename = 'Job',
+  });
+
+  factory Query_jobs_jobs_results.fromJson(Map<String, dynamic> json) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$$__typename = json['__typename'];
+    return Query_jobs_jobs_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      name: (l$name as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final String name;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$name = name;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$keyset, l$id, l$name, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_jobs_jobs_results || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_jobs_jobs_results on Query_jobs_jobs_results {
+  CopyWith_Query_jobs_jobs_results<Query_jobs_jobs_results> get copyWith =>
+      CopyWith_Query_jobs_jobs_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_jobs_jobs_results<TRes> {
+  factory CopyWith_Query_jobs_jobs_results(
+    Query_jobs_jobs_results instance,
+    TRes Function(Query_jobs_jobs_results) then,
+  ) = _CopyWithImpl_Query_jobs_jobs_results;
+
+  factory CopyWith_Query_jobs_jobs_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_jobs_jobs_results;
+
+  TRes call({String? keyset, String? id, String? name, String? $__typename});
+}
+
+class _CopyWithImpl_Query_jobs_jobs_results<TRes>
+    implements CopyWith_Query_jobs_jobs_results<TRes> {
+  _CopyWithImpl_Query_jobs_jobs_results(this._instance, this._then);
+
+  final Query_jobs_jobs_results _instance;
+
+  final TRes Function(Query_jobs_jobs_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_jobs_jobs_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Query_jobs_jobs_results<TRes>
+    implements CopyWith_Query_jobs_jobs_results<TRes> {
+  _CopyWithStubImpl_Query_jobs_jobs_results(this._res);
+
+  TRes _res;
+
+  call({String? keyset, String? id, String? name, String? $__typename}) => _res;
 }

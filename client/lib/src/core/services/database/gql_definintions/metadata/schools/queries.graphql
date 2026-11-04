@@ -8,6 +8,7 @@ query schools(
     count
     endKeyset
     results {
+      keyset
       ...School
     }
   }

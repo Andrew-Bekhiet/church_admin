@@ -583,6 +583,13 @@ const documentNodeQueryservices = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'ServiceWithStudyYears'),
                         directives: [],
@@ -898,6 +905,7 @@ class Query_services_services_results
         Fragment_Service,
         Fragment_ServiceNoPhoto {
   Query_services_services_results({
+    this.keyset,
     required this.id,
     required this.name,
     this.color,
@@ -914,6 +922,7 @@ class Query_services_services_results
   });
 
   factory Query_services_services_results.fromJson(Map<String, dynamic> json) {
+    final l$keyset = json['keyset'];
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
@@ -928,6 +937,7 @@ class Query_services_services_results
     final l$classes = json['classes'];
     final l$groups = json['groups'];
     return Query_services_services_results(
+      keyset: (l$keyset as String?),
       id: (l$id as String),
       name: (l$name as String),
       color: (l$color as int?),
@@ -962,6 +972,8 @@ class Query_services_services_results
     );
   }
 
+  final String? keyset;
+
   final String id;
 
   final String name;
@@ -990,6 +1002,8 @@ class Query_services_services_results
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
     final l$id = id;
     _resultData['id'] = l$id;
     final l$name = name;
@@ -1023,6 +1037,7 @@ class Query_services_services_results
 
   @override
   int get hashCode {
+    final l$keyset = keyset;
     final l$id = id;
     final l$name = name;
     final l$color = color;
@@ -1037,6 +1052,7 @@ class Query_services_services_results
     final l$classes = classes;
     final l$groups = groups;
     return Object.hashAll([
+      l$keyset,
       l$id,
       l$name,
       l$color,
@@ -1060,6 +1076,11 @@ class Query_services_services_results
     }
     if (other is! Query_services_services_results ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
       return false;
     }
     final l$id = id;
@@ -1161,6 +1182,7 @@ abstract class CopyWith_Query_services_services_results<TRes> {
       _CopyWithStubImpl_Query_services_services_results;
 
   TRes call({
+    String? keyset,
     String? id,
     String? name,
     int? color,
@@ -1204,6 +1226,7 @@ class _CopyWithImpl_Query_services_services_results<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? keyset = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
@@ -1219,6 +1242,7 @@ class _CopyWithImpl_Query_services_services_results<TRes>
     Object? groups = _undefined,
   }) => _then(
     Query_services_services_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
       id: id == _undefined || id == null ? _instance.id : (id as String),
       name: name == _undefined || name == null
           ? _instance.name
@@ -1311,6 +1335,7 @@ class _CopyWithStubImpl_Query_services_services_results<TRes>
   TRes _res;
 
   call({
+    String? keyset,
     String? id,
     String? name,
     int? color,

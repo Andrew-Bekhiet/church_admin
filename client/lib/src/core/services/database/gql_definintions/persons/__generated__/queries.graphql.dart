@@ -448,6 +448,13 @@ const documentNodeQuerypersons = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'Person'),
                         directives: [],
@@ -505,7 +512,11 @@ class Query_persons_persons {
       count: (l$count as int?),
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
-          ?.map((e) => Fragment_Person.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Query_persons_persons_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -515,7 +526,7 @@ class Query_persons_persons {
 
   final String? endKeyset;
 
-  final List<Fragment_Person>? results;
+  final List<Query_persons_persons_results>? results;
 
   final String $__typename;
 
@@ -606,12 +617,14 @@ abstract class CopyWith_Query_persons_persons<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_Person>? results,
+    List<Query_persons_persons_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_Person>? Function(
-      Iterable<CopyWith_Fragment_Person<Fragment_Person>>?,
+    Iterable<Query_persons_persons_results>? Function(
+      Iterable<
+        CopyWith_Query_persons_persons_results<Query_persons_persons_results>
+      >?,
     )
     _fn,
   );
@@ -640,7 +653,7 @@ class _CopyWithImpl_Query_persons_persons<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_Person>?),
+          : (results as List<Query_persons_persons_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -648,13 +661,17 @@ class _CopyWithImpl_Query_persons_persons<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_Person>? Function(
-      Iterable<CopyWith_Fragment_Person<Fragment_Person>>?,
+    Iterable<Query_persons_persons_results>? Function(
+      Iterable<
+        CopyWith_Query_persons_persons_results<Query_persons_persons_results>
+      >?,
     )
     _fn,
   ) => call(
     results: _fn(
-      _instance.results?.map((e) => CopyWith_Fragment_Person(e, (i) => i)),
+      _instance.results?.map(
+        (e) => CopyWith_Query_persons_persons_results(e, (i) => i),
+      ),
     )?.toList(),
   );
 }
@@ -668,11 +685,285 @@ class _CopyWithStubImpl_Query_persons_persons<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_Person>? results,
+    List<Query_persons_persons_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_persons_persons_results
+    implements Fragment_Person, Fragment_PersonNoPhoto {
+  Query_persons_persons_results({
+    this.keyset,
+    required this.id,
+    required this.name,
+    this.color,
+    required this.userCanEdit,
+    this.$__typename = 'Person',
+    this.photoUpdatedAt,
+    this.blurhash,
+    this.dataCheck,
+  });
+
+  factory Query_persons_persons_results.fromJson(Map<String, dynamic> json) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
+    final l$$__typename = json['__typename'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
+    final l$dataCheck = json['dataCheck'];
+    return Query_persons_persons_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      name: (l$name as String),
+      color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool),
+      $__typename: (l$$__typename as String),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
+      dataCheck: l$dataCheck == null
+          ? null
+          : Fragment_DataCheck.fromJson((l$dataCheck as Map<String, dynamic>)),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final String name;
+
+  final int? color;
+
+  final bool userCanEdit;
+
+  final String $__typename;
+
+  final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
+
+  final Fragment_DataCheck? dataCheck;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
+    final l$dataCheck = dataCheck;
+    _resultData['dataCheck'] = l$dataCheck?.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$name = name;
+    final l$color = color;
+    final l$userCanEdit = userCanEdit;
+    final l$$__typename = $__typename;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
+    final l$dataCheck = dataCheck;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$name,
+      l$color,
+      l$userCanEdit,
+      l$$__typename,
+      l$photoUpdatedAt,
+      l$blurhash,
+      l$dataCheck,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_persons_persons_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$dataCheck = dataCheck;
+    final lOther$dataCheck = other.dataCheck;
+    if (l$dataCheck != lOther$dataCheck) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_persons_persons_results
+    on Query_persons_persons_results {
+  CopyWith_Query_persons_persons_results<Query_persons_persons_results>
+  get copyWith => CopyWith_Query_persons_persons_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_persons_persons_results<TRes> {
+  factory CopyWith_Query_persons_persons_results(
+    Query_persons_persons_results instance,
+    TRes Function(Query_persons_persons_results) then,
+  ) = _CopyWithImpl_Query_persons_persons_results;
+
+  factory CopyWith_Query_persons_persons_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_persons_persons_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    String? $__typename,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    Fragment_DataCheck? dataCheck,
+  });
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck;
+}
+
+class _CopyWithImpl_Query_persons_persons_results<TRes>
+    implements CopyWith_Query_persons_persons_results<TRes> {
+  _CopyWithImpl_Query_persons_persons_results(this._instance, this._then);
+
+  final Query_persons_persons_results _instance;
+
+  final TRes Function(Query_persons_persons_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? color = _undefined,
+    Object? userCanEdit = _undefined,
+    Object? $__typename = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
+    Object? dataCheck = _undefined,
+  }) => _then(
+    Query_persons_persons_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined || userCanEdit == null
+          ? _instance.userCanEdit
+          : (userCanEdit as bool),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      dataCheck: dataCheck == _undefined
+          ? _instance.dataCheck
+          : (dataCheck as Fragment_DataCheck?),
+    ),
+  );
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck {
+    final local$dataCheck = _instance.dataCheck;
+    return local$dataCheck == null
+        ? CopyWith_Fragment_DataCheck.stub(_then(_instance))
+        : CopyWith_Fragment_DataCheck(
+            local$dataCheck,
+            (e) => call(dataCheck: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Query_persons_persons_results<TRes>
+    implements CopyWith_Query_persons_persons_results<TRes> {
+  _CopyWithStubImpl_Query_persons_persons_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    String? $__typename,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    Fragment_DataCheck? dataCheck,
+  }) => _res;
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck =>
+      CopyWith_Fragment_DataCheck.stub(_res);
 }
 
 class Variables_Query_person {
@@ -4080,6 +4371,13 @@ const documentNodeQuerypersonsPhoneContacts = DocumentNode(
                   selectionSet: SelectionSetNode(
                     selections: [
                       FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
                         name: NameNode(value: 'id'),
                         alias: null,
                         arguments: [],
@@ -4466,6 +4764,7 @@ class _CopyWithStubImpl_Query_personsPhoneContacts_persons<TRes>
 
 class Query_personsPhoneContacts_persons_results {
   Query_personsPhoneContacts_persons_results({
+    this.keyset,
     required this.id,
     required this.name,
     required this.contacts,
@@ -4476,12 +4775,14 @@ class Query_personsPhoneContacts_persons_results {
   factory Query_personsPhoneContacts_persons_results.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$keyset = json['keyset'];
     final l$id = json['id'];
     final l$name = json['name'];
     final l$contacts = json['contacts'];
     final l$familyContacts = json['familyContacts'];
     final l$$__typename = json['__typename'];
     return Query_personsPhoneContacts_persons_results(
+      keyset: (l$keyset as String?),
       id: (l$id as String),
       name: (l$name as String),
       contacts: (l$contacts as List<dynamic>)
@@ -4496,6 +4797,8 @@ class Query_personsPhoneContacts_persons_results {
     );
   }
 
+  final String? keyset;
+
   final String id;
 
   final String name;
@@ -4508,6 +4811,8 @@ class Query_personsPhoneContacts_persons_results {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
     final l$id = id;
     _resultData['id'] = l$id;
     final l$name = name;
@@ -4525,12 +4830,14 @@ class Query_personsPhoneContacts_persons_results {
 
   @override
   int get hashCode {
+    final l$keyset = keyset;
     final l$id = id;
     final l$name = name;
     final l$contacts = contacts;
     final l$familyContacts = familyContacts;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$keyset,
       l$id,
       l$name,
       Object.hashAll(l$contacts.map((v) => v)),
@@ -4546,6 +4853,11 @@ class Query_personsPhoneContacts_persons_results {
     }
     if (other is! Query_personsPhoneContacts_persons_results ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
       return false;
     }
     final l$id = id;
@@ -4610,6 +4922,7 @@ abstract class CopyWith_Query_personsPhoneContacts_persons_results<TRes> {
       _CopyWithStubImpl_Query_personsPhoneContacts_persons_results;
 
   TRes call({
+    String? keyset,
     String? id,
     String? name,
     List<Fragment_Contact>? contacts,
@@ -4644,6 +4957,7 @@ class _CopyWithImpl_Query_personsPhoneContacts_persons_results<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? keyset = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? contacts = _undefined,
@@ -4651,6 +4965,7 @@ class _CopyWithImpl_Query_personsPhoneContacts_persons_results<TRes>
     Object? $__typename = _undefined,
   }) => _then(
     Query_personsPhoneContacts_persons_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
       id: id == _undefined || id == null ? _instance.id : (id as String),
       name: name == _undefined || name == null
           ? _instance.name
@@ -4699,6 +5014,7 @@ class _CopyWithStubImpl_Query_personsPhoneContacts_persons_results<TRes>
   TRes _res;
 
   call({
+    String? keyset,
     String? id,
     String? name,
     List<Fragment_Contact>? contacts,
@@ -7841,6 +8157,13 @@ const documentNodeQuerygeolocatedAreas = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'AreaWithBounds'),
                         directives: [],
@@ -7895,8 +8218,9 @@ class Query_geolocatedAreas_areas {
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
           ?.map(
-            (e) =>
-                Fragment_AreaWithBounds.fromJson((e as Map<String, dynamic>)),
+            (e) => Query_geolocatedAreas_areas_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
           )
           .toList(),
       $__typename: (l$$__typename as String),
@@ -7905,7 +8229,7 @@ class Query_geolocatedAreas_areas {
 
   final String? endKeyset;
 
-  final List<Fragment_AreaWithBounds>? results;
+  final List<Query_geolocatedAreas_areas_results>? results;
 
   final String $__typename;
 
@@ -7988,12 +8312,16 @@ abstract class CopyWith_Query_geolocatedAreas_areas<TRes> {
 
   TRes call({
     String? endKeyset,
-    List<Fragment_AreaWithBounds>? results,
+    List<Query_geolocatedAreas_areas_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_AreaWithBounds>? Function(
-      Iterable<CopyWith_Fragment_AreaWithBounds<Fragment_AreaWithBounds>>?,
+    Iterable<Query_geolocatedAreas_areas_results>? Function(
+      Iterable<
+        CopyWith_Query_geolocatedAreas_areas_results<
+          Query_geolocatedAreas_areas_results
+        >
+      >?,
     )
     _fn,
   );
@@ -8020,7 +8348,7 @@ class _CopyWithImpl_Query_geolocatedAreas_areas<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_AreaWithBounds>?),
+          : (results as List<Query_geolocatedAreas_areas_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -8028,14 +8356,18 @@ class _CopyWithImpl_Query_geolocatedAreas_areas<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_AreaWithBounds>? Function(
-      Iterable<CopyWith_Fragment_AreaWithBounds<Fragment_AreaWithBounds>>?,
+    Iterable<Query_geolocatedAreas_areas_results>? Function(
+      Iterable<
+        CopyWith_Query_geolocatedAreas_areas_results<
+          Query_geolocatedAreas_areas_results
+        >
+      >?,
     )
     _fn,
   ) => call(
     results: _fn(
       _instance.results?.map(
-        (e) => CopyWith_Fragment_AreaWithBounds(e, (i) => i),
+        (e) => CopyWith_Query_geolocatedAreas_areas_results(e, (i) => i),
       ),
     )?.toList(),
   );
@@ -8049,11 +8381,271 @@ class _CopyWithStubImpl_Query_geolocatedAreas_areas<TRes>
 
   call({
     String? endKeyset,
-    List<Fragment_AreaWithBounds>? results,
+    List<Query_geolocatedAreas_areas_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_geolocatedAreas_areas_results
+    implements Fragment_AreaWithBounds, Fragment_Area {
+  Query_geolocatedAreas_areas_results({
+    this.keyset,
+    required this.id,
+    required this.name,
+    this.color,
+    this.photoUpdatedAt,
+    this.blurhash,
+    required this.userCanEdit,
+    this.$__typename = 'Area',
+    this.bounds,
+  });
+
+  factory Query_geolocatedAreas_areas_results.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$color = json['color'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
+    final l$userCanEdit = json['userCanEdit'];
+    final l$$__typename = json['__typename'];
+    final l$bounds = json['bounds'];
+    return Query_geolocatedAreas_areas_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      name: (l$name as String),
+      color: (l$color as int?),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
+      userCanEdit: (l$userCanEdit as bool),
+      $__typename: (l$$__typename as String),
+      bounds: (l$bounds as Json?),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final String name;
+
+  final int? color;
+
+  final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
+
+  final bool userCanEdit;
+
+  final String $__typename;
+
+  final Json? bounds;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$bounds = bounds;
+    _resultData['bounds'] = l$bounds;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$name = name;
+    final l$color = color;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
+    final l$userCanEdit = userCanEdit;
+    final l$$__typename = $__typename;
+    final l$bounds = bounds;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$name,
+      l$color,
+      l$photoUpdatedAt,
+      l$blurhash,
+      l$userCanEdit,
+      l$$__typename,
+      l$bounds,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_geolocatedAreas_areas_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$bounds = bounds;
+    final lOther$bounds = other.bounds;
+    if (l$bounds != lOther$bounds) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_geolocatedAreas_areas_results
+    on Query_geolocatedAreas_areas_results {
+  CopyWith_Query_geolocatedAreas_areas_results<
+    Query_geolocatedAreas_areas_results
+  >
+  get copyWith => CopyWith_Query_geolocatedAreas_areas_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_geolocatedAreas_areas_results<TRes> {
+  factory CopyWith_Query_geolocatedAreas_areas_results(
+    Query_geolocatedAreas_areas_results instance,
+    TRes Function(Query_geolocatedAreas_areas_results) then,
+  ) = _CopyWithImpl_Query_geolocatedAreas_areas_results;
+
+  factory CopyWith_Query_geolocatedAreas_areas_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_geolocatedAreas_areas_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    bool? userCanEdit,
+    String? $__typename,
+    Json? bounds,
+  });
+}
+
+class _CopyWithImpl_Query_geolocatedAreas_areas_results<TRes>
+    implements CopyWith_Query_geolocatedAreas_areas_results<TRes> {
+  _CopyWithImpl_Query_geolocatedAreas_areas_results(this._instance, this._then);
+
+  final Query_geolocatedAreas_areas_results _instance;
+
+  final TRes Function(Query_geolocatedAreas_areas_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? color = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
+    Object? userCanEdit = _undefined,
+    Object? $__typename = _undefined,
+    Object? bounds = _undefined,
+  }) => _then(
+    Query_geolocatedAreas_areas_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      userCanEdit: userCanEdit == _undefined || userCanEdit == null
+          ? _instance.userCanEdit
+          : (userCanEdit as bool),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      bounds: bounds == _undefined ? _instance.bounds : (bounds as Json?),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Query_geolocatedAreas_areas_results<TRes>
+    implements CopyWith_Query_geolocatedAreas_areas_results<TRes> {
+  _CopyWithStubImpl_Query_geolocatedAreas_areas_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    bool? userCanEdit,
+    String? $__typename,
+    Json? bounds,
+  }) => _res;
 }
 
 class Variables_Query_geolocatedStreets {
@@ -8404,6 +8996,13 @@ const documentNodeQuerygeolocatedStreets = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'StreetWithLine'),
                         directives: [],
@@ -8458,8 +9057,9 @@ class Query_geolocatedStreets_streets {
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
           ?.map(
-            (e) =>
-                Fragment_StreetWithLine.fromJson((e as Map<String, dynamic>)),
+            (e) => Query_geolocatedStreets_streets_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
           )
           .toList(),
       $__typename: (l$$__typename as String),
@@ -8468,7 +9068,7 @@ class Query_geolocatedStreets_streets {
 
   final String? endKeyset;
 
-  final List<Fragment_StreetWithLine>? results;
+  final List<Query_geolocatedStreets_streets_results>? results;
 
   final String $__typename;
 
@@ -8551,12 +9151,16 @@ abstract class CopyWith_Query_geolocatedStreets_streets<TRes> {
 
   TRes call({
     String? endKeyset,
-    List<Fragment_StreetWithLine>? results,
+    List<Query_geolocatedStreets_streets_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_StreetWithLine>? Function(
-      Iterable<CopyWith_Fragment_StreetWithLine<Fragment_StreetWithLine>>?,
+    Iterable<Query_geolocatedStreets_streets_results>? Function(
+      Iterable<
+        CopyWith_Query_geolocatedStreets_streets_results<
+          Query_geolocatedStreets_streets_results
+        >
+      >?,
     )
     _fn,
   );
@@ -8583,7 +9187,7 @@ class _CopyWithImpl_Query_geolocatedStreets_streets<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_StreetWithLine>?),
+          : (results as List<Query_geolocatedStreets_streets_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -8591,14 +9195,18 @@ class _CopyWithImpl_Query_geolocatedStreets_streets<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_StreetWithLine>? Function(
-      Iterable<CopyWith_Fragment_StreetWithLine<Fragment_StreetWithLine>>?,
+    Iterable<Query_geolocatedStreets_streets_results>? Function(
+      Iterable<
+        CopyWith_Query_geolocatedStreets_streets_results<
+          Query_geolocatedStreets_streets_results
+        >
+      >?,
     )
     _fn,
   ) => call(
     results: _fn(
       _instance.results?.map(
-        (e) => CopyWith_Fragment_StreetWithLine(e, (i) => i),
+        (e) => CopyWith_Query_geolocatedStreets_streets_results(e, (i) => i),
       ),
     )?.toList(),
   );
@@ -8612,11 +9220,275 @@ class _CopyWithStubImpl_Query_geolocatedStreets_streets<TRes>
 
   call({
     String? endKeyset,
-    List<Fragment_StreetWithLine>? results,
+    List<Query_geolocatedStreets_streets_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_geolocatedStreets_streets_results
+    implements Fragment_StreetWithLine, Fragment_Street {
+  Query_geolocatedStreets_streets_results({
+    this.keyset,
+    required this.id,
+    required this.name,
+    this.color,
+    this.photoUpdatedAt,
+    this.blurhash,
+    required this.userCanEdit,
+    this.$__typename = 'Street',
+    this.line,
+  });
+
+  factory Query_geolocatedStreets_streets_results.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$color = json['color'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
+    final l$userCanEdit = json['userCanEdit'];
+    final l$$__typename = json['__typename'];
+    final l$line = json['line'];
+    return Query_geolocatedStreets_streets_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      name: (l$name as String),
+      color: (l$color as int?),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
+      userCanEdit: (l$userCanEdit as bool),
+      $__typename: (l$$__typename as String),
+      line: (l$line as Json?),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final String name;
+
+  final int? color;
+
+  final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
+
+  final bool userCanEdit;
+
+  final String $__typename;
+
+  final Json? line;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$line = line;
+    _resultData['line'] = l$line;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$name = name;
+    final l$color = color;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
+    final l$userCanEdit = userCanEdit;
+    final l$$__typename = $__typename;
+    final l$line = line;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$name,
+      l$color,
+      l$photoUpdatedAt,
+      l$blurhash,
+      l$userCanEdit,
+      l$$__typename,
+      l$line,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_geolocatedStreets_streets_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$line = line;
+    final lOther$line = other.line;
+    if (l$line != lOther$line) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_geolocatedStreets_streets_results
+    on Query_geolocatedStreets_streets_results {
+  CopyWith_Query_geolocatedStreets_streets_results<
+    Query_geolocatedStreets_streets_results
+  >
+  get copyWith =>
+      CopyWith_Query_geolocatedStreets_streets_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_geolocatedStreets_streets_results<TRes> {
+  factory CopyWith_Query_geolocatedStreets_streets_results(
+    Query_geolocatedStreets_streets_results instance,
+    TRes Function(Query_geolocatedStreets_streets_results) then,
+  ) = _CopyWithImpl_Query_geolocatedStreets_streets_results;
+
+  factory CopyWith_Query_geolocatedStreets_streets_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_geolocatedStreets_streets_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    bool? userCanEdit,
+    String? $__typename,
+    Json? line,
+  });
+}
+
+class _CopyWithImpl_Query_geolocatedStreets_streets_results<TRes>
+    implements CopyWith_Query_geolocatedStreets_streets_results<TRes> {
+  _CopyWithImpl_Query_geolocatedStreets_streets_results(
+    this._instance,
+    this._then,
+  );
+
+  final Query_geolocatedStreets_streets_results _instance;
+
+  final TRes Function(Query_geolocatedStreets_streets_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? color = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
+    Object? userCanEdit = _undefined,
+    Object? $__typename = _undefined,
+    Object? line = _undefined,
+  }) => _then(
+    Query_geolocatedStreets_streets_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      userCanEdit: userCanEdit == _undefined || userCanEdit == null
+          ? _instance.userCanEdit
+          : (userCanEdit as bool),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      line: line == _undefined ? _instance.line : (line as Json?),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Query_geolocatedStreets_streets_results<TRes>
+    implements CopyWith_Query_geolocatedStreets_streets_results<TRes> {
+  _CopyWithStubImpl_Query_geolocatedStreets_streets_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    bool? userCanEdit,
+    String? $__typename,
+    Json? line,
+  }) => _res;
 }
 
 class Variables_Query_geolocatedFamilies {
@@ -8974,6 +9846,13 @@ const documentNodeQuerygeolocatedFamilies = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'PersonFamily'),
                         directives: [],
@@ -9234,6 +10113,7 @@ class _CopyWithStubImpl_Query_geolocatedFamilies_families<TRes>
 class Query_geolocatedFamilies_families_results
     implements Fragment_PersonFamily {
   Query_geolocatedFamilies_families_results({
+    this.keyset,
     required this.id,
     required this.name,
     this.color,
@@ -9248,6 +10128,7 @@ class Query_geolocatedFamilies_families_results
   factory Query_geolocatedFamilies_families_results.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$keyset = json['keyset'];
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
@@ -9258,6 +10139,7 @@ class Query_geolocatedFamilies_families_results
     final l$$__typename = json['__typename'];
     final l$address = json['address'];
     return Query_geolocatedFamilies_families_results(
+      keyset: (l$keyset as String?),
       id: (l$id as String),
       name: (l$name as String),
       color: (l$color as int?),
@@ -9277,6 +10159,8 @@ class Query_geolocatedFamilies_families_results
             ),
     );
   }
+
+  final String? keyset;
 
   final String id;
 
@@ -9298,6 +10182,8 @@ class Query_geolocatedFamilies_families_results
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
     final l$id = id;
     _resultData['id'] = l$id;
     final l$name = name;
@@ -9323,6 +10209,7 @@ class Query_geolocatedFamilies_families_results
 
   @override
   int get hashCode {
+    final l$keyset = keyset;
     final l$id = id;
     final l$name = name;
     final l$color = color;
@@ -9333,6 +10220,7 @@ class Query_geolocatedFamilies_families_results
     final l$$__typename = $__typename;
     final l$address = address;
     return Object.hashAll([
+      l$keyset,
       l$id,
       l$name,
       l$color,
@@ -9352,6 +10240,11 @@ class Query_geolocatedFamilies_families_results
     }
     if (other is! Query_geolocatedFamilies_families_results ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
       return false;
     }
     final l$id = id;
@@ -9422,6 +10315,7 @@ abstract class CopyWith_Query_geolocatedFamilies_families_results<TRes> {
       _CopyWithStubImpl_Query_geolocatedFamilies_families_results;
 
   TRes call({
+    String? keyset,
     String? id,
     String? name,
     int? color,
@@ -9450,6 +10344,7 @@ class _CopyWithImpl_Query_geolocatedFamilies_families_results<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? keyset = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
@@ -9461,6 +10356,7 @@ class _CopyWithImpl_Query_geolocatedFamilies_families_results<TRes>
     Object? address = _undefined,
   }) => _then(
     Query_geolocatedFamilies_families_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
       id: id == _undefined || id == null ? _instance.id : (id as String),
       name: name == _undefined || name == null
           ? _instance.name
@@ -9517,6 +10413,7 @@ class _CopyWithStubImpl_Query_geolocatedFamilies_families_results<TRes>
   TRes _res;
 
   call({
+    String? keyset,
     String? id,
     String? name,
     int? color,
@@ -10022,6 +10919,13 @@ const documentNodeQuerygeolocatedStores = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'Store'),
                         directives: [],
@@ -10278,6 +11182,7 @@ class _CopyWithStubImpl_Query_geolocatedStores_stores<TRes>
 
 class Query_geolocatedStores_stores_results implements Fragment_Store {
   Query_geolocatedStores_stores_results({
+    this.keyset,
     required this.id,
     required this.name,
     this.color,
@@ -10292,6 +11197,7 @@ class Query_geolocatedStores_stores_results implements Fragment_Store {
   factory Query_geolocatedStores_stores_results.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$keyset = json['keyset'];
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
@@ -10302,6 +11208,7 @@ class Query_geolocatedStores_stores_results implements Fragment_Store {
     final l$$__typename = json['__typename'];
     final l$address = json['address'];
     return Query_geolocatedStores_stores_results(
+      keyset: (l$keyset as String?),
       id: (l$id as String),
       name: (l$name as String),
       color: (l$color as int?),
@@ -10319,6 +11226,8 @@ class Query_geolocatedStores_stores_results implements Fragment_Store {
             ),
     );
   }
+
+  final String? keyset;
 
   final String id;
 
@@ -10340,6 +11249,8 @@ class Query_geolocatedStores_stores_results implements Fragment_Store {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
     final l$id = id;
     _resultData['id'] = l$id;
     final l$name = name;
@@ -10365,6 +11276,7 @@ class Query_geolocatedStores_stores_results implements Fragment_Store {
 
   @override
   int get hashCode {
+    final l$keyset = keyset;
     final l$id = id;
     final l$name = name;
     final l$color = color;
@@ -10375,6 +11287,7 @@ class Query_geolocatedStores_stores_results implements Fragment_Store {
     final l$$__typename = $__typename;
     final l$address = address;
     return Object.hashAll([
+      l$keyset,
       l$id,
       l$name,
       l$color,
@@ -10394,6 +11307,11 @@ class Query_geolocatedStores_stores_results implements Fragment_Store {
     }
     if (other is! Query_geolocatedStores_stores_results ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
       return false;
     }
     final l$id = id;
@@ -10464,6 +11382,7 @@ abstract class CopyWith_Query_geolocatedStores_stores_results<TRes> {
       _CopyWithStubImpl_Query_geolocatedStores_stores_results;
 
   TRes call({
+    String? keyset,
     String? id,
     String? name,
     int? color,
@@ -10491,6 +11410,7 @@ class _CopyWithImpl_Query_geolocatedStores_stores_results<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? keyset = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
@@ -10502,6 +11422,7 @@ class _CopyWithImpl_Query_geolocatedStores_stores_results<TRes>
     Object? address = _undefined,
   }) => _then(
     Query_geolocatedStores_stores_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
       id: id == _undefined || id == null ? _instance.id : (id as String),
       name: name == _undefined || name == null
           ? _instance.name
@@ -10548,6 +11469,7 @@ class _CopyWithStubImpl_Query_geolocatedStores_stores_results<TRes>
   TRes _res;
 
   call({
+    String? keyset,
     String? id,
     String? name,
     int? color,
@@ -11045,6 +11967,13 @@ const documentNodeQuerygeolocatedPersons = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'PersonNoPhoto'),
                         directives: [],
@@ -11302,6 +12231,7 @@ class _CopyWithStubImpl_Query_geolocatedPersons_persons<TRes>
 class Query_geolocatedPersons_persons_results
     implements Fragment_PersonNoPhoto {
   Query_geolocatedPersons_persons_results({
+    this.keyset,
     required this.id,
     required this.name,
     this.color,
@@ -11313,6 +12243,7 @@ class Query_geolocatedPersons_persons_results
   factory Query_geolocatedPersons_persons_results.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$keyset = json['keyset'];
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
@@ -11320,6 +12251,7 @@ class Query_geolocatedPersons_persons_results
     final l$$__typename = json['__typename'];
     final l$address = json['address'];
     return Query_geolocatedPersons_persons_results(
+      keyset: (l$keyset as String?),
       id: (l$id as String),
       name: (l$name as String),
       color: (l$color as int?),
@@ -11332,6 +12264,8 @@ class Query_geolocatedPersons_persons_results
             ),
     );
   }
+
+  final String? keyset;
 
   final String id;
 
@@ -11347,6 +12281,8 @@ class Query_geolocatedPersons_persons_results
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
     final l$id = id;
     _resultData['id'] = l$id;
     final l$name = name;
@@ -11364,6 +12300,7 @@ class Query_geolocatedPersons_persons_results
 
   @override
   int get hashCode {
+    final l$keyset = keyset;
     final l$id = id;
     final l$name = name;
     final l$color = color;
@@ -11371,6 +12308,7 @@ class Query_geolocatedPersons_persons_results
     final l$$__typename = $__typename;
     final l$address = address;
     return Object.hashAll([
+      l$keyset,
       l$id,
       l$name,
       l$color,
@@ -11387,6 +12325,11 @@ class Query_geolocatedPersons_persons_results
     }
     if (other is! Query_geolocatedPersons_persons_results ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
       return false;
     }
     final l$id = id;
@@ -11442,6 +12385,7 @@ abstract class CopyWith_Query_geolocatedPersons_persons_results<TRes> {
       _CopyWithStubImpl_Query_geolocatedPersons_persons_results;
 
   TRes call({
+    String? keyset,
     String? id,
     String? name,
     int? color,
@@ -11466,6 +12410,7 @@ class _CopyWithImpl_Query_geolocatedPersons_persons_results<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? keyset = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
@@ -11474,6 +12419,7 @@ class _CopyWithImpl_Query_geolocatedPersons_persons_results<TRes>
     Object? address = _undefined,
   }) => _then(
     Query_geolocatedPersons_persons_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
       id: id == _undefined || id == null ? _instance.id : (id as String),
       name: name == _undefined || name == null
           ? _instance.name
@@ -11511,6 +12457,7 @@ class _CopyWithStubImpl_Query_geolocatedPersons_persons_results<TRes>
   TRes _res;
 
   call({
+    String? keyset,
     String? id,
     String? name,
     int? color,

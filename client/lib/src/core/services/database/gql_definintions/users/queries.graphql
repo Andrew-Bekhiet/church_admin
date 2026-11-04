@@ -8,6 +8,7 @@ query users(
     count
     endKeyset
     results {
+      keyset
       ...UserOverview
       ...UserAdminScopes
     }

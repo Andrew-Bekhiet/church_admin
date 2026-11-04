@@ -8,6 +8,7 @@ query streets(
     count
     endKeyset
     results {
+      keyset
       ...StreetWithLine
     }
   }

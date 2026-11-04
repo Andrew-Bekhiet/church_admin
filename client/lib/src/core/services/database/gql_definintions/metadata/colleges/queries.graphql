@@ -8,6 +8,7 @@ query colleges(
     count
     endKeyset
     results {
+      keyset
       ...College
     }
   }

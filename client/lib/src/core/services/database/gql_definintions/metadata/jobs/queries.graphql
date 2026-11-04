@@ -8,6 +8,7 @@ query jobs(
     count
     endKeyset
     results {
+      keyset
       ...Job
     }
   }

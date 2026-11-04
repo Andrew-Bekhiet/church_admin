@@ -4,6 +4,7 @@ import '../../metadata/study_years/__generated__/fragments.graphql.dart';
 import '../../services/__generated__/fragments.graphql.dart';
 import 'fragments.graphql.dart';
 
+import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
 class Variables_Query_groups {
@@ -421,6 +422,13 @@ const documentNodeQuerygroups = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'Group'),
                         directives: [],
@@ -477,7 +485,11 @@ class Query_groups_groups {
       count: (l$count as int?),
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
-          ?.map((e) => Fragment_Group.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Query_groups_groups_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -487,7 +499,7 @@ class Query_groups_groups {
 
   final String? endKeyset;
 
-  final List<Fragment_Group>? results;
+  final List<Query_groups_groups_results>? results;
 
   final String $__typename;
 
@@ -578,12 +590,14 @@ abstract class CopyWith_Query_groups_groups<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_Group>? results,
+    List<Query_groups_groups_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_Group>? Function(
-      Iterable<CopyWith_Fragment_Group<Fragment_Group>>?,
+    Iterable<Query_groups_groups_results>? Function(
+      Iterable<
+        CopyWith_Query_groups_groups_results<Query_groups_groups_results>
+      >?,
     )
     _fn,
   );
@@ -612,7 +626,7 @@ class _CopyWithImpl_Query_groups_groups<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_Group>?),
+          : (results as List<Query_groups_groups_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -620,13 +634,17 @@ class _CopyWithImpl_Query_groups_groups<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_Group>? Function(
-      Iterable<CopyWith_Fragment_Group<Fragment_Group>>?,
+    Iterable<Query_groups_groups_results>? Function(
+      Iterable<
+        CopyWith_Query_groups_groups_results<Query_groups_groups_results>
+      >?,
     )
     _fn,
   ) => call(
     results: _fn(
-      _instance.results?.map((e) => CopyWith_Fragment_Group(e, (i) => i)),
+      _instance.results?.map(
+        (e) => CopyWith_Query_groups_groups_results(e, (i) => i),
+      ),
     )?.toList(),
   );
 }
@@ -640,11 +658,289 @@ class _CopyWithStubImpl_Query_groups_groups<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_Group>? results,
+    List<Query_groups_groups_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_groups_groups_results
+    implements Fragment_Group, Fragment_GroupNoPhoto {
+  Query_groups_groups_results({
+    this.keyset,
+    required this.id,
+    required this.name,
+    this.color,
+    required this.userCanEdit,
+    this.$__typename = 'Group',
+    this.photoUpdatedAt,
+    this.blurhash,
+    required this.serviceId,
+    this.validity,
+  });
+
+  factory Query_groups_groups_results.fromJson(Map<String, dynamic> json) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
+    final l$$__typename = json['__typename'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
+    final l$serviceId = json['serviceId'];
+    final l$validity = json['validity'];
+    return Query_groups_groups_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      name: (l$name as String),
+      color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool),
+      $__typename: (l$$__typename as String),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
+      serviceId: (l$serviceId as String),
+      validity: (l$validity as String?),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final String name;
+
+  final int? color;
+
+  final bool userCanEdit;
+
+  final String $__typename;
+
+  final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
+
+  final String serviceId;
+
+  final String? validity;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
+    final l$serviceId = serviceId;
+    _resultData['serviceId'] = l$serviceId;
+    final l$validity = validity;
+    _resultData['validity'] = l$validity;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$name = name;
+    final l$color = color;
+    final l$userCanEdit = userCanEdit;
+    final l$$__typename = $__typename;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
+    final l$serviceId = serviceId;
+    final l$validity = validity;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$name,
+      l$color,
+      l$userCanEdit,
+      l$$__typename,
+      l$photoUpdatedAt,
+      l$blurhash,
+      l$serviceId,
+      l$validity,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_groups_groups_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$serviceId = serviceId;
+    final lOther$serviceId = other.serviceId;
+    if (l$serviceId != lOther$serviceId) {
+      return false;
+    }
+    final l$validity = validity;
+    final lOther$validity = other.validity;
+    if (l$validity != lOther$validity) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_groups_groups_results
+    on Query_groups_groups_results {
+  CopyWith_Query_groups_groups_results<Query_groups_groups_results>
+  get copyWith => CopyWith_Query_groups_groups_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_groups_groups_results<TRes> {
+  factory CopyWith_Query_groups_groups_results(
+    Query_groups_groups_results instance,
+    TRes Function(Query_groups_groups_results) then,
+  ) = _CopyWithImpl_Query_groups_groups_results;
+
+  factory CopyWith_Query_groups_groups_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_groups_groups_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    String? $__typename,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    String? serviceId,
+    String? validity,
+  });
+}
+
+class _CopyWithImpl_Query_groups_groups_results<TRes>
+    implements CopyWith_Query_groups_groups_results<TRes> {
+  _CopyWithImpl_Query_groups_groups_results(this._instance, this._then);
+
+  final Query_groups_groups_results _instance;
+
+  final TRes Function(Query_groups_groups_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? color = _undefined,
+    Object? userCanEdit = _undefined,
+    Object? $__typename = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
+    Object? serviceId = _undefined,
+    Object? validity = _undefined,
+  }) => _then(
+    Query_groups_groups_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined || userCanEdit == null
+          ? _instance.userCanEdit
+          : (userCanEdit as bool),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      serviceId: serviceId == _undefined || serviceId == null
+          ? _instance.serviceId
+          : (serviceId as String),
+      validity: validity == _undefined
+          ? _instance.validity
+          : (validity as String?),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Query_groups_groups_results<TRes>
+    implements CopyWith_Query_groups_groups_results<TRes> {
+  _CopyWithStubImpl_Query_groups_groups_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    String? $__typename,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    String? serviceId,
+    String? validity,
+  }) => _res;
 }
 
 class Variables_Query_group {

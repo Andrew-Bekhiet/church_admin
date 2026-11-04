@@ -6,6 +6,7 @@ import '../../metadata/districts/__generated__/fragments.graphql.dart';
 import '../../streets/__generated__/fragments.graphql.dart';
 import 'fragments.graphql.dart';
 
+import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
 class Variables_Query_stores {
@@ -423,6 +424,13 @@ const documentNodeQuerystores = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'Store'),
                         directives: [],
@@ -478,7 +486,11 @@ class Query_stores_stores {
       count: (l$count as int?),
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
-          ?.map((e) => Fragment_Store.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Query_stores_stores_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -488,7 +500,7 @@ class Query_stores_stores {
 
   final String? endKeyset;
 
-  final List<Fragment_Store>? results;
+  final List<Query_stores_stores_results>? results;
 
   final String $__typename;
 
@@ -579,12 +591,14 @@ abstract class CopyWith_Query_stores_stores<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_Store>? results,
+    List<Query_stores_stores_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_Store>? Function(
-      Iterable<CopyWith_Fragment_Store<Fragment_Store>>?,
+    Iterable<Query_stores_stores_results>? Function(
+      Iterable<
+        CopyWith_Query_stores_stores_results<Query_stores_stores_results>
+      >?,
     )
     _fn,
   );
@@ -613,7 +627,7 @@ class _CopyWithImpl_Query_stores_stores<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_Store>?),
+          : (results as List<Query_stores_stores_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -621,13 +635,17 @@ class _CopyWithImpl_Query_stores_stores<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_Store>? Function(
-      Iterable<CopyWith_Fragment_Store<Fragment_Store>>?,
+    Iterable<Query_stores_stores_results>? Function(
+      Iterable<
+        CopyWith_Query_stores_stores_results<Query_stores_stores_results>
+      >?,
     )
     _fn,
   ) => call(
     results: _fn(
-      _instance.results?.map((e) => CopyWith_Fragment_Store(e, (i) => i)),
+      _instance.results?.map(
+        (e) => CopyWith_Query_stores_stores_results(e, (i) => i),
+      ),
     )?.toList(),
   );
 }
@@ -641,11 +659,268 @@ class _CopyWithStubImpl_Query_stores_stores<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_Store>? results,
+    List<Query_stores_stores_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_stores_stores_results implements Fragment_Store {
+  Query_stores_stores_results({
+    this.keyset,
+    required this.id,
+    required this.name,
+    this.color,
+    this.adminFamilyId,
+    this.photoUpdatedAt,
+    this.blurhash,
+    required this.userCanEdit,
+    this.$__typename = 'Store',
+  });
+
+  factory Query_stores_stores_results.fromJson(Map<String, dynamic> json) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$color = json['color'];
+    final l$adminFamilyId = json['adminFamilyId'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
+    final l$userCanEdit = json['userCanEdit'];
+    final l$$__typename = json['__typename'];
+    return Query_stores_stores_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      name: (l$name as String),
+      color: (l$color as int?),
+      adminFamilyId: (l$adminFamilyId as String?),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
+      userCanEdit: (l$userCanEdit as bool),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final String name;
+
+  final int? color;
+
+  final String? adminFamilyId;
+
+  final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
+
+  final bool userCanEdit;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$adminFamilyId = adminFamilyId;
+    _resultData['adminFamilyId'] = l$adminFamilyId;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$name = name;
+    final l$color = color;
+    final l$adminFamilyId = adminFamilyId;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
+    final l$userCanEdit = userCanEdit;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$name,
+      l$color,
+      l$adminFamilyId,
+      l$photoUpdatedAt,
+      l$blurhash,
+      l$userCanEdit,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_stores_stores_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$adminFamilyId = adminFamilyId;
+    final lOther$adminFamilyId = other.adminFamilyId;
+    if (l$adminFamilyId != lOther$adminFamilyId) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_stores_stores_results
+    on Query_stores_stores_results {
+  CopyWith_Query_stores_stores_results<Query_stores_stores_results>
+  get copyWith => CopyWith_Query_stores_stores_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_stores_stores_results<TRes> {
+  factory CopyWith_Query_stores_stores_results(
+    Query_stores_stores_results instance,
+    TRes Function(Query_stores_stores_results) then,
+  ) = _CopyWithImpl_Query_stores_stores_results;
+
+  factory CopyWith_Query_stores_stores_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_stores_stores_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    String? adminFamilyId,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    bool? userCanEdit,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Query_stores_stores_results<TRes>
+    implements CopyWith_Query_stores_stores_results<TRes> {
+  _CopyWithImpl_Query_stores_stores_results(this._instance, this._then);
+
+  final Query_stores_stores_results _instance;
+
+  final TRes Function(Query_stores_stores_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? color = _undefined,
+    Object? adminFamilyId = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
+    Object? userCanEdit = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_stores_stores_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      adminFamilyId: adminFamilyId == _undefined
+          ? _instance.adminFamilyId
+          : (adminFamilyId as String?),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      userCanEdit: userCanEdit == _undefined || userCanEdit == null
+          ? _instance.userCanEdit
+          : (userCanEdit as bool),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Query_stores_stores_results<TRes>
+    implements CopyWith_Query_stores_stores_results<TRes> {
+  _CopyWithStubImpl_Query_stores_stores_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    String? adminFamilyId,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    bool? userCanEdit,
+    String? $__typename,
+  }) => _res;
 }
 
 class Variables_Query_store {

@@ -8,6 +8,7 @@ query personTypes(
     count
     endKeyset
     results {
+      keyset
       ...PersonType
     }
   }

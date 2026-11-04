@@ -8,6 +8,7 @@ query hobbies(
     count
     endKeyset
     results {
+      keyset
       ...Hobby
     }
   }

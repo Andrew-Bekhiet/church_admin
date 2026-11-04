@@ -438,6 +438,13 @@ const documentNodeQueryfamilies = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'Family'),
                         directives: [],
@@ -494,7 +501,11 @@ class Query_families_families {
       count: (l$count as int?),
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
-          ?.map((e) => Fragment_Family.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Query_families_families_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -504,7 +515,7 @@ class Query_families_families {
 
   final String? endKeyset;
 
-  final List<Fragment_Family>? results;
+  final List<Query_families_families_results>? results;
 
   final String $__typename;
 
@@ -595,12 +606,16 @@ abstract class CopyWith_Query_families_families<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_Family>? results,
+    List<Query_families_families_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_Family>? Function(
-      Iterable<CopyWith_Fragment_Family<Fragment_Family>>?,
+    Iterable<Query_families_families_results>? Function(
+      Iterable<
+        CopyWith_Query_families_families_results<
+          Query_families_families_results
+        >
+      >?,
     )
     _fn,
   );
@@ -629,7 +644,7 @@ class _CopyWithImpl_Query_families_families<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_Family>?),
+          : (results as List<Query_families_families_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -637,13 +652,19 @@ class _CopyWithImpl_Query_families_families<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_Family>? Function(
-      Iterable<CopyWith_Fragment_Family<Fragment_Family>>?,
+    Iterable<Query_families_families_results>? Function(
+      Iterable<
+        CopyWith_Query_families_families_results<
+          Query_families_families_results
+        >
+      >?,
     )
     _fn,
   ) => call(
     results: _fn(
-      _instance.results?.map((e) => CopyWith_Fragment_Family(e, (i) => i)),
+      _instance.results?.map(
+        (e) => CopyWith_Query_families_families_results(e, (i) => i),
+      ),
     )?.toList(),
   );
 }
@@ -657,11 +678,284 @@ class _CopyWithStubImpl_Query_families_families<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_Family>? results,
+    List<Query_families_families_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_families_families_results implements Fragment_Family {
+  Query_families_families_results({
+    this.keyset,
+    required this.id,
+    required this.name,
+    this.color,
+    required this.userCanEdit,
+    this.photoUpdatedAt,
+    this.blurhash,
+    this.dataCheck,
+    this.$__typename = 'Family',
+  });
+
+  factory Query_families_families_results.fromJson(Map<String, dynamic> json) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
+    final l$dataCheck = json['dataCheck'];
+    final l$$__typename = json['__typename'];
+    return Query_families_families_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      name: (l$name as String),
+      color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
+      dataCheck: l$dataCheck == null
+          ? null
+          : Fragment_DataCheck.fromJson((l$dataCheck as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final String name;
+
+  final int? color;
+
+  final bool userCanEdit;
+
+  final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
+
+  final Fragment_DataCheck? dataCheck;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
+    final l$dataCheck = dataCheck;
+    _resultData['dataCheck'] = l$dataCheck?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$name = name;
+    final l$color = color;
+    final l$userCanEdit = userCanEdit;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
+    final l$dataCheck = dataCheck;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$name,
+      l$color,
+      l$userCanEdit,
+      l$photoUpdatedAt,
+      l$blurhash,
+      l$dataCheck,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_families_families_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$dataCheck = dataCheck;
+    final lOther$dataCheck = other.dataCheck;
+    if (l$dataCheck != lOther$dataCheck) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_families_families_results
+    on Query_families_families_results {
+  CopyWith_Query_families_families_results<Query_families_families_results>
+  get copyWith => CopyWith_Query_families_families_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_families_families_results<TRes> {
+  factory CopyWith_Query_families_families_results(
+    Query_families_families_results instance,
+    TRes Function(Query_families_families_results) then,
+  ) = _CopyWithImpl_Query_families_families_results;
+
+  factory CopyWith_Query_families_families_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_families_families_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    Fragment_DataCheck? dataCheck,
+    String? $__typename,
+  });
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck;
+}
+
+class _CopyWithImpl_Query_families_families_results<TRes>
+    implements CopyWith_Query_families_families_results<TRes> {
+  _CopyWithImpl_Query_families_families_results(this._instance, this._then);
+
+  final Query_families_families_results _instance;
+
+  final TRes Function(Query_families_families_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? color = _undefined,
+    Object? userCanEdit = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
+    Object? dataCheck = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_families_families_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined || userCanEdit == null
+          ? _instance.userCanEdit
+          : (userCanEdit as bool),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      dataCheck: dataCheck == _undefined
+          ? _instance.dataCheck
+          : (dataCheck as Fragment_DataCheck?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck {
+    final local$dataCheck = _instance.dataCheck;
+    return local$dataCheck == null
+        ? CopyWith_Fragment_DataCheck.stub(_then(_instance))
+        : CopyWith_Fragment_DataCheck(
+            local$dataCheck,
+            (e) => call(dataCheck: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Query_families_families_results<TRes>
+    implements CopyWith_Query_families_families_results<TRes> {
+  _CopyWithStubImpl_Query_families_families_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    Fragment_DataCheck? dataCheck,
+    String? $__typename,
+  }) => _res;
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck =>
+      CopyWith_Fragment_DataCheck.stub(_res);
 }
 
 class Variables_Query_familiesWithAddresses {
@@ -1108,6 +1402,13 @@ const documentNodeQueryfamiliesWithAddresses = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'keyset'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FragmentSpreadNode(
                         name: NameNode(value: 'FamilyWithAddress'),
                         directives: [],
@@ -1172,7 +1473,7 @@ class Query_familiesWithAddresses_families {
       endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
           ?.map(
-            (e) => Fragment_FamilyWithAddress.fromJson(
+            (e) => Query_familiesWithAddresses_families_results.fromJson(
               (e as Map<String, dynamic>),
             ),
           )
@@ -1185,7 +1486,7 @@ class Query_familiesWithAddresses_families {
 
   final String? endKeyset;
 
-  final List<Fragment_FamilyWithAddress>? results;
+  final List<Query_familiesWithAddresses_families_results>? results;
 
   final String $__typename;
 
@@ -1280,13 +1581,15 @@ abstract class CopyWith_Query_familiesWithAddresses_families<TRes> {
   TRes call({
     int? count,
     String? endKeyset,
-    List<Fragment_FamilyWithAddress>? results,
+    List<Query_familiesWithAddresses_families_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Fragment_FamilyWithAddress>? Function(
+    Iterable<Query_familiesWithAddresses_families_results>? Function(
       Iterable<
-        CopyWith_Fragment_FamilyWithAddress<Fragment_FamilyWithAddress>
+        CopyWith_Query_familiesWithAddresses_families_results<
+          Query_familiesWithAddresses_families_results
+        >
       >?,
     )
     _fn,
@@ -1319,7 +1622,7 @@ class _CopyWithImpl_Query_familiesWithAddresses_families<TRes>
           : (endKeyset as String?),
       results: results == _undefined
           ? _instance.results
-          : (results as List<Fragment_FamilyWithAddress>?),
+          : (results as List<Query_familiesWithAddresses_families_results>?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -1327,16 +1630,19 @@ class _CopyWithImpl_Query_familiesWithAddresses_families<TRes>
   );
 
   TRes results(
-    Iterable<Fragment_FamilyWithAddress>? Function(
+    Iterable<Query_familiesWithAddresses_families_results>? Function(
       Iterable<
-        CopyWith_Fragment_FamilyWithAddress<Fragment_FamilyWithAddress>
+        CopyWith_Query_familiesWithAddresses_families_results<
+          Query_familiesWithAddresses_families_results
+        >
       >?,
     )
     _fn,
   ) => call(
     results: _fn(
       _instance.results?.map(
-        (e) => CopyWith_Fragment_FamilyWithAddress(e, (i) => i),
+        (e) =>
+            CopyWith_Query_familiesWithAddresses_families_results(e, (i) => i),
       ),
     )?.toList(),
   );
@@ -1351,11 +1657,390 @@ class _CopyWithStubImpl_Query_familiesWithAddresses_families<TRes>
   call({
     int? count,
     String? endKeyset,
-    List<Fragment_FamilyWithAddress>? results,
+    List<Query_familiesWithAddresses_families_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
+}
+
+class Query_familiesWithAddresses_families_results
+    implements Fragment_FamilyWithAddress, Fragment_Family {
+  Query_familiesWithAddresses_families_results({
+    this.keyset,
+    required this.id,
+    required this.name,
+    this.color,
+    required this.userCanEdit,
+    this.photoUpdatedAt,
+    this.blurhash,
+    this.dataCheck,
+    this.$__typename = 'Family',
+    required this.status,
+    this.deceasedSpouseName,
+    this.marriageDate,
+    this.address,
+  });
+
+  factory Query_familiesWithAddresses_families_results.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$keyset = json['keyset'];
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
+    final l$dataCheck = json['dataCheck'];
+    final l$$__typename = json['__typename'];
+    final l$status = json['status'];
+    final l$deceasedSpouseName = json['deceasedSpouseName'];
+    final l$marriageDate = json['marriageDate'];
+    final l$address = json['address'];
+    return Query_familiesWithAddresses_families_results(
+      keyset: (l$keyset as String?),
+      id: (l$id as String),
+      name: (l$name as String),
+      color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
+      dataCheck: l$dataCheck == null
+          ? null
+          : Fragment_DataCheck.fromJson((l$dataCheck as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+      status: (l$status as String),
+      deceasedSpouseName: (l$deceasedSpouseName as String?),
+      marriageDate: l$marriageDate == null
+          ? null
+          : dateFromString(l$marriageDate),
+      address: l$address == null
+          ? null
+          : Fragment_Address.fromJson((l$address as Map<String, dynamic>)),
+    );
+  }
+
+  final String? keyset;
+
+  final String id;
+
+  final String name;
+
+  final int? color;
+
+  final bool userCanEdit;
+
+  final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
+
+  final Fragment_DataCheck? dataCheck;
+
+  final String $__typename;
+
+  final String status;
+
+  final String? deceasedSpouseName;
+
+  final DateTime? marriageDate;
+
+  final Fragment_Address? address;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$keyset = keyset;
+    _resultData['keyset'] = l$keyset;
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
+    final l$dataCheck = dataCheck;
+    _resultData['dataCheck'] = l$dataCheck?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$status = status;
+    _resultData['status'] = l$status;
+    final l$deceasedSpouseName = deceasedSpouseName;
+    _resultData['deceasedSpouseName'] = l$deceasedSpouseName;
+    final l$marriageDate = marriageDate;
+    _resultData['marriageDate'] = l$marriageDate == null
+        ? null
+        : dateToString(l$marriageDate);
+    final l$address = address;
+    _resultData['address'] = l$address?.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$keyset = keyset;
+    final l$id = id;
+    final l$name = name;
+    final l$color = color;
+    final l$userCanEdit = userCanEdit;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
+    final l$dataCheck = dataCheck;
+    final l$$__typename = $__typename;
+    final l$status = status;
+    final l$deceasedSpouseName = deceasedSpouseName;
+    final l$marriageDate = marriageDate;
+    final l$address = address;
+    return Object.hashAll([
+      l$keyset,
+      l$id,
+      l$name,
+      l$color,
+      l$userCanEdit,
+      l$photoUpdatedAt,
+      l$blurhash,
+      l$dataCheck,
+      l$$__typename,
+      l$status,
+      l$deceasedSpouseName,
+      l$marriageDate,
+      l$address,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_familiesWithAddresses_families_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$keyset = keyset;
+    final lOther$keyset = other.keyset;
+    if (l$keyset != lOther$keyset) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$dataCheck = dataCheck;
+    final lOther$dataCheck = other.dataCheck;
+    if (l$dataCheck != lOther$dataCheck) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$deceasedSpouseName = deceasedSpouseName;
+    final lOther$deceasedSpouseName = other.deceasedSpouseName;
+    if (l$deceasedSpouseName != lOther$deceasedSpouseName) {
+      return false;
+    }
+    final l$marriageDate = marriageDate;
+    final lOther$marriageDate = other.marriageDate;
+    if (l$marriageDate != lOther$marriageDate) {
+      return false;
+    }
+    final l$address = address;
+    final lOther$address = other.address;
+    if (l$address != lOther$address) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_familiesWithAddresses_families_results
+    on Query_familiesWithAddresses_families_results {
+  CopyWith_Query_familiesWithAddresses_families_results<
+    Query_familiesWithAddresses_families_results
+  >
+  get copyWith =>
+      CopyWith_Query_familiesWithAddresses_families_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_familiesWithAddresses_families_results<TRes> {
+  factory CopyWith_Query_familiesWithAddresses_families_results(
+    Query_familiesWithAddresses_families_results instance,
+    TRes Function(Query_familiesWithAddresses_families_results) then,
+  ) = _CopyWithImpl_Query_familiesWithAddresses_families_results;
+
+  factory CopyWith_Query_familiesWithAddresses_families_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_familiesWithAddresses_families_results;
+
+  TRes call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    Fragment_DataCheck? dataCheck,
+    String? $__typename,
+    String? status,
+    String? deceasedSpouseName,
+    DateTime? marriageDate,
+    Fragment_Address? address,
+  });
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck;
+  CopyWith_Fragment_Address<TRes> get address;
+}
+
+class _CopyWithImpl_Query_familiesWithAddresses_families_results<TRes>
+    implements CopyWith_Query_familiesWithAddresses_families_results<TRes> {
+  _CopyWithImpl_Query_familiesWithAddresses_families_results(
+    this._instance,
+    this._then,
+  );
+
+  final Query_familiesWithAddresses_families_results _instance;
+
+  final TRes Function(Query_familiesWithAddresses_families_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? keyset = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? color = _undefined,
+    Object? userCanEdit = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
+    Object? dataCheck = _undefined,
+    Object? $__typename = _undefined,
+    Object? status = _undefined,
+    Object? deceasedSpouseName = _undefined,
+    Object? marriageDate = _undefined,
+    Object? address = _undefined,
+  }) => _then(
+    Query_familiesWithAddresses_families_results(
+      keyset: keyset == _undefined ? _instance.keyset : (keyset as String?),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined || userCanEdit == null
+          ? _instance.userCanEdit
+          : (userCanEdit as bool),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      dataCheck: dataCheck == _undefined
+          ? _instance.dataCheck
+          : (dataCheck as Fragment_DataCheck?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      status: status == _undefined || status == null
+          ? _instance.status
+          : (status as String),
+      deceasedSpouseName: deceasedSpouseName == _undefined
+          ? _instance.deceasedSpouseName
+          : (deceasedSpouseName as String?),
+      marriageDate: marriageDate == _undefined
+          ? _instance.marriageDate
+          : (marriageDate as DateTime?),
+      address: address == _undefined
+          ? _instance.address
+          : (address as Fragment_Address?),
+    ),
+  );
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck {
+    final local$dataCheck = _instance.dataCheck;
+    return local$dataCheck == null
+        ? CopyWith_Fragment_DataCheck.stub(_then(_instance))
+        : CopyWith_Fragment_DataCheck(
+            local$dataCheck,
+            (e) => call(dataCheck: e),
+          );
+  }
+
+  CopyWith_Fragment_Address<TRes> get address {
+    final local$address = _instance.address;
+    return local$address == null
+        ? CopyWith_Fragment_Address.stub(_then(_instance))
+        : CopyWith_Fragment_Address(local$address, (e) => call(address: e));
+  }
+}
+
+class _CopyWithStubImpl_Query_familiesWithAddresses_families_results<TRes>
+    implements CopyWith_Query_familiesWithAddresses_families_results<TRes> {
+  _CopyWithStubImpl_Query_familiesWithAddresses_families_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? keyset,
+    String? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    Fragment_DataCheck? dataCheck,
+    String? $__typename,
+    String? status,
+    String? deceasedSpouseName,
+    DateTime? marriageDate,
+    Fragment_Address? address,
+  }) => _res;
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck =>
+      CopyWith_Fragment_DataCheck.stub(_res);
+
+  CopyWith_Fragment_Address<TRes> get address =>
+      CopyWith_Fragment_Address.stub(_res);
 }
 
 class Variables_Query_family {

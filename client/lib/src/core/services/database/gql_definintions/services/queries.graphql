@@ -11,6 +11,7 @@ query services(
     count
     endKeyset
     results {
+      keyset
       ...ServiceWithStudyYears
       classes(filter: $classesFilter, sort: $classesSort) {
         ...ClassWithStudyYears
