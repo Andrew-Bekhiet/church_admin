@@ -33,13 +33,18 @@ void main() {
   late BehaviorSubject<bool> connectivity;
   late RecordingGraphQLLink link;
 
+  Json pageOf(List<Person> persons, {String? endKeyset}) => {
+    'endKeyset': endKeyset,
+    'results': [for (final person in persons) person.toJson()],
+  };
+
   setUp(() {
     initGlobalProviderContainer([
       featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
     ]);
     connectivity = BehaviorSubject.seeded(true);
     link = RecordingGraphQLLink({
-      'persons': [mina.toJson()],
+      'persons': pageOf([mina]),
     });
   });
 
@@ -48,11 +53,11 @@ void main() {
     resetGlobalProviderContainer();
   });
 
-  PersonsDAO dao() => PersonsDAO(
+  PersonsDAO dao([Link? answeringLink]) => PersonsDAO(
     db: DatabaseService(
       DBGraphQLClient(
         connectivityStream: connectivity,
-        link: link,
+        link: answeringLink ?? link,
         cache: GraphQLCache(),
         autoChangeFetchPolicy: false,
       ),
@@ -69,6 +74,73 @@ void main() {
   test('the query asks for exactly the selected persons', () async {
     await dao().personsPhoneContacts(personsIds: [mina.id]);
 
-    expect(link.requests.single.variables['ids'], [mina.id]);
+    expect(
+      link.requests.single.variables['filter'],
+      Input_PersonFilterInput(
+        id: Input_PersonFilterId($in: [mina.id]),
+      ).toJson(),
+    );
   });
+
+  test('family phones are limited to the family admins', () async {
+    await dao().personsPhoneContacts(personsIds: [mina.id]);
+
+    expect(
+      link.requests.single.variables['familyContactsFilter'],
+      Input_FamilyContactFilterInput(
+        personType: Input_PersonTypeFilterInput(
+          isFamilyAdmin: Input_PersonTypeFilterIsFamilyAdmin(eq: true),
+        ),
+      ).toJson(),
+    );
+  });
+
+  test('a phone changed on the server replaces the one read before', () async {
+    final persons = dao();
+    await persons.personsPhoneContacts(personsIds: [mina.id]);
+    final renumbered = mina.copyWith(
+      contacts: const [PhoneContact(id: 'renumbered', phone: '+201003333333')],
+    );
+    link.data['persons'] = pageOf([renumbered]);
+
+    final fetched = await persons.personsPhoneContacts(personsIds: [mina.id]);
+
+    expect(fetched.single.contacts, renumbered.contacts);
+  });
+
+  test('a selection larger than a page comes back whole', () async {
+    final fullPage = [
+      for (var i = 0; i < AshPagination.maxPageSize; i++)
+        mina.copyWith(id: 'person-$i'),
+    ];
+    final lastPerson = mina.copyWith(id: 'last-person');
+    final pages = _PagedPersonsLink({
+      null: pageOf(fullPage, endKeyset: 'end-of-first-page'),
+      'end-of-first-page': pageOf([lastPerson]),
+    });
+
+    final persons = await dao(pages).personsPhoneContacts(
+      personsIds: [...fullPage, lastPerson].map((person) => person.id),
+    );
+
+    expect(persons.map((person) => person.id), [
+      ...fullPage.map((person) => person.id),
+      lastPerson.id,
+    ]);
+  });
+}
+
+class _PagedPersonsLink extends Link {
+  final Map<String?, Json> pagesByCursor;
+
+  _PagedPersonsLink(this.pagesByCursor);
+
+  @override
+  Stream<Response> request(Request request, [NextLink? forward]) =>
+      Stream.value(
+        Response(
+          data: {'persons': pagesByCursor[request.variables['after']]},
+          response: const {},
+        ),
+      );
 }

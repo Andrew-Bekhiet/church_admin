@@ -13,13 +13,14 @@ class KeysetRowsReader {
     required T Function(Json row) fromJson,
     required Json variables,
     int limit = everyRow,
+    bool onlineFirst = false,
   }) async {
     final pageQuery = KeysetPageQuery(
       client: client,
       document: document,
       fromJson: fromJson,
     );
-    final fetchPolicy = client.queryFetchPolicy(onlineFirst: false);
+    final fetchPolicy = client.queryFetchPolicy(onlineFirst: onlineFirst);
     final chunks = await KeysetPageQuery.fetchChained(
       rows: limit,
       after: null,

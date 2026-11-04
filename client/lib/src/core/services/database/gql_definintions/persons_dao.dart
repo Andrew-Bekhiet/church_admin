@@ -140,18 +140,21 @@ class PersonsDAO extends FullCRUDDAO<Person>
 
   Future<List<Person>> personsPhoneContacts({
     required Iterable<String> personsIds,
-  }) {
-    final queryOptions = QueryOptions(
-      document: transformDocument(documentNodeQuerypersonsPhoneContacts),
-      operationName: 'personsPhoneContacts',
-      variables: Variables_Query_personsPhoneContacts(
-        ids: personsIds.map((id) => id.toUuid()).toList(),
-      ).toJson(),
-      parserFn: db.parser.listParser(Person.fromJson),
-    );
-
-    return graphQLClient.queryAndReturnParsed(queryOptions, onlineFirst: true);
-  }
+  }) => _everyRow.read(
+    document: transformDocument(documentNodeQuerypersonsPhoneContacts),
+    fromJson: fromJson,
+    onlineFirst: true,
+    variables: Variables_Query_personsPhoneContacts(
+      filter: Input_PersonFilterInput(
+        id: Input_PersonFilterId($in: personsIds.toList()),
+      ),
+      familyContactsFilter: Input_FamilyContactFilterInput(
+        personType: Input_PersonTypeFilterInput(
+          isFamilyAdmin: Input_PersonTypeFilterIsFamilyAdmin(eq: true),
+        ),
+      ),
+    ).toJson(),
+  );
 
   Future<PersonsGeolocationsResponse?> personsGeolocations({
     List<UuidValue> areasIds = const [],
