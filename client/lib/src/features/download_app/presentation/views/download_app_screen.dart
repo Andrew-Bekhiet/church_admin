@@ -22,6 +22,7 @@ class DownloadAppScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               FilledButton.tonalIcon(
+                key: DownloadAppScreenKeys.androidButton,
                 style: Theme.of(context).filledTonalButtonStyleWorkaround,
                 onPressed: () =>
                     _downloadApp(context, DownloadPlatform.android),
@@ -29,6 +30,7 @@ class DownloadAppScreen extends StatelessWidget {
                 label: const Text('تنزيل التطبيق لنظام Android'),
               ),
               FilledButton.tonalIcon(
+                key: DownloadAppScreenKeys.iosButton,
                 style: Theme.of(context).filledTonalButtonStyleWorkaround,
                 onPressed: () => _downloadApp(context, DownloadPlatform.ios),
                 icon: const Icon(Symbols.ios),
@@ -55,10 +57,14 @@ class DownloadAppScreen extends StatelessWidget {
     unawaited(LauncherService.I.launchUrl(Uri.parse(link.url)));
   }
 
-  Future<String> _getAndTrackDownloadLink(DownloadPlatform platform) async {
-    final String url;
+  Future<AppDownloadLink> _getAndTrackDownloadLink(
+    DownloadPlatform platform,
+  ) async {
+    final AppDownloadLink link;
     try {
-      url = await FunctionsService.I.getAppDownloadLink(platform.name);
+      link = await DatabaseService.I.releases.appDownloadLink(
+        platform: platform.backendPlatform,
+      );
     } catch (_) {
       AnalyticsService.I.track(
         AppDownloadLinkFetchFinish(platform, isSuccess: false),
@@ -70,7 +76,7 @@ class DownloadAppScreen extends StatelessWidget {
       AppDownloadLinkFetchFinish(platform, isSuccess: true),
     );
 
-    return url;
+    return link;
   }
 
   Future<T> _showLoadingLinkDialog<T>(BuildContext context, Future<T> future) {
@@ -126,4 +132,9 @@ class DownloadAppScreen extends StatelessWidget {
 
     return completer.future;
   }
+}
+
+abstract final class DownloadAppScreenKeys {
+  static const androidButton = Key('DownloadAppScreen.androidButton');
+  static const iosButton = Key('DownloadAppScreen.iosButton');
 }
