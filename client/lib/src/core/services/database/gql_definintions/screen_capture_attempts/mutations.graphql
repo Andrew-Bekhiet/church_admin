@@ -1,0 +1,9 @@
+mutation recordScreenCaptureAttempt($input: RecordScreenCaptureAttemptInput!) {
+  recordScreenCaptureAttempt(input: $input) {
+    result {
+      id
+      captureKind
+      recordedAt
+    }
+  }
+}

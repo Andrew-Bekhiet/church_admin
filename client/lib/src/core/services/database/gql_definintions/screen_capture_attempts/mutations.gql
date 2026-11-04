@@ -1,7 +1,0 @@
-mutation recordScreenCaptureAttempt($captureKind: String!) {
-  insertOperationsScreenCaptureAttempts(
-    objects: [{ captureKind: $captureKind }]
-  ) {
-    affectedRows
-  }
-}

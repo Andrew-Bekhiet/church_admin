@@ -41,6 +41,39 @@ query personMemberships($id: ID!) {
   }
 }
 
+query personsPhoneContacts(
+  $filter: PersonFilterInput
+  $familyContactsFilter: FamilyContactFilterInput
+  $first: Int
+  $after: String
+) {
+  persons(filter: $filter, first: $first, after: $after) {
+    endKeyset
+    results {
+      id
+      name
+      contacts(
+        sort: [
+          { field: IS_MAIN_PHONE, order: DESC }
+          { field: CREATED_AT, order: ASC }
+        ]
+      ) {
+        ...Contact
+      }
+      familyContacts(
+        filter: $familyContactsFilter
+        sort: [
+          { field: PERSON_TYPE_ORDER, order: ASC }
+          { field: IS_MAIN_PHONE, order: DESC }
+          { field: CREATED_AT, order: ASC }
+        ]
+      ) {
+        ...FamilyContact
+      }
+    }
+  }
+}
+
 query personHistoryAnalysis(
   $id: ID!
   $callsFilter: CallFilterInput

@@ -6,5 +6,6 @@ fragment UserPreferences on UserPreferences {
   darkTheme
   greatFeastTheme
   lastHomeMode
+  lastWhatsappMessageText
   updatedAt
 }
