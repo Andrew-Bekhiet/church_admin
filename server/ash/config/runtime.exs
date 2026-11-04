@@ -41,11 +41,13 @@ auth_mode =
     other -> raise "AUTH_MODE must be firebase or emulator, got: #{inspect(other)}"
   end
 
+firebase_project_id =
+  auth_env.("FIREBASE_PROJECT_ID", default_firebase_project_id) ||
+    raise("environment variable FIREBASE_PROJECT_ID is missing")
+
 config :church_admin, ChurchAdmin.Auth.TokenVerifier,
   mode: auth_mode,
-  firebase_project_id:
-    auth_env.("FIREBASE_PROJECT_ID", default_firebase_project_id) ||
-      raise("environment variable FIREBASE_PROJECT_ID is missing")
+  firebase_project_id: firebase_project_id
 
 config :church_admin,
   account_claiming_by_email?:
@@ -63,12 +65,23 @@ storage_buckets = fn firebase_project_id ->
   end
 end
 
-if config_env() == :dev do
-  {:ok, http_bind_ip} =
-    "HTTP_BIND_IP" |> System.get_env("127.0.0.1") |> String.to_charlist() |> :inet.parse_address()
+if config_env() != :test do
+  default_http_bind_ip = if config_env() == :prod, do: "::", else: "127.0.0.1"
+  requested_http_bind_ip = System.get_env("HTTP_BIND_IP", default_http_bind_ip)
+
+  http_bind_ip =
+    case requested_http_bind_ip |> String.to_charlist() |> :inet.parse_address() do
+      {:ok, ip} ->
+        ip
+
+      {:error, _} ->
+        raise "HTTP_BIND_IP must be an IP address, got: #{inspect(requested_http_bind_ip)}"
+    end
 
   config :church_admin, ChurchAdminWeb.Endpoint, http: [ip: http_bind_ip]
+end
 
+if config_env() == :dev do
   if public_url = System.get_env("PUBLIC_URL") do
     %URI{scheme: scheme, host: public_host, port: public_port} = URI.parse(public_url)
 
@@ -142,19 +155,17 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  google_service_account =
-    (System.get_env("GOOGLE_APPLICATION_CREDENTIALS_JSON") ||
-       raise("environment variable GOOGLE_APPLICATION_CREDENTIALS_JSON is missing."))
-    |> Jason.decode!()
-
-  firebase_project_id =
-    System.get_env("FIREBASE_PROJECT_ID") || google_service_account["project_id"]
+  google_credentials =
+    case System.get_env("GOOGLE_APPLICATION_CREDENTIALS_JSON", "") do
+      "" -> :unconfigured
+      service_account_json -> {:service_account, Jason.decode!(service_account_json)}
+    end
 
   config :church_admin, ChurchAdmin.Files, buckets: storage_buckets.(firebase_project_id)
 
   config :church_admin, ChurchAdmin.Google.Config,
     project_id: firebase_project_id,
-    credentials: {:service_account, google_service_account}
+    credentials: google_credentials
 
   gcs_url_signer =
     case System.get_env("GCS_URL_SIGNER", "iam_sign_blob") do
@@ -173,7 +184,12 @@ if config_env() == :prod do
     signer: gcs_url_signer,
     signing_service_account: System.get_env("GCS_SIGNING_SERVICE_ACCOUNT")
 
-  host = System.get_env("PHX_HOST") || "example.com"
+  host =
+    System.get_env("PHX_HOST") ||
+      raise """
+      environment variable PHX_HOST is missing.
+      It is the public host name that export download links are built from.
+      """
 
   config :church_admin, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
@@ -183,13 +199,6 @@ if config_env() == :prod do
 
   config :church_admin, ChurchAdminWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
-    http: [
-      # Enable IPv6 and bind on all interfaces.
-      # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
-      # See the documentation on https://bandit.hexdocs.pm/Bandit.html#t:options/0
-      # for details about using IPv6 vs IPv4 and loopback vs public addresses.
-      ip: {0, 0, 0, 0, 0, 0, 0, 0}
-    ],
     secret_key_base: secret_key_base
 
   # ## SSL Support

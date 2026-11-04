@@ -36,6 +36,12 @@ defmodule ChurchAdmin.Google.ConfigTest do
       assert Config.check_allowed_in(@production_settings, @production_file_storage, :prod) == :ok
     end
 
+    test "allows unconfigured credentials in prod, so Google calls fail only when made" do
+      settings = Keyword.put(@production_settings, :credentials, :unconfigured)
+
+      assert Config.check_allowed_in(settings, @production_file_storage, :prod) == :ok
+    end
+
     test "allows the emulators in dev and test" do
       assert Config.check_allowed_in(@emulator_settings, @emulator_file_storage, :dev) == :ok
       assert Config.check_allowed_in(@emulator_settings, @emulator_file_storage, :test) == :ok

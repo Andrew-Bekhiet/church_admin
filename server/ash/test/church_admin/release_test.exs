@@ -6,6 +6,7 @@ defmodule ChurchAdmin.ReleaseTest do
   alias ChurchAdmin.Accounts.{Permission, User}
   alias ChurchAdmin.People.Person
   alias ChurchAdmin.Release
+  alias ChurchAdmin.Repo.BaselineMigration
 
   defp all_permissions,
     do: Permission |> Ash.read!(authorize?: false) |> Enum.map(& &1.name) |> Enum.sort()
@@ -85,5 +86,28 @@ defmodule ChurchAdmin.ReleaseTest do
     assert user_by_email("admin@example.com") == nil
 
     assert {:ok, _} = Release.bootstrap_admin("admin@example.com", force?: true)
+  end
+
+  describe "reference_seed_due?/1" do
+    setup do
+      baseline_versions = Enum.map(BaselineMigration.folders(), &BaselineMigration.version/1)
+
+      %{baseline_versions: baseline_versions, after_baseline: List.last(baseline_versions) + 1}
+    end
+
+    test "a database without migrations needs it", context do
+      assert Release.reference_seed_due?([])
+      assert context.baseline_versions |> Enum.take(3) |> Release.reference_seed_due?()
+    end
+
+    test "so does one that stopped right after the baseline, before the seed was loaded",
+         context do
+      assert Release.reference_seed_due?(context.baseline_versions)
+    end
+
+    test "a database that applied a migration after the baseline never gets it again",
+         context do
+      refute Release.reference_seed_due?(context.baseline_versions ++ [context.after_baseline])
+    end
   end
 end

@@ -2,11 +2,13 @@ defmodule ChurchAdmin.Google.Credentials do
   @moduledoc """
   Bearer tokens for the Google APIs: a Goth-managed service-account token in
   production, the Firebase emulators' fixed `owner` token in dev and test.
+  `:unconfigured` (production without `GOOGLE_APPLICATION_CREDENTIALS_JSON`) has
+  no token: every call that needs one fails with a `:credentials` error.
   """
 
   alias ChurchAdmin.Google.Error
 
-  @type t :: {:service_account, map()} | :emulator_owner
+  @type t :: {:service_account, map()} | :emulator_owner | :unconfigured
 
   @goth ChurchAdmin.Google.Goth
   @emulator_token "owner"
@@ -23,9 +25,18 @@ defmodule ChurchAdmin.Google.Credentials do
   end
 
   def child_specs(:emulator_owner), do: []
+  def child_specs(:unconfigured), do: []
 
   @spec fetch_token(t()) :: {:ok, String.t()} | {:error, Error.t()}
   def fetch_token(:emulator_owner), do: {:ok, @emulator_token}
+
+  def fetch_token(:unconfigured) do
+    {:error,
+     %Error{
+       reason: :credentials,
+       message: "GOOGLE_APPLICATION_CREDENTIALS_JSON is not set, so no Google API can be called"
+     }}
+  end
 
   def fetch_token({:service_account, _service_account}) do
     case Goth.fetch(@goth) do

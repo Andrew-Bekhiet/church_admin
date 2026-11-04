@@ -36,7 +36,7 @@ defmodule Mix.Tasks.ChurchAdmin.Setup do
     if baseline_applied?() do
       migrate([])
     else
-      migrate(["--to", Integer.to_string(last_baseline_version())])
+      migrate(["--to", Integer.to_string(BaselineMigration.last_version())])
       Seeds.load_reference!()
       load_sample_data(sample_data)
       migrate([])
@@ -67,11 +67,7 @@ defmodule Mix.Tasks.ChurchAdmin.Setup do
     {:ok, versions, _apps} =
       Ecto.Migrator.with_repo(ChurchAdmin.Repo, &Ecto.Migrator.migrated_versions/1)
 
-    last_baseline_version() in versions
-  end
-
-  defp last_baseline_version do
-    BaselineMigration.folders() |> List.last() |> BaselineMigration.version()
+    BaselineMigration.last_version() in versions
   end
 
   defp migrate(args) do
