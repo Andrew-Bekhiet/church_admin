@@ -2,145 +2,145 @@
 
 Advances every graded person one study year on 11 September (Nayrouz), and
 moves the service memberships, group memberships, classes and servant scopes
-that depend on their grade. Everything lives in the `operations` schema.
+that depend on their grade. On the Ash server the roll is Elixir code
+(`ChurchAdmin.Operations.StudyYearRoll`), scheduled by AshOban, and every
+outcome is a row in `operations.study_year_roll_runs`.
+
+`master` still runs the Hasura-era implementation: `pg_cron` jobs calling
+plpgsql procedures, and a Hasura event trigger with the
+`notifyStudyYearRollFailure` Cloud Function for the failure alert. This
+document describes the Ash backend (ENG-266), an experimental alternative
+backend; there is no decision to merge it to `master`.
 
 ## Pipeline
 
 ```mermaid
 flowchart TB
-    cron_roll(["pg_cron · study-year-roll<br/>0 * 11 9 * (UTC, hourly)"])
-    cron_missed(["pg_cron · study-year-roll-missed-check<br/>0 6 12 9 *"])
+    cron_roll(["AshOban schedule :roll<br/>0 * 11 9 * (UTC, hourly)"])
+    cron_missed(["AshOban schedule :missed_check<br/>0 6 12 9 *"])
 
-    subgraph scheduling [Scheduling procedures]
-        when_due["run_study_year_roll_when_due()<br/>date gate · catches failure"]
-        missed["record_missed_study_year_roll()"]
+    subgraph scheduling [Scheduled actions · StudyYearRollRun]
+        when_due["run_when_due<br/>date gate · records failure"]
+        missed["record_missed"]
     end
 
-    subgraph roll ["Atomic roll · run_study_year_roll(season)"]
+    subgraph roll ["Atomic roll · StudyYearRoll.run(season, today)"]
         direction TB
         lock["advisory lock + share row exclusive locks"]
-        skip{"study_year_roll_succeeded(season)?"}
-        blockers["find_study_year_roll_blockers()"]
-        plan["plan_study_year_roll()"]
+        skip{"season already succeeded?"}
+        refused{"season not started, or academic<br/>year already rolled?"}
+        snapshot["Snapshot.read!()"]
+        plan["Plan.build(snapshot)"]
+        blockers["Blockers.find(snapshot, plan)"]
         blocked{"any blockers?"}
-        apply["apply_study_year_roll_plan()"]
-        constraints["set constraints all immediate"]
+        apply["Apply.apply!(plan)"]
+        invariants["Invariants.check()"]
         lock --> skip
-        skip -- no --> blockers
-        blockers --> plan
-        plan --> blocked
+        skip -- no --> refused
+        refused -- no --> snapshot
+        snapshot --> plan
+        plan --> blockers
+        blockers --> blocked
         blocked -- no --> apply
-        apply --> constraints
+        apply --> invariants
     end
 
-    subgraph tables [Plan tables · temp, on commit drop]
-        ladder[(_study_year_roll_ladder)]
-        persons[(_persons_study_year_roll)]
-        services[(_persons_next_service_roll)]
-        after[(_persons_services_after_roll)]
-        groups[(_stranded_persons_groups_roll)]
-        classes[(_classes_roll)]
-        scopes[(_servant_scopes_roll)]
-        ladder --> persons --> services --> after --> groups
-        ladder --> classes
-        ladder --> scopes
-    end
-
-    rule["study_year_outgrows_service(next_year, service_last_year)"]
+    rule["Plan.outgrows_service?(next_year, service_last_year)"]
     runs[("operations.study_year_roll_runs")]
-    notify["Hasura event trigger →<br/>notifyStudyYearRollFailure"]
+    alert["EnqueueStudyYearRollAlert →<br/>Oban job StudyYearRollAlert → FCM"]
+    fail["Failure<br/>transaction rolled back"]
 
     cron_roll --> when_due
     cron_missed --> missed
     when_due --> roll
-    plan -.writes.-> tables
-    rule -.-> services
-    rule -.-> classes
-    rule -.-> scopes
-    apply -.reads.-> tables
-    blockers -.reads.-> tables
-    constraints -- succeeded --> runs
+    rule -.-> plan
+    invariants -- succeeded --> runs
     when_due -- failed --> runs
     missed -- missed --> runs
-    blocked -- yes --> raise["raise exception<br/>detail = blocker list"]
+    refused -- yes --> fail
+    blocked -- yes --> fail
+    invariants -- violation --> fail
+    fail --> when_due
     skip -- yes --> skipped["skipped_already_rolled"]
-    runs --> notify
+    runs -- "failed or missed insert" --> alert
 ```
 
 The one domain rule shared by memberships, classes and scopes is
-`study_year_outgrows_service`: a cohort whose next study year is past a
+`Plan.outgrows_service?/2`: a cohort whose next study year is past a
 bounded service's last year (or that has no next year at all) leaves that
 service. Everything else is bookkeeping around it.
 
 ## Scheduling
 
-`pg_cron` 1.6 ships in the Postgres image but is not preloaded. Enabling it is a
-one-time operator action:
+The schedules are AshOban scheduled actions on `StudyYearRollRun`, run by Oban
+on the `study_year_roll` queue (concurrency 1) of the Ash server. Nothing needs
+enabling in Postgres: the migration `move_study_year_roll_to_ash_oban`
+unschedules the two `pg_cron` jobs of the Hasura-era implementation and drops
+its plpgsql routines.
 
-1. Add `pg_cron` to `shared_preload_libraries` alongside `timescaledb`, and set
-   `cron.database_name = 'church_admin'`.
-2. Restart the database.
-3. Apply the migration, which runs `create extension if not exists pg_cron` and
-   registers the job.
-
-The job is registered as `0 * 11 9 *` — hourly for the whole of 11 September,
-**UTC**. pg_cron evaluates cron expressions in the server timezone, so a literal
-`0 0 11 9 *` would not mean midnight in Cairo, and would drift whenever Egypt
-changes its DST rules. Instead the schedule is deliberately loose and
-`run_study_year_roll_when_due` decides whether to act, comparing
-`cairo_now()::date` against `nayrouz_date(season)`:
+The roll is scheduled as `0 * 11 9 *` — hourly for the whole of 11 September,
+**UTC**. Oban evaluates cron expressions in UTC, so a literal `0 0 11 9 *` would
+not mean midnight in Cairo, and would drift whenever Egypt changes its DST
+rules. Instead the schedule is deliberately loose and `run_when_due` decides
+whether to act, comparing today's Cairo date (`now() at time zone
+'Africa/Cairo'`) against 11 September of that year:
 
 - Not 11 September Cairo: does nothing.
 - 11 September Cairo: runs, unless this season already succeeded.
-- 12 September 06:00 UTC: `record_missed_study_year_roll` writes `missed`
-  if no success was recorded, per [C14].
+- 12 September 06:00 UTC: `record_missed` writes `missed` if no `succeeded` or
+  `missed` run was recorded for the season, per [C14].
 
 Hourly firing gives free retries within the day when the midnight attempt fails,
 which is the retry policy [E19] left open. It never produces an unattended
 catch-up on a later date.
 
-Both procedures take an optional `p_today date` that defaults to the Cairo
-date. It exists so the tests can drive the date gate and the failure path; the
-cron jobs call them without it.
+Both actions take an optional `today` date that defaults to the Cairo date. It
+exists so the tests can drive the date gate and the failure path; the schedules
+call them without it.
 
 ## Transaction and failure recording
 
 The roll must be atomic, but a rolled-back transaction cannot leave a record of
 its own failure. The two are separated:
 
-- `run_study_year_roll(season)` is the atomic unit. All DML lives here. It ends
-  with `set constraints all immediate` so that the deferred constraint triggers
-  (`persons_container_check`, `check_persons_service_rel`) fire inside the
-  function instead of at the outer commit, and a violation surfaces as an
-  exception from the call. This is also why a `begin; …; rollback;` dry run
-  proves nothing on its own ([E22]) — force constraints first.
-- `run_study_year_roll_when_due()` calls it inside a `begin … exception`
-  block. On failure the block's subtransaction rolls the roll back, and the
-  procedure records `failed` with the exception message and detail (the
-  blocker list lives in `detail`). That insert commits with the procedure.
+- `StudyYearRoll.run/2` is the atomic unit. All writes happen here, as bulk
+  actions of the system actor inside the caller's transaction. A failure
+  (refusal, blockers, an invariant violation or an exception from a bulk
+  action) is returned as a `Failure` and the caller rolls the transaction back.
+- `run_when_due` and the operator's `run` action (`run_recording_refusal/2`)
+  wrap it in `Repo.transaction`. When the roll fails, `record_failure` records
+  `failed` with the error message and detail (the blocker list lives in
+  `detail`) in a transaction of its own, after the roll has been rolled back.
 
-Since the port to Ash (ENG-266) the roll checks those two invariants itself,
-after applying the plan and inside its transaction, on the same rows the
-deferred triggers covered: the persons the roll updated and the memberships it
-inserted. Violations elsewhere never fail the roll. A failed range check's
-detail lists every violating membership (`person_id: … service_id: …`, one per
-line), where the trigger stopped at the first.
+After applying the plan, and inside the roll's transaction, `Invariants.check`
+verifies what the deferred database triggers `persons_container_check` and
+`check_persons_service_rel` verify on the roll's own writes: every person the
+roll updated keeps a family, store, uid, service or group, and every
+membership it inserted fits the service's study year range. A violation rolls
+the whole roll back. Violations elsewhere never fail the roll. A failed range
+check's detail lists every violating membership (`person_id: … service_id: …`,
+one per line), where the trigger stopped at the first.
 
 Idempotency is a partial unique index on `season_year where status = 'succeeded'`.
 A failed attempt therefore does not block a retry the same day, and a successful
 one can never be repeated ([C13], [C16]).
 
 A second partial unique index on `season_year where status = 'failed'` keeps the
-hourly retries to one `failed` row per season: the recording insert is an
-`on conflict … do update`, which replaces the error with the latest attempt's.
-Retries stay free, but a season that fails all day alerts once rather than
-twenty-one times.
+hourly retries to one `failed` row per season: `record_failure` takes an
+advisory lock per season, then creates the `failed` row or, when one exists,
+updates it (`replace_failed_run_error`) with the latest attempt's error and
+time. Retries stay free, but a season that fails all day alerts once rather
+than twenty-one times.
 
-Every insert into `operations.study_year_roll_runs` fires a Hasura event
-trigger; the Cloud Function pushes a maintenance notification for `failed` and
-`missed` rows to users holding the `maintenanceNotifications` permission. An
-`on conflict … do update` is an update, so it does not fire that insert-only
-trigger — which is what bounds the alert to one per season.
+The `create_failed_run` and `create_missed_run` actions enqueue an Oban job,
+`StudyYearRollAlert`, in the same transaction as the row, so the alert exists
+exactly when the run does. The job sends an FCM maintenance notification to the
+device tokens of users holding the `maintenanceNotifications` permission, with
+the text the Cloud Function sent on `master`. Tokens FCM reports unregistered
+are deleted. A delivery failure fails the job and Oban retries it (5 attempts);
+the run's `notified_at` is set only after every token was tried without a
+failure. The update that replaces a failed run's error does not enqueue a job,
+which is what bounds the alert to one per season.
 
 ## Concurrency
 
@@ -152,10 +152,11 @@ roll takes. This closes [E18], which the advisory lock alone did not.
 
 ## Pre-flight validation
 
-`find_study_year_roll_blockers()` builds the plan tables and returns one row
-per blocking problem. The roll calls it first and aborts before mutating
-anything. It is also meant to be run manually in early September, so that a
-misconfiguration surfaces days ahead instead of aborting the unattended run at
+`Blockers.find/2` checks the `Snapshot` and `Plan` and returns one entry
+(`issue_code`, `detail`) per blocking problem. The roll calls it before
+applying anything and aborts without mutating. It is also meant to be run
+manually in early September, through the `blockers` action of `StudyYearRollRun`
+(system actor only), so that a misconfiguration surfaces days ahead instead of aborting the unattended run at
 midnight with no catch-up available.
 
 It blocks on:
@@ -167,7 +168,7 @@ It blocks on:
   class would actually move there ([E14])
 - a person whose next grade falls outside the destination service's study year
   range, which the deferred `check_persons_service_rel` would otherwise raise
-  from inside `set constraints all immediate`, long after the pre-flight passed
+  after the plan was applied, long after the pre-flight passed
 
 The first, third and fourth are invariants on `services` that could be enforced
 by a trigger at write time instead; that is a schema change outside this
@@ -186,11 +187,13 @@ next service, or the person already holds the destination, all but one row are
 deleted (`dedupe`) before the survivor moves. Without that step the move would
 raise a unique violation and abort the whole roll.
 
-**Group memberships (§2b).** `persons_groups_check` only runs when the group
-membership itself is written, so dropping or moving a service membership can
-strand a group membership whose service the person has left. After the service
-step, group memberships whose group belongs to a service the person is leaving,
-and which no other membership brings them back into, are deleted and counted.
+**Group memberships (§2b).** Nothing re-checks a group membership when a
+service membership changes (on `master` the `persons_groups_check` trigger ran
+only when the group membership itself was written), so dropping or moving a
+service membership can strand a group membership whose service the person has
+left. After the service step, group memberships whose group belongs to a
+service the person is leaving, and which no other membership brings them back
+into, are deleted and counted.
 Group memberships are not auto-moved to the destination service: there is no
 reliable mapping between a source group and a destination one.
 
@@ -211,18 +214,20 @@ before adding more class-move complexity.
 
 ## Recovery
 
-Counts alone cannot reconstruct changed rows ([E23]). `down.sql` removes the
-functions and the schedule; it does not and cannot undo a roll. Re-running the
-roll is never an undo. Recovery from a bad-but-committed roll is a restore from
+Counts alone cannot reconstruct changed rows ([E23]). Rolling back the
+`move_study_year_roll_to_ash_oban` migration recreates the Hasura-era functions
+from `priv/repo/sql/recreate_study_year_roll.sql`; it does not and cannot undo a
+roll. Re-running the roll is never an undo. Recovery from a bad-but-committed roll is a restore from
 the point-in-time backup taken before the scheduled window.
 
 ## Manual and late runs
 
-A late or repeat run is deliberately awkward. The operator's `run` action
-(formerly `run_study_year_roll(season)`) can be called directly, but only after
-confirming no manual advancement happened in the meantime ([E2]).
+A late or repeat run is deliberately awkward. The `run` action of
+`StudyYearRollRun` (system actor only; `run_study_year_roll(season)` on
+`master`) can be called directly, but only after confirming no manual
+advancement happened in the meantime ([E2]).
 
-Since ENG-266 the roll itself refuses to advance twice in one academic year.
+The roll itself refuses to advance twice in one academic year.
 The academic year starts on 1 September (Cairo), so an operator may roll early
 in September for the coming season: a run dated before it belongs to the
 previous year's, and a season counts as the academic year it starts. Two
