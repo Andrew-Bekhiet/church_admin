@@ -14,11 +14,7 @@ class ScreenCaptureAttemptsDAO {
         operationName: 'recordScreenCaptureAttempt',
         variables: Variables_Mutation_recordScreenCaptureAttempt(
           input: Input_RecordScreenCaptureAttemptInput(
-            captureKind: switch (kind) {
-              ScreenCaptureKind.screenshot => Enum_ScreenCaptureKind.SCREENSHOT,
-              ScreenCaptureKind.screenRecording =>
-                Enum_ScreenCaptureKind.SCREEN_RECORDING,
-            },
+            captureKind: kind.backendKind,
           ),
         ).toJson(),
       ),

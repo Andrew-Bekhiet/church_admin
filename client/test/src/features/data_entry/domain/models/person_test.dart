@@ -42,7 +42,7 @@ void main() {
       ),
     );
 
-    test('to female tells the server, which clears the shammas fields', () {
+    test('to female sends the new gender', () {
       final female = shammas.copyWith(gender: Gender.female);
 
       final input = PersonCommandInputs(person: female, saved: shammas).update;
@@ -50,7 +50,7 @@ void main() {
       expect(input.gender, female.gender.isMale);
     });
 
-    test('back to male keeps being a shammas', () {
+    test('back to male sends the gender with the shammas flag', () {
       final female = shammas.copyWith(gender: Gender.female);
 
       final input = PersonCommandInputs(person: shammas, saved: female).update;
