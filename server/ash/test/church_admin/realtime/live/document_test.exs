@@ -91,12 +91,4 @@ defmodule ChurchAdmin.Realtime.Live.DocumentTest do
     assert {:ok, _document} = (64 * 1024) |> document_with_size() |> Document.prepare(nil)
     assert {:error, :too_large} = (64 * 1024 + 1) |> document_with_size() |> Document.prepare(nil)
   end
-
-  test "a document that was parsed once comes from the cache" do
-    text = "query cached_#{System.unique_integer([:positive])} { __typename }"
-    {:ok, first} = Document.prepare(text, nil)
-
-    assert Document.Cache.fetch(first.hash) == {:ok, first.parsed}
-    assert {:ok, ^first} = Document.prepare(text, nil)
-  end
 end

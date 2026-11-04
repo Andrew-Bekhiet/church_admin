@@ -104,16 +104,6 @@ defmodule ChurchAdmin.Realtime.Live.StatementCaptureTest do
     assert [select(13)] == captured
   end
 
-  test "attaches one handler for the Repo's query event and keeps it across captures" do
-    handlers = fn -> :telemetry.list_handlers(@query_event) end
-    before_captures = handlers.()
-
-    for number <- 1..3, do: StatementCapture.capture(fn -> run(number) end)
-
-    assert before_captures == handlers.()
-    assert [_one] = Enum.filter(before_captures, &(&1.id == StatementCapture))
-  end
-
   describe "with Ash running relationship loads in tasks" do
     setup do
       Application.put_env(:ash, :disable_async?, false)

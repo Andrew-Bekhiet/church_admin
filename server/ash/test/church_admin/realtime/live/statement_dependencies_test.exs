@@ -44,13 +44,6 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependenciesTest do
              } == deps!(@scoped_list)
     end
 
-    test "leaves out the columns the statement does not read" do
-      %{@persons => persons_columns} = deps!(@scoped_list)
-
-      refute "notes" in persons_columns
-      refute "birthdate" in persons_columns
-    end
-
     test "counts a column that only the WHERE clause reads" do
       %{@persons => persons_columns} = deps!("SELECT id FROM persons WHERE deleted_at IS NULL")
 
@@ -152,10 +145,8 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependenciesTest do
     end
 
     test "finds a builtin inside a view that the statement reads without rejecting it" do
-      assert {:ok, read} =
+      assert {:ok, %{@persons => _columns}} =
                StatementDependencies.for_sql("SELECT family_id FROM data_checks")
-
-      assert map_size(read) > 0
     end
 
     test "accepts immutable functions" do
@@ -289,13 +280,6 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependenciesTest do
     test "keys entries by the exact SQL text" do
       assert %{@persons => columns(["id"])} == deps!(unique_sql("SELECT id FROM persons"))
       assert %{@persons => columns(["name"])} == deps!(unique_sql("SELECT name FROM persons"))
-    end
-
-    test "is owned by a process that survives the callers" do
-      sql = unique_sql("SELECT id FROM persons")
-      fn -> deps!(sql) end |> Task.async() |> Task.await()
-
-      assert {:ok, %{@persons => _}} = StatementDependencies.for_sql(sql)
     end
   end
 

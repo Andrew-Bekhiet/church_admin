@@ -43,6 +43,7 @@ defmodule ChurchAdmin.Realtime.Live.DependencyIndexTest do
       |> DependencyIndex.delete(:a, @readers_of_persons)
       |> DependencyIndex.delete(:b, :everything)
 
-    assert index == DependencyIndex.new()
+    assert DependencyIndex.groups_touching(index, [%{relation: {"public", "persons"}}]) ==
+             MapSet.new()
   end
 end

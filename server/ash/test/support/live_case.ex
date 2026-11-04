@@ -18,6 +18,7 @@ defmodule ChurchAdmin.LiveCase do
   alias ChurchAdminWeb.LiveQueriesSocket
 
   @endpoint ChurchAdminWeb.Endpoint
+  @chunk 25
   @run_event [:church_admin, :realtime, :live, :run]
   @tables_tests_fill ~w(
     auth.users_data public.persons public.families public.hobbies public.services
@@ -50,6 +51,8 @@ defmodule ChurchAdmin.LiveCase do
 
     :ok
   end
+
+  def chunk, do: @chunk
 
   def user_with!(permissions) do
     user = Factory.user!()
@@ -85,7 +88,7 @@ defmodule ChurchAdmin.LiveCase do
         "ref" => ref,
         "document" => document,
         "variables" => %{},
-        "window" => %{"rows" => 50, "chunk" => 25}
+        "window" => %{"rows" => 50, "chunk" => @chunk}
       },
       overrides
     )
@@ -111,5 +114,5 @@ defmodule ChurchAdmin.LiveCase do
   def registry_settled, do: :sys.get_state(ChurchAdmin.Realtime.Live.Registry)
 
   @doc "Long enough for a commit to pass the stream and the coalesce window."
-  def await_batch_passed, do: Process.sleep(900)
+  def sleep_past_coalesce_window, do: Process.sleep(900)
 end

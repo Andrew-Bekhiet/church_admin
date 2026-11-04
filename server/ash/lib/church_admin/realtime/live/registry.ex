@@ -44,9 +44,6 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
   @spec resync(GenServer.server(), reference()) :: :ok
   def resync(server \\ __MODULE__, id), do: GenServer.call(server, {:resync, id})
 
-  @spec group_count(GenServer.server()) :: non_neg_integer()
-  def group_count(server \\ __MODULE__), do: GenServer.call(server, :group_count)
-
   @impl GenServer
   def init(opts) do
     Process.flag(:message_queue_data, :off_heap)
@@ -87,8 +84,6 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
       _unknown -> {:reply, :ok, state}
     end
   end
-
-  def handle_call(:group_count, _from, state), do: {:reply, map_size(state.groups), state}
 
   @impl GenServer
   def handle_info({:realtime_changes, batch}, state) do

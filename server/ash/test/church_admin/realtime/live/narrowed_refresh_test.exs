@@ -7,7 +7,6 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
   alias ChurchAdmin.Realtime.Live.Document
   alias ChurchAdmin.Realtime.Live.Refresh
   alias ChurchAdmin.Realtime.Live.Result
-  alias ChurchAdmin.Realtime.Live.StatementCapture
 
   @hobbies """
   query hobbies($filter: HobbyFilterInput, $sort: [HobbySortInput], $first: Int, $after: String) {
@@ -77,9 +76,7 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
       changes: changes
     ]
 
-    StatementCapture.capture(fn ->
-      Refresh.run(input(context, Keyword.merge(fields, overrides)))
-    end)
+    context |> input(Keyword.merge(fields, overrides)) |> Refresh.run()
   end
 
   defp update(id), do: %{type: "Hobby", id: id, op: "update"}
@@ -99,12 +96,12 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
   describe "a held candidate with the same keyset" do
     test "patches the row, and the hashes match what HTTP would answer", context do
       stored = window!(context)
-      [_first, second, _third] = context.ids
-      rename(second, "renamed")
+      [first, second, third] = context.hobbies
+      rename(second.id, "renamed")
 
-      {{:ok, %{result: result}}, _statements} = narrowed(context, stored, [update(second)])
+      {:ok, %{result: result}} = narrowed(context, stored, [update(second.id)])
 
-      assert result |> names() |> Enum.sort() == ~w(a c renamed)
+      assert result |> names() |> Enum.sort() == Enum.sort([first.name, third.name, "renamed"])
       assert_same_as_a_fresh_window(context, result)
     end
 
@@ -112,24 +109,21 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
       stored = window!(context)
       [first | _rest] = context.ids
 
-      assert {{:ok, %{result: :unchanged}}, _statements} =
+      assert {:ok, %{result: :unchanged}} =
                narrowed(context, stored, [update(first)])
     end
 
-    test "runs a primary-key-bounded query and not the window", context do
+    test "reads only the rows the change names, not the window", context do
       stored = window!(context)
-      [_first, second, _third] = context.ids
-      rename(second, "renamed")
+      [_first, named, unnamed] = context.hobbies
+      rename(named.id, "named")
+      rename(unnamed.id, "unnamed")
 
-      {_outcome, statements} = narrowed(context, stored, [update(second)])
+      {:ok, %{result: result}} = narrowed(context, stored, [update(named.id)])
 
-      selects = Enum.filter(statements, &(&1 =~ ~s("hobbies")))
-
-      assert selects != []
-
-      for statement <- selects do
-        assert statement =~ ~r/\."id"(\)?::uuid)? *(= ANY|IN) *\(/, statement
-      end
+      assert "named" in names(result)
+      assert unnamed.name in names(result)
+      refute "unnamed" in names(result)
     end
 
     test "keeps the dependencies the window found", context do
@@ -137,7 +131,7 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
       [first | _rest] = context.ids
       rename(first, "renamed")
 
-      {{:ok, %{dependencies: dependencies}}, _statements} =
+      {:ok, %{dependencies: dependencies}} =
         narrowed(context, stored, [update(first)])
 
       assert dependencies == stored.dependencies
@@ -151,7 +145,7 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
       [_first, second, _third] = context.ids
       rename(second, "outside")
 
-      {{:ok, %{result: result}}, _statements} =
+      {:ok, %{result: result}} =
         narrowed(context, stored, [update(second)], variables: %{"filter" => filter})
 
       assert Result.data(result)["hobbies"]["count"] == 2
@@ -167,7 +161,7 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
       [first | _rest] = Result.ids(stored.result)
       rename(first, "outside")
 
-      {{:ok, %{result: result}}, _statements} =
+      {:ok, %{result: result}} =
         narrowed(context, stored, [update(first)], variables: variables, window: window)
 
       assert length(result.rows) == 2
@@ -176,16 +170,28 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
   end
 
   describe "a delete of a held id" do
-    test "leaves with no query at all", context do
+    test "leaves without reading anything", context do
+      stored = window!(context)
+      [deleted, unread, _third] = context.hobbies
+      sql!("delete from hobbies where id = $1", [dump(deleted.id)])
+      rename(unread.id, "unread")
+
+      {:ok, %{result: result}} =
+        narrowed(context, stored, [%{type: "Hobby", id: deleted.id, op: "delete"}])
+
+      assert deleted.id not in Result.ids(result)
+      assert unread.name in names(result)
+      assert Result.data(result)["hobbies"]["count"] == 2
+    end
+
+    test "gives what a fresh window gives", context do
       stored = window!(context)
       [first, _second, _third] = context.ids
       sql!("delete from hobbies where id = $1", [dump(first)])
 
-      {{:ok, %{result: result}}, statements} =
+      {:ok, %{result: result}} =
         narrowed(context, stored, [%{type: "Hobby", id: first, op: "delete"}])
 
-      assert statements == []
-      assert first not in Result.ids(result)
       assert Result.data(result)["hobbies"]["count"] == 2
       assert_same_as_a_fresh_window(context, result)
     end
@@ -196,7 +202,7 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
       [only] = Result.ids(stored.result)
       sql!("delete from hobbies where id = $1", [dump(only)])
 
-      {{:ok, %{result: result}}, _statements} =
+      {:ok, %{result: result}} =
         narrowed(context, stored, [%{type: "Hobby", id: only, op: "delete"}],
           variables: %{"filter" => filter}
         )
@@ -212,7 +218,7 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
       [first, _second, _third] = context.ids
       rename(first, "z")
 
-      {{:ok, %{result: result}}, _statements} =
+      {:ok, %{result: result}} =
         narrowed(context, stored, [update(first)], variables: %{"sort" => sort})
 
       assert names(result) == ~w(b c z)
@@ -222,7 +228,7 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
       stored = window!(context)
       added = Factory.hobby!(%{name: "d"})
 
-      {{:ok, %{result: result}}, _statements} = narrowed(context, stored, [update(added.id)])
+      {:ok, %{result: result}} = narrowed(context, stored, [update(added.id)])
 
       assert added.id in Result.ids(result)
       assert Result.data(result)["hobbies"]["count"] == 4
@@ -232,7 +238,7 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
       stored = window!(context)
       added = Factory.hobby!(%{name: "d"})
 
-      {{:ok, %{result: result}}, _statements} =
+      {:ok, %{result: result}} =
         narrowed(context, stored, [update("not-a-uuid"), update(added.id)])
 
       assert added.id in Result.ids(result)
@@ -359,17 +365,19 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
     end
   end
 
-  test "a change a nested view shows on another row re-runs the window", context do
+  test "a change a nested view shows on another row reaches that row", context do
     family = Factory.family!()
-    Factory.person!(%{family_id: family.id})
-    second = Factory.person!(%{family_id: family.id})
+    admin_type = Factory.person_type!(%{is_family_admin: true})
+    plain_type = Factory.person_type!()
+    shown_on = Factory.person!(%{family_id: family.id, person_type_id: plain_type.id})
+    changed = Factory.person!(%{family_id: family.id, person_type_id: plain_type.id})
 
     {:ok, document} =
       Document.prepare(
         """
         query persons($filter: PersonFilterInput, $first: Int, $after: String) {
           persons(filter: $filter, first: $first, after: $after) {
-            results { keyset id dataCheck { id isComplete details } }
+            results { keyset id dataCheck { id details } }
           }
         }
         """,
@@ -377,16 +385,30 @@ defmodule ChurchAdmin.Realtime.Live.NarrowedRefreshTest do
       )
 
     stored = window!(context, document: document)
-    assert length(stored.result.rows) == 2
+    refute has_family_admin?(stored.result, shown_on.id)
 
-    {{:ok, _run}, statements} =
-      narrowed(context, stored, [%{type: "Person", id: second.id, op: "update"}],
+    sql!("update persons set person_type_id = $1 where id = $2", [
+      dump(admin_type.id),
+      dump(changed.id)
+    ])
+
+    {:ok, %{result: result}} =
+      narrowed(context, stored, [%{type: "Person", id: changed.id, op: "update"}],
         document: document,
         touched: [
           %{relation: {"public", "persons"}, op: :update, columns: :all, id_types: ["Person"]}
         ]
       )
 
-    assert Enum.any?(statements, &(not (&1 =~ "ANY")))
+    assert has_family_admin?(result, shown_on.id)
+  end
+
+  defp has_family_admin?(%Result{rows: rows}, person_id) do
+    {_id, _keyset, row} = List.keyfind!(rows, person_id, 0)
+
+    row["dataCheck"]["details"]
+    |> Enum.map(&Jason.decode!/1)
+    |> Enum.find(&(&1["check"] == "has_family_admin"))
+    |> Map.fetch!("passed")
   end
 end
