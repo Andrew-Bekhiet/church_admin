@@ -10,7 +10,7 @@ defmodule ChurchAdmin.Realtime.Live.Document do
   alias ChurchAdmin.Realtime.Live.ResultHash
 
   @enforce_keys [:hash, :parsed, :operation_name, :variables]
-  defstruct [:hash, :parsed, :operation_name, :variables]
+  defstruct [:hash, :parsed, :operation_name, :variables, :root_field]
 
   @max_bytes 64 * 1024
 
@@ -18,7 +18,8 @@ defmodule ChurchAdmin.Realtime.Live.Document do
           hash: String.t(),
           parsed: Language.Document.t(),
           operation_name: String.t() | nil,
-          variables: MapSet.t(String.t())
+          variables: MapSet.t(String.t()),
+          root_field: String.t() | nil
         }
 
   @spec prepare(String.t(), String.t() | nil) ::
@@ -35,10 +36,14 @@ defmodule ChurchAdmin.Realtime.Live.Document do
          hash: hash,
          parsed: parsed,
          operation_name: operation.name,
-         variables: MapSet.new(operation.variable_definitions, & &1.variable.name)
+         variables: MapSet.new(operation.variable_definitions, & &1.variable.name),
+         root_field: root_field(operation)
        }}
     end
   end
+
+  defp root_field(%{selection_set: %{selections: [%Language.Field{name: name}]}}), do: name
+  defp root_field(_several_or_a_spread), do: nil
 
   defp parsed(hash, text) do
     with :error <- Cache.fetch(hash),

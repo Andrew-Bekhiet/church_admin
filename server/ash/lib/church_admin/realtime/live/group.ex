@@ -9,8 +9,8 @@ defmodule ChurchAdmin.Realtime.Live.Group do
   `generation` changes when a scoped member registers under fresher
   authorization facts. A run started under an older generation is discarded,
   so it cannot reach a member. Batches that arrive while a run is queued or
-  running collect in `touched`, because the run may discover dependencies
-  that make them matter.
+  running collect in `touched` and `changes`, because the run may discover
+  dependencies that make them matter.
   """
 
   alias ChurchAdmin.Authz.Actor
@@ -34,10 +34,12 @@ defmodule ChurchAdmin.Realtime.Live.Group do
     :result,
     :result_generation,
     :dependencies,
+    :rows_stand_alone?,
     :run_ref,
     :run_generation,
     status: :idle,
     touched: [],
+    changes: [],
     run_again?: false,
     members: %{}
   ]
@@ -126,7 +128,12 @@ defmodule ChurchAdmin.Realtime.Live.Group do
       window: group.window,
       actor: group.actor,
       known_hashes: group.result && group.result.chunk_hashes,
-      touched: group.touched
+      window_required?: group.run_again? or not result_current?(group),
+      result: group.result,
+      dependencies: group.dependencies,
+      rows_stand_alone?: group.rows_stand_alone?,
+      touched: group.touched,
+      changes: group.changes
     }
 
     {%{
@@ -134,6 +141,7 @@ defmodule ChurchAdmin.Realtime.Live.Group do
        | status: :running,
          run_generation: group.generation,
          touched: [],
+         changes: [],
          run_again?: false
      }, input}
   end
@@ -141,9 +149,14 @@ defmodule ChurchAdmin.Realtime.Live.Group do
   @spec track_run(t(), reference()) :: t()
   def track_run(%__MODULE__{} = group, run_ref), do: %{group | run_ref: run_ref}
 
-  @spec collect_touched(t(), [Broadcaster.touched_row()]) :: t()
-  def collect_touched(%__MODULE__{} = group, rows),
-    do: %{group | touched: rows ++ group.touched}
+  @spec collect_touched(t(), Broadcaster.batch()) :: t()
+  def collect_touched(%__MODULE__{} = group, %{rows: rows, changes: changes}) do
+    %{
+      group
+      | touched: Enum.uniq(rows ++ group.touched),
+        changes: Enum.uniq(changes ++ group.changes)
+    }
+  end
 
   @spec mark_run_again(t()) :: t()
   def mark_run_again(%__MODULE__{} = group), do: %{group | run_again?: true}
@@ -169,7 +182,8 @@ defmodule ChurchAdmin.Realtime.Live.Group do
     settle_awaiting_members(%{
       idle(group)
       | result_generation: group.generation,
-        dependencies: run.dependencies
+        dependencies: run.dependencies,
+        rows_stand_alone?: run.rows_stand_alone?
     })
   end
 
@@ -178,7 +192,8 @@ defmodule ChurchAdmin.Realtime.Live.Group do
       idle(group)
       | result: result,
         result_generation: group.generation,
-        dependencies: run.dependencies
+        dependencies: run.dependencies,
+        rows_stand_alone?: run.rows_stand_alone?
     }
     |> push_to_settled_members(group.result)
     |> settle_awaiting_members_after()
@@ -195,7 +210,7 @@ defmodule ChurchAdmin.Realtime.Live.Group do
 
     if group.run_again? or GroupDependencies.touched?(dependencies, group.touched),
       do: {true, group},
-      else: {false, %{group | touched: []}}
+      else: {false, %{group | touched: [], changes: []}}
   end
 
   defp idle(%__MODULE__{} = group), do: %{group | status: :idle, run_ref: nil}

@@ -7,6 +7,7 @@ defmodule ChurchAdmin.Realtime.Live.Window do
   and a short chunk ends the window.
   """
 
+  alias ChurchAdmin.Realtime.Live.Narrowing
   alias ChurchAdmin.Realtime.Live.Result
   alias ChurchAdminWeb.Graphql.Pipeline
 
@@ -20,6 +21,22 @@ defmodule ChurchAdmin.Realtime.Live.Window do
   def fetch(%{window: %{rows: rows}} = input) do
     with {:ok, chunks} <- fetch_chunks(input, rows, %{}, []) do
       Result.from_chunks(chunks)
+    end
+  end
+
+  @doc "The rows of `ids` this viewer may see under the client's filter, as one page."
+  @spec fetch_rows(map(), [String.t()]) :: {:ok, [map()]} | {:error, term()}
+  def fetch_rows(_input, []), do: {:ok, []}
+
+  def fetch_rows(input, ids) do
+    variables =
+      input.variables
+      |> Map.put("filter", Narrowing.filter(input.variables["filter"], ids))
+      |> Map.put("first", length(ids))
+
+    with {:ok, chunk} <- run_document(input, variables),
+         {:ok, %{"results" => rows}} <- Result.page_of(chunk) do
+      {:ok, rows}
     end
   end
 

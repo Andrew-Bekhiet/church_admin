@@ -28,7 +28,12 @@ defmodule ChurchAdmin.Realtime.Live.ClientListDependenciesTest do
         window: %{rows: 10, chunk: 10},
         actor: actor,
         known_hashes: nil,
-        touched: []
+        window_required?: true,
+        result: nil,
+        dependencies: nil,
+        rows_stand_alone?: nil,
+        touched: [],
+        changes: []
       })
 
     dependencies

@@ -86,9 +86,9 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
   def handle_call(:group_count, _from, state), do: {:reply, map_size(state.groups), state}
 
   @impl GenServer
-  def handle_info({:realtime_changes, %{rows: rows}}, state) do
+  def handle_info({:realtime_changes, batch}, state) do
     {:noreply,
-     state |> collect_in_busy_groups(rows) |> queue_touched_groups(rows) |> start_queued_runs()}
+     state |> collect_in_busy_groups(batch) |> queue_touched_groups(batch) |> start_queued_runs()}
   end
 
   def handle_info(:realtime_reset, state) do
@@ -196,31 +196,31 @@ defmodule ChurchAdmin.Realtime.Live.Registry do
     }
   end
 
-  defp collect_in_busy_groups(state, rows) do
+  defp collect_in_busy_groups(state, batch) do
     busy = state.running |> Map.values() |> Enum.concat(:queue.to_list(state.queue))
 
     Enum.reduce(busy, state, fn key, state ->
       case state.groups do
-        %{^key => group} -> put_in(state.groups[key], Group.collect_touched(group, rows))
+        %{^key => group} -> put_in(state.groups[key], Group.collect_touched(group, batch))
         _dropped -> state
       end
     end)
   end
 
-  defp queue_touched_groups(state, rows) do
+  defp queue_touched_groups(state, batch) do
     state.index
-    |> DependencyIndex.groups_touching(rows)
+    |> DependencyIndex.groups_touching(batch.rows)
     |> Enum.reduce(state, fn key, state ->
       case state.groups[key] do
-        %{status: :idle} = group -> enqueue_if_touched(state, group, rows)
+        %{status: :idle} = group -> enqueue_if_touched(state, group, batch)
         _busy -> state
       end
     end)
   end
 
-  defp enqueue_if_touched(state, group, rows) do
-    if GroupDependencies.touched?(group.dependencies, rows) do
-      enqueue(put_in(state.groups[group.key], Group.collect_touched(group, rows)), group.key)
+  defp enqueue_if_touched(state, group, batch) do
+    if GroupDependencies.touched?(group.dependencies, batch.rows) do
+      enqueue(put_in(state.groups[group.key], Group.collect_touched(group, batch)), group.key)
     else
       state
     end

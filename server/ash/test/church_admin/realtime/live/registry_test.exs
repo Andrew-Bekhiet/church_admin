@@ -85,10 +85,10 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
   defp row(id, name \\ "a"), do: %{"id" => id, "keyset" => "k#{id}", "name" => name}
 
   defp success(rows, dependencies \\ @reads_areas),
-    do: {:ok, %{result: list_result(rows), dependencies: dependencies}}
+    do: {:ok, %{result: list_result(rows), dependencies: dependencies, rows_stand_alone?: true}}
 
   defp unchanged(dependencies \\ @reads_areas),
-    do: {:ok, %{result: :unchanged, dependencies: dependencies}}
+    do: {:ok, %{result: :unchanged, dependencies: dependencies, rows_stand_alone?: true}}
 
   defp await_run do
     assert_receive {:run, input, task}, 1_000
@@ -116,11 +116,11 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
   defp touched(relation \\ @areas, columns \\ MapSet.new(["name"]), op \\ :update),
     do: [%{relation: relation, op: op, columns: columns}]
 
-  defp batch(topic, rows) do
+  defp batch(topic, rows, changes \\ []) do
     Phoenix.PubSub.broadcast(
       ChurchAdmin.PubSub,
       topic,
-      {:realtime_changes, %{changes: [], rows: rows}}
+      {:realtime_changes, %{changes: changes, rows: rows}}
     )
   end
 
@@ -168,7 +168,7 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
     test "hashes that differ push the full result", %{registry: registry} do
       %{id: id} = register_and_settle(registry, [row("1")], known_hashes: ["stale"])
 
-      assert_received {:live_result, ^id, %{full: true}}
+      assert_receive {:live_result, ^id, %{full: true}}
     end
 
     test "matching hashes seed the sent set, so the first delta holds only changed rows", %{
@@ -368,7 +368,7 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
     setup %{registry: registry, topic: topic} do
       rows = [row("1"), row("2")]
       %{id: id} = register_and_settle(registry, rows)
-      assert_received {:live_result, ^id, %{full: true}}
+      assert_receive {:live_result, ^id, %{full: true}}
       batch(topic, touched())
       {:ok, id: id, rows: rows}
     end
@@ -518,7 +518,7 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
       topic: topic
     } do
       %{id: old} = register_and_settle(registry, [row("1")])
-      assert_received {:live_result, ^old, _full}
+      assert_receive {:live_result, ^old, _full}
       stays = registration()
       :ok = Registry.register(registry, stays)
       stays_id = stays.id
@@ -739,24 +739,75 @@ defmodule ChurchAdmin.Realtime.Live.RegistryTest do
     :ok = Registry.register(registry, registration)
 
     assert {%{variables: %{"first" => 1000}}, task} = await_run()
-    send(task, {:finish, {:ok, %{result: first, dependencies: @reads_areas}}})
+
+    send(
+      task,
+      {:finish, {:ok, %{result: first, dependencies: @reads_areas, rows_stand_alone?: false}}}
+    )
+
     assert_receive {:live_result, ^id, %{full: true, data: ^first_data}}
 
     batch(topic, touched())
     next_data = %{"kodases" => %{"results" => [row("1", "renamed")]}}
     {:ok, next} = Result.from_entity(%{hash: "b", data: next_data})
-    finish_next_run({:ok, %{result: next, dependencies: @reads_areas}})
+    finish_next_run({:ok, %{result: next, dependencies: @reads_areas, rows_stand_alone?: false}})
 
     assert_receive {:live_result, ^id, %{full: true, data: ^next_data}}
   end
 
-  test "a batch is what the refresh seam receives", %{registry: registry, topic: topic} do
-    register_and_settle(registry, [row("1")])
-    rows = touched()
+  describe "the refresh seam" do
+    test "receives the batch and the stored result", %{registry: registry, topic: topic} do
+      register_and_settle(registry, [row("1")])
+      rows = touched()
+      changes = [%{type: "Area", id: "1", op: "update"}]
 
-    batch(topic, rows)
+      batch(topic, rows, changes)
 
-    assert {%{touched: ^rows, known_hashes: [_hash]}, _task} = await_run()
+      assert {input, _task} = await_run()
+      assert %{touched: ^rows, changes: ^changes, known_hashes: [_hash]} = input
+      assert %{window_required?: false, dependencies: @reads_areas} = input
+      assert input.result == list_result([row("1")])
+    end
+
+    test "receives every batch of a queued group once", %{registry: registry, topic: topic} do
+      register_and_settle(registry, [row("1")])
+      batch(topic, touched())
+      {_input, task} = await_run()
+      changes = [%{type: "Area", id: "1", op: "update"}]
+
+      batch(topic, touched(), changes)
+      batch(topic, touched(), changes)
+      settle(registry)
+      send(task, {:finish, unchanged()})
+
+      assert {%{touched: touched, changes: ^changes}, _task} = await_run()
+      assert touched == touched()
+    end
+
+    test "requires the window on a first run", %{registry: registry} do
+      :ok = Registry.register(registry, registration())
+
+      assert {%{window_required?: true, result: nil}, _task} = await_run()
+    end
+
+    test "requires the window after a reset", %{registry: registry, topic: topic} do
+      :ok = Registry.register(registry, registration())
+      {_input, task} = await_run()
+      Phoenix.PubSub.broadcast(ChurchAdmin.PubSub, topic, :realtime_reset)
+      settle(registry)
+      send(task, {:finish, success([row("1")])})
+
+      assert {%{window_required?: true}, _task} = await_run()
+    end
+
+    test "requires the window under a new actor", %{registry: registry} do
+      register_and_settle(registry, [row("1")])
+      regranted = %Actor{actor() | permissions: MapSet.new(["approved", "x"])}
+
+      :ok = Registry.register(registry, registration(actor: regranted))
+
+      assert {%{window_required?: true}, _task} = await_run()
+    end
   end
 
   test "an entity registration has no window", %{registry: registry} do

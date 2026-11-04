@@ -17,6 +17,14 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
   }
   """
 
+  @filtered_hobbies """
+  query hobbies($filter: HobbyFilterInput, $first: Int, $after: String) {
+    hobbies(filter: $filter, first: $first, after: $after) {
+      count endKeyset results { keyset id name }
+    }
+  }
+  """
+
   @persons """
   query persons($first: Int, $after: String) {
     persons(first: $first, after: $after) {
@@ -210,6 +218,22 @@ defmodule ChurchAdminWeb.ChangesChannelLiveTest do
       assert_push "live:result", %{full: false, rows: [row]} = payload, @staleness_budget_ms
       assert %{"id" => ^renamed, "name" => "c"} = row
       refute Map.has_key?(payload, :count)
+    end
+
+    test "to a held row is patched by a narrowed run, not the window", %{writer: writer} do
+      id = hobby!(writer, "a")
+      socket = join_as(admin!())
+      {:ok, %{}} = register(socket, window_payload("r1", @filtered_hobbies))
+      assert_push "live:result", %{full: true}
+      await_batch_passed()
+      windows = count_runs()
+      narrowed = count_runs(:narrowed)
+
+      rename_hobby(writer, id, "b")
+
+      assert_push "live:result", %{full: false, rows: [%{"name" => "b"}]}, @staleness_budget_ms
+      assert runs(windows) == 0
+      assert runs(narrowed) == 1
     end
 
     test "that a scoped user cannot see stays out of their results", %{writer: writer} do

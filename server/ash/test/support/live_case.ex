@@ -91,16 +91,19 @@ defmodule ChurchAdmin.LiveCase do
     )
   end
 
-  @doc "Counts live-query runs into the returned counter for the rest of the test."
-  def count_runs do
+  @doc "Counts window runs into the returned counter for the rest of the test."
+  def count_runs(kind \\ :window) do
     counter = :counters.new(1, [])
     handler = {__MODULE__, make_ref()}
-    :telemetry.attach(handler, @run_event, &__MODULE__.count_run/4, counter)
+    :telemetry.attach(handler, @run_event, &__MODULE__.count_run/4, {kind, counter})
     on_exit(fn -> :telemetry.detach(handler) end)
     counter
   end
 
-  def count_run(_event, _measurements, _metadata, counter), do: :counters.add(counter, 1, 1)
+  def count_run(_event, _measurements, %{kind: kind}, {kind, counter}),
+    do: :counters.add(counter, 1, 1)
+
+  def count_run(_event, _measurements, _metadata, _other_kind), do: :ok
 
   def runs(counter), do: :counters.get(counter, 1)
 
