@@ -220,8 +220,10 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     _loadedQuery = query;
     final window = _window =
         (keep.isEmpty ? null : _window) ??
-        LiveListWindow(rootField: AshResultParser.rootFieldOf(query.document));
-    window.append(chunksData);
+              LiveListWindow(
+                rootField: AshResultParser.rootFieldOf(query.document),
+              )
+          ..append(chunksData);
     final page = query.parsePage(window.pageData);
     _publish(
       page.items,
