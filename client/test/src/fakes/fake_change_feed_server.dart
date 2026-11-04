@@ -21,6 +21,9 @@ class FakeChangeFeedServer {
   final List<String> unregisteredRefs = [];
   final List<String> resyncedRefs = [];
 
+  /// The join ref of every `phx_join` the server received, in order.
+  final List<String?> joinRefs = [];
+
   /// The `reason` a `live:register` is refused with, or null to accept it.
   String? Function(Json payload) refusalFor = (_) => null;
 
@@ -108,6 +111,20 @@ class FakeChangeFeedServer {
     payload,
   ]);
 
+  /// Crashes the channel process, as the server does on an unhandled error:
+  /// the socket stays open, `phx_error` reaches the client and the
+  /// registrations are gone.
+  void crashChannel() {
+    registrations.clear();
+    _send(_serverSocket, [
+      _joinRef,
+      null,
+      ChangeFeedClient.topic,
+      'phx_error',
+      <String, Object?>{},
+    ]);
+  }
+
   Future<void> dropConnection() async {
     final socket = _serverSocket;
     _serverSocket = null;
@@ -135,6 +152,7 @@ class FakeChangeFeedServer {
 
       case 'phx_join':
         _joinRef = joinRef as String?;
+        joinRefs.add(_joinRef);
         _reply(socket, joinRef, ref, topic, {});
 
       case 'live:register':
