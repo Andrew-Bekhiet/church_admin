@@ -90,13 +90,13 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
 
     final generation = _generation;
     await _serialized(() async {
-      final missingRows = (pageIndex + 1) * pageSize - currentItems.length;
-      if (generation != _generation || !hasMore || missingRows <= 0) return;
+      final needsResyncs = (pageIndex + 1) * pageSize - currentItems.length;
+      if (generation != _generation || !hasMore || needsResyncs <= 0) return;
 
       _pageIndex = pageIndex;
       await _load(
         generation,
-        rows: missingRows,
+        rows: needsResyncs,
         after: _window?.endKeyset,
         keep: currentItems,
       );
@@ -171,7 +171,7 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
 
       _registry.stopLive(this);
       _awaitingResync = false;
-      _emitLoaded(query, keep, chunks, requestedRows: rows);
+      _storeAndPublishLoaded(query, keep, chunks, requestedRows: rows);
       if (effectivePolicy == FetchPolicy.networkOnly) {
         _startLive(query, variables, chunks, isFromFirstRow: keep.isEmpty);
       }
@@ -208,7 +208,7 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     );
   }
 
-  void _emitLoaded(
+  void _storeAndPublishLoaded(
     KeysetPageQuery<T> query,
     List<T> keep,
     List<KeysetChunk<T>> chunks, {
@@ -259,16 +259,15 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     required bool isFromFirstRow,
   }) {
     final hashes = [for (final chunk in chunks) chunk.resultHash];
+    final isEveryChunkHashKnown = isFromFirstRow && !hashes.contains(null);
     _registry.startLive(
       this,
       LiveQueryRequest(
         document: query.document,
         operationName: query.operationName,
         variables: variables,
-        window: (rows: _windowSize, chunk: maxPageSize),
-        resultHashes: isFromFirstRow && !hashes.contains(null)
-            ? hashes.cast<String>()
-            : null,
+        window: LiveWindowSize(rows: _windowSize, chunk: maxPageSize),
+        resultHashes: isEveryChunkHashKnown ? hashes.cast<String>() : null,
       ),
     );
   }
@@ -288,7 +287,7 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
       case LiveWindowUpdate.unchanged:
         return;
 
-      case LiveWindowUpdate.missingRow:
+      case LiveWindowUpdate.needsResync:
         _awaitingResync = true;
         _registry.requestResync(this);
 

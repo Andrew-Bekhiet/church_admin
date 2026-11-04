@@ -80,7 +80,7 @@ class LiveQueryRegistry {
     );
     state.live = live;
     _targetsByRef[live.ref] = target;
-    unawaited(_sendRegistration(target, live));
+    unawaited(_sendRegistrationOrScheduleRetry(target, live));
   }
 
   void stopLive(LiveQueryTarget target) {
@@ -131,20 +131,23 @@ class LiveQueryRegistry {
     final live = _states[target]?.live;
     if (target == null || live == null) return;
 
-    live.request = live.request.withoutResultHashes();
+    _forgetResultHashes(live);
     target.onLiveResult(result);
   }
+
+  void _forgetResultHashes(LiveRegistrationState live) =>
+      live.request = live.request.withoutResultHashes();
 
   void _registerAgain() {
     for (final MapEntry(key: target, value: state) in _states.entries) {
       if (state.live case final live?) {
         live.failedAttempts = 0;
-        unawaited(_sendRegistration(target, live));
+        unawaited(_sendRegistrationOrScheduleRetry(target, live));
       }
     }
   }
 
-  Future<void> _sendRegistration(
+  Future<void> _sendRegistrationOrScheduleRetry(
     LiveQueryTarget target,
     LiveRegistrationState live,
   ) async {
@@ -170,7 +173,7 @@ class LiveQueryRegistry {
     for (final MapEntry(key: target, value: state) in _states.entries) {
       if (state.live
           case LiveRegistrationState(needsRetry: true) && final live) {
-        unawaited(_sendRegistration(target, live));
+        unawaited(_sendRegistrationOrScheduleRetry(target, live));
       }
     }
   }

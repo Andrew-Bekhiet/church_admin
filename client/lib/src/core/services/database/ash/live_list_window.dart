@@ -11,16 +11,16 @@ class LiveListWindow {
 
   Map<String, Json> _rowsById = {};
   List<Json> _rows = [];
-  bool _isKeyed = true;
+  bool _hasIdOnEveryRow = true;
 
   int? count;
   String? endKeyset;
 
-  bool get isKeyed => _isKeyed;
+  bool get hasIdOnEveryRow => _hasIdOnEveryRow;
 
   Json get pageData => {
     rootField: {
-      'results': _isKeyed ? _rowsById.values.toList() : _rows,
+      'results': _hasIdOnEveryRow ? _rowsById.values.toList() : _rows,
       'count': count,
       'endKeyset': endKeyset,
     },
@@ -31,7 +31,7 @@ class LiveListWindow {
   void replaceWith(Iterable<Json> chunksData) {
     _rowsById = {};
     _rows = [];
-    _isKeyed = true;
+    _hasIdOnEveryRow = true;
     append(chunksData);
   }
 
@@ -44,7 +44,7 @@ class LiveListWindow {
         if (json['id'] case final String id) {
           _rowsById[id] = json;
         } else {
-          _isKeyed = false;
+          _hasIdOnEveryRow = false;
         }
       }
       count = page['count'] as int?;
@@ -60,7 +60,7 @@ class LiveListWindow {
   }
 
   LiveWindowUpdate applyDelta(ListDeltaLiveResult delta) {
-    if (!_isKeyed) return LiveWindowUpdate.missingRow;
+    if (!_hasIdOnEveryRow) return LiveWindowUpdate.needsResync;
 
     final before = pageData;
     final received = {
@@ -71,13 +71,13 @@ class LiveListWindow {
     final next = <String, Json>{};
     for (final id in ids) {
       final row = received[id] ?? _rowsById[id];
-      if (row == null) return LiveWindowUpdate.missingRow;
+      if (row == null) return LiveWindowUpdate.needsResync;
 
       next[id] = row;
     }
     if (delta.order == null &&
         received.keys.any((id) => !next.containsKey(id))) {
-      return LiveWindowUpdate.missingRow;
+      return LiveWindowUpdate.needsResync;
     }
 
     _rowsById = next;

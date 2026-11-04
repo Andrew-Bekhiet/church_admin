@@ -126,7 +126,7 @@ void main() {
         ),
       );
 
-      expect(update, LiveWindowUpdate.missingRow);
+      expect(update, LiveWindowUpdate.needsResync);
       expect(itemsOf(window), [mina]);
     });
 
@@ -138,7 +138,7 @@ void main() {
         ListDeltaLiveResult(ref: 'r1', rows: [marina.toJson()]),
       );
 
-      expect(update, LiveWindowUpdate.missingRow);
+      expect(update, LiveWindowUpdate.needsResync);
     });
   });
 
@@ -179,7 +179,7 @@ void main() {
           rootField: AshResponses.page([newer, unkeyed]),
         });
 
-      expect(window.isKeyed, isFalse);
+      expect(window.hasIdOnEveryRow, isFalse);
       expect(
         (window.pageData[rootField] as Map)['results'],
         [newer, unkeyed],
@@ -218,7 +218,7 @@ void main() {
           dataOf([marina]),
         ]);
 
-      expect(window.isKeyed, isFalse);
+      expect(window.hasIdOnEveryRow, isFalse);
       expect((window.pageData[rootField] as Map)['results'], [
         mina.toJson(),
         unkeyed,
@@ -240,7 +240,7 @@ void main() {
         const ListDeltaLiveResult(ref: 'r1', rows: []),
       );
 
-      expect(update, LiveWindowUpdate.missingRow);
+      expect(update, LiveWindowUpdate.needsResync);
     });
   });
 }

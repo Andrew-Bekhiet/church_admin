@@ -7,4 +7,5 @@ export 'realtime/live_query_target.dart';
 export 'realtime/live_register_outcome.dart';
 export 'realtime/live_registration.dart';
 export 'realtime/live_result.dart';
+export 'realtime/live_window_size.dart';
 export 'realtime/query_result_hash.dart';

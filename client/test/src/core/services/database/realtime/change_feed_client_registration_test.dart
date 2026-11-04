@@ -13,7 +13,7 @@ void main() {
     document: document,
     operationName: 'people',
     variables: const {'filter': 'مينا', 'first': 10},
-    window: (rows: 20, chunk: 10),
+    window: const LiveWindowSize(rows: 20, chunk: 10),
     resultHashes: const ['abc'],
   );
   const ref = 'ref-1';
