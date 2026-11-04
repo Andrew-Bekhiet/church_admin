@@ -1,9 +1,8 @@
 defmodule ChurchAdmin.Realtime.Live.GroupDependencies do
   @moduledoc """
   What a group's result depends on: the union of what its statements read,
-  or `:everything` when Postgres could not tell for one of them, a function
-  that is not immutable being the usual reason. A group that depends on
-  everything cannot react to time passing alone.
+  or `:everything` when Postgres could not tell for one of them. No group
+  reacts to time passing alone.
   """
 
   alias ChurchAdmin.Realtime.Broadcaster

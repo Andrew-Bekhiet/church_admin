@@ -48,13 +48,14 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependencies.Probe do
   GROUP BY n.nspname, c.relname
   """
 
-  @functions_that_are_not_immutable """
+  @functions_that_can_read_unreported_tables """
   #{@views_read_by_view}
   SELECT n.nspname || '.' || p.proname
   FROM views AS v
   JOIN pg_rewrite AS r ON r.ev_class = v.oid
   CROSS JOIN LATERAL regexp_matches(r.ev_action::text, ':(?:funcid|opfuncid|aggfnoid|winfnoid) ([0-9]+)', 'g') AS m
   JOIN pg_proc AS p ON p.oid = m[1]::oid AND p.provolatile <> 'i'
+  JOIN pg_language AS l ON l.oid = p.prolang AND l.lanname IN ('sql', 'plpgsql')
   JOIN pg_namespace AS n ON n.oid = p.pronamespace
   ORDER BY 1
   LIMIT 1
@@ -108,7 +109,7 @@ defmodule ChurchAdmin.Realtime.Live.StatementDependencies.Probe do
   end
 
   defp read_view(connection) do
-    case Postgrex.query!(connection, @functions_that_are_not_immutable, []) do
+    case Postgrex.query!(connection, @functions_that_can_read_unreported_tables, []) do
       %{rows: [[function]]} ->
         {:error, {:volatile_function, function}}
 
