@@ -114,6 +114,11 @@ class AddressFormController extends AdvancedFormController {
     staleLocationInputsChanged.addListener(
       _maybeTrackStaleLocationReminderShow,
     );
+    addRelation(
+      area,
+      (chosenArea) => chosenArea?.id,
+      (_) => _clearStreetMismatchError(),
+    );
   }
 
   Address toAddress() => _baselineAddress.copyWith(
@@ -163,6 +168,7 @@ class AddressFormController extends AdvancedFormController {
 
     _houseNumberGeocodingDebounce?.cancel();
     street.setValue(chosen);
+    _clearStreetMismatchError();
 
     if (chosen != null) unawaited(_areaAutofiller.fillAreaOf(chosen));
   }
@@ -265,6 +271,43 @@ class AddressFormController extends AdvancedFormController {
 
   Future<District> createDistrictNamed(String name) async {
     return _services.places.createDistrictNamed(name);
+  }
+
+  @override
+  Future<bool> validate() async {
+    final fieldsAreValid = await super.validate();
+    if (!fieldsAreValid || isDisposed) return false;
+
+    return _validateStreetBelongsToArea();
+  }
+
+  Future<bool> _validateStreetBelongsToArea() async {
+    final chosenStreet = street.fieldValue;
+    final chosenArea = area.fieldValue;
+    if (chosenStreet == null || chosenArea == null) return true;
+
+    final areasOfStreet = await _services.logFailureOf(
+      'lookupAreasOfStreetForValidation',
+      () => _services.autofill.areasOf(chosenStreet),
+    );
+    if (isDisposed) return false;
+
+    if (areasOfStreet != null &&
+        !areasOfStreet.any((a) => a.id == chosenArea.id)) {
+      street.setError(AddressFieldError.streetNotInArea);
+
+      return false;
+    }
+
+    _clearStreetMismatchError();
+
+    return true;
+  }
+
+  void _clearStreetMismatchError() {
+    if (street.value.error == AddressFieldError.streetNotInArea) {
+      street.setError(null);
+    }
   }
 
   void _maybeTrackStaleLocationReminderAccept() {

@@ -55,7 +55,13 @@ class EditObjectScreenHarness {
     }),
   );
 
-  final FakeAreasDAO areasDAO = FakeAreasDAO();
+  final FakeAreasDAO areasDAO = FakeAreasDAO()
+    ..areasByStreetId['street-id'] = const [
+      Area(id: 'area-id', name: 'منطقة'),
+    ]
+    ..areasByStreetId['nile'] = const [
+      Area(id: 'shubra', name: 'شبرا'),
+    ];
   final FakeStreetsDAO streetsDAO = FakeStreetsDAO();
   final InMemoryFamiliesDAO familiesDAO = InMemoryFamiliesDAO();
   final FakeStoresDAO storesDAO = FakeStoresDAO();
