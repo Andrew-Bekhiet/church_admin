@@ -8,22 +8,26 @@ import 'fake_streets_dao.dart';
 import 'recording_analytics_provider.dart';
 
 abstract final class FakeAddressFormServices {
-  static AddressFormServices withNothingToSuggest() {
-    final areas = FakeAreasDAO();
-    final streets = FakeStreetsDAO();
-    final districts = FakeDistrictsDAO();
+  static AddressFormServices withNothingToSuggest({
+    FakeAreasDAO? areas,
+    FakeStreetsDAO? streets,
+    FakeDistrictsDAO? districts,
+  }) {
+    final effectiveAreas = areas ?? FakeAreasDAO();
+    final effectiveStreets = streets ?? FakeStreetsDAO();
+    final effectiveDistricts = districts ?? FakeDistrictsDAO();
 
     return AddressFormServices(
       autofill: AddressAutofill(
-        areas: areas,
-        streets: streets,
-        districts: districts,
+        areas: effectiveAreas,
+        streets: effectiveStreets,
+        districts: effectiveDistricts,
         geocoder: FakeGeocoder(),
       ),
       places: AddressPlaceCatalog(
-        areas: areas,
-        streets: streets,
-        districts: districts,
+        areas: effectiveAreas,
+        streets: effectiveStreets,
+        districts: effectiveDistricts,
       ),
       logging: FakeLoggingService(),
       analytics: AnalyticsService(

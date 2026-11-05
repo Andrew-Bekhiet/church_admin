@@ -217,4 +217,45 @@ void main() {
       expect(controller.household.canHaveFamilyNumbers, isTrue);
     });
   });
+
+  group('street and area validation', () {
+    test(
+      'fails validation when the household street does not belong to the area',
+      () async {
+        final controller = fixture.controllerFor(
+          const CreatePersonOnStreet(
+            street: PersonFormControllerFixture.nileStreet,
+          ),
+        );
+        controller.identity.name.setValue('مينا');
+        controller.household.address.area.setValue(
+          PersonFormControllerFixture.maadi,
+        );
+
+        expect(await controller.validate(), isFalse);
+        expect(
+          controller.household.address.street.value.error,
+          AddressFieldError.streetNotInArea,
+        );
+      },
+    );
+
+    test(
+      'passes validation when the household street belongs to the area',
+      () async {
+        final controller = fixture.controllerFor(
+          const CreatePersonOnStreet(
+            street: PersonFormControllerFixture.nileStreet,
+          ),
+        );
+        controller.identity.name.setValue('مينا');
+        controller.household.address.area.setValue(
+          PersonFormControllerFixture.shubra,
+        );
+
+        expect(await controller.validate(), isTrue);
+        expect(controller.household.address.street.value.error, isNull);
+      },
+    );
+  });
 }
