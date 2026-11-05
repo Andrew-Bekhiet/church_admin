@@ -15,7 +15,10 @@ void main() {
 
   late AddressFormControllerFixture fixture;
 
-  setUp(() => fixture = AddressFormControllerFixture());
+  setUp(() {
+    fixture = AddressFormControllerFixture()
+      ..areas.areasByStreetId[mainStreet.id] = const [stMarkArea];
+  });
 
   group('area and street', () {
     test(
@@ -127,6 +130,58 @@ void main() {
         ..useSuggestedAddress();
 
       expect(controller.area.fieldValue, isNull);
+    });
+  });
+
+  group('street and area relation', () {
+    const otherArea = Area(id: 'other-area-id', name: 'منطقة أخرى');
+
+    test('passes validation when street belongs to area', () async {
+      fixture.areas.areasByStreetId[mainStreet.id] = [stMarkArea];
+      final controller = fixture.controllerFor(completeAddress);
+
+      expect(await controller.validate(), isTrue);
+      expect(controller.street.value.error, isNull);
+    });
+
+    test('fails validation when street does not belong to area', () async {
+      fixture.areas.areasByStreetId[mainStreet.id] = [stMarkArea];
+      final controller = fixture.controllerFor(
+        completeAddress.copyWith(area: otherArea),
+      );
+
+      expect(await controller.validate(), isFalse);
+      expect(
+        controller.street.value.error,
+        AddressFieldError.streetNotInArea,
+      );
+    });
+
+    test('clears mismatch error when area changes to a valid one', () async {
+      fixture.areas.areasByStreetId[mainStreet.id] = [stMarkArea];
+      final controller = fixture.controllerFor(
+        completeAddress.copyWith(area: otherArea),
+      );
+      await controller.validate();
+      expect(controller.street.value.error, AddressFieldError.streetNotInArea);
+
+      controller.area.setValue(stMarkArea);
+
+      expect(controller.street.value.error, isNull);
+    });
+
+    test('clears mismatch error when street changes', () async {
+      fixture.areas.areasByStreetId[mainStreet.id] = [stMarkArea];
+      fixture.areas.areasByStreetId[sideStreet.id] = [otherArea];
+      final controller = fixture.controllerFor(
+        completeAddress.copyWith(area: otherArea),
+      );
+      await controller.validate();
+      expect(controller.street.value.error, AddressFieldError.streetNotInArea);
+
+      controller.chooseStreet(sideStreet);
+
+      expect(controller.street.value.error, isNull);
     });
   });
 }
