@@ -37,6 +37,7 @@ class DataCheckReportDialog extends StatelessWidget {
         return PopScope(
           canPop: !state.isSaving,
           child: AlertDialog(
+            key: DataCheckReportDialogKeys.dialog,
             title: const Text('تقرير اكتمال البيانات'),
             scrollable: true,
             content: Column(
@@ -93,4 +94,8 @@ class DataCheckReportDialog extends StatelessWidget {
       },
     );
   }
+}
+
+abstract final class DataCheckReportDialogKeys {
+  static const Key dialog = ValueKey('Data Check Report Dialog Key');
 }
