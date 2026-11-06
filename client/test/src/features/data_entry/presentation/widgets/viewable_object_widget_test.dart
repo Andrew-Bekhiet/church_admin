@@ -92,6 +92,7 @@ void main() {
 
         await openReportFor(tester, readOnlyFamily);
 
+        expect(find.byKey(DataCheckReportDialogKeys.dialog), findsOneWidget);
         expect(find.byType(SegmentedButton<DataCheckOverride>), findsNothing);
       },
     );
@@ -113,6 +114,7 @@ void main() {
 
         await openReportFor(tester, editableFamily);
 
+        expect(find.byKey(DataCheckReportDialogKeys.dialog), findsOneWidget);
         expect(find.byType(SegmentedButton<DataCheckOverride>), findsNothing);
       },
     );
@@ -124,6 +126,7 @@ void main() {
 
       await openReportFor(tester, editableFamily);
 
+      expect(find.byKey(DataCheckReportDialogKeys.dialog), findsOneWidget);
       expect(find.byType(SegmentedButton<DataCheckOverride>), findsNothing);
     });
   });
