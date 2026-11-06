@@ -109,11 +109,14 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
           trailing ??
           config.trailing ??
           switch (object) {
-            HasDataCheck(:final dataCheck?) && final HasDataCheck checked =>
+            HasDataCheck(:final dataCheck?) &&
+                final HasDataCheck objectWithDataCheck =>
               DataCheckIndicator(
                 dataCheck: dataCheck,
-                canOverride:
-                    AuthBloc.I.currentUserData?.canChangeDataCheck(checked) ??
+                canChangeDataCheck:
+                    AuthBloc.I.currentUserData?.canChangeDataCheck(
+                      objectWithDataCheck,
+                    ) ??
                     false,
               ),
             _ => null,
