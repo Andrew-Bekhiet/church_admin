@@ -14,6 +14,11 @@ void main() {
       userCanEdit: true,
       dataCheck: DataCheck(familyId: 'family', completenessPercent: 50),
     );
+    final readOnlyFamily = Family(
+      id: 'family',
+      name: 'عائلة',
+      dataCheck: DataCheck(familyId: 'family', completenessPercent: 50),
+    );
 
     late _MockAuthBloc authBloc;
     late MockViewableObjectService viewableObjects;
@@ -21,9 +26,11 @@ void main() {
     setUp(() {
       authBloc = _MockAuthBloc();
       viewableObjects = MockViewableObjectService();
-      when(
-        () => viewableObjects.getFormattedValue(editableFamily, any()),
-      ).thenReturn(null);
+      for (final family in [editableFamily, readOnlyFamily]) {
+        when(
+          () => viewableObjects.getFormattedValue(family, any()),
+        ).thenReturn(null);
+      }
       final database = _MockDatabaseService();
       when(() => database.dataChecks).thenReturn(_MockDataChecksDAO());
       initGlobalProviderContainer([
@@ -66,6 +73,26 @@ void main() {
         await openReportFor(tester, editableFamily);
 
         expect(find.byType(SegmentedButton<DataCheckOverride>), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'a user holding the data checks permission cannot override a family they cannot edit',
+      (tester) async {
+        when(() => authBloc.currentUserData).thenReturn(
+          const User(
+            uid: 'uid',
+            name: 'servant',
+            permissions: PermissionsSet.fromSet({
+              UserPermission.approved,
+              UserPermission.changeDataChecks,
+            }),
+          ),
+        );
+
+        await openReportFor(tester, readOnlyFamily);
+
+        expect(find.byType(SegmentedButton<DataCheckOverride>), findsNothing);
       },
     );
 
