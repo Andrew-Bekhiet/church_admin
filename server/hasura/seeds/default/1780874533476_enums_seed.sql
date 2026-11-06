@@ -12,7 +12,8 @@ INSERT INTO auth.permissions (name) VALUES
 ('deleteData'),
 ('exportAllData'),
 ('maintenanceNotifications'),
-('screenCaptureNotifications')
+('screenCaptureNotifications'),
+('changeDataChecks')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO public.work_status (name) VALUES
