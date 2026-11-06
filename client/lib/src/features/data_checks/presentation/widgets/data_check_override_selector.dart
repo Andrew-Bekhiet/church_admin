@@ -6,9 +6,7 @@ import 'package:material_ui/material_ui.dart';
 class DataCheckOverrideSelector extends StatelessWidget {
   static const String explanation = 'تجاوز نتيجة التحقق التلقائي';
 
-  final bool canOverride;
-
-  const DataCheckOverrideSelector({required this.canOverride, super.key});
+  const DataCheckOverrideSelector({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,18 +55,13 @@ class DataCheckOverrideSelector extends StatelessWidget {
                       ),
                   ],
                   selected: {state.dataCheck.userOverride},
-                  onSelectionChanged: canOverride && !state.isSaving
-                      ? (selection) => context
+                  onSelectionChanged: state.isSaving
+                      ? null
+                      : (selection) => context
                             .read<DataCheckOverrideCubit>()
-                            .choose(selection.single)
-                      : null,
+                            .choose(selection.single),
                 ),
                 if (state.isSaving) const LinearProgressIndicator(),
-                if (!canOverride)
-                  Text(
-                    'لا تملك صلاحية تعديل بيانات هذه العائلة',
-                    style: textTheme.bodySmall,
-                  ),
                 if (error != null)
                   Text(
                     error.message,

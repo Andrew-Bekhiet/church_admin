@@ -20,6 +20,7 @@ class PermissionsSet extends DelegatingSet<UserPermission> with Equatable {
   bool get deleteData => contains(UserPermission.deleteData);
   bool get recoverDeleted => contains(UserPermission.recoverDeleted);
   bool get exportAllData => contains(UserPermission.exportAllData);
+  bool get changeDataChecks => contains(UserPermission.changeDataChecks);
 
   bool get isSuperAdmin => readAllData || writeAllData || manageAllUsers;
 

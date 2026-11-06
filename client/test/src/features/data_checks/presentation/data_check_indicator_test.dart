@@ -132,10 +132,26 @@ void main() {
       },
     );
 
-    testWidgets('a reader without edit rights cannot change the verdict', (
+    testWidgets(
+      'a user who cannot change the data check sees the report without the override controls',
+      (tester) async {
+        await pumpIndicator(tester, incomplete, canOverride: false);
+
+        await tester.tap(find.byType(DataCheckIndicator));
+        await tester.pumpAndSettle();
+
+        expect(
+          find.byKey(DataCheckDetailRow.keyFor(failedDetail)),
+          findsOneWidget,
+        );
+        expect(find.byType(DataCheckOverrideSelector), findsNothing);
+      },
+    );
+
+    testWidgets('a user who can change the data check can pick an override', (
       tester,
     ) async {
-      await pumpIndicator(tester, incomplete, canOverride: false);
+      await pumpIndicator(tester, incomplete);
 
       await tester.tap(find.byType(DataCheckIndicator));
       await tester.pumpAndSettle();
@@ -143,7 +159,7 @@ void main() {
       final selector = tester.widget<SegmentedButton<DataCheckOverride>>(
         find.byType(SegmentedButton<DataCheckOverride>),
       );
-      expect(selector.onSelectionChanged, isNull);
+      expect(selector.onSelectionChanged, isNotNull);
     });
 
     testWidgets('the report stays open while an override is saving', (
