@@ -55,8 +55,10 @@ class DataCheckReportDialog extends StatelessWidget {
                         DataCheckDetailRow(detail: detail),
                     ],
                   ),
-                const Divider(),
-                DataCheckOverrideSelector(canOverride: canOverride),
+                if (canOverride) ...[
+                  const Divider(),
+                  const DataCheckOverrideSelector(),
+                ],
                 if (kDebugMode)
                   ExpansionTile(
                     title: const Text('التفاصيل الكاملة'),
