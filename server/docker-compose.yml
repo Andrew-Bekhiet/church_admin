@@ -97,7 +97,7 @@ services:
       start_period: 10s
 
   seed:
-    image: hasura/graphql-engine:v2.51.4.cli-migrations-v3
+    image: hasura/graphql-engine:v2.51.5.cli-migrations-v3
     profiles:
       - plant_seeds
     depends_on:
