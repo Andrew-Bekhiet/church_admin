@@ -50,13 +50,13 @@ void main() {
     Future<void> pumpIndicator(
       WidgetTester tester,
       DataCheck dataCheck, {
-      bool canOverride = true,
+      bool canChangeDataCheck = true,
     }) => tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
           body: DataCheckIndicator(
             dataCheck: dataCheck,
-            canOverride: canOverride,
+            canChangeDataCheck: canChangeDataCheck,
           ),
         ),
       ),
@@ -140,19 +140,21 @@ void main() {
       expect(find.text(DataCheckOverrideSelector.explanation), findsOneWidget);
     });
 
-    testWidgets('a reader without edit rights cannot change the verdict', (
-      tester,
-    ) async {
-      await pumpIndicator(tester, incomplete, canOverride: false);
+    testWidgets(
+      'a user who cannot change the data check sees the report without the override controls',
+      (tester) async {
+        await pumpIndicator(tester, incomplete, canChangeDataCheck: false);
 
-      await tester.tap(find.byType(DataCheckIndicator));
-      await tester.pumpAndSettle();
+        await tester.tap(find.byType(DataCheckIndicator));
+        await tester.pumpAndSettle();
 
-      final selector = tester.widget<SegmentedButton<DataCheckOverride>>(
-        find.byType(SegmentedButton<DataCheckOverride>),
-      );
-      expect(selector.onSelectionChanged, isNull);
-    });
+        expect(
+          find.byKey(DataCheckDetailRow.keyFor(failedDetail)),
+          findsOneWidget,
+        );
+        expect(find.byType(SegmentedButton<DataCheckOverride>), findsNothing);
+      },
+    );
 
     testWidgets('the report stays open while an override is saving', (
       tester,

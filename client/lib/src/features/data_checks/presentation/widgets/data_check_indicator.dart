@@ -5,11 +5,11 @@ class DataCheckIndicator extends StatelessWidget {
   static const double _emblemSize = 20;
 
   final DataCheck dataCheck;
-  final bool canOverride;
+  final bool canChangeDataCheck;
 
   const DataCheckIndicator({
     required this.dataCheck,
-    required this.canOverride,
+    required this.canChangeDataCheck,
     super.key,
   });
 
@@ -20,7 +20,7 @@ class DataCheckIndicator extends StatelessWidget {
       onPressed: () => DataCheckReportDialog.show(
         context,
         dataCheck: dataCheck,
-        canOverride: canOverride,
+        canChangeDataCheck: canChangeDataCheck,
       ),
       icon: DataCheckEmblem(dataCheck: dataCheck, size: _emblemSize),
     );

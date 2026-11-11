@@ -127,6 +127,9 @@ class User extends ViewableWithIDAndImage
   }
 
   bool canDeleteObject(ViewableWithID object) => permissions.deleteData;
+
+  bool canChangeDataCheck(HasDataCheck object) =>
+      permissions.changeDataChecks && object.userCanEdit;
 }
 
 // Extends the generated private base, which only this library can see
