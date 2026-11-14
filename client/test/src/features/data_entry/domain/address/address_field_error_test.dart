@@ -8,4 +8,11 @@ void main() {
       'الشارع لا ينتمي إلى المنطقة المختارة',
     );
   });
+
+  test('streetAreaLookupFailed error has correct Arabic message', () {
+    expect(
+      AddressFieldError.streetAreaLookupFailed.message,
+      'تعذر التحقق من الشارع، حاول مرة أخرى',
+    );
+  });
 }

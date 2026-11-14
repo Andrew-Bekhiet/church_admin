@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -131,6 +133,16 @@ void main() {
 
       expect(controller.area.fieldValue, isNull);
     });
+
+    test('validating does not reject a mismatched street and area', () async {
+      const otherArea = Area(id: 'other-area-id', name: 'منطقة أخرى');
+      final controller = fixture.controllerFor(
+        completeAddress.copyWith(area: otherArea),
+      )..markReadOnly();
+
+      expect(await controller.validate(), isTrue);
+      expect(controller.street.value.error, isNull);
+    });
   });
 
   group('street and area relation', () {
@@ -183,5 +195,77 @@ void main() {
 
       expect(controller.street.value.error, isNull);
     });
+
+    test('reports lookup failure and lets the user retry', () async {
+      fixture.areas.lookupFailure = Exception('offline');
+      final controller = fixture.controllerFor(completeAddress);
+
+      expect(await controller.validate(), isFalse);
+      expect(
+        controller.street.value.error,
+        AddressFieldError.streetAreaLookupFailed,
+      );
+
+      fixture.areas.lookupFailure = null;
+      expect(await controller.validate(), isTrue);
+      expect(controller.street.value.error, isNull);
+    });
+
+    test(
+      'discards stale lookup when street changes while validating',
+      () async {
+        fixture.areas.areasByStreetId[mainStreet.id] = [stMarkArea];
+        fixture.areas.areasByStreetId[sideStreet.id] = [otherArea];
+        final gate = fixture.areas.lookupGatesByStreetId[mainStreet.id] =
+            Completer<void>();
+        final controller = fixture.controllerFor(
+          completeAddress.copyWith(area: otherArea),
+        );
+
+        final validation = controller.validate();
+        await pumpEventQueue();
+        controller.chooseStreet(sideStreet);
+        gate.complete();
+
+        expect(await validation, isFalse);
+        expect(controller.street.value.error, isNull);
+      },
+    );
+
+    test('discards stale lookup when area changes while validating', () async {
+      fixture.areas.areasByStreetId[mainStreet.id] = [stMarkArea];
+      final gate = fixture.areas.lookupGatesByStreetId[mainStreet.id] =
+          Completer<void>();
+      final controller = fixture.controllerFor(
+        completeAddress.copyWith(area: otherArea),
+      );
+
+      final validation = controller.validate();
+      await pumpEventQueue();
+      controller.area.setValue(stMarkArea);
+      gate.complete();
+
+      expect(await validation, isFalse);
+      expect(controller.street.value.error, isNull);
+    });
+
+    test(
+      'discards stale lookup when baseline reloads while validating',
+      () async {
+        fixture.areas.areasByStreetId[mainStreet.id] = [stMarkArea];
+        final gate = fixture.areas.lookupGatesByStreetId[mainStreet.id] =
+            Completer<void>();
+        final mismatchedAddress = completeAddress.copyWith(area: otherArea);
+        final controller = fixture.controllerFor(mismatchedAddress);
+
+        final validation = controller.validate();
+        await pumpEventQueue();
+        controller.loadAsNewBaseline(mismatchedAddress);
+        gate.complete();
+
+        expect(await validation, isFalse);
+        expect(controller.street.value.error, isNull);
+      },
+    );
   });
 }
