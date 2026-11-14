@@ -5,6 +5,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../fakes/fake_address_form_services.dart';
+import '../../../../fakes/fake_areas_dao.dart';
 import '../../../../fakes/fake_logging_service.dart';
 import '../../../../fakes/fake_photo_uploader.dart';
 import '../../../../fakes/in_memory_families_dao.dart';
@@ -35,7 +36,9 @@ void main() {
       intent: const UpdateFamily(family: storedFamily),
       familiesDAO: families,
       analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-      addressServices: FakeAddressFormServices.withNothingToSuggest(),
+      addressServices: FakeAddressFormServices.withNothingToSuggest(
+        areas: FakeAreasDAO()..areasByStreetId[nile.id] = const [shubra, maadi],
+      ),
       currentUserId: shubraServant.uid,
     );
     addTearDown(form.dispose);

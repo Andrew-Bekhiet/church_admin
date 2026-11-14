@@ -2,6 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../fakes/fake_address_form_services.dart';
+import '../../../../fakes/fake_areas_dao.dart';
 import '../../../../fakes/fake_logging_service.dart';
 import '../../../../fakes/in_memory_families_dao.dart';
 import '../../../../fakes/recording_analytics_provider.dart';
@@ -19,6 +20,12 @@ void main() {
     deceasedSpouseName: 'مينا',
   );
 
+  late FakeAreasDAO areas;
+
+  setUp(() {
+    areas = FakeAreasDAO()..areasByStreetId[nile.id] = const [shubra];
+  });
+
   FamilyFormController controllerFor(FamilyEditIntent intent) {
     final controller = FamilyFormController(
       intent: intent,
@@ -26,7 +33,9 @@ void main() {
       analyticsService: AnalyticsService([
         RecordingAnalyticsProvider(),
       ], FakeLoggingService()),
-      addressServices: FakeAddressFormServices.withNothingToSuggest(),
+      addressServices: FakeAddressFormServices.withNothingToSuggest(
+        areas: areas,
+      ),
       currentUserId: 'me',
     );
     addTearDown(() {
@@ -165,5 +174,46 @@ void main() {
       expect(controller.savedObject?.parents, [parent]);
       expect(controller.toObject().parents, isEmpty);
     });
+  });
+
+  group('street and area validation', () {
+    const otherArea = Area(id: 'other', name: 'أخرى');
+
+    test(
+      'fails validation when the address street does not belong to the area',
+      () async {
+        final controller = controllerFor(
+          const UpdateFamily(
+            family: Family(
+              id: 'family',
+              name: 'عائلة',
+              address: Address(
+                id: 'address',
+                area: otherArea,
+                street: nile,
+              ),
+              status: MartialStatus.widowed,
+              deceasedSpouseName: 'مينا',
+            ),
+          ),
+        );
+
+        expect(await controller.validate(), isFalse);
+        expect(
+          controller.address.street.value.error,
+          AddressFieldError.streetNotInArea,
+        );
+      },
+    );
+
+    test(
+      'passes validation when the address street belongs to the area',
+      () async {
+        final controller = controllerOfStoredFamily();
+
+        expect(await controller.validate(), isTrue);
+        expect(controller.address.street.value.error, isNull);
+      },
+    );
   });
 }

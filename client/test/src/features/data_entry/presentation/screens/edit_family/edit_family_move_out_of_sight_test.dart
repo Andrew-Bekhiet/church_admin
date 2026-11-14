@@ -48,6 +48,7 @@ void main() {
         name: 'خادم',
         adminOn: [AdminOnData(permissionId: 'grant', area: shubra)],
       )
+      ..areasDAO.areasByStreetId['nile'] = const [shubra, maadi]
       ..install();
     harness.areasDAO.pickableAreas = const [maadi];
   });

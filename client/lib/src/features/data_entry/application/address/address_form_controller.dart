@@ -114,6 +114,11 @@ class AddressFormController extends AdvancedFormController {
     staleLocationInputsChanged.addListener(
       _maybeTrackStaleLocationReminderShow,
     );
+    addRelation(
+      area,
+      (chosenArea) => chosenArea?.id,
+      (_) => _clearStreetValidationError(),
+    );
   }
 
   Address toAddress() => _baselineAddress.copyWith(
@@ -163,6 +168,7 @@ class AddressFormController extends AdvancedFormController {
 
     _houseNumberGeocodingDebounce?.cancel();
     street.setValue(chosen);
+    _clearStreetValidationError();
 
     if (chosen != null) unawaited(_areaAutofiller.fillAreaOf(chosen));
   }
@@ -265,6 +271,69 @@ class AddressFormController extends AdvancedFormController {
 
   Future<District> createDistrictNamed(String name) async {
     return _services.places.createDistrictNamed(name);
+  }
+
+  @override
+  Future<bool> validate() async {
+    final fieldsAreValid = await super.validate();
+    if (!fieldsAreValid || isDisposed) return false;
+
+    return _validateStreetBelongsToArea();
+  }
+
+  Future<bool> _validateStreetBelongsToArea() async {
+    if (_isReadOnly) return true;
+
+    final chosenStreet = street.fieldValue;
+    final chosenArea = area.fieldValue;
+    if (chosenStreet == null || chosenArea == null) return true;
+
+    final generationWhenLookupStarted = _baselineGeneration;
+    final areasOfStreet = await _services.logFailureOf(
+      'lookupAreasOfStreetForValidation',
+      () => _services.autofill.areasOf(chosenStreet),
+    );
+    if (_wasSelectionReplacedSince(
+      chosenStreet,
+      chosenArea,
+      generationWhenLookupStarted,
+    )) {
+      return false;
+    }
+
+    if (areasOfStreet == null) {
+      street.setError(AddressFieldError.streetAreaLookupFailed);
+
+      return false;
+    }
+
+    if (!areasOfStreet.any((a) => a.id == chosenArea.id)) {
+      street.setError(AddressFieldError.streetNotInArea);
+
+      return false;
+    }
+
+    _clearStreetValidationError();
+
+    return true;
+  }
+
+  bool _wasSelectionReplacedSince(
+    Street chosenStreet,
+    Area chosenArea,
+    int generationWhenLookupStarted,
+  ) =>
+      isDisposed ||
+      generationWhenLookupStarted != _baselineGeneration ||
+      street.fieldValue != chosenStreet ||
+      area.fieldValue != chosenArea;
+
+  void _clearStreetValidationError() {
+    final error = street.value.error;
+    if (error == AddressFieldError.streetNotInArea ||
+        error == AddressFieldError.streetAreaLookupFailed) {
+      street.setError(null);
+    }
   }
 
   void _maybeTrackStaleLocationReminderAccept() {
