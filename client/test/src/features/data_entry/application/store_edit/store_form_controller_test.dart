@@ -2,14 +2,17 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../fakes/fake_address_form_services.dart';
+import '../../../../fakes/fake_areas_dao.dart';
 import '../../../../fakes/in_memory_families_dao.dart';
 
 void main() {
   const family = Family(id: 'family', name: 'عائلة');
+  const shubra = Area(id: 'shubra', name: 'شبرا');
+  const nile = Street(id: 'nile', name: 'شارع النيل');
   const placedAddress = Address(
     id: 'address',
-    area: Area(id: 'shubra', name: 'شبرا'),
-    street: Street(id: 'nile', name: 'شارع النيل'),
+    area: shubra,
+    street: nile,
   );
   const storedStore = Store(
     id: 'store',
@@ -19,11 +22,19 @@ void main() {
     familyId: 'family',
   );
 
+  late FakeAreasDAO areas;
+
+  setUp(() {
+    areas = FakeAreasDAO()..areasByStreetId[nile.id] = const [shubra];
+  });
+
   StoreFormController controllerFor(StoreEditIntent intent) {
     final controller = StoreFormController(
       intent: intent,
       familiesDAO: InMemoryFamiliesDAO(),
-      addressServices: FakeAddressFormServices.withNothingToSuggest(),
+      addressServices: FakeAddressFormServices.withNothingToSuggest(
+        areas: areas,
+      ),
       currentUserId: 'me',
     );
     addTearDown(() {

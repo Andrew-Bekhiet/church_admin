@@ -8,6 +8,7 @@ import '../edit_object/edit_object_screen_harness.dart';
 void main() {
   const shubra = Area(id: 'shubra', name: 'شبرا');
   const maadi = Area(id: 'maadi', name: 'المعادي');
+  const nile = Street(id: 'nile', name: 'شارع النيل');
   const store = Store(
     id: 'store-id',
     name: 'متجر',
@@ -16,7 +17,7 @@ void main() {
     address: Address(
       id: 'address-id',
       area: shubra,
-      street: Street(id: 'nile', name: 'شارع النيل'),
+      street: nile,
     ),
   );
 
@@ -50,7 +51,7 @@ void main() {
         name: 'خادم',
         adminOn: [AdminOnData(permissionId: 'grant', area: shubra)],
       )
-      ..areasDAO.areasByStreetId['nile'] = const [shubra, maadi]
+      ..areasDAO.areasByStreetId[nile.id] = const [shubra, maadi]
       ..install();
     harness.areasDAO.pickableAreas = const [maadi];
   });

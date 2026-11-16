@@ -6,6 +6,8 @@ import '../../../../../utils.dart';
 import 'edit_person_screen_harness.dart';
 
 void main() {
+  const street = Street(id: 'street-id', name: 'شارع');
+  const area = Area(id: 'area-id', name: 'منطقة');
   const family = Family(id: 'family-id', name: 'أسرة');
   const otherFamily = Family(
     id: 'other-family-id',
@@ -20,8 +22,8 @@ void main() {
     address: const Address(
       id: 'address-id',
       houseCode: '12',
-      street: Street(id: 'street-id', name: 'شارع'),
-      area: Area(id: 'area-id', name: 'منطقة'),
+      street: street,
+      area: area,
     ),
   );
 
@@ -43,6 +45,7 @@ void main() {
   setUp(() {
     harness = EditPersonScreenHarness();
     harness.families.families = const [family, otherFamily];
+    harness.areas.areasByStreetId[street.id] = const [area];
     harness.install();
   });
 

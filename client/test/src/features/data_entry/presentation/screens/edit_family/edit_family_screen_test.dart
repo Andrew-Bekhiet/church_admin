@@ -10,13 +10,15 @@ void main() {
   const father = PersonType(id: 'father', name: 'الأب', isFamilyAdmin: true);
   const otherValidInput = '01002222222';
   const otherE164 = '+201002222222';
+  const area = Area(id: 'area-id', name: 'منطقة');
+  const street = Street(id: 'street-id', name: 'شارع');
   const storedFamily = Family(
     id: 'family-id',
     name: 'أسرة',
     address: Address(
       id: 'address-id',
-      area: Area(id: 'area-id', name: 'منطقة'),
-      street: Street(id: 'street-id', name: 'شارع'),
+      area: area,
+      street: street,
     ),
     contacts: [
       FamilyPhoneContact(
@@ -48,7 +50,9 @@ void main() {
   }
 
   setUp(() {
-    harness = EditObjectScreenHarness()..install();
+    harness = EditObjectScreenHarness()
+      ..areasDAO.areasByStreetId[street.id] = const [area]
+      ..install();
   });
 
   tearDown(defaultTearDown);

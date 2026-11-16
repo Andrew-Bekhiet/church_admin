@@ -5,12 +5,14 @@ import '../../../../../utils.dart';
 import '../edit_object/edit_object_screen_harness.dart';
 
 void main() {
+  const area = Area(id: 'area-id', name: 'منطقة');
+  const street = Street(id: 'street-id', name: 'شارع');
   const family = Family(
     id: 'family-id',
     name: 'أسرة',
     address: Address(
-      area: Area(id: 'area-id', name: 'منطقة'),
-      street: Street(id: 'street-id', name: 'شارع'),
+      area: area,
+      street: street,
     ),
   );
   const storedStore = Store(
@@ -18,8 +20,8 @@ void main() {
     name: 'محل',
     address: Address(
       id: 'address-id',
-      area: Area(id: 'area-id', name: 'منطقة'),
-      street: Street(id: 'street-id', name: 'شارع'),
+      area: area,
+      street: street,
     ),
     family: family,
     familyId: 'family-id',
@@ -28,7 +30,9 @@ void main() {
   late EditObjectScreenHarness harness;
 
   setUp(() {
-    harness = EditObjectScreenHarness()..install();
+    harness = EditObjectScreenHarness()
+      ..areasDAO.areasByStreetId[street.id] = const [area]
+      ..install();
   });
 
   tearDown(defaultTearDown);

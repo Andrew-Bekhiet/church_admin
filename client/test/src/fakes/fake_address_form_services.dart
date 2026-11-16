@@ -13,12 +13,7 @@ abstract final class FakeAddressFormServices {
     FakeStreetsDAO? streets,
     FakeDistrictsDAO? districts,
   }) {
-    final effectiveAreas =
-        areas ??
-        (FakeAreasDAO()
-          ..areasByStreetId['nile'] = const [
-            Area(id: 'shubra', name: 'شبرا'),
-          ]);
+    final effectiveAreas = areas ?? FakeAreasDAO();
     final effectiveStreets = streets ?? FakeStreetsDAO();
     final effectiveDistricts = districts ?? FakeDistrictsDAO();
 

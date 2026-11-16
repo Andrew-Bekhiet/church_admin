@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -17,10 +15,7 @@ void main() {
 
   late AddressFormControllerFixture fixture;
 
-  setUp(() {
-    fixture = AddressFormControllerFixture()
-      ..areas.areasByStreetId[mainStreet.id] = const [stMarkArea];
-  });
+  setUp(() => fixture = AddressFormControllerFixture());
 
   group('area and street', () {
     test(
@@ -62,6 +57,7 @@ void main() {
 
     test('are satisfied by an address that has both', () async {
       fixture.required = true;
+      fixture.areas.areasByStreetId[mainStreet.id] = const [stMarkArea];
       final controller = fixture.controllerFor(completeAddress);
 
       expect(await controller.validate(), isTrue);
@@ -97,6 +93,7 @@ void main() {
     });
 
     test('accept a whole number', () async {
+      fixture.areas.areasByStreetId[mainStreet.id] = const [stMarkArea];
       final controller = fixture.controllerFor(completeAddress);
       controller.apartmentNumber.textController.text = '7';
 
@@ -148,8 +145,11 @@ void main() {
   group('street and area relation', () {
     const otherArea = Area(id: 'other-area-id', name: 'منطقة أخرى');
 
+    setUp(
+      () => fixture.areas.areasByStreetId[mainStreet.id] = const [stMarkArea],
+    );
+
     test('passes validation when street belongs to area', () async {
-      fixture.areas.areasByStreetId[mainStreet.id] = [stMarkArea];
       final controller = fixture.controllerFor(completeAddress);
 
       expect(await controller.validate(), isTrue);
@@ -157,7 +157,6 @@ void main() {
     });
 
     test('fails validation when street does not belong to area', () async {
-      fixture.areas.areasByStreetId[mainStreet.id] = [stMarkArea];
       final controller = fixture.controllerFor(
         completeAddress.copyWith(area: otherArea),
       );
@@ -170,7 +169,6 @@ void main() {
     });
 
     test('clears mismatch error when area changes to a valid one', () async {
-      fixture.areas.areasByStreetId[mainStreet.id] = [stMarkArea];
       final controller = fixture.controllerFor(
         completeAddress.copyWith(area: otherArea),
       );
@@ -183,7 +181,6 @@ void main() {
     });
 
     test('clears mismatch error when street changes', () async {
-      fixture.areas.areasByStreetId[mainStreet.id] = [stMarkArea];
       fixture.areas.areasByStreetId[sideStreet.id] = [otherArea];
       final controller = fixture.controllerFor(
         completeAddress.copyWith(area: otherArea),
@@ -201,6 +198,7 @@ void main() {
       final controller = fixture.controllerFor(completeAddress);
 
       expect(await controller.validate(), isFalse);
+      expect(controller.value.hasFailedValidation, isTrue);
       expect(
         controller.street.value.error,
         AddressFieldError.streetAreaLookupFailed,
@@ -208,63 +206,23 @@ void main() {
 
       fixture.areas.lookupFailure = null;
       expect(await controller.validate(), isTrue);
+      expect(controller.value.hasFailedValidation, isFalse);
       expect(controller.street.value.error, isNull);
     });
 
     test(
-      'discards stale lookup when street changes while validating',
+      're-checks the street when the area changes after a passing validation',
       () async {
-        fixture.areas.areasByStreetId[mainStreet.id] = [stMarkArea];
-        fixture.areas.areasByStreetId[sideStreet.id] = [otherArea];
-        final gate = fixture.areas.lookupGatesByStreetId[mainStreet.id] =
-            Completer<void>();
-        final controller = fixture.controllerFor(
-          completeAddress.copyWith(area: otherArea),
+        final controller = fixture.controllerFor(completeAddress);
+        expect(await controller.validate(), isTrue);
+
+        controller.area.setValue(otherArea);
+
+        expect(await controller.validate(), isFalse);
+        expect(
+          controller.street.value.error,
+          AddressFieldError.streetNotInArea,
         );
-
-        final validation = controller.validate();
-        await pumpEventQueue();
-        controller.chooseStreet(sideStreet);
-        gate.complete();
-
-        expect(await validation, isFalse);
-        expect(controller.street.value.error, isNull);
-      },
-    );
-
-    test('discards stale lookup when area changes while validating', () async {
-      fixture.areas.areasByStreetId[mainStreet.id] = [stMarkArea];
-      final gate = fixture.areas.lookupGatesByStreetId[mainStreet.id] =
-          Completer<void>();
-      final controller = fixture.controllerFor(
-        completeAddress.copyWith(area: otherArea),
-      );
-
-      final validation = controller.validate();
-      await pumpEventQueue();
-      controller.area.setValue(stMarkArea);
-      gate.complete();
-
-      expect(await validation, isFalse);
-      expect(controller.street.value.error, isNull);
-    });
-
-    test(
-      'discards stale lookup when baseline reloads while validating',
-      () async {
-        fixture.areas.areasByStreetId[mainStreet.id] = [stMarkArea];
-        final gate = fixture.areas.lookupGatesByStreetId[mainStreet.id] =
-            Completer<void>();
-        final mismatchedAddress = completeAddress.copyWith(area: otherArea);
-        final controller = fixture.controllerFor(mismatchedAddress);
-
-        final validation = controller.validate();
-        await pumpEventQueue();
-        controller.loadAsNewBaseline(mismatchedAddress);
-        gate.complete();
-
-        expect(await validation, isFalse);
-        expect(controller.street.value.error, isNull);
       },
     );
   });

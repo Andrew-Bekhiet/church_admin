@@ -23,8 +23,6 @@ class PersonFormControllerFixture {
     userCanEdit: true,
   );
 
-  final FakeAreasDAO areas = FakeAreasDAO()
-    ..areasByStreetId[nileStreet.id] = const [shubra];
   final FakePersonsDAO persons = FakePersonsDAO();
   final FakePhotoUploader photos = FakePhotoUploader();
   final InMemoryFamiliesDAO families = InMemoryFamiliesDAO();
@@ -38,7 +36,11 @@ class PersonFormControllerFixture {
     name: 'خادم',
   );
 
-  PersonFormController controllerFor(PersonEditIntent intent) {
+  PersonFormController controllerFor(
+    PersonEditIntent intent, {
+    FakeAreasDAO? areas,
+  }) {
+    final effectiveAreas = areas ?? FakeAreasDAO();
     final streets = FakeStreetsDAO();
     final districts = FakeDistrictsDAO();
     final controller = PersonFormController(
@@ -50,13 +52,13 @@ class PersonFormControllerFixture {
       analyticsService: analyticsService,
       addressServices: AddressFormServices(
         autofill: AddressAutofill(
-          areas: areas,
+          areas: effectiveAreas,
           streets: streets,
           districts: districts,
           geocoder: FakeGeocoder(),
         ),
         places: AddressPlaceCatalog(
-          areas: areas,
+          areas: effectiveAreas,
           streets: streets,
           districts: districts,
         ),

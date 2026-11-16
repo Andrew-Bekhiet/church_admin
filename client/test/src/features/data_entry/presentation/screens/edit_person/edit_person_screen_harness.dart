@@ -86,13 +86,7 @@ class EditPersonScreenHarness {
   final FakeLoggingService logging = FakeLoggingService();
   final FakeFunctionsService functions = FakeFunctionsService();
   final FakeStreetsDAO streets = FakeStreetsDAO();
-  final FakeAreasDAO areas = FakeAreasDAO()
-    ..areasByStreetId['street-id'] = const [
-      Area(id: 'area-id', name: 'منطقة'),
-    ]
-    ..areasByStreetId['nile'] = const [
-      Area(id: 'shubra', name: 'شبرا'),
-    ];
+  final FakeAreasDAO areas = FakeAreasDAO();
   final FakeServicesDAO services = FakeServicesDAO();
 
   User? currentUser = userWhoWritesEverything;

@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../../fakes/fake_areas_dao.dart';
 import 'person_form_controller_fixture.dart';
 
 void main() {
@@ -219,6 +220,15 @@ void main() {
   });
 
   group('street and area validation', () {
+    late FakeAreasDAO areas;
+
+    setUp(() {
+      areas = FakeAreasDAO()
+        ..areasByStreetId[PersonFormControllerFixture.nileStreet.id] = const [
+          PersonFormControllerFixture.shubra,
+        ];
+    });
+
     test(
       'fails validation when the household street does not belong to the area',
       () async {
@@ -226,6 +236,7 @@ void main() {
           const CreatePersonOnStreet(
             street: PersonFormControllerFixture.nileStreet,
           ),
+          areas: areas,
         );
         controller.identity.name.setValue('مينا');
         controller.household.address.area.setValue(
@@ -247,6 +258,7 @@ void main() {
           const CreatePersonOnStreet(
             street: PersonFormControllerFixture.nileStreet,
           ),
+          areas: areas,
         );
         controller.identity.name.setValue('مينا');
         controller.household.address.area.setValue(
