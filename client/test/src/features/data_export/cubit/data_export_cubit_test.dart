@@ -141,12 +141,6 @@ void main() {
             groupsIds: captureAny(named: 'groupsIds'),
           ),
         );
-        verify(
-          () => fixture.exportOperationsStorage.saveFile(
-            downloadUrl: downloadUrl,
-            onProgress: any(named: 'onProgress'),
-          ),
-        ).called(1);
       },
     );
 

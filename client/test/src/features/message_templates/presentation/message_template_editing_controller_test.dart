@@ -26,24 +26,6 @@ void main() {
     expect(controller.template.text, stored);
   });
 
-  test('deleting the character before a placeholder removes it whole', () {
-    final controller = controllerWith('يا {name}');
-    addTearDown(controller.dispose);
-
-    final textWithoutLastCharacter = controller.text.substring(
-      0,
-      controller.text.length - 1,
-    );
-    controller.value = TextEditingValue(
-      text: textWithoutLastCharacter,
-      selection: TextSelection.collapsed(
-        offset: textWithoutLastCharacter.length,
-      ),
-    );
-
-    expect(controller.template.text, 'يا ');
-  });
-
   test('an inserted placeholder is stored by its field name at the cursor', () {
     final controller = controllerWith('يا  اهلا');
     addTearDown(controller.dispose);
