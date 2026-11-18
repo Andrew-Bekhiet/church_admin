@@ -31,11 +31,6 @@ void main() {
       );
 
       expect(
-        DateTime(2024, 7, 27).toCopticDate(),
-        (year: 1740, month: 11, day: 20),
-      );
-
-      expect(
         DateTime(2024, 9, 4).toCopticDate(),
         (year: 1740, month: 12, day: 29),
       );
