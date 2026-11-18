@@ -11,13 +11,19 @@ environment:
 dependency_overrides:
   # flutter_test pins test_api 0.7.12, whose only test release (1.31.1) caps analyzer below 14
   analyzer: ^14.5.0
-  # Until [gql-dart/gql#524](https://github.com/gql-dart/gql/pull/524) is released: 0.15.2 caps analyzer below 14
-  gql_code_builder:
+  # Until [heftapp/graphql_codegen#419](https://github.com/heftapp/graphql_codegen/pull/419) is released: 3.0.2 caps build below 5
+  graphql_codegen:
     git:
-      url: https://github.com/TheoGermain/gql.git
-      ref: 40e925caed5a5036d1c59a96e7c3f05de6057e6d
-      path: codegen/gql_code_builder
-  # Until https://github.com/dart-lang/native/issues/3281 and https://github.com/flutter/flutter/issues/186794 are fixed
+      url: https://github.com/heftapp/graphql_codegen.git
+      ref: cbd701824ea6e58813eae826c99123f0c06dc862
+      path: packages/graphql_codegen
+  # Until mockito 5.8.2 with [dart-lang/build#5224](https://github.com/dart-lang/build/pull/5224) is released: 5.8.1 caps build below 5
+  mockito:
+    git:
+      url: https://github.com/dart-lang/build.git
+      ref: 3088ac884999c97f9ac6d2155e90e81af553b93c
+      path: builder_pkgs/mockito
+  # Until [dart-lang/native#3281](https://github.com/dart-lang/native/issues/3281) is fixed
   objective_c: 9.3.0
 
 dependencies:
@@ -58,7 +64,7 @@ dependencies:
   flutter_blurhash: ^0.9.1
   flutter_cache_manager: ^3.3.0
   flutter_contacts: ^2.0.0
-  flutter_local_notifications: ^22.0.1
+  flutter_local_notifications: ^23.0.3
   flutter_map: ^8.1.1
   flutter_map_dragmarker: ^8.0.3
   flutter_map_location_marker: ^10.1.0
