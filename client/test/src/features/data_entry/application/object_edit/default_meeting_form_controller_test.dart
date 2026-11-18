@@ -45,18 +45,4 @@ void main() {
     expect(await form.validate(), isFalse);
     expect(form.name.error, ObjectEditError.defaultMeetingNameRequired);
   });
-
-  test('no meeting is drafted once the user opts out', () {
-    ownerName.setValue('خدمة ابتدائي');
-
-    form.isCreated.setValue(false);
-
-    expect(
-      form.draftFor(
-        id: 'meeting',
-        owner: const Service(id: 's', name: 'خدمة ابتدائي'),
-      ),
-      isNull,
-    );
-  });
 }

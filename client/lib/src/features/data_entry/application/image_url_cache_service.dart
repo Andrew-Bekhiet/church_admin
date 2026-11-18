@@ -41,21 +41,6 @@ class ImageUrlCacheService {
     return _getUrlAndSaveToCache(imageObject);
   }
 
-  /// Retrieves the cached image URL for the given [imageObject].
-  ///
-  /// Throws a [StateError] if the [imageObject] has no image.
-  ///
-  /// Returns the cached URL if it exists and is not expired, otherwise returns null.
-  String? getNonExpiredCachedImageUrl(ObjectImageInfo imageObject) {
-    final cachedUrl = getCachedImageUrl(imageObject);
-
-    if (cachedUrl == null || isUrlExpired(cachedUrl)) {
-      return null;
-    }
-
-    return cachedUrl;
-  }
-
   String? getCachedImageUrl(ObjectImageInfo imageInfo) {
     final cachedData = box.get(imageInfo.cacheKey);
 

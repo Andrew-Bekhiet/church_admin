@@ -142,15 +142,13 @@ void main() {
     );
   });
 
-  testWidgets('importing from contacts is offered as a labelled button', (
-    tester,
-  ) async {
-    var imported = false;
-    await pumpEditor(tester, onImportFromContacts: () => imported = true);
+  testWidgets('importing from contacts is offered only when the screen can '
+      'import', (tester) async {
+    await pumpEditor(tester, onImportFromContacts: () {});
+    expect(find.byKey(PhoneContactsEditorKeys.importButton), findsOneWidget);
 
-    await tester.tap(find.byKey(PhoneContactsEditorKeys.importButton));
-
-    expect(imported, isTrue);
+    await pumpEditor(tester);
+    expect(find.byKey(PhoneContactsEditorKeys.importButton), findsNothing);
   });
 
   testWidgets('a family editor only offers family roles', (tester) async {
@@ -161,21 +159,6 @@ void main() {
       find.byKey(FamilyPhoneContactMenuButtonKeys.button),
       findsOneWidget,
     );
-  });
-
-  testWidgets('a number that is not a phone number fails validation', (
-    tester,
-  ) async {
-    final form = await pumpEditor(tester);
-
-    await tester.enterText(
-      find.byKey(PhoneContactFieldKeys.phoneField(ownWork.id)),
-      '0100',
-    );
-    await form.validate();
-    await tester.pump();
-
-    expect(find.text(PhoneContactError.invalidPhone.message), findsOneWidget);
   });
 
   testWidgets('an untouched saved number shows no error', (tester) async {

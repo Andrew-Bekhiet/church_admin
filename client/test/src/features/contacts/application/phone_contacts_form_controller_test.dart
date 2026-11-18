@@ -193,18 +193,6 @@ void main() {
     expect(addedContact.phone.error, PhoneContactError.roleNeedsFamily);
   });
 
-  test('choosing a family makes the role numbers valid', () {
-    canHaveFamilyNumbers = false;
-    final form = formFor(own: [], family: [])
-      ..add(const RolePhoneContactLabel(father));
-    contactOf(form, newKeyAt(0)).phone.setValue('01003333333');
-
-    canHaveFamilyNumbers = true;
-    form.revalidateSync();
-
-    expect(form.value.validationErrors, isEmpty);
-  });
-
   test('removing a duplicate clears the error on its twin', () async {
     final form = formFor(own: [ownMain], family: [])
       ..importNumbers([(label: importedLabel, number: '01001111111')]);

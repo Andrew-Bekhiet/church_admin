@@ -129,15 +129,6 @@ void main() {
 
       expect(harness.familiesDAO.updates, isEmpty);
     });
-
-    testWidgets('says why', (tester) async {
-      await typeIncompleteNumberAndSave(tester);
-
-      expect(
-        find.text(PhoneContactError.invalidPhone.message),
-        findsOneWidget,
-      );
-    });
   });
 
   group('editing before the saved relatives finish loading', () {

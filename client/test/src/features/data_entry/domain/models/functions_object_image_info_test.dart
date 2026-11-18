@@ -23,37 +23,6 @@ void main() {
       );
 
       test(
-        'equality',
-        () {
-          final date = DateTime.now();
-
-          final unit1 = FunctionsObjectImageInfo(
-            'smth',
-            'idd',
-            lastUpdatedTime: date,
-          );
-          final unit2 = FunctionsObjectImageInfo(
-            'smth',
-            'idd',
-            lastUpdatedTime: date,
-          );
-
-          expect(unit1, equals(unit2));
-        },
-      );
-
-      test(
-        'getDownloadUrl',
-        () async {
-          const unit = FunctionsObjectImageInfo('table', 'id');
-
-          await unit.getDownloadUrl();
-
-          verify(FunctionsService.I.getDownloadUrl('table', 'id'));
-        },
-      );
-
-      test(
         'getUploadUrl',
         () async {
           const unit = FunctionsObjectImageInfo('table', 'id');

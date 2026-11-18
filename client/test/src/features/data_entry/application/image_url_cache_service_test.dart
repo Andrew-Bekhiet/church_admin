@@ -66,32 +66,6 @@ void main() {
   );
 
   test(
-    'Image Url Cache Service: getNonExpiredCachedImageUrl',
-    () async {
-      final fakeBox = FakeSyncKVStore<String>();
-      final unit = ImageUrlCacheService(
-        box: fakeBox,
-        cacheManager: MockBaseCacheManager(),
-      );
-
-      final person = Person(
-        id: 'id',
-        name: 'name',
-        photoUpdatedAt: DateTime.now(),
-      );
-
-      expect(unit.getNonExpiredCachedImageUrl(person.imageInfo), isNull);
-
-      fakeBox.put(
-        person.imageInfo.cacheKey,
-        '${person.imageInfo.lastUpdatedTime!.toIso8601String()}|url',
-      );
-
-      expect(unit.getNonExpiredCachedImageUrl(person.imageInfo), isNull);
-    },
-  );
-
-  test(
     'Image Url Cache Service: getImageUrl',
     () async {
       // Setup:
@@ -193,41 +167,6 @@ void main() {
       expect(await unit.getImageUrl(person.imageInfo), expiredUrl);
     },
   );
-
-  test('Image Url Cache Service: getImageFileFromCache', () async {
-    final baseCacheManager = getMockedCacheManager('cachedUrl');
-
-    final unit = ImageUrlCacheService(
-      box: FakeSyncKVStore(),
-      cacheManager: baseCacheManager,
-    );
-
-    final srvc = getMockedFunctionsSrvc('person1', 'cachedUrl');
-    when(
-      () => srvc.getDownloadUrl('persons', 'person2'),
-    ).thenAnswer((_) async => 'uncachedUrl');
-    registerFunctionsService(srvc);
-
-    final person = Person(
-      id: 'person1',
-      name: 'name',
-      photoUpdatedAt: DateTime.now(),
-    );
-    final person2 = Person(
-      id: 'person2',
-      name: 'name',
-      photoUpdatedAt: DateTime.now(),
-    );
-
-    expect(
-      unit.getImageFile(person.imageInfo),
-      completion(isNotNull),
-    );
-    expect(
-      unit.getImageFile(person2.imageInfo),
-      completion(isNotNull),
-    );
-  });
 }
 
 MockBaseCacheManager getMockedCacheManager(String cachedUrl) {

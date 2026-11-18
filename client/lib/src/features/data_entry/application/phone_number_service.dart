@@ -17,15 +17,6 @@ class PhoneNumberService {
         : null,
   ).isValid();
 
-  String format(String phone) => PhoneNumber.parse(
-    phone,
-    callerCountry: IsoCode.EG,
-    destinationCountry:
-        PhoneNumber.findPotentialPhoneNumbers(phone).singleOrNull == null
-        ? IsoCode.EG
-        : null,
-  ).nsn;
-
   String formatInternational(String phone) => PhoneNumber.parse(
     phone,
     callerCountry: IsoCode.EG,

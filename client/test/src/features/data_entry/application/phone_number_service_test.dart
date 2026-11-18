@@ -24,19 +24,6 @@ void main() {
   );
 
   test(
-    'PhoneNumberService => format',
-    () {
-      const unit = PhoneNumberService();
-
-      expect(unit.format('0123456789'), '0123456789');
-      expect(unit.format('01234567890'), '1234567890');
-      expect(unit.format('012345678900'), '012345678900');
-
-      expect(unit.format('+201234567890'), '1234567890');
-    },
-  );
-
-  test(
     'PhoneNumberService => formatInternational',
     () {
       const unit = PhoneNumberService();

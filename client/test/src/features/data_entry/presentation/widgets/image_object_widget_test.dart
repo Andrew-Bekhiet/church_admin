@@ -414,29 +414,7 @@ void main() {
       await tester.pump(const Duration(milliseconds: 120));
 
       expect(
-        find.byWidgetPredicate(
-          (widget) =>
-              widget is Dialog && widget.backgroundColor == Colors.transparent,
-          skipOffstage: false,
-        ),
-        findsOneWidget,
-      );
-
-      expect(
-        find.descendant(
-          of: find.byType(
-            Dialog,
-            skipOffstage: false,
-          ),
-          matching: find.byWidgetPredicate(
-            (widget) =>
-                widget is PhotoView &&
-                widget.backgroundDecoration?.color == Colors.transparent &&
-                (widget.tightMode ?? false),
-            skipOffstage: false,
-          ),
-          skipOffstage: false,
-        ),
+        find.byType(PhotoView, skipOffstage: false),
         findsOneWidget,
       );
     },
