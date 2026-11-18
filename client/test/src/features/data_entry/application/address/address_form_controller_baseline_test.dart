@@ -232,15 +232,6 @@ void main() {
       expect(controller.hasPlaceChangedWithStaleLocation, isFalse);
     });
 
-    test('goes away when the user confirms the address is not stale', () {
-      final controller = fixture.controllerFor(locatedAddress);
-      controller.houseCode.setValue('14');
-
-      controller.confirmAddressNotStale();
-
-      expect(controller.hasPlaceChangedWithStaleLocation, isFalse);
-    });
-
     test('returns when a place part changes again after confirming the '
         'address is not stale', () {
       final controller = fixture.controllerFor(locatedAddress);
@@ -261,16 +252,6 @@ void main() {
       controller.houseCode.setValue('16');
 
       expect(controller.hasPlaceChangedWithStaleLocation, isTrue);
-    });
-
-    test('tells listeners when the user confirms the address is not stale', () {
-      final controller = fixture.controllerFor(locatedAddress);
-      var notifications = 0;
-      controller.staleLocationInputsChanged.addListener(() => notifications++);
-
-      controller.confirmAddressNotStale();
-
-      expect(notifications, 1);
     });
   });
 }

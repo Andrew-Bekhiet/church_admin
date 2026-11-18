@@ -51,7 +51,7 @@ void main() {
         'analysis:custom_range_pick',
         {
           'is_cancelled': false,
-          'range_days': week.inclusiveCalendarDays,
+          'range_days': 8,
         },
       ),
       (
@@ -146,7 +146,7 @@ void main() {
           'subject_type': 'class',
           'class_id': classGroup.id,
           'range_preset': 'custom',
-          'range_days': week.inclusiveCalendarDays,
+          'range_days': 8,
           'is_success': true,
         },
       ),

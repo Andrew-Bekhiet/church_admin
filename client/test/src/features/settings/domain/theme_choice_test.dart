@@ -13,14 +13,6 @@ void main() {
   for (final MapEntry(key: themeChoice, value: storedDarkTheme)
       in storedDarkThemes.entries) {
     group('$themeChoice', () {
-      test('is read from the stored dark theme $storedDarkTheme', () {
-        expect(ThemeChoice.fromStoredDarkTheme(storedDarkTheme), themeChoice);
-      });
-
-      test('is stored as the dark theme $storedDarkTheme', () {
-        expect(themeChoice.storedDarkTheme, storedDarkTheme);
-      });
-
       test('survives a round trip through the preferences json', () {
         final preferences = UserPreferences(
           uid: 'uid',

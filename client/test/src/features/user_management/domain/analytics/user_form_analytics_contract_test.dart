@@ -41,7 +41,7 @@ void main() {
       (
         InvitationExpiryChange(validFrom: validFrom, expiresAt: expiresAt),
         'user_management:invitation_expiry_change',
-        {'validity_days': validFrom.calendarDaysUntil(expiresAt)},
+        {'validity_days': 3},
       ),
       (
         const InvitationCodeShare(),

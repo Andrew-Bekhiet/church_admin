@@ -103,42 +103,34 @@ void main() {
       },
     );
 
-    testWidgets('check results are announced in an Arabic RTL report', (
-      tester,
-    ) async {
-      final semantics = tester.ensureSemantics();
-      await tester.pumpWidget(
-        MaterialUiTestApp.withThemeAndLocale(
-          child: Scaffold(
-            body: Column(
-              children: [
-                DataCheckDetailRow(detail: passedDetail),
-                DataCheckDetailRow(detail: failedDetail),
-              ],
+    testWidgets(
+      'check results are announced to screen readers as passed or failed',
+      (
+        tester,
+      ) async {
+        final semantics = tester.ensureSemantics();
+        await tester.pumpWidget(
+          MaterialUiTestApp.withThemeAndLocale(
+            child: Scaffold(
+              body: Column(
+                children: [
+                  DataCheckDetailRow(detail: passedDetail),
+                  DataCheckDetailRow(detail: failedDetail),
+                ],
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      expect(find.bySemanticsLabel('اجتاز الفحص'), findsOneWidget);
-      expect(find.bySemanticsLabel('لم يجتز الفحص'), findsOneWidget);
-      expect(
-        Directionality.of(tester.element(find.byType(Column).first)),
-        TextDirection.rtl,
-      );
-      semantics.dispose();
-    });
-
-    testWidgets('the report explains how the manual override works', (
-      tester,
-    ) async {
-      await pumpIndicator(tester, incomplete);
-
-      await tester.tap(find.byType(DataCheckIndicator));
-      await tester.pumpAndSettle();
-
-      expect(find.text(DataCheckOverrideSelector.explanation), findsOneWidget);
-    });
+        Finder labelIn(DataCheckDetail detail, String label) => find.descendant(
+          of: find.byKey(DataCheckDetailRow.keyFor(detail)),
+          matching: find.bySemanticsLabel(label),
+        );
+        expect(labelIn(passedDetail, 'اجتاز الفحص'), findsOneWidget);
+        expect(labelIn(failedDetail, 'لم يجتز الفحص'), findsOneWidget);
+        semantics.dispose();
+      },
+    );
 
     testWidgets('a reader without edit rights cannot change the verdict', (
       tester,

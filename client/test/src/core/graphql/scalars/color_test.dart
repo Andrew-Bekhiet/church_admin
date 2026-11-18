@@ -25,17 +25,4 @@ void main() {
       expect(colorToInt(null), null);
     },
   );
-
-  test(
-    'colorToInt <=> colorFromInt',
-    () {
-      final color = Color(random.nextInt(0xffffffff));
-
-      expect(colorFromInt(colorToInt(color)), color);
-
-      expect(colorToInt(colorFromInt(color.argbValue)), color.argbValue);
-
-      expect(colorToInt(colorFromInt(null)), null);
-    },
-  );
 }

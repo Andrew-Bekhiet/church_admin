@@ -5,6 +5,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../fakes/fake_box.dart';
 import '../../../utils.dart';
 import 'home_daily_data_repository_test.mocks.dart';
 
@@ -17,6 +18,8 @@ void main() {
 
   const testVersesData = ['verse 1', 'verse 2'];
   const testSayingData = ['saying 1', 'saying 2'];
+  final manyVerses = List.generate(1000, (index) => 'verse $index');
+  final manySayings = List.generate(1000, (index) => 'saying $index');
   final List<List<String>> testSneksarData = kRawSneksarData.fold(
     [[]],
     (acc, c) => [
@@ -58,31 +61,34 @@ void main() {
 
       expect(unit.getVerse(), testVersesData[0]);
       expect(unit.getSaying(), testSayingData[1]);
-
-      verify(mockBox.get(dateKey)).called(2);
     });
 
-    test('generates new verse when forced', () {
-      final mockBox = MockSyncKVStore();
-
-      when(mockBox.get(dateKey)).thenReturn({'verse': 0, 'saying': 1});
-      when(mockBox.put(any, any)).thenAnswer((_) async {
-        return;
-      });
+    test('a forced refresh is what the next plain read returns', () {
+      final store = FakeSyncKVStore<Map>()
+        ..put(dateKey, {'verse': 0, 'saying': 1});
 
       final unit = HomeDailyDataRepository(
         advancedQueryParser: mockAdvancedQueryParser,
-        currentIndexes: mockBox,
-        versesData: testVersesData,
-        sayingData: testSayingData,
+        currentIndexes: store,
+        versesData: manyVerses,
+        sayingData: manySayings,
         sneksarData: testSneksarData,
         clock: Clock.fixed(date),
       );
 
-      expect(testVersesData, contains(unit.getVerse(forceRefresh: true)));
-      expect(testSayingData, contains(unit.getSaying(forceRefresh: true)));
+      final refreshedVerses = List.generate(
+        5,
+        (_) => unit.getVerse(forceRefresh: true),
+      );
+      final refreshedSayings = List.generate(
+        5,
+        (_) => unit.getSaying(forceRefresh: true),
+      );
 
-      verify(mockBox.put(dateKey, any)).called(2);
+      expect(refreshedVerses, anyElement(isNot(manyVerses[0])));
+      expect(refreshedSayings, anyElement(isNot(manySayings[1])));
+      expect(unit.getVerse(), refreshedVerses.last);
+      expect(unit.getSaying(), refreshedSayings.last);
     });
   });
 
@@ -112,34 +118,27 @@ void main() {
     });
   });
 
-  group('_maybeGenerateIndexes', () {
-    test('generates new data when cache miss', () {
-      final mockBox = MockSyncKVStore();
+  group('picking for the day', () {
+    test(
+      'a pick made on a cache miss stays the same for the rest of the day',
+      () {
+        final unit = HomeDailyDataRepository(
+          advancedQueryParser: mockAdvancedQueryParser,
+          currentIndexes: FakeSyncKVStore<Map>(),
+          versesData: manyVerses,
+          sayingData: manySayings,
+          sneksarData: testSneksarData,
+          clock: Clock.fixed(date),
+        );
 
-      dynamic savedValue;
+        final verse = unit.getVerse();
+        final saying = unit.getSaying();
 
-      when(mockBox.get(any)).thenAnswer((_) => savedValue);
-      when(
-        mockBox.put(any, any),
-      ).thenAnswer((i) async => savedValue = i.positionalArguments[1]);
-
-      final unit = HomeDailyDataRepository(
-        advancedQueryParser: mockAdvancedQueryParser,
-        currentIndexes: mockBox,
-        versesData: testVersesData,
-        sayingData: testSayingData,
-        sneksarData: testSneksarData,
-      );
-
-      final verse = unit.getVerse();
-      final saying = unit.getSaying();
-
-      expect(testVersesData, contains(verse));
-      expect(testSayingData, contains(saying));
-
-      verify(
-        mockBox.put(DateTime.now().toIso8601String().split('T').first, any),
-      ).called(1);
-    });
+        expect(manyVerses, contains(verse));
+        expect(manySayings, contains(saying));
+        expect(unit.getVerse(), verse);
+        expect(unit.getSaying(), saying);
+      },
+    );
   });
 }

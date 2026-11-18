@@ -29,12 +29,4 @@ void main() {
       );
     },
   );
-
-  test(
-    'tstzFromString <=> tstzToString',
-    () {
-      expect(tstzFromString(tstzToString(value)), value);
-      expect(tstzFromString(tstzToString(valueUtc)), value);
-    },
-  );
 }

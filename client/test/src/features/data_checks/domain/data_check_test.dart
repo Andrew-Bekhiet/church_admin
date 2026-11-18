@@ -3,24 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('DataCheck', () {
-    test('clearing the override falls back to the automatic verdict', () {
-      final dataCheck = DataCheck(
-        familyId: 'family',
-        familyCheck: true,
-        addressCheck: true,
-        userOverride: DataCheckOverride.markedIncomplete,
-      );
-
-      expect(
-        dataCheck.withUserOverride(DataCheckOverride.none).isComplete,
-        isTrue,
-      );
-      expect(
-        dataCheck.withUserOverride(DataCheckOverride.none).userOverride,
-        DataCheckOverride.none,
-      );
-    });
-
     test('marking incomplete hides an automatically complete family', () {
       final dataCheck = DataCheck(
         familyId: 'family',

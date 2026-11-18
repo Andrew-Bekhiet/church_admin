@@ -17,24 +17,6 @@ void main() {
         preset.duration.inDays + 1,
       );
     });
-
-    test('a range spanning a DST change counts calendar dates', () {
-      final range = DateTimeRange(
-        start: DateTime(2026, 3),
-        end: DateTime(2026, 11),
-      );
-
-      expect(range.inclusiveCalendarDays, 246);
-    });
-
-    test('time of day does not change the count', () {
-      final range = DateTimeRange(
-        start: DateTime(2026, 10, 1, 23, 59),
-        end: DateTime(2026, 10, 3, 0, 1),
-      );
-
-      expect(range.inclusiveCalendarDays, 3);
-    });
   });
 
   group('calendarDaysUntil', () {

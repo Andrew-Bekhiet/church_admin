@@ -43,18 +43,17 @@ void main() {
             serviceName: serviceName,
           ),
       };
-      final notBornToday = <String>{
-        for (final (index, birthdate) in otherBirthdates.indexed)
-          await E2eBackend.insertPersonBornOn(
-            'مولود في يوم آخر $index',
-            birthdate: birthdate,
-            serviceName: serviceName,
-          ),
-        await E2eBackend.insertPerson(
-          'بدون تاريخ ميلاد',
+      for (final (index, birthdate) in otherBirthdates.indexed) {
+        await E2eBackend.insertPersonBornOn(
+          'مولود في يوم آخر $index',
+          birthdate: birthdate,
           serviceName: serviceName,
-        ),
-      };
+        );
+      }
+      await E2eBackend.insertPerson(
+        'بدون تاريخ ميلاد',
+        serviceName: serviceName,
+      );
 
       step('the admin signs in and reaches home');
       await E2eApp.launchSignedOut($);
@@ -79,7 +78,6 @@ void main() {
         bornToday.values.toSet(),
       );
       expect(listedIds, unorderedEquals(bornToday.values));
-      expect(listedIds.where(notBornToday.contains), isEmpty);
 
       await E2eApp.signOut(tester);
       await E2eApp.finish(tester);

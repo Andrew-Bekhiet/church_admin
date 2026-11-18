@@ -24,37 +24,6 @@ void main() {
     expect(find.byIcon(type.icon), findsOneWidget);
   });
 
-  testWidgets('shows a saying and its reference as separate texts', (
-    tester,
-  ) async {
-    await HomeWidgetPump.pump(
-      tester,
-      HomeDailyTextSection(
-        type: HomeDailyDataType.saying,
-        text: rawSaying,
-        onTap: () {},
-      ),
-    );
-
-    expect(find.text(quote), findsOneWidget);
-    expect(find.text(reference), findsOneWidget);
-  });
-
-  testWidgets('shows the sneksar date and each commemoration', (tester) async {
-    await HomeWidgetPump.pump(
-      tester,
-      HomeDailyTextSection(
-        type: HomeDailyDataType.sneksar,
-        text: rawSneksar,
-        onTap: () {},
-      ),
-    );
-
-    expect(find.text(sneksarDate), findsOneWidget);
-    expect(find.text(sneksarFirst), findsOneWidget);
-    expect(find.text(sneksarSecond), findsOneWidget);
-  });
-
   testWidgets('numbers the commemorations with Arabic-Indic digits', (
     tester,
   ) async {

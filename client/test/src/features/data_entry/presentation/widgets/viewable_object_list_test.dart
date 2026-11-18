@@ -248,22 +248,26 @@ void main() {
     'Viewable Object List => Auto Pagination',
     (tester) async {
       const limit = 8;
+      final firstPage = [
+        for (var i = 1; i <= limit; i++) Person(id: 'id$i', name: 'name$i'),
+      ];
+      final secondPage = [
+        ...firstPage,
+        for (var i = limit + 1; i <= limit * 2; i++)
+          Person(id: 'id$i', name: 'name$i'),
+      ];
+      final objectsStream = BehaviorSubject.seeded(firstPage);
+      addTearDown(objectsStream.close);
 
       final paginatableStream = _createMockPaginatableStream(
         BehaviorSubject.seeded(false),
-        BehaviorSubject.seeded([
-          Person(id: 'id1', name: 'name1'),
-          Person(id: 'id2', name: 'name2'),
-          Person(id: 'id3', name: 'name3'),
-          Person(id: 'id4', name: 'name4'),
-          Person(id: 'id5', name: 'name5'),
-          Person(id: 'id6', name: 'name6'),
-          Person(id: 'id7', name: 'name7'),
-          Person(id: 'id8', name: 'name8'),
-        ]),
+        objectsStream,
         limit: limit,
       );
       when(paginatableStream.hasMore).thenReturn(true);
+      when(
+        paginatableStream.listenToNextPage(),
+      ).thenAnswer((_) async => objectsStream.add(secondPage));
 
       final controller = ViewableObjectListController(
         objectsPaginatableStream: paginatableStream,
@@ -275,10 +279,9 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-
-      expect(
-        find.byType(ViewableObjectListItem<Person>, skipOffstage: false),
-        findsNWidgets(limit + 1),
+      final lastSecondPageItem = find.widgetWithText(
+        ViewableObjectListItem<Person>,
+        secondPage.last.name,
       );
 
       await tester.drag(
@@ -286,8 +289,9 @@ void main() {
         const Offset(0, -20000),
       );
       await tester.pumpAndSettle();
+      await tester.scrollUntilVisible(lastSecondPageItem, 500);
 
-      verify(paginatableStream.listenToNextPage()).called(1);
+      expect(lastSecondPageItem, findsOneWidget);
 
       unawaited(controller.dispose());
     },

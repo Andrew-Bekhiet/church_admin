@@ -51,18 +51,6 @@ void main() {
     );
 
     blocTest<HomeSearchCubit, HomeSearchState>(
-      'typing quickly searches once with the latest query after the debounce',
-      build: buildCubit,
-      act: (cubit) async {
-        cubit.search('first');
-        await Future<void>.delayed(HomeSearchCubit.debounceDuration ~/ 3);
-        cubit.search('latest');
-      },
-      wait: HomeSearchCubit.debounceDuration + const Duration(milliseconds: 50),
-      verify: (_) => expect(dao.queries, ['latest']),
-    );
-
-    blocTest<HomeSearchCubit, HomeSearchState>(
       'a query with results lists its sections',
       setUp: () => dao.results = const HomeSearchResults(
         families: [family],

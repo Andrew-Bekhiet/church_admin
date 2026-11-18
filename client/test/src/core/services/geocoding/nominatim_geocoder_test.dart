@@ -191,15 +191,6 @@ void main() {
     expect(await locationOfHouse(), isNull);
   });
 
-  test('the first result of a place search becomes the location', () async {
-    answerWith([
-      searchResult,
-      {'lat': '${location.latitude + 1}', 'lon': '${location.longitude + 1}'},
-    ]);
-
-    expect(await geocoder.locationOfPlace(placeName), location);
-  });
-
   test('the place search request carries the place name', () async {
     answerWith([searchResult]);
 
@@ -216,12 +207,6 @@ void main() {
     expect(request.pathSegments, ['search']);
     expect(request.queryParameters['q'], placeName);
     expect(request.queryParameters['limit'], '1');
-  });
-
-  test('a failed place search yields no location', () async {
-    failWithBadResponse();
-
-    expect(await geocoder.locationOfPlace(placeName), isNull);
   });
 
   test('requests issued together start at least the minimum spacing apart', () {

@@ -5,13 +5,12 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pub_semver/pub_semver.dart';
-import 'package:rxdart/rxdart.dart';
 
+import '../../fakes/in_memory_remote_config.dart';
 import 'feature_flags_repo_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<FirebaseRemoteConfig>(),
-  MockSpec<RemoteConfigUpdate>(),
   MockSpec<PackageInfo>(),
 ])
 void main() {
@@ -29,45 +28,28 @@ void main() {
       tearDown(resetMockitoState);
 
       test(
-        'Fetches feature flags at initialization',
+        'a config update makes the repo read the newly fetched values',
         () async {
+          final fetchedValues = <String, Object>{};
+          final remoteConfig = InMemoryRemoteConfig(
+            fetchedValues: fetchedValues,
+          );
+          addTearDown(remoteConfig.close);
           final repo = FeatureFlagsRepository(
-            remoteConfig: mockFirebaseRemoteConfig,
+            remoteConfig: remoteConfig,
             packageInfo: mockPackageInfo,
           );
 
           await repo.initialize();
 
-          verify(mockFirebaseRemoteConfig.fetchAndActivate()).called(1);
-        },
-      );
+          expect(repo.isUnderMaintenance, isFalse);
 
-      test(
-        'Fetches feature flags onConfigChanged',
-        () async {
-          final streamController = BehaviorSubject<void>();
+          fetchedValues[FeatureFlagsRepository.isUnderMaintenanceKey] = true;
+          final changed = repo.onConfigChanged.first;
+          remoteConfig.publishConfigUpdate();
+          await changed;
 
-          when(mockFirebaseRemoteConfig.onConfigUpdated).thenAnswer(
-            (_) => streamController.stream.mapTo(MockRemoteConfigUpdate()),
-          );
-
-          final repo = FeatureFlagsRepository(
-            remoteConfig: mockFirebaseRemoteConfig,
-            packageInfo: mockPackageInfo,
-          );
-
-          await repo.initialize();
-
-          streamController.add(null);
-          await repo.onConfigChanged.take(1).first;
-
-          verify(mockFirebaseRemoteConfig.fetchAndActivate()).called(2);
-
-          streamController.add(null);
-          await repo.onConfigChanged.take(1).first;
-          verify(mockFirebaseRemoteConfig.fetchAndActivate()).called(1);
-
-          await streamController.close();
+          expect(repo.isUnderMaintenance, isTrue);
         },
       );
 

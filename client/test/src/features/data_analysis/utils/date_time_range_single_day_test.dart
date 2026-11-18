@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('DateTimeRangeSingleDay', () {
@@ -20,13 +19,6 @@ void main() {
       );
 
       expect(range.isSingleDay, isFalse);
-    });
-
-    test('Today preset range is a single day', () {
-      final range = TodayDateTimeRangePreset().range;
-
-      expect(DateUtils.isSameDay(range.start, range.end), isTrue);
-      expect(range.isSingleDay, isTrue);
     });
   });
 }

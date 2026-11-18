@@ -88,7 +88,7 @@ void main() {
       act: (cubit) => cubit.save(),
       verify: (_) => expect(
         analytics.trackedEventsOf<UserCreate>().single.permissionCount,
-        draftPermissions.validated().length,
+        1,
       ),
     );
 

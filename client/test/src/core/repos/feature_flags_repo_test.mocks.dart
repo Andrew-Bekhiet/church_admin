@@ -220,19 +220,6 @@ class MockFirebaseRemoteConfig extends _i1.Mock
       ) as _i5.Future<void>);
 }
 
-/// A class which mocks [RemoteConfigUpdate].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockRemoteConfigUpdate extends _i1.Mock
-    implements _i3.RemoteConfigUpdate {
-  @override
-  Set<String> get updatedKeys => (super.noSuchMethod(
-    Invocation.getter(#updatedKeys),
-    returnValue: <String>{},
-    returnValueForMissingStub: <String>{},
-  ) as Set<String>);
-}
-
 /// A class which mocks [PackageInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.

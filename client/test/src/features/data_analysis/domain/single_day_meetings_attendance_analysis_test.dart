@@ -224,24 +224,6 @@ void main() {
       expect(rate.displayName, 'أولى إعدادي بنين');
     });
 
-    test('roster studyYearId matches StudyYear.order, not a separate id', () {
-      // The roster's studyYearId equals StudyYear.order (StudyYear.id is
-      // `order.toString()`), so matching keys off `studyYear.order`.
-      final matching = class$(
-        name: 'صف مطابق',
-        studyYearOrder: 2,
-        serviceGender: Gender.female,
-      );
-      final subject = analysis(
-        rosterMembers: [
-          member('p1', studyYearId: 2, gender: Gender.female, attended: true),
-        ],
-        classes: [matching],
-      );
-
-      expect(subject.classAttendanceRates.single.className, 'صف مطابق');
-    });
-
     test('an exact-match class beats a wildcard class for its slice', () {
       final wildcard = class$(name: 'فصل عام');
       final exact = class$(

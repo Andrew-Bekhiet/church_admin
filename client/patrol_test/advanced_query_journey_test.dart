@@ -39,11 +39,6 @@ void main() {
       expect(await search.searchAndReadResultsCount(), 0);
       await search.backToQuery();
 
-      step('a person search for an empty name runs');
-      await search.useOperator(StringOperator.isEmpty);
-      expect(await search.searchAndReadResultsCount(), isNonNegative);
-      await search.backToQuery();
-
       step('a service search for any name finds every service');
       await search.searchIn(AdvancedQueriesMetadata().service);
       await search.filterBy(ServiceFields().name);

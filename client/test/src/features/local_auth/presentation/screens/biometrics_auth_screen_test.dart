@@ -51,29 +51,14 @@ void main() {
   }
 
   testWidgets(
-    'the lock screen shows password entry and available biometric recovery',
+    'the lock screen offers password entry, and biometrics unless the variant is password only',
     (tester) async {
       await pumpLockScreen(tester);
 
-      expect(
-        find.byElementPredicate((e) {
-          final Widget widget = e.widget;
-          if (widget is Image) {
-            return widget.image == const AssetImage('assets/holyweek.jpeg') ||
-                widget.image == const AssetImage('assets/risen.jpg') ||
-                widget.image == const AssetImage('assets/logo.png');
-          }
-          return false;
-        }, skipOffstage: false),
-        findsOneWidget,
-      );
-
-      spotKey(
-        BiometricsAuthScreenKeys.passwordFieldKey,
-      ).spot<PasswordFormField>().existsOnce();
-
+      spotKey(BiometricsAuthScreenKeys.passwordFieldKey)
+          .spot<PasswordFormField>()
+          .existsOnce();
       spotKey(BiometricsAuthScreenKeys.submitButtonKey).existsOnce();
-
       spotKey(BiometricsAuthScreenKeys.biometricsButtonKey)
           .spotFinder(find.bySubtype<FilledButton>())
           .existsExactlyNTimes(

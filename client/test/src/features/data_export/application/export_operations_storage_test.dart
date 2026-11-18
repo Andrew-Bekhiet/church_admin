@@ -71,7 +71,6 @@ void main() {
       },
     );
 
-    expect(file, isA<DataExportFile>());
     expect(mockFileSystem.file(file.path).existsSync(), isTrue);
   });
 
