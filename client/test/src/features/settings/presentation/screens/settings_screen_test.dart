@@ -96,6 +96,31 @@ void main() {
         expect(find.byType(SettingsScreen), findsNothing);
         expect(find.text('تم حفظ التغييرات'), findsNothing);
       });
+
+      testWidgets('Changing theme', (tester) async {
+        await tester.pumpWidget(
+          MaterialUiTestApp.withThemeAndLocale(child: const SizedBox()),
+        );
+        tester
+            .firstState<NavigatorState>(find.byType(Navigator))
+            .push(MaterialPageRoute(builder: (_) => const SettingsScreen()));
+
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.widgetWithText(ExpansionTile, 'المظهر'));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.byType(SwitchListTile).first);
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.byType(BackButton));
+
+        await tester.pumpAndSettle();
+
+        expect(find.byType(AlertDialog), findsNothing);
+        expect(find.byType(SettingsScreen), findsNothing);
+        expect(find.text('تم حفظ التغييرات'), findsNothing);
+      });
     });
 
     testWidgets('Saving changes', (tester) async {

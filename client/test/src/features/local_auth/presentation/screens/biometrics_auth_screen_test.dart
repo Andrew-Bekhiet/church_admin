@@ -51,10 +51,14 @@ void main() {
   }
 
   testWidgets(
-    'the lock screen offers biometrics unless the variant is password only',
+    'the lock screen offers password entry, and biometrics unless the variant is password only',
     (tester) async {
       await pumpLockScreen(tester);
 
+      spotKey(BiometricsAuthScreenKeys.passwordFieldKey)
+          .spot<PasswordFormField>()
+          .existsOnce();
+      spotKey(BiometricsAuthScreenKeys.submitButtonKey).existsOnce();
       spotKey(BiometricsAuthScreenKeys.biometricsButtonKey)
           .spotFinder(find.bySubtype<FilledButton>())
           .existsExactlyNTimes(
