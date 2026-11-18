@@ -30,7 +30,7 @@ class ExportedWorkbook {
       queryParameters: {'alt': 'media'},
     );
     final xmlText = ZipDecoder()
-        .decodeBytes(workbook.bodyBytes)
+        .decodeBytes(workbook.bodyBytes, verify: true)
         .files
         .where((file) => file.isFile && file.name.endsWith('.xml'))
         .map((file) => utf8.decode(file.content))

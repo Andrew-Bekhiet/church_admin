@@ -11,22 +11,28 @@ environment:
 dependency_overrides:
   # flutter_test pins test_api 0.7.12, whose only test release (1.31.1) caps analyzer below 14
   analyzer: ^14.5.0
-  # Until [gql-dart/gql#524](https://github.com/gql-dart/gql/pull/524) is released: 0.15.2 caps analyzer below 14
-  gql_code_builder:
+  # Until [heftapp/graphql_codegen#419](https://github.com/heftapp/graphql_codegen/pull/419) is released: 3.0.2 caps build below 5
+  graphql_codegen:
     git:
-      url: https://github.com/TheoGermain/gql.git
-      ref: 40e925caed5a5036d1c59a96e7c3f05de6057e6d
-      path: codegen/gql_code_builder
-  # Until https://github.com/dart-lang/native/issues/3281 and https://github.com/flutter/flutter/issues/186794 are fixed
+      url: https://github.com/heftapp/graphql_codegen.git
+      ref: cbd701824ea6e58813eae826c99123f0c06dc862
+      path: packages/graphql_codegen
+  # Until mockito 5.8.2 with [dart-lang/build#5224](https://github.com/dart-lang/build/pull/5224) is released: 5.8.1 caps build below 5
+  mockito:
+    git:
+      url: https://github.com/dart-lang/build.git
+      ref: 3088ac884999c97f9ac6d2155e90e81af553b93c
+      path: builder_pkgs/mockito
+  # Until [dart-lang/native#3281](https://github.com/dart-lang/native/issues/3281) is fixed
   objective_c: 9.3.0
 
 dependencies:
-  advanced_forms: ^0.2.3
+  advanced_forms: ^0.3.0
   align_positioned: ^5.0.1
   android_alarm_manager_plus: ^5.0.0
   async: ^2.9.0
   auto_size_text: ^3.0.0
-  cached_network_image: ^4.0.4
+  cached_network_image: ^4.0.7
   calendar_date_picker2: ^4.0.0
   church_admin_annotations:
     path: ../packages/church_admin_annotations
@@ -49,7 +55,7 @@ dependencies:
   firebase_database: ^13.0.0
   firebase_messaging: ^17.0.0
   firebase_remote_config: ^7.0.0
-  fl_chart: ^1.0.0
+  fl_chart: ^1.3.1
   flex_color_picker: ^4.0.0
   flex_color_scheme: ^9.0.0
   flutter:
@@ -58,18 +64,18 @@ dependencies:
   flutter_blurhash: ^0.9.1
   flutter_cache_manager: ^3.3.0
   flutter_contacts: ^2.0.0
-  flutter_local_notifications: ^22.0.1
+  flutter_local_notifications: ^23.0.3
   flutter_map: ^8.1.1
   flutter_map_dragmarker: ^8.0.3
   flutter_map_location_marker: ^10.1.0
   flutter_map_marker_cluster: ^8.2.2
   flutter_native_splash: ^2.4.4
-  flutter_riverpod: ^3.0.3
+  flutter_riverpod: ^3.5.0
   flutter_secure_storage: ^11.2.0
   flutter_web_plugins:
     sdk: flutter
   freezed_annotation: ^3.0.0
-  geolocator: ^14.1.1
+  geolocator: ^14.1.2
   gql: ^1.0.1-alpha+1709845491443
   graphql: ^5.2.0
   graphql_cache_inspector: ^0.0.2+1
@@ -78,7 +84,7 @@ dependencies:
   image_picker: ^1.0.1
   intl: ^0.20.2
   json_annotation: ^4.9.0
-  kaisel: ^1.1.0
+  kaisel: ^1.3.1
   latlong2: ^0.9.0
   local_auth: ^3.0.0
   map_launcher: ^7.0.0
@@ -94,7 +100,7 @@ dependencies:
   percent_indicator: ^4.2.2
   permission_handler: ^13.0.2
   phone_form_field: ^12.0.1
-  phone_numbers_parser: ^9.0.0
+  phone_numbers_parser: ^9.0.29
   photo_view: ^0.15.0
   pointycastle: ^4.0.0
   # 5.58.1 masks every Android replay frame while FLAG_SECURE is set, and
@@ -103,16 +109,16 @@ dependencies:
   pub_semver: ^2.2.0
   riverpod: ^3.0.3
   rxdart: ^0.28.0
-  sembast: ^3.8.5
+  sembast: ^3.10.1
   sembast_sqflite: ^2.2.1
-  sembast_web: ^2.4.1
+  sembast_web: ^2.4.7
   sentry_flutter: ^10.1.0
   share_plus: ^13.2.0
   shared_preferences: ^2.5.5
   shorebird_code_push: ^2.0.4
   sliver_tools: ^0.2.12
   snapping_sheet_2: ^3.1.5
-  sqflite: ^2.4.2
+  sqflite: ^2.4.6
   table_calendar: ^3.0.7
   timeago: ^3.3.0
   tinycolor2: ^3.0.1
@@ -123,7 +129,7 @@ dependencies:
   uuid: ^4.3.3
 
 dev_dependencies:
-  archive: ^4.0.0
+  archive: ^4.7.1
   bloc_test: ^10.0.0
   build_runner: ^2.5.3
   church_admin_generator:
@@ -138,21 +144,21 @@ dev_dependencies:
   flutter_launcher_icons: ^0.14.3
   flutter_test:
     sdk: flutter
-  freezed: ^4.0.2
+  freezed: ^4.0.3
   graphql_codegen: ^3.0.0
   http: ^1.0.0
   image_cropper_platform_interface: ^9.0.0
   image_picker_platform_interface: ^2.8.0
-  json_serializable: ^6.6.0
+  json_serializable: ^6.15.2
   local_auth_platform_interface: ^1.0.5
   mock_data: ^2.0.0
   mockito: ^5.4.4
   mocktail: ^1.0.5
   path_provider_platform_interface: ^2.1.0
-  patrol: ^4.10.0
+  patrol: ^4.11.0
   permission_handler_platform_interface: ^4.0.2
   plugin_platform_interface: ^2.1.3
-  rxdart_ext: ^0.3.0
+  rxdart_ext: ^0.4.0
   solid_lints: ^2.0.0
   spot: ^0.22.0
   url_launcher_platform_interface: ^2.1.2
