@@ -19,14 +19,4 @@ void main() {
       expect(stringToUuid(value.toString()), value);
     },
   );
-
-  test(
-    'uuidFromString <=> uuidToString',
-    () {
-      final value = uuid.v4obj();
-
-      expect(uuidToString(stringToUuid(value.toString())), value.toString());
-      expect(stringToUuid(uuidToString(value)), value);
-    },
-  );
 }

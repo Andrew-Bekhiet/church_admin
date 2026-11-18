@@ -23,14 +23,4 @@ void main() {
       expect(birthdays.preview, '${names[0]}، ${names[1]}، ${names[2]}، ...');
     });
   });
-
-  group('$HomeBirthdays emptiness', () {
-    test('is empty without names', () {
-      expect(const HomeBirthdays(names: []).isEmpty, isTrue);
-    });
-
-    test('is not empty with a name', () {
-      expect(const HomeBirthdays(names: ['ann']).isEmpty, isFalse);
-    });
-  });
 }

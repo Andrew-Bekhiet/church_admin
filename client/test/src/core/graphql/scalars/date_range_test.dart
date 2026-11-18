@@ -8,67 +8,37 @@ void main() {
   final thirdDay = DateUtils.addDaysToDate(firstDay, 2);
 
   test('Date Range => toString', () {
-    final dateTimeRange = DateTimeRange(start: firstDay, end: thirdDay);
     expect(
-      dateRangeToString(dateTimeRange),
-      '[${dateToString(dateTimeRange.start)},${dateToString(dateTimeRange.end)}]',
+      dateRangeToString(DateTimeRange(start: firstDay, end: thirdDay)),
+      '[2026-03-10,2026-03-12]',
     );
   });
 
   test('Date Range => fromString => [date, date]', () {
-    final expectedDateTimeRange = DateTimeRange(start: firstDay, end: thirdDay);
-
     expect(
-      dateRangeFromString(dateRangeToString(expectedDateTimeRange)),
-      expectedDateTimeRange,
+      dateRangeFromString('[2026-03-10,2026-03-12]'),
+      DateTimeRange(start: firstDay, end: thirdDay),
     );
   });
 
   test('Date Range => fromString => [date, date)', () {
-    final expectedDateTimeRange = DateTimeRange(
-      start: firstDay,
-      end: secondDay,
-    );
-
-    final dateTimeRange = DateTimeRange(start: firstDay, end: thirdDay);
-
     expect(
-      dateRangeFromString(
-        dateRangeToString(dateTimeRange)?.replaceAll(']', ')'),
-      ),
-      expectedDateTimeRange,
+      dateRangeFromString('[2026-03-10,2026-03-12)'),
+      DateTimeRange(start: firstDay, end: secondDay),
     );
   });
+
   test('Date Range => fromString => (date, date]', () {
-    final expectedDateTimeRange = DateTimeRange(
-      start: secondDay,
-      end: thirdDay,
-    );
-
-    final dateTimeRange = DateTimeRange(start: firstDay, end: thirdDay);
-
     expect(
-      dateRangeFromString(
-        dateRangeToString(dateTimeRange)?.replaceAll('[', '('),
-      ),
-      expectedDateTimeRange,
+      dateRangeFromString('(2026-03-10,2026-03-12]'),
+      DateTimeRange(start: secondDay, end: thirdDay),
     );
   });
+
   test('Date Range => fromString => (date, date)', () {
-    final expectedDateTimeRange = DateTimeRange(
-      start: secondDay,
-      end: secondDay,
-    );
-
-    final dateTimeRange = DateTimeRange(start: firstDay, end: thirdDay);
-
     expect(
-      dateRangeFromString(
-        dateRangeToString(dateTimeRange)
-            ?.replaceAll(']', ')')
-            .replaceAll('[', '('),
-      ),
-      expectedDateTimeRange,
+      dateRangeFromString('(2026-03-10,2026-03-12)'),
+      DateTimeRange(start: secondDay, end: secondDay),
     );
   });
 

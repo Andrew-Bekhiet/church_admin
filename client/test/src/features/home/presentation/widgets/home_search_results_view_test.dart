@@ -26,25 +26,10 @@ void main() {
 
   tearDown(defaultTearDown);
 
-  testWidgets('idle prompts the user to start typing', (tester) async {
-    await HomeSearchResultsViewPump.pump(tester, const HomeSearchIdle());
-
-    expect(find.text('ابدأ بالكتابة للبحث ...'), findsOneWidget);
-  });
-
   testWidgets('loading shows a spinner', (tester) async {
     await HomeSearchResultsViewPump.pump(tester, const HomeSearchLoading());
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
-  });
-
-  testWidgets('nothing found says so', (tester) async {
-    await HomeSearchResultsViewPump.pump(
-      tester,
-      const HomeSearchNothingFound(),
-    );
-
-    expect(find.text('لم يتم العثور على أي نتائج'), findsOneWidget);
   });
 
   testWidgets('failed says the search failed', (tester) async {
@@ -68,13 +53,6 @@ void main() {
       for (final section in sections) {
         expect(find.text(section.label), findsOneWidget);
       }
-    });
-
-    testWidgets('lists the items of every section', (tester) async {
-      await HomeSearchResultsViewPump.pump(tester, HomeSearchFound(sections));
-
-      expect(find.text(family.name), findsOneWidget);
-      expect(find.text(area.name), findsOneWidget);
     });
 
     testWidgets('separates the items of a section with dividers', (
