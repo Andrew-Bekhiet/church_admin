@@ -9,7 +9,7 @@ environment:
 dependencies:
   analyzer: ^14.5.0
   # The client's freezed caps build below 5
-  build: ^4.0.7
+  build: ^5.0.0
   church_admin_annotations:
     path: ../church_admin_annotations
   code_builder: ^4.12.0
@@ -17,7 +17,7 @@ dependencies:
   source_gen: ^4.2.4
 
 dev_dependencies:
-  build_test: ^3.5.0
+  build_test: ^3.5.23
   dart_style: ^3.1.7
   solid_lints: ^2.0.0
   test: ^1.26.0
