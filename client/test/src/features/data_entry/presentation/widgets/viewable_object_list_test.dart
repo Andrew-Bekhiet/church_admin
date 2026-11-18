@@ -279,19 +279,19 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      final items = find.byType(
+      final lastSecondPageItem = find.widgetWithText(
         ViewableObjectListItem<Person>,
-        skipOffstage: false,
+        secondPage.last.name,
       );
-      final firstPageItemCount = items.evaluate().length;
 
       await tester.drag(
         find.byType(ViewableObjectList<Person>),
         const Offset(0, -20000),
       );
       await tester.pumpAndSettle();
+      await tester.scrollUntilVisible(lastSecondPageItem, 500);
 
-      expect(items.evaluate().length, greaterThan(firstPageItemCount));
+      expect(lastSecondPageItem, findsOneWidget);
 
       unawaited(controller.dispose());
     },

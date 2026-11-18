@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:clock/clock.dart';
@@ -139,20 +141,37 @@ void main() {
 
     group('selectDate', () {
       final pickedDay = DateTime(2026, 7, 3);
+      late StreamController<List<AttendanceRecord>> pickedDayRecords;
 
       blocTest<RecordAttendanceCubit, RecordAttendanceState>(
         'picking another day keeps the roster ready and shows the attendance '
         'recorded on that day',
         setUp: () {
           f.rosterPersons = [RecordAttendanceFixture.rosterPerson('p1')];
+          pickedDayRecords =
+              StreamController<List<AttendanceRecord>>.broadcast();
+          addTearDown(pickedDayRecords.close);
+          when(
+            () => f.dao.streamAttendanceHistory(
+              meetingId: any(named: 'meetingId'),
+              fromDate: pickedDay,
+              toDate: DateTime(2026, 7, 4),
+            ),
+          ).thenAnswer((_) => pickedDayRecords.stream);
         },
         build: () => f.createCubit(),
         act: (cubit) async {
           await RecordAttendanceFixture.readyRoster(cubit);
 
           cubit.selectDate(pickedDay);
-          f.attendanceController.add([
-            RecordAttendanceFixture.makeRecord('p1'),
+          pickedDayRecords.add([
+            AttendanceRecord(
+              id: 'att-picked-day',
+              meetingId: RecordAttendanceFixture.meetingId,
+              personId: 'p1',
+              datetime: pickedDay.add(const Duration(hours: 10)),
+              asServant: false,
+            ),
           ]);
           await pumpEventQueue();
         },
@@ -238,6 +257,13 @@ void main() {
           await RecordAttendanceFixture.readyRoster(cubit);
           cubit.toggleAudience();
         },
+        expect: () => everyElement(
+          isA<RecordAttendanceLoaded>().having(
+            (s) => s.rosterStatus,
+            'rosterStatus',
+            RosterStatus.ready,
+          ),
+        ),
         verify: (cubit) {
           final state = cubit.state as RecordAttendanceLoaded;
           expect(state.audienceView, AttendanceRosterAudienceView.servants);
@@ -262,12 +288,10 @@ void main() {
         heldDays: [DateTime(2026, 6, 4), DateTime(2026, 6, 25)],
         attendedDays: {DateTime(2026, 6, 25)},
       );
-      late PersonMeetingAttendanceAnalysis currentTrackRecord;
 
       blocTest<RecordAttendanceCubit, RecordAttendanceState>(
         'a wider streak window refreshes the track record of each person',
         setUp: () {
-          currentTrackRecord = narrowTrackRecord;
           f.rosterPersons = [RecordAttendanceFixture.rosterPerson('p1')];
           when(
             () => f.dao.getAttendanceAnalyses(
@@ -275,7 +299,17 @@ void main() {
               range: any(named: 'range'),
               asServant: any(named: 'asServant'),
             ),
-          ).thenAnswer((_) async => [currentTrackRecord]);
+          ).thenAnswer((_) async => [narrowTrackRecord]);
+          when(
+            () => f.dao.getAttendanceAnalyses(
+              meeting: any(named: 'meeting'),
+              range: DateTimeRange(
+                start: DateTime(2026, 6, 2),
+                end: DateTime(2026, 7),
+              ),
+              asServant: any(named: 'asServant'),
+            ),
+          ).thenAnswer((_) async => [widerTrackRecord]);
         },
         build: () => f.createCubit(),
         act: (cubit) async {
@@ -283,7 +317,6 @@ void main() {
             (s) => s.entries.firstOrNull?.personAttendanceAnalysis != null,
           );
 
-          currentTrackRecord = widerTrackRecord;
           cubit.changeStreakWindow(30);
           await pumpEventQueue();
         },

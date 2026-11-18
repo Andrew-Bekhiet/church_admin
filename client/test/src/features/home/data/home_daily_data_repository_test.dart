@@ -76,11 +76,19 @@ void main() {
         clock: Clock.fixed(date),
       );
 
-      final refreshedVerse = unit.getVerse(forceRefresh: true);
-      final refreshedSaying = unit.getSaying(forceRefresh: true);
+      final refreshedVerses = List.generate(
+        5,
+        (_) => unit.getVerse(forceRefresh: true),
+      );
+      final refreshedSayings = List.generate(
+        5,
+        (_) => unit.getSaying(forceRefresh: true),
+      );
 
-      expect(unit.getVerse(), refreshedVerse);
-      expect(unit.getSaying(), refreshedSaying);
+      expect(refreshedVerses, anyElement(isNot(manyVerses[0])));
+      expect(refreshedSayings, anyElement(isNot(manySayings[1])));
+      expect(unit.getVerse(), refreshedVerses.last);
+      expect(unit.getSaying(), refreshedSayings.last);
     });
   });
 

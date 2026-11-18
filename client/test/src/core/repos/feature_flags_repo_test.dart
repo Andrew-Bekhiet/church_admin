@@ -11,7 +11,6 @@ import 'feature_flags_repo_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<FirebaseRemoteConfig>(),
-  MockSpec<RemoteConfigUpdate>(),
   MockSpec<PackageInfo>(),
 ])
 void main() {
@@ -35,6 +34,7 @@ void main() {
           final remoteConfig = InMemoryRemoteConfig(
             fetchedValues: fetchedValues,
           );
+          addTearDown(remoteConfig.close);
           final repo = FeatureFlagsRepository(
             remoteConfig: remoteConfig,
             packageInfo: mockPackageInfo,

@@ -64,6 +64,7 @@ void main() {
           );
           await tester.pumpAndSettle();
 
+          expect(find.byIcon(Symbols.camera), findsOneWidget);
           expect(
             find.descendant(
               of: find.byType(IconButton),

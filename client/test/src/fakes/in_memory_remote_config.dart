@@ -20,6 +20,8 @@ class InMemoryRemoteConfig extends Fake implements FirebaseRemoteConfig {
 
   void publishConfigUpdate() => _configUpdates.add(RemoteConfigUpdate({}));
 
+  Future<void> close() => _configUpdates.close();
+
   @override
   Future<void> setDefaults(Map<String, dynamic> defaultParameters) async {
     _defaults.addAll(defaultParameters.cast<String, Object>());

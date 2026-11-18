@@ -9,6 +9,8 @@ import 'package:rxdart/rxdart.dart';
 
 import 'connectivity_service_test.mocks.dart';
 
+const _hasuraServer = 'https://hasura.server.mock.com';
+
 @GenerateNiceMocks([
   MockSpec<Connectivity>(),
   MockSpec<Dio>(),
@@ -38,13 +40,7 @@ void main() {
         (globalProviderContainer.read(dioProvider) as MockDio).get(captureAny),
       ).captured;
 
-      expect(
-        captured,
-        allOf(
-          isNotEmpty,
-          everyElement('https://hasura.server.mock.com/healthz'),
-        ),
-      );
+      expect(captured, everyElement('$_hasuraServer/healthz'));
     },
   );
 
@@ -144,7 +140,7 @@ Override _setUpMockConnectivity() {
 
 Override _setUpMockSecretsRepo() {
   final mockSecrets = MockSecretsService();
-  when(mockSecrets.hasuraServer).thenReturn('https://hasura.server.mock.com/');
+  when(mockSecrets.hasuraServer).thenReturn(_hasuraServer);
 
   return secretsServiceProvider.overrideWithValue(mockSecrets);
 }

@@ -261,7 +261,10 @@ Future<void> _testNotificationMethod({
   for (final notification in [written, notified[0] as Notification]) {
     expect(notification.title, title);
     expect(notification.body, 'name، name2');
-    expect(notification.senderUID, 'LOCAL_NOTIFICATION_SENDER_UID');
+    expect(
+      notification.senderUID,
+      NotificationsService.localNotificationSenderUID,
+    );
     expect(notification.type, NotificationType.local);
   }
 
