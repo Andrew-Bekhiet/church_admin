@@ -122,8 +122,12 @@ void main() {
           ),
         );
 
-        expect(find.bySemanticsLabel('اجتاز الفحص'), findsOneWidget);
-        expect(find.bySemanticsLabel('لم يجتز الفحص'), findsOneWidget);
+        Finder labelIn(DataCheckDetail detail, String label) => find.descendant(
+          of: find.byKey(DataCheckDetailRow.keyFor(detail)),
+          matching: find.bySemanticsLabel(label),
+        );
+        expect(labelIn(passedDetail, 'اجتاز الفحص'), findsOneWidget);
+        expect(labelIn(failedDetail, 'لم يجتز الفحص'), findsOneWidget);
         semantics.dispose();
       },
     );
