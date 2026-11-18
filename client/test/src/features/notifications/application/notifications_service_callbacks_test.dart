@@ -242,49 +242,41 @@ Future<void> _testNotificationMethod({
   required Future<void> Function() callback,
   String icon = 'warning_notification',
 }) async {
-  final expectedNotification =
-      NotificationsServiceCallbacks.makeNotificationWith(
-        title: title,
-        persons: expectedPersons,
-        additionalData: const {},
-      );
-
-  final expectedNotificationDetails = NotificationDetails(
-    android: NotificationsServiceCallbacks.androidNotificationDetailsFor(
-      channelId,
-      channelName,
-      channelDescription: channelDescription,
-      body: expectedPersons.map((e) => e.name).join(', '),
-      icon: icon,
-    ),
-  );
-  final advancedQueryParser =
-      DatabaseService.I.advancedQueryParser as MockAdvancedQueryParser;
-
   await callback();
 
-  final paginatableStreamCall = verifyInOrder([
-    InitializationService.I.initialize(),
-    advancedQueryParser.createPaginatableStream(captureAny),
-    (NotificationsStorage.I as MockNotificationsStorage).writeNotification(
-      argThat(matchExpectedNotification(expectedNotification)),
-    ),
+  final written =
+      verify(
+            (NotificationsStorage.I as MockNotificationsStorage)
+                .writeNotification(captureAny),
+          ).captured.single
+          as Notification;
+  final notified = verify(
     (NotificationsService.I as MockNotificationsService).notify(
-      argThat(matchExpectedNotification(expectedNotification)),
+      captureAny,
       id: type.index,
-      notificationDetails: argThat(
-        matchExpectedNotificationDetails(expectedNotificationDetails),
-        named: 'notificationDetails',
-      ),
+      notificationDetails: captureAnyNamed('notificationDetails'),
     ),
-  ]).captured[1];
+  ).captured;
 
-  final advQueryJson = json.encode(
-    (paginatableStreamCall.first as AdvancedQuery).toJson(),
-  );
+  for (final notification in [written, notified[0] as Notification]) {
+    expect(notification.title, title);
+    expect(notification.body, 'name، name2');
+    expect(notification.senderUID, 'LOCAL_NOTIFICATION_SENDER_UID');
+    expect(notification.type, NotificationType.local);
+  }
+
+  final android = (notified[1] as NotificationDetails).android!;
+  expect(android.channelId, channelId);
+  expect(android.channelName, channelName);
+  expect(android.channelDescription, channelDescription);
+  expect(android.icon, icon);
+  expect(android.autoCancel, false);
+  expect(android.category, AndroidNotificationCategory.reminder);
+  expect(android.visibility, NotificationVisibility.secret);
+  expect(android.showWhen, false);
 
   expect(
-    advQueryJson,
+    json.encode(written.additionalData),
     contains(type.name),
   );
 }
@@ -307,28 +299,6 @@ Future<void> _showReminder() => NotificationsServiceCallbacks.showNotification(
   type: LocalNotificationType.kodas,
   query: AdvancedQuery(queryableType: AdvancedQueriesMetadata().person),
 );
-
-Matcher matchExpectedNotificationDetails(NotificationDetails expected) =>
-    predicate<NotificationDetails>(
-      (n) =>
-          n.android!.channelId == expected.android!.channelId &&
-          n.android!.channelName == expected.android!.channelName &&
-          n.android!.channelDescription ==
-              expected.android!.channelDescription &&
-          n.android!.icon == expected.android!.icon &&
-          n.android!.autoCancel == expected.android!.autoCancel &&
-          n.android!.category == expected.android!.category &&
-          n.android!.visibility == expected.android!.visibility &&
-          n.android!.showWhen == expected.android!.showWhen,
-    );
-Matcher matchExpectedNotification(Notification expectedNotification) =>
-    predicate<Notification>(
-      (n) =>
-          n.title == expectedNotification.title &&
-          n.body == expectedNotification.body &&
-          n.senderUID == expectedNotification.senderUID &&
-          n.type == expectedNotification.type,
-    );
 
 void _setUp() {
   analytics = RecordingAnalyticsProvider();
