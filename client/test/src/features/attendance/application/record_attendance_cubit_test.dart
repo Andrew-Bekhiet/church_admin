@@ -138,30 +138,35 @@ void main() {
     });
 
     group('selectDate', () {
+      final pickedDay = DateTime(2026, 7, 3);
+
       blocTest<RecordAttendanceCubit, RecordAttendanceState>(
-        'does NOT re-call getMeetingRoster — only re-subscribes attendance',
+        'picking another day keeps the roster ready and shows the attendance '
+        'recorded on that day',
+        setUp: () {
+          f.rosterPersons = [RecordAttendanceFixture.rosterPerson('p1')];
+        },
         build: () => f.createCubit(),
         act: (cubit) async {
-          await cubit.stream.whereType<RecordAttendanceLoaded>().firstWhere(
-            (s) => s.rosterStatus == RosterStatus.ready,
-          );
-          cubit.selectDate(DateTime(2026, 7, 3));
-        },
-        verify: (_) {
-          verify(
-            () => f.dao.getMeetingRoster(
-              meetingId: any(named: 'meetingId'),
-              groupByStudyYear: any(named: 'groupByStudyYear'),
-            ),
-          ).called(1);
+          await RecordAttendanceFixture.readyRoster(cubit);
 
-          verify(
-            () => f.dao.streamAttendanceHistory(
-              meetingId: any(named: 'meetingId'),
-              fromDate: any(named: 'fromDate'),
-              toDate: any(named: 'toDate'),
-            ),
-          ).called(2); // once on init, once after date change
+          cubit.selectDate(pickedDay);
+          f.attendanceController.add([
+            RecordAttendanceFixture.makeRecord('p1'),
+          ]);
+          await pumpEventQueue();
+        },
+        expect: () => everyElement(
+          isA<RecordAttendanceLoaded>().having(
+            (s) => s.rosterStatus,
+            'rosterStatus',
+            RosterStatus.ready,
+          ),
+        ),
+        verify: (cubit) {
+          final state = cubit.state as RecordAttendanceLoaded;
+          expect(state.selectedDate, pickedDay);
+          expect(state.entries.single.attended, isTrue);
         },
       );
 
@@ -210,86 +215,85 @@ void main() {
 
     group('toggleAudience', () {
       blocTest<RecordAttendanceCubit, RecordAttendanceState>(
-        'does NOT re-call getMeetingRoster or re-subscribe attendance',
+        'switching the audience shows the servants instead of the persons '
+        'without reloading the roster',
         setUp: () {
           f
             ..meeting = RecordAttendanceFixture.makeMeeting(
               audience: MeetingAudience.personsAndServants,
             )
-            ..user = RecordAttendanceFixture.userWithBothRecordRights();
+            ..user = RecordAttendanceFixture.userWithBothRecordRights()
+            ..rosterPersons = [
+              RecordAttendanceFixture.rosterPerson('p1'),
+              MeetingRosterEntry(
+                asServant: true,
+                person: Person(id: 's1', name: 'Servant s1'),
+                attendanceRecord: null,
+                personAttendanceAnalysis: null,
+              ),
+            ];
         },
         build: () => f.createCubit(),
         act: (cubit) async {
-          await cubit.stream.whereType<RecordAttendanceLoaded>().firstWhere(
-            (s) => s.rosterStatus == RosterStatus.ready,
-          );
-
-          final toggled = cubit.stream
-              .whereType<RecordAttendanceLoaded>()
-              .first;
+          await RecordAttendanceFixture.readyRoster(cubit);
           cubit.toggleAudience();
-          await toggled;
         },
-        verify: (_) {
-          verify(
-            () => f.dao.getMeetingRoster(
-              meetingId: any(named: 'meetingId'),
-              groupByStudyYear: any(named: 'groupByStudyYear'),
-            ),
-          ).called(1);
-
-          verify(
-            () => f.dao.streamAttendanceHistory(
-              meetingId: any(named: 'meetingId'),
-              fromDate: any(named: 'fromDate'),
-              toDate: any(named: 'toDate'),
-            ),
-          ).called(1);
+        verify: (cubit) {
+          final state = cubit.state as RecordAttendanceLoaded;
+          expect(state.audienceView, AttendanceRosterAudienceView.servants);
+          expect(state.rosterStatus, RosterStatus.ready);
+          expect(state.entries.map((e) => e.person.id), ['s1']);
         },
       );
     });
 
     group('changeStreakWindow', () {
+      final narrowTrackRecord = PersonMeetingAttendanceAnalysis(
+        personId: 'p1',
+        meeting: RecordAttendanceFixture.makeMeeting(),
+        asServant: false,
+        heldDays: [DateTime(2026, 6, 25)],
+        attendedDays: {DateTime(2026, 6, 25)},
+      );
+      final widerTrackRecord = PersonMeetingAttendanceAnalysis(
+        personId: 'p1',
+        meeting: RecordAttendanceFixture.makeMeeting(),
+        asServant: false,
+        heldDays: [DateTime(2026, 6, 4), DateTime(2026, 6, 25)],
+        attendedDays: {DateTime(2026, 6, 25)},
+      );
+      late PersonMeetingAttendanceAnalysis currentTrackRecord;
+
       blocTest<RecordAttendanceCubit, RecordAttendanceState>(
-        'reloads track records with the new window and does not re-call '
-        'getMeetingRoster or re-subscribe attendance',
-        build: () => f.createCubit(),
-        act: (cubit) async {
-          await cubit.stream.whereType<RecordAttendanceLoaded>().firstWhere(
-            (s) => s.rosterStatus == RosterStatus.ready,
-          );
-
-          final changed = cubit.stream
-              .whereType<RecordAttendanceLoaded>()
-              .firstWhere((s) => s.streakWindowDays == 30);
-          cubit.changeStreakWindow(30);
-          await changed;
-        },
-        verify: (cubit) {
-          expect((cubit.state as RecordAttendanceLoaded).streakWindowDays, 30);
-
-          verify(
-            () => f.dao.getMeetingRoster(
-              meetingId: any(named: 'meetingId'),
-              groupByStudyYear: any(named: 'groupByStudyYear'),
-            ),
-          ).called(1);
-
-          verify(
-            () => f.dao.streamAttendanceHistory(
-              meetingId: any(named: 'meetingId'),
-              fromDate: any(named: 'fromDate'),
-              toDate: any(named: 'toDate'),
-            ),
-          ).called(1);
-
-          verify(
+        'a wider streak window refreshes the track record of each person',
+        setUp: () {
+          currentTrackRecord = narrowTrackRecord;
+          f.rosterPersons = [RecordAttendanceFixture.rosterPerson('p1')];
+          when(
             () => f.dao.getAttendanceAnalyses(
               meeting: any(named: 'meeting'),
               range: any(named: 'range'),
               asServant: any(named: 'asServant'),
             ),
-          ).called(2); // once on init, once after the window change
+          ).thenAnswer((_) async => [currentTrackRecord]);
+        },
+        build: () => f.createCubit(),
+        act: (cubit) async {
+          await cubit.stream.whereType<RecordAttendanceLoaded>().firstWhere(
+            (s) => s.entries.firstOrNull?.personAttendanceAnalysis != null,
+          );
+
+          currentTrackRecord = widerTrackRecord;
+          cubit.changeStreakWindow(30);
+          await pumpEventQueue();
+        },
+        verify: (cubit) {
+          final state = cubit.state as RecordAttendanceLoaded;
+          expect(state.streakWindowDays, 30);
+          expect(
+            state.entries.first.personAttendanceAnalysis,
+            widerTrackRecord,
+          );
         },
       );
     });

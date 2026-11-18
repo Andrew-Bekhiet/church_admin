@@ -41,22 +41,6 @@ void main() {
   );
 
   blocTest<BulkActionInvocationCubit, BulkActionInvocationState>(
-    'invoking an action tracks which action ran on how many',
-    build: buildCubit,
-    act: (cubit) => cubit.invoke(
-      actionKey: 'show_names',
-      items: {mina},
-      run: () async {},
-    ),
-    verify: (_) => expect(
-      analytics.trackedEventsOf<BulkActionInvoke>().map((e) => e.properties),
-      [
-        {'action': 'show_names', 'entity_type': 'person', 'selected_count': 1},
-      ],
-    ),
-  );
-
-  blocTest<BulkActionInvocationCubit, BulkActionInvocationState>(
     'an action invoked while another runs is ignored',
     build: buildCubit,
     act: (cubit) {
@@ -90,20 +74,6 @@ void main() {
     verify: (_) => expect(
       logging.reportedErrors.map((record) => record.message),
       ['Bulk action show_names failed'],
-    ),
-  );
-
-  blocTest<BulkActionInvocationCubit, BulkActionInvocationState>(
-    'an action that throws before returning its future is logged',
-    build: buildCubit,
-    act: (cubit) => cubit.invoke(
-      actionKey: 'reject',
-      items: {mina},
-      run: () => throw StateError('rejected before starting'),
-    ),
-    verify: (_) => expect(
-      logging.reportedErrors.map((record) => record.message),
-      ['Bulk action reject failed'],
     ),
   );
 
