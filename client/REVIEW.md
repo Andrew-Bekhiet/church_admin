@@ -70,7 +70,7 @@ Review each test for what it proves:
 - Async gaps run under `fakeAsync`, not real timers.
 - Flag implementation tests, as `client/AGENTS.md` defines them under Tests: counting calls, testing wiring, or pinning a JSON shape in a test that is not about JSON.
 - Build fixtures from model objects, not raw JSON maps. Assert against the injected fixture value and keep any unit conversion (`percent / 100`). For a computed result, write the expected value independently instead of reusing the code under test. A product value the test does not own, such as a default template or a placeholder token, comes from the code that owns it, not a copied literal.
-- Find widgets through the widget's own `<Widget>Keys` or `keyFor`, never by text or by rebuilding a `ValueKey` string.
+- Find widgets through the widget's own `<Widget>Keys` members, never by text or by rebuilding a `ValueKey` value. A new key whose value is a string rather than a `(<Widget>Keys, #member)` record is a finding (see `client/AGENTS.md`).
 - Test cubits and blocs with `blocTest`.
 - When the code branches on a permission variant, such as a manager scoped to some areas versus one who manages all users, check that a test covers each branch.
 - Ask for semantics assertions only when the change alters a label, role, or state. Not every widget test needs one.
