@@ -41,7 +41,6 @@ void main() {
     connectivity = BehaviorSubject.seeded(true);
     link = RecordingSubscriptionLink({
       listOperation: {'persons': <Object?>[]},
-      countOperation: countResponse(7),
     });
     dao = PersonsDAO(
       db: DatabaseService(
@@ -64,10 +63,13 @@ void main() {
     resetGlobalProviderContainer();
   });
 
-  Future<PaginatableStreamBase<Person>> listenToPersons() async {
+  Future<PaginatableStreamBase<Person>> listenUntilPersonsCounted(
+    int initialCount,
+  ) async {
+    link.dataByOperationName[countOperation] = countResponse(initialCount);
     final persons = dao.streamAll(searchQuery: search, where: filters);
     addTearDown(persons.dispose);
-    await persons.totalCountStream.firstWhere((count) => count != null);
+    await persons.totalCountStream.firstWhere((count) => count == initialCount);
 
     return persons;
   }
@@ -75,45 +77,50 @@ void main() {
   test(
     'typing a new search with unchanged filters keeps the one count subscription',
     () async {
-      await listenToPersons();
+      await listenUntilPersonsCounted(7);
 
       search.add('ab');
       await pumpEventQueue();
 
-      expect(link.requestsNamed(listOperation), hasLength(2));
-      expect(link.requestsNamed(countOperation), hasLength(1));
+      expect(link.allRequestsNamed(listOperation), hasLength(2));
+      expect(link.allRequestsNamed(countOperation), hasLength(1));
     },
   );
 
   test('a count pushed after a search change reaches the list', () async {
-    final persons = await listenToPersons();
+    const initialCount = 7;
+    const pushedCount = 9;
+    final persons = await listenUntilPersonsCounted(initialCount);
     search.add('ab');
     await pumpEventQueue();
 
-    link.pushToOpenSubscriptions(countOperation, countResponse(9));
+    link.pushToOpenSubscriptions(countOperation, countResponse(pushedCount));
     await pumpEventQueue();
 
-    expect(persons.currentTotalCount, 9);
+    expect(persons.currentTotalCount, pushedCount);
   });
 
   test(
     'loading the next page keeps the one live count subscription',
     () async {
-      final persons = await listenToPersons();
+      const initialCount = 7;
+      const pushedCount = 9;
+      final persons = await listenUntilPersonsCounted(initialCount);
       await persons.listenToNextPage();
+      expect(link.allRequestsNamed(listOperation), hasLength(2));
 
-      link.pushToOpenSubscriptions(countOperation, countResponse(9));
+      link.pushToOpenSubscriptions(countOperation, countResponse(pushedCount));
       await pumpEventQueue();
 
-      expect(link.requestsNamed(countOperation), hasLength(1));
-      expect(persons.currentTotalCount, 9);
+      expect(link.allRequestsNamed(countOperation), hasLength(1));
+      expect(persons.currentTotalCount, pushedCount);
     },
   );
 
   test(
     'changing the filters replaces the count subscription with one for the new filters',
     () async {
-      await listenToPersons();
+      await listenUntilPersonsCounted(7);
 
       filters.add([secondFilter]);
       await pumpEventQueue();
@@ -132,23 +139,46 @@ void main() {
   test(
     'changing the filters keeps the list loading until their own count arrives',
     () async {
-      final persons = await listenToPersons();
+      const secondFilterCount = 3;
+      final persons = await listenUntilPersonsCounted(7);
       link.dataByOperationName.remove(countOperation);
 
       filters.add([secondFilter]);
       await pumpEventQueue();
       final loadingBeforeCount = persons.isLoading;
-      link.pushToOpenSubscriptions(countOperation, countResponse(3));
+      link.pushToOpenSubscriptions(
+        countOperation,
+        countResponse(secondFilterCount),
+      );
       await pumpEventQueue();
 
       expect(loadingBeforeCount, isTrue);
       expect(persons.isLoading, isFalse);
-      expect(persons.currentTotalCount, 3);
+      expect(persons.currentTotalCount, secondFilterCount);
+    },
+  );
+
+  test(
+    'a list without a count finishes loading after its filters change',
+    () async {
+      final persons = dao.streamAllWithConfig(
+        streamAllConfig: dao.baseStreamAllConfig,
+        searchQuery: search,
+        where: filters,
+      );
+      addTearDown(persons.dispose);
+      await persons.first;
+
+      filters.add([secondFilter]);
+      await pumpEventQueue();
+
+      expect(link.allRequestsNamed(listOperation), hasLength(2));
+      expect(persons.isLoading, isFalse);
     },
   );
 
   test('disposing the list cancels its count subscription', () async {
-    final persons = await listenToPersons();
+    final persons = await listenUntilPersonsCounted(7);
     expect(link.openRequestsNamed(countOperation), hasLength(1));
 
     await persons.dispose();

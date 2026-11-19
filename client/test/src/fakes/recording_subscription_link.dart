@@ -3,9 +3,6 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-/// Answers each operation with the data registered under its name, if any,
-/// and keeps the response stream open, as a live Hasura subscription does,
-/// until the client cancels it.
 class RecordingSubscriptionLink extends Link {
   final Map<String, Json> dataByOperationName;
   final List<Request> requests = [];
@@ -14,7 +11,7 @@ class RecordingSubscriptionLink extends Link {
 
   RecordingSubscriptionLink(this.dataByOperationName);
 
-  List<Request> requestsNamed(String operationName) => [
+  List<Request> allRequestsNamed(String operationName) => [
     for (final request in requests)
       if (request.operation.operationName == operationName) request,
   ];
