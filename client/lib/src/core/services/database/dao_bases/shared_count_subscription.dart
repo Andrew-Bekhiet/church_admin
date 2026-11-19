@@ -14,7 +14,7 @@ class SharedCountSubscription {
 
   SharedCountSubscription(this._subscribeToCount);
 
-  Stream<int?> countsFor(List<Filter>? where) {
+  Stream<int?> reuseOrReopenCountsFor(List<Filter>? where) {
     if (_counts case final counts?
         when !_hasEnded && const ListEquality<Filter>().equals(where, _where)) {
       return counts;
@@ -32,5 +32,5 @@ class SharedCountSubscription {
     return _counts = counts;
   }
 
-  Future<void> dispose() async => _connection?.cancel();
+  Future<void> cancel() async => _connection?.cancel();
 }

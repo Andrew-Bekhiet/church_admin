@@ -137,6 +137,19 @@ void main() {
   );
 
   test(
+    'filters re-sent with equal content keep the one count subscription',
+    () async {
+      await listenUntilPersonsCounted(7);
+
+      filters.add([firstFilter]);
+      await pumpEventQueue();
+
+      expect(link.allRequestsNamed(listOperation), hasLength(2));
+      expect(link.allRequestsNamed(countOperation), hasLength(1));
+    },
+  );
+
+  test(
     'changing the filters keeps the list loading until their own count arrives',
     () async {
       const secondFilterCount = 3;

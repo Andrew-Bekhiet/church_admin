@@ -111,11 +111,11 @@ mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
       parametersStream: shareableParametersStream,
       factory: (request) => _streamAllFactory(
         streamAllConfig,
-        countSubscription?.countsFor(request.param?.where) ??
+        countSubscription?.reuseOrReopenCountsFor(request.param?.where) ??
             Stream.value(null),
         request,
       ),
-      onDispose: countSubscription?.dispose,
+      onDispose: countSubscription?.cancel,
     );
   }
 
