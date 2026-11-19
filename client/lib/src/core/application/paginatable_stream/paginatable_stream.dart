@@ -49,6 +49,8 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
 
   final BehaviorSubject<bool> _onLoadingChanged = BehaviorSubject.seeded(true);
 
+  final Future<void> Function()? _onDispose;
+
   @override
   bool get hasMore => _subject.valueOrNull?.hasMore ?? false;
 
@@ -81,6 +83,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
     required Stream<P> parametersStream,
     required PaginatableStreamFactory<T, P> factory,
     this.pageSize = defaultPageSize,
+    this._onDispose,
   }) {
     _subjectSubscription = parametersStream
         .scan<({P value, bool changed})?>(
@@ -109,7 +112,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
   PaginatableStream.simple({
     required PaginatableStreamFactory<T, P?> factory,
     this.pageSize = defaultPageSize,
-  }) {
+  }) : _onDispose = null {
     _subjectSubscription = _loadPagesFor(factory)(null)
         .map(_mapPageResult)
         .doOnData((_) => _onLoadingChanged.add(false))
@@ -236,6 +239,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
     await _onLoadingChanged.close();
     await _subjectSubscription.cancel();
     await _subject.close();
+    await _onDispose?.call();
   }
 }
 
