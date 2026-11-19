@@ -7,7 +7,7 @@ class LoadingFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const FloatingActionButton(
-      key: LoadingFloatingActionButtonKeys.button,
+      key: LoadingFloatingActionButtonKeys.self,
       onPressed: null,
       child: SizedBox.square(
         dimension: 24,
@@ -18,8 +18,5 @@ class LoadingFloatingActionButton extends StatelessWidget {
 }
 
 abstract final class LoadingFloatingActionButtonKeys extends WidgetKeys {
-  static const Key button = ValueKey((
-    LoadingFloatingActionButtonKeys,
-    #button,
-  ));
+  static const Key self = ValueKey((LoadingFloatingActionButtonKeys, #self));
 }

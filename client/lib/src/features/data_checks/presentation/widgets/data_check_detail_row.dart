@@ -6,7 +6,7 @@ class DataCheckDetailRow extends StatelessWidget {
   final DataCheckDetail detail;
 
   DataCheckDetailRow({required this.detail})
-    : super(key: DataCheckDetailRowKeys.rowFor(detail));
+    : super(key: DataCheckDetailRowKeys.selfFor(detail));
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +28,6 @@ class DataCheckDetailRow extends StatelessWidget {
 }
 
 abstract final class DataCheckDetailRowKeys extends WidgetKeys {
-  static Key rowFor(DataCheckDetail detail) =>
-      ValueKey((DataCheckDetailRowKeys, #rowFor, detail));
+  static Key selfFor(DataCheckDetail detail) =>
+      ValueKey((DataCheckDetailRowKeys, #selfFor, detail));
 }

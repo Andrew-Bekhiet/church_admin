@@ -92,7 +92,7 @@ void main() {
         await tester.pumpAndSettle();
 
         Finder iconIn(DataCheckDetail detail) => find.descendant(
-          of: find.byKey(DataCheckDetailRowKeys.rowFor(detail)),
+          of: find.byKey(DataCheckDetailRowKeys.selfFor(detail)),
           matching: find.byType(Icon),
         );
         expect(
@@ -123,7 +123,7 @@ void main() {
         );
 
         Finder labelIn(DataCheckDetail detail, String label) => find.descendant(
-          of: find.byKey(DataCheckDetailRowKeys.rowFor(detail)),
+          of: find.byKey(DataCheckDetailRowKeys.selfFor(detail)),
           matching: find.bySemanticsLabel(label),
         );
         expect(labelIn(passedDetail, 'اجتاز الفحص'), findsOneWidget);
@@ -141,7 +141,7 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(
-          find.byKey(DataCheckDetailRowKeys.rowFor(failedDetail)),
+          find.byKey(DataCheckDetailRowKeys.selfFor(failedDetail)),
           findsOneWidget,
         );
         expect(find.byType(SegmentedButton<DataCheckOverride>), findsNothing);
