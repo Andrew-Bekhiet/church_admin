@@ -1,5 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:collection/collection.dart';
+import 'package:church_admin/src/core/services/database/dao_bases/shared_count_subscription.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
@@ -99,50 +99,45 @@ mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
       ),
     ).shareValue();
 
-    final Stream<int?> countStream = _getCountStream(
-      streamCountConfig,
-      shareableParametersStream,
-      overrideTotalLimit,
-    );
+    final countSubscription = switch (streamCountConfig) {
+      final config? => SharedCountSubscription(
+        (where) => _subscribeToCount(config, where, overrideTotalLimit),
+      ),
+      null => null,
+    };
 
     return PaginatableStream(
       pageSize: overrideTotalLimit ?? PaginatableStream.defaultPageSize,
       parametersStream: shareableParametersStream,
       factory: (request) => _streamAllFactory(
         streamAllConfig,
-        countStream,
+        countSubscription?.reuseOrReopenCountsFor(request.param?.where) ??
+            Stream.value(null),
         request,
       ),
+      onDispose: countSubscription?.cancel,
     );
   }
 
-  Stream<int?> _getCountStream(
-    StreamCountConfig? streamCountConfig,
-    Stream<StreamableDAOParameters> parametersStream,
+  Stream<int?> _subscribeToCount(
+    StreamCountConfig streamCountConfig,
+    List<Filter>? where,
     int? overrideTotalLimit,
   ) {
-    if (streamCountConfig == null) return Stream.value(null).shareValue();
-
-    return parametersStream
-        .map((p) => p.where)
-        .distinct(const ListEquality<Filter>().equals)
-        .switchMap(
-          (where) => graphQLClient.subscribeAndReturnParsed(
-            streamCountConfig.operationOptions ??
-                SubscriptionOptions(
-                  document: transformDocument(streamCountConfig.document),
-                  operationName: streamCountConfig.effectiveOperationName,
-                  variables:
-                      streamCountConfig.variables ??
-                      {
-                        'where':
-                            where?.map((o) => o.queryToJson()).toList() ?? [],
-                        'limit': overrideTotalLimit,
-                      },
-                  parserFn: streamCountConfig.parserFn ?? db.parser.countParser,
-                ),
+    return graphQLClient.subscribeAndReturnParsed(
+      streamCountConfig.operationOptions ??
+          SubscriptionOptions(
+            document: transformDocument(streamCountConfig.document),
+            operationName: streamCountConfig.effectiveOperationName,
+            variables:
+                streamCountConfig.variables ??
+                {
+                  'where': where?.map((o) => o.queryToJson()).toList() ?? [],
+                  'limit': overrideTotalLimit,
+                },
+            parserFn: streamCountConfig.parserFn ?? db.parser.countParser,
           ),
-        );
+    );
   }
 
   Stream<PaginatableStreamResponse<T>> _streamAllFactory(
