@@ -15,6 +15,7 @@ class DBGraphQLClient extends GraphQLClient {
         .map(_cacheAndNetworkFetchPolicyFor)
         .startWith(_currentFetchPolicy)
         .distinct(),
+    reusable: true,
   );
   FetchPolicy get _currentFetchPolicy =>
       _cacheAndNetworkFetchPolicyFor(_connectivityStream.valueOrNull);
