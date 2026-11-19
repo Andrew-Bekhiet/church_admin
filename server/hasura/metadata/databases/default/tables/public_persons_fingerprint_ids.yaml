@@ -1,0 +1,75 @@
+table:
+  name: persons_fingerprint_ids
+  schema: public
+object_relationships:
+  - name: addedByUser
+    using:
+      foreign_key_constraint_on: added_by
+insert_permissions:
+  - role: user
+    permission:
+      check: &person_editable_with_manage_fingerprint_ids
+        _and:
+          - _exists:
+              _table:
+                name: users_permissions
+                schema: auth
+              _where:
+                _and:
+                  - &requesting_user
+                    uid:
+                      _eq: X-Hasura-User-Id
+                  - permission:
+                      _eq: manageFingerprintIds
+          - _or:
+              - _exists:
+                  _table: &permissions_view
+                    name: users_permissions_by_entity_id_cache
+                    schema: auth
+                  _where:
+                    _and:
+                      - *requesting_user
+                      - allow_edit:
+                          _eq: true
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
+              - _exists:
+                  _table: *permissions_view
+                  _where:
+                    _and:
+                      - *requesting_user
+                      - allow_edit:
+                          _eq: true
+                      - entity_type:
+                          _eq: person
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - person_id
+      set:
+        added_by: x-hasura-User-Id
+      columns:
+        - employee_code
+        - person_id
+select_permissions:
+  - role: fingerprint_sync
+    permission:
+      columns:
+        - employee_code
+        - person_id
+      filter: {}
+  - role: user
+    permission:
+      columns:
+        - added_at
+        - added_by
+        - employee_code
+        - id
+        - person_id
+      filter: *person_editable_with_manage_fingerprint_ids
+delete_permissions:
+  - role: user
+    permission:
+      filter: *person_editable_with_manage_fingerprint_ids

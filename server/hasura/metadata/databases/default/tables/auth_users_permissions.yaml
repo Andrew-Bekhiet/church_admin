@@ -40,6 +40,9 @@ insert_permissions:
                       _ceq:
                         - $
                         - uid
+        user:
+          type:
+            _eq: human
       columns:
         - permission
         - uid
@@ -78,3 +81,6 @@ delete_permissions:
         _or:
           - *any_user_editable
           - *user_by_uid_editable
+        user:
+          type:
+            _eq: human

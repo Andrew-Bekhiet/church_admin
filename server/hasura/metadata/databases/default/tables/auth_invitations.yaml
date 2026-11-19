@@ -43,6 +43,9 @@ insert_permissions:
                       _ceq:
                         - $
                         - user_uid
+        user:
+          type:
+            _eq: human
       columns:
         - expires_at
         - user_uid

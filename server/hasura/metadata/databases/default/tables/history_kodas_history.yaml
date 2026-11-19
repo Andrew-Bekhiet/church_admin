@@ -12,6 +12,13 @@ object_relationships:
     using:
       foreign_key_constraint_on: recorded_by
 insert_permissions:
+  - role: fingerprint_sync
+    permission:
+      check: {}
+      columns:
+        - day_id
+        - person_id
+        - recorded_by
   - role: user
     permission:
       check: &check_edit_person_kodas_permission

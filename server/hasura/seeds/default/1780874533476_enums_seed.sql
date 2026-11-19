@@ -13,7 +13,15 @@ INSERT INTO auth.permissions (name) VALUES
 ('exportAllData'),
 ('maintenanceNotifications'),
 ('screenCaptureNotifications'),
-('changeDataChecks')
+('changeDataChecks'),
+('appMaintenance'),
+('manageFingerprintIds')
+ON CONFLICT DO NOTHING;
+
+INSERT INTO auth.user_types (name) VALUES
+('human'),
+('fingerprint_bot'),
+('maintenance_bot')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO public.work_status (name) VALUES
