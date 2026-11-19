@@ -1,14 +1,17 @@
 import { getMessaging, SendResponse } from "firebase-admin/messaging";
 import { defineSecret } from "firebase-functions/params";
 import { https } from "firebase-functions/v2";
-import { getFcmTokensForPermission } from "./hasura_interface";
+import { getFcmTokensForAnyOfPermissions } from "./hasura_interface";
 import { hasuraAdminSecret } from "./secrets";
 
 const studyYearRollWebhookSecret = defineSecret(
   "STUDY_YEAR_ROLL_WEBHOOK_SECRET",
 );
 
-const MAINTENANCE_NOTIFICATIONS_PERMISSION = "maintenanceNotifications";
+const APP_MAINTENANCE_PERMISSION_NAMES = [
+  "appMaintenance",
+  "maintenanceNotifications",
+];
 
 const NON_USER_SENDER_UID = "LOCAL_NOTIFICATION_SENDER_UID";
 
@@ -63,13 +66,13 @@ export const notifyStudyYearRollFailure = https.onRequest(
     }
 
     try {
-      const tokens = await getFcmTokensForPermission(
-        MAINTENANCE_NOTIFICATIONS_PERMISSION,
+      const tokens = await getFcmTokensForAnyOfPermissions(
+        APP_MAINTENANCE_PERMISSION_NAMES,
       );
 
       if (tokens.length === 0) {
         console.error(
-          "No maintenanceNotifications recipients for study year roll run",
+          "No app maintenance recipients for study year roll run",
           run.id,
         );
 

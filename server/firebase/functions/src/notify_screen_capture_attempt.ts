@@ -1,7 +1,7 @@
 import { getMessaging, SendResponse } from "firebase-admin/messaging";
 import { defineSecret } from "firebase-functions/params";
 import { https } from "firebase-functions/v2";
-import { getFcmTokensForPermission, getUserName } from "./hasura_interface";
+import { getFcmTokensForAnyOfPermissions, getUserName } from "./hasura_interface";
 import { hasuraAdminSecret } from "./secrets";
 
 const screenCaptureWebhookSecret = defineSecret(
@@ -68,9 +68,9 @@ export const notifyScreenCaptureAttempt = https.onRequest(
     }
 
     try {
-      const tokens = await getFcmTokensForPermission(
+      const tokens = await getFcmTokensForAnyOfPermissions([
         SCREEN_CAPTURE_NOTIFICATIONS_PERMISSION,
-      );
+      ]);
 
       if (tokens.length === 0) {
         res.status(200).send();
