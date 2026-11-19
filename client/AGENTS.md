@@ -22,7 +22,7 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
   }
   ```
 
-  A per-item key is a `<member>For(...)` method that appends the item's id or value to the record. Never give a key a string value, `Key('...')` included: that is a `ValueKey<String>`, and the login and forgot-password email fields once shared `'Email Field Key'`. ENG-332 migrates the string keys still on master.
+  A per-item key is a `<member>For(...)` method that appends the item's id or value to the record. Never give a Keys member a string value, `Key('...')` included: that is a `ValueKey<String>`, and the login and forgot-password email fields once shared `'Email Field Key'`. ENG-332 migrates the string keys still on master. Inline identity keys that only steer reconciliation, such as `ValueKey(item.id)` on a list item, are not test keys and stay as they are; tests never rebuild them.
 - **UI is mobile-first and responsive**; keep components modular and reusable rather than page-specific.
 - **Never return widgets from methods** (`Widget _buildFoo()`). Extract a widget class, or if the subtree is small (under ~100 lines) inline it at the call site. Non-widget helpers returning `String`/data are fine.
 - **No top-level variables or functions.** Use `static` members on the class that owns them. Inside a class that has instances, a private helper is an instance method, not a `static` one, placed below the first member that calls it.
