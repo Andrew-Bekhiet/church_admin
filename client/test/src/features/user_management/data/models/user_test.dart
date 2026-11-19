@@ -2,6 +2,29 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  group('User.fromJson', () {
+    test('skips a permission name this app version does not know and keeps '
+        'the known ones', () {
+      final user = User.fromJson({
+        'uid': 'uid',
+        'name': 'servant',
+        'permissions': [
+          {'permission': UserPermission.approved.name},
+          const {'permission': 'permissionAddedByANewerAppVersion'},
+          {'permission': UserPermission.readAllData.name},
+        ],
+      });
+
+      expect(
+        user.permissions,
+        unorderedEquals({
+          UserPermission.approved,
+          UserPermission.readAllData,
+        }),
+      );
+    });
+  });
+
   group('User.canChangeDataCheck', () {
     const editableFamily = Family(
       id: 'family',
