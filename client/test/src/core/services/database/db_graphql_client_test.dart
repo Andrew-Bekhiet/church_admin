@@ -9,7 +9,7 @@ import 'package:rxdart/rxdart.dart';
 import '../../../fakes/recording_subscription_link.dart';
 
 void main() {
-  const operation = 'watchThing';
+  const subscriptionOperation = 'watchThing';
   const queryOperation = 'thing';
 
   late BehaviorSubject<bool> connectivity;
@@ -19,7 +19,7 @@ void main() {
   setUp(() {
     connectivity = BehaviorSubject();
     link = RecordingSubscriptionLink({
-      operation: {
+      subscriptionOperation: {
         'thing': {'__typename': 'Thing', 'id': '1'},
       },
       queryOperation: {
@@ -37,8 +37,10 @@ void main() {
 
   Stream<QueryResult<Object?>> watchThing() => client.subscribe(
     SubscriptionOptions(
-      document: parseString('subscription $operation { thing { id } }'),
-      operationName: operation,
+      document: parseString(
+        'subscription $subscriptionOperation { thing { id } }',
+      ),
+      operationName: subscriptionOperation,
     ),
   );
 
@@ -64,7 +66,7 @@ void main() {
     listenTo(watchThing());
     await pumpEventQueue();
 
-    expect(link.allRequestsNamed(operation), hasLength(1));
+    expect(link.allRequestsNamed(subscriptionOperation), hasLength(1));
   });
 
   test('a subscription started while offline is sent once', () async {
@@ -73,7 +75,7 @@ void main() {
     listenTo(watchThing());
     await pumpEventQueue();
 
-    expect(link.allRequestsNamed(operation), hasLength(1));
+    expect(link.allRequestsNamed(subscriptionOperation), hasLength(1));
   });
 
   test(
@@ -82,7 +84,7 @@ void main() {
       listenTo(watchThing());
       await pumpEventQueue();
 
-      expect(link.allRequestsNamed(operation), hasLength(1));
+      expect(link.allRequestsNamed(subscriptionOperation), hasLength(1));
     },
   );
 
@@ -95,7 +97,7 @@ void main() {
       connectivity.add(true);
       await pumpEventQueue();
 
-      expect(link.allRequestsNamed(operation), hasLength(1));
+      expect(link.allRequestsNamed(subscriptionOperation), hasLength(1));
     },
   );
 
@@ -109,7 +111,7 @@ void main() {
       listenTo(results);
       await pumpEventQueue();
 
-      expect(link.allRequestsNamed(operation), hasLength(1));
+      expect(link.allRequestsNamed(subscriptionOperation), hasLength(1));
     },
   );
 
@@ -119,15 +121,24 @@ void main() {
       connectivity.add(true);
       await listenTo(watchThing()).cancel();
       listenTo(watchThing());
+      await pumpEventQueue();
+      final requestsWhileOnline = link
+          .allRequestsNamed(subscriptionOperation)
+          .length;
 
       connectivity.add(false);
       await pumpEventQueue();
-      final requestsAfterGoingOffline = link.allRequestsNamed(operation).length;
+      final requestsWhileOffline = link
+          .allRequestsNamed(subscriptionOperation)
+          .length;
       connectivity.add(true);
       await pumpEventQueue();
 
-      expect(requestsAfterGoingOffline, 2);
-      expect(link.allRequestsNamed(operation), hasLength(3));
+      expect(requestsWhileOffline, requestsWhileOnline + 1);
+      expect(
+        link.allRequestsNamed(subscriptionOperation),
+        hasLength(requestsWhileOnline + 2),
+      );
     },
   );
 
@@ -139,7 +150,7 @@ void main() {
     listenTo(results);
     await pumpEventQueue();
 
-    expect(link.openRequestsNamed(operation), hasLength(2));
+    expect(link.openRequestsNamed(subscriptionOperation), hasLength(2));
   });
 
   test('a query while offline is answered from the cache', () async {

@@ -12,13 +12,13 @@ class DBGraphQLClient extends GraphQLClient {
   final ValueStream<bool> _connectivityStream;
   Stream<FetchPolicy> get _fetchPolicyStream => Rx.defer(
     () => _connectivityStream
-        .map(_cacheAndNetworkFetchPolicyFor)
+        .map(_cacheAndNetworkUnlessOfflineFor)
         .startWith(_currentFetchPolicy)
         .distinct(),
     reusable: true,
   );
   FetchPolicy get _currentFetchPolicy =>
-      _cacheAndNetworkFetchPolicyFor(_connectivityStream.valueOrNull);
+      _cacheAndNetworkUnlessOfflineFor(_connectivityStream.valueOrNull);
   FetchPolicy get _onlineFirstFetchPolicy => _fetchPolicyFor(
     _connectivityStream.valueOrNull,
     whenConnected: FetchPolicy.networkOnly,
@@ -32,7 +32,7 @@ class DBGraphQLClient extends GraphQLClient {
     super.defaultPolicies,
   });
 
-  FetchPolicy _cacheAndNetworkFetchPolicyFor(bool? connected) =>
+  FetchPolicy _cacheAndNetworkUnlessOfflineFor(bool? connected) =>
       _fetchPolicyFor(connected, whenConnected: FetchPolicy.cacheAndNetwork);
 
   Q _exceptionsMiddleware<T, Q extends QueryResult<T>>(Q result) {
