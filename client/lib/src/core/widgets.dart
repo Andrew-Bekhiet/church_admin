@@ -15,3 +15,4 @@ export 'widgets/session_replay_unmask.dart';
 export 'widgets/splash_branding.dart';
 export 'widgets/switching_fab.dart';
 export 'widgets/title_search_field.dart';
+export 'widgets/widget_keys.dart';

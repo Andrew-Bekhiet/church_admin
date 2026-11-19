@@ -76,7 +76,7 @@ class TabsHeaderDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(TabsHeaderDelegate oldDelegate) => false;
 }
 
-abstract final class SelectionAwareAppBarTestKeys {
+abstract final class SelectionAwareAppBarTestKeys extends WidgetKeys {
   static const Key tabsHeader = ValueKey((
     SelectionAwareAppBarTestKeys,
     #tabsHeader,

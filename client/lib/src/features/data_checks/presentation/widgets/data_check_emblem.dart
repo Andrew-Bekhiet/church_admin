@@ -44,7 +44,7 @@ class DataCheckEmblem extends StatelessWidget {
   }
 }
 
-abstract final class DataCheckEmblemKeys {
+abstract final class DataCheckEmblemKeys extends WidgetKeys {
   static const Key completeBadge = ValueKey((
     DataCheckEmblemKeys,
     #completeBadge,

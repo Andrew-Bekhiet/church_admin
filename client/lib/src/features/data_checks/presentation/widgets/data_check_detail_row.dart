@@ -27,7 +27,7 @@ class DataCheckDetailRow extends StatelessWidget {
   }
 }
 
-abstract final class DataCheckDetailRowKeys {
+abstract final class DataCheckDetailRowKeys extends WidgetKeys {
   static Key rowFor(DataCheckDetail detail) =>
       ValueKey((DataCheckDetailRowKeys, #rowFor, detail));
 }

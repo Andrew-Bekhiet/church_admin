@@ -8,7 +8,7 @@ import '../../../../fakes/fake_logging_service.dart';
 import '../../../../fakes/mock_viewable_object_service.dart';
 import '../../../../utils.dart';
 
-abstract final class ViewableObjectListSelectionTestKeys {
+abstract final class ViewableObjectListSelectionTestKeys extends WidgetKeys {
   static Key itemFor(String id) =>
       ValueKey((ViewableObjectListSelectionTestKeys, #itemFor, id));
 }

@@ -13,6 +13,7 @@ solid_lints:
     avoid_multiple_declarations_per_file:
       ignored_types:
         - State
+        - WidgetKeys
       maximum_loc: 15
     avoid_unused_parameters: false
     avoid_non_null_assertion: false

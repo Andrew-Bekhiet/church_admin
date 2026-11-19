@@ -8,21 +8,21 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 
 ## Structure
 
-- **No private `_Foo` widget classes, test files included, and no `part`/`part of` beyond the two exceptions below.** A sealed class and its subclasses share one file while it stays under 420 lines; `avoid_multiple_declarations_per_file` allows that family, and companions of 15 lines or fewer such as `XKeys`.
+- **No private `_Foo` widget classes, test files included, and no `part`/`part of` beyond the two exceptions below.** A sealed class and its subclasses share one file while it stays under 420 lines; `avoid_multiple_declarations_per_file` allows that family, companions of 15 lines or fewer, and any `<Widget>Keys` companion (it extends `WidgetKeys`, which `analysis_options.yaml` exempts).
 - **One `part` exception is the sealed `AppRoute` family**, which is too large for one file. `core/services/router/app_route.dart` is the library: it holds every import and a `part` per route, and each route stays in its feature's `presentation/navigation/` folder as a `part of` file. A part cannot import or have parts of its own, so a new route adds its imports to `app_route.dart`. A route's fields mirror its screen's constructor parameters, so callers build a route with the screen's own arguments: no wrapper extra objects. Tests cannot subclass `AppRoute`: use real routes and stub what the test router's `builder` renders.
 - **The sealed `AnalyticsEvent` family is the other `part` exception.** `core/analytics/domain/models/analytics_event.dart` is the library: it holds every import and a `part` per feature event file, and each feature's events stay in its `domain/analytics/` folder as a `part of` file. Enums or types that non-analytics code uses go in the feature's `domain/models/`, not in the part file. An event serialises itself and its properties; callers hand it domain values, never a ready-made property map, and feature domain models carry no analytics keys. Keep properties coarse enough to answer a product question: no counts of individual edits, durations in days rather than milliseconds.
-- **Widget keys live in a `<Widget>Keys` companion** (`abstract final class`) right after the widget, in its file. A widget class never holds a static key itself.
+- **Widget keys live in a `<Widget>Keys` companion** (`abstract final class <Widget>Keys extends WidgetKeys`) right after the widget, in its file, however many keys it holds. A widget class never holds a static key itself.
 - **A key's value is a record of its Keys class and a symbol of the member's name**, so no two keys can be equal, whatever they are named:
 
   ```dart
-  abstract final class HomeDrawerKeys {
+  abstract final class HomeDrawerKeys extends WidgetKeys {
     static const Key manageUsers = ValueKey((HomeDrawerKeys, #manageUsers));
     static Key destinationFor(HomeTab tab) =>
         ValueKey((HomeDrawerKeys, #destinationFor, tab));
   }
   ```
 
-  A per-item key is a `<member>For(...)` method that appends the item's id or value to the record. Never give a Keys member a string value, `Key('...')` included: that is a `ValueKey<String>`, and the login and forgot-password email fields once shared `'Email Field Key'`. ENG-332 migrates the string keys still on master. Inline identity keys that only steer reconciliation, such as `ValueKey(item.id)` on a list item, are not test keys and stay as they are; tests never rebuild them.
+  A per-item key is a `<member>For(...)` method that appends the item's id or value to the record. Never give a Keys member a string value, `Key('...')` included: that is a `ValueKey<String>`, and the login and forgot-password email fields once shared `'Email Field Key'`. ENG-332 migrates the string keys still on master and adds `extends WidgetKeys` to the companions that lack it. Inline identity keys that only steer reconciliation, such as `ValueKey(item.id)` on a list item, are not test keys and stay as they are; tests never rebuild them.
 - **UI is mobile-first and responsive**; keep components modular and reusable rather than page-specific.
 - **Never return widgets from methods** (`Widget _buildFoo()`). Extract a widget class, or if the subtree is small (under ~100 lines) inline it at the call site. Non-widget helpers returning `String`/data are fine.
 - **No top-level variables or functions.** Use `static` members on the class that owns them. Inside a class that has instances, a private helper is an instance method, not a `static` one, placed below the first member that calls it.
