@@ -23,8 +23,6 @@ dependency_overrides:
       url: https://github.com/dart-lang/build.git
       ref: 3088ac884999c97f9ac6d2155e90e81af553b93c
       path: builder_pkgs/mockito
-  # Until [dart-lang/native#3281](https://github.com/dart-lang/native/issues/3281) is fixed
-  objective_c: 9.3.0
 
 dependencies:
   advanced_forms: ^0.3.0
