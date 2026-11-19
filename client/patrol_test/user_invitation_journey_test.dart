@@ -19,7 +19,7 @@ void main() {
       const earlyInviteeEmail = 'early@e2e.test';
       const lateInviteeEmail = 'late@e2e.test';
       const lateInviteeName = 'خادم متأخر';
-      const emailedInviteeEmail = 'emailed@e2e.test';
+      const emailClaimInviteeEmail = 'emailed@e2e.test';
       const existingPerson = 'مخدوم موجود';
       const replacementPerson = 'مخدوم بديل';
 
@@ -61,7 +61,7 @@ void main() {
       await admin.fillExistingPerson(
         personId: existingPersonId,
         personName: existingPerson,
-        email: emailedInviteeEmail,
+        email: emailClaimInviteeEmail,
       );
       await admin.saveAndReadInvitationCode();
 
@@ -71,14 +71,14 @@ void main() {
         personName: replacementPerson,
       );
       expect(
-        ((await E2eBackend.userByEmail(emailedInviteeEmail))['person']
+        ((await E2eBackend.userByEmail(emailClaimInviteeEmail))['person']
             as Map)['name'],
         replacementPerson,
       );
 
       step('admin goes from the user to the person and back');
       await admin.roundTripThroughLinkedPerson(
-        (await E2eBackend.userByEmail(emailedInviteeEmail))['uid'] as String,
+        (await E2eBackend.userByEmail(emailClaimInviteeEmail))['uid'] as String,
       );
 
       await E2eApp.signOut(tester);
@@ -114,18 +114,20 @@ void main() {
       step('an invitee who verifies the invited email joins without the code');
       await E2eApp.signUp(
         tester,
-        email: emailedInviteeEmail,
+        email: emailClaimInviteeEmail,
         password: password,
       );
       await tester.waitFor(verificationScreen);
-      await E2eBackend.verifyEmail(emailedInviteeEmail);
+      await E2eBackend.verifyEmail(emailClaimInviteeEmail);
       await tester.tapOn(verificationScreen);
       await tester.waitForAbsent(verificationScreen);
       await E2eApp.completeSpiritualData(tester);
       await E2eApp.enterHome(tester, password);
-      final emailedUser = await E2eBackend.userByEmail(emailedInviteeEmail);
-      expect(emailedUser['authId'], isNotNull);
-      expect((emailedUser['person'] as Map)['name'], replacementPerson);
+      final emailClaimInvitee = await E2eBackend.userByEmail(
+        emailClaimInviteeEmail,
+      );
+      expect(emailClaimInvitee['authId'], isNotNull);
+      expect((emailClaimInvitee['person'] as Map)['name'], replacementPerson);
 
       await E2eApp.finish(tester);
     },

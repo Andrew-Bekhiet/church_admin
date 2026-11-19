@@ -74,8 +74,6 @@ class RecordAttendanceRobot {
     return _state;
   }
 
-  /// Other journeys sharing the backend add persons to the same rosters, so
-  /// only the [candidates] a journey seeded itself are reported.
   Future<Set<String>> offeredPersonIdsAmong(
     Set<String> candidates, {
     required String meetingId,

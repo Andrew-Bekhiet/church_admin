@@ -139,7 +139,7 @@ class ScopedAttendanceSeed {
   final String personsRightsPersonId;
   final E2eUser user;
 
-  Set<String> get personIds => {
+  Set<String> get seededPersonIds => {
     ...neverOfferedPersonIds,
     scopedPersonId,
     secondaryServantId,

@@ -59,7 +59,7 @@ void main() {
       step('persons and servants meeting: persons in the scope pair only');
       expect(
         await robot.offeredPersonIdsAmong(
-          seed.personIds,
+          seed.seededPersonIds,
           meetingId: seed.bothAudiencesMeetingId,
           view: persons,
         ),
@@ -80,7 +80,7 @@ void main() {
       await robot.showServants();
       expect(
         await robot.offeredPersonIdsAmong(
-          seed.personIds,
+          seed.seededPersonIds,
           meetingId: seed.bothAudiencesMeetingId,
           view: servants,
         ),
@@ -99,7 +99,7 @@ void main() {
       await robot.switchToMeeting(seed.personsOnlyMeetingId);
       expect(
         await robot.offeredPersonIdsAmong(
-          seed.personIds,
+          seed.seededPersonIds,
           meetingId: seed.personsOnlyMeetingId,
           view: persons,
         ),
@@ -116,7 +116,7 @@ void main() {
       await robot.switchToMeeting(seed.servantsOnlyMeetingId);
       expect(
         await robot.offeredPersonIdsAmong(
-          seed.personIds,
+          seed.seededPersonIds,
           meetingId: seed.servantsOnlyMeetingId,
           view: servants,
         ),
@@ -136,7 +136,7 @@ void main() {
       await robot.switchToMeeting(seed.personsRightsMeetingId);
       expect(
         await robot.offeredPersonIdsAmong(
-          seed.personIds,
+          seed.seededPersonIds,
           meetingId: seed.personsRightsMeetingId,
           view: persons,
         ),
@@ -153,7 +153,7 @@ void main() {
       await robot.switchToMeeting(seed.servantsRightsMeetingId);
       expect(
         await robot.offeredPersonIdsAmong(
-          seed.personIds,
+          seed.seededPersonIds,
           meetingId: seed.servantsRightsMeetingId,
           view: servants,
         ),
@@ -170,7 +170,7 @@ void main() {
       await robot.switchToMeeting(seed.notRecordableMeetingId);
       expect(
         await robot.offeredPersonIdsAmong(
-          seed.personIds,
+          seed.seededPersonIds,
           meetingId: seed.notRecordableMeetingId,
           view: persons,
         ),
