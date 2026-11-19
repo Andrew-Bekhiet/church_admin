@@ -20,7 +20,18 @@ class SharedCountSubscription {
       return counts;
     }
 
-    unawaited(_connection?.cancel());
+    unawaited(
+      _connection?.cancel().catchError(
+        (Object error, StackTrace stackTrace) => LoggingService.I.warning(
+          LogRecord(
+            message: 'Cancelling the replaced count subscription failed',
+            moduleName: '$SharedCountSubscription',
+            error: error,
+            stackTrace: stackTrace,
+          ),
+        ),
+      ),
+    );
     _where = where;
     _hasEnded = false;
     final counts = _subscribeToCount(where)
