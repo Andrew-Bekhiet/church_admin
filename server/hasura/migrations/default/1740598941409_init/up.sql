@@ -83,20 +83,6 @@ COMMENT ON SCHEMA "public" IS 'standard public schema';
 
 
 --
--- Name: timescaledb; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS "timescaledb" WITH SCHEMA "public";
-
-
---
--- Name: EXTENSION "timescaledb"; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION "timescaledb" IS 'Enables scalable inserts and complex queries for time-series data (Community Edition)';
-
-
---
 -- Name: auth; Type: SCHEMA; Schema: -; Owner: -
 --
 
