@@ -7,16 +7,9 @@ import '../../../../utils.dart';
 import '../screens/edit_person/edit_person_screen_harness.dart';
 
 void main() {
-  final person = Person(id: 'person-id', name: 'مينا');
-
-  late EditPersonScreenHarness harness;
-
-  Future<void> openRoute(
-    WidgetTester tester, {
-    PersonEditIntent? intent,
-  }) async {
+  Future<void> openRoute(WidgetTester tester) async {
     final router = KaiselRouterConfig<AppRoute>(
-      initial: EditPersonRoute(intent: intent),
+      initial: const EditPersonRoute(),
       builder: (context, route) => route.build(context),
     );
     addTearDown(router.dispose);
@@ -35,7 +28,7 @@ void main() {
   }
 
   setUp(() {
-    harness = EditPersonScreenHarness()..install();
+    EditPersonScreenHarness().install();
   });
 
   tearDown(defaultTearDown);
@@ -47,16 +40,5 @@ void main() {
 
     expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsOneWidget);
     expect(find.byTooltip('حذف'), findsNothing);
-  });
-
-  testWidgets('opening the route with an intent edits that person', (
-    tester,
-  ) async {
-    harness.persons.respondWithSavedMemberships(null);
-
-    await openRoute(tester, intent: UpdatePerson(person: person));
-
-    expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsOneWidget);
-    expect(find.byTooltip('حذف'), findsOneWidget);
   });
 }

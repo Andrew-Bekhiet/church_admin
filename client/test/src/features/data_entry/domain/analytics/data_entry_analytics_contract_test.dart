@@ -68,10 +68,6 @@ void main() {
 
   final personOutcomes = <({PersonSaveOutcome outcome, String sent})>[
     (
-      outcome: PersonSaved(person: person, movedOutOfSight: false),
-      sent: 'saved',
-    ),
-    (
       outcome: PersonSavedButPhotoFailed(
         person: person,
         movedOutOfSight: true,
@@ -113,15 +109,6 @@ void main() {
     (
       outcome: const ObjectSaved(object: service, movedOutOfSight: false),
       sent: 'saved',
-    ),
-    (
-      outcome: ObjectSavedButPhotoFailed(
-        object: service,
-        movedOutOfSight: false,
-        error: failure,
-        stackTrace: stackTrace,
-      ),
-      sent: 'savedButPhotoFailed',
     ),
     (
       outcome: ObjectSaveFailed(

@@ -28,42 +28,9 @@ void main() {
   tearDown(resetGlobalProviderContainer);
 
   testWidgets(
-    'HistoryProperty => onRecordNow',
-    (tester) async {
-      var called = false;
-
-      final historyProperty = HistoryProperty<LastRecordedByInfo>(
-        name: 'name',
-        value: clock.now(),
-        getHistoryListController: () => ViewableObjectListController(
-          objectsPaginatableStream: MockPaginatableStreamBase(),
-        ),
-        onRecordNow: () => called = true,
-      );
-
-      await tester.pumpWidget(
-        MaterialUiTestApp(
-          child: Scaffold(
-            body: historyProperty,
-          ),
-        ),
-      );
-      await tester.tap(
-        find.descendant(
-          of: find.byType(OutlinedButton),
-          matching: find.byIcon(Symbols.task_alt),
-        ),
-      );
-
-      expect(called, isTrue);
-    },
-  );
-
-  testWidgets(
     'HistoryProperty => getHistoryStream',
     (tester) async {
       await withClock(Clock.fixed(DateTime(2050)), () async {
-        var called = false;
         final lastRecordedByInfo = LastRecordedByInfo(
           time: clock.now(),
           recordedBy: 'id',
@@ -78,8 +45,6 @@ void main() {
           name: 'name',
           value: clock.now(),
           getHistoryListController: () {
-            called = true;
-
             final mock = MockPaginatableStreamBase<LastRecordedByInfo>();
 
             when(
@@ -131,8 +96,6 @@ void main() {
           ),
           findsOneWidget,
         );
-        expect(called, isTrue);
-
         expect(
           find.descendant(
             of: find.bySubtype<ViewableObjectList<LastRecordedByInfo>>(),

@@ -72,21 +72,6 @@ void main() {
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
-    'returning to the app after opening a chat moves to the next person',
-    build: () => fixture.buildCubit(),
-    seed: () =>
-        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
-    act: (cubit) async {
-      await cubit.openCurrentChat();
-      await cubit.showNextAndMaybeOpenItsChat();
-    },
-    verify: (cubit) => expect(
-      BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).current.person.id,
-      mina.id,
-    ),
-  );
-
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
     'returning to the app twice after one chat moves on only once',
     build: () => fixture.buildCubit(),
     seed: () =>

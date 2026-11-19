@@ -131,7 +131,13 @@ void main() {
     await tester.pump(AddressFormController.houseNumberGeocodingDebounce);
     await tester.pumpAndSettle();
 
-    expect(form.area.fieldValue, stMinaArea);
+    expect(
+      find.descendant(
+        of: find.byKey(AddressFormPlaceFieldsKeys.area),
+        matching: find.text(stMinaArea.name),
+      ),
+      findsOneWidget,
+    );
   });
 
   testWidgets('the house number field keeps focus when the geocoded house '

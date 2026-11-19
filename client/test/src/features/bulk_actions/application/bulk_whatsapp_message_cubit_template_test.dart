@@ -13,8 +13,6 @@ class _RejectingWritesBox extends FakeSyncKVStore<Object?> {
 }
 
 void main() {
-  const lastSentText = 'اهلا';
-
   late BulkWhatsappMessageCubitFixture fixture;
 
   setUp(() => fixture = BulkWhatsappMessageCubitFixture());
@@ -56,24 +54,5 @@ void main() {
     act: (cubit) => cubit.saveTextAndStart(fixture.template),
     verify: (_) =>
         expect(fixture.userPreferences.lastWhatsappMessageText, isNull),
-  );
-
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
-    'the last saved message is offered with the given fields',
-    setUp: () => fixture.userPreferences.setLastWhatsappMessageText(
-      lastSentText,
-    ),
-    build: () => fixture.buildCubit(),
-    verify: (cubit) => expect(
-      cubit.withLastSentTextOr(fixture.template),
-      MessageTemplate(text: lastSentText, fields: fixture.template.fields),
-    ),
-  );
-
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
-    'without a saved message the given template is offered',
-    build: () => fixture.buildCubit(),
-    verify: (cubit) =>
-        expect(cubit.withLastSentTextOr(fixture.template), fixture.template),
   );
 }

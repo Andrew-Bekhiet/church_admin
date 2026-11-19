@@ -32,6 +32,14 @@ void main() {
       attendedDays: {DateTime(2026, 6, 7)},
     );
 
+    final reloadedAnalysis = PersonMeetingAttendanceAnalysis(
+      personId: 'p1',
+      meeting: meeting,
+      asServant: false,
+      heldDays: [DateTime(2026, 6, 7), DateTime(2026, 6, 14)],
+      attendedDays: {DateTime(2026, 6, 14)},
+    );
+
     setUpAll(() {
       registerFallbackValue(
         DateTimeRange(start: DateTime(2026), end: DateTime(2026)),
@@ -70,7 +78,7 @@ void main() {
     );
 
     blocTest<PersonAttendanceAnalysisCubit, PersonAttendanceAnalysisState>(
-      'emits Empty and skips the DAO when no meetings are selected',
+      'emits Empty when no meetings are selected',
       setUp: () => stubAnalysis([analysis]),
       build: () => PersonAttendanceAnalysisCubit(
         personId: 'p1',
@@ -79,14 +87,6 @@ void main() {
       ),
       verify: (cubit) {
         expect(cubit.state, isA<PersonAttendanceAnalysisEmpty>());
-        verifyNever(
-          () => dao.getPersonAttendanceAnalysis(
-            personId: any(named: 'personId'),
-            range: any(named: 'range'),
-            meetings: any(named: 'meetings'),
-            asServant: any(named: 'asServant'),
-          ),
-        );
       },
     );
 
@@ -112,8 +112,18 @@ void main() {
     );
 
     blocTest<PersonAttendanceAnalysisCubit, PersonAttendanceAnalysisState>(
-      'passes the servant scope and meeting filter through to the DAO',
-      setUp: () => stubAnalysis(const []),
+      'loads the servant analyses of the selected meetings',
+      setUp: () {
+        stubAnalysis(const []);
+        when(
+          () => dao.getPersonAttendanceAnalysis(
+            personId: 'p1',
+            range: range,
+            meetings: [meeting],
+            asServant: true,
+          ),
+        ).thenAnswer((_) async => [analysis]);
+      },
       build: () => PersonAttendanceAnalysisCubit(
         personId: 'p1',
         options: PersonAnalysisOptions(
@@ -123,37 +133,55 @@ void main() {
         asServant: true,
         dao: dao,
       ),
-      verify: (_) {
-        verify(
-          () => dao.getPersonAttendanceAnalysis(
-            personId: 'p1',
-            range: range,
-            meetings: [meeting],
-            asServant: true,
-          ),
-        ).called(1);
-      },
+      expect: () => [
+        isA<PersonAttendanceAnalysisLoaded>().having(
+          (s) => s.analyses,
+          'analyses',
+          [analysis],
+        ),
+      ],
     );
 
     blocTest<PersonAttendanceAnalysisCubit, PersonAttendanceAnalysisState>(
-      'reload re-fetches from the DAO',
-      setUp: () => stubAnalysis([analysis]),
-      build: () => PersonAttendanceAnalysisCubit(
-        personId: 'p1',
-        options: options,
-        dao: dao,
-      ),
-      act: (cubit) => cubit.load(options),
-      verify: (_) {
-        verify(
+      'reload shows the fresh result of the DAO',
+      setUp: () {
+        final answers = [
+          [analysis],
+          [reloadedAnalysis],
+        ];
+        when(
           () => dao.getPersonAttendanceAnalysis(
             personId: any(named: 'personId'),
             range: any(named: 'range'),
             meetings: any(named: 'meetings'),
             asServant: any(named: 'asServant'),
           ),
-        ).called(2);
+        ).thenAnswer((_) async => answers.removeAt(0));
       },
+      build: () => PersonAttendanceAnalysisCubit(
+        personId: 'p1',
+        options: options,
+        dao: dao,
+      ),
+      act: (cubit) async {
+        await cubit.stream.firstWhere(
+          (s) => s is PersonAttendanceAnalysisLoaded,
+        );
+        await cubit.load(options);
+      },
+      expect: () => [
+        isA<PersonAttendanceAnalysisLoaded>().having(
+          (s) => s.analyses,
+          'analyses',
+          [analysis],
+        ),
+        isA<PersonAttendanceAnalysisLoading>(),
+        isA<PersonAttendanceAnalysisLoaded>().having(
+          (s) => s.analyses,
+          'analyses',
+          [reloadedAnalysis],
+        ),
+      ],
     );
   });
 }

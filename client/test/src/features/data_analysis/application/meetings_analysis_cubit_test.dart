@@ -35,6 +35,10 @@ void main() {
       title: 'خدمة',
       meetings: const [],
     );
+    final reloadedAnalysis = MeetingsAttendanceAnalysis(
+      title: 'خدمة محدثة',
+      meetings: const [],
+    );
     const rosterMember = SingleDayRosterMember(
       personId: 'p1',
       attended: true,
@@ -141,14 +145,6 @@ void main() {
           analysis,
         ),
       ],
-      verify: (_) {
-        verifyNever(
-          () => dao.getSingleDayRosterDemographics(
-            subject: any(named: 'subject'),
-            day: any(named: 'day'),
-          ),
-        );
-      },
     );
 
     blocTest<MeetingsAnalysisCubit, MeetingsAnalysisState>(
@@ -192,12 +188,18 @@ void main() {
         stubAnalysis();
         stubRoster();
         stubClasses(const []);
+        when(
+          () => classesDao.getClassesForService(serviceId: service.id),
+        ).thenAnswer((_) async => [class$]);
       },
       build: buildCubit,
-      verify: (_) {
-        verify(
-          () => classesDao.getClassesForService(serviceId: service.id),
-        ).called(1);
+      verify: (cubit) {
+        expect(
+          ((cubit.state as MeetingsAnalysisLoaded).analysis
+                  as SingleDayMeetingsAttendanceAnalysis)
+              .classes,
+          [class$],
+        );
       },
     );
 
@@ -207,6 +209,9 @@ void main() {
         stubAnalysis();
         stubRoster();
         stubClasses(const []);
+        when(
+          () => classesDao.getClassesForService(serviceId: 's1'),
+        ).thenAnswer((_) async => [class$]);
       },
       build: () => buildCubit(
         subject: const MeetingAnalysisSubject(
@@ -219,10 +224,13 @@ void main() {
           ),
         ),
       ),
-      verify: (_) {
-        verify(
-          () => classesDao.getClassesForService(serviceId: 's1'),
-        ).called(1);
+      verify: (cubit) {
+        expect(
+          ((cubit.state as MeetingsAnalysisLoaded).analysis
+                  as SingleDayMeetingsAttendanceAnalysis)
+              .classes,
+          [class$],
+        );
       },
     );
 
@@ -243,11 +251,6 @@ void main() {
         ),
       ),
       verify: (cubit) {
-        verifyNever(
-          () => classesDao.getClassesForService(
-            serviceId: any(named: 'serviceId'),
-          ),
-        );
         expect(
           ((cubit.state as MeetingsAnalysisLoaded).analysis
                   as SingleDayMeetingsAttendanceAnalysis)
@@ -258,18 +261,13 @@ void main() {
     );
 
     blocTest<MeetingsAnalysisCubit, MeetingsAnalysisState>(
-      'a class subject resolves to itself without hitting the classes DAO',
+      'a class subject resolves to itself',
       setUp: () {
         stubAnalysis();
         stubRoster();
       },
       build: () => buildCubit(subject: const ClassAnalysisSubject(class$)),
       verify: (cubit) {
-        verifyNever(
-          () => classesDao.getClassesForService(
-            serviceId: any(named: 'serviceId'),
-          ),
-        );
         expect(
           ((cubit.state as MeetingsAnalysisLoaded).analysis
                   as SingleDayMeetingsAttendanceAnalysis)
@@ -287,11 +285,6 @@ void main() {
       },
       build: () => buildCubit(subject: const GroupAnalysisSubject(group)),
       verify: (cubit) {
-        verifyNever(
-          () => classesDao.getClassesForService(
-            serviceId: any(named: 'serviceId'),
-          ),
-        );
         expect(
           ((cubit.state as MeetingsAnalysisLoaded).analysis
                   as SingleDayMeetingsAttendanceAnalysis)
@@ -317,18 +310,34 @@ void main() {
     );
 
     blocTest<MeetingsAnalysisCubit, MeetingsAnalysisState>(
-      'reload re-fetches from the DAO',
-      setUp: stubAnalysis,
-      build: () => buildCubit(initialRange: range),
-      act: (cubit) => cubit.load(CustomDateTimeRangePreset(range: range)),
-      verify: (_) {
-        verify(
+      'reload shows the fresh result of the DAO',
+      setUp: () {
+        final answers = [analysis, reloadedAnalysis];
+        when(
           () => dao.getMeetingsAttendanceAnalysis(
             subject: any(named: 'subject'),
             range: any(named: 'range'),
           ),
-        ).called(2);
+        ).thenAnswer((_) async => answers.removeAt(0));
       },
+      build: () => buildCubit(initialRange: range),
+      act: (cubit) async {
+        await cubit.stream.firstWhere((s) => s is MeetingsAnalysisLoaded);
+        await cubit.load(CustomDateTimeRangePreset(range: range));
+      },
+      expect: () => [
+        isA<MeetingsAnalysisLoaded>().having(
+          (s) => s.analysis,
+          'analysis',
+          analysis,
+        ),
+        isA<MeetingsAnalysisLoading>(),
+        isA<MeetingsAnalysisLoaded>().having(
+          (s) => s.analysis,
+          'analysis',
+          reloadedAnalysis,
+        ),
+      ],
     );
   });
 }

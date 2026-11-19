@@ -200,7 +200,7 @@ void main() {
     contactOf(form, newKeyAt(0)).phone.setValue('01003333333');
 
     canHaveFamilyNumbers = true;
-    form.revalidateSync();
+    form.revalidateAfterFamilyAvailabilityChanged();
 
     expect(form.value.validationErrors, isEmpty);
   });

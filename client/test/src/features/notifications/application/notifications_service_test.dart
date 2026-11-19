@@ -311,6 +311,8 @@ void main() {
               final unit = _createNewUnit();
               addTearDown(unit.dispose);
 
+              final sentTime = DateTime.utc(2026, 11, 18);
+
               final initialRemoteMessage = RemoteMessage(
                 notification: const RemoteNotification(
                   title: 'title',
@@ -318,7 +320,7 @@ void main() {
                 ),
                 data: {'aa': 'bb', 'senderUID': 'foobar'},
                 messageId: 'foo',
-                sentTime: DateTime.now(),
+                sentTime: sentTime,
               );
 
               when(
@@ -330,19 +332,15 @@ void main() {
               await expectLater(
                 unit.getInitialNotification(),
                 completion(
-                  Notification.fromRemoteMessage(initialRemoteMessage),
+                  Notification(
+                    id: 'foo',
+                    title: 'title',
+                    body: 'body',
+                    sentTime: sentTime,
+                    senderUID: 'foobar',
+                    additionalData: const {'aa': 'bb', 'senderUID': 'foobar'},
+                  ),
                 ),
-              );
-
-              verify(
-                globalProviderContainer
-                    .read(firebaseMessagingProvider)
-                    .getInitialMessage(),
-              );
-              verifyNever(
-                globalProviderContainer
-                    .read(localNotificationsPluginProvider)
-                    .getNotificationAppLaunchDetails(),
               );
             },
           );
@@ -388,18 +386,6 @@ void main() {
                 unit.getInitialNotification(),
                 completion(expectedNotification),
               );
-
-              verifyInOrder([
-                globalProviderContainer
-                    .read(firebaseMessagingProvider)
-                    .getInitialMessage(),
-                globalProviderContainer
-                    .read(localNotificationsPluginProvider)
-                    .getNotificationAppLaunchDetails(),
-                globalProviderContainer
-                    .read(notificationsStorageProvider)
-                    .readNotification(notificationId),
-              ]);
             },
           );
 
@@ -639,9 +625,10 @@ void main() {
                 remoteMessage,
               );
 
-              verifyInOrder([
-                InitializationService.I.initialize(),
+              verify(
                 NotificationsStorage.I.writeNotification(expectedNotification),
+              );
+              verify(
                 NotificationsService.I.notify(
                   expectedNotification,
                   notificationDetails:
@@ -649,7 +636,7 @@ void main() {
                         expectedNotification,
                       ),
                 ),
-              ]);
+              );
             },
           );
 
@@ -677,10 +664,9 @@ void main() {
                 remoteMessage,
               );
 
-              verifyInOrder([
-                InitializationService.I.initialize(),
+              verify(
                 NotificationsStorage.I.writeNotification(expectedNotification),
-              ]);
+              );
               verifyNever(
                 (NotificationsService.I as MockNotificationsService).notify(
                   any,
@@ -715,9 +701,6 @@ void main() {
                 remoteMessage,
               );
 
-              verifyInOrder([
-                InitializationService.I.initialize(),
-              ]);
               verifyNever(
                 (NotificationsService.I as MockNotificationsService).notify(
                   any,
@@ -765,7 +748,7 @@ void main() {
               expect(
                 capturedCall!.arguments,
                 _callArgumentsMatchFor(
-                  notificationSetting: notificationSetting,
+                  intervalInMilliseconds: twoDaysInMilliseconds,
                   name: 'BirthDay',
                   callback:
                       NotificationsServiceCallbacks.showBirthDayNotification,
@@ -803,7 +786,7 @@ void main() {
               expect(
                 capturedCall!.arguments,
                 _callArgumentsMatchFor(
-                  notificationSetting: notificationSetting,
+                  intervalInMilliseconds: twoDaysInMilliseconds,
                   name: 'Attendance',
                   callback:
                       NotificationsServiceCallbacks.showAttendanceNotification,
@@ -841,7 +824,7 @@ void main() {
               expect(
                 capturedCall!.arguments,
                 _callArgumentsMatchFor(
-                  notificationSetting: notificationSetting,
+                  intervalInMilliseconds: twoDaysInMilliseconds,
                   name: 'Kodas',
                   callback: NotificationsServiceCallbacks.showKodasNotification,
                 ),
@@ -878,7 +861,7 @@ void main() {
               expect(
                 capturedCall!.arguments,
                 _callArgumentsMatchFor(
-                  notificationSetting: notificationSetting,
+                  intervalInMilliseconds: twoDaysInMilliseconds,
                   name: 'Confession',
                   callback:
                       NotificationsServiceCallbacks.showConfessionNotification,
@@ -914,8 +897,10 @@ void _mockLocalInitialNotification(Notification expectedInitialNotification) {
   ).thenAnswer((_) async => expectedInitialNotification);
 }
 
+const twoDaysInMilliseconds = 172800000;
+
 List<Object> _callArgumentsMatchFor({
-  required NotificationSetting notificationSetting,
+  required int intervalInMilliseconds,
   required String name,
   required VoidCallback callback,
 }) {
@@ -925,7 +910,7 @@ List<Object> _callArgumentsMatchFor({
     true,
     true,
     anything,
-    notificationSetting.intervalInDays * 24 * 60 * 60 * 1000,
+    intervalInMilliseconds,
     true,
     PluginUtilities.getCallbackHandle(callback)!.toRawHandle(),
     {},

@@ -1,95 +1,98 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
-import 'notifications_settings_storage_test.mocks.dart';
+import '../../../../fakes/fake_box.dart';
 
-@GenerateNiceMocks([
-  MockSpec<SyncKVStore>(),
-])
 void main() {
   group('NotificationsSettingsStorage', () {
-    late MockSyncKVStore<NotificationSetting> mockBox;
+    late FakeSyncKVStore<NotificationSetting> box;
     late NotificationsSettingsStorage storage;
 
     setUp(() {
-      mockBox = MockSyncKVStore<NotificationSetting>();
-
-      storage = NotificationsSettingsStorage(mockBox);
+      box = FakeSyncKVStore<NotificationSetting>();
+      storage = NotificationsSettingsStorage(box);
     });
 
-    test('birthDayTimeSetting', () async {
-      const setting = NotificationSetting(
-        hours: 12,
+    const chosen = NotificationSetting(
+      hours: 12,
+      minutes: 30,
+      intervalInDays: 3,
+    );
+
+    final settings =
+        <
+          String,
+          ({
+            Future<void> Function(NotificationSetting) set,
+            NotificationSetting Function() read,
+          })
+        >{
+          'birthday': (
+            set: (setting) => storage.setBirthDayTime(setting),
+            read: () => storage.birthDayTimeSetting,
+          ),
+          'kodas': (
+            set: (setting) => storage.setKodasTime(setting),
+            read: () => storage.kodasTimeSetting,
+          ),
+          'attendance': (
+            set: (setting) => storage.setAttendanceTime(setting),
+            read: () => storage.attendanceTimeSetting,
+          ),
+          'confession': (
+            set: (setting) => storage.setConfessionTime(setting),
+            read: () => storage.confessionTimeSetting,
+          ),
+        };
+
+    for (final MapEntry(key: name, value: accessors) in settings.entries) {
+      test('a chosen $name time is read back', () async {
+        await accessors.set(chosen);
+
+        expect(accessors.read(), chosen);
+      });
+
+      test('an unset $name time is 11:00 every 7 days', () {
+        expect(
+          accessors.read(),
+          const NotificationSetting(hours: 11, minutes: 0, intervalInDays: 7),
+        );
+      });
+    }
+
+    test('settings are persisted under their stored key names', () async {
+      const birthday = NotificationSetting(
+        hours: 1,
         minutes: 0,
-        intervalInDays: 7,
+        intervalInDays: 1,
+      );
+      const kodas = NotificationSetting(
+        hours: 2,
+        minutes: 0,
+        intervalInDays: 2,
+      );
+      const attendance = NotificationSetting(
+        hours: 3,
+        minutes: 0,
+        intervalInDays: 3,
+      );
+      const confession = NotificationSetting(
+        hours: 4,
+        minutes: 0,
+        intervalInDays: 4,
       );
 
-      when(
-        mockBox.get(NotificationsSettingsStorage.birthDayTimeKey),
-      ).thenReturn(setting);
-      expect(storage.birthDayTimeSetting, setting);
+      await storage.setBirthDayTime(birthday);
+      await storage.setKodasTime(kodas);
+      await storage.setAttendanceTime(attendance);
+      await storage.setConfessionTime(confession);
 
-      await storage.setBirthDayTime(setting);
-      verify(mockBox.put('BirthDayTime', setting)).called(1);
-    });
-
-    test('kodasTimeSetting', () async {
-      const setting = NotificationSetting(
-        hours: 13,
-        minutes: 0,
-        intervalInDays: 7,
-      );
-
-      when(
-        mockBox.get(NotificationsSettingsStorage.kodasTimeKey),
-      ).thenReturn(setting);
-      expect(storage.kodasTimeSetting, setting);
-
-      await storage.setKodasTime(setting);
-      verify(
-        mockBox.put(NotificationsSettingsStorage.kodasTimeKey, setting),
-      ).called(1);
-    });
-
-    test('attendanceTimeSetting', () async {
-      const setting = NotificationSetting(
-        hours: 14,
-        minutes: 0,
-        intervalInDays: 7,
-      );
-
-      when(
-        mockBox.get(NotificationsSettingsStorage.attendanceTimeKey),
-      ).thenReturn(setting);
-      expect(storage.attendanceTimeSetting, setting);
-
-      await storage.setAttendanceTime(setting);
-      verify(
-        mockBox.put(NotificationsSettingsStorage.attendanceTimeKey, setting),
-      ).called(1);
-    });
-
-    test('confessionTimeSetting', () async {
-      const setting = NotificationSetting(
-        hours: 15,
-        minutes: 0,
-        intervalInDays: 7,
-      );
-
-      when(
-        mockBox.get(NotificationsSettingsStorage.confessionTimeKey),
-      ).thenReturn(setting);
-      expect(storage.confessionTimeSetting, setting);
-
-      await storage.setConfessionTime(setting);
-      verify(
-        mockBox.put(
-          NotificationsSettingsStorage.confessionTimeKey,
-          setting,
-        ),
-      ).called(1);
+      expect(box.toMap(), {
+        'BirthDayTime': birthday,
+        'KodasTime': kodas,
+        'AttendanceTime': attendance,
+        'ConfessionTime': confession,
+      });
     });
   });
 }

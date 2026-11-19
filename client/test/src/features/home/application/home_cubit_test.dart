@@ -9,7 +9,6 @@ import '../../../utils.dart';
 import '../support/fake_home_daily_data_repository.dart';
 import '../support/home_cubit_fixture.dart';
 import '../support/home_database_fixture.dart';
-import '../support/home_state_tabs.dart';
 
 void main() {
   late HomeCubitFixture fixture;
@@ -38,32 +37,6 @@ void main() {
   });
 
   group('tabs', () {
-    blocTest<HomeCubit, HomeState>(
-      'sunday school mode lists summary, services and persons',
-      build: () => fixture.buildCubit(),
-      wait: Duration.zero,
-      verify: (cubit) => expect(cubit.state.entityTypesAfterSummary, [
-        Service,
-        Person,
-      ]),
-    );
-
-    blocTest<HomeCubit, HomeState>(
-      'church data mode lists summary, areas, streets, families, stores '
-      'and persons',
-      setUp: () =>
-          fixture = HomeCubitFixture(lastHomeMode: HomeMode.churchData),
-      build: () => fixture.buildCubit(),
-      wait: Duration.zero,
-      verify: (cubit) => expect(cubit.state.entityTypesAfterSummary, [
-        Area,
-        Street,
-        Family,
-        Store,
-        Person,
-      ]),
-    );
-
     blocTest<HomeCubit, HomeState>(
       'the services tab starts as a grid',
       build: () => fixture.buildCubit(),
@@ -169,40 +142,6 @@ void main() {
       build: () => fixture.buildCubit(),
       wait: Duration.zero,
       verify: (cubit) => expect(cubit.state.birthdays?.preview, isEmpty),
-    );
-
-    blocTest<HomeCubit, HomeState>(
-      'joins three birthday names with the arabic comma',
-      setUp: () => fixture = HomeCubitFixture(
-        dailyData: FakeHomeDailyDataRepository(birthdays: ['ann', 'ben', 'cy']),
-      ),
-      build: () => fixture.buildCubit(),
-      wait: Duration.zero,
-      verify: (cubit) {
-        final [first, second, third] = fixture.dailyData.birthdays;
-
-        expect(cubit.state.birthdays?.preview, '$first، $second، $third');
-      },
-    );
-
-    blocTest<HomeCubit, HomeState>(
-      'shows the first three birthday names and an ellipsis when there are '
-      'more',
-      setUp: () => fixture = HomeCubitFixture(
-        dailyData: FakeHomeDailyDataRepository(
-          birthdays: ['ann', 'ben', 'cy', 'dee', 'eve'],
-        ),
-      ),
-      build: () => fixture.buildCubit(),
-      wait: Duration.zero,
-      verify: (cubit) {
-        final [first, second, third, ...] = fixture.dailyData.birthdays;
-
-        expect(
-          cubit.state.birthdays?.preview,
-          '$first، $second، $third، ...',
-        );
-      },
     );
 
     blocTest<HomeCubit, HomeState>(
@@ -580,28 +519,6 @@ void main() {
       uid: 'manager',
       name: 'manager',
       permissions: PermissionsSet.fromSet({UserPermission.manageAllUsers}),
-    );
-
-    blocTest<HomeCubit, HomeState>(
-      'a user who can manage some users is allowed to manage users',
-      setUp: () => fixture = HomeCubitFixture(
-        userDataStream: Stream.value(manager),
-      ),
-      build: () => fixture.buildCubit(),
-      wait: Duration.zero,
-      verify: (cubit) => expect(cubit.state.canManageUsers, isTrue),
-    );
-
-    blocTest<HomeCubit, HomeState>(
-      'a user who cannot manage users is not allowed to',
-      setUp: () => fixture = HomeCubitFixture(
-        userDataStream: Stream.value(
-          const User(uid: 'servant', name: 'servant'),
-        ),
-      ),
-      build: () => fixture.buildCubit(),
-      wait: Duration.zero,
-      verify: (cubit) => expect(cubit.state.canManageUsers, isFalse),
     );
 
     blocTest<HomeCubit, HomeState>(

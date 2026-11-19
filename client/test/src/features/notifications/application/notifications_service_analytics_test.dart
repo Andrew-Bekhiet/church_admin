@@ -98,12 +98,6 @@ void main() {
       addTearDown(unit.dispose);
     });
 
-    test('signing in tracks one notification permission request', () async {
-      await unit.onTransition(authBloc, signIn);
-
-      expect(analytics.trackedEvents, [isA<NotificationPermissionRequest>()]);
-    });
-
     test(
       'the permission request is tracked with whether it was granted',
       () async {

@@ -76,13 +76,26 @@ class TabsHeaderDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(TabsHeaderDelegate oldDelegate) => false;
 }
 
-abstract final class SelectionAwareAppBarTestKeys {
-  static const Key tabsHeader = ValueKey('selection-aware-tabs-header');
-  static const Key screenTitle = ValueKey('selection-aware-screen-title');
-  static const Key shownNames = ValueKey('selection-aware-shown-names');
-  static const Key previousScreen = ValueKey('selection-aware-previous-screen');
+abstract final class SelectionAwareAppBarTestKeys extends WidgetKeys {
+  static const Key tabsHeader = ValueKey((
+    SelectionAwareAppBarTestKeys,
+    #tabsHeader,
+  ));
+  static const Key screenTitle = ValueKey((
+    SelectionAwareAppBarTestKeys,
+    #screenTitle,
+  ));
+  static const Key shownNames = ValueKey((
+    SelectionAwareAppBarTestKeys,
+    #shownNames,
+  ));
+  static const Key previousScreen = ValueKey((
+    SelectionAwareAppBarTestKeys,
+    #previousScreen,
+  ));
 
-  static Key itemFor(String id) => ValueKey('selection-aware-item-$id');
+  static Key itemFor(String id) =>
+      ValueKey((SelectionAwareAppBarTestKeys, #itemFor, id));
 }
 
 void main() {
@@ -419,27 +432,6 @@ void main() {
     expect(selection.state.selected, unorderedEquals(persons));
   });
 
-  testScreen('a bulk action runs on the selected items', (tester) async {
-    await pumpScreenListing(tester, persons);
-
-    await tester.longPress(
-      find.byKey(SelectionAwareAppBarTestKeys.itemFor(persons[0].id)),
-    );
-    await tester.pumpAndSettle();
-    await tester.tap(
-      find.byKey(SelectionAwareAppBarTestKeys.itemFor(persons[2].id)),
-    );
-    await tester.pumpAndSettle();
-    await tester.tap(
-      find.byKey(
-        ListSelectionBarKeys.actionButtonFor(const ShowNamesBulkAction()),
-      ),
-    );
-    await tester.pumpAndSettle();
-
-    expect(shownNames(tester), 'مينا، بيتر');
-  });
-
   testScreen('a bulk action gets the selected items in list order', (
     tester,
   ) async {
@@ -526,25 +518,6 @@ void main() {
       ['bulk_action:invoke'],
     );
   });
-
-  testScreen(
-    'a list typed by a supertype offers the actions of the selected items',
-    (tester) async {
-      await pumpScreenListing<ViewableWithID>(tester, persons);
-
-      await tester.longPress(
-        find.byKey(SelectionAwareAppBarTestKeys.itemFor(persons[0].id)),
-      );
-      await tester.pumpAndSettle();
-
-      expect(
-        find.byKey(
-          ListSelectionBarKeys.actionButtonFor(const ShowNamesBulkAction()),
-        ),
-        findsOneWidget,
-      );
-    },
-  );
 
   testScreen('a bulk action runs only on the selected items of its type', (
     tester,

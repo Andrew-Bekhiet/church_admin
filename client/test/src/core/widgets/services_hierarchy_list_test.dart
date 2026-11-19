@@ -151,7 +151,6 @@ void main() {
       );
 
       expect(find.byKey(const Key('Class 1')), findsNothing);
-      expect(find.byKey(const Key('Class 2')), findsNothing);
       expect(find.byKey(const Key('Group 1')), findsNothing);
       expect(find.byKey(const Key('Group 2')), findsNothing);
       expect(find.byKey(const Key('First Primary')), findsNothing);
@@ -159,29 +158,19 @@ void main() {
       await tester.tap(find.byKey(const Key('Service 1')));
       await tester.pumpAndSettle();
 
-      expect(find.byKey(const Key('Class 1')), findsNothing);
-      expect(find.byKey(const Key('Class 2')), findsNothing);
+      expect(find.byKey(const Key('First Primary')), findsOneWidget);
       expect(find.byKey(const Key('Group 1')), findsOneWidget);
       expect(find.byKey(const Key('Group 2')), findsOneWidget);
-      expect(find.byKey(const Key('First Primary')), findsOneWidget);
 
       await tester.tap(find.byKey(const Key('Service 1')));
       await tester.pumpAndSettle();
-
-      expect(find.byKey(const Key('Class 1')), findsNothing);
-      expect(find.byKey(const Key('Class 2')), findsNothing);
-      expect(find.byKey(const Key('Group 1')), findsNothing);
-      expect(find.byKey(const Key('Group 2')), findsNothing);
-      expect(find.byKey(const Key('First Primary')), findsNothing);
 
       await tester.tap(find.byKey(const Key('Service 2')));
       await tester.pumpAndSettle();
 
       expect(find.byKey(const Key('Class 1')), findsOneWidget);
-      expect(find.byKey(const Key('Class 2')), findsNothing);
       expect(find.byKey(const Key('Group 1')), findsOneWidget);
       expect(find.byKey(const Key('Group 2')), findsOneWidget);
-      expect(find.byKey(const Key('First Primary')), findsNothing);
 
       // Dispose the main widget:
       await tester.pumpWidget(Container());

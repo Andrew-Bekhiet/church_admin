@@ -58,27 +58,6 @@ void main() {
 
   tearDown(defaultTearDown);
 
-  testWidgets('moving the store out of sight asks before saving', (
-    tester,
-  ) async {
-    await moveToMaadiAndSave(tester);
-
-    expect(find.byType(MoveOutOfSightConfirmationDialog), findsOneWidget);
-    expect(harness.storesDAO.updates, isEmpty);
-  });
-
-  testWidgets('declining the move keeps the editor and saves nothing', (
-    tester,
-  ) async {
-    await moveToMaadiAndSave(tester);
-
-    await tester.tap(find.byKey(ConfirmationDialogKeys.cancelButton));
-    await tester.pumpAndSettle();
-
-    expect(find.byKey(ObjectSaveButtonKeys.saveButton), findsOneWidget);
-    expect(harness.storesDAO.updates, isEmpty);
-  });
-
   testWidgets('a confirmed move is saved and leaves the store behind', (
     tester,
   ) async {

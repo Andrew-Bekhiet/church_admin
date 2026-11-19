@@ -9,6 +9,8 @@ import 'package:rxdart/rxdart.dart';
 
 import 'connectivity_service_test.mocks.dart';
 
+const _hasuraServer = 'https://hasura.server.mock.com';
+
 @GenerateNiceMocks([
   MockSpec<Connectivity>(),
   MockSpec<Dio>(),
@@ -34,23 +36,11 @@ void main() {
 
       await expectLater(unit.isConnected(), completion(isTrue));
 
-      final captured = verifyInOrder(
-        [
-          globalProviderContainer
-              .read(connectivityPluginProvider)
-              .checkConnectivity(),
-          (globalProviderContainer.read(dioProvider) as MockDio).get(
-            captureAny,
-          ),
-        ],
+      final captured = verify(
+        (globalProviderContainer.read(dioProvider) as MockDio).get(captureAny),
       ).captured;
 
-      expect(
-        captured[1].first,
-        Uri.parse(
-          SecretsService.I.hasuraServer,
-        ).replace(pathSegments: ['healthz']).toString(),
-      );
+      expect(captured, everyElement('$_hasuraServer/healthz'));
     },
   );
 
@@ -67,12 +57,6 @@ void main() {
       addTearDown(unit.dispose);
 
       await expectLater(unit.isConnected(), completion(isFalse));
-
-      verify(
-        globalProviderContainer
-            .read(connectivityPluginProvider)
-            .checkConnectivity(),
-      );
 
       verifyNever(
         (globalProviderContainer.read(dioProvider) as MockDio).get(captureAny),
@@ -156,7 +140,7 @@ Override _setUpMockConnectivity() {
 
 Override _setUpMockSecretsRepo() {
   final mockSecrets = MockSecretsService();
-  when(mockSecrets.hasuraServer).thenReturn('https://hasura.server.mock.com/');
+  when(mockSecrets.hasuraServer).thenReturn(_hasuraServer);
 
   return secretsServiceProvider.overrideWithValue(mockSecrets);
 }

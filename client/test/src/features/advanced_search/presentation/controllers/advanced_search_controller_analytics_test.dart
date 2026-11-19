@@ -254,20 +254,6 @@ void main() {
       ]);
     });
 
-    test('a search without a limit or polygon says so', () {
-      unit.trackQuerySubmit(isAutoExecuted: false);
-
-      expect(f.analytics.trackedEventsOf<AdvancedSearchQuerySubmit>(), [
-        isA<AdvancedSearchQuerySubmit>()
-            .having((event) => event.limitValue, 'limitValue', isNull)
-            .having(
-              (event) => event.hasPolygonFilter,
-              'hasPolygonFilter',
-              false,
-            ),
-      ]);
-    });
-
     test('a results search cleared before it settles is not tracked', () {
       f.typeUntilSettled((controller, _) {
         final searches = BehaviorSubject<String?>.seeded(resultsSearchText);

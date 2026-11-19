@@ -50,13 +50,13 @@ void main() {
     Future<void> pumpIndicator(
       WidgetTester tester,
       DataCheck dataCheck, {
-      bool canOverride = true,
+      bool canChangeDataCheck = true,
     }) => tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
           body: DataCheckIndicator(
             dataCheck: dataCheck,
-            canOverride: canOverride,
+            canChangeDataCheck: canChangeDataCheck,
           ),
         ),
       ),
@@ -67,8 +67,8 @@ void main() {
     ) async {
       await pumpIndicator(tester, complete);
 
-      expect(find.byKey(DataCheckEmblem.completeBadgeKey), findsOneWidget);
-      expect(find.byKey(DataCheckEmblem.progressRingKey), findsNothing);
+      expect(find.byKey(DataCheckEmblemKeys.completeBadge), findsOneWidget);
+      expect(find.byKey(DataCheckEmblemKeys.progressRing), findsNothing);
     });
 
     testWidgets('an incomplete family shows how far it is from complete', (
@@ -77,10 +77,10 @@ void main() {
       await pumpIndicator(tester, incomplete);
 
       final ring = tester.widget<CircularProgressIndicator>(
-        find.byKey(DataCheckEmblem.progressRingKey),
+        find.byKey(DataCheckEmblemKeys.progressRing),
       );
       expect(ring.value, incomplete.completenessPercent / 100);
-      expect(find.byKey(DataCheckEmblem.completeBadgeKey), findsNothing);
+      expect(find.byKey(DataCheckEmblemKeys.completeBadge), findsNothing);
     });
 
     testWidgets(
@@ -92,7 +92,7 @@ void main() {
         await tester.pumpAndSettle();
 
         Finder iconIn(DataCheckDetail detail) => find.descendant(
-          of: find.byKey(DataCheckDetailRow.keyFor(detail)),
+          of: find.byKey(DataCheckDetailRowKeys.selfFor(detail)),
           matching: find.byType(Icon),
         );
         expect(
@@ -103,56 +103,50 @@ void main() {
       },
     );
 
-    testWidgets('check results are announced in an Arabic RTL report', (
-      tester,
-    ) async {
-      final semantics = tester.ensureSemantics();
-      await tester.pumpWidget(
-        MaterialUiTestApp.withThemeAndLocale(
-          child: Scaffold(
-            body: Column(
-              children: [
-                DataCheckDetailRow(detail: passedDetail),
-                DataCheckDetailRow(detail: failedDetail),
-              ],
+    testWidgets(
+      'check results are announced to screen readers as passed or failed',
+      (
+        tester,
+      ) async {
+        final semantics = tester.ensureSemantics();
+        await tester.pumpWidget(
+          MaterialUiTestApp.withThemeAndLocale(
+            child: Scaffold(
+              body: Column(
+                children: [
+                  DataCheckDetailRow(detail: passedDetail),
+                  DataCheckDetailRow(detail: failedDetail),
+                ],
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      expect(find.bySemanticsLabel('اجتاز الفحص'), findsOneWidget);
-      expect(find.bySemanticsLabel('لم يجتز الفحص'), findsOneWidget);
-      expect(
-        Directionality.of(tester.element(find.byType(Column).first)),
-        TextDirection.rtl,
-      );
-      semantics.dispose();
-    });
+        Finder labelIn(DataCheckDetail detail, String label) => find.descendant(
+          of: find.byKey(DataCheckDetailRowKeys.selfFor(detail)),
+          matching: find.bySemanticsLabel(label),
+        );
+        expect(labelIn(passedDetail, 'اجتاز الفحص'), findsOneWidget);
+        expect(labelIn(failedDetail, 'لم يجتز الفحص'), findsOneWidget);
+        semantics.dispose();
+      },
+    );
 
-    testWidgets('the report explains how the manual override works', (
-      tester,
-    ) async {
-      await pumpIndicator(tester, incomplete);
+    testWidgets(
+      'a user who cannot change the data check sees the report without the override controls',
+      (tester) async {
+        await pumpIndicator(tester, incomplete, canChangeDataCheck: false);
 
-      await tester.tap(find.byType(DataCheckIndicator));
-      await tester.pumpAndSettle();
+        await tester.tap(find.byType(DataCheckIndicator));
+        await tester.pumpAndSettle();
 
-      expect(find.text(DataCheckOverrideSelector.explanation), findsOneWidget);
-    });
-
-    testWidgets('a reader without edit rights cannot change the verdict', (
-      tester,
-    ) async {
-      await pumpIndicator(tester, incomplete, canOverride: false);
-
-      await tester.tap(find.byType(DataCheckIndicator));
-      await tester.pumpAndSettle();
-
-      final selector = tester.widget<SegmentedButton<DataCheckOverride>>(
-        find.byType(SegmentedButton<DataCheckOverride>),
-      );
-      expect(selector.onSelectionChanged, isNull);
-    });
+        expect(
+          find.byKey(DataCheckDetailRowKeys.selfFor(failedDetail)),
+          findsOneWidget,
+        );
+        expect(find.byType(SegmentedButton<DataCheckOverride>), findsNothing);
+      },
+    );
 
     testWidgets('the report stays open while an override is saving', (
       tester,

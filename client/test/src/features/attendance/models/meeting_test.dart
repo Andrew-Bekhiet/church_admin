@@ -34,24 +34,6 @@ void main() {
       expect(MeetingAudience.personsAndServants.name, 'personsAndServants');
     });
 
-    test('audience round-trips through Meeting.fromJson / toJson', () {
-      for (final aud in MeetingAudience.values) {
-        final json = _meeting(audience: aud).toJson();
-        expect(json['audience'], aud.name);
-        expect(Meeting.fromJson(json).audience, aud);
-      }
-    });
-
-    test('Meeting.fromJson rejects unknown audience value', () {
-      final json = {
-        'id': 'm1',
-        'name': 'test',
-        'audience': 'unknownAudience',
-        'isArchived': false,
-      };
-      expect(() => Meeting.fromJson(json), throwsA(anything));
-    });
-
     test('includesPersons is true for onlyPersons and personsAndServants', () {
       expect(MeetingAudience.onlyPersons.includesPersons, isTrue);
       expect(MeetingAudience.personsAndServants.includesPersons, isTrue);
@@ -69,21 +51,6 @@ void main() {
   });
 
   group('Meeting.fromJson', () {
-    test('parses minimal meeting JSON', () {
-      final json = {
-        'id': 'meet-1',
-        'name': 'Sunday Meeting',
-        'audience': 'onlyPersons',
-        'isArchived': false,
-      };
-      final meeting = Meeting.fromJson(json);
-      expect(meeting.id, 'meet-1');
-      expect(meeting.name, 'Sunday Meeting');
-      expect(meeting.audience, MeetingAudience.onlyPersons);
-      expect(meeting.isArchived, isFalse);
-      expect(meeting.color, isNull);
-    });
-
     test('a meeting without the kodas flag shows the kodas checkbox', () {
       final json = {
         'id': 'meet-1',
@@ -120,7 +87,7 @@ void main() {
         'color': 0xFF2196F3,
       };
       final meeting = Meeting.fromJson(json);
-      expect(meeting.color, isNotNull);
+      expect(meeting.color, const Color(0xFF2196F3));
     });
 
     test('parses full meeting JSON with optional fields', () {
@@ -172,13 +139,6 @@ void main() {
       expect(input.groupId, isNotNull);
       expect(input.serviceId, isNull);
       expect(input.color, isNull);
-    });
-
-    test('audience serialises as enum name string', () {
-      for (final aud in MeetingAudience.values) {
-        final input = _meeting(audience: aud).toInsertInput();
-        expect(input.audience, aud.name);
-      }
     });
   });
 

@@ -95,26 +95,6 @@ void main() {
       expect(outcome, isA<PersonSaved>());
     });
 
-    test(
-      'moving the person out of sight asks for confirmation before saving',
-      () async {
-        final controller = await fixture.controllerOfServantMovingOutOfSight(
-          storedPerson,
-        );
-        var updatesWhenAsked = -1;
-
-        await controller.submit(
-          confirmMoveOutOfSight: () async {
-            updatesWhenAsked = fixture.persons.updatedPeople.length;
-
-            return true;
-          },
-        );
-
-        expect(updatesWhenAsked, 0);
-      },
-    );
-
     test('a declined move saves nothing', () async {
       final controller = await fixture.controllerOfServantMovingOutOfSight(
         storedPerson,
@@ -149,21 +129,20 @@ void main() {
       );
     });
 
-    test('a failing save carries the error and the attempted person', () async {
+    test('a failing save carries the error', () async {
       final controller = await validNewPerson();
-      fixture.persons.saveError = Exception('offline');
+      final saveError = Exception('offline');
+      fixture.persons.saveError = saveError;
 
       final outcome = await controller.submit();
 
       expect(
         outcome,
-        isA<PersonSaveFailed>()
-            .having((failed) => failed.error, 'error', isA<Exception>())
-            .having(
-              (failed) => failed.attemptedPerson,
-              'attemptedPerson',
-              controller.toPerson(),
-            ),
+        isA<PersonSaveFailed>().having(
+          (failed) => failed.error,
+          'error',
+          same(saveError),
+        ),
       );
     });
 

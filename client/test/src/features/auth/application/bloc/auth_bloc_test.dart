@@ -216,9 +216,7 @@ void main() {
             isA<AuthAttemptFailed>().having(
               (failed) => failed.kind,
               'kind',
-              AuthAnalyticsEvent.failedOutcomeOf(
-                const IncorrectCredentialsException(null, null),
-              ).kind,
+              'incorrect_credentials',
             ),
           ),
         ),
@@ -507,12 +505,6 @@ void main() {
             'refreshed',
           ),
         ],
-        verify: (bloc) {
-          final mockRepo = globalProviderContainer.read(
-            authRepositoryProvider,
-          ) as MockFirebaseAuthRepository;
-          verify(mockRepo.refreshToken());
-        },
       );
 
       blocTest<AuthBloc, AuthState>(
@@ -603,12 +595,6 @@ void main() {
               .having((s) => s.authUser.idToken, 'idToken', 'reloaded')
               .having((s) => s.userData, 'userData', initialUserData),
         ],
-        verify: (bloc) {
-          final mockRepo = globalProviderContainer.read(
-            authRepositoryProvider,
-          ) as MockFirebaseAuthRepository;
-          verify(mockRepo.reload());
-        },
       );
 
       blocTest<AuthBloc, AuthState>(

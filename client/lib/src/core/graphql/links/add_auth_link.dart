@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:church_admin/src/core/graphql/links/auth_link_credentials.dart';
 import 'package:graphql/client.dart';
-import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AddAuthLink extends Link {
@@ -57,12 +56,11 @@ class AddAuthLink extends Link {
   @override
   Stream<Response> request(Request request, [NextLink? forward]) {
     return request.isSubscription
-        ? getWebSocketResponse(request, forward)
-        : getHttpResponse(request, forward);
+        ? _getWebSocketResponse(request, forward)
+        : _getHttpResponse(request, forward);
   }
 
-  @visibleForTesting
-  Stream<Response> getHttpResponse(
+  Stream<Response> _getHttpResponse(
     Request request, [
     NextLink? forward,
   ]) {
@@ -81,8 +79,7 @@ class AddAuthLink extends Link {
         );
   }
 
-  @visibleForTesting
-  Stream<Response> getWebSocketResponse(
+  Stream<Response> _getWebSocketResponse(
     Request request, [
     NextLink? forward,
   ]) {

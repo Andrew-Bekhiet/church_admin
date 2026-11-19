@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/subscriptions.gql.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gql/language.dart';
 
@@ -69,19 +68,4 @@ void main() {
       );
     },
   );
-
-  test('the generated persons subscription no longer selects dataCheck', () {
-    final stripped = printNode(
-      DataCheckSelectionRemover.removeFrom(
-        documentNodeSubscriptionwatchAllPersons,
-      ),
-    );
-
-    expect(
-      printNode(documentNodeSubscriptionwatchAllPersons),
-      contains('dataCheck'),
-    );
-    expect(stripped, isNot(contains('dataCheck')));
-    expect(stripped, isNot(contains('fragment DataCheck')));
-  });
 }

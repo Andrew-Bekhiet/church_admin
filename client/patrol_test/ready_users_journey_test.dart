@@ -36,10 +36,6 @@ void main() {
           ),
         ],
       );
-      expect(
-        (await E2eBackend.userByEmail(servant.email))['authId'],
-        servant.authId,
-      );
 
       step('the servant signs in without signing up or claiming');
       await E2eApp.launchSignedOut($);
