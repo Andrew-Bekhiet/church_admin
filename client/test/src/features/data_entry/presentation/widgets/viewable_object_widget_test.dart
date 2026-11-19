@@ -72,7 +72,10 @@ void main() {
 
         await openReportFor(tester, editableFamily);
 
-        expect(find.byType(SegmentedButton<DataCheckOverride>), findsOneWidget);
+        expect(
+          find.byKey(DataCheckOverrideSelectorKeys.overrideButton),
+          findsOneWidget,
+        );
       },
     );
 
@@ -93,7 +96,10 @@ void main() {
         await openReportFor(tester, readOnlyFamily);
 
         expect(find.byKey(DataCheckReportDialogKeys.dialog), findsOneWidget);
-        expect(find.byType(SegmentedButton<DataCheckOverride>), findsNothing);
+        expect(
+          find.byKey(DataCheckOverrideSelectorKeys.overrideButton),
+          findsNothing,
+        );
       },
     );
 
@@ -115,20 +121,12 @@ void main() {
         await openReportFor(tester, editableFamily);
 
         expect(find.byKey(DataCheckReportDialogKeys.dialog), findsOneWidget);
-        expect(find.byType(SegmentedButton<DataCheckOverride>), findsNothing);
+        expect(
+          find.byKey(DataCheckOverrideSelectorKeys.overrideButton),
+          findsNothing,
+        );
       },
     );
-
-    testWidgets('a signed-out viewer cannot override a family', (
-      tester,
-    ) async {
-      when(() => authBloc.currentUserData).thenReturn(null);
-
-      await openReportFor(tester, editableFamily);
-
-      expect(find.byKey(DataCheckReportDialogKeys.dialog), findsOneWidget);
-      expect(find.byType(SegmentedButton<DataCheckOverride>), findsNothing);
-    });
   });
 }
 

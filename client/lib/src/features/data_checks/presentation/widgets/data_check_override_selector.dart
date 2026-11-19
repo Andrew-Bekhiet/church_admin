@@ -42,6 +42,7 @@ class DataCheckOverrideSelector extends StatelessWidget {
                   ],
                 ),
                 SegmentedButton<DataCheckOverride>(
+                  key: DataCheckOverrideSelectorKeys.overrideButton,
                   expandedInsets: EdgeInsets.zero,
                   showSelectedIcon: false,
                   style: const ButtonStyle(
@@ -76,4 +77,8 @@ class DataCheckOverrideSelector extends StatelessWidget {
       },
     );
   }
+}
+
+abstract final class DataCheckOverrideSelectorKeys {
+  static final overrideButton = UniqueKey();
 }
