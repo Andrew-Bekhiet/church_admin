@@ -36,13 +36,7 @@ void main() {
 
       step('admin signs in');
       await E2eApp.launchSignedOut($);
-      await E2eApp.signIn(
-        tester,
-        email: E2eBackend.adminEmail,
-        password: password,
-      );
-      await E2eApp.completeSpiritualData(tester);
-      await E2eApp.enterHome(tester, password);
+      await E2eApp.signInToHome(tester, email: E2eBackend.adminEmail);
 
       final admin = UserManagementRobot(tester, password: password);
 

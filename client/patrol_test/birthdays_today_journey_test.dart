@@ -11,7 +11,6 @@ void main() {
     'the home birthdays card and its full list show only persons born today',
     ($) async {
       final tester = $.tester;
-      const password = E2eBackend.password;
       const serviceName = 'خدمة ثانوي';
 
       void step(String description) => debugPrint('E2E STEP: $description');
@@ -57,13 +56,7 @@ void main() {
 
       step('the admin signs in and reaches home');
       await E2eApp.launchSignedOut($);
-      await E2eApp.signIn(
-        tester,
-        email: E2eBackend.adminEmail,
-        password: password,
-      );
-      await E2eApp.completeSpiritualData(tester);
-      await E2eApp.enterHome(tester, password);
+      await E2eApp.signInToHome(tester, email: E2eBackend.adminEmail);
 
       step('the home birthdays card lists only persons born today');
       final birthdays = HomeBirthdaysRobot(tester);
