@@ -9,7 +9,7 @@ class DataCheckReportDialog extends StatelessWidget {
   static Future<void> show(
     BuildContext context, {
     required DataCheck dataCheck,
-    required bool canOverride,
+    required bool canChangeDataCheck,
   }) {
     AnalyticsService.I.track(DataCheckReportOpen(dataCheck));
 
@@ -17,14 +17,14 @@ class DataCheckReportDialog extends StatelessWidget {
       context: context,
       builder: (_) => BlocProvider(
         create: (_) => DataCheckOverrideCubit(dataCheck: dataCheck),
-        child: DataCheckReportDialog(canOverride: canOverride),
+        child: DataCheckReportDialog(canChangeDataCheck: canChangeDataCheck),
       ),
     );
   }
 
-  final bool canOverride;
+  final bool canChangeDataCheck;
 
-  const DataCheckReportDialog({required this.canOverride, super.key});
+  const DataCheckReportDialog({required this.canChangeDataCheck, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +37,7 @@ class DataCheckReportDialog extends StatelessWidget {
         return PopScope(
           canPop: !state.isSaving,
           child: AlertDialog(
+            key: DataCheckReportDialogKeys.dialog,
             title: const Text('تقرير اكتمال البيانات'),
             scrollable: true,
             content: Column(
@@ -55,8 +56,10 @@ class DataCheckReportDialog extends StatelessWidget {
                         DataCheckDetailRow(detail: detail),
                     ],
                   ),
-                const Divider(),
-                DataCheckOverrideSelector(canOverride: canOverride),
+                if (canChangeDataCheck) ...[
+                  const Divider(),
+                  const DataCheckOverrideSelector(),
+                ],
                 if (kDebugMode)
                   ExpansionTile(
                     title: const Text('التفاصيل الكاملة'),
@@ -91,4 +94,8 @@ class DataCheckReportDialog extends StatelessWidget {
       },
     );
   }
+}
+
+abstract final class DataCheckReportDialogKeys {
+  static const Key dialog = ValueKey('Data Check Report Dialog Key');
 }

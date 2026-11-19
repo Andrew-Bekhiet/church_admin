@@ -42,6 +42,10 @@ enum UserPermission implements LabeledEnum {
     label: 'استرجاع المحذوفات',
     icon: Symbols.restore_from_trash,
   ),
+  changeDataChecks(
+    label: 'تعديل حالة اكتمال البيانات',
+    icon: Symbols.fact_check,
+  ),
   maintenanceNotifications(
     label: 'استلام إشعارات الصيانة',
     icon: Symbols.build,
