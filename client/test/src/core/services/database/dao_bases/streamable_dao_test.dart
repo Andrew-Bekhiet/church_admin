@@ -177,6 +177,41 @@ void main() {
     },
   );
 
+  test('a count error reaches the list', () async {
+    const message = 'count failed';
+    final persons = await listenUntilPersonsCounted(7);
+    final errors = <Object>[];
+    final subscription = persons.listen(null, onError: errors.add);
+    addTearDown(subscription.cancel);
+
+    link.failOpenSubscriptions(countOperation, message);
+    await pumpEventQueue();
+
+    expect(
+      errors.whereType<OperationException>().map(
+        (error) => error.graphqlErrors.single.message,
+      ),
+      [message],
+    );
+  });
+
+  test(
+    'a search after a count error opens a fresh count and the list finishes loading',
+    () async {
+      final persons = await listenUntilPersonsCounted(7);
+      final subscription = persons.listen(null, onError: (_) {});
+      addTearDown(subscription.cancel);
+      link.failOpenSubscriptions(countOperation, 'count failed');
+      await pumpEventQueue();
+
+      search.add('ab');
+      await pumpEventQueue();
+
+      expect(link.openRequestsNamed(countOperation), hasLength(1));
+      expect(persons.isLoading, isFalse);
+    },
+  );
+
   test('disposing the list cancels its count subscription', () async {
     final persons = await listenUntilPersonsCounted(7);
     expect(link.openRequestsNamed(countOperation), hasLength(1));

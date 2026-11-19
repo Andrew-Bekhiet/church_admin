@@ -1,5 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:collection/collection.dart';
+import 'package:church_admin/src/core/services/database/dao_bases/shared_count_subscription.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
@@ -99,63 +99,44 @@ mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
       ),
     ).shareValue();
 
-    final countForFiltersStream = _getCountForFiltersStream(
-      streamCountConfig,
-      shareableParametersStream,
-      overrideTotalLimit,
-    ).publishValue();
-    final countSubscription = countForFiltersStream.connect();
+    final countSubscription = switch (streamCountConfig) {
+      final config? => SharedCountSubscription(
+        (where) => _subscribeToCount(config, where, overrideTotalLimit),
+      ),
+      null => null,
+    };
 
     return PaginatableStream(
       pageSize: overrideTotalLimit ?? PaginatableStream.defaultPageSize,
       parametersStream: shareableParametersStream,
       factory: (request) => _streamAllFactory(
         streamAllConfig,
-        countForFiltersStream
-            .where(
-              (countForFilters) => const ListEquality<Filter>().equals(
-                countForFilters.where,
-                request.param?.where,
-              ),
-            )
-            .map((countForFilters) => countForFilters.count),
+        countSubscription?.countsFor(request.param?.where) ??
+            Stream.value(null),
         request,
       ),
-      onDispose: countSubscription.cancel,
+      onDispose: countSubscription?.dispose,
     );
   }
 
-  Stream<_CountForFilters> _getCountForFiltersStream(
-    StreamCountConfig? streamCountConfig,
-    Stream<StreamableDAOParameters> parametersStream,
+  Stream<int?> _subscribeToCount(
+    StreamCountConfig streamCountConfig,
+    List<Filter>? where,
     int? overrideTotalLimit,
   ) {
-    final filtersStream = parametersStream
-        .map((p) => p.where)
-        .distinct(const ListEquality<Filter>().equals);
-
-    if (streamCountConfig == null) {
-      return filtersStream.map((where) => (where: where, count: null));
-    }
-
-    return filtersStream.switchMap(
-      (where) => graphQLClient
-          .subscribeAndReturnParsed(
-            streamCountConfig.operationOptions ??
-                SubscriptionOptions(
-                  document: transformDocument(streamCountConfig.document),
-                  operationName: streamCountConfig.effectiveOperationName,
-                  variables:
-                      streamCountConfig.variables ??
-                      {
-                        'where':
-                            where?.map((o) => o.queryToJson()).toList() ?? [],
-                        'limit': overrideTotalLimit,
-                      },
-                  parserFn: streamCountConfig.parserFn ?? db.parser.countParser,
-                ),
-          )
-          .map((count) => (where: where, count: count)),
+    return graphQLClient.subscribeAndReturnParsed(
+      streamCountConfig.operationOptions ??
+          SubscriptionOptions(
+            document: transformDocument(streamCountConfig.document),
+            operationName: streamCountConfig.effectiveOperationName,
+            variables:
+                streamCountConfig.variables ??
+                {
+                  'where': where?.map((o) => o.queryToJson()).toList() ?? [],
+                  'limit': overrideTotalLimit,
+                },
+            parserFn: streamCountConfig.parserFn ?? db.parser.countParser,
+          ),
     );
   }
 
@@ -224,5 +205,3 @@ mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
         .map((p) => p.parsedData);
   }
 }
-
-typedef _CountForFilters = ({List<Filter>? where, int? count});
