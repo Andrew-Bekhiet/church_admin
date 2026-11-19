@@ -36,8 +36,11 @@ class PersonFormControllerFixture {
     name: 'خادم',
   );
 
-  PersonFormController controllerFor(PersonEditIntent intent) {
-    final areas = FakeAreasDAO();
+  PersonFormController controllerFor(
+    PersonEditIntent intent, {
+    FakeAreasDAO? areas,
+  }) {
+    final effectiveAreas = areas ?? FakeAreasDAO();
     final streets = FakeStreetsDAO();
     final districts = FakeDistrictsDAO();
     final controller = PersonFormController(
@@ -49,13 +52,13 @@ class PersonFormControllerFixture {
       analyticsService: analyticsService,
       addressServices: AddressFormServices(
         autofill: AddressAutofill(
-          areas: areas,
+          areas: effectiveAreas,
           streets: streets,
           districts: districts,
           geocoder: FakeGeocoder(),
         ),
         places: AddressPlaceCatalog(
-          areas: areas,
+          areas: effectiveAreas,
           streets: streets,
           districts: districts,
         ),

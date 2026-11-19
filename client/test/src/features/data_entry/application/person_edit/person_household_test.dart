@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../../fakes/fake_areas_dao.dart';
 import 'person_form_controller_fixture.dart';
 
 void main() {
@@ -216,5 +217,57 @@ void main() {
 
       expect(controller.household.canHaveFamilyNumbers, isTrue);
     });
+  });
+
+  group('street and area validation', () {
+    late FakeAreasDAO areas;
+
+    setUp(() {
+      areas = FakeAreasDAO()
+        ..areasByStreetId[PersonFormControllerFixture.nileStreet.id] = const [
+          PersonFormControllerFixture.shubra,
+        ];
+    });
+
+    test(
+      'fails validation when the household street does not belong to the area',
+      () async {
+        final controller = fixture.controllerFor(
+          const CreatePersonOnStreet(
+            street: PersonFormControllerFixture.nileStreet,
+          ),
+          areas: areas,
+        );
+        controller.identity.name.setValue('مينا');
+        controller.household.address.area.setValue(
+          PersonFormControllerFixture.maadi,
+        );
+
+        expect(await controller.validate(), isFalse);
+        expect(
+          controller.household.address.street.value.error,
+          AddressFieldError.streetNotInArea,
+        );
+      },
+    );
+
+    test(
+      'passes validation when the household street belongs to the area',
+      () async {
+        final controller = fixture.controllerFor(
+          const CreatePersonOnStreet(
+            street: PersonFormControllerFixture.nileStreet,
+          ),
+          areas: areas,
+        );
+        controller.identity.name.setValue('مينا');
+        controller.household.address.area.setValue(
+          PersonFormControllerFixture.shubra,
+        );
+
+        expect(await controller.validate(), isTrue);
+        expect(controller.household.address.street.value.error, isNull);
+      },
+    );
   });
 }

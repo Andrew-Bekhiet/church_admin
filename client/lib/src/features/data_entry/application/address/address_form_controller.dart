@@ -32,6 +32,31 @@ class AddressFormController extends AdvancedFormController {
     validator: (street) => street == null && mustNameAreaAndStreet
         ? AddressFieldError.streetRequired
         : null,
+    asyncValidation: AsyncValidation(
+      validator: (chosenStreet) async {
+        final chosenArea = area.fieldValue;
+        if (_isReadOnly || chosenStreet == null || chosenArea == null) {
+          return null;
+        }
+
+        final areasOfStreet = await _services.autofill.areasOf(chosenStreet);
+
+        final isStreetInChosenArea = areasOfStreet.any(
+          (areaOfStreet) => areaOfStreet.id == chosenArea.id,
+        );
+
+        return isStreetInChosenArea ? null : AddressFieldError.streetNotInArea;
+      },
+      failureToError: (_, _) => AddressFieldError.streetAreaLookupFailed,
+      onFailure: (error, stackTrace) => _services.logging.exception(
+        LogRecord(
+          moduleName: '$AddressFormController',
+          eventName: 'lookupAreasOfStreetForValidation',
+          error: error,
+          stackTrace: stackTrace,
+        ),
+      ),
+    ),
   );
   late final area = AdvancedFieldController<Area?, AddressFieldError>(
     initialValue: _baselineAddress.area,
@@ -113,6 +138,11 @@ class AddressFormController extends AdvancedFormController {
     ]);
     staleLocationInputsChanged.addListener(
       _maybeTrackStaleLocationReminderShow,
+    );
+    addRelation(
+      area,
+      (chosenArea) => chosenArea?.id,
+      (_) => street.clearErrors(),
     );
   }
 

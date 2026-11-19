@@ -57,6 +57,7 @@ void main() {
 
     test('are satisfied by an address that has both', () async {
       fixture.required = true;
+      fixture.areas.areasByStreetId[mainStreet.id] = const [stMarkArea];
       final controller = fixture.controllerFor(completeAddress);
 
       expect(await controller.validate(), isTrue);
@@ -92,6 +93,7 @@ void main() {
     });
 
     test('accept a whole number', () async {
+      fixture.areas.areasByStreetId[mainStreet.id] = const [stMarkArea];
       final controller = fixture.controllerFor(completeAddress);
       controller.apartmentNumber.textController.text = '7';
 
@@ -128,5 +130,100 @@ void main() {
 
       expect(controller.area.fieldValue, isNull);
     });
+
+    test('validating does not reject a mismatched street and area', () async {
+      const otherArea = Area(id: 'other-area-id', name: 'منطقة أخرى');
+      final controller = fixture.controllerFor(
+        completeAddress.copyWith(area: otherArea),
+      )..markReadOnly();
+
+      expect(await controller.validate(), isTrue);
+      expect(controller.street.value.error, isNull);
+    });
+  });
+
+  group('street and area validation', () {
+    const otherArea = Area(id: 'other-area-id', name: 'منطقة أخرى');
+
+    setUp(
+      () => fixture.areas.areasByStreetId[mainStreet.id] = const [stMarkArea],
+    );
+
+    test('passes validation when street belongs to area', () async {
+      final controller = fixture.controllerFor(completeAddress);
+
+      expect(await controller.validate(), isTrue);
+      expect(controller.street.value.error, isNull);
+    });
+
+    test('fails validation when street does not belong to area', () async {
+      final controller = fixture.controllerFor(
+        completeAddress.copyWith(area: otherArea),
+      );
+
+      expect(await controller.validate(), isFalse);
+      expect(
+        controller.street.value.error,
+        AddressFieldError.streetNotInArea,
+      );
+    });
+
+    test('clears mismatch error when area changes', () async {
+      final controller = fixture.controllerFor(
+        completeAddress.copyWith(area: otherArea),
+      );
+      await controller.validate();
+      expect(controller.street.value.error, AddressFieldError.streetNotInArea);
+
+      controller.area.setValue(stMarkArea);
+
+      expect(controller.street.value.error, isNull);
+    });
+
+    test('clears mismatch error when street changes', () async {
+      fixture.areas.areasByStreetId[sideStreet.id] = [otherArea];
+      final controller = fixture.controllerFor(
+        completeAddress.copyWith(area: otherArea),
+      );
+      await controller.validate();
+      expect(controller.street.value.error, AddressFieldError.streetNotInArea);
+
+      controller.chooseStreet(sideStreet);
+
+      expect(controller.street.value.error, isNull);
+    });
+
+    test('reports lookup failure and lets the user retry', () async {
+      fixture.areas.lookupFailure = Exception('offline');
+      final controller = fixture.controllerFor(completeAddress);
+
+      expect(await controller.validate(), isFalse);
+      expect(controller.value.hasFailedValidation, isTrue);
+      expect(
+        controller.street.value.error,
+        AddressFieldError.streetAreaLookupFailed,
+      );
+
+      fixture.areas.lookupFailure = null;
+      expect(await controller.validate(), isTrue);
+      expect(controller.value.hasFailedValidation, isFalse);
+      expect(controller.street.value.error, isNull);
+    });
+
+    test(
+      're-checks the street when the area changes after a passing validation',
+      () async {
+        final controller = fixture.controllerFor(completeAddress);
+        expect(await controller.validate(), isTrue);
+
+        controller.area.setValue(otherArea);
+
+        expect(await controller.validate(), isFalse);
+        expect(
+          controller.street.value.error,
+          AddressFieldError.streetNotInArea,
+        );
+      },
+    );
   });
 }
