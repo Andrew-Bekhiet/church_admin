@@ -74,13 +74,19 @@ class RecordAttendanceRobot {
     return _state;
   }
 
-  Future<Set<String>> offeredPersonIds({
+  /// Other journeys sharing the backend add persons to the same rosters, so
+  /// only the [candidates] a journey seeded itself are reported.
+  Future<Set<String>> offeredPersonIdsAmong(
+    Set<String> candidates, {
     required String meetingId,
     required AttendanceRosterAudienceView view,
   }) async {
     final state = await waitForRoster(meetingId: meetingId, view: view);
 
-    return {for (final entry in state.entries) entry.person.id};
+    return {
+      for (final entry in state.entries)
+        if (candidates.contains(entry.person.id)) entry.person.id,
+    };
   }
 
   Future<void> showServants() async {

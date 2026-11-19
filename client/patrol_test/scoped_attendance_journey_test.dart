@@ -58,7 +58,8 @@ void main() {
 
       step('persons and servants meeting: persons in the scope pair only');
       expect(
-        await robot.offeredPersonIds(
+        await robot.offeredPersonIdsAmong(
+          seed.personIds,
           meetingId: seed.bothAudiencesMeetingId,
           view: persons,
         ),
@@ -78,7 +79,8 @@ void main() {
       expect(robot.canSwitchAudience, isTrue);
       await robot.showServants();
       expect(
-        await robot.offeredPersonIds(
+        await robot.offeredPersonIdsAmong(
+          seed.personIds,
           meetingId: seed.bothAudiencesMeetingId,
           view: servants,
         ),
@@ -96,7 +98,8 @@ void main() {
       step('persons-only meeting offers only persons');
       await robot.switchToMeeting(seed.personsOnlyMeetingId);
       expect(
-        await robot.offeredPersonIds(
+        await robot.offeredPersonIdsAmong(
+          seed.personIds,
           meetingId: seed.personsOnlyMeetingId,
           view: persons,
         ),
@@ -112,7 +115,8 @@ void main() {
       step('servants-only meeting offers only servants');
       await robot.switchToMeeting(seed.servantsOnlyMeetingId);
       expect(
-        await robot.offeredPersonIds(
+        await robot.offeredPersonIdsAmong(
+          seed.personIds,
           meetingId: seed.servantsOnlyMeetingId,
           view: servants,
         ),
@@ -131,7 +135,8 @@ void main() {
       step('a scope recording only persons offers only persons');
       await robot.switchToMeeting(seed.personsRightsMeetingId);
       expect(
-        await robot.offeredPersonIds(
+        await robot.offeredPersonIdsAmong(
+          seed.personIds,
           meetingId: seed.personsRightsMeetingId,
           view: persons,
         ),
@@ -147,7 +152,8 @@ void main() {
       step('a scope recording only servants offers only servants');
       await robot.switchToMeeting(seed.servantsRightsMeetingId);
       expect(
-        await robot.offeredPersonIds(
+        await robot.offeredPersonIdsAmong(
+          seed.personIds,
           meetingId: seed.servantsRightsMeetingId,
           view: servants,
         ),
@@ -163,7 +169,8 @@ void main() {
       step('a scope without the record attendance flag is refused');
       await robot.switchToMeeting(seed.notRecordableMeetingId);
       expect(
-        await robot.offeredPersonIds(
+        await robot.offeredPersonIdsAmong(
+          seed.personIds,
           meetingId: seed.notRecordableMeetingId,
           view: persons,
         ),
