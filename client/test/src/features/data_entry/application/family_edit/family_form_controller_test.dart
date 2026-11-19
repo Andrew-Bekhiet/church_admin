@@ -33,7 +33,7 @@ void main() {
       analyticsService: AnalyticsService([
         RecordingAnalyticsProvider(),
       ], FakeLoggingService()),
-      addressServices: FakeAddressFormServices.withNothingToSuggest(
+      addressServices: FakeAddressFormServices.backedBy(
         areas: areas,
       ),
       currentUserId: 'me',

@@ -142,7 +142,7 @@ void main() {
     });
   });
 
-  group('street and area relation', () {
+  group('street and area validation', () {
     const otherArea = Area(id: 'other-area-id', name: 'منطقة أخرى');
 
     setUp(
@@ -168,7 +168,7 @@ void main() {
       );
     });
 
-    test('clears mismatch error when area changes to a valid one', () async {
+    test('clears mismatch error when area changes', () async {
       final controller = fixture.controllerFor(
         completeAddress.copyWith(area: otherArea),
       );

@@ -36,7 +36,7 @@ void main() {
       intent: const UpdateFamily(family: storedFamily),
       familiesDAO: families,
       analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-      addressServices: FakeAddressFormServices.withNothingToSuggest(
+      addressServices: FakeAddressFormServices.backedBy(
         areas: FakeAreasDAO()..areasByStreetId[nile.id] = const [shubra, maadi],
       ),
       currentUserId: shubraServant.uid,

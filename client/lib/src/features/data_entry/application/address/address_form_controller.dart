@@ -41,9 +41,11 @@ class AddressFormController extends AdvancedFormController {
 
         final areasOfStreet = await _services.autofill.areasOf(chosenStreet);
 
-        return areasOfStreet.any((a) => a.id == chosenArea.id)
-            ? null
-            : AddressFieldError.streetNotInArea;
+        final isStreetInChosenArea = areasOfStreet.any(
+          (areaOfStreet) => areaOfStreet.id == chosenArea.id,
+        );
+
+        return isStreetInChosenArea ? null : AddressFieldError.streetNotInArea;
       },
       failureToError: (_, _) => AddressFieldError.streetAreaLookupFailed,
       onFailure: (error, stackTrace) => _services.logging.exception(

@@ -32,7 +32,7 @@ void main() {
     final controller = StoreFormController(
       intent: intent,
       familiesDAO: InMemoryFamiliesDAO(),
-      addressServices: FakeAddressFormServices.withNothingToSuggest(
+      addressServices: FakeAddressFormServices.backedBy(
         areas: areas,
       ),
       currentUserId: 'me',

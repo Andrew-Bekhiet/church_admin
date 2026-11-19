@@ -21,7 +21,7 @@ void main() {
       analyticsService: AnalyticsService([
         RecordingAnalyticsProvider(),
       ], FakeLoggingService()),
-      addressServices: FakeAddressFormServices.withNothingToSuggest(),
+      addressServices: FakeAddressFormServices.backedBy(),
       currentUserId: 'me',
     );
     addTearDown(form.dispose);
