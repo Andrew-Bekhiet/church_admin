@@ -32,14 +32,13 @@ class RecordingSubscriptionLink extends Link {
   void failOpenSubscriptions(String operationName, String message) {
     for (final (:request, :responses) in [..._openSubscriptions]) {
       if (request.operation.operationName == operationName) {
-        responses
-          ..add(
-            Response(
-              errors: [GraphQLError(message: message)],
-              response: const {},
-            ),
-          )
-          ..close();
+        responses.add(
+          Response(
+            errors: [GraphQLError(message: message)],
+            response: const {},
+          ),
+        );
+        unawaited(responses.close());
       }
     }
   }
