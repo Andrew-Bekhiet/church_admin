@@ -10,29 +10,29 @@ class DBGraphQLClient extends GraphQLClient {
   final bool autoChangeFetchPolicy;
 
   final ValueStream<bool> _connectivityStream;
-  final ValueStream<FetchPolicy> _fetchPolicyStream;
-  FetchPolicy get _currentFetchPolicy => _fetchPolicyStream.value;
+  Stream<FetchPolicy> get _fetchPolicyStream => Rx.defer(
+    () => _connectivityStream
+        .map(_cacheAndNetworkFetchPolicyFor)
+        .startWith(_currentFetchPolicy)
+        .distinct(),
+  );
+  FetchPolicy get _currentFetchPolicy =>
+      _cacheAndNetworkFetchPolicyFor(_connectivityStream.valueOrNull);
   FetchPolicy get _onlineFirstFetchPolicy => _fetchPolicyFor(
     _connectivityStream.valueOrNull,
     whenConnected: FetchPolicy.networkOnly,
   );
   DBGraphQLClient({
-    required ValueStream<bool> connectivityStream,
+    required this._connectivityStream,
     required super.link,
     required super.cache,
     this.autoChangeFetchPolicy = true,
     super.alwaysRebroadcast,
     super.defaultPolicies,
-  }) : _connectivityStream = connectivityStream,
-       _fetchPolicyStream = connectivityStream
-           .map(
-             (connected) => _fetchPolicyFor(
-               connected,
-               whenConnected: FetchPolicy.cacheAndNetwork,
-             ),
-           )
-           .distinct()
-           .shareValueSeeded(FetchPolicy.cacheAndNetwork);
+  });
+
+  FetchPolicy _cacheAndNetworkFetchPolicyFor(bool? connected) =>
+      _fetchPolicyFor(connected, whenConnected: FetchPolicy.cacheAndNetwork);
 
   Q _exceptionsMiddleware<T, Q extends QueryResult<T>>(Q result) {
     switch (result.exception) {
