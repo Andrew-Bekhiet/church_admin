@@ -1,14 +1,13 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
 class LoadingFloatingActionButton extends StatelessWidget {
-  static const button = ValueKey('loadingFloatingActionButton');
-
   const LoadingFloatingActionButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const FloatingActionButton(
-      key: button,
+      key: LoadingFloatingActionButtonKeys.self,
       onPressed: null,
       child: SizedBox.square(
         dimension: 24,
@@ -16,4 +15,8 @@ class LoadingFloatingActionButton extends StatelessWidget {
       ),
     );
   }
+}
+
+abstract final class LoadingFloatingActionButtonKeys extends WidgetKeys {
+  static const Key self = ValueKey((LoadingFloatingActionButtonKeys, #self));
 }
