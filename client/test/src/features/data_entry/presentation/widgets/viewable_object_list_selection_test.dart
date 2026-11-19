@@ -9,7 +9,8 @@ import '../../../../fakes/mock_viewable_object_service.dart';
 import '../../../../utils.dart';
 
 abstract final class ViewableObjectListSelectionTestKeys {
-  static Key itemFor(String id) => ValueKey('list-selection-item-$id');
+  static Key itemFor(String id) =>
+      ValueKey((ViewableObjectListSelectionTestKeys, #itemFor, id));
 }
 
 void main() {

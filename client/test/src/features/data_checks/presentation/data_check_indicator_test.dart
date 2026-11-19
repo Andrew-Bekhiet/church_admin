@@ -67,8 +67,8 @@ void main() {
     ) async {
       await pumpIndicator(tester, complete);
 
-      expect(find.byKey(DataCheckEmblem.completeBadgeKey), findsOneWidget);
-      expect(find.byKey(DataCheckEmblem.progressRingKey), findsNothing);
+      expect(find.byKey(DataCheckEmblemKeys.completeBadge), findsOneWidget);
+      expect(find.byKey(DataCheckEmblemKeys.progressRing), findsNothing);
     });
 
     testWidgets('an incomplete family shows how far it is from complete', (
@@ -77,10 +77,10 @@ void main() {
       await pumpIndicator(tester, incomplete);
 
       final ring = tester.widget<CircularProgressIndicator>(
-        find.byKey(DataCheckEmblem.progressRingKey),
+        find.byKey(DataCheckEmblemKeys.progressRing),
       );
       expect(ring.value, incomplete.completenessPercent / 100);
-      expect(find.byKey(DataCheckEmblem.completeBadgeKey), findsNothing);
+      expect(find.byKey(DataCheckEmblemKeys.completeBadge), findsNothing);
     });
 
     testWidgets(
@@ -92,7 +92,7 @@ void main() {
         await tester.pumpAndSettle();
 
         Finder iconIn(DataCheckDetail detail) => find.descendant(
-          of: find.byKey(DataCheckDetailRow.keyFor(detail)),
+          of: find.byKey(DataCheckDetailRowKeys.rowFor(detail)),
           matching: find.byType(Icon),
         );
         expect(
@@ -123,7 +123,7 @@ void main() {
         );
 
         Finder labelIn(DataCheckDetail detail, String label) => find.descendant(
-          of: find.byKey(DataCheckDetailRow.keyFor(detail)),
+          of: find.byKey(DataCheckDetailRowKeys.rowFor(detail)),
           matching: find.bySemanticsLabel(label),
         );
         expect(labelIn(passedDetail, 'اجتاز الفحص'), findsOneWidget);
@@ -141,7 +141,7 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(
-          find.byKey(DataCheckDetailRow.keyFor(failedDetail)),
+          find.byKey(DataCheckDetailRowKeys.rowFor(failedDetail)),
           findsOneWidget,
         );
         expect(find.byType(SegmentedButton<DataCheckOverride>), findsNothing);

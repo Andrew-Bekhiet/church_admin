@@ -3,11 +3,10 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
 class DataCheckDetailRow extends StatelessWidget {
-  static Key keyFor(DataCheckDetail detail) => ObjectKey(detail);
-
   final DataCheckDetail detail;
 
-  DataCheckDetailRow({required this.detail}) : super(key: keyFor(detail));
+  DataCheckDetailRow({required this.detail})
+    : super(key: DataCheckDetailRowKeys.rowFor(detail));
 
   @override
   Widget build(BuildContext context) {
@@ -26,4 +25,9 @@ class DataCheckDetailRow extends StatelessWidget {
       ],
     );
   }
+}
+
+abstract final class DataCheckDetailRowKeys {
+  static Key rowFor(DataCheckDetail detail) =>
+      ValueKey((DataCheckDetailRowKeys, #rowFor, detail));
 }

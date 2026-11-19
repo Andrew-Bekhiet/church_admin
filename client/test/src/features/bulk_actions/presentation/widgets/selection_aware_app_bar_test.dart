@@ -77,12 +77,25 @@ class TabsHeaderDelegate extends SliverPersistentHeaderDelegate {
 }
 
 abstract final class SelectionAwareAppBarTestKeys {
-  static const Key tabsHeader = ValueKey('selection-aware-tabs-header');
-  static const Key screenTitle = ValueKey('selection-aware-screen-title');
-  static const Key shownNames = ValueKey('selection-aware-shown-names');
-  static const Key previousScreen = ValueKey('selection-aware-previous-screen');
+  static const Key tabsHeader = ValueKey((
+    SelectionAwareAppBarTestKeys,
+    #tabsHeader,
+  ));
+  static const Key screenTitle = ValueKey((
+    SelectionAwareAppBarTestKeys,
+    #screenTitle,
+  ));
+  static const Key shownNames = ValueKey((
+    SelectionAwareAppBarTestKeys,
+    #shownNames,
+  ));
+  static const Key previousScreen = ValueKey((
+    SelectionAwareAppBarTestKeys,
+    #previousScreen,
+  ));
 
-  static Key itemFor(String id) => ValueKey('selection-aware-item-$id');
+  static Key itemFor(String id) =>
+      ValueKey((SelectionAwareAppBarTestKeys, #itemFor, id));
 }
 
 void main() {
