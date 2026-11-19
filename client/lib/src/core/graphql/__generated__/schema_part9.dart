@@ -1317,6 +1317,7 @@ class Input_AuthUsersDataBoolExp {
     Input_PersonsBoolExp? person,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
     Input_UsersPreferencesBoolExp? preferences,
+    Input_StringComparisonExp? type,
     Input_UuidComparisonExp? uid,
   }) => Input_AuthUsersDataBoolExp._({
     if ($_and != null) r'_and': $_and,
@@ -1336,6 +1337,7 @@ class Input_AuthUsersDataBoolExp {
     if (person != null) r'person': person,
     if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
     if (preferences != null) r'preferences': preferences,
+    if (type != null) r'type': type,
     if (uid != null) r'uid': uid,
   });
 
@@ -1475,6 +1477,14 @@ class Input_AuthUsersDataBoolExp {
               (l$preferences as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('type')) {
+      final l$type = data['type'];
+      result$data['type'] = l$type == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$type as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
       result$data['uid'] = l$uid == null
@@ -1533,6 +1543,9 @@ class Input_AuthUsersDataBoolExp {
 
   Input_UsersPreferencesBoolExp? get preferences =>
       (_$data['preferences'] as Input_UsersPreferencesBoolExp?);
+
+  Input_StringComparisonExp? get type =>
+      (_$data['type'] as Input_StringComparisonExp?);
 
   Input_UuidComparisonExp? get uid =>
       (_$data['uid'] as Input_UuidComparisonExp?);
@@ -1603,6 +1616,10 @@ class Input_AuthUsersDataBoolExp {
     if (_$data.containsKey('preferences')) {
       final l$preferences = preferences;
       result$data['preferences'] = l$preferences?.toJson();
+    }
+    if (_$data.containsKey('type')) {
+      final l$type = type;
+      result$data['type'] = l$type?.toJson();
     }
     if (_$data.containsKey('uid')) {
       final l$uid = uid;
@@ -1782,6 +1799,14 @@ class Input_AuthUsersDataBoolExp {
     if (l$preferences != lOther$preferences) {
       return false;
     }
+    final l$type = type;
+    final lOther$type = other.type;
+    if (_$data.containsKey('type') != other._$data.containsKey('type')) {
+      return false;
+    }
+    if (l$type != lOther$type) {
+      return false;
+    }
     final l$uid = uid;
     final lOther$uid = other.uid;
     if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
@@ -1811,6 +1836,7 @@ class Input_AuthUsersDataBoolExp {
     final l$person = person;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$preferences = preferences;
+    final l$type = type;
     final l$uid = uid;
     return Object.hashAll([
       _$data.containsKey('_and')
@@ -1839,6 +1865,7 @@ class Input_AuthUsersDataBoolExp {
       _$data.containsKey('person') ? l$person : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('preferences') ? l$preferences : const {},
+      _$data.containsKey('type') ? l$type : const {},
       _$data.containsKey('uid') ? l$uid : const {},
     ]);
   }
@@ -1870,6 +1897,7 @@ abstract class CopyWith_Input_AuthUsersDataBoolExp<TRes> {
     Input_PersonsBoolExp? person,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
     Input_UsersPreferencesBoolExp? preferences,
+    Input_StringComparisonExp? type,
     Input_UuidComparisonExp? uid,
   });
   TRes $_and(
@@ -1902,6 +1930,7 @@ abstract class CopyWith_Input_AuthUsersDataBoolExp<TRes> {
   CopyWith_Input_PersonsBoolExp<TRes> get person;
   CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt;
   CopyWith_Input_UsersPreferencesBoolExp<TRes> get preferences;
+  CopyWith_Input_StringComparisonExp<TRes> get type;
   CopyWith_Input_UuidComparisonExp<TRes> get uid;
 }
 
@@ -1932,6 +1961,7 @@ class _CopyWithImpl_Input_AuthUsersDataBoolExp<TRes>
     Object? person = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? preferences = _undefined,
+    Object? type = _undefined,
     Object? uid = _undefined,
   }) => _then(
     Input_AuthUsersDataBoolExp._({
@@ -1965,6 +1995,7 @@ class _CopyWithImpl_Input_AuthUsersDataBoolExp<TRes>
         'photoUpdatedAt': (photoUpdatedAt as Input_TimestamptzComparisonExp?),
       if (preferences != _undefined)
         'preferences': (preferences as Input_UsersPreferencesBoolExp?),
+      if (type != _undefined) 'type': (type as Input_StringComparisonExp?),
       if (uid != _undefined) 'uid': (uid as Input_UuidComparisonExp?),
     }),
   );
@@ -2134,6 +2165,13 @@ class _CopyWithImpl_Input_AuthUsersDataBoolExp<TRes>
           );
   }
 
+  CopyWith_Input_StringComparisonExp<TRes> get type {
+    final local$type = _instance.type;
+    return local$type == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(local$type, (e) => call(type: e));
+  }
+
   CopyWith_Input_UuidComparisonExp<TRes> get uid {
     final local$uid = _instance.uid;
     return local$uid == null
@@ -2165,6 +2203,7 @@ class _CopyWithStubImpl_Input_AuthUsersDataBoolExp<TRes>
     Input_PersonsBoolExp? person,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
     Input_UsersPreferencesBoolExp? preferences,
+    Input_StringComparisonExp? type,
     Input_UuidComparisonExp? uid,
   }) => _res;
 
@@ -2213,6 +2252,9 @@ class _CopyWithStubImpl_Input_AuthUsersDataBoolExp<TRes>
 
   CopyWith_Input_UsersPreferencesBoolExp<TRes> get preferences =>
       CopyWith_Input_UsersPreferencesBoolExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get type =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
 
   CopyWith_Input_UuidComparisonExp<TRes> get uid =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
