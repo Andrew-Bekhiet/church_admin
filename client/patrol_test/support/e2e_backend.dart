@@ -9,7 +9,7 @@ abstract final class E2eBackend {
   static const password = 'Harness_Passw0rd';
 
   static final Uri authEmulator = Uri.http('localhost:9099');
-  static final Uri _hasura = Uri.http('localhost:8080', '/v1/graphql');
+  static final Uri hasuraGraphql = Uri.http('localhost:8080', '/v1/graphql');
   static const hasuraAdminSecret = 'localdevadminsecret';
   static const _verificationEmailTimeout = Duration(seconds: 30);
   static const _pollInterval = Duration(milliseconds: 500);
@@ -52,7 +52,7 @@ abstract final class E2eBackend {
     Map<String, dynamic> variables = const {},
   }) async {
     final response = await http.post(
-      _hasura,
+      hasuraGraphql,
       headers: {
         'content-type': 'application/json',
         'x-hasura-admin-secret': hasuraAdminSecret,

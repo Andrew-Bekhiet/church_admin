@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:patrol/patrol.dart';
 
-import 'e2e_app.dart';
 import 'e2e_backend.dart';
 
 /// Declares a journey that starts from the state `server/scripts/e2e-backend.sh
@@ -12,10 +11,12 @@ import 'e2e_backend.dart';
 /// behind. App state on the simulator, such as stored preferences, is not
 /// reset.
 abstract final class E2eJourney {
-  static final Uri _hasuraQuery = Uri.http('localhost:8080', '/v2/query');
+  static final Uri _hasuraRunSql = E2eBackend.hasuraGraphql.replace(
+    path: '/v2/query',
+  );
   static const _authAccountsPath =
       '/identitytoolkit.googleapis.com/v1/projects/${E2eBackend.projectId}/accounts';
-  static const _authEmulatorAdmin = {'authorization': 'Bearer owner'};
+  static const _authEmulatorAdminHeaders = {'authorization': 'Bearer owner'};
 
   static void test(
     String description,
@@ -23,15 +24,14 @@ abstract final class E2eJourney {
     required Timeout timeout,
   }) {
     patrolTest(description, ($) async {
-      E2eApp.uncaughtAppErrors.clear();
       await _restoreSeededDatabase();
       await _deleteAuthAccountsOtherThanAdmin();
       await body($);
     }, timeout: timeout);
   }
 
-  static Future<void> _restoreSeededDatabase() => _postJson(
-    _hasuraQuery,
+  static Future<void> _restoreSeededDatabase() => _postResetRequest(
+    _hasuraRunSql,
     headers: {'x-hasura-admin-secret': E2eBackend.hasuraAdminSecret},
     body: {
       'type': 'run_sql',
@@ -43,9 +43,9 @@ abstract final class E2eJourney {
   );
 
   static Future<void> _deleteAuthAccountsOtherThanAdmin() async {
-    final accounts = await _postJson(
+    final accounts = await _postResetRequest(
       E2eBackend.authEmulator.replace(path: '$_authAccountsPath:query'),
-      headers: _authEmulatorAdmin,
+      headers: _authEmulatorAdminHeaders,
       body: {},
     );
     final nonAdminIds = [
@@ -58,14 +58,14 @@ abstract final class E2eJourney {
       return;
     }
 
-    await _postJson(
+    await _postResetRequest(
       E2eBackend.authEmulator.replace(path: '$_authAccountsPath:batchDelete'),
-      headers: _authEmulatorAdmin,
+      headers: _authEmulatorAdminHeaders,
       body: {'localIds': nonAdminIds, 'force': true},
     );
   }
 
-  static Future<Map<String, dynamic>> _postJson(
+  static Future<Map<String, dynamic>> _postResetRequest(
     Uri uri, {
     required Map<String, String> headers,
     required Map<String, Object> body,

@@ -5,7 +5,7 @@ create schema e2e_snapshot;
 
 create table e2e_snapshot.copied_tables (
     source regclass primary key,
-    copy regclass not null,
+    snapshot regclass not null,
     insertable_columns text not null
 );
 
@@ -76,7 +76,7 @@ begin
     for copied in select * from e2e_snapshot.copied_tables loop
         execute format(
             'insert into %s (%s) overriding system value select %s from %s',
-            copied.source, copied.insertable_columns, copied.insertable_columns, copied.copy
+            copied.source, copied.insertable_columns, copied.insertable_columns, copied.snapshot
         );
     end loop;
 end
