@@ -10,19 +10,19 @@ begin
 end $$;
 
 alter table history.meetings
-drop constraint if exists meetings_auto_communion_and_attendance_windows_disjoint_check,
-drop constraint if exists meetings_auto_communion_window_starts_before_it_ends_check,
+drop constraint if exists meetings_auto_kodas_and_attendance_windows_disjoint_check,
+drop constraint if exists meetings_auto_kodas_window_starts_before_it_ends_check,
 drop constraint if exists meetings_auto_attendance_window_starts_before_it_ends_check,
-drop constraint if exists meetings_auto_communion_window_requires_attendance_window_check,
-drop constraint if exists meetings_auto_communion_window_bounds_set_together_check,
+drop constraint if exists meetings_auto_kodas_window_requires_attendance_window_check,
+drop constraint if exists meetings_auto_kodas_window_bounds_set_together_check,
 drop constraint if exists meetings_auto_attendance_weekday_and_window_set_together_check;
 
 alter table history.meetings
 drop column if exists auto_attendance_records_servants,
-drop column if exists auto_communion_ends_at,
-drop column if exists auto_communion_starts_at,
-drop column if exists auto_attendance_ends_at,
-drop column if exists auto_attendance_starts_at,
+drop column if exists auto_kodas_end_time,
+drop column if exists auto_kodas_start_time,
+drop column if exists auto_attendance_end_time,
+drop column if exists auto_attendance_start_time,
 drop column if exists auto_attendance_weekday;
 
 drop domain if exists history.iso_weekday;

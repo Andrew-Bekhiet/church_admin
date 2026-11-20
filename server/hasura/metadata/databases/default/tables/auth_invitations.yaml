@@ -44,7 +44,7 @@ insert_permissions:
                         - $
                         - user_uid
         user:
-          type:
+          user_type:
             _eq: human
       columns:
         - expires_at

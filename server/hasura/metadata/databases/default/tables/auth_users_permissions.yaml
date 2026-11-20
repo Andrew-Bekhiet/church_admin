@@ -41,7 +41,7 @@ insert_permissions:
                         - $
                         - uid
         user:
-          type:
+          user_type:
             _eq: human
       columns:
         - permission
@@ -82,5 +82,5 @@ delete_permissions:
           - *any_user_editable
           - *user_by_uid_editable
         user:
-          type:
+          user_type:
             _eq: human

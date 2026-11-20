@@ -14,7 +14,10 @@ object_relationships:
 insert_permissions:
   - role: fingerprint_sync
     permission:
-      check: {}
+      check: &recorded_by_fingerprint_bot
+        recordedByUser:
+          user_type:
+            _eq: fingerprint_bot
       columns:
         - as_servant
         - datetime
@@ -165,7 +168,7 @@ update_permissions:
         - datetime
         - recorded_by
       filter: {}
-      check: {}
+      check: *recorded_by_fingerprint_bot
   - role: user
     permission:
       columns:

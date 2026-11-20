@@ -421,7 +421,7 @@ update_permissions:
               - uid:
                   _is_null: true
               - user:
-                  type:
+                  user_type:
                     _eq: human
 delete_permissions:
   - role: user

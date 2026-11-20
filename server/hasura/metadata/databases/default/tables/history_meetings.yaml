@@ -132,10 +132,10 @@ select_permissions:
       columns:
         - id
         - auto_attendance_weekday
-        - auto_attendance_starts_at
-        - auto_attendance_ends_at
-        - auto_communion_starts_at
-        - auto_communion_ends_at
+        - auto_attendance_start_time
+        - auto_attendance_end_time
+        - auto_kodas_start_time
+        - auto_kodas_end_time
         - auto_attendance_records_servants
       filter:
         _and:
@@ -157,10 +157,10 @@ select_permissions:
         - is_archived
         - show_kodas_checkbox
         - auto_attendance_weekday
-        - auto_attendance_starts_at
-        - auto_attendance_ends_at
-        - auto_communion_starts_at
-        - auto_communion_ends_at
+        - auto_attendance_start_time
+        - auto_attendance_end_time
+        - auto_kodas_start_time
+        - auto_kodas_end_time
         - auto_attendance_records_servants
       filter:
         _and:

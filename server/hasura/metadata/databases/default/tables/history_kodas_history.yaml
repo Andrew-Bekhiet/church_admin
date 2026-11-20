@@ -14,7 +14,10 @@ object_relationships:
 insert_permissions:
   - role: fingerprint_sync
     permission:
-      check: {}
+      check:
+        user:
+          user_type:
+            _eq: fingerprint_bot
       columns:
         - day_id
         - person_id
