@@ -14,19 +14,32 @@ object_relationships:
 insert_permissions:
   - role: fingerprint_sync
     permission:
-      check: &recorded_by_fingerprint_bot
-        _exists:
-          _table:
-            name: users_data
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _ceq:
-                    - $
-                    - recorded_by
-              - user_type:
-                  _eq: fingerprint_bot
+      check: &recorded_by_fingerprint_bot_for_a_live_person
+        _and:
+          - _exists:
+              _table:
+                name: users_data
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _ceq:
+                        - $
+                        - recorded_by
+                  - user_type:
+                      _eq: fingerprint_bot
+          - _exists:
+              _table:
+                name: persons
+                schema: public
+              _where:
+                _and:
+                  - id:
+                      _ceq:
+                        - $
+                        - person_id
+                  - deleted_at:
+                      _is_null: true
       columns:
         - as_servant
         - datetime
@@ -177,7 +190,7 @@ update_permissions:
         - datetime
         - recorded_by
       filter: {}
-      check: *recorded_by_fingerprint_bot
+      check: *recorded_by_fingerprint_bot_for_a_live_person
   - role: user
     permission:
       columns:

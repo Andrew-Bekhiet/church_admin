@@ -59,7 +59,19 @@ select_permissions:
       columns:
         - employee_code
         - person_id
-      filter: {}
+      filter:
+        _exists:
+          _table:
+            name: persons
+            schema: public
+          _where:
+            _and:
+              - id:
+                  _ceq:
+                    - $
+                    - person_id
+              - deleted_at:
+                  _is_null: true
   - role: user
     permission:
       columns:
