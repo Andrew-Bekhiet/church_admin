@@ -10,6 +10,7 @@ void main() {
       ),
       ('https://maps.app.goo.gl/AbCdEf123', LocationLinkInputKind.shortLink),
       ('https://goo.gl/maps/AbCdEf123', LocationLinkInputKind.shortLink),
+      ('https://maps.apple/p/0z5uq3vXkTor6w', LocationLinkInputKind.shortLink),
       ('geo:30.0444,31.2357', LocationLinkInputKind.geo),
       ('7GXHX4HM+3J', LocationLinkInputKind.plusCode),
       ('X4HM+3J', LocationLinkInputKind.shortPlusCode),
