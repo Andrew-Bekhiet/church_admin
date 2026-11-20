@@ -38,6 +38,7 @@ void main() {
       'https://maps.apple.com/directions?destination=30.0444,31.2357',
       'https://maps.apple.com/frame?center=30.0444,31.2357',
       'https://maps.apple.com/search?center=30.0444,31.2357',
+      'https://maps.apple/p/0z5uq3vXkTor6w',
       '7GXHX4HM+3J',
       '26VP+Q7 Cairo, Egypt',
       'https://plus.codes/7GXHX4HM+3J',
@@ -58,6 +59,9 @@ void main() {
       'https://goo.gl/abc',
       'http://maps.google.com/?q=30.0444,31.2357',
       'https://www.apple.com/maps/',
+      'https://maps.apple/',
+      'https://maps.apple/p',
+      'https://maps.apple/p/',
       'some copied text',
     ]) {
       test('$link is not a maps link', () {
@@ -231,6 +235,28 @@ void main() {
         await expectLater(
           const LocationParsingService().maybeParseLocationUri(shortLink),
           completion(const Point(33.8904447, 35.5066505)),
+        );
+      },
+    );
+
+    test(
+      'an Apple Maps short link gives the coordinates of the place it redirects to',
+      () async {
+        final appleMapsShortLink = Uri.parse(
+          'https://maps.apple/p/0z5uq3vXkTor6w',
+        );
+        dio.replyWithRedirect(
+          from: appleMapsShortLink,
+          to: Uri.parse(
+            'https://maps.apple.com/place?map=explore&address=El+Tahrir+Square%2C+Cairo%2C+Cairo%2C+Egypt&coordinate=30.044400%2C31.235700&name=El+Tahrir+Square',
+          ),
+        );
+
+        await expectLater(
+          const LocationParsingService().maybeParseLocationUri(
+            appleMapsShortLink,
+          ),
+          completion(const Point(30.044400, 31.235700)),
         );
       },
     );
