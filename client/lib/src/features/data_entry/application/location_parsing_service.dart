@@ -35,7 +35,11 @@ class LocationParsingService {
     Uri(scheme: 'https', host: 'maps.google.com' || 'maps.apple.com') ||
     Uri(scheme: 'https', host: 'maps.app.goo.gl', pathSegments: [_]) ||
     Uri(scheme: 'https', host: 'goo.gl', pathSegments: ['maps', _]) ||
-    Uri(scheme: 'https', host: 'maps.apple', pathSegments: ['p', _]) ||
+    Uri(
+      scheme: 'https',
+      host: 'maps.apple',
+      pathSegments: ['p', String(isNotEmpty: true)],
+    ) ||
     Uri(scheme: 'https', host: 'plus.codes') => true,
     Uri(scheme: '', :final path) => _plusCodePattern.hasMatch(
       Uri.decodeFull(path),
@@ -156,7 +160,11 @@ class LocationParsingService {
 
         case Uri(scheme: 'https', host: 'maps.app.goo.gl', pathSegments: [_]) ||
             Uri(scheme: 'https', host: 'goo.gl', pathSegments: ['maps', _]) ||
-            Uri(scheme: 'https', host: 'maps.apple', pathSegments: ['p', _]):
+            Uri(
+              scheme: 'https',
+              host: 'maps.apple',
+              pathSegments: ['p', String(isNotEmpty: true)],
+            ):
           Uri? redirectLocation;
 
           try {

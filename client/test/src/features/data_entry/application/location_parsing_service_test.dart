@@ -61,6 +61,7 @@ void main() {
       'https://www.apple.com/maps/',
       'https://maps.apple/',
       'https://maps.apple/p',
+      'https://maps.apple/p/',
       'some copied text',
     ]) {
       test('$link is not a maps link', () {

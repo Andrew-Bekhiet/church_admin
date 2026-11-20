@@ -15,7 +15,10 @@ enum LocationLinkInputKind {
         Uri(scheme: 'geo') => geo,
         Uri(host: 'maps.app.goo.gl') ||
         Uri(host: 'goo.gl', pathSegments: ['maps', ...]) ||
-        Uri(host: 'maps.apple', pathSegments: ['p', _]) => shortLink,
+        Uri(
+          host: 'maps.apple',
+          pathSegments: ['p', String(isNotEmpty: true)],
+        ) => shortLink,
         Uri(scheme: 'http' || 'https') => url,
         _ => _plusCodeKindIn(input),
       };
