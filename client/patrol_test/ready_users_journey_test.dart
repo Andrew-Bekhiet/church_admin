@@ -1,16 +1,16 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:patrol/patrol.dart';
 
 import 'support/e2e_admin_scope.dart';
 import 'support/e2e_app.dart';
 import 'support/e2e_backend.dart';
+import 'support/e2e_journey.dart';
 import 'support/e2e_users.dart';
 import 'support/e2e_widget_tester.dart';
 
 void main() {
-  patrolTest(
+  E2eJourney.test(
     'a ready service servant signs in straight to the people of their service',
     ($) async {
       final tester = $.tester;

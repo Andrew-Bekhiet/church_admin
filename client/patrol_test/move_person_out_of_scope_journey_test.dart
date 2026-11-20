@@ -1,16 +1,16 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:patrol/patrol.dart';
 
 import 'support/e2e_admin_scope.dart';
 import 'support/e2e_app.dart';
 import 'support/e2e_backend.dart';
+import 'support/e2e_journey.dart';
 import 'support/e2e_users.dart';
 import 'support/person_editor_robot.dart';
 
 void main() {
-  patrolTest(
+  E2eJourney.test(
     'a class servant moves a person to an area and a service outside their '
     'scope',
     ($) async {

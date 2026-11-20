@@ -36,7 +36,7 @@ extension E2eWidgetTester on WidgetTester {
     final tappable = target.hitTestable();
     await waitFor(finder, timeout: timeout);
 
-    while (tappable.evaluate().isEmpty) {
+    while (finder.evaluate().isEmpty || tappable.evaluate().isEmpty) {
       if (finder.evaluate().isEmpty) {
         throw failureShowingScreen(
           '${finder.toString(describeSelf: true)} left the tree before it '

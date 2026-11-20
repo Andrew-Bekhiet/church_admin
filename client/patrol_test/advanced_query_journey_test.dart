@@ -2,17 +2,17 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:patrol/patrol.dart';
 
 import 'support/advanced_query_known_backend_gaps.dart';
 import 'support/advanced_query_matrix.dart';
 import 'support/advanced_search_robot.dart';
 import 'support/e2e_app.dart';
 import 'support/e2e_backend.dart';
+import 'support/e2e_journey.dart';
 import 'support/e2e_users.dart';
 
 void main() {
-  patrolTest(
+  E2eJourney.test(
     'every field and operator the advanced search offers runs on the backend',
     ($) async {
       final tester = $.tester;

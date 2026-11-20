@@ -1,15 +1,15 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:patrol/patrol.dart';
 
 import 'support/attendance_e2e_backend.dart';
 import 'support/e2e_app.dart';
+import 'support/e2e_journey.dart';
 import 'support/record_attendance_robot.dart';
 import 'support/scoped_attendance_seed.dart';
 
 void main() {
-  patrolTest(
+  E2eJourney.test(
     'a service-scoped user records attendance only where, for whom and when '
     'their scopes allow',
     ($) async {
