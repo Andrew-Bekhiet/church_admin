@@ -110,7 +110,7 @@ export async function seedHumanUser(): Promise<string> {
   return uid;
 }
 
-export async function linkEmployeeCode(personId: string): Promise<string> {
+export async function linkNewEmployeeCode(personId: string): Promise<string> {
   const employeeCode = `code-${randomUUID()}`;
   const addedBy = await seedHumanUser();
 
@@ -127,7 +127,7 @@ export interface SeededPerson {
   employeeCode: string;
 }
 
-export async function seedMember(serviceId: string): Promise<SeededPerson> {
+export async function seedMemberWithEmployeeCode(serviceId: string): Promise<SeededPerson> {
   const personId = randomUUID();
 
   await runSql(
@@ -136,7 +136,7 @@ export async function seedMember(serviceId: string): Promise<SeededPerson> {
      values ('${personId}', '${serviceId}');`,
   );
 
-  return { personId, employeeCode: await linkEmployeeCode(personId) };
+  return { personId, employeeCode: await linkNewEmployeeCode(personId) };
 }
 
 export async function makeServantOf(
@@ -155,7 +155,7 @@ export async function makeServantOf(
 
 export async function seedServant(serviceId: string): Promise<SeededPerson> {
   const homeServiceId = await seedService();
-  const servant = await seedMember(homeServiceId);
+  const servant = await seedMemberWithEmployeeCode(homeServiceId);
 
   await makeServantOf(serviceId, servant.personId);
 

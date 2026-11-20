@@ -42,7 +42,7 @@ export function cairoWallClockAt(instant: Date): CairoWallClock {
   };
 }
 
-export function cairoWallClockDriftMs(
+export function driftFromCairoWallClockMs(
   zonelessLocalTime: string,
   now: Date,
 ): number {

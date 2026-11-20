@@ -39,7 +39,7 @@ export interface PresenceRecords {
   matchedMeetingIds: string[];
 }
 
-function isWithinWindow(
+function isWithinSetWindow(
   timeOfDay: string,
   startTime: string | null,
   endTime: string | null,
@@ -70,7 +70,7 @@ export function presenceRecordsFor(
     }
 
     if (
-      isWithinWindow(
+      isWithinSetWindow(
         timeOfDay,
         schedule.communionStartTime,
         schedule.communionEndTime,
@@ -80,7 +80,7 @@ export function presenceRecordsFor(
       matchedMeetingIds.add(schedule.meetingId);
     }
 
-    const isInAttendanceWindow = isWithinWindow(
+    const isInAttendanceWindow = isWithinSetWindow(
       timeOfDay,
       schedule.attendanceStartTime,
       schedule.attendanceEndTime,
