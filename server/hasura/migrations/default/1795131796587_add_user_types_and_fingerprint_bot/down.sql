@@ -30,6 +30,14 @@ begin
   ) then
     raise exception 'Cannot roll back: a non-human user holds permissions, admin scopes, invitations, FCM tokens or screen capture records, or is linked to a person';
   end if;
+
+  if exists (
+    select 1 from public.users_preferences as preferences
+    inner join auth.users_data as non_human on non_human.uid = preferences.uid
+    where non_human.user_type <> 'human' and preferences.updated_at > preferences.created_at
+  ) then
+    raise exception 'Cannot roll back: a non-human user has preferences changed since they were seeded';
+  end if;
 end $$;
 
 delete from auth.users_data

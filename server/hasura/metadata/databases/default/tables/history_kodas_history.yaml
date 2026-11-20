@@ -15,9 +15,18 @@ insert_permissions:
   - role: fingerprint_sync
     permission:
       check:
-        user:
-          user_type:
-            _eq: fingerprint_bot
+        _exists:
+          _table:
+            name: users_data
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _ceq:
+                    - $
+                    - recorded_by
+              - user_type:
+                  _eq: fingerprint_bot
       columns:
         - day_id
         - person_id
