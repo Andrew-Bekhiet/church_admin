@@ -134,8 +134,8 @@ select_permissions:
         - auto_attendance_weekday
         - auto_attendance_start_time
         - auto_attendance_end_time
-        - auto_kodas_start_time
-        - auto_kodas_end_time
+        - auto_communion_start_time
+        - auto_communion_end_time
         - auto_attendance_records_servants
       filter:
         _and:
@@ -159,8 +159,8 @@ select_permissions:
         - auto_attendance_weekday
         - auto_attendance_start_time
         - auto_attendance_end_time
-        - auto_kodas_start_time
-        - auto_kodas_end_time
+        - auto_communion_start_time
+        - auto_communion_end_time
         - auto_attendance_records_servants
       filter:
         _and:
