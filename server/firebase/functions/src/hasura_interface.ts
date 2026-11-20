@@ -27,7 +27,7 @@ export type UserData = {
   auth_id: string | null;
 };
 
-function dataOrThrow(hasura_response: AxiosResponse) {
+export function dataOrThrow(hasura_response: AxiosResponse) {
   const errors = hasura_response.data?.["errors"];
 
   if (errors) {
