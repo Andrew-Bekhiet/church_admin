@@ -66,22 +66,13 @@ describe("recordFingerprintPunches endpoint", () => {
     assert.equal((await post(emptyBatch, undefined)).status, 401);
   });
 
-  it("answers 400 to a punch time without a zone offset", async () => {
+  it("answers 204 to a batch that holds a malformed punch", async () => {
     const reply = await post(
-      {
-        ...emptyBatch,
-        punches: [
-          {
-            employeeCode: "1042",
-            punchedAt: "2026-11-13T09:30:00",
-            terminalSerial: "t",
-          },
-        ],
-      },
+      { ...emptyBatch, punches: [{ employeeCode: "1042" }] },
       CONFIGURED_SECRET,
     );
 
-    assert.equal(reply.status, 400);
+    assert.equal(reply.status, 204);
   });
 
   it("answers 400 to more punches than one request may carry", async () => {

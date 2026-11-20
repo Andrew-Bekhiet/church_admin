@@ -3,8 +3,8 @@ import { defineSecret } from "firebase-functions/params";
 import { https } from "firebase-functions/v2";
 import {
   fingerprintPunchesRequest,
-  recordFingerprintPunchesReceivedAt,
-} from "./fingerprint/record_fingerprint_punches_received_at";
+  recordFingerprintPunchesAndMarkSynced,
+} from "./fingerprint/record_fingerprint_punches_and_mark_synced";
 import { hasuraAdminSecret } from "./secrets";
 
 const fingerprintSyncSecret = defineSecret("FINGERPRINT_SYNC_SECRET");
@@ -38,17 +38,17 @@ export const recordFingerprintPunches = https.onRequest(
       return;
     }
 
-    const request = fingerprintPunchesRequest.safeParse(req.body);
+    const requestData = fingerprintPunchesRequest.safeParse(req.body);
 
-    if (!request.success) {
-      console.error("Malformed fingerprint punches request", request.error);
+    if (!requestData.success) {
+      console.error("Malformed fingerprint punches request", requestData.error);
       res.status(400).send();
 
       return;
     }
 
     try {
-      await recordFingerprintPunchesReceivedAt(request.data, new Date());
+      await recordFingerprintPunchesAndMarkSynced(requestData.data, new Date());
     } catch (e) {
       console.error("Failed to record fingerprint punches", e);
       res.status(500).send();

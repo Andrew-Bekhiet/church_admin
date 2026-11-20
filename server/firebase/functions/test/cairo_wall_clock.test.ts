@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
   cairoWallClockAt,
-  cairoWallClockDriftMs,
+  driftFromCairoWallClockMs,
 } from "../src/fingerprint/cairo_wall_clock";
 
 describe("cairoWallClockAt", () => {
@@ -76,16 +76,16 @@ describe("cairoWallClockAt", () => {
   });
 });
 
-describe("cairoWallClockDriftMs", () => {
+describe("driftFromCairoWallClockMs", () => {
   const now = new Date("2026-11-13T07:00:00Z");
 
   it("is zero for a server clock showing Cairo time", () => {
-    assert.equal(cairoWallClockDriftMs("2026-11-13T09:00:00", now), 0);
+    assert.equal(driftFromCairoWallClockMs("2026-11-13T09:00:00", now), 0);
   });
 
   it("is one hour for a server clock that missed the change back from summer time", () => {
     assert.equal(
-      cairoWallClockDriftMs("2026-11-13T10:00:00", now),
+      driftFromCairoWallClockMs("2026-11-13T10:00:00", now),
       60 * 60 * 1000,
     );
   });

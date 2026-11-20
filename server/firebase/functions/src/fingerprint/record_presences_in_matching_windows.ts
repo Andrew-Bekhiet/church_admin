@@ -89,74 +89,94 @@ function attendanceKeyOf(attendance: AttendanceToRecord): string {
   ].join("|");
 }
 
-function attendanceGroupedByPunchTimeEarliestFirst(
+function distinctAttendanceGroupedByTimeEarliestFirst(
   attendance: AttendanceToRecord[],
 ): AttendanceToRecord[][] {
-  const attendanceByPunchTime = new Map<
+  const attendanceByTime = new Map<
     number,
     Map<string, AttendanceToRecord>
   >();
 
   for (const record of attendance) {
-    const punchTime = record.at.getTime();
-    const sameTimeRecords = attendanceByPunchTime.get(punchTime) ??
+    const presenceTime = record.at.getTime();
+    const sameTimeRecords = attendanceByTime.get(presenceTime) ??
       new Map<string, AttendanceToRecord>();
 
     sameTimeRecords.set(attendanceKeyOf(record), record);
-    attendanceByPunchTime.set(punchTime, sameTimeRecords);
+    attendanceByTime.set(presenceTime, sameTimeRecords);
   }
 
-  return [...attendanceByPunchTime.entries()]
+  return [...attendanceByTime.entries()]
     .sort(([earlierTime], [laterTime]) => earlierTime - laterTime)
     .map(([, sameTimeRecords]) => [...sameTimeRecords.values()]);
 }
 
-async function writePresenceRecords(
-  fingerprintBotUid: string,
-  attendance: AttendanceToRecord[],
+interface CommunionRow {
+  dayId: string;
+  personId: string;
+  recordedBy: string;
+}
+
+function communionRowsWithoutDuplicates(
   communions: CommunionToRecord[],
-): Promise<void> {
-  const attendanceGroups = attendanceGroupedByPunchTimeEarliestFirst(attendance);
-  const communionKeys = new Set(
-    communions.map((communion) =>
-      `${communion.cairoDate}|${communion.personId}`
-    ),
-  );
-  const communionRows = [...communionKeys].map((key) => {
-    const [dayId, personId] = key.split("|");
+  fingerprintBotUid: string,
+): CommunionRow[] {
+  const rowsByDayAndPerson = new Map<string, CommunionRow>();
 
-    return { dayId, personId, recordedBy: fingerprintBotUid };
-  });
-
-  if (attendanceGroups.length === 0 && communionRows.length === 0) return;
-
-  const variables: Record<string, unknown> = {
-    days: [...new Set(communionRows.map((row) => row.dayId))]
-      .map((day) => ({ day })),
-    communions: communionRows,
-  };
-
-  attendanceGroups.forEach((group, index) => {
-    variables[`punchedAt${index}`] = group[0].at.toISOString();
-    variables[`attendance${index}`] = group.map((record) => ({
-      meetingId: record.meetingId,
-      personId: record.personId,
-      asServant: record.asServant,
-      datetime: record.at.toISOString(),
+  for (const communion of communions) {
+    rowsByDayAndPerson.set(`${communion.cairoDate}|${communion.personId}`, {
+      dayId: communion.cairoDate,
+      personId: communion.personId,
       recordedBy: fingerprintBotUid,
-    }));
-  });
+    });
+  }
 
-  await requestAsFingerprintSync(
-    `
-      mutation recordPresenceOfPersons(
+  return [...rowsByDayAndPerson.values()];
+}
+
+function attendanceVariablesOf(
+  attendanceGroups: AttendanceToRecord[][],
+  fingerprintBotUid: string,
+): Record<string, unknown> {
+  return Object.fromEntries(
+    attendanceGroups.flatMap((group, index) => [
+      [`at${index}`, group[0].at.toISOString()],
+      [
+        `attendance${index}`,
+        group.map((record) => ({
+          meetingId: record.meetingId,
+          personId: record.personId,
+          asServant: record.asServant,
+          datetime: record.at.toISOString(),
+          recordedBy: fingerprintBotUid,
+        })),
+      ],
+    ]),
+  );
+}
+
+function recordPresenceMutationFor(attendanceGroupCount: number): string {
+  const groupIndexes = [...Array(attendanceGroupCount).keys()];
+  const attendanceVariableDefinitions = groupIndexes.map((index) => `
+        $attendance${index}: [HistoryAttendanceHistoryInsertInput!]!
+        $at${index}: timestamptz!`);
+  const attendanceUpserts = groupIndexes.map((index) => `
+        attendance${index}: insertHistoryAttendanceHistory(
+          objects: $attendance${index}
+          onConflict: {
+            constraint: attendance_history_day_meeting_id_person_id_as_servant_key
+            updateColumns: [datetime, recordedBy]
+            where: { datetime: { _gt: $at${index} } }
+          }
+        ) {
+          affectedRows
+        }`);
+
+  return `
+      mutation recordPresencesInMatchingWindows(
         $days: [HistoryAttendanceDaysInsertInput!]!
         $communions: [HistoryKodasHistoryInsertInput!]!
-        ${
-      attendanceGroups.map((_, index) => `
-        $attendance${index}: [HistoryAttendanceHistoryInsertInput!]!
-        $punchedAt${index}: timestamptz!`).join("")
-    }
+        ${attendanceVariableDefinitions.join("")}
       ) {
         insertHistoryAttendanceDays(
           objects: $days
@@ -173,27 +193,39 @@ async function writePresenceRecords(
         ) {
           affectedRows
         }
-        ${
-      attendanceGroups.map((_, index) => `
-        attendance${index}: insertHistoryAttendanceHistory(
-          objects: $attendance${index}
-          onConflict: {
-            constraint: attendance_history_day_meeting_id_person_id_as_servant_key
-            updateColumns: [datetime, recordedBy]
-            where: { datetime: { _gt: $punchedAt${index} } }
-          }
-        ) {
-          affectedRows
-        }`).join("")
-    }
+        ${attendanceUpserts.join("")}
       }
-    `,
-    variables,
-    "recordPresenceOfPersons",
+    `;
+}
+
+async function writePresenceRecords(
+  fingerprintBotUid: string,
+  attendance: AttendanceToRecord[],
+  communions: CommunionToRecord[],
+): Promise<void> {
+  const attendanceGroups = distinctAttendanceGroupedByTimeEarliestFirst(
+    attendance,
+  );
+  const communionRows = communionRowsWithoutDuplicates(
+    communions,
+    fingerprintBotUid,
+  );
+
+  if (attendanceGroups.length === 0 && communionRows.length === 0) return;
+
+  await requestAsFingerprintSync(
+    recordPresenceMutationFor(attendanceGroups.length),
+    {
+      days: [...new Set(communionRows.map((row) => row.dayId))]
+        .map((day) => ({ day })),
+      communions: communionRows,
+      ...attendanceVariablesOf(attendanceGroups, fingerprintBotUid),
+    },
+    "recordPresencesInMatchingWindows",
   );
 }
 
-export async function recordPresenceOfPersons(
+export async function recordPresencesInMatchingWindows(
   presences: PersonPresence[],
 ): Promise<void> {
   if (presences.length === 0) return;
