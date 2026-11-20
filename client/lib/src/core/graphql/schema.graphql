@@ -4423,8 +4423,8 @@ type HistoryMeetings {
   autoAttendanceRecordsServants: Boolean!
   autoAttendanceStartTime: time
   autoAttendanceWeekday: smallint
-  autoKodasEndTime: time
-  autoKodasStartTime: time
+  autoCommunionEndTime: time
+  autoCommunionStartTime: time
   color: bigint
   days(distinctOn: [HistoryMeetingDaysSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingDaysOrderBy!], where: HistoryMeetingDaysBoolExp): [HistoryMeetingDays!]!
   daysAggregate(distinctOn: [HistoryMeetingDaysSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingDaysOrderBy!], where: HistoryMeetingDaysBoolExp): HistoryMeetingDaysAggregate!
@@ -4477,8 +4477,8 @@ input HistoryMeetingsBoolExp {
   autoAttendanceRecordsServants: BooleanComparisonExp
   autoAttendanceStartTime: TimeComparisonExp
   autoAttendanceWeekday: SmallintComparisonExp
-  autoKodasEndTime: TimeComparisonExp
-  autoKodasStartTime: TimeComparisonExp
+  autoCommunionEndTime: TimeComparisonExp
+  autoCommunionStartTime: TimeComparisonExp
   color: BigintComparisonExp
   days: HistoryMeetingDaysBoolExp
   daysAggregate: HistoryMeetingDaysAggregateBoolExp
@@ -4564,8 +4564,8 @@ input HistoryMeetingsOrderBy {
   autoAttendanceRecordsServants: OrderBy
   autoAttendanceStartTime: OrderBy
   autoAttendanceWeekday: OrderBy
-  autoKodasEndTime: OrderBy
-  autoKodasStartTime: OrderBy
+  autoCommunionEndTime: OrderBy
+  autoCommunionStartTime: OrderBy
   color: OrderBy
   daysAggregate: HistoryMeetingDaysAggregateOrderBy
   group: GroupsOrderBy
@@ -4591,8 +4591,8 @@ enum HistoryMeetingsSelectColumn {
   autoAttendanceRecordsServants
   autoAttendanceStartTime
   autoAttendanceWeekday
-  autoKodasEndTime
-  autoKodasStartTime
+  autoCommunionEndTime
+  autoCommunionStartTime
   color
   groupId
   id
@@ -4641,8 +4641,8 @@ input HistoryMeetingsStreamCursorValueInput {
   autoAttendanceRecordsServants: Boolean
   autoAttendanceStartTime: time
   autoAttendanceWeekday: smallint
-  autoKodasEndTime: time
-  autoKodasStartTime: time
+  autoCommunionEndTime: time
+  autoCommunionStartTime: time
   color: bigint
   groupId: uuid
   id: uuid

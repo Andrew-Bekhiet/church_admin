@@ -546,8 +546,8 @@ enum Enum_HistoryMeetingsSelectColumn {
   autoAttendanceRecordsServants,
   autoAttendanceStartTime,
   autoAttendanceWeekday,
-  autoKodasEndTime,
-  autoKodasStartTime,
+  autoCommunionEndTime,
+  autoCommunionStartTime,
   color,
   groupId,
   id,
@@ -579,10 +579,10 @@ String toJson_Enum_HistoryMeetingsSelectColumn(
       return r'autoAttendanceStartTime';
     case Enum_HistoryMeetingsSelectColumn.autoAttendanceWeekday:
       return r'autoAttendanceWeekday';
-    case Enum_HistoryMeetingsSelectColumn.autoKodasEndTime:
-      return r'autoKodasEndTime';
-    case Enum_HistoryMeetingsSelectColumn.autoKodasStartTime:
-      return r'autoKodasStartTime';
+    case Enum_HistoryMeetingsSelectColumn.autoCommunionEndTime:
+      return r'autoCommunionEndTime';
+    case Enum_HistoryMeetingsSelectColumn.autoCommunionStartTime:
+      return r'autoCommunionStartTime';
     case Enum_HistoryMeetingsSelectColumn.color:
       return r'color';
     case Enum_HistoryMeetingsSelectColumn.groupId:
@@ -620,10 +620,10 @@ Enum_HistoryMeetingsSelectColumn fromJson_Enum_HistoryMeetingsSelectColumn(
       return Enum_HistoryMeetingsSelectColumn.autoAttendanceStartTime;
     case r'autoAttendanceWeekday':
       return Enum_HistoryMeetingsSelectColumn.autoAttendanceWeekday;
-    case r'autoKodasEndTime':
-      return Enum_HistoryMeetingsSelectColumn.autoKodasEndTime;
-    case r'autoKodasStartTime':
-      return Enum_HistoryMeetingsSelectColumn.autoKodasStartTime;
+    case r'autoCommunionEndTime':
+      return Enum_HistoryMeetingsSelectColumn.autoCommunionEndTime;
+    case r'autoCommunionStartTime':
+      return Enum_HistoryMeetingsSelectColumn.autoCommunionStartTime;
     case r'color':
       return Enum_HistoryMeetingsSelectColumn.color;
     case r'groupId':

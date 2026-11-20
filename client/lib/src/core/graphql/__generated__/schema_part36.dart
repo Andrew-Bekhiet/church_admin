@@ -2534,8 +2534,8 @@ class Input_HistoryMeetingsBoolExp {
     Input_BooleanComparisonExp? autoAttendanceRecordsServants,
     Input_TimeComparisonExp? autoAttendanceStartTime,
     Input_SmallintComparisonExp? autoAttendanceWeekday,
-    Input_TimeComparisonExp? autoKodasEndTime,
-    Input_TimeComparisonExp? autoKodasStartTime,
+    Input_TimeComparisonExp? autoCommunionEndTime,
+    Input_TimeComparisonExp? autoCommunionStartTime,
     Input_BigintComparisonExp? color,
     Input_HistoryMeetingDaysBoolExp? days,
     Input_HistoryMeetingDaysAggregateBoolExp? daysAggregate,
@@ -2566,8 +2566,10 @@ class Input_HistoryMeetingsBoolExp {
       r'autoAttendanceStartTime': autoAttendanceStartTime,
     if (autoAttendanceWeekday != null)
       r'autoAttendanceWeekday': autoAttendanceWeekday,
-    if (autoKodasEndTime != null) r'autoKodasEndTime': autoKodasEndTime,
-    if (autoKodasStartTime != null) r'autoKodasStartTime': autoKodasStartTime,
+    if (autoCommunionEndTime != null)
+      r'autoCommunionEndTime': autoCommunionEndTime,
+    if (autoCommunionStartTime != null)
+      r'autoCommunionStartTime': autoCommunionStartTime,
     if (color != null) r'color': color,
     if (days != null) r'days': days,
     if (daysAggregate != null) r'daysAggregate': daysAggregate,
@@ -2675,20 +2677,20 @@ class Input_HistoryMeetingsBoolExp {
               (l$autoAttendanceWeekday as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('autoKodasEndTime')) {
-      final l$autoKodasEndTime = data['autoKodasEndTime'];
-      result$data['autoKodasEndTime'] = l$autoKodasEndTime == null
+    if (data.containsKey('autoCommunionEndTime')) {
+      final l$autoCommunionEndTime = data['autoCommunionEndTime'];
+      result$data['autoCommunionEndTime'] = l$autoCommunionEndTime == null
           ? null
           : Input_TimeComparisonExp.fromJson(
-              (l$autoKodasEndTime as Map<String, dynamic>),
+              (l$autoCommunionEndTime as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('autoKodasStartTime')) {
-      final l$autoKodasStartTime = data['autoKodasStartTime'];
-      result$data['autoKodasStartTime'] = l$autoKodasStartTime == null
+    if (data.containsKey('autoCommunionStartTime')) {
+      final l$autoCommunionStartTime = data['autoCommunionStartTime'];
+      result$data['autoCommunionStartTime'] = l$autoCommunionStartTime == null
           ? null
           : Input_TimeComparisonExp.fromJson(
-              (l$autoKodasStartTime as Map<String, dynamic>),
+              (l$autoCommunionStartTime as Map<String, dynamic>),
             );
     }
     if (data.containsKey('color')) {
@@ -2834,11 +2836,11 @@ class Input_HistoryMeetingsBoolExp {
   Input_SmallintComparisonExp? get autoAttendanceWeekday =>
       (_$data['autoAttendanceWeekday'] as Input_SmallintComparisonExp?);
 
-  Input_TimeComparisonExp? get autoKodasEndTime =>
-      (_$data['autoKodasEndTime'] as Input_TimeComparisonExp?);
+  Input_TimeComparisonExp? get autoCommunionEndTime =>
+      (_$data['autoCommunionEndTime'] as Input_TimeComparisonExp?);
 
-  Input_TimeComparisonExp? get autoKodasStartTime =>
-      (_$data['autoKodasStartTime'] as Input_TimeComparisonExp?);
+  Input_TimeComparisonExp? get autoCommunionStartTime =>
+      (_$data['autoCommunionStartTime'] as Input_TimeComparisonExp?);
 
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
@@ -2925,13 +2927,14 @@ class Input_HistoryMeetingsBoolExp {
       final l$autoAttendanceWeekday = autoAttendanceWeekday;
       result$data['autoAttendanceWeekday'] = l$autoAttendanceWeekday?.toJson();
     }
-    if (_$data.containsKey('autoKodasEndTime')) {
-      final l$autoKodasEndTime = autoKodasEndTime;
-      result$data['autoKodasEndTime'] = l$autoKodasEndTime?.toJson();
+    if (_$data.containsKey('autoCommunionEndTime')) {
+      final l$autoCommunionEndTime = autoCommunionEndTime;
+      result$data['autoCommunionEndTime'] = l$autoCommunionEndTime?.toJson();
     }
-    if (_$data.containsKey('autoKodasStartTime')) {
-      final l$autoKodasStartTime = autoKodasStartTime;
-      result$data['autoKodasStartTime'] = l$autoKodasStartTime?.toJson();
+    if (_$data.containsKey('autoCommunionStartTime')) {
+      final l$autoCommunionStartTime = autoCommunionStartTime;
+      result$data['autoCommunionStartTime'] = l$autoCommunionStartTime
+          ?.toJson();
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -3115,22 +3118,22 @@ class Input_HistoryMeetingsBoolExp {
     if (l$autoAttendanceWeekday != lOther$autoAttendanceWeekday) {
       return false;
     }
-    final l$autoKodasEndTime = autoKodasEndTime;
-    final lOther$autoKodasEndTime = other.autoKodasEndTime;
-    if (_$data.containsKey('autoKodasEndTime') !=
-        other._$data.containsKey('autoKodasEndTime')) {
+    final l$autoCommunionEndTime = autoCommunionEndTime;
+    final lOther$autoCommunionEndTime = other.autoCommunionEndTime;
+    if (_$data.containsKey('autoCommunionEndTime') !=
+        other._$data.containsKey('autoCommunionEndTime')) {
       return false;
     }
-    if (l$autoKodasEndTime != lOther$autoKodasEndTime) {
+    if (l$autoCommunionEndTime != lOther$autoCommunionEndTime) {
       return false;
     }
-    final l$autoKodasStartTime = autoKodasStartTime;
-    final lOther$autoKodasStartTime = other.autoKodasStartTime;
-    if (_$data.containsKey('autoKodasStartTime') !=
-        other._$data.containsKey('autoKodasStartTime')) {
+    final l$autoCommunionStartTime = autoCommunionStartTime;
+    final lOther$autoCommunionStartTime = other.autoCommunionStartTime;
+    if (_$data.containsKey('autoCommunionStartTime') !=
+        other._$data.containsKey('autoCommunionStartTime')) {
       return false;
     }
-    if (l$autoKodasStartTime != lOther$autoKodasStartTime) {
+    if (l$autoCommunionStartTime != lOther$autoCommunionStartTime) {
       return false;
     }
     final l$color = color;
@@ -3267,8 +3270,8 @@ class Input_HistoryMeetingsBoolExp {
     final l$autoAttendanceRecordsServants = autoAttendanceRecordsServants;
     final l$autoAttendanceStartTime = autoAttendanceStartTime;
     final l$autoAttendanceWeekday = autoAttendanceWeekday;
-    final l$autoKodasEndTime = autoKodasEndTime;
-    final l$autoKodasStartTime = autoKodasStartTime;
+    final l$autoCommunionEndTime = autoCommunionEndTime;
+    final l$autoCommunionStartTime = autoCommunionStartTime;
     final l$color = color;
     final l$days = days;
     final l$daysAggregate = daysAggregate;
@@ -3312,9 +3315,11 @@ class Input_HistoryMeetingsBoolExp {
       _$data.containsKey('autoAttendanceWeekday')
           ? l$autoAttendanceWeekday
           : const {},
-      _$data.containsKey('autoKodasEndTime') ? l$autoKodasEndTime : const {},
-      _$data.containsKey('autoKodasStartTime')
-          ? l$autoKodasStartTime
+      _$data.containsKey('autoCommunionEndTime')
+          ? l$autoCommunionEndTime
+          : const {},
+      _$data.containsKey('autoCommunionStartTime')
+          ? l$autoCommunionStartTime
           : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('days') ? l$days : const {},

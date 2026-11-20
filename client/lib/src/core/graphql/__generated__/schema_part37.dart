@@ -21,8 +21,8 @@ abstract class CopyWith_Input_HistoryMeetingsBoolExp<TRes> {
     Input_BooleanComparisonExp? autoAttendanceRecordsServants,
     Input_TimeComparisonExp? autoAttendanceStartTime,
     Input_SmallintComparisonExp? autoAttendanceWeekday,
-    Input_TimeComparisonExp? autoKodasEndTime,
-    Input_TimeComparisonExp? autoKodasStartTime,
+    Input_TimeComparisonExp? autoCommunionEndTime,
+    Input_TimeComparisonExp? autoCommunionStartTime,
     Input_BigintComparisonExp? color,
     Input_HistoryMeetingDaysBoolExp? days,
     Input_HistoryMeetingDaysAggregateBoolExp? daysAggregate,
@@ -63,8 +63,8 @@ abstract class CopyWith_Input_HistoryMeetingsBoolExp<TRes> {
   CopyWith_Input_BooleanComparisonExp<TRes> get autoAttendanceRecordsServants;
   CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceStartTime;
   CopyWith_Input_SmallintComparisonExp<TRes> get autoAttendanceWeekday;
-  CopyWith_Input_TimeComparisonExp<TRes> get autoKodasEndTime;
-  CopyWith_Input_TimeComparisonExp<TRes> get autoKodasStartTime;
+  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionEndTime;
+  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionStartTime;
   CopyWith_Input_BigintComparisonExp<TRes> get color;
   CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get days;
   CopyWith_Input_HistoryMeetingDaysAggregateBoolExp<TRes> get daysAggregate;
@@ -102,8 +102,8 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
     Object? autoAttendanceRecordsServants = _undefined,
     Object? autoAttendanceStartTime = _undefined,
     Object? autoAttendanceWeekday = _undefined,
-    Object? autoKodasEndTime = _undefined,
-    Object? autoKodasStartTime = _undefined,
+    Object? autoCommunionEndTime = _undefined,
+    Object? autoCommunionStartTime = _undefined,
     Object? color = _undefined,
     Object? days = _undefined,
     Object? daysAggregate = _undefined,
@@ -147,10 +147,12 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
       if (autoAttendanceWeekday != _undefined)
         'autoAttendanceWeekday':
             (autoAttendanceWeekday as Input_SmallintComparisonExp?),
-      if (autoKodasEndTime != _undefined)
-        'autoKodasEndTime': (autoKodasEndTime as Input_TimeComparisonExp?),
-      if (autoKodasStartTime != _undefined)
-        'autoKodasStartTime': (autoKodasStartTime as Input_TimeComparisonExp?),
+      if (autoCommunionEndTime != _undefined)
+        'autoCommunionEndTime':
+            (autoCommunionEndTime as Input_TimeComparisonExp?),
+      if (autoCommunionStartTime != _undefined)
+        'autoCommunionStartTime':
+            (autoCommunionStartTime as Input_TimeComparisonExp?),
       if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
       if (days != _undefined)
         'days': (days as Input_HistoryMeetingDaysBoolExp?),
@@ -293,23 +295,23 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
           );
   }
 
-  CopyWith_Input_TimeComparisonExp<TRes> get autoKodasEndTime {
-    final local$autoKodasEndTime = _instance.autoKodasEndTime;
-    return local$autoKodasEndTime == null
+  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionEndTime {
+    final local$autoCommunionEndTime = _instance.autoCommunionEndTime;
+    return local$autoCommunionEndTime == null
         ? CopyWith_Input_TimeComparisonExp.stub(_then(_instance))
         : CopyWith_Input_TimeComparisonExp(
-            local$autoKodasEndTime,
-            (e) => call(autoKodasEndTime: e),
+            local$autoCommunionEndTime,
+            (e) => call(autoCommunionEndTime: e),
           );
   }
 
-  CopyWith_Input_TimeComparisonExp<TRes> get autoKodasStartTime {
-    final local$autoKodasStartTime = _instance.autoKodasStartTime;
-    return local$autoKodasStartTime == null
+  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionStartTime {
+    final local$autoCommunionStartTime = _instance.autoCommunionStartTime;
+    return local$autoCommunionStartTime == null
         ? CopyWith_Input_TimeComparisonExp.stub(_then(_instance))
         : CopyWith_Input_TimeComparisonExp(
-            local$autoKodasStartTime,
-            (e) => call(autoKodasStartTime: e),
+            local$autoCommunionStartTime,
+            (e) => call(autoCommunionStartTime: e),
           );
   }
 
@@ -464,8 +466,8 @@ class _CopyWithStubImpl_Input_HistoryMeetingsBoolExp<TRes>
     Input_BooleanComparisonExp? autoAttendanceRecordsServants,
     Input_TimeComparisonExp? autoAttendanceStartTime,
     Input_SmallintComparisonExp? autoAttendanceWeekday,
-    Input_TimeComparisonExp? autoKodasEndTime,
-    Input_TimeComparisonExp? autoKodasStartTime,
+    Input_TimeComparisonExp? autoCommunionEndTime,
+    Input_TimeComparisonExp? autoCommunionStartTime,
     Input_BigintComparisonExp? color,
     Input_HistoryMeetingDaysBoolExp? days,
     Input_HistoryMeetingDaysAggregateBoolExp? daysAggregate,
@@ -511,10 +513,10 @@ class _CopyWithStubImpl_Input_HistoryMeetingsBoolExp<TRes>
   CopyWith_Input_SmallintComparisonExp<TRes> get autoAttendanceWeekday =>
       CopyWith_Input_SmallintComparisonExp.stub(_res);
 
-  CopyWith_Input_TimeComparisonExp<TRes> get autoKodasEndTime =>
+  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionEndTime =>
       CopyWith_Input_TimeComparisonExp.stub(_res);
 
-  CopyWith_Input_TimeComparisonExp<TRes> get autoKodasStartTime =>
+  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionStartTime =>
       CopyWith_Input_TimeComparisonExp.stub(_res);
 
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
@@ -2223,8 +2225,8 @@ class Input_HistoryMeetingsOrderBy {
     Enum_OrderBy? autoAttendanceRecordsServants,
     Enum_OrderBy? autoAttendanceStartTime,
     Enum_OrderBy? autoAttendanceWeekday,
-    Enum_OrderBy? autoKodasEndTime,
-    Enum_OrderBy? autoKodasStartTime,
+    Enum_OrderBy? autoCommunionEndTime,
+    Enum_OrderBy? autoCommunionStartTime,
     Enum_OrderBy? color,
     Input_HistoryMeetingDaysAggregateOrderBy? daysAggregate,
     Input_GroupsOrderBy? group,
@@ -2250,8 +2252,10 @@ class Input_HistoryMeetingsOrderBy {
       r'autoAttendanceStartTime': autoAttendanceStartTime,
     if (autoAttendanceWeekday != null)
       r'autoAttendanceWeekday': autoAttendanceWeekday,
-    if (autoKodasEndTime != null) r'autoKodasEndTime': autoKodasEndTime,
-    if (autoKodasStartTime != null) r'autoKodasStartTime': autoKodasStartTime,
+    if (autoCommunionEndTime != null)
+      r'autoCommunionEndTime': autoCommunionEndTime,
+    if (autoCommunionStartTime != null)
+      r'autoCommunionStartTime': autoCommunionStartTime,
     if (color != null) r'color': color,
     if (daysAggregate != null) r'daysAggregate': daysAggregate,
     if (group != null) r'group': group,
@@ -2312,17 +2316,17 @@ class Input_HistoryMeetingsOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$autoAttendanceWeekday as String));
     }
-    if (data.containsKey('autoKodasEndTime')) {
-      final l$autoKodasEndTime = data['autoKodasEndTime'];
-      result$data['autoKodasEndTime'] = l$autoKodasEndTime == null
+    if (data.containsKey('autoCommunionEndTime')) {
+      final l$autoCommunionEndTime = data['autoCommunionEndTime'];
+      result$data['autoCommunionEndTime'] = l$autoCommunionEndTime == null
           ? null
-          : fromJson_Enum_OrderBy((l$autoKodasEndTime as String));
+          : fromJson_Enum_OrderBy((l$autoCommunionEndTime as String));
     }
-    if (data.containsKey('autoKodasStartTime')) {
-      final l$autoKodasStartTime = data['autoKodasStartTime'];
-      result$data['autoKodasStartTime'] = l$autoKodasStartTime == null
+    if (data.containsKey('autoCommunionStartTime')) {
+      final l$autoCommunionStartTime = data['autoCommunionStartTime'];
+      result$data['autoCommunionStartTime'] = l$autoCommunionStartTime == null
           ? null
-          : fromJson_Enum_OrderBy((l$autoKodasStartTime as String));
+          : fromJson_Enum_OrderBy((l$autoCommunionStartTime as String));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -2430,11 +2434,11 @@ class Input_HistoryMeetingsOrderBy {
   Enum_OrderBy? get autoAttendanceWeekday =>
       (_$data['autoAttendanceWeekday'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get autoKodasEndTime =>
-      (_$data['autoKodasEndTime'] as Enum_OrderBy?);
+  Enum_OrderBy? get autoCommunionEndTime =>
+      (_$data['autoCommunionEndTime'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get autoKodasStartTime =>
-      (_$data['autoKodasStartTime'] as Enum_OrderBy?);
+  Enum_OrderBy? get autoCommunionStartTime =>
+      (_$data['autoCommunionStartTime'] as Enum_OrderBy?);
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
@@ -2505,17 +2509,17 @@ class Input_HistoryMeetingsOrderBy {
           ? null
           : toJson_Enum_OrderBy(l$autoAttendanceWeekday);
     }
-    if (_$data.containsKey('autoKodasEndTime')) {
-      final l$autoKodasEndTime = autoKodasEndTime;
-      result$data['autoKodasEndTime'] = l$autoKodasEndTime == null
+    if (_$data.containsKey('autoCommunionEndTime')) {
+      final l$autoCommunionEndTime = autoCommunionEndTime;
+      result$data['autoCommunionEndTime'] = l$autoCommunionEndTime == null
           ? null
-          : toJson_Enum_OrderBy(l$autoKodasEndTime);
+          : toJson_Enum_OrderBy(l$autoCommunionEndTime);
     }
-    if (_$data.containsKey('autoKodasStartTime')) {
-      final l$autoKodasStartTime = autoKodasStartTime;
-      result$data['autoKodasStartTime'] = l$autoKodasStartTime == null
+    if (_$data.containsKey('autoCommunionStartTime')) {
+      final l$autoCommunionStartTime = autoCommunionStartTime;
+      result$data['autoCommunionStartTime'] = l$autoCommunionStartTime == null
           ? null
-          : toJson_Enum_OrderBy(l$autoKodasStartTime);
+          : toJson_Enum_OrderBy(l$autoCommunionStartTime);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -2654,22 +2658,22 @@ class Input_HistoryMeetingsOrderBy {
     if (l$autoAttendanceWeekday != lOther$autoAttendanceWeekday) {
       return false;
     }
-    final l$autoKodasEndTime = autoKodasEndTime;
-    final lOther$autoKodasEndTime = other.autoKodasEndTime;
-    if (_$data.containsKey('autoKodasEndTime') !=
-        other._$data.containsKey('autoKodasEndTime')) {
+    final l$autoCommunionEndTime = autoCommunionEndTime;
+    final lOther$autoCommunionEndTime = other.autoCommunionEndTime;
+    if (_$data.containsKey('autoCommunionEndTime') !=
+        other._$data.containsKey('autoCommunionEndTime')) {
       return false;
     }
-    if (l$autoKodasEndTime != lOther$autoKodasEndTime) {
+    if (l$autoCommunionEndTime != lOther$autoCommunionEndTime) {
       return false;
     }
-    final l$autoKodasStartTime = autoKodasStartTime;
-    final lOther$autoKodasStartTime = other.autoKodasStartTime;
-    if (_$data.containsKey('autoKodasStartTime') !=
-        other._$data.containsKey('autoKodasStartTime')) {
+    final l$autoCommunionStartTime = autoCommunionStartTime;
+    final lOther$autoCommunionStartTime = other.autoCommunionStartTime;
+    if (_$data.containsKey('autoCommunionStartTime') !=
+        other._$data.containsKey('autoCommunionStartTime')) {
       return false;
     }
-    if (l$autoKodasStartTime != lOther$autoKodasStartTime) {
+    if (l$autoCommunionStartTime != lOther$autoCommunionStartTime) {
       return false;
     }
     final l$color = color;
@@ -2794,8 +2798,8 @@ class Input_HistoryMeetingsOrderBy {
     final l$autoAttendanceRecordsServants = autoAttendanceRecordsServants;
     final l$autoAttendanceStartTime = autoAttendanceStartTime;
     final l$autoAttendanceWeekday = autoAttendanceWeekday;
-    final l$autoKodasEndTime = autoKodasEndTime;
-    final l$autoKodasStartTime = autoKodasStartTime;
+    final l$autoCommunionEndTime = autoCommunionEndTime;
+    final l$autoCommunionStartTime = autoCommunionStartTime;
     final l$color = color;
     final l$daysAggregate = daysAggregate;
     final l$group = group;
@@ -2826,9 +2830,11 @@ class Input_HistoryMeetingsOrderBy {
       _$data.containsKey('autoAttendanceWeekday')
           ? l$autoAttendanceWeekday
           : const {},
-      _$data.containsKey('autoKodasEndTime') ? l$autoKodasEndTime : const {},
-      _$data.containsKey('autoKodasStartTime')
-          ? l$autoKodasStartTime
+      _$data.containsKey('autoCommunionEndTime')
+          ? l$autoCommunionEndTime
+          : const {},
+      _$data.containsKey('autoCommunionStartTime')
+          ? l$autoCommunionStartTime
           : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('daysAggregate') ? l$daysAggregate : const {},
