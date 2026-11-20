@@ -542,12 +542,12 @@ Enum_HistoryMeetingsConstraint fromJson_Enum_HistoryMeetingsConstraint(
 
 enum Enum_HistoryMeetingsSelectColumn {
   audience,
-  autoAttendanceEndsAt,
+  autoAttendanceEndTime,
   autoAttendanceRecordsServants,
-  autoAttendanceStartsAt,
+  autoAttendanceStartTime,
   autoAttendanceWeekday,
-  autoCommunionEndsAt,
-  autoCommunionStartsAt,
+  autoKodasEndTime,
+  autoKodasStartTime,
   color,
   groupId,
   id,
@@ -571,18 +571,18 @@ String toJson_Enum_HistoryMeetingsSelectColumn(
   switch (e) {
     case Enum_HistoryMeetingsSelectColumn.audience:
       return r'audience';
-    case Enum_HistoryMeetingsSelectColumn.autoAttendanceEndsAt:
-      return r'autoAttendanceEndsAt';
+    case Enum_HistoryMeetingsSelectColumn.autoAttendanceEndTime:
+      return r'autoAttendanceEndTime';
     case Enum_HistoryMeetingsSelectColumn.autoAttendanceRecordsServants:
       return r'autoAttendanceRecordsServants';
-    case Enum_HistoryMeetingsSelectColumn.autoAttendanceStartsAt:
-      return r'autoAttendanceStartsAt';
+    case Enum_HistoryMeetingsSelectColumn.autoAttendanceStartTime:
+      return r'autoAttendanceStartTime';
     case Enum_HistoryMeetingsSelectColumn.autoAttendanceWeekday:
       return r'autoAttendanceWeekday';
-    case Enum_HistoryMeetingsSelectColumn.autoCommunionEndsAt:
-      return r'autoCommunionEndsAt';
-    case Enum_HistoryMeetingsSelectColumn.autoCommunionStartsAt:
-      return r'autoCommunionStartsAt';
+    case Enum_HistoryMeetingsSelectColumn.autoKodasEndTime:
+      return r'autoKodasEndTime';
+    case Enum_HistoryMeetingsSelectColumn.autoKodasStartTime:
+      return r'autoKodasStartTime';
     case Enum_HistoryMeetingsSelectColumn.color:
       return r'color';
     case Enum_HistoryMeetingsSelectColumn.groupId:
@@ -612,18 +612,18 @@ Enum_HistoryMeetingsSelectColumn fromJson_Enum_HistoryMeetingsSelectColumn(
   switch (value) {
     case r'audience':
       return Enum_HistoryMeetingsSelectColumn.audience;
-    case r'autoAttendanceEndsAt':
-      return Enum_HistoryMeetingsSelectColumn.autoAttendanceEndsAt;
+    case r'autoAttendanceEndTime':
+      return Enum_HistoryMeetingsSelectColumn.autoAttendanceEndTime;
     case r'autoAttendanceRecordsServants':
       return Enum_HistoryMeetingsSelectColumn.autoAttendanceRecordsServants;
-    case r'autoAttendanceStartsAt':
-      return Enum_HistoryMeetingsSelectColumn.autoAttendanceStartsAt;
+    case r'autoAttendanceStartTime':
+      return Enum_HistoryMeetingsSelectColumn.autoAttendanceStartTime;
     case r'autoAttendanceWeekday':
       return Enum_HistoryMeetingsSelectColumn.autoAttendanceWeekday;
-    case r'autoCommunionEndsAt':
-      return Enum_HistoryMeetingsSelectColumn.autoCommunionEndsAt;
-    case r'autoCommunionStartsAt':
-      return Enum_HistoryMeetingsSelectColumn.autoCommunionStartsAt;
+    case r'autoKodasEndTime':
+      return Enum_HistoryMeetingsSelectColumn.autoKodasEndTime;
+    case r'autoKodasStartTime':
+      return Enum_HistoryMeetingsSelectColumn.autoKodasStartTime;
     case r'color':
       return Enum_HistoryMeetingsSelectColumn.color;
     case r'groupId':

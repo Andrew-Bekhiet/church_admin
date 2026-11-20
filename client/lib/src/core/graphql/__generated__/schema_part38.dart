@@ -13,12 +13,12 @@ abstract class CopyWith_Input_HistoryMeetingsOrderBy<TRes> {
   TRes call({
     Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
     Enum_OrderBy? audience,
-    Enum_OrderBy? autoAttendanceEndsAt,
+    Enum_OrderBy? autoAttendanceEndTime,
     Enum_OrderBy? autoAttendanceRecordsServants,
-    Enum_OrderBy? autoAttendanceStartsAt,
+    Enum_OrderBy? autoAttendanceStartTime,
     Enum_OrderBy? autoAttendanceWeekday,
-    Enum_OrderBy? autoCommunionEndsAt,
-    Enum_OrderBy? autoCommunionStartsAt,
+    Enum_OrderBy? autoKodasEndTime,
+    Enum_OrderBy? autoKodasStartTime,
     Enum_OrderBy? color,
     Input_HistoryMeetingDaysAggregateOrderBy? daysAggregate,
     Input_GroupsOrderBy? group,
@@ -54,12 +54,12 @@ class _CopyWithImpl_Input_HistoryMeetingsOrderBy<TRes>
   TRes call({
     Object? attendanceHistoryAggregate = _undefined,
     Object? audience = _undefined,
-    Object? autoAttendanceEndsAt = _undefined,
+    Object? autoAttendanceEndTime = _undefined,
     Object? autoAttendanceRecordsServants = _undefined,
-    Object? autoAttendanceStartsAt = _undefined,
+    Object? autoAttendanceStartTime = _undefined,
     Object? autoAttendanceWeekday = _undefined,
-    Object? autoCommunionEndsAt = _undefined,
-    Object? autoCommunionStartsAt = _undefined,
+    Object? autoKodasEndTime = _undefined,
+    Object? autoKodasStartTime = _undefined,
     Object? color = _undefined,
     Object? daysAggregate = _undefined,
     Object? group = _undefined,
@@ -81,19 +81,19 @@ class _CopyWithImpl_Input_HistoryMeetingsOrderBy<TRes>
             (attendanceHistoryAggregate
                 as Input_HistoryAttendanceHistoryAggregateOrderBy?),
       if (audience != _undefined) 'audience': (audience as Enum_OrderBy?),
-      if (autoAttendanceEndsAt != _undefined)
-        'autoAttendanceEndsAt': (autoAttendanceEndsAt as Enum_OrderBy?),
+      if (autoAttendanceEndTime != _undefined)
+        'autoAttendanceEndTime': (autoAttendanceEndTime as Enum_OrderBy?),
       if (autoAttendanceRecordsServants != _undefined)
         'autoAttendanceRecordsServants':
             (autoAttendanceRecordsServants as Enum_OrderBy?),
-      if (autoAttendanceStartsAt != _undefined)
-        'autoAttendanceStartsAt': (autoAttendanceStartsAt as Enum_OrderBy?),
+      if (autoAttendanceStartTime != _undefined)
+        'autoAttendanceStartTime': (autoAttendanceStartTime as Enum_OrderBy?),
       if (autoAttendanceWeekday != _undefined)
         'autoAttendanceWeekday': (autoAttendanceWeekday as Enum_OrderBy?),
-      if (autoCommunionEndsAt != _undefined)
-        'autoCommunionEndsAt': (autoCommunionEndsAt as Enum_OrderBy?),
-      if (autoCommunionStartsAt != _undefined)
-        'autoCommunionStartsAt': (autoCommunionStartsAt as Enum_OrderBy?),
+      if (autoKodasEndTime != _undefined)
+        'autoKodasEndTime': (autoKodasEndTime as Enum_OrderBy?),
+      if (autoKodasStartTime != _undefined)
+        'autoKodasStartTime': (autoKodasStartTime as Enum_OrderBy?),
       if (color != _undefined) 'color': (color as Enum_OrderBy?),
       if (daysAggregate != _undefined)
         'daysAggregate':
@@ -179,12 +179,12 @@ class _CopyWithStubImpl_Input_HistoryMeetingsOrderBy<TRes>
   call({
     Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
     Enum_OrderBy? audience,
-    Enum_OrderBy? autoAttendanceEndsAt,
+    Enum_OrderBy? autoAttendanceEndTime,
     Enum_OrderBy? autoAttendanceRecordsServants,
-    Enum_OrderBy? autoAttendanceStartsAt,
+    Enum_OrderBy? autoAttendanceStartTime,
     Enum_OrderBy? autoAttendanceWeekday,
-    Enum_OrderBy? autoCommunionEndsAt,
-    Enum_OrderBy? autoCommunionStartsAt,
+    Enum_OrderBy? autoKodasEndTime,
+    Enum_OrderBy? autoKodasStartTime,
     Enum_OrderBy? color,
     Input_HistoryMeetingDaysAggregateOrderBy? daysAggregate,
     Input_GroupsOrderBy? group,
@@ -1253,12 +1253,12 @@ class _CopyWithStubImpl_Input_HistoryMeetingsStreamCursorInput<TRes>
 class Input_HistoryMeetingsStreamCursorValueInput {
   factory Input_HistoryMeetingsStreamCursorValueInput({
     String? audience,
-    DateTime? autoAttendanceEndsAt,
+    DateTime? autoAttendanceEndTime,
     bool? autoAttendanceRecordsServants,
-    DateTime? autoAttendanceStartsAt,
+    DateTime? autoAttendanceStartTime,
     int? autoAttendanceWeekday,
-    DateTime? autoCommunionEndsAt,
-    DateTime? autoCommunionStartsAt,
+    DateTime? autoKodasEndTime,
+    DateTime? autoKodasStartTime,
     int? color,
     UuidValue? groupId,
     UuidValue? id,
@@ -1270,18 +1270,16 @@ class Input_HistoryMeetingsStreamCursorValueInput {
     bool? showKodasCheckbox,
   }) => Input_HistoryMeetingsStreamCursorValueInput._({
     if (audience != null) r'audience': audience,
-    if (autoAttendanceEndsAt != null)
-      r'autoAttendanceEndsAt': autoAttendanceEndsAt,
+    if (autoAttendanceEndTime != null)
+      r'autoAttendanceEndTime': autoAttendanceEndTime,
     if (autoAttendanceRecordsServants != null)
       r'autoAttendanceRecordsServants': autoAttendanceRecordsServants,
-    if (autoAttendanceStartsAt != null)
-      r'autoAttendanceStartsAt': autoAttendanceStartsAt,
+    if (autoAttendanceStartTime != null)
+      r'autoAttendanceStartTime': autoAttendanceStartTime,
     if (autoAttendanceWeekday != null)
       r'autoAttendanceWeekday': autoAttendanceWeekday,
-    if (autoCommunionEndsAt != null)
-      r'autoCommunionEndsAt': autoCommunionEndsAt,
-    if (autoCommunionStartsAt != null)
-      r'autoCommunionStartsAt': autoCommunionStartsAt,
+    if (autoKodasEndTime != null) r'autoKodasEndTime': autoKodasEndTime,
+    if (autoKodasStartTime != null) r'autoKodasStartTime': autoKodasStartTime,
     if (color != null) r'color': color,
     if (groupId != null) r'groupId': groupId,
     if (id != null) r'id': id,
@@ -1303,11 +1301,11 @@ class Input_HistoryMeetingsStreamCursorValueInput {
       final l$audience = data['audience'];
       result$data['audience'] = (l$audience as String?);
     }
-    if (data.containsKey('autoAttendanceEndsAt')) {
-      final l$autoAttendanceEndsAt = data['autoAttendanceEndsAt'];
-      result$data['autoAttendanceEndsAt'] = l$autoAttendanceEndsAt == null
+    if (data.containsKey('autoAttendanceEndTime')) {
+      final l$autoAttendanceEndTime = data['autoAttendanceEndTime'];
+      result$data['autoAttendanceEndTime'] = l$autoAttendanceEndTime == null
           ? null
-          : tstzFromString(l$autoAttendanceEndsAt);
+          : tstzFromString(l$autoAttendanceEndTime);
     }
     if (data.containsKey('autoAttendanceRecordsServants')) {
       final l$autoAttendanceRecordsServants =
@@ -1315,27 +1313,27 @@ class Input_HistoryMeetingsStreamCursorValueInput {
       result$data['autoAttendanceRecordsServants'] =
           (l$autoAttendanceRecordsServants as bool?);
     }
-    if (data.containsKey('autoAttendanceStartsAt')) {
-      final l$autoAttendanceStartsAt = data['autoAttendanceStartsAt'];
-      result$data['autoAttendanceStartsAt'] = l$autoAttendanceStartsAt == null
+    if (data.containsKey('autoAttendanceStartTime')) {
+      final l$autoAttendanceStartTime = data['autoAttendanceStartTime'];
+      result$data['autoAttendanceStartTime'] = l$autoAttendanceStartTime == null
           ? null
-          : tstzFromString(l$autoAttendanceStartsAt);
+          : tstzFromString(l$autoAttendanceStartTime);
     }
     if (data.containsKey('autoAttendanceWeekday')) {
       final l$autoAttendanceWeekday = data['autoAttendanceWeekday'];
       result$data['autoAttendanceWeekday'] = (l$autoAttendanceWeekday as int?);
     }
-    if (data.containsKey('autoCommunionEndsAt')) {
-      final l$autoCommunionEndsAt = data['autoCommunionEndsAt'];
-      result$data['autoCommunionEndsAt'] = l$autoCommunionEndsAt == null
+    if (data.containsKey('autoKodasEndTime')) {
+      final l$autoKodasEndTime = data['autoKodasEndTime'];
+      result$data['autoKodasEndTime'] = l$autoKodasEndTime == null
           ? null
-          : tstzFromString(l$autoCommunionEndsAt);
+          : tstzFromString(l$autoKodasEndTime);
     }
-    if (data.containsKey('autoCommunionStartsAt')) {
-      final l$autoCommunionStartsAt = data['autoCommunionStartsAt'];
-      result$data['autoCommunionStartsAt'] = l$autoCommunionStartsAt == null
+    if (data.containsKey('autoKodasStartTime')) {
+      final l$autoKodasStartTime = data['autoKodasStartTime'];
+      result$data['autoKodasStartTime'] = l$autoKodasStartTime == null
           ? null
-          : tstzFromString(l$autoCommunionStartsAt);
+          : tstzFromString(l$autoKodasStartTime);
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -1384,22 +1382,21 @@ class Input_HistoryMeetingsStreamCursorValueInput {
 
   String? get audience => (_$data['audience'] as String?);
 
-  DateTime? get autoAttendanceEndsAt =>
-      (_$data['autoAttendanceEndsAt'] as DateTime?);
+  DateTime? get autoAttendanceEndTime =>
+      (_$data['autoAttendanceEndTime'] as DateTime?);
 
   bool? get autoAttendanceRecordsServants =>
       (_$data['autoAttendanceRecordsServants'] as bool?);
 
-  DateTime? get autoAttendanceStartsAt =>
-      (_$data['autoAttendanceStartsAt'] as DateTime?);
+  DateTime? get autoAttendanceStartTime =>
+      (_$data['autoAttendanceStartTime'] as DateTime?);
 
   int? get autoAttendanceWeekday => (_$data['autoAttendanceWeekday'] as int?);
 
-  DateTime? get autoCommunionEndsAt =>
-      (_$data['autoCommunionEndsAt'] as DateTime?);
+  DateTime? get autoKodasEndTime => (_$data['autoKodasEndTime'] as DateTime?);
 
-  DateTime? get autoCommunionStartsAt =>
-      (_$data['autoCommunionStartsAt'] as DateTime?);
+  DateTime? get autoKodasStartTime =>
+      (_$data['autoKodasStartTime'] as DateTime?);
 
   int? get color => (_$data['color'] as int?);
 
@@ -1425,38 +1422,38 @@ class Input_HistoryMeetingsStreamCursorValueInput {
       final l$audience = audience;
       result$data['audience'] = l$audience;
     }
-    if (_$data.containsKey('autoAttendanceEndsAt')) {
-      final l$autoAttendanceEndsAt = autoAttendanceEndsAt;
-      result$data['autoAttendanceEndsAt'] = l$autoAttendanceEndsAt == null
+    if (_$data.containsKey('autoAttendanceEndTime')) {
+      final l$autoAttendanceEndTime = autoAttendanceEndTime;
+      result$data['autoAttendanceEndTime'] = l$autoAttendanceEndTime == null
           ? null
-          : tstzToString(l$autoAttendanceEndsAt);
+          : tstzToString(l$autoAttendanceEndTime);
     }
     if (_$data.containsKey('autoAttendanceRecordsServants')) {
       final l$autoAttendanceRecordsServants = autoAttendanceRecordsServants;
       result$data['autoAttendanceRecordsServants'] =
           l$autoAttendanceRecordsServants;
     }
-    if (_$data.containsKey('autoAttendanceStartsAt')) {
-      final l$autoAttendanceStartsAt = autoAttendanceStartsAt;
-      result$data['autoAttendanceStartsAt'] = l$autoAttendanceStartsAt == null
+    if (_$data.containsKey('autoAttendanceStartTime')) {
+      final l$autoAttendanceStartTime = autoAttendanceStartTime;
+      result$data['autoAttendanceStartTime'] = l$autoAttendanceStartTime == null
           ? null
-          : tstzToString(l$autoAttendanceStartsAt);
+          : tstzToString(l$autoAttendanceStartTime);
     }
     if (_$data.containsKey('autoAttendanceWeekday')) {
       final l$autoAttendanceWeekday = autoAttendanceWeekday;
       result$data['autoAttendanceWeekday'] = l$autoAttendanceWeekday;
     }
-    if (_$data.containsKey('autoCommunionEndsAt')) {
-      final l$autoCommunionEndsAt = autoCommunionEndsAt;
-      result$data['autoCommunionEndsAt'] = l$autoCommunionEndsAt == null
+    if (_$data.containsKey('autoKodasEndTime')) {
+      final l$autoKodasEndTime = autoKodasEndTime;
+      result$data['autoKodasEndTime'] = l$autoKodasEndTime == null
           ? null
-          : tstzToString(l$autoCommunionEndsAt);
+          : tstzToString(l$autoKodasEndTime);
     }
-    if (_$data.containsKey('autoCommunionStartsAt')) {
-      final l$autoCommunionStartsAt = autoCommunionStartsAt;
-      result$data['autoCommunionStartsAt'] = l$autoCommunionStartsAt == null
+    if (_$data.containsKey('autoKodasStartTime')) {
+      final l$autoKodasStartTime = autoKodasStartTime;
+      result$data['autoKodasStartTime'] = l$autoKodasStartTime == null
           ? null
-          : tstzToString(l$autoCommunionStartsAt);
+          : tstzToString(l$autoKodasStartTime);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -1525,13 +1522,13 @@ class Input_HistoryMeetingsStreamCursorValueInput {
     if (l$audience != lOther$audience) {
       return false;
     }
-    final l$autoAttendanceEndsAt = autoAttendanceEndsAt;
-    final lOther$autoAttendanceEndsAt = other.autoAttendanceEndsAt;
-    if (_$data.containsKey('autoAttendanceEndsAt') !=
-        other._$data.containsKey('autoAttendanceEndsAt')) {
+    final l$autoAttendanceEndTime = autoAttendanceEndTime;
+    final lOther$autoAttendanceEndTime = other.autoAttendanceEndTime;
+    if (_$data.containsKey('autoAttendanceEndTime') !=
+        other._$data.containsKey('autoAttendanceEndTime')) {
       return false;
     }
-    if (l$autoAttendanceEndsAt != lOther$autoAttendanceEndsAt) {
+    if (l$autoAttendanceEndTime != lOther$autoAttendanceEndTime) {
       return false;
     }
     final l$autoAttendanceRecordsServants = autoAttendanceRecordsServants;
@@ -1545,13 +1542,13 @@ class Input_HistoryMeetingsStreamCursorValueInput {
         lOther$autoAttendanceRecordsServants) {
       return false;
     }
-    final l$autoAttendanceStartsAt = autoAttendanceStartsAt;
-    final lOther$autoAttendanceStartsAt = other.autoAttendanceStartsAt;
-    if (_$data.containsKey('autoAttendanceStartsAt') !=
-        other._$data.containsKey('autoAttendanceStartsAt')) {
+    final l$autoAttendanceStartTime = autoAttendanceStartTime;
+    final lOther$autoAttendanceStartTime = other.autoAttendanceStartTime;
+    if (_$data.containsKey('autoAttendanceStartTime') !=
+        other._$data.containsKey('autoAttendanceStartTime')) {
       return false;
     }
-    if (l$autoAttendanceStartsAt != lOther$autoAttendanceStartsAt) {
+    if (l$autoAttendanceStartTime != lOther$autoAttendanceStartTime) {
       return false;
     }
     final l$autoAttendanceWeekday = autoAttendanceWeekday;
@@ -1563,22 +1560,22 @@ class Input_HistoryMeetingsStreamCursorValueInput {
     if (l$autoAttendanceWeekday != lOther$autoAttendanceWeekday) {
       return false;
     }
-    final l$autoCommunionEndsAt = autoCommunionEndsAt;
-    final lOther$autoCommunionEndsAt = other.autoCommunionEndsAt;
-    if (_$data.containsKey('autoCommunionEndsAt') !=
-        other._$data.containsKey('autoCommunionEndsAt')) {
+    final l$autoKodasEndTime = autoKodasEndTime;
+    final lOther$autoKodasEndTime = other.autoKodasEndTime;
+    if (_$data.containsKey('autoKodasEndTime') !=
+        other._$data.containsKey('autoKodasEndTime')) {
       return false;
     }
-    if (l$autoCommunionEndsAt != lOther$autoCommunionEndsAt) {
+    if (l$autoKodasEndTime != lOther$autoKodasEndTime) {
       return false;
     }
-    final l$autoCommunionStartsAt = autoCommunionStartsAt;
-    final lOther$autoCommunionStartsAt = other.autoCommunionStartsAt;
-    if (_$data.containsKey('autoCommunionStartsAt') !=
-        other._$data.containsKey('autoCommunionStartsAt')) {
+    final l$autoKodasStartTime = autoKodasStartTime;
+    final lOther$autoKodasStartTime = other.autoKodasStartTime;
+    if (_$data.containsKey('autoKodasStartTime') !=
+        other._$data.containsKey('autoKodasStartTime')) {
       return false;
     }
-    if (l$autoCommunionStartsAt != lOther$autoCommunionStartsAt) {
+    if (l$autoKodasStartTime != lOther$autoKodasStartTime) {
       return false;
     }
     final l$color = color;
@@ -1664,12 +1661,12 @@ class Input_HistoryMeetingsStreamCursorValueInput {
   @override
   int get hashCode {
     final l$audience = audience;
-    final l$autoAttendanceEndsAt = autoAttendanceEndsAt;
+    final l$autoAttendanceEndTime = autoAttendanceEndTime;
     final l$autoAttendanceRecordsServants = autoAttendanceRecordsServants;
-    final l$autoAttendanceStartsAt = autoAttendanceStartsAt;
+    final l$autoAttendanceStartTime = autoAttendanceStartTime;
     final l$autoAttendanceWeekday = autoAttendanceWeekday;
-    final l$autoCommunionEndsAt = autoCommunionEndsAt;
-    final l$autoCommunionStartsAt = autoCommunionStartsAt;
+    final l$autoKodasEndTime = autoKodasEndTime;
+    final l$autoKodasStartTime = autoKodasStartTime;
     final l$color = color;
     final l$groupId = groupId;
     final l$id = id;
@@ -1681,23 +1678,21 @@ class Input_HistoryMeetingsStreamCursorValueInput {
     final l$showKodasCheckbox = showKodasCheckbox;
     return Object.hashAll([
       _$data.containsKey('audience') ? l$audience : const {},
-      _$data.containsKey('autoAttendanceEndsAt')
-          ? l$autoAttendanceEndsAt
+      _$data.containsKey('autoAttendanceEndTime')
+          ? l$autoAttendanceEndTime
           : const {},
       _$data.containsKey('autoAttendanceRecordsServants')
           ? l$autoAttendanceRecordsServants
           : const {},
-      _$data.containsKey('autoAttendanceStartsAt')
-          ? l$autoAttendanceStartsAt
+      _$data.containsKey('autoAttendanceStartTime')
+          ? l$autoAttendanceStartTime
           : const {},
       _$data.containsKey('autoAttendanceWeekday')
           ? l$autoAttendanceWeekday
           : const {},
-      _$data.containsKey('autoCommunionEndsAt')
-          ? l$autoCommunionEndsAt
-          : const {},
-      _$data.containsKey('autoCommunionStartsAt')
-          ? l$autoCommunionStartsAt
+      _$data.containsKey('autoKodasEndTime') ? l$autoKodasEndTime : const {},
+      _$data.containsKey('autoKodasStartTime')
+          ? l$autoKodasStartTime
           : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('groupId') ? l$groupId : const {},
@@ -1723,12 +1718,12 @@ abstract class CopyWith_Input_HistoryMeetingsStreamCursorValueInput<TRes> {
 
   TRes call({
     String? audience,
-    DateTime? autoAttendanceEndsAt,
+    DateTime? autoAttendanceEndTime,
     bool? autoAttendanceRecordsServants,
-    DateTime? autoAttendanceStartsAt,
+    DateTime? autoAttendanceStartTime,
     int? autoAttendanceWeekday,
-    DateTime? autoCommunionEndsAt,
-    DateTime? autoCommunionStartsAt,
+    DateTime? autoKodasEndTime,
+    DateTime? autoKodasStartTime,
     int? color,
     UuidValue? groupId,
     UuidValue? id,
@@ -1756,12 +1751,12 @@ class _CopyWithImpl_Input_HistoryMeetingsStreamCursorValueInput<TRes>
 
   TRes call({
     Object? audience = _undefined,
-    Object? autoAttendanceEndsAt = _undefined,
+    Object? autoAttendanceEndTime = _undefined,
     Object? autoAttendanceRecordsServants = _undefined,
-    Object? autoAttendanceStartsAt = _undefined,
+    Object? autoAttendanceStartTime = _undefined,
     Object? autoAttendanceWeekday = _undefined,
-    Object? autoCommunionEndsAt = _undefined,
-    Object? autoCommunionStartsAt = _undefined,
+    Object? autoKodasEndTime = _undefined,
+    Object? autoKodasStartTime = _undefined,
     Object? color = _undefined,
     Object? groupId = _undefined,
     Object? id = _undefined,
@@ -1775,19 +1770,19 @@ class _CopyWithImpl_Input_HistoryMeetingsStreamCursorValueInput<TRes>
     Input_HistoryMeetingsStreamCursorValueInput._({
       ..._instance._$data,
       if (audience != _undefined) 'audience': (audience as String?),
-      if (autoAttendanceEndsAt != _undefined)
-        'autoAttendanceEndsAt': (autoAttendanceEndsAt as DateTime?),
+      if (autoAttendanceEndTime != _undefined)
+        'autoAttendanceEndTime': (autoAttendanceEndTime as DateTime?),
       if (autoAttendanceRecordsServants != _undefined)
         'autoAttendanceRecordsServants':
             (autoAttendanceRecordsServants as bool?),
-      if (autoAttendanceStartsAt != _undefined)
-        'autoAttendanceStartsAt': (autoAttendanceStartsAt as DateTime?),
+      if (autoAttendanceStartTime != _undefined)
+        'autoAttendanceStartTime': (autoAttendanceStartTime as DateTime?),
       if (autoAttendanceWeekday != _undefined)
         'autoAttendanceWeekday': (autoAttendanceWeekday as int?),
-      if (autoCommunionEndsAt != _undefined)
-        'autoCommunionEndsAt': (autoCommunionEndsAt as DateTime?),
-      if (autoCommunionStartsAt != _undefined)
-        'autoCommunionStartsAt': (autoCommunionStartsAt as DateTime?),
+      if (autoKodasEndTime != _undefined)
+        'autoKodasEndTime': (autoKodasEndTime as DateTime?),
+      if (autoKodasStartTime != _undefined)
+        'autoKodasStartTime': (autoKodasStartTime as DateTime?),
       if (color != _undefined) 'color': (color as int?),
       if (groupId != _undefined) 'groupId': (groupId as UuidValue?),
       if (id != _undefined) 'id': (id as UuidValue?),
@@ -1812,12 +1807,12 @@ class _CopyWithStubImpl_Input_HistoryMeetingsStreamCursorValueInput<TRes>
 
   call({
     String? audience,
-    DateTime? autoAttendanceEndsAt,
+    DateTime? autoAttendanceEndTime,
     bool? autoAttendanceRecordsServants,
-    DateTime? autoAttendanceStartsAt,
+    DateTime? autoAttendanceStartTime,
     int? autoAttendanceWeekday,
-    DateTime? autoCommunionEndsAt,
-    DateTime? autoCommunionStartsAt,
+    DateTime? autoKodasEndTime,
+    DateTime? autoKodasStartTime,
     int? color,
     UuidValue? groupId,
     UuidValue? id,

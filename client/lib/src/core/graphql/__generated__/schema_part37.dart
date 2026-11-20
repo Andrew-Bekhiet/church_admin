@@ -17,12 +17,12 @@ abstract class CopyWith_Input_HistoryMeetingsBoolExp<TRes> {
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
     Input_MeetingAudienceComparisonExp? audience,
-    Input_TimeComparisonExp? autoAttendanceEndsAt,
+    Input_TimeComparisonExp? autoAttendanceEndTime,
     Input_BooleanComparisonExp? autoAttendanceRecordsServants,
-    Input_TimeComparisonExp? autoAttendanceStartsAt,
+    Input_TimeComparisonExp? autoAttendanceStartTime,
     Input_SmallintComparisonExp? autoAttendanceWeekday,
-    Input_TimeComparisonExp? autoCommunionEndsAt,
-    Input_TimeComparisonExp? autoCommunionStartsAt,
+    Input_TimeComparisonExp? autoKodasEndTime,
+    Input_TimeComparisonExp? autoKodasStartTime,
     Input_BigintComparisonExp? color,
     Input_HistoryMeetingDaysBoolExp? days,
     Input_HistoryMeetingDaysAggregateBoolExp? daysAggregate,
@@ -59,12 +59,12 @@ abstract class CopyWith_Input_HistoryMeetingsBoolExp<TRes> {
   CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
   get attendanceHistoryAggregate;
   CopyWith_Input_MeetingAudienceComparisonExp<TRes> get audience;
-  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceEndsAt;
+  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceEndTime;
   CopyWith_Input_BooleanComparisonExp<TRes> get autoAttendanceRecordsServants;
-  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceStartsAt;
+  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceStartTime;
   CopyWith_Input_SmallintComparisonExp<TRes> get autoAttendanceWeekday;
-  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionEndsAt;
-  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionStartsAt;
+  CopyWith_Input_TimeComparisonExp<TRes> get autoKodasEndTime;
+  CopyWith_Input_TimeComparisonExp<TRes> get autoKodasStartTime;
   CopyWith_Input_BigintComparisonExp<TRes> get color;
   CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get days;
   CopyWith_Input_HistoryMeetingDaysAggregateBoolExp<TRes> get daysAggregate;
@@ -98,12 +98,12 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
     Object? attendanceHistory = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
     Object? audience = _undefined,
-    Object? autoAttendanceEndsAt = _undefined,
+    Object? autoAttendanceEndTime = _undefined,
     Object? autoAttendanceRecordsServants = _undefined,
-    Object? autoAttendanceStartsAt = _undefined,
+    Object? autoAttendanceStartTime = _undefined,
     Object? autoAttendanceWeekday = _undefined,
-    Object? autoCommunionEndsAt = _undefined,
-    Object? autoCommunionStartsAt = _undefined,
+    Object? autoKodasEndTime = _undefined,
+    Object? autoKodasStartTime = _undefined,
     Object? color = _undefined,
     Object? days = _undefined,
     Object? daysAggregate = _undefined,
@@ -135,24 +135,22 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
                 as Input_HistoryAttendanceHistoryAggregateBoolExp?),
       if (audience != _undefined)
         'audience': (audience as Input_MeetingAudienceComparisonExp?),
-      if (autoAttendanceEndsAt != _undefined)
-        'autoAttendanceEndsAt':
-            (autoAttendanceEndsAt as Input_TimeComparisonExp?),
+      if (autoAttendanceEndTime != _undefined)
+        'autoAttendanceEndTime':
+            (autoAttendanceEndTime as Input_TimeComparisonExp?),
       if (autoAttendanceRecordsServants != _undefined)
         'autoAttendanceRecordsServants':
             (autoAttendanceRecordsServants as Input_BooleanComparisonExp?),
-      if (autoAttendanceStartsAt != _undefined)
-        'autoAttendanceStartsAt':
-            (autoAttendanceStartsAt as Input_TimeComparisonExp?),
+      if (autoAttendanceStartTime != _undefined)
+        'autoAttendanceStartTime':
+            (autoAttendanceStartTime as Input_TimeComparisonExp?),
       if (autoAttendanceWeekday != _undefined)
         'autoAttendanceWeekday':
             (autoAttendanceWeekday as Input_SmallintComparisonExp?),
-      if (autoCommunionEndsAt != _undefined)
-        'autoCommunionEndsAt':
-            (autoCommunionEndsAt as Input_TimeComparisonExp?),
-      if (autoCommunionStartsAt != _undefined)
-        'autoCommunionStartsAt':
-            (autoCommunionStartsAt as Input_TimeComparisonExp?),
+      if (autoKodasEndTime != _undefined)
+        'autoKodasEndTime': (autoKodasEndTime as Input_TimeComparisonExp?),
+      if (autoKodasStartTime != _undefined)
+        'autoKodasStartTime': (autoKodasStartTime as Input_TimeComparisonExp?),
       if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
       if (days != _undefined)
         'days': (days as Input_HistoryMeetingDaysBoolExp?),
@@ -254,13 +252,13 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
           );
   }
 
-  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceEndsAt {
-    final local$autoAttendanceEndsAt = _instance.autoAttendanceEndsAt;
-    return local$autoAttendanceEndsAt == null
+  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceEndTime {
+    final local$autoAttendanceEndTime = _instance.autoAttendanceEndTime;
+    return local$autoAttendanceEndTime == null
         ? CopyWith_Input_TimeComparisonExp.stub(_then(_instance))
         : CopyWith_Input_TimeComparisonExp(
-            local$autoAttendanceEndsAt,
-            (e) => call(autoAttendanceEndsAt: e),
+            local$autoAttendanceEndTime,
+            (e) => call(autoAttendanceEndTime: e),
           );
   }
 
@@ -275,13 +273,13 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
           );
   }
 
-  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceStartsAt {
-    final local$autoAttendanceStartsAt = _instance.autoAttendanceStartsAt;
-    return local$autoAttendanceStartsAt == null
+  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceStartTime {
+    final local$autoAttendanceStartTime = _instance.autoAttendanceStartTime;
+    return local$autoAttendanceStartTime == null
         ? CopyWith_Input_TimeComparisonExp.stub(_then(_instance))
         : CopyWith_Input_TimeComparisonExp(
-            local$autoAttendanceStartsAt,
-            (e) => call(autoAttendanceStartsAt: e),
+            local$autoAttendanceStartTime,
+            (e) => call(autoAttendanceStartTime: e),
           );
   }
 
@@ -295,23 +293,23 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
           );
   }
 
-  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionEndsAt {
-    final local$autoCommunionEndsAt = _instance.autoCommunionEndsAt;
-    return local$autoCommunionEndsAt == null
+  CopyWith_Input_TimeComparisonExp<TRes> get autoKodasEndTime {
+    final local$autoKodasEndTime = _instance.autoKodasEndTime;
+    return local$autoKodasEndTime == null
         ? CopyWith_Input_TimeComparisonExp.stub(_then(_instance))
         : CopyWith_Input_TimeComparisonExp(
-            local$autoCommunionEndsAt,
-            (e) => call(autoCommunionEndsAt: e),
+            local$autoKodasEndTime,
+            (e) => call(autoKodasEndTime: e),
           );
   }
 
-  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionStartsAt {
-    final local$autoCommunionStartsAt = _instance.autoCommunionStartsAt;
-    return local$autoCommunionStartsAt == null
+  CopyWith_Input_TimeComparisonExp<TRes> get autoKodasStartTime {
+    final local$autoKodasStartTime = _instance.autoKodasStartTime;
+    return local$autoKodasStartTime == null
         ? CopyWith_Input_TimeComparisonExp.stub(_then(_instance))
         : CopyWith_Input_TimeComparisonExp(
-            local$autoCommunionStartsAt,
-            (e) => call(autoCommunionStartsAt: e),
+            local$autoKodasStartTime,
+            (e) => call(autoKodasStartTime: e),
           );
   }
 
@@ -462,12 +460,12 @@ class _CopyWithStubImpl_Input_HistoryMeetingsBoolExp<TRes>
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
     Input_MeetingAudienceComparisonExp? audience,
-    Input_TimeComparisonExp? autoAttendanceEndsAt,
+    Input_TimeComparisonExp? autoAttendanceEndTime,
     Input_BooleanComparisonExp? autoAttendanceRecordsServants,
-    Input_TimeComparisonExp? autoAttendanceStartsAt,
+    Input_TimeComparisonExp? autoAttendanceStartTime,
     Input_SmallintComparisonExp? autoAttendanceWeekday,
-    Input_TimeComparisonExp? autoCommunionEndsAt,
-    Input_TimeComparisonExp? autoCommunionStartsAt,
+    Input_TimeComparisonExp? autoKodasEndTime,
+    Input_TimeComparisonExp? autoKodasStartTime,
     Input_BigintComparisonExp? color,
     Input_HistoryMeetingDaysBoolExp? days,
     Input_HistoryMeetingDaysAggregateBoolExp? daysAggregate,
@@ -501,22 +499,22 @@ class _CopyWithStubImpl_Input_HistoryMeetingsBoolExp<TRes>
   CopyWith_Input_MeetingAudienceComparisonExp<TRes> get audience =>
       CopyWith_Input_MeetingAudienceComparisonExp.stub(_res);
 
-  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceEndsAt =>
+  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceEndTime =>
       CopyWith_Input_TimeComparisonExp.stub(_res);
 
   CopyWith_Input_BooleanComparisonExp<TRes> get autoAttendanceRecordsServants =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
 
-  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceStartsAt =>
+  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceStartTime =>
       CopyWith_Input_TimeComparisonExp.stub(_res);
 
   CopyWith_Input_SmallintComparisonExp<TRes> get autoAttendanceWeekday =>
       CopyWith_Input_SmallintComparisonExp.stub(_res);
 
-  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionEndsAt =>
+  CopyWith_Input_TimeComparisonExp<TRes> get autoKodasEndTime =>
       CopyWith_Input_TimeComparisonExp.stub(_res);
 
-  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionStartsAt =>
+  CopyWith_Input_TimeComparisonExp<TRes> get autoKodasStartTime =>
       CopyWith_Input_TimeComparisonExp.stub(_res);
 
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
@@ -2221,12 +2219,12 @@ class Input_HistoryMeetingsOrderBy {
   factory Input_HistoryMeetingsOrderBy({
     Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
     Enum_OrderBy? audience,
-    Enum_OrderBy? autoAttendanceEndsAt,
+    Enum_OrderBy? autoAttendanceEndTime,
     Enum_OrderBy? autoAttendanceRecordsServants,
-    Enum_OrderBy? autoAttendanceStartsAt,
+    Enum_OrderBy? autoAttendanceStartTime,
     Enum_OrderBy? autoAttendanceWeekday,
-    Enum_OrderBy? autoCommunionEndsAt,
-    Enum_OrderBy? autoCommunionStartsAt,
+    Enum_OrderBy? autoKodasEndTime,
+    Enum_OrderBy? autoKodasStartTime,
     Enum_OrderBy? color,
     Input_HistoryMeetingDaysAggregateOrderBy? daysAggregate,
     Input_GroupsOrderBy? group,
@@ -2244,18 +2242,16 @@ class Input_HistoryMeetingsOrderBy {
     if (attendanceHistoryAggregate != null)
       r'attendanceHistoryAggregate': attendanceHistoryAggregate,
     if (audience != null) r'audience': audience,
-    if (autoAttendanceEndsAt != null)
-      r'autoAttendanceEndsAt': autoAttendanceEndsAt,
+    if (autoAttendanceEndTime != null)
+      r'autoAttendanceEndTime': autoAttendanceEndTime,
     if (autoAttendanceRecordsServants != null)
       r'autoAttendanceRecordsServants': autoAttendanceRecordsServants,
-    if (autoAttendanceStartsAt != null)
-      r'autoAttendanceStartsAt': autoAttendanceStartsAt,
+    if (autoAttendanceStartTime != null)
+      r'autoAttendanceStartTime': autoAttendanceStartTime,
     if (autoAttendanceWeekday != null)
       r'autoAttendanceWeekday': autoAttendanceWeekday,
-    if (autoCommunionEndsAt != null)
-      r'autoCommunionEndsAt': autoCommunionEndsAt,
-    if (autoCommunionStartsAt != null)
-      r'autoCommunionStartsAt': autoCommunionStartsAt,
+    if (autoKodasEndTime != null) r'autoKodasEndTime': autoKodasEndTime,
+    if (autoKodasStartTime != null) r'autoKodasStartTime': autoKodasStartTime,
     if (color != null) r'color': color,
     if (daysAggregate != null) r'daysAggregate': daysAggregate,
     if (group != null) r'group': group,
@@ -2290,11 +2286,11 @@ class Input_HistoryMeetingsOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$audience as String));
     }
-    if (data.containsKey('autoAttendanceEndsAt')) {
-      final l$autoAttendanceEndsAt = data['autoAttendanceEndsAt'];
-      result$data['autoAttendanceEndsAt'] = l$autoAttendanceEndsAt == null
+    if (data.containsKey('autoAttendanceEndTime')) {
+      final l$autoAttendanceEndTime = data['autoAttendanceEndTime'];
+      result$data['autoAttendanceEndTime'] = l$autoAttendanceEndTime == null
           ? null
-          : fromJson_Enum_OrderBy((l$autoAttendanceEndsAt as String));
+          : fromJson_Enum_OrderBy((l$autoAttendanceEndTime as String));
     }
     if (data.containsKey('autoAttendanceRecordsServants')) {
       final l$autoAttendanceRecordsServants =
@@ -2304,11 +2300,11 @@ class Input_HistoryMeetingsOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$autoAttendanceRecordsServants as String));
     }
-    if (data.containsKey('autoAttendanceStartsAt')) {
-      final l$autoAttendanceStartsAt = data['autoAttendanceStartsAt'];
-      result$data['autoAttendanceStartsAt'] = l$autoAttendanceStartsAt == null
+    if (data.containsKey('autoAttendanceStartTime')) {
+      final l$autoAttendanceStartTime = data['autoAttendanceStartTime'];
+      result$data['autoAttendanceStartTime'] = l$autoAttendanceStartTime == null
           ? null
-          : fromJson_Enum_OrderBy((l$autoAttendanceStartsAt as String));
+          : fromJson_Enum_OrderBy((l$autoAttendanceStartTime as String));
     }
     if (data.containsKey('autoAttendanceWeekday')) {
       final l$autoAttendanceWeekday = data['autoAttendanceWeekday'];
@@ -2316,17 +2312,17 @@ class Input_HistoryMeetingsOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$autoAttendanceWeekday as String));
     }
-    if (data.containsKey('autoCommunionEndsAt')) {
-      final l$autoCommunionEndsAt = data['autoCommunionEndsAt'];
-      result$data['autoCommunionEndsAt'] = l$autoCommunionEndsAt == null
+    if (data.containsKey('autoKodasEndTime')) {
+      final l$autoKodasEndTime = data['autoKodasEndTime'];
+      result$data['autoKodasEndTime'] = l$autoKodasEndTime == null
           ? null
-          : fromJson_Enum_OrderBy((l$autoCommunionEndsAt as String));
+          : fromJson_Enum_OrderBy((l$autoKodasEndTime as String));
     }
-    if (data.containsKey('autoCommunionStartsAt')) {
-      final l$autoCommunionStartsAt = data['autoCommunionStartsAt'];
-      result$data['autoCommunionStartsAt'] = l$autoCommunionStartsAt == null
+    if (data.containsKey('autoKodasStartTime')) {
+      final l$autoKodasStartTime = data['autoKodasStartTime'];
+      result$data['autoKodasStartTime'] = l$autoKodasStartTime == null
           ? null
-          : fromJson_Enum_OrderBy((l$autoCommunionStartsAt as String));
+          : fromJson_Enum_OrderBy((l$autoKodasStartTime as String));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -2422,23 +2418,23 @@ class Input_HistoryMeetingsOrderBy {
 
   Enum_OrderBy? get audience => (_$data['audience'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get autoAttendanceEndsAt =>
-      (_$data['autoAttendanceEndsAt'] as Enum_OrderBy?);
+  Enum_OrderBy? get autoAttendanceEndTime =>
+      (_$data['autoAttendanceEndTime'] as Enum_OrderBy?);
 
   Enum_OrderBy? get autoAttendanceRecordsServants =>
       (_$data['autoAttendanceRecordsServants'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get autoAttendanceStartsAt =>
-      (_$data['autoAttendanceStartsAt'] as Enum_OrderBy?);
+  Enum_OrderBy? get autoAttendanceStartTime =>
+      (_$data['autoAttendanceStartTime'] as Enum_OrderBy?);
 
   Enum_OrderBy? get autoAttendanceWeekday =>
       (_$data['autoAttendanceWeekday'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get autoCommunionEndsAt =>
-      (_$data['autoCommunionEndsAt'] as Enum_OrderBy?);
+  Enum_OrderBy? get autoKodasEndTime =>
+      (_$data['autoKodasEndTime'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get autoCommunionStartsAt =>
-      (_$data['autoCommunionStartsAt'] as Enum_OrderBy?);
+  Enum_OrderBy? get autoKodasStartTime =>
+      (_$data['autoKodasStartTime'] as Enum_OrderBy?);
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
@@ -2484,11 +2480,11 @@ class Input_HistoryMeetingsOrderBy {
           ? null
           : toJson_Enum_OrderBy(l$audience);
     }
-    if (_$data.containsKey('autoAttendanceEndsAt')) {
-      final l$autoAttendanceEndsAt = autoAttendanceEndsAt;
-      result$data['autoAttendanceEndsAt'] = l$autoAttendanceEndsAt == null
+    if (_$data.containsKey('autoAttendanceEndTime')) {
+      final l$autoAttendanceEndTime = autoAttendanceEndTime;
+      result$data['autoAttendanceEndTime'] = l$autoAttendanceEndTime == null
           ? null
-          : toJson_Enum_OrderBy(l$autoAttendanceEndsAt);
+          : toJson_Enum_OrderBy(l$autoAttendanceEndTime);
     }
     if (_$data.containsKey('autoAttendanceRecordsServants')) {
       final l$autoAttendanceRecordsServants = autoAttendanceRecordsServants;
@@ -2497,11 +2493,11 @@ class Input_HistoryMeetingsOrderBy {
           ? null
           : toJson_Enum_OrderBy(l$autoAttendanceRecordsServants);
     }
-    if (_$data.containsKey('autoAttendanceStartsAt')) {
-      final l$autoAttendanceStartsAt = autoAttendanceStartsAt;
-      result$data['autoAttendanceStartsAt'] = l$autoAttendanceStartsAt == null
+    if (_$data.containsKey('autoAttendanceStartTime')) {
+      final l$autoAttendanceStartTime = autoAttendanceStartTime;
+      result$data['autoAttendanceStartTime'] = l$autoAttendanceStartTime == null
           ? null
-          : toJson_Enum_OrderBy(l$autoAttendanceStartsAt);
+          : toJson_Enum_OrderBy(l$autoAttendanceStartTime);
     }
     if (_$data.containsKey('autoAttendanceWeekday')) {
       final l$autoAttendanceWeekday = autoAttendanceWeekday;
@@ -2509,17 +2505,17 @@ class Input_HistoryMeetingsOrderBy {
           ? null
           : toJson_Enum_OrderBy(l$autoAttendanceWeekday);
     }
-    if (_$data.containsKey('autoCommunionEndsAt')) {
-      final l$autoCommunionEndsAt = autoCommunionEndsAt;
-      result$data['autoCommunionEndsAt'] = l$autoCommunionEndsAt == null
+    if (_$data.containsKey('autoKodasEndTime')) {
+      final l$autoKodasEndTime = autoKodasEndTime;
+      result$data['autoKodasEndTime'] = l$autoKodasEndTime == null
           ? null
-          : toJson_Enum_OrderBy(l$autoCommunionEndsAt);
+          : toJson_Enum_OrderBy(l$autoKodasEndTime);
     }
-    if (_$data.containsKey('autoCommunionStartsAt')) {
-      final l$autoCommunionStartsAt = autoCommunionStartsAt;
-      result$data['autoCommunionStartsAt'] = l$autoCommunionStartsAt == null
+    if (_$data.containsKey('autoKodasStartTime')) {
+      final l$autoKodasStartTime = autoKodasStartTime;
+      result$data['autoKodasStartTime'] = l$autoKodasStartTime == null
           ? null
-          : toJson_Enum_OrderBy(l$autoCommunionStartsAt);
+          : toJson_Enum_OrderBy(l$autoKodasStartTime);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -2620,13 +2616,13 @@ class Input_HistoryMeetingsOrderBy {
     if (l$audience != lOther$audience) {
       return false;
     }
-    final l$autoAttendanceEndsAt = autoAttendanceEndsAt;
-    final lOther$autoAttendanceEndsAt = other.autoAttendanceEndsAt;
-    if (_$data.containsKey('autoAttendanceEndsAt') !=
-        other._$data.containsKey('autoAttendanceEndsAt')) {
+    final l$autoAttendanceEndTime = autoAttendanceEndTime;
+    final lOther$autoAttendanceEndTime = other.autoAttendanceEndTime;
+    if (_$data.containsKey('autoAttendanceEndTime') !=
+        other._$data.containsKey('autoAttendanceEndTime')) {
       return false;
     }
-    if (l$autoAttendanceEndsAt != lOther$autoAttendanceEndsAt) {
+    if (l$autoAttendanceEndTime != lOther$autoAttendanceEndTime) {
       return false;
     }
     final l$autoAttendanceRecordsServants = autoAttendanceRecordsServants;
@@ -2640,13 +2636,13 @@ class Input_HistoryMeetingsOrderBy {
         lOther$autoAttendanceRecordsServants) {
       return false;
     }
-    final l$autoAttendanceStartsAt = autoAttendanceStartsAt;
-    final lOther$autoAttendanceStartsAt = other.autoAttendanceStartsAt;
-    if (_$data.containsKey('autoAttendanceStartsAt') !=
-        other._$data.containsKey('autoAttendanceStartsAt')) {
+    final l$autoAttendanceStartTime = autoAttendanceStartTime;
+    final lOther$autoAttendanceStartTime = other.autoAttendanceStartTime;
+    if (_$data.containsKey('autoAttendanceStartTime') !=
+        other._$data.containsKey('autoAttendanceStartTime')) {
       return false;
     }
-    if (l$autoAttendanceStartsAt != lOther$autoAttendanceStartsAt) {
+    if (l$autoAttendanceStartTime != lOther$autoAttendanceStartTime) {
       return false;
     }
     final l$autoAttendanceWeekday = autoAttendanceWeekday;
@@ -2658,22 +2654,22 @@ class Input_HistoryMeetingsOrderBy {
     if (l$autoAttendanceWeekday != lOther$autoAttendanceWeekday) {
       return false;
     }
-    final l$autoCommunionEndsAt = autoCommunionEndsAt;
-    final lOther$autoCommunionEndsAt = other.autoCommunionEndsAt;
-    if (_$data.containsKey('autoCommunionEndsAt') !=
-        other._$data.containsKey('autoCommunionEndsAt')) {
+    final l$autoKodasEndTime = autoKodasEndTime;
+    final lOther$autoKodasEndTime = other.autoKodasEndTime;
+    if (_$data.containsKey('autoKodasEndTime') !=
+        other._$data.containsKey('autoKodasEndTime')) {
       return false;
     }
-    if (l$autoCommunionEndsAt != lOther$autoCommunionEndsAt) {
+    if (l$autoKodasEndTime != lOther$autoKodasEndTime) {
       return false;
     }
-    final l$autoCommunionStartsAt = autoCommunionStartsAt;
-    final lOther$autoCommunionStartsAt = other.autoCommunionStartsAt;
-    if (_$data.containsKey('autoCommunionStartsAt') !=
-        other._$data.containsKey('autoCommunionStartsAt')) {
+    final l$autoKodasStartTime = autoKodasStartTime;
+    final lOther$autoKodasStartTime = other.autoKodasStartTime;
+    if (_$data.containsKey('autoKodasStartTime') !=
+        other._$data.containsKey('autoKodasStartTime')) {
       return false;
     }
-    if (l$autoCommunionStartsAt != lOther$autoCommunionStartsAt) {
+    if (l$autoKodasStartTime != lOther$autoKodasStartTime) {
       return false;
     }
     final l$color = color;
@@ -2794,12 +2790,12 @@ class Input_HistoryMeetingsOrderBy {
   int get hashCode {
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final l$audience = audience;
-    final l$autoAttendanceEndsAt = autoAttendanceEndsAt;
+    final l$autoAttendanceEndTime = autoAttendanceEndTime;
     final l$autoAttendanceRecordsServants = autoAttendanceRecordsServants;
-    final l$autoAttendanceStartsAt = autoAttendanceStartsAt;
+    final l$autoAttendanceStartTime = autoAttendanceStartTime;
     final l$autoAttendanceWeekday = autoAttendanceWeekday;
-    final l$autoCommunionEndsAt = autoCommunionEndsAt;
-    final l$autoCommunionStartsAt = autoCommunionStartsAt;
+    final l$autoKodasEndTime = autoKodasEndTime;
+    final l$autoKodasStartTime = autoKodasStartTime;
     final l$color = color;
     final l$daysAggregate = daysAggregate;
     final l$group = group;
@@ -2818,23 +2814,21 @@ class Input_HistoryMeetingsOrderBy {
           ? l$attendanceHistoryAggregate
           : const {},
       _$data.containsKey('audience') ? l$audience : const {},
-      _$data.containsKey('autoAttendanceEndsAt')
-          ? l$autoAttendanceEndsAt
+      _$data.containsKey('autoAttendanceEndTime')
+          ? l$autoAttendanceEndTime
           : const {},
       _$data.containsKey('autoAttendanceRecordsServants')
           ? l$autoAttendanceRecordsServants
           : const {},
-      _$data.containsKey('autoAttendanceStartsAt')
-          ? l$autoAttendanceStartsAt
+      _$data.containsKey('autoAttendanceStartTime')
+          ? l$autoAttendanceStartTime
           : const {},
       _$data.containsKey('autoAttendanceWeekday')
           ? l$autoAttendanceWeekday
           : const {},
-      _$data.containsKey('autoCommunionEndsAt')
-          ? l$autoCommunionEndsAt
-          : const {},
-      _$data.containsKey('autoCommunionStartsAt')
-          ? l$autoCommunionStartsAt
+      _$data.containsKey('autoKodasEndTime') ? l$autoKodasEndTime : const {},
+      _$data.containsKey('autoKodasStartTime')
+          ? l$autoKodasStartTime
           : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('daysAggregate') ? l$daysAggregate : const {},

@@ -986,8 +986,8 @@ type AuthUsersData {
   person: Persons
   photoUpdatedAt: timestamptz
   preferences: UsersPreferences
-  type: String!
   uid: uuid!
+  userType: String!
 }
 
 type AuthUsersDataAggregate {
@@ -1018,8 +1018,8 @@ input AuthUsersDataBoolExp {
   person: PersonsBoolExp
   photoUpdatedAt: TimestamptzComparisonExp
   preferences: UsersPreferencesBoolExp
-  type: StringComparisonExp
   uid: UuidComparisonExp
+  userType: StringComparisonExp
 }
 
 enum AuthUsersDataConstraint {
@@ -1045,8 +1045,8 @@ type AuthUsersDataMaxFields {
   email: String
   name: String
   photoUpdatedAt: timestamptz
-  type: String
   uid: uuid
+  userType: String
 }
 
 type AuthUsersDataMinFields {
@@ -1055,8 +1055,8 @@ type AuthUsersDataMinFields {
   email: String
   name: String
   photoUpdatedAt: timestamptz
-  type: String
   uid: uuid
+  userType: String
 }
 
 type AuthUsersDataMutationResponse {
@@ -1089,8 +1089,8 @@ input AuthUsersDataOrderBy {
   person: PersonsOrderBy
   photoUpdatedAt: OrderBy
   preferences: UsersPreferencesOrderBy
-  type: OrderBy
   uid: OrderBy
+  userType: OrderBy
 }
 
 input AuthUsersDataPkColumnsInput {
@@ -1103,8 +1103,8 @@ enum AuthUsersDataSelectColumn {
   email
   name
   photoUpdatedAt
-  type
   uid
+  userType
 }
 
 input AuthUsersDataSetInput {
@@ -1123,8 +1123,8 @@ input AuthUsersDataStreamCursorValueInput {
   email: String
   name: String
   photoUpdatedAt: timestamptz
-  type: String
   uid: uuid
+  userType: String
 }
 
 enum AuthUsersDataUpdateColumn {
@@ -3195,7 +3195,7 @@ input HistoryAttendanceHistoryBoolExp {
 }
 
 enum HistoryAttendanceHistoryConstraint {
-  attendance_history_meeting_person_day_idx
+  attendance_history_day_meeting_id_person_id_as_servant_key
   attendance_history_pkey
 }
 
@@ -4419,12 +4419,12 @@ type HistoryMeetings {
   attendanceHistory(distinctOn: [HistoryAttendanceHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryAttendanceHistoryOrderBy!], where: HistoryAttendanceHistoryBoolExp): [HistoryAttendanceHistory!]!
   attendanceHistoryAggregate(distinctOn: [HistoryAttendanceHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryAttendanceHistoryOrderBy!], where: HistoryAttendanceHistoryBoolExp): HistoryAttendanceHistoryAggregate!
   audience: meeting_audience!
-  autoAttendanceEndsAt: time
+  autoAttendanceEndTime: time
   autoAttendanceRecordsServants: Boolean!
-  autoAttendanceStartsAt: time
+  autoAttendanceStartTime: time
   autoAttendanceWeekday: smallint
-  autoCommunionEndsAt: time
-  autoCommunionStartsAt: time
+  autoKodasEndTime: time
+  autoKodasStartTime: time
   color: bigint
   days(distinctOn: [HistoryMeetingDaysSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingDaysOrderBy!], where: HistoryMeetingDaysBoolExp): [HistoryMeetingDays!]!
   daysAggregate(distinctOn: [HistoryMeetingDaysSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingDaysOrderBy!], where: HistoryMeetingDaysBoolExp): HistoryMeetingDaysAggregate!
@@ -4473,12 +4473,12 @@ input HistoryMeetingsBoolExp {
   attendanceHistory: HistoryAttendanceHistoryBoolExp
   attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateBoolExp
   audience: MeetingAudienceComparisonExp
-  autoAttendanceEndsAt: TimeComparisonExp
+  autoAttendanceEndTime: TimeComparisonExp
   autoAttendanceRecordsServants: BooleanComparisonExp
-  autoAttendanceStartsAt: TimeComparisonExp
+  autoAttendanceStartTime: TimeComparisonExp
   autoAttendanceWeekday: SmallintComparisonExp
-  autoCommunionEndsAt: TimeComparisonExp
-  autoCommunionStartsAt: TimeComparisonExp
+  autoKodasEndTime: TimeComparisonExp
+  autoKodasStartTime: TimeComparisonExp
   color: BigintComparisonExp
   days: HistoryMeetingDaysBoolExp
   daysAggregate: HistoryMeetingDaysAggregateBoolExp
@@ -4560,12 +4560,12 @@ input HistoryMeetingsOnConflict {
 input HistoryMeetingsOrderBy {
   attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
   audience: OrderBy
-  autoAttendanceEndsAt: OrderBy
+  autoAttendanceEndTime: OrderBy
   autoAttendanceRecordsServants: OrderBy
-  autoAttendanceStartsAt: OrderBy
+  autoAttendanceStartTime: OrderBy
   autoAttendanceWeekday: OrderBy
-  autoCommunionEndsAt: OrderBy
-  autoCommunionStartsAt: OrderBy
+  autoKodasEndTime: OrderBy
+  autoKodasStartTime: OrderBy
   color: OrderBy
   daysAggregate: HistoryMeetingDaysAggregateOrderBy
   group: GroupsOrderBy
@@ -4587,12 +4587,12 @@ input HistoryMeetingsPkColumnsInput {
 
 enum HistoryMeetingsSelectColumn {
   audience
-  autoAttendanceEndsAt
+  autoAttendanceEndTime
   autoAttendanceRecordsServants
-  autoAttendanceStartsAt
+  autoAttendanceStartTime
   autoAttendanceWeekday
-  autoCommunionEndsAt
-  autoCommunionStartsAt
+  autoKodasEndTime
+  autoKodasStartTime
   color
   groupId
   id
@@ -4637,12 +4637,12 @@ input HistoryMeetingsStreamCursorInput {
 
 input HistoryMeetingsStreamCursorValueInput {
   audience: meeting_audience
-  autoAttendanceEndsAt: time
+  autoAttendanceEndTime: time
   autoAttendanceRecordsServants: Boolean
-  autoAttendanceStartsAt: time
+  autoAttendanceStartTime: time
   autoAttendanceWeekday: smallint
-  autoCommunionEndsAt: time
-  autoCommunionStartsAt: time
+  autoKodasEndTime: time
+  autoKodasStartTime: time
   color: bigint
   groupId: uuid
   id: uuid

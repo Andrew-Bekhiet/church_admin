@@ -296,8 +296,8 @@ class Input_AuthUsersDataOrderBy {
     Input_PersonsOrderBy? person,
     Enum_OrderBy? photoUpdatedAt,
     Input_UsersPreferencesOrderBy? preferences,
-    Enum_OrderBy? type,
     Enum_OrderBy? uid,
+    Enum_OrderBy? userType,
   }) => Input_AuthUsersDataOrderBy._({
     if (adminOnAggregate != null) r'adminOnAggregate': adminOnAggregate,
     if (authId != null) r'authId': authId,
@@ -314,8 +314,8 @@ class Input_AuthUsersDataOrderBy {
     if (person != null) r'person': person,
     if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
     if (preferences != null) r'preferences': preferences,
-    if (type != null) r'type': type,
     if (uid != null) r'uid': uid,
+    if (userType != null) r'userType': userType,
   });
 
   Input_AuthUsersDataOrderBy._(this._$data);
@@ -414,17 +414,17 @@ class Input_AuthUsersDataOrderBy {
               (l$preferences as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('type')) {
-      final l$type = data['type'];
-      result$data['type'] = l$type == null
-          ? null
-          : fromJson_Enum_OrderBy((l$type as String));
-    }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
       result$data['uid'] = l$uid == null
           ? null
           : fromJson_Enum_OrderBy((l$uid as String));
+    }
+    if (data.containsKey('userType')) {
+      final l$userType = data['userType'];
+      result$data['userType'] = l$userType == null
+          ? null
+          : fromJson_Enum_OrderBy((l$userType as String));
     }
     return Input_AuthUsersDataOrderBy._(result$data);
   }
@@ -467,9 +467,9 @@ class Input_AuthUsersDataOrderBy {
   Input_UsersPreferencesOrderBy? get preferences =>
       (_$data['preferences'] as Input_UsersPreferencesOrderBy?);
 
-  Enum_OrderBy? get type => (_$data['type'] as Enum_OrderBy?);
-
   Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get userType => (_$data['userType'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -536,13 +536,15 @@ class Input_AuthUsersDataOrderBy {
       final l$preferences = preferences;
       result$data['preferences'] = l$preferences?.toJson();
     }
-    if (_$data.containsKey('type')) {
-      final l$type = type;
-      result$data['type'] = l$type == null ? null : toJson_Enum_OrderBy(l$type);
-    }
     if (_$data.containsKey('uid')) {
       final l$uid = uid;
       result$data['uid'] = l$uid == null ? null : toJson_Enum_OrderBy(l$uid);
+    }
+    if (_$data.containsKey('userType')) {
+      final l$userType = userType;
+      result$data['userType'] = l$userType == null
+          ? null
+          : toJson_Enum_OrderBy(l$userType);
     }
     return result$data;
   }
@@ -673,20 +675,21 @@ class Input_AuthUsersDataOrderBy {
     if (l$preferences != lOther$preferences) {
       return false;
     }
-    final l$type = type;
-    final lOther$type = other.type;
-    if (_$data.containsKey('type') != other._$data.containsKey('type')) {
-      return false;
-    }
-    if (l$type != lOther$type) {
-      return false;
-    }
     final l$uid = uid;
     final lOther$uid = other.uid;
     if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
       return false;
     }
     if (l$uid != lOther$uid) {
+      return false;
+    }
+    final l$userType = userType;
+    final lOther$userType = other.userType;
+    if (_$data.containsKey('userType') !=
+        other._$data.containsKey('userType')) {
+      return false;
+    }
+    if (l$userType != lOther$userType) {
       return false;
     }
     return true;
@@ -707,8 +710,8 @@ class Input_AuthUsersDataOrderBy {
     final l$person = person;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$preferences = preferences;
-    final l$type = type;
     final l$uid = uid;
+    final l$userType = userType;
     return Object.hashAll([
       _$data.containsKey('adminOnAggregate') ? l$adminOnAggregate : const {},
       _$data.containsKey('authId') ? l$authId : const {},
@@ -729,8 +732,8 @@ class Input_AuthUsersDataOrderBy {
       _$data.containsKey('person') ? l$person : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('preferences') ? l$preferences : const {},
-      _$data.containsKey('type') ? l$type : const {},
       _$data.containsKey('uid') ? l$uid : const {},
+      _$data.containsKey('userType') ? l$userType : const {},
     ]);
   }
 }
@@ -758,8 +761,8 @@ abstract class CopyWith_Input_AuthUsersDataOrderBy<TRes> {
     Input_PersonsOrderBy? person,
     Enum_OrderBy? photoUpdatedAt,
     Input_UsersPreferencesOrderBy? preferences,
-    Enum_OrderBy? type,
     Enum_OrderBy? uid,
+    Enum_OrderBy? userType,
   });
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> get adminOnAggregate;
   CopyWith_Input_UsersFcmTokensAggregateOrderBy<TRes> get fcmTokensAggregate;
@@ -795,8 +798,8 @@ class _CopyWithImpl_Input_AuthUsersDataOrderBy<TRes>
     Object? person = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? preferences = _undefined,
-    Object? type = _undefined,
     Object? uid = _undefined,
+    Object? userType = _undefined,
   }) => _then(
     Input_AuthUsersDataOrderBy._({
       ..._instance._$data,
@@ -826,8 +829,8 @@ class _CopyWithImpl_Input_AuthUsersDataOrderBy<TRes>
         'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
       if (preferences != _undefined)
         'preferences': (preferences as Input_UsersPreferencesOrderBy?),
-      if (type != _undefined) 'type': (type as Enum_OrderBy?),
       if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+      if (userType != _undefined) 'userType': (userType as Enum_OrderBy?),
     }),
   );
 
@@ -922,8 +925,8 @@ class _CopyWithStubImpl_Input_AuthUsersDataOrderBy<TRes>
     Input_PersonsOrderBy? person,
     Enum_OrderBy? photoUpdatedAt,
     Input_UsersPreferencesOrderBy? preferences,
-    Enum_OrderBy? type,
     Enum_OrderBy? uid,
+    Enum_OrderBy? userType,
   }) => _res;
 
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> get adminOnAggregate =>
@@ -1330,16 +1333,16 @@ class Input_AuthUsersDataStreamCursorValueInput {
     String? email,
     String? name,
     DateTime? photoUpdatedAt,
-    String? type,
     UuidValue? uid,
+    String? userType,
   }) => Input_AuthUsersDataStreamCursorValueInput._({
     if (authId != null) r'authId': authId,
     if (blurhash != null) r'blurhash': blurhash,
     if (email != null) r'email': email,
     if (name != null) r'name': name,
     if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-    if (type != null) r'type': type,
     if (uid != null) r'uid': uid,
+    if (userType != null) r'userType': userType,
   });
 
   Input_AuthUsersDataStreamCursorValueInput._(this._$data);
@@ -1370,13 +1373,13 @@ class Input_AuthUsersDataStreamCursorValueInput {
           ? null
           : tstzFromString(l$photoUpdatedAt);
     }
-    if (data.containsKey('type')) {
-      final l$type = data['type'];
-      result$data['type'] = (l$type as String?);
-    }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
       result$data['uid'] = l$uid == null ? null : stringToUuid(l$uid);
+    }
+    if (data.containsKey('userType')) {
+      final l$userType = data['userType'];
+      result$data['userType'] = (l$userType as String?);
     }
     return Input_AuthUsersDataStreamCursorValueInput._(result$data);
   }
@@ -1393,9 +1396,9 @@ class Input_AuthUsersDataStreamCursorValueInput {
 
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
 
-  String? get type => (_$data['type'] as String?);
-
   UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
+  String? get userType => (_$data['userType'] as String?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -1421,13 +1424,13 @@ class Input_AuthUsersDataStreamCursorValueInput {
           ? null
           : tstzToString(l$photoUpdatedAt);
     }
-    if (_$data.containsKey('type')) {
-      final l$type = type;
-      result$data['type'] = l$type;
-    }
     if (_$data.containsKey('uid')) {
       final l$uid = uid;
       result$data['uid'] = l$uid == null ? null : uuidToString(l$uid);
+    }
+    if (_$data.containsKey('userType')) {
+      final l$userType = userType;
+      result$data['userType'] = l$userType;
     }
     return result$data;
   }
@@ -1489,20 +1492,21 @@ class Input_AuthUsersDataStreamCursorValueInput {
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
       return false;
     }
-    final l$type = type;
-    final lOther$type = other.type;
-    if (_$data.containsKey('type') != other._$data.containsKey('type')) {
-      return false;
-    }
-    if (l$type != lOther$type) {
-      return false;
-    }
     final l$uid = uid;
     final lOther$uid = other.uid;
     if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
       return false;
     }
     if (l$uid != lOther$uid) {
+      return false;
+    }
+    final l$userType = userType;
+    final lOther$userType = other.userType;
+    if (_$data.containsKey('userType') !=
+        other._$data.containsKey('userType')) {
+      return false;
+    }
+    if (l$userType != lOther$userType) {
       return false;
     }
     return true;
@@ -1515,16 +1519,16 @@ class Input_AuthUsersDataStreamCursorValueInput {
     final l$email = email;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
-    final l$type = type;
     final l$uid = uid;
+    final l$userType = userType;
     return Object.hashAll([
       _$data.containsKey('authId') ? l$authId : const {},
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('email') ? l$email : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
-      _$data.containsKey('type') ? l$type : const {},
       _$data.containsKey('uid') ? l$uid : const {},
+      _$data.containsKey('userType') ? l$userType : const {},
     ]);
   }
 }
@@ -1544,8 +1548,8 @@ abstract class CopyWith_Input_AuthUsersDataStreamCursorValueInput<TRes> {
     String? email,
     String? name,
     DateTime? photoUpdatedAt,
-    String? type,
     UuidValue? uid,
+    String? userType,
   });
 }
 
@@ -1568,8 +1572,8 @@ class _CopyWithImpl_Input_AuthUsersDataStreamCursorValueInput<TRes>
     Object? email = _undefined,
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
-    Object? type = _undefined,
     Object? uid = _undefined,
+    Object? userType = _undefined,
   }) => _then(
     Input_AuthUsersDataStreamCursorValueInput._({
       ..._instance._$data,
@@ -1579,8 +1583,8 @@ class _CopyWithImpl_Input_AuthUsersDataStreamCursorValueInput<TRes>
       if (name != _undefined) 'name': (name as String?),
       if (photoUpdatedAt != _undefined)
         'photoUpdatedAt': (photoUpdatedAt as DateTime?),
-      if (type != _undefined) 'type': (type as String?),
       if (uid != _undefined) 'uid': (uid as UuidValue?),
+      if (userType != _undefined) 'userType': (userType as String?),
     }),
   );
 }
@@ -1597,8 +1601,8 @@ class _CopyWithStubImpl_Input_AuthUsersDataStreamCursorValueInput<TRes>
     String? email,
     String? name,
     DateTime? photoUpdatedAt,
-    String? type,
     UuidValue? uid,
+    String? userType,
   }) => _res;
 }
 

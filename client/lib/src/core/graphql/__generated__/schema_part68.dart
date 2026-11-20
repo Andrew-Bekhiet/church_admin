@@ -532,8 +532,8 @@ enum Enum_AuthUsersDataSelectColumn {
   email,
   name,
   photoUpdatedAt,
-  type,
   uid,
+  userType,
   $unknown;
 
   factory Enum_AuthUsersDataSelectColumn.fromJson(String value) =>
@@ -554,10 +554,10 @@ String toJson_Enum_AuthUsersDataSelectColumn(Enum_AuthUsersDataSelectColumn e) {
       return r'name';
     case Enum_AuthUsersDataSelectColumn.photoUpdatedAt:
       return r'photoUpdatedAt';
-    case Enum_AuthUsersDataSelectColumn.type:
-      return r'type';
     case Enum_AuthUsersDataSelectColumn.uid:
       return r'uid';
+    case Enum_AuthUsersDataSelectColumn.userType:
+      return r'userType';
     case Enum_AuthUsersDataSelectColumn.$unknown:
       return r'$unknown';
   }
@@ -577,10 +577,10 @@ Enum_AuthUsersDataSelectColumn fromJson_Enum_AuthUsersDataSelectColumn(
       return Enum_AuthUsersDataSelectColumn.name;
     case r'photoUpdatedAt':
       return Enum_AuthUsersDataSelectColumn.photoUpdatedAt;
-    case r'type':
-      return Enum_AuthUsersDataSelectColumn.type;
     case r'uid':
       return Enum_AuthUsersDataSelectColumn.uid;
+    case r'userType':
+      return Enum_AuthUsersDataSelectColumn.userType;
     default:
       return Enum_AuthUsersDataSelectColumn.$unknown;
   }
@@ -2192,7 +2192,7 @@ fromJson_Enum_HistoryAttendanceDaysUpdateColumn(String value) {
 }
 
 enum Enum_HistoryAttendanceHistoryConstraint {
-  attendance_history_meeting_person_day_idx,
+  attendance_history_day_meeting_id_person_id_as_servant_key,
   attendance_history_pkey,
   $unknown;
 
@@ -2207,8 +2207,8 @@ String toJson_Enum_HistoryAttendanceHistoryConstraint(
 ) {
   switch (e) {
     case Enum_HistoryAttendanceHistoryConstraint
-        .attendance_history_meeting_person_day_idx:
-      return r'attendance_history_meeting_person_day_idx';
+        .attendance_history_day_meeting_id_person_id_as_servant_key:
+      return r'attendance_history_day_meeting_id_person_id_as_servant_key';
     case Enum_HistoryAttendanceHistoryConstraint.attendance_history_pkey:
       return r'attendance_history_pkey';
     case Enum_HistoryAttendanceHistoryConstraint.$unknown:
@@ -2219,9 +2219,9 @@ String toJson_Enum_HistoryAttendanceHistoryConstraint(
 Enum_HistoryAttendanceHistoryConstraint
 fromJson_Enum_HistoryAttendanceHistoryConstraint(String value) {
   switch (value) {
-    case r'attendance_history_meeting_person_day_idx':
+    case r'attendance_history_day_meeting_id_person_id_as_servant_key':
       return Enum_HistoryAttendanceHistoryConstraint
-          .attendance_history_meeting_person_day_idx;
+          .attendance_history_day_meeting_id_person_id_as_servant_key;
     case r'attendance_history_pkey':
       return Enum_HistoryAttendanceHistoryConstraint.attendance_history_pkey;
     default:
