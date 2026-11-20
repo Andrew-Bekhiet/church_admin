@@ -8,9 +8,9 @@ abstract final class E2eBackend {
   static const adminEmail = 'admin@e2e.test';
   static const password = 'Harness_Passw0rd';
 
-  static final Uri _authEmulator = Uri.http('localhost:9099');
+  static final Uri authEmulator = Uri.http('localhost:9099');
   static final Uri _hasura = Uri.http('localhost:8080', '/v1/graphql');
-  static const _hasuraAdminSecret = 'localdevadminsecret';
+  static const hasuraAdminSecret = 'localdevadminsecret';
   static const _verificationEmailTimeout = Duration(seconds: 30);
   static const _pollInterval = Duration(milliseconds: 500);
 
@@ -25,7 +25,7 @@ abstract final class E2eBackend {
 
       await Future<void>.delayed(_pollInterval);
       final response = await http.get(
-        _authEmulator.replace(
+        authEmulator.replace(
           path: '/emulator/v1/projects/$projectId/oobCodes',
         ),
       );
@@ -55,7 +55,7 @@ abstract final class E2eBackend {
       _hasura,
       headers: {
         'content-type': 'application/json',
-        'x-hasura-admin-secret': _hasuraAdminSecret,
+        'x-hasura-admin-secret': hasuraAdminSecret,
       },
       body: jsonEncode({'query': query, 'variables': variables}),
     );

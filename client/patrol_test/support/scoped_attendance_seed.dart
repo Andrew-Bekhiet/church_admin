@@ -21,35 +21,33 @@ class ScopedAttendanceSeed {
     final primaryId = await E2eBackend.serviceIdByName('خدمة ابتدائي');
     final kgId = await E2eBackend.serviceIdByName('خدمة KG');
 
-    final neverOfferedPersonIds = {
-      await AttendanceE2eBackend.insertServedPerson(
-        'مخدوم تانية ثانوي',
-        serviceId: secondaryId,
-        studyYear: _otherSecondaryStudyYear,
-        isMale: true,
-      ),
-      await AttendanceE2eBackend.insertServedPerson(
-        'مخدومة أولى ثانوي',
-        serviceId: secondaryId,
-        studyYear: _scopedStudyYear,
-        isMale: false,
-      ),
-      await AttendanceE2eBackend.insertServedPerson(
-        'مخدوم KG',
-        serviceId: kgId,
-        studyYear: 0,
-        isMale: true,
-      ),
-      await AttendanceE2eBackend.insertServantPerson(
-        'خادم ثانوي غير معتمد',
-        scopes: [ServiceAdminScope(secondaryId)],
-        isApproved: false,
-      ),
-      await AttendanceE2eBackend.insertServantPerson(
-        'خادم اعدادي',
-        scopes: [ServiceAdminScope(preparatoryId)],
-      ),
-    };
+    await AttendanceE2eBackend.insertServedPerson(
+      'مخدوم تانية ثانوي',
+      serviceId: secondaryId,
+      studyYear: _otherSecondaryStudyYear,
+      isMale: true,
+    );
+    await AttendanceE2eBackend.insertServedPerson(
+      'مخدومة أولى ثانوي',
+      serviceId: secondaryId,
+      studyYear: _scopedStudyYear,
+      isMale: false,
+    );
+    await AttendanceE2eBackend.insertServedPerson(
+      'مخدوم KG',
+      serviceId: kgId,
+      studyYear: 0,
+      isMale: true,
+    );
+    await AttendanceE2eBackend.insertServantPerson(
+      'خادم ثانوي غير معتمد',
+      scopes: [ServiceAdminScope(secondaryId)],
+      isApproved: false,
+    );
+    await AttendanceE2eBackend.insertServantPerson(
+      'خادم اعدادي',
+      scopes: [ServiceAdminScope(preparatoryId)],
+    );
 
     return ScopedAttendanceSeed(
       bothAudiencesMeetingId: await AttendanceE2eBackend.meetingIdByName(
@@ -81,7 +79,6 @@ class ScopedAttendanceSeed {
         'اجتماع KG',
       ),
       secondaryServiceId: secondaryId,
-      neverOfferedPersonIds: neverOfferedPersonIds,
       scopedPersonId: await AttendanceE2eBackend.insertServedPerson(
         'مخدوم أولى ثانوي',
         serviceId: secondaryId,
@@ -132,21 +129,11 @@ class ScopedAttendanceSeed {
   final String servantsRightsMeetingId;
 
   final String secondaryServiceId;
-  final Set<String> neverOfferedPersonIds;
   final String scopedPersonId;
   final String secondaryServantId;
   final String notRecordablePersonId;
   final String personsRightsPersonId;
   final E2eUser user;
-
-  Set<String> get seededPersonIds => {
-    ...neverOfferedPersonIds,
-    scopedPersonId,
-    secondaryServantId,
-    notRecordablePersonId,
-    personsRightsPersonId,
-    user.personId,
-  };
 
   const ScopedAttendanceSeed({
     required this.bothAudiencesMeetingId,
@@ -157,7 +144,6 @@ class ScopedAttendanceSeed {
     required this.personsRightsMeetingId,
     required this.servantsRightsMeetingId,
     required this.secondaryServiceId,
-    required this.neverOfferedPersonIds,
     required this.scopedPersonId,
     required this.secondaryServantId,
     required this.notRecordablePersonId,

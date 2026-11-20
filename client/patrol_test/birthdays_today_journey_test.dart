@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:patrol/patrol.dart';
 
 import 'support/e2e_app.dart';
 import 'support/e2e_backend.dart';
+import 'support/e2e_journey.dart';
 import 'support/home_birthdays_robot.dart';
 
 void main() {
-  patrolTest(
+  E2eJourney.test(
     'the home birthdays card and its full list show only persons born today',
     ($) async {
       final tester = $.tester;

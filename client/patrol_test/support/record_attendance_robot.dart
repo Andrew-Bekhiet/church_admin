@@ -74,17 +74,13 @@ class RecordAttendanceRobot {
     return _state;
   }
 
-  Future<Set<String>> offeredPersonIdsAmong(
-    Set<String> candidates, {
+  Future<Set<String>> offeredPersonIds({
     required String meetingId,
     required AttendanceRosterAudienceView view,
   }) async {
     final state = await waitForRoster(meetingId: meetingId, view: view);
 
-    return {
-      for (final entry in state.entries)
-        if (candidates.contains(entry.person.id)) entry.person.id,
-    };
+    return {for (final entry in state.entries) entry.person.id};
   }
 
   Future<void> showServants() async {

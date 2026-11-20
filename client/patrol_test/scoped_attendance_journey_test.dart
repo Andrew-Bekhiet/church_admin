@@ -1,15 +1,15 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:patrol/patrol.dart';
 
 import 'support/attendance_e2e_backend.dart';
 import 'support/e2e_app.dart';
+import 'support/e2e_journey.dart';
 import 'support/record_attendance_robot.dart';
 import 'support/scoped_attendance_seed.dart';
 
 void main() {
-  patrolTest(
+  E2eJourney.test(
     'a service-scoped user records attendance only where, for whom and when '
     'their scopes allow',
     ($) async {
@@ -58,8 +58,7 @@ void main() {
 
       step('persons and servants meeting: persons in the scope pair only');
       expect(
-        await robot.offeredPersonIdsAmong(
-          seed.seededPersonIds,
+        await robot.offeredPersonIds(
           meetingId: seed.bothAudiencesMeetingId,
           view: persons,
         ),
@@ -79,8 +78,7 @@ void main() {
       expect(robot.canSwitchAudience, isTrue);
       await robot.showServants();
       expect(
-        await robot.offeredPersonIdsAmong(
-          seed.seededPersonIds,
+        await robot.offeredPersonIds(
           meetingId: seed.bothAudiencesMeetingId,
           view: servants,
         ),
@@ -98,8 +96,7 @@ void main() {
       step('persons-only meeting offers only persons');
       await robot.switchToMeeting(seed.personsOnlyMeetingId);
       expect(
-        await robot.offeredPersonIdsAmong(
-          seed.seededPersonIds,
+        await robot.offeredPersonIds(
           meetingId: seed.personsOnlyMeetingId,
           view: persons,
         ),
@@ -115,8 +112,7 @@ void main() {
       step('servants-only meeting offers only servants');
       await robot.switchToMeeting(seed.servantsOnlyMeetingId);
       expect(
-        await robot.offeredPersonIdsAmong(
-          seed.seededPersonIds,
+        await robot.offeredPersonIds(
           meetingId: seed.servantsOnlyMeetingId,
           view: servants,
         ),
@@ -135,8 +131,7 @@ void main() {
       step('a scope recording only persons offers only persons');
       await robot.switchToMeeting(seed.personsRightsMeetingId);
       expect(
-        await robot.offeredPersonIdsAmong(
-          seed.seededPersonIds,
+        await robot.offeredPersonIds(
           meetingId: seed.personsRightsMeetingId,
           view: persons,
         ),
@@ -152,8 +147,7 @@ void main() {
       step('a scope recording only servants offers only servants');
       await robot.switchToMeeting(seed.servantsRightsMeetingId);
       expect(
-        await robot.offeredPersonIdsAmong(
-          seed.seededPersonIds,
+        await robot.offeredPersonIds(
           meetingId: seed.servantsRightsMeetingId,
           view: servants,
         ),
@@ -169,8 +163,7 @@ void main() {
       step('a scope without the record attendance flag is refused');
       await robot.switchToMeeting(seed.notRecordableMeetingId);
       expect(
-        await robot.offeredPersonIdsAmong(
-          seed.seededPersonIds,
+        await robot.offeredPersonIds(
           meetingId: seed.notRecordableMeetingId,
           view: persons,
         ),

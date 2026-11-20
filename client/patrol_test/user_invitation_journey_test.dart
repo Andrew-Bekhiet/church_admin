@@ -1,15 +1,15 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:patrol/patrol.dart';
 
 import 'support/e2e_app.dart';
 import 'support/e2e_backend.dart';
+import 'support/e2e_journey.dart';
 import 'support/e2e_widget_tester.dart';
 import 'support/user_management_robot.dart';
 
 void main() {
-  patrolTest(
+  E2eJourney.test(
     'an admin invites users who then join with their invitation codes or '
     'their invited email',
     ($) async {
