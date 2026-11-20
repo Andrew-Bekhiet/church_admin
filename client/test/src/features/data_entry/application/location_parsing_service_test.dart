@@ -59,6 +59,8 @@ void main() {
       'https://goo.gl/abc',
       'http://maps.google.com/?q=30.0444,31.2357',
       'https://www.apple.com/maps/',
+      'https://maps.apple/',
+      'https://maps.apple/p',
       'some copied text',
     ]) {
       test('$link is not a maps link', () {
@@ -221,20 +223,24 @@ void main() {
     test(
       'a short link gives the coordinates of the place it redirects to',
       () async {
-        final gMapsShortLink = Uri.parse(
-          'https://goo.gl/maps/sXnse1erRvkA6aV99',
-        );
+        final shortLink = Uri.parse('https://goo.gl/maps/sXnse1erRvkA6aV99');
         dio.replyWithRedirect(
-          from: gMapsShortLink,
+          from: shortLink,
           to: Uri.parse(
             'https://www.google.com/maps/place/Falafel+M.+Sahyoun/@33.8904447,35.5066505,17z/data=!3m1!4b1!4m6!3m5!1s0x151f16e2123697fd:0x8e6626b678863990!8m2!3d33.8904447!4d35.5066505!16s%2Fg%2F1td7wffc?utm_source=mstt_1&coh=164777&entry=tt&shorturl=1',
           ),
         );
+
         await expectLater(
-          const LocationParsingService().maybeParseLocationUri(gMapsShortLink),
+          const LocationParsingService().maybeParseLocationUri(shortLink),
           completion(const Point(33.8904447, 35.5066505)),
         );
+      },
+    );
 
+    test(
+      'an Apple Maps short link gives the coordinates of the place it redirects to',
+      () async {
         final appleMapsShortLink = Uri.parse(
           'https://maps.apple/p/0z5uq3vXkTor6w',
         );
