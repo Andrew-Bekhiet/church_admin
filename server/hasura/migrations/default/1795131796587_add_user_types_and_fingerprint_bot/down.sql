@@ -1,8 +1,25 @@
+do $$
+begin
+  if exists (
+    select 1 from auth.users_data as non_human
+    where
+      non_human.user_type <> 'human'
+      and (
+        exists (select 1 from history.attendance_history where recorded_by = non_human.uid)
+        or exists (select 1 from history.kodas_history where recorded_by = non_human.uid)
+        or exists (select 1 from history.edit_history where recorded_by = non_human.uid)
+      )
+  ) then
+    raise exception 'Cannot roll back: a non-human user has recorded attendance, kodas or edits';
+  end if;
+end $$;
+
 delete from auth.users_data
 where user_type <> 'human';
 
 alter table auth.users_data
-drop constraint if exists users_data_non_human_auth_id_is_unclaimable_placeholder_check;
+drop constraint if exists users_data_non_human_auth_id_is_unclaimable_placeholder_check,
+drop constraint if exists users_data_user_type_fkey;
 
 drop index if exists auth.users_data_one_user_per_non_human_type_idx;
 

@@ -18,12 +18,6 @@ INSERT INTO auth.permissions (name) VALUES
 ('manageFingerprintIds')
 ON CONFLICT DO NOTHING;
 
-INSERT INTO auth.user_types (name) VALUES
-('human'),
-('fingerprint_bot'),
-('maintenance_bot')
-ON CONFLICT DO NOTHING;
-
 INSERT INTO public.work_status (name) VALUES
 ('student'),
 ('employed'),

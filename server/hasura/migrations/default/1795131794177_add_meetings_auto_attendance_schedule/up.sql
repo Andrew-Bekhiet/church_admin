@@ -28,20 +28,20 @@ drop constraint if exists meetings_auto_communion_and_attendance_windows_disjoin
 alter table history.meetings
 add constraint meetings_auto_attendance_weekday_and_window_set_together_check check (
     num_nulls(auto_attendance_weekday, auto_attendance_start_time, auto_attendance_end_time) in (0, 3)
-),
+) not valid,
 add constraint meetings_auto_communion_window_bounds_set_together_check check (
     num_nulls(auto_communion_start_time, auto_communion_end_time) in (0, 2)
-),
+) not valid,
 add constraint meetings_auto_communion_window_requires_attendance_window_check check (
     auto_communion_start_time is null or auto_attendance_weekday is not null
-),
+) not valid,
 add constraint meetings_auto_attendance_window_starts_before_it_ends_check check (
     auto_attendance_start_time < auto_attendance_end_time
-),
+) not valid,
 add constraint meetings_auto_communion_window_starts_before_it_ends_check check (
     auto_communion_start_time < auto_communion_end_time
-),
+) not valid,
 add constraint meetings_auto_communion_and_attendance_windows_disjoint_check check (
     auto_communion_end_time <= auto_attendance_start_time
     or auto_attendance_end_time <= auto_communion_start_time
-);
+) not valid;
