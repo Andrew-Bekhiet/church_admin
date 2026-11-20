@@ -24,9 +24,11 @@ begin
         or exists (select 1 from auth.users_admin_on where "uid" = non_human.uid)
         or exists (select 1 from auth.invitations where non_human.uid in (user_uid, created_by))
         or exists (select 1 from public.persons where "uid" = non_human.uid)
+        or exists (select 1 from public.users_fcm_tokens where "uid" = non_human.uid)
+        or exists (select 1 from operations.screen_capture_attempts where "uid" = non_human.uid)
       )
   ) then
-    raise exception 'Cannot roll back: a non-human user holds permissions, admin scopes or invitations, or is linked to a person';
+    raise exception 'Cannot roll back: a non-human user holds permissions, admin scopes, invitations, FCM tokens or screen capture records, or is linked to a person';
   end if;
 end $$;
 
