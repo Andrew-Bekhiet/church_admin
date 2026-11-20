@@ -21,6 +21,8 @@ class PermissionsSet extends DelegatingSet<UserPermission> with Equatable {
   bool get recoverDeleted => contains(UserPermission.recoverDeleted);
   bool get exportAllData => contains(UserPermission.exportAllData);
   bool get changeDataChecks => contains(UserPermission.changeDataChecks);
+  bool get manageFingerprintIds =>
+      contains(UserPermission.manageFingerprintIds);
 
   bool get isSuperAdmin => readAllData || writeAllData || manageAllUsers;
 
@@ -36,6 +38,7 @@ class PermissionsSet extends DelegatingSet<UserPermission> with Equatable {
               (p) => UserPermission.values.firstWhereOrNull((e) => e.name == p),
             )
             .nonNulls
+            .map((permission) => permission.currentName)
             .toSet(),
       );
 

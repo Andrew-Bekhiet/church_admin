@@ -62,6 +62,9 @@ class User extends ViewableWithIDAndImage
   @QueryableField(label: 'currentUserCanManageThisUser', codeOnly: true)
   final bool currentUserCanManageThisUser;
 
+  @JsonKey(fromJson: UserType.fromServerName, toJson: UserType.toServerName)
+  final UserType userType;
+
   @override
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('users', id, lastUpdatedTime: photoUpdatedAt);
@@ -89,6 +92,7 @@ class User extends ViewableWithIDAndImage
     this.permissions = const PermissionsSet.empty(),
     this.fcmTokens = const [],
     this.currentUserCanManageThisUser = false,
+    this.userType = UserType.human,
     this.email,
     this.photoUpdatedAt,
     this.blurhash,
@@ -109,6 +113,7 @@ class User extends ViewableWithIDAndImage
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
   bool canEditObject(ViewableWithID object) {
+    if (object case User(:final userType) when !userType.isHuman) return false;
     if (permissions.writeAllData) return true;
 
     return switch (object) {
@@ -127,6 +132,9 @@ class User extends ViewableWithIDAndImage
   }
 
   bool canDeleteObject(ViewableWithID object) => permissions.deleteData;
+
+  bool canManageFingerprintIdsOf(Person person) =>
+      permissions.manageFingerprintIds && canEditObject(person);
 
   bool canChangeDataCheck(HasDataCheck object) =>
       permissions.changeDataChecks && object.userCanEdit;

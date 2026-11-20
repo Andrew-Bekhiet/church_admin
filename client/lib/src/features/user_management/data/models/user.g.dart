@@ -161,6 +161,9 @@ User _$UserFromJson(Map json) => User(
       [],
   currentUserCanManageThisUser:
       json['currentUserCanManageThisUser'] as bool? ?? false,
+  userType: json['userType'] == null
+      ? UserType.human
+      : UserType.fromServerName(json['userType'] as String?),
   email: json['email'] as String?,
   photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
     json['photoUpdatedAt'],
@@ -220,6 +223,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
   'classesHistory': instance.classesHistory?.map((e) => e.toJson()).toList(),
   'groupsHistory': instance.groupsHistory?.map((e) => e.toJson()).toList(),
   'invitation': instance.invitation?.toJson(),
+  'userType': UserType.toServerName(instance.userType),
 };
 
 Value? _$JsonConverterFromJson<Json, Value>(

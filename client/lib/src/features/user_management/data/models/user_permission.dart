@@ -46,8 +46,16 @@ enum UserPermission implements LabeledEnum {
     label: 'تعديل حالة اكتمال البيانات',
     icon: Symbols.fact_check,
   ),
+  manageFingerprintIds(
+    label: 'إدارة أرقام البصمة',
+    icon: Symbols.fingerprint,
+  ),
+  appMaintenance(
+    label: 'صيانة التطبيق',
+    icon: Symbols.build,
+  ),
   maintenanceNotifications(
-    label: 'استلام إشعارات الصيانة',
+    label: 'استلام إشعارات الصيانة (الاسم القديم لصيانة التطبيق)',
     icon: Symbols.build,
   ),
   screenCaptureNotifications(
@@ -86,6 +94,23 @@ enum UserPermission implements LabeledEnum {
       },
     };
   }
+
+  UserPermissionSection get section => switch (this) {
+    UserPermission.deleteData ||
+    UserPermission.changeDataChecks ||
+    UserPermission.manageFingerprintIds => UserPermissionSection.scopeBound,
+    _ => UserPermissionSection.general,
+  };
+
+  UserPermission get currentName => switch (this) {
+    UserPermission.maintenanceNotifications => UserPermission.appMaintenance,
+    _ => this,
+  };
+
+  Set<UserPermission> get everyNameGrantingIt => {
+    for (final permission in UserPermission.values)
+      if (permission.currentName == this) permission,
+  };
 
   String get subtitle => this != UserPermission.approved
       ? 'السماح ب$label'

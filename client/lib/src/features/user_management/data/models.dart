@@ -6,4 +6,6 @@ export 'models/relationships.dart';
 export 'models/user.dart';
 export 'models/user_admin_scope.dart';
 export 'models/user_permission.dart';
+export 'models/user_permission_section.dart';
 export 'models/user_preferences.dart';
+export 'models/user_type.dart';

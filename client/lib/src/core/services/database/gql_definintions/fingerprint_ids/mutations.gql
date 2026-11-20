@@ -1,0 +1,13 @@
+mutation addPersonFingerprintId($personId: uuid!, $employeeCode: String!) {
+  insertPersonsFingerprintIdsOne(
+    object: { personId: $personId, employeeCode: $employeeCode }
+  ) {
+    id
+  }
+}
+
+mutation removePersonFingerprintId($id: uuid!) {
+  deletePersonsFingerprintIdsByPk(id: $id) {
+    id
+  }
+}
