@@ -1,3 +1,5 @@
+lock table auth.users_data in access exclusive mode;
+
 do $$
 begin
   if exists (
@@ -11,6 +13,20 @@ begin
       )
   ) then
     raise exception 'Cannot roll back: a non-human user has recorded attendance, kodas or edits';
+  end if;
+
+  if exists (
+    select 1 from auth.users_data as non_human
+    where
+      non_human.user_type <> 'human'
+      and (
+        exists (select 1 from auth.users_permissions where "uid" = non_human.uid)
+        or exists (select 1 from auth.users_admin_on where "uid" = non_human.uid)
+        or exists (select 1 from auth.invitations where non_human.uid in (user_uid, created_by))
+        or exists (select 1 from public.persons where "uid" = non_human.uid)
+      )
+  ) then
+    raise exception 'Cannot roll back: a non-human user holds permissions, admin scopes or invitations, or is linked to a person';
   end if;
 end $$;
 

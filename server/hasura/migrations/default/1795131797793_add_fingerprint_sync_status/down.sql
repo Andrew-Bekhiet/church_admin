@@ -1,3 +1,5 @@
+lock table operations.fingerprint_sync_status in access exclusive mode;
+
 do $$
 begin
   if exists (select 1 from operations.fingerprint_sync_status) then

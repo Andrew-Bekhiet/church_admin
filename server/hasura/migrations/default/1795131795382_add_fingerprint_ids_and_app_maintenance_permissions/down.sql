@@ -1,3 +1,5 @@
+lock table public.persons_fingerprint_ids, auth.users_permissions in access exclusive mode;
+
 do $$
 begin
   if exists (select 1 from public.persons_fingerprint_ids) then

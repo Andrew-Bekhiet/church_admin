@@ -1,3 +1,5 @@
+lock table history.meetings in access exclusive mode;
+
 do $$
 begin
   if exists (select 1 from history.meetings where auto_attendance_weekday is not null) then
