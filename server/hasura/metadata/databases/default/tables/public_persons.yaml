@@ -413,9 +413,16 @@ update_permissions:
                   - entity_id:
                       _is_null: true
       check:
-        _or:
-          - *person_by_id_editable
-          - *all_data_editable
+        _and:
+          - _or:
+              - *person_by_id_editable
+              - *all_data_editable
+          - _or:
+              - uid:
+                  _is_null: true
+              - user:
+                  user_type:
+                    _eq: human
 delete_permissions:
   - role: user
     permission:

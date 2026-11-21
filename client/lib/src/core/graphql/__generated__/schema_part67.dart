@@ -1,6 +1,490 @@
 // Part 67 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_historyMeetingDaysAggregateBoolExpBool_or<TRes> {
+  factory CopyWith_Input_historyMeetingDaysAggregateBoolExpBool_or(
+    Input_historyMeetingDaysAggregateBoolExpBool_or instance,
+    TRes Function(Input_historyMeetingDaysAggregateBoolExpBool_or) then,
+  ) = _CopyWithImpl_Input_historyMeetingDaysAggregateBoolExpBool_or;
+
+  factory CopyWith_Input_historyMeetingDaysAggregateBoolExpBool_or.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Input_historyMeetingDaysAggregateBoolExpBool_or;
+
+  TRes call({
+    Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns?
+    arguments,
+    bool? distinct,
+    Input_HistoryMeetingDaysBoolExp? filter,
+    Input_BooleanComparisonExp? predicate,
+  });
+  CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get filter;
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate;
+}
+
+class _CopyWithImpl_Input_historyMeetingDaysAggregateBoolExpBool_or<TRes>
+    implements CopyWith_Input_historyMeetingDaysAggregateBoolExpBool_or<TRes> {
+  _CopyWithImpl_Input_historyMeetingDaysAggregateBoolExpBool_or(
+    this._instance,
+    this._then,
+  );
+
+  final Input_historyMeetingDaysAggregateBoolExpBool_or _instance;
+
+  final TRes Function(Input_historyMeetingDaysAggregateBoolExpBool_or) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? arguments = _undefined,
+    Object? distinct = _undefined,
+    Object? filter = _undefined,
+    Object? predicate = _undefined,
+  }) => _then(
+    Input_historyMeetingDaysAggregateBoolExpBool_or._({
+      ..._instance._$data,
+      if (arguments != _undefined && arguments != null)
+        'arguments':
+            (arguments
+                as Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns),
+      if (distinct != _undefined) 'distinct': (distinct as bool?),
+      if (filter != _undefined)
+        'filter': (filter as Input_HistoryMeetingDaysBoolExp?),
+      if (predicate != _undefined && predicate != null)
+        'predicate': (predicate as Input_BooleanComparisonExp),
+    }),
+  );
+
+  CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get filter {
+    final local$filter = _instance.filter;
+    return local$filter == null
+        ? CopyWith_Input_HistoryMeetingDaysBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryMeetingDaysBoolExp(
+            local$filter,
+            (e) => call(filter: e),
+          );
+  }
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate {
+    final local$predicate = _instance.predicate;
+    return CopyWith_Input_BooleanComparisonExp(
+      local$predicate,
+      (e) => call(predicate: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl_Input_historyMeetingDaysAggregateBoolExpBool_or<TRes>
+    implements CopyWith_Input_historyMeetingDaysAggregateBoolExpBool_or<TRes> {
+  _CopyWithStubImpl_Input_historyMeetingDaysAggregateBoolExpBool_or(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns?
+    arguments,
+    bool? distinct,
+    Input_HistoryMeetingDaysBoolExp? filter,
+    Input_BooleanComparisonExp? predicate,
+  }) => _res;
+
+  CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get filter =>
+      CopyWith_Input_HistoryMeetingDaysBoolExp.stub(_res);
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
+}
+
+class Input_historyMeetingDaysAggregateBoolExpCount {
+  factory Input_historyMeetingDaysAggregateBoolExpCount({
+    List<Enum_HistoryMeetingDaysSelectColumn>? arguments,
+    bool? distinct,
+    Input_HistoryMeetingDaysBoolExp? filter,
+    required Input_IntComparisonExp predicate,
+  }) => Input_historyMeetingDaysAggregateBoolExpCount._({
+    if (arguments != null) r'arguments': arguments,
+    if (distinct != null) r'distinct': distinct,
+    if (filter != null) r'filter': filter,
+    r'predicate': predicate,
+  });
+
+  Input_historyMeetingDaysAggregateBoolExpCount._(this._$data);
+
+  factory Input_historyMeetingDaysAggregateBoolExpCount.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('arguments')) {
+      final l$arguments = data['arguments'];
+      result$data['arguments'] = (l$arguments as List<dynamic>?)
+          ?.map(
+            (e) => fromJson_Enum_HistoryMeetingDaysSelectColumn((e as String)),
+          )
+          .toList();
+    }
+    if (data.containsKey('distinct')) {
+      final l$distinct = data['distinct'];
+      result$data['distinct'] = (l$distinct as bool?);
+    }
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_HistoryMeetingDaysBoolExp.fromJson(
+              (l$filter as Map<String, dynamic>),
+            );
+    }
+    final l$predicate = data['predicate'];
+    result$data['predicate'] = Input_IntComparisonExp.fromJson(
+      (l$predicate as Map<String, dynamic>),
+    );
+    return Input_historyMeetingDaysAggregateBoolExpCount._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Enum_HistoryMeetingDaysSelectColumn>? get arguments =>
+      (_$data['arguments'] as List<Enum_HistoryMeetingDaysSelectColumn>?);
+
+  bool? get distinct => (_$data['distinct'] as bool?);
+
+  Input_HistoryMeetingDaysBoolExp? get filter =>
+      (_$data['filter'] as Input_HistoryMeetingDaysBoolExp?);
+
+  Input_IntComparisonExp get predicate =>
+      (_$data['predicate'] as Input_IntComparisonExp);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('arguments')) {
+      final l$arguments = arguments;
+      result$data['arguments'] = l$arguments
+          ?.map((e) => toJson_Enum_HistoryMeetingDaysSelectColumn(e))
+          .toList();
+    }
+    if (_$data.containsKey('distinct')) {
+      final l$distinct = distinct;
+      result$data['distinct'] = l$distinct;
+    }
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    final l$predicate = predicate;
+    result$data['predicate'] = l$predicate.toJson();
+    return result$data;
+  }
+
+  CopyWith_Input_historyMeetingDaysAggregateBoolExpCount<
+    Input_historyMeetingDaysAggregateBoolExpCount
+  >
+  get copyWith =>
+      CopyWith_Input_historyMeetingDaysAggregateBoolExpCount(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_historyMeetingDaysAggregateBoolExpCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$arguments = arguments;
+    final lOther$arguments = other.arguments;
+    if (_$data.containsKey('arguments') !=
+        other._$data.containsKey('arguments')) {
+      return false;
+    }
+    if (l$arguments != null && lOther$arguments != null) {
+      if (l$arguments.length != lOther$arguments.length) {
+        return false;
+      }
+      for (int i = 0; i < l$arguments.length; i++) {
+        final l$arguments$entry = l$arguments[i];
+        final lOther$arguments$entry = lOther$arguments[i];
+        if (l$arguments$entry != lOther$arguments$entry) {
+          return false;
+        }
+      }
+    } else if (l$arguments != lOther$arguments) {
+      return false;
+    }
+    final l$distinct = distinct;
+    final lOther$distinct = other.distinct;
+    if (_$data.containsKey('distinct') !=
+        other._$data.containsKey('distinct')) {
+      return false;
+    }
+    if (l$distinct != lOther$distinct) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$predicate = predicate;
+    final lOther$predicate = other.predicate;
+    if (l$predicate != lOther$predicate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$arguments = arguments;
+    final l$distinct = distinct;
+    final l$filter = filter;
+    final l$predicate = predicate;
+    return Object.hashAll([
+      _$data.containsKey('arguments')
+          ? l$arguments == null
+                ? null
+                : Object.hashAll(l$arguments.map((v) => v))
+          : const {},
+      _$data.containsKey('distinct') ? l$distinct : const {},
+      _$data.containsKey('filter') ? l$filter : const {},
+      l$predicate,
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_historyMeetingDaysAggregateBoolExpCount<TRes> {
+  factory CopyWith_Input_historyMeetingDaysAggregateBoolExpCount(
+    Input_historyMeetingDaysAggregateBoolExpCount instance,
+    TRes Function(Input_historyMeetingDaysAggregateBoolExpCount) then,
+  ) = _CopyWithImpl_Input_historyMeetingDaysAggregateBoolExpCount;
+
+  factory CopyWith_Input_historyMeetingDaysAggregateBoolExpCount.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Input_historyMeetingDaysAggregateBoolExpCount;
+
+  TRes call({
+    List<Enum_HistoryMeetingDaysSelectColumn>? arguments,
+    bool? distinct,
+    Input_HistoryMeetingDaysBoolExp? filter,
+    Input_IntComparisonExp? predicate,
+  });
+  CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get filter;
+  CopyWith_Input_IntComparisonExp<TRes> get predicate;
+}
+
+class _CopyWithImpl_Input_historyMeetingDaysAggregateBoolExpCount<TRes>
+    implements CopyWith_Input_historyMeetingDaysAggregateBoolExpCount<TRes> {
+  _CopyWithImpl_Input_historyMeetingDaysAggregateBoolExpCount(
+    this._instance,
+    this._then,
+  );
+
+  final Input_historyMeetingDaysAggregateBoolExpCount _instance;
+
+  final TRes Function(Input_historyMeetingDaysAggregateBoolExpCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? arguments = _undefined,
+    Object? distinct = _undefined,
+    Object? filter = _undefined,
+    Object? predicate = _undefined,
+  }) => _then(
+    Input_historyMeetingDaysAggregateBoolExpCount._({
+      ..._instance._$data,
+      if (arguments != _undefined)
+        'arguments': (arguments as List<Enum_HistoryMeetingDaysSelectColumn>?),
+      if (distinct != _undefined) 'distinct': (distinct as bool?),
+      if (filter != _undefined)
+        'filter': (filter as Input_HistoryMeetingDaysBoolExp?),
+      if (predicate != _undefined && predicate != null)
+        'predicate': (predicate as Input_IntComparisonExp),
+    }),
+  );
+
+  CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get filter {
+    final local$filter = _instance.filter;
+    return local$filter == null
+        ? CopyWith_Input_HistoryMeetingDaysBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryMeetingDaysBoolExp(
+            local$filter,
+            (e) => call(filter: e),
+          );
+  }
+
+  CopyWith_Input_IntComparisonExp<TRes> get predicate {
+    final local$predicate = _instance.predicate;
+    return CopyWith_Input_IntComparisonExp(
+      local$predicate,
+      (e) => call(predicate: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl_Input_historyMeetingDaysAggregateBoolExpCount<TRes>
+    implements CopyWith_Input_historyMeetingDaysAggregateBoolExpCount<TRes> {
+  _CopyWithStubImpl_Input_historyMeetingDaysAggregateBoolExpCount(this._res);
+
+  TRes _res;
+
+  call({
+    List<Enum_HistoryMeetingDaysSelectColumn>? arguments,
+    bool? distinct,
+    Input_HistoryMeetingDaysBoolExp? filter,
+    Input_IntComparisonExp? predicate,
+  }) => _res;
+
+  CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get filter =>
+      CopyWith_Input_HistoryMeetingDaysBoolExp.stub(_res);
+
+  CopyWith_Input_IntComparisonExp<TRes> get predicate =>
+      CopyWith_Input_IntComparisonExp.stub(_res);
+}
+
+class Input_historyVisitHistoryAggregateBoolExpBool_and {
+  factory Input_historyVisitHistoryAggregateBoolExpBool_and({
+    required Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
+    arguments,
+    bool? distinct,
+    Input_HistoryVisitHistoryBoolExp? filter,
+    required Input_BooleanComparisonExp predicate,
+  }) => Input_historyVisitHistoryAggregateBoolExpBool_and._({
+    r'arguments': arguments,
+    if (distinct != null) r'distinct': distinct,
+    if (filter != null) r'filter': filter,
+    r'predicate': predicate,
+  });
+
+  Input_historyVisitHistoryAggregateBoolExpBool_and._(this._$data);
+
+  factory Input_historyVisitHistoryAggregateBoolExpBool_and.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$arguments = data['arguments'];
+    result$data['arguments'] =
+        fromJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
+          (l$arguments as String),
+        );
+    if (data.containsKey('distinct')) {
+      final l$distinct = data['distinct'];
+      result$data['distinct'] = (l$distinct as bool?);
+    }
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_HistoryVisitHistoryBoolExp.fromJson(
+              (l$filter as Map<String, dynamic>),
+            );
+    }
+    final l$predicate = data['predicate'];
+    result$data['predicate'] = Input_BooleanComparisonExp.fromJson(
+      (l$predicate as Map<String, dynamic>),
+    );
+    return Input_historyVisitHistoryAggregateBoolExpBool_and._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
+  get arguments =>
+      (_$data['arguments']
+          as Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns);
+
+  bool? get distinct => (_$data['distinct'] as bool?);
+
+  Input_HistoryVisitHistoryBoolExp? get filter =>
+      (_$data['filter'] as Input_HistoryVisitHistoryBoolExp?);
+
+  Input_BooleanComparisonExp get predicate =>
+      (_$data['predicate'] as Input_BooleanComparisonExp);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$arguments = arguments;
+    result$data['arguments'] =
+        toJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
+          l$arguments,
+        );
+    if (_$data.containsKey('distinct')) {
+      final l$distinct = distinct;
+      result$data['distinct'] = l$distinct;
+    }
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    final l$predicate = predicate;
+    result$data['predicate'] = l$predicate.toJson();
+    return result$data;
+  }
+
+  CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and<
+    Input_historyVisitHistoryAggregateBoolExpBool_and
+  >
+  get copyWith => CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and(
+    this,
+    (i) => i,
+  );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_historyVisitHistoryAggregateBoolExpBool_and ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$arguments = arguments;
+    final lOther$arguments = other.arguments;
+    if (l$arguments != lOther$arguments) {
+      return false;
+    }
+    final l$distinct = distinct;
+    final lOther$distinct = other.distinct;
+    if (_$data.containsKey('distinct') !=
+        other._$data.containsKey('distinct')) {
+      return false;
+    }
+    if (l$distinct != lOther$distinct) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$predicate = predicate;
+    final lOther$predicate = other.predicate;
+    if (l$predicate != lOther$predicate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$arguments = arguments;
+    final l$distinct = distinct;
+    final l$filter = filter;
+    final l$predicate = predicate;
+    return Object.hashAll([
+      l$arguments,
+      _$data.containsKey('distinct') ? l$distinct : const {},
+      _$data.containsKey('filter') ? l$filter : const {},
+      l$predicate,
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and<
   TRes
 > {
@@ -2062,455 +2546,4 @@ enum Enum_AreasStreetsConstraint {
       fromJson_Enum_AreasStreetsConstraint(value);
 
   String toJson() => toJson_Enum_AreasStreetsConstraint(this);
-}
-
-String toJson_Enum_AreasStreetsConstraint(Enum_AreasStreetsConstraint e) {
-  switch (e) {
-    case Enum_AreasStreetsConstraint.areas_streets_pk:
-      return r'areas_streets_pk';
-    case Enum_AreasStreetsConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_AreasStreetsConstraint fromJson_Enum_AreasStreetsConstraint(String value) {
-  switch (value) {
-    case r'areas_streets_pk':
-      return Enum_AreasStreetsConstraint.areas_streets_pk;
-    default:
-      return Enum_AreasStreetsConstraint.$unknown;
-  }
-}
-
-enum Enum_AreasStreetsSelectColumn {
-  areaId,
-  streetId,
-  $unknown;
-
-  factory Enum_AreasStreetsSelectColumn.fromJson(String value) =>
-      fromJson_Enum_AreasStreetsSelectColumn(value);
-
-  String toJson() => toJson_Enum_AreasStreetsSelectColumn(this);
-}
-
-String toJson_Enum_AreasStreetsSelectColumn(Enum_AreasStreetsSelectColumn e) {
-  switch (e) {
-    case Enum_AreasStreetsSelectColumn.areaId:
-      return r'areaId';
-    case Enum_AreasStreetsSelectColumn.streetId:
-      return r'streetId';
-    case Enum_AreasStreetsSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_AreasStreetsSelectColumn fromJson_Enum_AreasStreetsSelectColumn(
-  String value,
-) {
-  switch (value) {
-    case r'areaId':
-      return Enum_AreasStreetsSelectColumn.areaId;
-    case r'streetId':
-      return Enum_AreasStreetsSelectColumn.streetId;
-    default:
-      return Enum_AreasStreetsSelectColumn.$unknown;
-  }
-}
-
-enum Enum_AreasStreetsUpdateColumn {
-  $_PLACEHOLDER,
-  $unknown;
-
-  factory Enum_AreasStreetsUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_AreasStreetsUpdateColumn(value);
-
-  String toJson() => toJson_Enum_AreasStreetsUpdateColumn(this);
-}
-
-String toJson_Enum_AreasStreetsUpdateColumn(Enum_AreasStreetsUpdateColumn e) {
-  switch (e) {
-    case Enum_AreasStreetsUpdateColumn.$_PLACEHOLDER:
-      return r'_PLACEHOLDER';
-    case Enum_AreasStreetsUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_AreasStreetsUpdateColumn fromJson_Enum_AreasStreetsUpdateColumn(
-  String value,
-) {
-  switch (value) {
-    case r'_PLACEHOLDER':
-      return Enum_AreasStreetsUpdateColumn.$_PLACEHOLDER;
-    default:
-      return Enum_AreasStreetsUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_AreasUpdateColumn {
-  bounds,
-  color,
-  name,
-  $unknown;
-
-  factory Enum_AreasUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_AreasUpdateColumn(value);
-
-  String toJson() => toJson_Enum_AreasUpdateColumn(this);
-}
-
-String toJson_Enum_AreasUpdateColumn(Enum_AreasUpdateColumn e) {
-  switch (e) {
-    case Enum_AreasUpdateColumn.bounds:
-      return r'bounds';
-    case Enum_AreasUpdateColumn.color:
-      return r'color';
-    case Enum_AreasUpdateColumn.name:
-      return r'name';
-    case Enum_AreasUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_AreasUpdateColumn fromJson_Enum_AreasUpdateColumn(String value) {
-  switch (value) {
-    case r'bounds':
-      return Enum_AreasUpdateColumn.bounds;
-    case r'color':
-      return Enum_AreasUpdateColumn.color;
-    case r'name':
-      return Enum_AreasUpdateColumn.name;
-    default:
-      return Enum_AreasUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_AuthInvitationsConstraint {
-  invitations_code_key,
-  invitations_pkey,
-  invitations_user_uid_key,
-  $unknown;
-
-  factory Enum_AuthInvitationsConstraint.fromJson(String value) =>
-      fromJson_Enum_AuthInvitationsConstraint(value);
-
-  String toJson() => toJson_Enum_AuthInvitationsConstraint(this);
-}
-
-String toJson_Enum_AuthInvitationsConstraint(Enum_AuthInvitationsConstraint e) {
-  switch (e) {
-    case Enum_AuthInvitationsConstraint.invitations_code_key:
-      return r'invitations_code_key';
-    case Enum_AuthInvitationsConstraint.invitations_pkey:
-      return r'invitations_pkey';
-    case Enum_AuthInvitationsConstraint.invitations_user_uid_key:
-      return r'invitations_user_uid_key';
-    case Enum_AuthInvitationsConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_AuthInvitationsConstraint fromJson_Enum_AuthInvitationsConstraint(
-  String value,
-) {
-  switch (value) {
-    case r'invitations_code_key':
-      return Enum_AuthInvitationsConstraint.invitations_code_key;
-    case r'invitations_pkey':
-      return Enum_AuthInvitationsConstraint.invitations_pkey;
-    case r'invitations_user_uid_key':
-      return Enum_AuthInvitationsConstraint.invitations_user_uid_key;
-    default:
-      return Enum_AuthInvitationsConstraint.$unknown;
-  }
-}
-
-enum Enum_AuthInvitationsSelectColumn {
-  claimedAt,
-  code,
-  createdAt,
-  createdBy,
-  expiresAt,
-  id,
-  userUid,
-  $unknown;
-
-  factory Enum_AuthInvitationsSelectColumn.fromJson(String value) =>
-      fromJson_Enum_AuthInvitationsSelectColumn(value);
-
-  String toJson() => toJson_Enum_AuthInvitationsSelectColumn(this);
-}
-
-String toJson_Enum_AuthInvitationsSelectColumn(
-  Enum_AuthInvitationsSelectColumn e,
-) {
-  switch (e) {
-    case Enum_AuthInvitationsSelectColumn.claimedAt:
-      return r'claimedAt';
-    case Enum_AuthInvitationsSelectColumn.code:
-      return r'code';
-    case Enum_AuthInvitationsSelectColumn.createdAt:
-      return r'createdAt';
-    case Enum_AuthInvitationsSelectColumn.createdBy:
-      return r'createdBy';
-    case Enum_AuthInvitationsSelectColumn.expiresAt:
-      return r'expiresAt';
-    case Enum_AuthInvitationsSelectColumn.id:
-      return r'id';
-    case Enum_AuthInvitationsSelectColumn.userUid:
-      return r'userUid';
-    case Enum_AuthInvitationsSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_AuthInvitationsSelectColumn fromJson_Enum_AuthInvitationsSelectColumn(
-  String value,
-) {
-  switch (value) {
-    case r'claimedAt':
-      return Enum_AuthInvitationsSelectColumn.claimedAt;
-    case r'code':
-      return Enum_AuthInvitationsSelectColumn.code;
-    case r'createdAt':
-      return Enum_AuthInvitationsSelectColumn.createdAt;
-    case r'createdBy':
-      return Enum_AuthInvitationsSelectColumn.createdBy;
-    case r'expiresAt':
-      return Enum_AuthInvitationsSelectColumn.expiresAt;
-    case r'id':
-      return Enum_AuthInvitationsSelectColumn.id;
-    case r'userUid':
-      return Enum_AuthInvitationsSelectColumn.userUid;
-    default:
-      return Enum_AuthInvitationsSelectColumn.$unknown;
-  }
-}
-
-enum Enum_AuthInvitationsUpdateColumn {
-  expiresAt,
-  $unknown;
-
-  factory Enum_AuthInvitationsUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_AuthInvitationsUpdateColumn(value);
-
-  String toJson() => toJson_Enum_AuthInvitationsUpdateColumn(this);
-}
-
-String toJson_Enum_AuthInvitationsUpdateColumn(
-  Enum_AuthInvitationsUpdateColumn e,
-) {
-  switch (e) {
-    case Enum_AuthInvitationsUpdateColumn.expiresAt:
-      return r'expiresAt';
-    case Enum_AuthInvitationsUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_AuthInvitationsUpdateColumn fromJson_Enum_AuthInvitationsUpdateColumn(
-  String value,
-) {
-  switch (value) {
-    case r'expiresAt':
-      return Enum_AuthInvitationsUpdateColumn.expiresAt;
-    default:
-      return Enum_AuthInvitationsUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_AuthUsersAdminOnConstraint {
-  users_admin_on_area,
-  users_admin_on_group,
-  users_admin_on_pkey,
-  users_admin_on_service,
-  $unknown;
-
-  factory Enum_AuthUsersAdminOnConstraint.fromJson(String value) =>
-      fromJson_Enum_AuthUsersAdminOnConstraint(value);
-
-  String toJson() => toJson_Enum_AuthUsersAdminOnConstraint(this);
-}
-
-String toJson_Enum_AuthUsersAdminOnConstraint(
-  Enum_AuthUsersAdminOnConstraint e,
-) {
-  switch (e) {
-    case Enum_AuthUsersAdminOnConstraint.users_admin_on_area:
-      return r'users_admin_on_area';
-    case Enum_AuthUsersAdminOnConstraint.users_admin_on_group:
-      return r'users_admin_on_group';
-    case Enum_AuthUsersAdminOnConstraint.users_admin_on_pkey:
-      return r'users_admin_on_pkey';
-    case Enum_AuthUsersAdminOnConstraint.users_admin_on_service:
-      return r'users_admin_on_service';
-    case Enum_AuthUsersAdminOnConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_AuthUsersAdminOnConstraint fromJson_Enum_AuthUsersAdminOnConstraint(
-  String value,
-) {
-  switch (value) {
-    case r'users_admin_on_area':
-      return Enum_AuthUsersAdminOnConstraint.users_admin_on_area;
-    case r'users_admin_on_group':
-      return Enum_AuthUsersAdminOnConstraint.users_admin_on_group;
-    case r'users_admin_on_pkey':
-      return Enum_AuthUsersAdminOnConstraint.users_admin_on_pkey;
-    case r'users_admin_on_service':
-      return Enum_AuthUsersAdminOnConstraint.users_admin_on_service;
-    default:
-      return Enum_AuthUsersAdminOnConstraint.$unknown;
-  }
-}
-
-enum Enum_AuthUsersAdminOnSelectColumn {
-  adminOnArea,
-  adminOnGroup,
-  adminOnService,
-  areaAdminOnUsers,
-  areaAllowEdit,
-  areaAllowExport,
-  groupAdminOnUsers,
-  groupAllowEdit,
-  groupAllowExport,
-  groupAllowRecordAttendance,
-  groupAllowRecordServantsAttendance,
-  groupWriteRelatedFamilies,
-  permissionId,
-  serviceAdminOnUsers,
-  serviceAllowEdit,
-  serviceAllowExport,
-  serviceAllowRecordAttendance,
-  serviceAllowRecordServantsAttendance,
-  serviceGender,
-  serviceStudyYear,
-  serviceWriteRelatedFamilies,
-  uid,
-  $unknown;
-
-  factory Enum_AuthUsersAdminOnSelectColumn.fromJson(String value) =>
-      fromJson_Enum_AuthUsersAdminOnSelectColumn(value);
-
-  String toJson() => toJson_Enum_AuthUsersAdminOnSelectColumn(this);
-}
-
-String toJson_Enum_AuthUsersAdminOnSelectColumn(
-  Enum_AuthUsersAdminOnSelectColumn e,
-) {
-  switch (e) {
-    case Enum_AuthUsersAdminOnSelectColumn.adminOnArea:
-      return r'adminOnArea';
-    case Enum_AuthUsersAdminOnSelectColumn.adminOnGroup:
-      return r'adminOnGroup';
-    case Enum_AuthUsersAdminOnSelectColumn.adminOnService:
-      return r'adminOnService';
-    case Enum_AuthUsersAdminOnSelectColumn.areaAdminOnUsers:
-      return r'areaAdminOnUsers';
-    case Enum_AuthUsersAdminOnSelectColumn.areaAllowEdit:
-      return r'areaAllowEdit';
-    case Enum_AuthUsersAdminOnSelectColumn.areaAllowExport:
-      return r'areaAllowExport';
-    case Enum_AuthUsersAdminOnSelectColumn.groupAdminOnUsers:
-      return r'groupAdminOnUsers';
-    case Enum_AuthUsersAdminOnSelectColumn.groupAllowEdit:
-      return r'groupAllowEdit';
-    case Enum_AuthUsersAdminOnSelectColumn.groupAllowExport:
-      return r'groupAllowExport';
-    case Enum_AuthUsersAdminOnSelectColumn.groupAllowRecordAttendance:
-      return r'groupAllowRecordAttendance';
-    case Enum_AuthUsersAdminOnSelectColumn.groupAllowRecordServantsAttendance:
-      return r'groupAllowRecordServantsAttendance';
-    case Enum_AuthUsersAdminOnSelectColumn.groupWriteRelatedFamilies:
-      return r'groupWriteRelatedFamilies';
-    case Enum_AuthUsersAdminOnSelectColumn.permissionId:
-      return r'permissionId';
-    case Enum_AuthUsersAdminOnSelectColumn.serviceAdminOnUsers:
-      return r'serviceAdminOnUsers';
-    case Enum_AuthUsersAdminOnSelectColumn.serviceAllowEdit:
-      return r'serviceAllowEdit';
-    case Enum_AuthUsersAdminOnSelectColumn.serviceAllowExport:
-      return r'serviceAllowExport';
-    case Enum_AuthUsersAdminOnSelectColumn.serviceAllowRecordAttendance:
-      return r'serviceAllowRecordAttendance';
-    case Enum_AuthUsersAdminOnSelectColumn.serviceAllowRecordServantsAttendance:
-      return r'serviceAllowRecordServantsAttendance';
-    case Enum_AuthUsersAdminOnSelectColumn.serviceGender:
-      return r'serviceGender';
-    case Enum_AuthUsersAdminOnSelectColumn.serviceStudyYear:
-      return r'serviceStudyYear';
-    case Enum_AuthUsersAdminOnSelectColumn.serviceWriteRelatedFamilies:
-      return r'serviceWriteRelatedFamilies';
-    case Enum_AuthUsersAdminOnSelectColumn.uid:
-      return r'uid';
-    case Enum_AuthUsersAdminOnSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_AuthUsersAdminOnSelectColumn fromJson_Enum_AuthUsersAdminOnSelectColumn(
-  String value,
-) {
-  switch (value) {
-    case r'adminOnArea':
-      return Enum_AuthUsersAdminOnSelectColumn.adminOnArea;
-    case r'adminOnGroup':
-      return Enum_AuthUsersAdminOnSelectColumn.adminOnGroup;
-    case r'adminOnService':
-      return Enum_AuthUsersAdminOnSelectColumn.adminOnService;
-    case r'areaAdminOnUsers':
-      return Enum_AuthUsersAdminOnSelectColumn.areaAdminOnUsers;
-    case r'areaAllowEdit':
-      return Enum_AuthUsersAdminOnSelectColumn.areaAllowEdit;
-    case r'areaAllowExport':
-      return Enum_AuthUsersAdminOnSelectColumn.areaAllowExport;
-    case r'groupAdminOnUsers':
-      return Enum_AuthUsersAdminOnSelectColumn.groupAdminOnUsers;
-    case r'groupAllowEdit':
-      return Enum_AuthUsersAdminOnSelectColumn.groupAllowEdit;
-    case r'groupAllowExport':
-      return Enum_AuthUsersAdminOnSelectColumn.groupAllowExport;
-    case r'groupAllowRecordAttendance':
-      return Enum_AuthUsersAdminOnSelectColumn.groupAllowRecordAttendance;
-    case r'groupAllowRecordServantsAttendance':
-      return Enum_AuthUsersAdminOnSelectColumn
-          .groupAllowRecordServantsAttendance;
-    case r'groupWriteRelatedFamilies':
-      return Enum_AuthUsersAdminOnSelectColumn.groupWriteRelatedFamilies;
-    case r'permissionId':
-      return Enum_AuthUsersAdminOnSelectColumn.permissionId;
-    case r'serviceAdminOnUsers':
-      return Enum_AuthUsersAdminOnSelectColumn.serviceAdminOnUsers;
-    case r'serviceAllowEdit':
-      return Enum_AuthUsersAdminOnSelectColumn.serviceAllowEdit;
-    case r'serviceAllowExport':
-      return Enum_AuthUsersAdminOnSelectColumn.serviceAllowExport;
-    case r'serviceAllowRecordAttendance':
-      return Enum_AuthUsersAdminOnSelectColumn.serviceAllowRecordAttendance;
-    case r'serviceAllowRecordServantsAttendance':
-      return Enum_AuthUsersAdminOnSelectColumn
-          .serviceAllowRecordServantsAttendance;
-    case r'serviceGender':
-      return Enum_AuthUsersAdminOnSelectColumn.serviceGender;
-    case r'serviceStudyYear':
-      return Enum_AuthUsersAdminOnSelectColumn.serviceStudyYear;
-    case r'serviceWriteRelatedFamilies':
-      return Enum_AuthUsersAdminOnSelectColumn.serviceWriteRelatedFamilies;
-    case r'uid':
-      return Enum_AuthUsersAdminOnSelectColumn.uid;
-    default:
-      return Enum_AuthUsersAdminOnSelectColumn.$unknown;
-  }
-}
-
-enum Enum_AuthUsersAdminOnUpdateColumn {
-  $_PLACEHOLDER,
-  $unknown;
-
-  factory Enum_AuthUsersAdminOnUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_AuthUsersAdminOnUpdateColumn(value);
-
-  String toJson() => toJson_Enum_AuthUsersAdminOnUpdateColumn(this);
 }

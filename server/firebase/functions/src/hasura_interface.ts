@@ -543,27 +543,27 @@ export async function insertFcmToken(
   }
 }
 
-export async function getFcmTokensForPermission(
-  permission: string,
+export async function getFcmTokensForAnyOfPermissions(
+  permissions: string[],
 ): Promise<string[]> {
   const hasura_response = await makeGraphqlRequest({
     query: `
-            query getFcmTokensForPermission($permission: String!) {
-              authUsersData(where: { permissions: { permission: { _eq: $permission } } }) {
+            query getFcmTokensForAnyOfPermissions($permissions: [String!]!) {
+              authUsersData(where: { permissions: { permission: { _in: $permissions } } }) {
                 fcmTokens {
                   token
                 }
               }
             }
           `,
-    variables: { permission },
-    operationName: "getFcmTokensForPermission",
+    variables: { permissions },
+    operationName: "getFcmTokensForAnyOfPermissions",
   });
 
   if (hasura_response.data?.["errors"]) {
     throw new https.HttpsError(
       "internal",
-      "Failed to fetch FCM tokens for permission",
+      "Failed to fetch FCM tokens for permissions",
       hasura_response.data?.["errors"],
     );
   }

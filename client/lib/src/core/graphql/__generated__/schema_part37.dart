@@ -17,6 +17,12 @@ abstract class CopyWith_Input_HistoryMeetingsBoolExp<TRes> {
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
     Input_MeetingAudienceComparisonExp? audience,
+    Input_TimeComparisonExp? autoAttendanceEndTime,
+    Input_BooleanComparisonExp? autoAttendanceRecordsServants,
+    Input_TimeComparisonExp? autoAttendanceStartTime,
+    Input_SmallintComparisonExp? autoAttendanceWeekday,
+    Input_TimeComparisonExp? autoCommunionEndTime,
+    Input_TimeComparisonExp? autoCommunionStartTime,
     Input_BigintComparisonExp? color,
     Input_HistoryMeetingDaysBoolExp? days,
     Input_HistoryMeetingDaysAggregateBoolExp? daysAggregate,
@@ -53,6 +59,12 @@ abstract class CopyWith_Input_HistoryMeetingsBoolExp<TRes> {
   CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
   get attendanceHistoryAggregate;
   CopyWith_Input_MeetingAudienceComparisonExp<TRes> get audience;
+  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceEndTime;
+  CopyWith_Input_BooleanComparisonExp<TRes> get autoAttendanceRecordsServants;
+  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceStartTime;
+  CopyWith_Input_SmallintComparisonExp<TRes> get autoAttendanceWeekday;
+  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionEndTime;
+  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionStartTime;
   CopyWith_Input_BigintComparisonExp<TRes> get color;
   CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get days;
   CopyWith_Input_HistoryMeetingDaysAggregateBoolExp<TRes> get daysAggregate;
@@ -86,6 +98,12 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
     Object? attendanceHistory = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
     Object? audience = _undefined,
+    Object? autoAttendanceEndTime = _undefined,
+    Object? autoAttendanceRecordsServants = _undefined,
+    Object? autoAttendanceStartTime = _undefined,
+    Object? autoAttendanceWeekday = _undefined,
+    Object? autoCommunionEndTime = _undefined,
+    Object? autoCommunionStartTime = _undefined,
     Object? color = _undefined,
     Object? days = _undefined,
     Object? daysAggregate = _undefined,
@@ -117,6 +135,24 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
                 as Input_HistoryAttendanceHistoryAggregateBoolExp?),
       if (audience != _undefined)
         'audience': (audience as Input_MeetingAudienceComparisonExp?),
+      if (autoAttendanceEndTime != _undefined)
+        'autoAttendanceEndTime':
+            (autoAttendanceEndTime as Input_TimeComparisonExp?),
+      if (autoAttendanceRecordsServants != _undefined)
+        'autoAttendanceRecordsServants':
+            (autoAttendanceRecordsServants as Input_BooleanComparisonExp?),
+      if (autoAttendanceStartTime != _undefined)
+        'autoAttendanceStartTime':
+            (autoAttendanceStartTime as Input_TimeComparisonExp?),
+      if (autoAttendanceWeekday != _undefined)
+        'autoAttendanceWeekday':
+            (autoAttendanceWeekday as Input_SmallintComparisonExp?),
+      if (autoCommunionEndTime != _undefined)
+        'autoCommunionEndTime':
+            (autoCommunionEndTime as Input_TimeComparisonExp?),
+      if (autoCommunionStartTime != _undefined)
+        'autoCommunionStartTime':
+            (autoCommunionStartTime as Input_TimeComparisonExp?),
       if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
       if (days != _undefined)
         'days': (days as Input_HistoryMeetingDaysBoolExp?),
@@ -215,6 +251,67 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
         : CopyWith_Input_MeetingAudienceComparisonExp(
             local$audience,
             (e) => call(audience: e),
+          );
+  }
+
+  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceEndTime {
+    final local$autoAttendanceEndTime = _instance.autoAttendanceEndTime;
+    return local$autoAttendanceEndTime == null
+        ? CopyWith_Input_TimeComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_TimeComparisonExp(
+            local$autoAttendanceEndTime,
+            (e) => call(autoAttendanceEndTime: e),
+          );
+  }
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get autoAttendanceRecordsServants {
+    final local$autoAttendanceRecordsServants =
+        _instance.autoAttendanceRecordsServants;
+    return local$autoAttendanceRecordsServants == null
+        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BooleanComparisonExp(
+            local$autoAttendanceRecordsServants,
+            (e) => call(autoAttendanceRecordsServants: e),
+          );
+  }
+
+  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceStartTime {
+    final local$autoAttendanceStartTime = _instance.autoAttendanceStartTime;
+    return local$autoAttendanceStartTime == null
+        ? CopyWith_Input_TimeComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_TimeComparisonExp(
+            local$autoAttendanceStartTime,
+            (e) => call(autoAttendanceStartTime: e),
+          );
+  }
+
+  CopyWith_Input_SmallintComparisonExp<TRes> get autoAttendanceWeekday {
+    final local$autoAttendanceWeekday = _instance.autoAttendanceWeekday;
+    return local$autoAttendanceWeekday == null
+        ? CopyWith_Input_SmallintComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_SmallintComparisonExp(
+            local$autoAttendanceWeekday,
+            (e) => call(autoAttendanceWeekday: e),
+          );
+  }
+
+  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionEndTime {
+    final local$autoCommunionEndTime = _instance.autoCommunionEndTime;
+    return local$autoCommunionEndTime == null
+        ? CopyWith_Input_TimeComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_TimeComparisonExp(
+            local$autoCommunionEndTime,
+            (e) => call(autoCommunionEndTime: e),
+          );
+  }
+
+  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionStartTime {
+    final local$autoCommunionStartTime = _instance.autoCommunionStartTime;
+    return local$autoCommunionStartTime == null
+        ? CopyWith_Input_TimeComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_TimeComparisonExp(
+            local$autoCommunionStartTime,
+            (e) => call(autoCommunionStartTime: e),
           );
   }
 
@@ -365,6 +462,12 @@ class _CopyWithStubImpl_Input_HistoryMeetingsBoolExp<TRes>
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
     Input_MeetingAudienceComparisonExp? audience,
+    Input_TimeComparisonExp? autoAttendanceEndTime,
+    Input_BooleanComparisonExp? autoAttendanceRecordsServants,
+    Input_TimeComparisonExp? autoAttendanceStartTime,
+    Input_SmallintComparisonExp? autoAttendanceWeekday,
+    Input_TimeComparisonExp? autoCommunionEndTime,
+    Input_TimeComparisonExp? autoCommunionStartTime,
     Input_BigintComparisonExp? color,
     Input_HistoryMeetingDaysBoolExp? days,
     Input_HistoryMeetingDaysAggregateBoolExp? daysAggregate,
@@ -397,6 +500,24 @@ class _CopyWithStubImpl_Input_HistoryMeetingsBoolExp<TRes>
 
   CopyWith_Input_MeetingAudienceComparisonExp<TRes> get audience =>
       CopyWith_Input_MeetingAudienceComparisonExp.stub(_res);
+
+  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceEndTime =>
+      CopyWith_Input_TimeComparisonExp.stub(_res);
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get autoAttendanceRecordsServants =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
+
+  CopyWith_Input_TimeComparisonExp<TRes> get autoAttendanceStartTime =>
+      CopyWith_Input_TimeComparisonExp.stub(_res);
+
+  CopyWith_Input_SmallintComparisonExp<TRes> get autoAttendanceWeekday =>
+      CopyWith_Input_SmallintComparisonExp.stub(_res);
+
+  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionEndTime =>
+      CopyWith_Input_TimeComparisonExp.stub(_res);
+
+  CopyWith_Input_TimeComparisonExp<TRes> get autoCommunionStartTime =>
+      CopyWith_Input_TimeComparisonExp.stub(_res);
 
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
@@ -1068,6 +1189,7 @@ class _CopyWithStubImpl_Input_HistoryMeetingsInsertInput<TRes>
 class Input_HistoryMeetingsMaxOrderBy {
   factory Input_HistoryMeetingsMaxOrderBy({
     Enum_OrderBy? audience,
+    Enum_OrderBy? autoAttendanceWeekday,
     Enum_OrderBy? color,
     Enum_OrderBy? groupId,
     Enum_OrderBy? id,
@@ -1076,6 +1198,8 @@ class Input_HistoryMeetingsMaxOrderBy {
     Enum_OrderBy? serviceStudyYear,
   }) => Input_HistoryMeetingsMaxOrderBy._({
     if (audience != null) r'audience': audience,
+    if (autoAttendanceWeekday != null)
+      r'autoAttendanceWeekday': autoAttendanceWeekday,
     if (color != null) r'color': color,
     if (groupId != null) r'groupId': groupId,
     if (id != null) r'id': id,
@@ -1093,6 +1217,12 @@ class Input_HistoryMeetingsMaxOrderBy {
       result$data['audience'] = l$audience == null
           ? null
           : fromJson_Enum_OrderBy((l$audience as String));
+    }
+    if (data.containsKey('autoAttendanceWeekday')) {
+      final l$autoAttendanceWeekday = data['autoAttendanceWeekday'];
+      result$data['autoAttendanceWeekday'] = l$autoAttendanceWeekday == null
+          ? null
+          : fromJson_Enum_OrderBy((l$autoAttendanceWeekday as String));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -1137,6 +1267,9 @@ class Input_HistoryMeetingsMaxOrderBy {
 
   Enum_OrderBy? get audience => (_$data['audience'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get autoAttendanceWeekday =>
+      (_$data['autoAttendanceWeekday'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
   Enum_OrderBy? get groupId => (_$data['groupId'] as Enum_OrderBy?);
@@ -1157,6 +1290,12 @@ class Input_HistoryMeetingsMaxOrderBy {
       result$data['audience'] = l$audience == null
           ? null
           : toJson_Enum_OrderBy(l$audience);
+    }
+    if (_$data.containsKey('autoAttendanceWeekday')) {
+      final l$autoAttendanceWeekday = autoAttendanceWeekday;
+      result$data['autoAttendanceWeekday'] = l$autoAttendanceWeekday == null
+          ? null
+          : toJson_Enum_OrderBy(l$autoAttendanceWeekday);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -1214,6 +1353,15 @@ class Input_HistoryMeetingsMaxOrderBy {
     if (l$audience != lOther$audience) {
       return false;
     }
+    final l$autoAttendanceWeekday = autoAttendanceWeekday;
+    final lOther$autoAttendanceWeekday = other.autoAttendanceWeekday;
+    if (_$data.containsKey('autoAttendanceWeekday') !=
+        other._$data.containsKey('autoAttendanceWeekday')) {
+      return false;
+    }
+    if (l$autoAttendanceWeekday != lOther$autoAttendanceWeekday) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -1270,6 +1418,7 @@ class Input_HistoryMeetingsMaxOrderBy {
   @override
   int get hashCode {
     final l$audience = audience;
+    final l$autoAttendanceWeekday = autoAttendanceWeekday;
     final l$color = color;
     final l$groupId = groupId;
     final l$id = id;
@@ -1278,6 +1427,9 @@ class Input_HistoryMeetingsMaxOrderBy {
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
       _$data.containsKey('audience') ? l$audience : const {},
+      _$data.containsKey('autoAttendanceWeekday')
+          ? l$autoAttendanceWeekday
+          : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('groupId') ? l$groupId : const {},
       _$data.containsKey('id') ? l$id : const {},
@@ -1299,6 +1451,7 @@ abstract class CopyWith_Input_HistoryMeetingsMaxOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? audience,
+    Enum_OrderBy? autoAttendanceWeekday,
     Enum_OrderBy? color,
     Enum_OrderBy? groupId,
     Enum_OrderBy? id,
@@ -1320,6 +1473,7 @@ class _CopyWithImpl_Input_HistoryMeetingsMaxOrderBy<TRes>
 
   TRes call({
     Object? audience = _undefined,
+    Object? autoAttendanceWeekday = _undefined,
     Object? color = _undefined,
     Object? groupId = _undefined,
     Object? id = _undefined,
@@ -1330,6 +1484,8 @@ class _CopyWithImpl_Input_HistoryMeetingsMaxOrderBy<TRes>
     Input_HistoryMeetingsMaxOrderBy._({
       ..._instance._$data,
       if (audience != _undefined) 'audience': (audience as Enum_OrderBy?),
+      if (autoAttendanceWeekday != _undefined)
+        'autoAttendanceWeekday': (autoAttendanceWeekday as Enum_OrderBy?),
       if (color != _undefined) 'color': (color as Enum_OrderBy?),
       if (groupId != _undefined) 'groupId': (groupId as Enum_OrderBy?),
       if (id != _undefined) 'id': (id as Enum_OrderBy?),
@@ -1349,6 +1505,7 @@ class _CopyWithStubImpl_Input_HistoryMeetingsMaxOrderBy<TRes>
 
   call({
     Enum_OrderBy? audience,
+    Enum_OrderBy? autoAttendanceWeekday,
     Enum_OrderBy? color,
     Enum_OrderBy? groupId,
     Enum_OrderBy? id,
@@ -1361,6 +1518,7 @@ class _CopyWithStubImpl_Input_HistoryMeetingsMaxOrderBy<TRes>
 class Input_HistoryMeetingsMinOrderBy {
   factory Input_HistoryMeetingsMinOrderBy({
     Enum_OrderBy? audience,
+    Enum_OrderBy? autoAttendanceWeekday,
     Enum_OrderBy? color,
     Enum_OrderBy? groupId,
     Enum_OrderBy? id,
@@ -1369,6 +1527,8 @@ class Input_HistoryMeetingsMinOrderBy {
     Enum_OrderBy? serviceStudyYear,
   }) => Input_HistoryMeetingsMinOrderBy._({
     if (audience != null) r'audience': audience,
+    if (autoAttendanceWeekday != null)
+      r'autoAttendanceWeekday': autoAttendanceWeekday,
     if (color != null) r'color': color,
     if (groupId != null) r'groupId': groupId,
     if (id != null) r'id': id,
@@ -1386,6 +1546,12 @@ class Input_HistoryMeetingsMinOrderBy {
       result$data['audience'] = l$audience == null
           ? null
           : fromJson_Enum_OrderBy((l$audience as String));
+    }
+    if (data.containsKey('autoAttendanceWeekday')) {
+      final l$autoAttendanceWeekday = data['autoAttendanceWeekday'];
+      result$data['autoAttendanceWeekday'] = l$autoAttendanceWeekday == null
+          ? null
+          : fromJson_Enum_OrderBy((l$autoAttendanceWeekday as String));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -1430,6 +1596,9 @@ class Input_HistoryMeetingsMinOrderBy {
 
   Enum_OrderBy? get audience => (_$data['audience'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get autoAttendanceWeekday =>
+      (_$data['autoAttendanceWeekday'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
   Enum_OrderBy? get groupId => (_$data['groupId'] as Enum_OrderBy?);
@@ -1450,6 +1619,12 @@ class Input_HistoryMeetingsMinOrderBy {
       result$data['audience'] = l$audience == null
           ? null
           : toJson_Enum_OrderBy(l$audience);
+    }
+    if (_$data.containsKey('autoAttendanceWeekday')) {
+      final l$autoAttendanceWeekday = autoAttendanceWeekday;
+      result$data['autoAttendanceWeekday'] = l$autoAttendanceWeekday == null
+          ? null
+          : toJson_Enum_OrderBy(l$autoAttendanceWeekday);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -1507,6 +1682,15 @@ class Input_HistoryMeetingsMinOrderBy {
     if (l$audience != lOther$audience) {
       return false;
     }
+    final l$autoAttendanceWeekday = autoAttendanceWeekday;
+    final lOther$autoAttendanceWeekday = other.autoAttendanceWeekday;
+    if (_$data.containsKey('autoAttendanceWeekday') !=
+        other._$data.containsKey('autoAttendanceWeekday')) {
+      return false;
+    }
+    if (l$autoAttendanceWeekday != lOther$autoAttendanceWeekday) {
+      return false;
+    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -1563,6 +1747,7 @@ class Input_HistoryMeetingsMinOrderBy {
   @override
   int get hashCode {
     final l$audience = audience;
+    final l$autoAttendanceWeekday = autoAttendanceWeekday;
     final l$color = color;
     final l$groupId = groupId;
     final l$id = id;
@@ -1571,6 +1756,9 @@ class Input_HistoryMeetingsMinOrderBy {
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
       _$data.containsKey('audience') ? l$audience : const {},
+      _$data.containsKey('autoAttendanceWeekday')
+          ? l$autoAttendanceWeekday
+          : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('groupId') ? l$groupId : const {},
       _$data.containsKey('id') ? l$id : const {},
@@ -1592,6 +1780,7 @@ abstract class CopyWith_Input_HistoryMeetingsMinOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? audience,
+    Enum_OrderBy? autoAttendanceWeekday,
     Enum_OrderBy? color,
     Enum_OrderBy? groupId,
     Enum_OrderBy? id,
@@ -1613,6 +1802,7 @@ class _CopyWithImpl_Input_HistoryMeetingsMinOrderBy<TRes>
 
   TRes call({
     Object? audience = _undefined,
+    Object? autoAttendanceWeekday = _undefined,
     Object? color = _undefined,
     Object? groupId = _undefined,
     Object? id = _undefined,
@@ -1623,6 +1813,8 @@ class _CopyWithImpl_Input_HistoryMeetingsMinOrderBy<TRes>
     Input_HistoryMeetingsMinOrderBy._({
       ..._instance._$data,
       if (audience != _undefined) 'audience': (audience as Enum_OrderBy?),
+      if (autoAttendanceWeekday != _undefined)
+        'autoAttendanceWeekday': (autoAttendanceWeekday as Enum_OrderBy?),
       if (color != _undefined) 'color': (color as Enum_OrderBy?),
       if (groupId != _undefined) 'groupId': (groupId as Enum_OrderBy?),
       if (id != _undefined) 'id': (id as Enum_OrderBy?),
@@ -1642,6 +1834,7 @@ class _CopyWithStubImpl_Input_HistoryMeetingsMinOrderBy<TRes>
 
   call({
     Enum_OrderBy? audience,
+    Enum_OrderBy? autoAttendanceWeekday,
     Enum_OrderBy? color,
     Enum_OrderBy? groupId,
     Enum_OrderBy? id,
@@ -2028,6 +2221,12 @@ class Input_HistoryMeetingsOrderBy {
   factory Input_HistoryMeetingsOrderBy({
     Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
     Enum_OrderBy? audience,
+    Enum_OrderBy? autoAttendanceEndTime,
+    Enum_OrderBy? autoAttendanceRecordsServants,
+    Enum_OrderBy? autoAttendanceStartTime,
+    Enum_OrderBy? autoAttendanceWeekday,
+    Enum_OrderBy? autoCommunionEndTime,
+    Enum_OrderBy? autoCommunionStartTime,
     Enum_OrderBy? color,
     Input_HistoryMeetingDaysAggregateOrderBy? daysAggregate,
     Input_GroupsOrderBy? group,
@@ -2045,6 +2244,18 @@ class Input_HistoryMeetingsOrderBy {
     if (attendanceHistoryAggregate != null)
       r'attendanceHistoryAggregate': attendanceHistoryAggregate,
     if (audience != null) r'audience': audience,
+    if (autoAttendanceEndTime != null)
+      r'autoAttendanceEndTime': autoAttendanceEndTime,
+    if (autoAttendanceRecordsServants != null)
+      r'autoAttendanceRecordsServants': autoAttendanceRecordsServants,
+    if (autoAttendanceStartTime != null)
+      r'autoAttendanceStartTime': autoAttendanceStartTime,
+    if (autoAttendanceWeekday != null)
+      r'autoAttendanceWeekday': autoAttendanceWeekday,
+    if (autoCommunionEndTime != null)
+      r'autoCommunionEndTime': autoCommunionEndTime,
+    if (autoCommunionStartTime != null)
+      r'autoCommunionStartTime': autoCommunionStartTime,
     if (color != null) r'color': color,
     if (daysAggregate != null) r'daysAggregate': daysAggregate,
     if (group != null) r'group': group,
@@ -2078,6 +2289,44 @@ class Input_HistoryMeetingsOrderBy {
       result$data['audience'] = l$audience == null
           ? null
           : fromJson_Enum_OrderBy((l$audience as String));
+    }
+    if (data.containsKey('autoAttendanceEndTime')) {
+      final l$autoAttendanceEndTime = data['autoAttendanceEndTime'];
+      result$data['autoAttendanceEndTime'] = l$autoAttendanceEndTime == null
+          ? null
+          : fromJson_Enum_OrderBy((l$autoAttendanceEndTime as String));
+    }
+    if (data.containsKey('autoAttendanceRecordsServants')) {
+      final l$autoAttendanceRecordsServants =
+          data['autoAttendanceRecordsServants'];
+      result$data['autoAttendanceRecordsServants'] =
+          l$autoAttendanceRecordsServants == null
+          ? null
+          : fromJson_Enum_OrderBy((l$autoAttendanceRecordsServants as String));
+    }
+    if (data.containsKey('autoAttendanceStartTime')) {
+      final l$autoAttendanceStartTime = data['autoAttendanceStartTime'];
+      result$data['autoAttendanceStartTime'] = l$autoAttendanceStartTime == null
+          ? null
+          : fromJson_Enum_OrderBy((l$autoAttendanceStartTime as String));
+    }
+    if (data.containsKey('autoAttendanceWeekday')) {
+      final l$autoAttendanceWeekday = data['autoAttendanceWeekday'];
+      result$data['autoAttendanceWeekday'] = l$autoAttendanceWeekday == null
+          ? null
+          : fromJson_Enum_OrderBy((l$autoAttendanceWeekday as String));
+    }
+    if (data.containsKey('autoCommunionEndTime')) {
+      final l$autoCommunionEndTime = data['autoCommunionEndTime'];
+      result$data['autoCommunionEndTime'] = l$autoCommunionEndTime == null
+          ? null
+          : fromJson_Enum_OrderBy((l$autoCommunionEndTime as String));
+    }
+    if (data.containsKey('autoCommunionStartTime')) {
+      final l$autoCommunionStartTime = data['autoCommunionStartTime'];
+      result$data['autoCommunionStartTime'] = l$autoCommunionStartTime == null
+          ? null
+          : fromJson_Enum_OrderBy((l$autoCommunionStartTime as String));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -2173,6 +2422,24 @@ class Input_HistoryMeetingsOrderBy {
 
   Enum_OrderBy? get audience => (_$data['audience'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get autoAttendanceEndTime =>
+      (_$data['autoAttendanceEndTime'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get autoAttendanceRecordsServants =>
+      (_$data['autoAttendanceRecordsServants'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get autoAttendanceStartTime =>
+      (_$data['autoAttendanceStartTime'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get autoAttendanceWeekday =>
+      (_$data['autoAttendanceWeekday'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get autoCommunionEndTime =>
+      (_$data['autoCommunionEndTime'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get autoCommunionStartTime =>
+      (_$data['autoCommunionStartTime'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
   Input_HistoryMeetingDaysAggregateOrderBy? get daysAggregate =>
@@ -2216,6 +2483,43 @@ class Input_HistoryMeetingsOrderBy {
       result$data['audience'] = l$audience == null
           ? null
           : toJson_Enum_OrderBy(l$audience);
+    }
+    if (_$data.containsKey('autoAttendanceEndTime')) {
+      final l$autoAttendanceEndTime = autoAttendanceEndTime;
+      result$data['autoAttendanceEndTime'] = l$autoAttendanceEndTime == null
+          ? null
+          : toJson_Enum_OrderBy(l$autoAttendanceEndTime);
+    }
+    if (_$data.containsKey('autoAttendanceRecordsServants')) {
+      final l$autoAttendanceRecordsServants = autoAttendanceRecordsServants;
+      result$data['autoAttendanceRecordsServants'] =
+          l$autoAttendanceRecordsServants == null
+          ? null
+          : toJson_Enum_OrderBy(l$autoAttendanceRecordsServants);
+    }
+    if (_$data.containsKey('autoAttendanceStartTime')) {
+      final l$autoAttendanceStartTime = autoAttendanceStartTime;
+      result$data['autoAttendanceStartTime'] = l$autoAttendanceStartTime == null
+          ? null
+          : toJson_Enum_OrderBy(l$autoAttendanceStartTime);
+    }
+    if (_$data.containsKey('autoAttendanceWeekday')) {
+      final l$autoAttendanceWeekday = autoAttendanceWeekday;
+      result$data['autoAttendanceWeekday'] = l$autoAttendanceWeekday == null
+          ? null
+          : toJson_Enum_OrderBy(l$autoAttendanceWeekday);
+    }
+    if (_$data.containsKey('autoCommunionEndTime')) {
+      final l$autoCommunionEndTime = autoCommunionEndTime;
+      result$data['autoCommunionEndTime'] = l$autoCommunionEndTime == null
+          ? null
+          : toJson_Enum_OrderBy(l$autoCommunionEndTime);
+    }
+    if (_$data.containsKey('autoCommunionStartTime')) {
+      final l$autoCommunionStartTime = autoCommunionStartTime;
+      result$data['autoCommunionStartTime'] = l$autoCommunionStartTime == null
+          ? null
+          : toJson_Enum_OrderBy(l$autoCommunionStartTime);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -2314,6 +2618,62 @@ class Input_HistoryMeetingsOrderBy {
       return false;
     }
     if (l$audience != lOther$audience) {
+      return false;
+    }
+    final l$autoAttendanceEndTime = autoAttendanceEndTime;
+    final lOther$autoAttendanceEndTime = other.autoAttendanceEndTime;
+    if (_$data.containsKey('autoAttendanceEndTime') !=
+        other._$data.containsKey('autoAttendanceEndTime')) {
+      return false;
+    }
+    if (l$autoAttendanceEndTime != lOther$autoAttendanceEndTime) {
+      return false;
+    }
+    final l$autoAttendanceRecordsServants = autoAttendanceRecordsServants;
+    final lOther$autoAttendanceRecordsServants =
+        other.autoAttendanceRecordsServants;
+    if (_$data.containsKey('autoAttendanceRecordsServants') !=
+        other._$data.containsKey('autoAttendanceRecordsServants')) {
+      return false;
+    }
+    if (l$autoAttendanceRecordsServants !=
+        lOther$autoAttendanceRecordsServants) {
+      return false;
+    }
+    final l$autoAttendanceStartTime = autoAttendanceStartTime;
+    final lOther$autoAttendanceStartTime = other.autoAttendanceStartTime;
+    if (_$data.containsKey('autoAttendanceStartTime') !=
+        other._$data.containsKey('autoAttendanceStartTime')) {
+      return false;
+    }
+    if (l$autoAttendanceStartTime != lOther$autoAttendanceStartTime) {
+      return false;
+    }
+    final l$autoAttendanceWeekday = autoAttendanceWeekday;
+    final lOther$autoAttendanceWeekday = other.autoAttendanceWeekday;
+    if (_$data.containsKey('autoAttendanceWeekday') !=
+        other._$data.containsKey('autoAttendanceWeekday')) {
+      return false;
+    }
+    if (l$autoAttendanceWeekday != lOther$autoAttendanceWeekday) {
+      return false;
+    }
+    final l$autoCommunionEndTime = autoCommunionEndTime;
+    final lOther$autoCommunionEndTime = other.autoCommunionEndTime;
+    if (_$data.containsKey('autoCommunionEndTime') !=
+        other._$data.containsKey('autoCommunionEndTime')) {
+      return false;
+    }
+    if (l$autoCommunionEndTime != lOther$autoCommunionEndTime) {
+      return false;
+    }
+    final l$autoCommunionStartTime = autoCommunionStartTime;
+    final lOther$autoCommunionStartTime = other.autoCommunionStartTime;
+    if (_$data.containsKey('autoCommunionStartTime') !=
+        other._$data.containsKey('autoCommunionStartTime')) {
+      return false;
+    }
+    if (l$autoCommunionStartTime != lOther$autoCommunionStartTime) {
       return false;
     }
     final l$color = color;
@@ -2434,6 +2794,12 @@ class Input_HistoryMeetingsOrderBy {
   int get hashCode {
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final l$audience = audience;
+    final l$autoAttendanceEndTime = autoAttendanceEndTime;
+    final l$autoAttendanceRecordsServants = autoAttendanceRecordsServants;
+    final l$autoAttendanceStartTime = autoAttendanceStartTime;
+    final l$autoAttendanceWeekday = autoAttendanceWeekday;
+    final l$autoCommunionEndTime = autoCommunionEndTime;
+    final l$autoCommunionStartTime = autoCommunionStartTime;
     final l$color = color;
     final l$daysAggregate = daysAggregate;
     final l$group = group;
@@ -2452,6 +2818,24 @@ class Input_HistoryMeetingsOrderBy {
           ? l$attendanceHistoryAggregate
           : const {},
       _$data.containsKey('audience') ? l$audience : const {},
+      _$data.containsKey('autoAttendanceEndTime')
+          ? l$autoAttendanceEndTime
+          : const {},
+      _$data.containsKey('autoAttendanceRecordsServants')
+          ? l$autoAttendanceRecordsServants
+          : const {},
+      _$data.containsKey('autoAttendanceStartTime')
+          ? l$autoAttendanceStartTime
+          : const {},
+      _$data.containsKey('autoAttendanceWeekday')
+          ? l$autoAttendanceWeekday
+          : const {},
+      _$data.containsKey('autoCommunionEndTime')
+          ? l$autoCommunionEndTime
+          : const {},
+      _$data.containsKey('autoCommunionStartTime')
+          ? l$autoCommunionStartTime
+          : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('daysAggregate') ? l$daysAggregate : const {},
       _$data.containsKey('group') ? l$group : const {},
@@ -2467,38 +2851,4 @@ class Input_HistoryMeetingsOrderBy {
       _$data.containsKey('studyYear') ? l$studyYear : const {},
     ]);
   }
-}
-
-abstract class CopyWith_Input_HistoryMeetingsOrderBy<TRes> {
-  factory CopyWith_Input_HistoryMeetingsOrderBy(
-    Input_HistoryMeetingsOrderBy instance,
-    TRes Function(Input_HistoryMeetingsOrderBy) then,
-  ) = _CopyWithImpl_Input_HistoryMeetingsOrderBy;
-
-  factory CopyWith_Input_HistoryMeetingsOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryMeetingsOrderBy;
-
-  TRes call({
-    Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
-    Enum_OrderBy? audience,
-    Enum_OrderBy? color,
-    Input_HistoryMeetingDaysAggregateOrderBy? daysAggregate,
-    Input_GroupsOrderBy? group,
-    Enum_OrderBy? groupId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? isArchived,
-    Enum_OrderBy? name,
-    Input_ServicesOrderBy? service,
-    Enum_OrderBy? serviceGender,
-    Enum_OrderBy? serviceId,
-    Enum_OrderBy? serviceStudyYear,
-    Enum_OrderBy? showKodasCheckbox,
-    Input_StudyYearsOrderBy? studyYear,
-  });
-  CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
-  get attendanceHistoryAggregate;
-  CopyWith_Input_HistoryMeetingDaysAggregateOrderBy<TRes> get daysAggregate;
-  CopyWith_Input_GroupsOrderBy<TRes> get group;
-  CopyWith_Input_ServicesOrderBy<TRes> get service;
-  CopyWith_Input_StudyYearsOrderBy<TRes> get studyYear;
 }

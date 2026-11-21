@@ -77,6 +77,13 @@ insert_permissions:
         - uid
     comment: ""
 select_permissions:
+  - role: fingerprint_sync
+    permission:
+      columns:
+        - uid
+      filter:
+        user_type:
+          _eq: fingerprint_bot
   - role: user
     permission:
       columns:
@@ -86,6 +93,7 @@ select_permissions:
         - photo_updated_at
         - blurhash
         - uid
+        - user_type
       computed_fields:
         - currentUserCanManageThisUser
       filter:
@@ -152,6 +160,8 @@ update_permissions:
                           _ceq:
                             - $
                             - uid
+        user_type:
+          _eq: human
       check:
         _or:
           - uid:
@@ -159,4 +169,6 @@ update_permissions:
           - _or:
               - *any_user_editable
               - *user_by_uid_editable
+        user_type:
+          _eq: human
     comment: ""

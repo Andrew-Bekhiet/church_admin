@@ -1483,433 +1483,40 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
       CopyWith_Input_StringComparisonExp.stub(_res);
 }
 
-class Input_PersonsGroupsAggregateOrderBy {
-  factory Input_PersonsGroupsAggregateOrderBy({
-    Enum_OrderBy? count,
-    Input_PersonsGroupsMaxOrderBy? max,
-    Input_PersonsGroupsMinOrderBy? min,
-  }) => Input_PersonsGroupsAggregateOrderBy._({
-    if (count != null) r'count': count,
-    if (max != null) r'max': max,
-    if (min != null) r'min': min,
-  });
-
-  Input_PersonsGroupsAggregateOrderBy._(this._$data);
-
-  factory Input_PersonsGroupsAggregateOrderBy.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('count')) {
-      final l$count = data['count'];
-      result$data['count'] = l$count == null
-          ? null
-          : fromJson_Enum_OrderBy((l$count as String));
-    }
-    if (data.containsKey('max')) {
-      final l$max = data['max'];
-      result$data['max'] = l$max == null
-          ? null
-          : Input_PersonsGroupsMaxOrderBy.fromJson(
-              (l$max as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('min')) {
-      final l$min = data['min'];
-      result$data['min'] = l$min == null
-          ? null
-          : Input_PersonsGroupsMinOrderBy.fromJson(
-              (l$min as Map<String, dynamic>),
-            );
-    }
-    return Input_PersonsGroupsAggregateOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
-
-  Input_PersonsGroupsMaxOrderBy? get max =>
-      (_$data['max'] as Input_PersonsGroupsMaxOrderBy?);
-
-  Input_PersonsGroupsMinOrderBy? get min =>
-      (_$data['min'] as Input_PersonsGroupsMinOrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('count')) {
-      final l$count = count;
-      result$data['count'] = l$count == null
-          ? null
-          : toJson_Enum_OrderBy(l$count);
-    }
-    if (_$data.containsKey('max')) {
-      final l$max = max;
-      result$data['max'] = l$max?.toJson();
-    }
-    if (_$data.containsKey('min')) {
-      final l$min = min;
-      result$data['min'] = l$min?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_PersonsGroupsAggregateOrderBy<
-    Input_PersonsGroupsAggregateOrderBy
-  >
-  get copyWith => CopyWith_Input_PersonsGroupsAggregateOrderBy(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_PersonsGroupsAggregateOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$count = count;
-    final lOther$count = other.count;
-    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
-      return false;
-    }
-    if (l$count != lOther$count) {
-      return false;
-    }
-    final l$max = max;
-    final lOther$max = other.max;
-    if (_$data.containsKey('max') != other._$data.containsKey('max')) {
-      return false;
-    }
-    if (l$max != lOther$max) {
-      return false;
-    }
-    final l$min = min;
-    final lOther$min = other.min;
-    if (_$data.containsKey('min') != other._$data.containsKey('min')) {
-      return false;
-    }
-    if (l$min != lOther$min) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$count = count;
-    final l$max = max;
-    final l$min = min;
-    return Object.hashAll([
-      _$data.containsKey('count') ? l$count : const {},
-      _$data.containsKey('max') ? l$max : const {},
-      _$data.containsKey('min') ? l$min : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_PersonsGroupsAggregateOrderBy<TRes> {
-  factory CopyWith_Input_PersonsGroupsAggregateOrderBy(
-    Input_PersonsGroupsAggregateOrderBy instance,
-    TRes Function(Input_PersonsGroupsAggregateOrderBy) then,
-  ) = _CopyWithImpl_Input_PersonsGroupsAggregateOrderBy;
-
-  factory CopyWith_Input_PersonsGroupsAggregateOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonsGroupsAggregateOrderBy;
-
-  TRes call({
-    Enum_OrderBy? count,
-    Input_PersonsGroupsMaxOrderBy? max,
-    Input_PersonsGroupsMinOrderBy? min,
-  });
-  CopyWith_Input_PersonsGroupsMaxOrderBy<TRes> get max;
-  CopyWith_Input_PersonsGroupsMinOrderBy<TRes> get min;
-}
-
-class _CopyWithImpl_Input_PersonsGroupsAggregateOrderBy<TRes>
-    implements CopyWith_Input_PersonsGroupsAggregateOrderBy<TRes> {
-  _CopyWithImpl_Input_PersonsGroupsAggregateOrderBy(this._instance, this._then);
-
-  final Input_PersonsGroupsAggregateOrderBy _instance;
-
-  final TRes Function(Input_PersonsGroupsAggregateOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? count = _undefined,
-    Object? max = _undefined,
-    Object? min = _undefined,
-  }) => _then(
-    Input_PersonsGroupsAggregateOrderBy._({
-      ..._instance._$data,
-      if (count != _undefined) 'count': (count as Enum_OrderBy?),
-      if (max != _undefined) 'max': (max as Input_PersonsGroupsMaxOrderBy?),
-      if (min != _undefined) 'min': (min as Input_PersonsGroupsMinOrderBy?),
-    }),
-  );
-
-  CopyWith_Input_PersonsGroupsMaxOrderBy<TRes> get max {
-    final local$max = _instance.max;
-    return local$max == null
-        ? CopyWith_Input_PersonsGroupsMaxOrderBy.stub(_then(_instance))
-        : CopyWith_Input_PersonsGroupsMaxOrderBy(
-            local$max,
-            (e) => call(max: e),
-          );
-  }
-
-  CopyWith_Input_PersonsGroupsMinOrderBy<TRes> get min {
-    final local$min = _instance.min;
-    return local$min == null
-        ? CopyWith_Input_PersonsGroupsMinOrderBy.stub(_then(_instance))
-        : CopyWith_Input_PersonsGroupsMinOrderBy(
-            local$min,
-            (e) => call(min: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_PersonsGroupsAggregateOrderBy<TRes>
-    implements CopyWith_Input_PersonsGroupsAggregateOrderBy<TRes> {
-  _CopyWithStubImpl_Input_PersonsGroupsAggregateOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_OrderBy? count,
-    Input_PersonsGroupsMaxOrderBy? max,
-    Input_PersonsGroupsMinOrderBy? min,
-  }) => _res;
-
-  CopyWith_Input_PersonsGroupsMaxOrderBy<TRes> get max =>
-      CopyWith_Input_PersonsGroupsMaxOrderBy.stub(_res);
-
-  CopyWith_Input_PersonsGroupsMinOrderBy<TRes> get min =>
-      CopyWith_Input_PersonsGroupsMinOrderBy.stub(_res);
-}
-
-class Input_PersonsGroupsArrRelInsertInput {
-  factory Input_PersonsGroupsArrRelInsertInput({
-    required List<Input_PersonsGroupsInsertInput> data,
-    Input_PersonsGroupsOnConflict? onConflict,
-  }) => Input_PersonsGroupsArrRelInsertInput._({
-    r'data': data,
-    if (onConflict != null) r'onConflict': onConflict,
-  });
-
-  Input_PersonsGroupsArrRelInsertInput._(this._$data);
-
-  factory Input_PersonsGroupsArrRelInsertInput.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    final l$data = data['data'];
-    result$data['data'] = (l$data as List<dynamic>)
-        .map(
-          (e) => Input_PersonsGroupsInsertInput.fromJson(
-            (e as Map<String, dynamic>),
-          ),
-        )
-        .toList();
-    if (data.containsKey('onConflict')) {
-      final l$onConflict = data['onConflict'];
-      result$data['onConflict'] = l$onConflict == null
-          ? null
-          : Input_PersonsGroupsOnConflict.fromJson(
-              (l$onConflict as Map<String, dynamic>),
-            );
-    }
-    return Input_PersonsGroupsArrRelInsertInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  List<Input_PersonsGroupsInsertInput> get data =>
-      (_$data['data'] as List<Input_PersonsGroupsInsertInput>);
-
-  Input_PersonsGroupsOnConflict? get onConflict =>
-      (_$data['onConflict'] as Input_PersonsGroupsOnConflict?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$data = data;
-    result$data['data'] = l$data.map((e) => e.toJson()).toList();
-    if (_$data.containsKey('onConflict')) {
-      final l$onConflict = onConflict;
-      result$data['onConflict'] = l$onConflict?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_PersonsGroupsArrRelInsertInput<
-    Input_PersonsGroupsArrRelInsertInput
-  >
-  get copyWith => CopyWith_Input_PersonsGroupsArrRelInsertInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_PersonsGroupsArrRelInsertInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$data = data;
-    final lOther$data = other.data;
-    if (l$data.length != lOther$data.length) {
-      return false;
-    }
-    for (int i = 0; i < l$data.length; i++) {
-      final l$data$entry = l$data[i];
-      final lOther$data$entry = lOther$data[i];
-      if (l$data$entry != lOther$data$entry) {
-        return false;
-      }
-    }
-    final l$onConflict = onConflict;
-    final lOther$onConflict = other.onConflict;
-    if (_$data.containsKey('onConflict') !=
-        other._$data.containsKey('onConflict')) {
-      return false;
-    }
-    if (l$onConflict != lOther$onConflict) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$data = data;
-    final l$onConflict = onConflict;
-    return Object.hashAll([
-      Object.hashAll(l$data.map((v) => v)),
-      _$data.containsKey('onConflict') ? l$onConflict : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_PersonsGroupsArrRelInsertInput<TRes> {
-  factory CopyWith_Input_PersonsGroupsArrRelInsertInput(
-    Input_PersonsGroupsArrRelInsertInput instance,
-    TRes Function(Input_PersonsGroupsArrRelInsertInput) then,
-  ) = _CopyWithImpl_Input_PersonsGroupsArrRelInsertInput;
-
-  factory CopyWith_Input_PersonsGroupsArrRelInsertInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonsGroupsArrRelInsertInput;
-
-  TRes call({
-    List<Input_PersonsGroupsInsertInput>? data,
-    Input_PersonsGroupsOnConflict? onConflict,
-  });
-  TRes data(
-    Iterable<Input_PersonsGroupsInsertInput> Function(
-      Iterable<
-        CopyWith_Input_PersonsGroupsInsertInput<Input_PersonsGroupsInsertInput>
-      >,
-    )
-    _fn,
-  );
-  CopyWith_Input_PersonsGroupsOnConflict<TRes> get onConflict;
-}
-
-class _CopyWithImpl_Input_PersonsGroupsArrRelInsertInput<TRes>
-    implements CopyWith_Input_PersonsGroupsArrRelInsertInput<TRes> {
-  _CopyWithImpl_Input_PersonsGroupsArrRelInsertInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_PersonsGroupsArrRelInsertInput _instance;
-
-  final TRes Function(Input_PersonsGroupsArrRelInsertInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
-      _then(
-        Input_PersonsGroupsArrRelInsertInput._({
-          ..._instance._$data,
-          if (data != _undefined && data != null)
-            'data': (data as List<Input_PersonsGroupsInsertInput>),
-          if (onConflict != _undefined)
-            'onConflict': (onConflict as Input_PersonsGroupsOnConflict?),
-        }),
-      );
-
-  TRes data(
-    Iterable<Input_PersonsGroupsInsertInput> Function(
-      Iterable<
-        CopyWith_Input_PersonsGroupsInsertInput<Input_PersonsGroupsInsertInput>
-      >,
-    )
-    _fn,
-  ) => call(
-    data: _fn(
-      _instance.data.map(
-        (e) => CopyWith_Input_PersonsGroupsInsertInput(e, (i) => i),
-      ),
-    ).toList(),
-  );
-
-  CopyWith_Input_PersonsGroupsOnConflict<TRes> get onConflict {
-    final local$onConflict = _instance.onConflict;
-    return local$onConflict == null
-        ? CopyWith_Input_PersonsGroupsOnConflict.stub(_then(_instance))
-        : CopyWith_Input_PersonsGroupsOnConflict(
-            local$onConflict,
-            (e) => call(onConflict: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_PersonsGroupsArrRelInsertInput<TRes>
-    implements CopyWith_Input_PersonsGroupsArrRelInsertInput<TRes> {
-  _CopyWithStubImpl_Input_PersonsGroupsArrRelInsertInput(this._res);
-
-  TRes _res;
-
-  call({
-    List<Input_PersonsGroupsInsertInput>? data,
-    Input_PersonsGroupsOnConflict? onConflict,
-  }) => _res;
-
-  data(_fn) => _res;
-
-  CopyWith_Input_PersonsGroupsOnConflict<TRes> get onConflict =>
-      CopyWith_Input_PersonsGroupsOnConflict.stub(_res);
-}
-
-class Input_PersonsGroupsBoolExp {
-  factory Input_PersonsGroupsBoolExp({
-    List<Input_PersonsGroupsBoolExp>? $_and,
-    Input_PersonsGroupsBoolExp? $_not,
-    List<Input_PersonsGroupsBoolExp>? $_or,
-    Input_GroupsBoolExp? group,
-    Input_UuidComparisonExp? groupId,
-    Input_PersonsBoolExp? person,
+class Input_PersonsFingerprintIdsBoolExp {
+  factory Input_PersonsFingerprintIdsBoolExp({
+    List<Input_PersonsFingerprintIdsBoolExp>? $_and,
+    Input_PersonsFingerprintIdsBoolExp? $_not,
+    List<Input_PersonsFingerprintIdsBoolExp>? $_or,
+    Input_TimestamptzComparisonExp? addedAt,
+    Input_UuidComparisonExp? addedBy,
+    Input_AuthUsersDataBoolExp? addedByUser,
+    Input_StringComparisonExp? employeeCode,
+    Input_UuidComparisonExp? id,
     Input_UuidComparisonExp? personId,
-  }) => Input_PersonsGroupsBoolExp._({
+  }) => Input_PersonsFingerprintIdsBoolExp._({
     if ($_and != null) r'_and': $_and,
     if ($_not != null) r'_not': $_not,
     if ($_or != null) r'_or': $_or,
-    if (group != null) r'group': group,
-    if (groupId != null) r'groupId': groupId,
-    if (person != null) r'person': person,
+    if (addedAt != null) r'addedAt': addedAt,
+    if (addedBy != null) r'addedBy': addedBy,
+    if (addedByUser != null) r'addedByUser': addedByUser,
+    if (employeeCode != null) r'employeeCode': employeeCode,
+    if (id != null) r'id': id,
     if (personId != null) r'personId': personId,
   });
 
-  Input_PersonsGroupsBoolExp._(this._$data);
+  Input_PersonsFingerprintIdsBoolExp._(this._$data);
 
-  factory Input_PersonsGroupsBoolExp.fromJson(Map<String, dynamic> data) {
+  factory Input_PersonsFingerprintIdsBoolExp.fromJson(
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('_and')) {
       final l$$_and = data['_and'];
       result$data['_and'] = (l$$_and as List<dynamic>?)
           ?.map(
-            (e) => Input_PersonsGroupsBoolExp.fromJson(
+            (e) => Input_PersonsFingerprintIdsBoolExp.fromJson(
               (e as Map<String, dynamic>),
             ),
           )
@@ -1919,7 +1526,7 @@ class Input_PersonsGroupsBoolExp {
       final l$$_not = data['_not'];
       result$data['_not'] = l$$_not == null
           ? null
-          : Input_PersonsGroupsBoolExp.fromJson(
+          : Input_PersonsFingerprintIdsBoolExp.fromJson(
               (l$$_not as Map<String, dynamic>),
             );
     }
@@ -1927,31 +1534,49 @@ class Input_PersonsGroupsBoolExp {
       final l$$_or = data['_or'];
       result$data['_or'] = (l$$_or as List<dynamic>?)
           ?.map(
-            (e) => Input_PersonsGroupsBoolExp.fromJson(
+            (e) => Input_PersonsFingerprintIdsBoolExp.fromJson(
               (e as Map<String, dynamic>),
             ),
           )
           .toList();
     }
-    if (data.containsKey('group')) {
-      final l$group = data['group'];
-      result$data['group'] = l$group == null
+    if (data.containsKey('addedAt')) {
+      final l$addedAt = data['addedAt'];
+      result$data['addedAt'] = l$addedAt == null
           ? null
-          : Input_GroupsBoolExp.fromJson((l$group as Map<String, dynamic>));
-    }
-    if (data.containsKey('groupId')) {
-      final l$groupId = data['groupId'];
-      result$data['groupId'] = l$groupId == null
-          ? null
-          : Input_UuidComparisonExp.fromJson(
-              (l$groupId as Map<String, dynamic>),
+          : Input_TimestamptzComparisonExp.fromJson(
+              (l$addedAt as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('person')) {
-      final l$person = data['person'];
-      result$data['person'] = l$person == null
+    if (data.containsKey('addedBy')) {
+      final l$addedBy = data['addedBy'];
+      result$data['addedBy'] = l$addedBy == null
           ? null
-          : Input_PersonsBoolExp.fromJson((l$person as Map<String, dynamic>));
+          : Input_UuidComparisonExp.fromJson(
+              (l$addedBy as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('addedByUser')) {
+      final l$addedByUser = data['addedByUser'];
+      result$data['addedByUser'] = l$addedByUser == null
+          ? null
+          : Input_AuthUsersDataBoolExp.fromJson(
+              (l$addedByUser as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('employeeCode')) {
+      final l$employeeCode = data['employeeCode'];
+      result$data['employeeCode'] = l$employeeCode == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$employeeCode as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
     }
     if (data.containsKey('personId')) {
       final l$personId = data['personId'];
@@ -1961,27 +1586,33 @@ class Input_PersonsGroupsBoolExp {
               (l$personId as Map<String, dynamic>),
             );
     }
-    return Input_PersonsGroupsBoolExp._(result$data);
+    return Input_PersonsFingerprintIdsBoolExp._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input_PersonsGroupsBoolExp>? get $_and =>
-      (_$data['_and'] as List<Input_PersonsGroupsBoolExp>?);
+  List<Input_PersonsFingerprintIdsBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_PersonsFingerprintIdsBoolExp>?);
 
-  Input_PersonsGroupsBoolExp? get $_not =>
-      (_$data['_not'] as Input_PersonsGroupsBoolExp?);
+  Input_PersonsFingerprintIdsBoolExp? get $_not =>
+      (_$data['_not'] as Input_PersonsFingerprintIdsBoolExp?);
 
-  List<Input_PersonsGroupsBoolExp>? get $_or =>
-      (_$data['_or'] as List<Input_PersonsGroupsBoolExp>?);
+  List<Input_PersonsFingerprintIdsBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_PersonsFingerprintIdsBoolExp>?);
 
-  Input_GroupsBoolExp? get group => (_$data['group'] as Input_GroupsBoolExp?);
+  Input_TimestamptzComparisonExp? get addedAt =>
+      (_$data['addedAt'] as Input_TimestamptzComparisonExp?);
 
-  Input_UuidComparisonExp? get groupId =>
-      (_$data['groupId'] as Input_UuidComparisonExp?);
+  Input_UuidComparisonExp? get addedBy =>
+      (_$data['addedBy'] as Input_UuidComparisonExp?);
 
-  Input_PersonsBoolExp? get person =>
-      (_$data['person'] as Input_PersonsBoolExp?);
+  Input_AuthUsersDataBoolExp? get addedByUser =>
+      (_$data['addedByUser'] as Input_AuthUsersDataBoolExp?);
+
+  Input_StringComparisonExp? get employeeCode =>
+      (_$data['employeeCode'] as Input_StringComparisonExp?);
+
+  Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
 
   Input_UuidComparisonExp? get personId =>
       (_$data['personId'] as Input_UuidComparisonExp?);
@@ -2000,17 +1631,25 @@ class Input_PersonsGroupsBoolExp {
       final l$$_or = $_or;
       result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('group')) {
-      final l$group = group;
-      result$data['group'] = l$group?.toJson();
+    if (_$data.containsKey('addedAt')) {
+      final l$addedAt = addedAt;
+      result$data['addedAt'] = l$addedAt?.toJson();
     }
-    if (_$data.containsKey('groupId')) {
-      final l$groupId = groupId;
-      result$data['groupId'] = l$groupId?.toJson();
+    if (_$data.containsKey('addedBy')) {
+      final l$addedBy = addedBy;
+      result$data['addedBy'] = l$addedBy?.toJson();
     }
-    if (_$data.containsKey('person')) {
-      final l$person = person;
-      result$data['person'] = l$person?.toJson();
+    if (_$data.containsKey('addedByUser')) {
+      final l$addedByUser = addedByUser;
+      result$data['addedByUser'] = l$addedByUser?.toJson();
+    }
+    if (_$data.containsKey('employeeCode')) {
+      final l$employeeCode = employeeCode;
+      result$data['employeeCode'] = l$employeeCode?.toJson();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id?.toJson();
     }
     if (_$data.containsKey('personId')) {
       final l$personId = personId;
@@ -2019,15 +1658,17 @@ class Input_PersonsGroupsBoolExp {
     return result$data;
   }
 
-  CopyWith_Input_PersonsGroupsBoolExp<Input_PersonsGroupsBoolExp>
-  get copyWith => CopyWith_Input_PersonsGroupsBoolExp(this, (i) => i);
+  CopyWith_Input_PersonsFingerprintIdsBoolExp<
+    Input_PersonsFingerprintIdsBoolExp
+  >
+  get copyWith => CopyWith_Input_PersonsFingerprintIdsBoolExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_PersonsGroupsBoolExp ||
+    if (other is! Input_PersonsFingerprintIdsBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2077,28 +1718,46 @@ class Input_PersonsGroupsBoolExp {
     } else if (l$$_or != lOther$$_or) {
       return false;
     }
-    final l$group = group;
-    final lOther$group = other.group;
-    if (_$data.containsKey('group') != other._$data.containsKey('group')) {
+    final l$addedAt = addedAt;
+    final lOther$addedAt = other.addedAt;
+    if (_$data.containsKey('addedAt') != other._$data.containsKey('addedAt')) {
       return false;
     }
-    if (l$group != lOther$group) {
+    if (l$addedAt != lOther$addedAt) {
       return false;
     }
-    final l$groupId = groupId;
-    final lOther$groupId = other.groupId;
-    if (_$data.containsKey('groupId') != other._$data.containsKey('groupId')) {
+    final l$addedBy = addedBy;
+    final lOther$addedBy = other.addedBy;
+    if (_$data.containsKey('addedBy') != other._$data.containsKey('addedBy')) {
       return false;
     }
-    if (l$groupId != lOther$groupId) {
+    if (l$addedBy != lOther$addedBy) {
       return false;
     }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
+    final l$addedByUser = addedByUser;
+    final lOther$addedByUser = other.addedByUser;
+    if (_$data.containsKey('addedByUser') !=
+        other._$data.containsKey('addedByUser')) {
       return false;
     }
-    if (l$person != lOther$person) {
+    if (l$addedByUser != lOther$addedByUser) {
+      return false;
+    }
+    final l$employeeCode = employeeCode;
+    final lOther$employeeCode = other.employeeCode;
+    if (_$data.containsKey('employeeCode') !=
+        other._$data.containsKey('employeeCode')) {
+      return false;
+    }
+    if (l$employeeCode != lOther$employeeCode) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
       return false;
     }
     final l$personId = personId;
@@ -2118,9 +1777,11 @@ class Input_PersonsGroupsBoolExp {
     final l$$_and = $_and;
     final l$$_not = $_not;
     final l$$_or = $_or;
-    final l$group = group;
-    final l$groupId = groupId;
-    final l$person = person;
+    final l$addedAt = addedAt;
+    final l$addedBy = addedBy;
+    final l$addedByUser = addedByUser;
+    final l$employeeCode = employeeCode;
+    final l$id = id;
     final l$personId = personId;
     return Object.hashAll([
       _$data.containsKey('_and')
@@ -2134,62 +1795,72 @@ class Input_PersonsGroupsBoolExp {
                 ? null
                 : Object.hashAll(l$$_or.map((v) => v))
           : const {},
-      _$data.containsKey('group') ? l$group : const {},
-      _$data.containsKey('groupId') ? l$groupId : const {},
-      _$data.containsKey('person') ? l$person : const {},
+      _$data.containsKey('addedAt') ? l$addedAt : const {},
+      _$data.containsKey('addedBy') ? l$addedBy : const {},
+      _$data.containsKey('addedByUser') ? l$addedByUser : const {},
+      _$data.containsKey('employeeCode') ? l$employeeCode : const {},
+      _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('personId') ? l$personId : const {},
     ]);
   }
 }
 
-abstract class CopyWith_Input_PersonsGroupsBoolExp<TRes> {
-  factory CopyWith_Input_PersonsGroupsBoolExp(
-    Input_PersonsGroupsBoolExp instance,
-    TRes Function(Input_PersonsGroupsBoolExp) then,
-  ) = _CopyWithImpl_Input_PersonsGroupsBoolExp;
+abstract class CopyWith_Input_PersonsFingerprintIdsBoolExp<TRes> {
+  factory CopyWith_Input_PersonsFingerprintIdsBoolExp(
+    Input_PersonsFingerprintIdsBoolExp instance,
+    TRes Function(Input_PersonsFingerprintIdsBoolExp) then,
+  ) = _CopyWithImpl_Input_PersonsFingerprintIdsBoolExp;
 
-  factory CopyWith_Input_PersonsGroupsBoolExp.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonsGroupsBoolExp;
+  factory CopyWith_Input_PersonsFingerprintIdsBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonsFingerprintIdsBoolExp;
 
   TRes call({
-    List<Input_PersonsGroupsBoolExp>? $_and,
-    Input_PersonsGroupsBoolExp? $_not,
-    List<Input_PersonsGroupsBoolExp>? $_or,
-    Input_GroupsBoolExp? group,
-    Input_UuidComparisonExp? groupId,
-    Input_PersonsBoolExp? person,
+    List<Input_PersonsFingerprintIdsBoolExp>? $_and,
+    Input_PersonsFingerprintIdsBoolExp? $_not,
+    List<Input_PersonsFingerprintIdsBoolExp>? $_or,
+    Input_TimestamptzComparisonExp? addedAt,
+    Input_UuidComparisonExp? addedBy,
+    Input_AuthUsersDataBoolExp? addedByUser,
+    Input_StringComparisonExp? employeeCode,
+    Input_UuidComparisonExp? id,
     Input_UuidComparisonExp? personId,
   });
   TRes $_and(
-    Iterable<Input_PersonsGroupsBoolExp>? Function(
+    Iterable<Input_PersonsFingerprintIdsBoolExp>? Function(
       Iterable<
-        CopyWith_Input_PersonsGroupsBoolExp<Input_PersonsGroupsBoolExp>
+        CopyWith_Input_PersonsFingerprintIdsBoolExp<
+          Input_PersonsFingerprintIdsBoolExp
+        >
       >?,
     )
     _fn,
   );
-  CopyWith_Input_PersonsGroupsBoolExp<TRes> get $_not;
+  CopyWith_Input_PersonsFingerprintIdsBoolExp<TRes> get $_not;
   TRes $_or(
-    Iterable<Input_PersonsGroupsBoolExp>? Function(
+    Iterable<Input_PersonsFingerprintIdsBoolExp>? Function(
       Iterable<
-        CopyWith_Input_PersonsGroupsBoolExp<Input_PersonsGroupsBoolExp>
+        CopyWith_Input_PersonsFingerprintIdsBoolExp<
+          Input_PersonsFingerprintIdsBoolExp
+        >
       >?,
     )
     _fn,
   );
-  CopyWith_Input_GroupsBoolExp<TRes> get group;
-  CopyWith_Input_UuidComparisonExp<TRes> get groupId;
-  CopyWith_Input_PersonsBoolExp<TRes> get person;
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get addedAt;
+  CopyWith_Input_UuidComparisonExp<TRes> get addedBy;
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get addedByUser;
+  CopyWith_Input_StringComparisonExp<TRes> get employeeCode;
+  CopyWith_Input_UuidComparisonExp<TRes> get id;
   CopyWith_Input_UuidComparisonExp<TRes> get personId;
 }
 
-class _CopyWithImpl_Input_PersonsGroupsBoolExp<TRes>
-    implements CopyWith_Input_PersonsGroupsBoolExp<TRes> {
-  _CopyWithImpl_Input_PersonsGroupsBoolExp(this._instance, this._then);
+class _CopyWithImpl_Input_PersonsFingerprintIdsBoolExp<TRes>
+    implements CopyWith_Input_PersonsFingerprintIdsBoolExp<TRes> {
+  _CopyWithImpl_Input_PersonsFingerprintIdsBoolExp(this._instance, this._then);
 
-  final Input_PersonsGroupsBoolExp _instance;
+  final Input_PersonsFingerprintIdsBoolExp _instance;
 
-  final TRes Function(Input_PersonsGroupsBoolExp) _then;
+  final TRes Function(Input_PersonsFingerprintIdsBoolExp) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2197,89 +1868,124 @@ class _CopyWithImpl_Input_PersonsGroupsBoolExp<TRes>
     Object? $_and = _undefined,
     Object? $_not = _undefined,
     Object? $_or = _undefined,
-    Object? group = _undefined,
-    Object? groupId = _undefined,
-    Object? person = _undefined,
+    Object? addedAt = _undefined,
+    Object? addedBy = _undefined,
+    Object? addedByUser = _undefined,
+    Object? employeeCode = _undefined,
+    Object? id = _undefined,
     Object? personId = _undefined,
   }) => _then(
-    Input_PersonsGroupsBoolExp._({
+    Input_PersonsFingerprintIdsBoolExp._({
       ..._instance._$data,
       if ($_and != _undefined)
-        '_and': ($_and as List<Input_PersonsGroupsBoolExp>?),
-      if ($_not != _undefined) '_not': ($_not as Input_PersonsGroupsBoolExp?),
+        '_and': ($_and as List<Input_PersonsFingerprintIdsBoolExp>?),
+      if ($_not != _undefined)
+        '_not': ($_not as Input_PersonsFingerprintIdsBoolExp?),
       if ($_or != _undefined)
-        '_or': ($_or as List<Input_PersonsGroupsBoolExp>?),
-      if (group != _undefined) 'group': (group as Input_GroupsBoolExp?),
-      if (groupId != _undefined)
-        'groupId': (groupId as Input_UuidComparisonExp?),
-      if (person != _undefined) 'person': (person as Input_PersonsBoolExp?),
+        '_or': ($_or as List<Input_PersonsFingerprintIdsBoolExp>?),
+      if (addedAt != _undefined)
+        'addedAt': (addedAt as Input_TimestamptzComparisonExp?),
+      if (addedBy != _undefined)
+        'addedBy': (addedBy as Input_UuidComparisonExp?),
+      if (addedByUser != _undefined)
+        'addedByUser': (addedByUser as Input_AuthUsersDataBoolExp?),
+      if (employeeCode != _undefined)
+        'employeeCode': (employeeCode as Input_StringComparisonExp?),
+      if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
       if (personId != _undefined)
         'personId': (personId as Input_UuidComparisonExp?),
     }),
   );
 
   TRes $_and(
-    Iterable<Input_PersonsGroupsBoolExp>? Function(
+    Iterable<Input_PersonsFingerprintIdsBoolExp>? Function(
       Iterable<
-        CopyWith_Input_PersonsGroupsBoolExp<Input_PersonsGroupsBoolExp>
+        CopyWith_Input_PersonsFingerprintIdsBoolExp<
+          Input_PersonsFingerprintIdsBoolExp
+        >
       >?,
     )
     _fn,
   ) => call(
     $_and: _fn(
       _instance.$_and?.map(
-        (e) => CopyWith_Input_PersonsGroupsBoolExp(e, (i) => i),
+        (e) => CopyWith_Input_PersonsFingerprintIdsBoolExp(e, (i) => i),
       ),
     )?.toList(),
   );
 
-  CopyWith_Input_PersonsGroupsBoolExp<TRes> get $_not {
+  CopyWith_Input_PersonsFingerprintIdsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
-        ? CopyWith_Input_PersonsGroupsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_PersonsGroupsBoolExp(
+        ? CopyWith_Input_PersonsFingerprintIdsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_PersonsFingerprintIdsBoolExp(
             local$$_not,
             (e) => call($_not: e),
           );
   }
 
   TRes $_or(
-    Iterable<Input_PersonsGroupsBoolExp>? Function(
+    Iterable<Input_PersonsFingerprintIdsBoolExp>? Function(
       Iterable<
-        CopyWith_Input_PersonsGroupsBoolExp<Input_PersonsGroupsBoolExp>
+        CopyWith_Input_PersonsFingerprintIdsBoolExp<
+          Input_PersonsFingerprintIdsBoolExp
+        >
       >?,
     )
     _fn,
   ) => call(
     $_or: _fn(
       _instance.$_or?.map(
-        (e) => CopyWith_Input_PersonsGroupsBoolExp(e, (i) => i),
+        (e) => CopyWith_Input_PersonsFingerprintIdsBoolExp(e, (i) => i),
       ),
     )?.toList(),
   );
 
-  CopyWith_Input_GroupsBoolExp<TRes> get group {
-    final local$group = _instance.group;
-    return local$group == null
-        ? CopyWith_Input_GroupsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_GroupsBoolExp(local$group, (e) => call(group: e));
-  }
-
-  CopyWith_Input_UuidComparisonExp<TRes> get groupId {
-    final local$groupId = _instance.groupId;
-    return local$groupId == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(
-            local$groupId,
-            (e) => call(groupId: e),
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get addedAt {
+    final local$addedAt = _instance.addedAt;
+    return local$addedAt == null
+        ? CopyWith_Input_TimestamptzComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_TimestamptzComparisonExp(
+            local$addedAt,
+            (e) => call(addedAt: e),
           );
   }
 
-  CopyWith_Input_PersonsBoolExp<TRes> get person {
-    final local$person = _instance.person;
-    return local$person == null
-        ? CopyWith_Input_PersonsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_PersonsBoolExp(local$person, (e) => call(person: e));
+  CopyWith_Input_UuidComparisonExp<TRes> get addedBy {
+    final local$addedBy = _instance.addedBy;
+    return local$addedBy == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$addedBy,
+            (e) => call(addedBy: e),
+          );
+  }
+
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get addedByUser {
+    final local$addedByUser = _instance.addedByUser;
+    return local$addedByUser == null
+        ? CopyWith_Input_AuthUsersDataBoolExp.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersDataBoolExp(
+            local$addedByUser,
+            (e) => call(addedByUser: e),
+          );
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get employeeCode {
+    final local$employeeCode = _instance.employeeCode;
+    return local$employeeCode == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$employeeCode,
+            (e) => call(employeeCode: e),
+          );
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get id {
+    final local$id = _instance.id;
+    return local$id == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(local$id, (e) => call(id: e));
   }
 
   CopyWith_Input_UuidComparisonExp<TRes> get personId {
@@ -2293,80 +1999,78 @@ class _CopyWithImpl_Input_PersonsGroupsBoolExp<TRes>
   }
 }
 
-class _CopyWithStubImpl_Input_PersonsGroupsBoolExp<TRes>
-    implements CopyWith_Input_PersonsGroupsBoolExp<TRes> {
-  _CopyWithStubImpl_Input_PersonsGroupsBoolExp(this._res);
+class _CopyWithStubImpl_Input_PersonsFingerprintIdsBoolExp<TRes>
+    implements CopyWith_Input_PersonsFingerprintIdsBoolExp<TRes> {
+  _CopyWithStubImpl_Input_PersonsFingerprintIdsBoolExp(this._res);
 
   TRes _res;
 
   call({
-    List<Input_PersonsGroupsBoolExp>? $_and,
-    Input_PersonsGroupsBoolExp? $_not,
-    List<Input_PersonsGroupsBoolExp>? $_or,
-    Input_GroupsBoolExp? group,
-    Input_UuidComparisonExp? groupId,
-    Input_PersonsBoolExp? person,
+    List<Input_PersonsFingerprintIdsBoolExp>? $_and,
+    Input_PersonsFingerprintIdsBoolExp? $_not,
+    List<Input_PersonsFingerprintIdsBoolExp>? $_or,
+    Input_TimestamptzComparisonExp? addedAt,
+    Input_UuidComparisonExp? addedBy,
+    Input_AuthUsersDataBoolExp? addedByUser,
+    Input_StringComparisonExp? employeeCode,
+    Input_UuidComparisonExp? id,
     Input_UuidComparisonExp? personId,
   }) => _res;
 
   $_and(_fn) => _res;
 
-  CopyWith_Input_PersonsGroupsBoolExp<TRes> get $_not =>
-      CopyWith_Input_PersonsGroupsBoolExp.stub(_res);
+  CopyWith_Input_PersonsFingerprintIdsBoolExp<TRes> get $_not =>
+      CopyWith_Input_PersonsFingerprintIdsBoolExp.stub(_res);
 
   $_or(_fn) => _res;
 
-  CopyWith_Input_GroupsBoolExp<TRes> get group =>
-      CopyWith_Input_GroupsBoolExp.stub(_res);
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get addedAt =>
+      CopyWith_Input_TimestamptzComparisonExp.stub(_res);
 
-  CopyWith_Input_UuidComparisonExp<TRes> get groupId =>
+  CopyWith_Input_UuidComparisonExp<TRes> get addedBy =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 
-  CopyWith_Input_PersonsBoolExp<TRes> get person =>
-      CopyWith_Input_PersonsBoolExp.stub(_res);
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get addedByUser =>
+      CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get employeeCode =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get id =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
 
   CopyWith_Input_UuidComparisonExp<TRes> get personId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 }
 
-class Input_PersonsGroupsInsertInput {
-  factory Input_PersonsGroupsInsertInput({
-    Input_GroupsObjRelInsertInput? group,
-    UuidValue? groupId,
-    Input_PersonsObjRelInsertInput? person,
+class Input_PersonsFingerprintIdsInsertInput {
+  factory Input_PersonsFingerprintIdsInsertInput({
+    Input_AuthUsersDataObjRelInsertInput? addedByUser,
+    String? employeeCode,
     UuidValue? personId,
-  }) => Input_PersonsGroupsInsertInput._({
-    if (group != null) r'group': group,
-    if (groupId != null) r'groupId': groupId,
-    if (person != null) r'person': person,
+  }) => Input_PersonsFingerprintIdsInsertInput._({
+    if (addedByUser != null) r'addedByUser': addedByUser,
+    if (employeeCode != null) r'employeeCode': employeeCode,
     if (personId != null) r'personId': personId,
   });
 
-  Input_PersonsGroupsInsertInput._(this._$data);
+  Input_PersonsFingerprintIdsInsertInput._(this._$data);
 
-  factory Input_PersonsGroupsInsertInput.fromJson(Map<String, dynamic> data) {
+  factory Input_PersonsFingerprintIdsInsertInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('group')) {
-      final l$group = data['group'];
-      result$data['group'] = l$group == null
+    if (data.containsKey('addedByUser')) {
+      final l$addedByUser = data['addedByUser'];
+      result$data['addedByUser'] = l$addedByUser == null
           ? null
-          : Input_GroupsObjRelInsertInput.fromJson(
-              (l$group as Map<String, dynamic>),
+          : Input_AuthUsersDataObjRelInsertInput.fromJson(
+              (l$addedByUser as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('groupId')) {
-      final l$groupId = data['groupId'];
-      result$data['groupId'] = l$groupId == null
-          ? null
-          : stringToUuid(l$groupId);
-    }
-    if (data.containsKey('person')) {
-      final l$person = data['person'];
-      result$data['person'] = l$person == null
-          ? null
-          : Input_PersonsObjRelInsertInput.fromJson(
-              (l$person as Map<String, dynamic>),
-            );
+    if (data.containsKey('employeeCode')) {
+      final l$employeeCode = data['employeeCode'];
+      result$data['employeeCode'] = (l$employeeCode as String?);
     }
     if (data.containsKey('personId')) {
       final l$personId = data['personId'];
@@ -2374,36 +2078,27 @@ class Input_PersonsGroupsInsertInput {
           ? null
           : stringToUuid(l$personId);
     }
-    return Input_PersonsGroupsInsertInput._(result$data);
+    return Input_PersonsFingerprintIdsInsertInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input_GroupsObjRelInsertInput? get group =>
-      (_$data['group'] as Input_GroupsObjRelInsertInput?);
+  Input_AuthUsersDataObjRelInsertInput? get addedByUser =>
+      (_$data['addedByUser'] as Input_AuthUsersDataObjRelInsertInput?);
 
-  UuidValue? get groupId => (_$data['groupId'] as UuidValue?);
-
-  Input_PersonsObjRelInsertInput? get person =>
-      (_$data['person'] as Input_PersonsObjRelInsertInput?);
+  String? get employeeCode => (_$data['employeeCode'] as String?);
 
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('group')) {
-      final l$group = group;
-      result$data['group'] = l$group?.toJson();
+    if (_$data.containsKey('addedByUser')) {
+      final l$addedByUser = addedByUser;
+      result$data['addedByUser'] = l$addedByUser?.toJson();
     }
-    if (_$data.containsKey('groupId')) {
-      final l$groupId = groupId;
-      result$data['groupId'] = l$groupId == null
-          ? null
-          : uuidToString(l$groupId);
-    }
-    if (_$data.containsKey('person')) {
-      final l$person = person;
-      result$data['person'] = l$person?.toJson();
+    if (_$data.containsKey('employeeCode')) {
+      final l$employeeCode = employeeCode;
+      result$data['employeeCode'] = l$employeeCode;
     }
     if (_$data.containsKey('personId')) {
       final l$personId = personId;
@@ -2414,40 +2109,37 @@ class Input_PersonsGroupsInsertInput {
     return result$data;
   }
 
-  CopyWith_Input_PersonsGroupsInsertInput<Input_PersonsGroupsInsertInput>
-  get copyWith => CopyWith_Input_PersonsGroupsInsertInput(this, (i) => i);
+  CopyWith_Input_PersonsFingerprintIdsInsertInput<
+    Input_PersonsFingerprintIdsInsertInput
+  >
+  get copyWith =>
+      CopyWith_Input_PersonsFingerprintIdsInsertInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_PersonsGroupsInsertInput ||
+    if (other is! Input_PersonsFingerprintIdsInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$group = group;
-    final lOther$group = other.group;
-    if (_$data.containsKey('group') != other._$data.containsKey('group')) {
+    final l$addedByUser = addedByUser;
+    final lOther$addedByUser = other.addedByUser;
+    if (_$data.containsKey('addedByUser') !=
+        other._$data.containsKey('addedByUser')) {
       return false;
     }
-    if (l$group != lOther$group) {
+    if (l$addedByUser != lOther$addedByUser) {
       return false;
     }
-    final l$groupId = groupId;
-    final lOther$groupId = other.groupId;
-    if (_$data.containsKey('groupId') != other._$data.containsKey('groupId')) {
+    final l$employeeCode = employeeCode;
+    final lOther$employeeCode = other.employeeCode;
+    if (_$data.containsKey('employeeCode') !=
+        other._$data.containsKey('employeeCode')) {
       return false;
     }
-    if (l$groupId != lOther$groupId) {
-      return false;
-    }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
-      return false;
-    }
-    if (l$person != lOther$person) {
+    if (l$employeeCode != lOther$employeeCode) {
       return false;
     }
     final l$personId = personId;
@@ -2464,124 +2156,357 @@ class Input_PersonsGroupsInsertInput {
 
   @override
   int get hashCode {
-    final l$group = group;
-    final l$groupId = groupId;
-    final l$person = person;
+    final l$addedByUser = addedByUser;
+    final l$employeeCode = employeeCode;
     final l$personId = personId;
     return Object.hashAll([
-      _$data.containsKey('group') ? l$group : const {},
-      _$data.containsKey('groupId') ? l$groupId : const {},
-      _$data.containsKey('person') ? l$person : const {},
+      _$data.containsKey('addedByUser') ? l$addedByUser : const {},
+      _$data.containsKey('employeeCode') ? l$employeeCode : const {},
       _$data.containsKey('personId') ? l$personId : const {},
     ]);
   }
 }
 
-abstract class CopyWith_Input_PersonsGroupsInsertInput<TRes> {
-  factory CopyWith_Input_PersonsGroupsInsertInput(
-    Input_PersonsGroupsInsertInput instance,
-    TRes Function(Input_PersonsGroupsInsertInput) then,
-  ) = _CopyWithImpl_Input_PersonsGroupsInsertInput;
+abstract class CopyWith_Input_PersonsFingerprintIdsInsertInput<TRes> {
+  factory CopyWith_Input_PersonsFingerprintIdsInsertInput(
+    Input_PersonsFingerprintIdsInsertInput instance,
+    TRes Function(Input_PersonsFingerprintIdsInsertInput) then,
+  ) = _CopyWithImpl_Input_PersonsFingerprintIdsInsertInput;
 
-  factory CopyWith_Input_PersonsGroupsInsertInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonsGroupsInsertInput;
+  factory CopyWith_Input_PersonsFingerprintIdsInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonsFingerprintIdsInsertInput;
 
   TRes call({
-    Input_GroupsObjRelInsertInput? group,
-    UuidValue? groupId,
-    Input_PersonsObjRelInsertInput? person,
+    Input_AuthUsersDataObjRelInsertInput? addedByUser,
+    String? employeeCode,
     UuidValue? personId,
   });
-  CopyWith_Input_GroupsObjRelInsertInput<TRes> get group;
-  CopyWith_Input_PersonsObjRelInsertInput<TRes> get person;
+  CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get addedByUser;
 }
 
-class _CopyWithImpl_Input_PersonsGroupsInsertInput<TRes>
-    implements CopyWith_Input_PersonsGroupsInsertInput<TRes> {
-  _CopyWithImpl_Input_PersonsGroupsInsertInput(this._instance, this._then);
+class _CopyWithImpl_Input_PersonsFingerprintIdsInsertInput<TRes>
+    implements CopyWith_Input_PersonsFingerprintIdsInsertInput<TRes> {
+  _CopyWithImpl_Input_PersonsFingerprintIdsInsertInput(
+    this._instance,
+    this._then,
+  );
 
-  final Input_PersonsGroupsInsertInput _instance;
+  final Input_PersonsFingerprintIdsInsertInput _instance;
 
-  final TRes Function(Input_PersonsGroupsInsertInput) _then;
+  final TRes Function(Input_PersonsFingerprintIdsInsertInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? group = _undefined,
-    Object? groupId = _undefined,
-    Object? person = _undefined,
+    Object? addedByUser = _undefined,
+    Object? employeeCode = _undefined,
     Object? personId = _undefined,
   }) => _then(
-    Input_PersonsGroupsInsertInput._({
+    Input_PersonsFingerprintIdsInsertInput._({
       ..._instance._$data,
-      if (group != _undefined)
-        'group': (group as Input_GroupsObjRelInsertInput?),
-      if (groupId != _undefined) 'groupId': (groupId as UuidValue?),
-      if (person != _undefined)
-        'person': (person as Input_PersonsObjRelInsertInput?),
+      if (addedByUser != _undefined)
+        'addedByUser': (addedByUser as Input_AuthUsersDataObjRelInsertInput?),
+      if (employeeCode != _undefined) 'employeeCode': (employeeCode as String?),
       if (personId != _undefined) 'personId': (personId as UuidValue?),
     }),
   );
 
-  CopyWith_Input_GroupsObjRelInsertInput<TRes> get group {
-    final local$group = _instance.group;
-    return local$group == null
-        ? CopyWith_Input_GroupsObjRelInsertInput.stub(_then(_instance))
-        : CopyWith_Input_GroupsObjRelInsertInput(
-            local$group,
-            (e) => call(group: e),
-          );
-  }
-
-  CopyWith_Input_PersonsObjRelInsertInput<TRes> get person {
-    final local$person = _instance.person;
-    return local$person == null
-        ? CopyWith_Input_PersonsObjRelInsertInput.stub(_then(_instance))
-        : CopyWith_Input_PersonsObjRelInsertInput(
-            local$person,
-            (e) => call(person: e),
+  CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get addedByUser {
+    final local$addedByUser = _instance.addedByUser;
+    return local$addedByUser == null
+        ? CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersDataObjRelInsertInput(
+            local$addedByUser,
+            (e) => call(addedByUser: e),
           );
   }
 }
 
-class _CopyWithStubImpl_Input_PersonsGroupsInsertInput<TRes>
-    implements CopyWith_Input_PersonsGroupsInsertInput<TRes> {
-  _CopyWithStubImpl_Input_PersonsGroupsInsertInput(this._res);
+class _CopyWithStubImpl_Input_PersonsFingerprintIdsInsertInput<TRes>
+    implements CopyWith_Input_PersonsFingerprintIdsInsertInput<TRes> {
+  _CopyWithStubImpl_Input_PersonsFingerprintIdsInsertInput(this._res);
 
   TRes _res;
 
   call({
-    Input_GroupsObjRelInsertInput? group,
-    UuidValue? groupId,
-    Input_PersonsObjRelInsertInput? person,
+    Input_AuthUsersDataObjRelInsertInput? addedByUser,
+    String? employeeCode,
     UuidValue? personId,
   }) => _res;
 
-  CopyWith_Input_GroupsObjRelInsertInput<TRes> get group =>
-      CopyWith_Input_GroupsObjRelInsertInput.stub(_res);
-
-  CopyWith_Input_PersonsObjRelInsertInput<TRes> get person =>
-      CopyWith_Input_PersonsObjRelInsertInput.stub(_res);
+  CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get addedByUser =>
+      CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_res);
 }
 
-class Input_PersonsGroupsMaxOrderBy {
-  factory Input_PersonsGroupsMaxOrderBy({
-    Enum_OrderBy? groupId,
+class Input_PersonsFingerprintIdsOnConflict {
+  factory Input_PersonsFingerprintIdsOnConflict({
+    required Enum_PersonsFingerprintIdsConstraint constraint,
+    List<Enum_PersonsFingerprintIdsUpdateColumn>? updateColumns,
+    Input_PersonsFingerprintIdsBoolExp? where,
+  }) => Input_PersonsFingerprintIdsOnConflict._({
+    r'constraint': constraint,
+    if (updateColumns != null) r'updateColumns': updateColumns,
+    if (where != null) r'where': where,
+  });
+
+  Input_PersonsFingerprintIdsOnConflict._(this._$data);
+
+  factory Input_PersonsFingerprintIdsOnConflict.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$constraint = data['constraint'];
+    result$data['constraint'] = fromJson_Enum_PersonsFingerprintIdsConstraint(
+      (l$constraint as String),
+    );
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map(
+            (e) =>
+                fromJson_Enum_PersonsFingerprintIdsUpdateColumn((e as String)),
+          )
+          .toList();
+    }
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = l$where == null
+          ? null
+          : Input_PersonsFingerprintIdsBoolExp.fromJson(
+              (l$where as Map<String, dynamic>),
+            );
+    }
+    return Input_PersonsFingerprintIdsOnConflict._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_PersonsFingerprintIdsConstraint get constraint =>
+      (_$data['constraint'] as Enum_PersonsFingerprintIdsConstraint);
+
+  List<Enum_PersonsFingerprintIdsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns']
+          as List<Enum_PersonsFingerprintIdsUpdateColumn>?);
+
+  Input_PersonsFingerprintIdsBoolExp? get where =>
+      (_$data['where'] as Input_PersonsFingerprintIdsBoolExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$constraint = constraint;
+    result$data['constraint'] = toJson_Enum_PersonsFingerprintIdsConstraint(
+      l$constraint,
+    );
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_PersonsFingerprintIdsUpdateColumn>)
+              .map((e) => toJson_Enum_PersonsFingerprintIdsUpdateColumn(e))
+              .toList();
+    }
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_PersonsFingerprintIdsOnConflict<
+    Input_PersonsFingerprintIdsOnConflict
+  >
+  get copyWith =>
+      CopyWith_Input_PersonsFingerprintIdsOnConflict(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_PersonsFingerprintIdsOnConflict ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$constraint = constraint;
+    final lOther$constraint = other.constraint;
+    if (l$constraint != lOther$constraint) {
+      return false;
+    }
+    final l$updateColumns = updateColumns;
+    final lOther$updateColumns = other.updateColumns;
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
+      return false;
+    }
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
+        return false;
+      }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$constraint = constraint;
+    final l$updateColumns = updateColumns;
+    final l$where = where;
+    return Object.hashAll([
+      l$constraint,
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+                ? null
+                : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
+      _$data.containsKey('where') ? l$where : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_PersonsFingerprintIdsOnConflict<TRes> {
+  factory CopyWith_Input_PersonsFingerprintIdsOnConflict(
+    Input_PersonsFingerprintIdsOnConflict instance,
+    TRes Function(Input_PersonsFingerprintIdsOnConflict) then,
+  ) = _CopyWithImpl_Input_PersonsFingerprintIdsOnConflict;
+
+  factory CopyWith_Input_PersonsFingerprintIdsOnConflict.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonsFingerprintIdsOnConflict;
+
+  TRes call({
+    Enum_PersonsFingerprintIdsConstraint? constraint,
+    List<Enum_PersonsFingerprintIdsUpdateColumn>? updateColumns,
+    Input_PersonsFingerprintIdsBoolExp? where,
+  });
+  CopyWith_Input_PersonsFingerprintIdsBoolExp<TRes> get where;
+}
+
+class _CopyWithImpl_Input_PersonsFingerprintIdsOnConflict<TRes>
+    implements CopyWith_Input_PersonsFingerprintIdsOnConflict<TRes> {
+  _CopyWithImpl_Input_PersonsFingerprintIdsOnConflict(
+    this._instance,
+    this._then,
+  );
+
+  final Input_PersonsFingerprintIdsOnConflict _instance;
+
+  final TRes Function(Input_PersonsFingerprintIdsOnConflict) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? constraint = _undefined,
+    Object? updateColumns = _undefined,
+    Object? where = _undefined,
+  }) => _then(
+    Input_PersonsFingerprintIdsOnConflict._({
+      ..._instance._$data,
+      if (constraint != _undefined && constraint != null)
+        'constraint': (constraint as Enum_PersonsFingerprintIdsConstraint),
+      if (updateColumns != _undefined && updateColumns != null)
+        'updateColumns':
+            (updateColumns as List<Enum_PersonsFingerprintIdsUpdateColumn>),
+      if (where != _undefined)
+        'where': (where as Input_PersonsFingerprintIdsBoolExp?),
+    }),
+  );
+
+  CopyWith_Input_PersonsFingerprintIdsBoolExp<TRes> get where {
+    final local$where = _instance.where;
+    return local$where == null
+        ? CopyWith_Input_PersonsFingerprintIdsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_PersonsFingerprintIdsBoolExp(
+            local$where,
+            (e) => call(where: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_PersonsFingerprintIdsOnConflict<TRes>
+    implements CopyWith_Input_PersonsFingerprintIdsOnConflict<TRes> {
+  _CopyWithStubImpl_Input_PersonsFingerprintIdsOnConflict(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_PersonsFingerprintIdsConstraint? constraint,
+    List<Enum_PersonsFingerprintIdsUpdateColumn>? updateColumns,
+    Input_PersonsFingerprintIdsBoolExp? where,
+  }) => _res;
+
+  CopyWith_Input_PersonsFingerprintIdsBoolExp<TRes> get where =>
+      CopyWith_Input_PersonsFingerprintIdsBoolExp.stub(_res);
+}
+
+class Input_PersonsFingerprintIdsOrderBy {
+  factory Input_PersonsFingerprintIdsOrderBy({
+    Enum_OrderBy? addedAt,
+    Enum_OrderBy? addedBy,
+    Input_AuthUsersDataOrderBy? addedByUser,
+    Enum_OrderBy? employeeCode,
+    Enum_OrderBy? id,
     Enum_OrderBy? personId,
-  }) => Input_PersonsGroupsMaxOrderBy._({
-    if (groupId != null) r'groupId': groupId,
+  }) => Input_PersonsFingerprintIdsOrderBy._({
+    if (addedAt != null) r'addedAt': addedAt,
+    if (addedBy != null) r'addedBy': addedBy,
+    if (addedByUser != null) r'addedByUser': addedByUser,
+    if (employeeCode != null) r'employeeCode': employeeCode,
+    if (id != null) r'id': id,
     if (personId != null) r'personId': personId,
   });
 
-  Input_PersonsGroupsMaxOrderBy._(this._$data);
+  Input_PersonsFingerprintIdsOrderBy._(this._$data);
 
-  factory Input_PersonsGroupsMaxOrderBy.fromJson(Map<String, dynamic> data) {
+  factory Input_PersonsFingerprintIdsOrderBy.fromJson(
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('groupId')) {
-      final l$groupId = data['groupId'];
-      result$data['groupId'] = l$groupId == null
+    if (data.containsKey('addedAt')) {
+      final l$addedAt = data['addedAt'];
+      result$data['addedAt'] = l$addedAt == null
           ? null
-          : fromJson_Enum_OrderBy((l$groupId as String));
+          : fromJson_Enum_OrderBy((l$addedAt as String));
+    }
+    if (data.containsKey('addedBy')) {
+      final l$addedBy = data['addedBy'];
+      result$data['addedBy'] = l$addedBy == null
+          ? null
+          : fromJson_Enum_OrderBy((l$addedBy as String));
+    }
+    if (data.containsKey('addedByUser')) {
+      final l$addedByUser = data['addedByUser'];
+      result$data['addedByUser'] = l$addedByUser == null
+          ? null
+          : Input_AuthUsersDataOrderBy.fromJson(
+              (l$addedByUser as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('employeeCode')) {
+      final l$employeeCode = data['employeeCode'];
+      result$data['employeeCode'] = l$employeeCode == null
+          ? null
+          : fromJson_Enum_OrderBy((l$employeeCode as String));
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : fromJson_Enum_OrderBy((l$id as String));
     }
     if (data.containsKey('personId')) {
       final l$personId = data['personId'];
@@ -2589,22 +2514,51 @@ class Input_PersonsGroupsMaxOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$personId as String));
     }
-    return Input_PersonsGroupsMaxOrderBy._(result$data);
+    return Input_PersonsFingerprintIdsOrderBy._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Enum_OrderBy? get groupId => (_$data['groupId'] as Enum_OrderBy?);
+  Enum_OrderBy? get addedAt => (_$data['addedAt'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get addedBy => (_$data['addedBy'] as Enum_OrderBy?);
+
+  Input_AuthUsersDataOrderBy? get addedByUser =>
+      (_$data['addedByUser'] as Input_AuthUsersDataOrderBy?);
+
+  Enum_OrderBy? get employeeCode => (_$data['employeeCode'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
 
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('groupId')) {
-      final l$groupId = groupId;
-      result$data['groupId'] = l$groupId == null
+    if (_$data.containsKey('addedAt')) {
+      final l$addedAt = addedAt;
+      result$data['addedAt'] = l$addedAt == null
           ? null
-          : toJson_Enum_OrderBy(l$groupId);
+          : toJson_Enum_OrderBy(l$addedAt);
+    }
+    if (_$data.containsKey('addedBy')) {
+      final l$addedBy = addedBy;
+      result$data['addedBy'] = l$addedBy == null
+          ? null
+          : toJson_Enum_OrderBy(l$addedBy);
+    }
+    if (_$data.containsKey('addedByUser')) {
+      final l$addedByUser = addedByUser;
+      result$data['addedByUser'] = l$addedByUser?.toJson();
+    }
+    if (_$data.containsKey('employeeCode')) {
+      final l$employeeCode = employeeCode;
+      result$data['employeeCode'] = l$employeeCode == null
+          ? null
+          : toJson_Enum_OrderBy(l$employeeCode);
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
     }
     if (_$data.containsKey('personId')) {
       final l$personId = personId;
@@ -2615,24 +2569,60 @@ class Input_PersonsGroupsMaxOrderBy {
     return result$data;
   }
 
-  CopyWith_Input_PersonsGroupsMaxOrderBy<Input_PersonsGroupsMaxOrderBy>
-  get copyWith => CopyWith_Input_PersonsGroupsMaxOrderBy(this, (i) => i);
+  CopyWith_Input_PersonsFingerprintIdsOrderBy<
+    Input_PersonsFingerprintIdsOrderBy
+  >
+  get copyWith => CopyWith_Input_PersonsFingerprintIdsOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_PersonsGroupsMaxOrderBy ||
+    if (other is! Input_PersonsFingerprintIdsOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$groupId = groupId;
-    final lOther$groupId = other.groupId;
-    if (_$data.containsKey('groupId') != other._$data.containsKey('groupId')) {
+    final l$addedAt = addedAt;
+    final lOther$addedAt = other.addedAt;
+    if (_$data.containsKey('addedAt') != other._$data.containsKey('addedAt')) {
       return false;
     }
-    if (l$groupId != lOther$groupId) {
+    if (l$addedAt != lOther$addedAt) {
+      return false;
+    }
+    final l$addedBy = addedBy;
+    final lOther$addedBy = other.addedBy;
+    if (_$data.containsKey('addedBy') != other._$data.containsKey('addedBy')) {
+      return false;
+    }
+    if (l$addedBy != lOther$addedBy) {
+      return false;
+    }
+    final l$addedByUser = addedByUser;
+    final lOther$addedByUser = other.addedByUser;
+    if (_$data.containsKey('addedByUser') !=
+        other._$data.containsKey('addedByUser')) {
+      return false;
+    }
+    if (l$addedByUser != lOther$addedByUser) {
+      return false;
+    }
+    final l$employeeCode = employeeCode;
+    final lOther$employeeCode = other.employeeCode;
+    if (_$data.containsKey('employeeCode') !=
+        other._$data.containsKey('employeeCode')) {
+      return false;
+    }
+    if (l$employeeCode != lOther$employeeCode) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
       return false;
     }
     final l$personId = personId;
@@ -2649,10 +2639,18 @@ class Input_PersonsGroupsMaxOrderBy {
 
   @override
   int get hashCode {
-    final l$groupId = groupId;
+    final l$addedAt = addedAt;
+    final l$addedBy = addedBy;
+    final l$addedByUser = addedByUser;
+    final l$employeeCode = employeeCode;
+    final l$id = id;
     final l$personId = personId;
     return Object.hashAll([
-      _$data.containsKey('groupId') ? l$groupId : const {},
+      _$data.containsKey('addedAt') ? l$addedAt : const {},
+      _$data.containsKey('addedBy') ? l$addedBy : const {},
+      _$data.containsKey('addedByUser') ? l$addedByUser : const {},
+      _$data.containsKey('employeeCode') ? l$employeeCode : const {},
+      _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('personId') ? l$personId : const {},
     ]);
   }
