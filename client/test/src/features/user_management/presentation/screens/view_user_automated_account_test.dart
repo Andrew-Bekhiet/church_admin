@@ -41,9 +41,9 @@ void main() {
   );
   const unapprovedServant = User(
     uid: 'viewed-id',
-    name: 'مينا',
-    email: 'mina@example.com',
-    authId: 'mina-auth-id',
+    name: 'خادم غير مفعل',
+    email: 'servant@example.com',
+    authId: 'servant-auth-id',
     currentUserCanManageThisUser: true,
   );
 
@@ -120,8 +120,7 @@ void main() {
         ),
       ),
     );
-    await tester.pump();
-    await tester.pump();
+    await tester.pumpAndSettle();
   }
 
   testWidgets('the fingerprint bot is presented as an automated account', (
@@ -199,7 +198,7 @@ void main() {
       'code', (tester) async {
     final servantWithoutAccount = User(
       uid: 'viewed-id',
-      name: 'مينا',
+      name: 'خادم بدون حساب',
       invitation: unclaimedInvitation,
       currentUserCanManageThisUser: true,
     );

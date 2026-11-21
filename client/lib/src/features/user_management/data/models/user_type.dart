@@ -1,7 +1,8 @@
-import 'package:collection/collection.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
+@JsonEnum(valueField: 'storedName')
 enum UserType {
   human(storedName: 'human', icon: Symbols.person),
   fingerprintBot(
@@ -33,13 +34,4 @@ enum UserType {
     required this.icon,
     this.automatedAccountDescription,
   });
-
-  static UserType fromStoredName(String? storedName) {
-    if (storedName == null) return UserType.human;
-
-    return values.firstWhereOrNull((type) => type.storedName == storedName) ??
-        UserType.unknownNonHuman;
-  }
-
-  static String toStoredName(UserType type) => type.storedName;
 }

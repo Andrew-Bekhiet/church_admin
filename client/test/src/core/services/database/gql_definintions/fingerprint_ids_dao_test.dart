@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/fingerprint_ids/__generated__/fragments.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/fingerprint_ids/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/fingerprint_ids/__generated__/subscriptions.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/fragments.gql.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,6 +15,19 @@ void main() {
   group('FingerprintIdsDAO', () {
     const personId = '00000000-0000-0000-0000-0000000000e1';
     const fingerprintId = '00000000-0000-0000-0000-0000000000f1';
+
+    final acceptedAdd = Mutation_addPersonFingerprintId(
+      insertPersonsFingerprintIdsOne:
+          Mutation_addPersonFingerprintId_insertPersonsFingerprintIdsOne(
+            id: fingerprintId.toUuid(),
+          ),
+    ).toJson();
+    final confirmedRemoval = Mutation_removePersonFingerprintId(
+      deletePersonsFingerprintIdsByPk:
+          Mutation_removePersonFingerprintId_deletePersonsFingerprintIdsByPk(
+            id: fingerprintId.toUuid(),
+          ),
+    ).toJson();
 
     late BehaviorSubject<bool> connectivity;
 
@@ -48,7 +62,7 @@ void main() {
                 addedByUser: Fragment_User(
                   uid: addedByUid.toUuid(),
                   name: 'بوت البصمة',
-                  userType: 'fingerprint_bot',
+                  userType: UserType.fingerprintBot.storedName,
                 ),
               ),
             ],
@@ -76,31 +90,24 @@ void main() {
     });
 
     test('an add sends the person and the employee code', () async {
-      final link = RecordingGraphQLLink(const {
-        'insertPersonsFingerprintIdsOne': {
-          '__typename': 'PersonsFingerprintIds',
-          'id': fingerprintId,
-        },
-      });
+      final link = RecordingGraphQLLink(acceptedAdd);
 
       await daoOver(
         link,
       ).addEmployeeCode(personId: personId, employeeCode: '1042');
 
-      expect(link.requests.single.variables, {
-        'personId': personId,
-        'employeeCode': '1042',
-      });
+      expect(
+        link.requests.single.variables,
+        Variables_Mutation_addPersonFingerprintId(
+          personId: personId.toUuid(),
+          employeeCode: '1042',
+        ).toJson(),
+      );
     });
 
     test('an add the server accepts completes', () async {
       final dao = daoOver(
-        RecordingGraphQLLink(const {
-          'insertPersonsFingerprintIdsOne': {
-            '__typename': 'PersonsFingerprintIds',
-            'id': fingerprintId,
-          },
-        }),
+        RecordingGraphQLLink(acceptedAdd),
       );
 
       await expectLater(
@@ -145,7 +152,7 @@ void main() {
 
     test('a removal that removed nothing is reported as not removed', () async {
       final dao = daoOver(
-        RecordingGraphQLLink(const {'deletePersonsFingerprintIdsByPk': null}),
+        RecordingGraphQLLink(Mutation_removePersonFingerprintId().toJson()),
       );
 
       await expectLater(
@@ -155,26 +162,21 @@ void main() {
     });
 
     test('a removal sends the id of the fingerprint number', () async {
-      final link = RecordingGraphQLLink(const {
-        'deletePersonsFingerprintIdsByPk': {
-          '__typename': 'PersonsFingerprintIds',
-          'id': fingerprintId,
-        },
-      });
+      final link = RecordingGraphQLLink(confirmedRemoval);
 
       await daoOver(link).remove(fingerprintId);
 
-      expect(link.requests.single.variables, {'id': fingerprintId});
+      expect(
+        link.requests.single.variables,
+        Variables_Mutation_removePersonFingerprintId(
+          id: fingerprintId.toUuid(),
+        ).toJson(),
+      );
     });
 
     test('a removal the server confirms completes', () async {
       final dao = daoOver(
-        RecordingGraphQLLink(const {
-          'deletePersonsFingerprintIdsByPk': {
-            '__typename': 'PersonsFingerprintIds',
-            'id': fingerprintId,
-          },
-        }),
+        RecordingGraphQLLink(confirmedRemoval),
       );
 
       await expectLater(dao.remove(fingerprintId), completes);

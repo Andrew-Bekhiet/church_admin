@@ -48,11 +48,8 @@ class PermissionsSet extends DelegatingSet<UserPermission> with Equatable {
   PermissionsSet.parse(Set<String> permissions)
     : super(
         permissions
-            .map(
-              (p) => UserPermission.values.firstWhereOrNull((e) => e.name == p),
-            )
+            .map(UserPermission.tryParseMigratingLegacyName)
             .nonNulls
-            .map((permission) => permission.currentPermission)
             .toSet(),
       );
 

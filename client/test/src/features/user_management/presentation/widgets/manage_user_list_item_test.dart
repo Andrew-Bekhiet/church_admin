@@ -17,7 +17,7 @@ void main() {
     name: 'بصمة الحضور',
     userType: UserType.fingerprintBot,
   );
-  const servantWithoutAccount = User(uid: 'servant-id', name: 'مينا');
+  const servantWithoutAccount = User(uid: 'servant-id', name: 'خادم بدون حساب');
 
   setUpAll(() => registerFallbackValue(const User(uid: '', name: '')));
 

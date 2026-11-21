@@ -30,7 +30,6 @@ class PersonFingerprintIdsSheet extends StatefulWidget {
 
 class _PersonFingerprintIdsSheetState extends State<PersonFingerprintIdsSheet> {
   final _employeeCodeController = TextEditingController();
-  Object? _unacknowledgedWriteError;
 
   @override
   Widget build(BuildContext context) {
@@ -38,138 +37,152 @@ class _PersonFingerprintIdsSheetState extends State<PersonFingerprintIdsSheet> {
     final textTheme = TextTheme.of(context);
 
     return BlocConsumer<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
-      listenWhen: (previous, current) => previous.write != current.write,
-      listener: (_, state) {
-        _clearFieldIfCodeAdded(state.write);
-        _recordWriteError(state.write);
+      listenWhen: (previous, _) => switch (previous) {
+        PersonFingerprintIdsLoaded(write: FingerprintIdsWriteInProgress()) =>
+          true,
+        _ => false,
       },
-      builder: (context, state) {
-        final isWriting = state.write is FingerprintIdsWriteInProgress;
-        final isEmployeeCodeBlank = _employeeCodeController.text.trim().isEmpty;
-
-        return SingleChildScrollView(
-          padding: EdgeInsetsDirectional.only(
-            start: 20,
-            end: 20,
-            bottom: MediaQuery.viewInsetsOf(context).bottom + 20,
-          ),
-          child: Column(
-            mainAxisSize: .min,
-            crossAxisAlignment: .stretch,
-            spacing: 12,
-            children: [
-              Text(
-                'بصمة الحضور',
-                style: textTheme.headlineSmall?.copyWith(fontWeight: .bold),
+      listener: (_, state) => _clearFieldIfCodeAdded(state),
+      builder: (context, state) => SingleChildScrollView(
+        padding: EdgeInsetsDirectional.only(
+          start: 20,
+          end: 20,
+          bottom: MediaQuery.viewInsetsOf(context).bottom + 20,
+        ),
+        child: Column(
+          mainAxisSize: .min,
+          crossAxisAlignment: .stretch,
+          spacing: 12,
+          children: [
+            Text(
+              'بصمة الحضور',
+              style: textTheme.headlineSmall?.copyWith(fontWeight: .bold),
+            ),
+            Text(
+              'أرقام ${widget.personName} على جهاز البصمة',
+              style: textTheme.bodyLarge?.copyWith(
+                color: colorScheme.onSurfaceVariant,
               ),
-              Text(
-                'أرقام ${widget.personName} على جهاز البصمة',
-                style: textTheme.bodyLarge?.copyWith(
-                  color: colorScheme.onSurfaceVariant,
-                ),
-              ),
-              switch ((state.fingerprintIds, state.loadError)) {
-                (null, null) => const Padding(
+            ),
+            ...switch (state) {
+              PersonFingerprintIdsLoading() => const [
+                Padding(
                   key: PersonFingerprintIdsSheetKeys.loadingIndicator,
                   padding: EdgeInsetsDirectional.symmetric(vertical: 32),
                   child: Center(child: CircularProgressIndicator()),
                 ),
-                (null, _?) => const PersonFingerprintIdsSheetNotice(
+              ],
+              PersonFingerprintIdsFailedToLoad() => const [
+                PersonFingerprintIdsSheetNotice(
                   key: PersonFingerprintIdsSheetKeys.loadErrorNotice,
                   icon: Symbols.cloud_off,
                   title: 'تعذر تحميل أرقام البصمة',
                   detail: 'تأكد من الاتصال بالإنترنت ثم افتح الصفحة مرة أخرى',
                 ),
-                ([], _) => const PersonFingerprintIdsSheetNotice(
-                  key: PersonFingerprintIdsSheetKeys.emptyNotice,
-                  icon: Symbols.fingerprint,
-                  title: 'لا يوجد رقم بصمة بعد',
-                  detail:
-                      'أضف رقم هذا الشخص على جهاز البصمة ليُسجَّل حضوره '
-                      'تلقائيًا كلما وضع إصبعه على الجهاز',
-                ),
-                (final fingerprintIds?, _) => Column(
-                  mainAxisSize: .min,
-                  children: [
-                    for (final (index, fingerprintId)
-                        in fingerprintIds.indexed) ...[
-                      if (index > 0) const Divider(height: 1),
-                      PersonFingerprintIdTile(
-                        fingerprintId: fingerprintId,
-                        onRemove: isWriting
-                            ? null
-                            : () => _removeIfConfirmed(fingerprintId),
-                      ),
-                    ],
-                  ],
-                ),
-              },
-              if (state.fingerprintIds != null) ...[
-                TextField(
-                  key: PersonFingerprintIdsSheetKeys.employeeCodeField,
-                  controller: _employeeCodeController,
-                  enabled: !isWriting,
-                  keyboardType: TextInputType.visiblePassword,
-                  textInputAction: TextInputAction.done,
-                  decoration: InputDecoration(
-                    labelText: 'رقم البصمة الجديد',
-                    prefixIcon: const Icon(Symbols.dialpad),
-                    error: switch (_unacknowledgedWriteError) {
-                      null => null,
-                      FingerprintEmployeeCodeAlreadyLinkedException() =>
-                        const Text(
-                          'هذا الرقم مسجَّل من قبل لهذا الشخص أو لشخص آخر',
-                          key: PersonFingerprintIdsSheetKeys
-                              .employeeCodeAlreadyLinkedMessage,
-                        ),
-                      BlankFingerprintEmployeeCodeException() => const Text(
-                        'اكتب رقم البصمة أولًا',
-                        key: PersonFingerprintIdsSheetKeys
-                            .blankEmployeeCodeMessage,
-                      ),
-                      _ => const Text(
-                        'تعذر حفظ التغيير، تأكد من الاتصال بالإنترنت ثم حاول '
-                        'مرة أخرى',
-                        key: PersonFingerprintIdsSheetKeys.writeFailedMessage,
-                      ),
-                    },
-                  ),
-                  onChanged: (_) =>
-                      setState(() => _unacknowledgedWriteError = null),
-                  onSubmitted: (_) => _addEmployeeCode(),
-                ),
-                FilledButton.icon(
-                  key: PersonFingerprintIdsSheetKeys.addButton,
-                  onPressed: isWriting || isEmployeeCodeBlank
-                      ? null
-                      : _addEmployeeCode,
-                  icon: isWriting
-                      ? const SizedBox.square(
-                          dimension: 18,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : const Icon(Symbols.add),
-                  label: const Text('إضافة الرقم'),
-                ),
               ],
-            ],
-          ),
-        );
-      },
+              PersonFingerprintIdsLoaded(:final fingerprintIds, :final write) =>
+                [
+                  if (fingerprintIds.isEmpty)
+                    const PersonFingerprintIdsSheetNotice(
+                      key: PersonFingerprintIdsSheetKeys.emptyNotice,
+                      icon: Symbols.fingerprint,
+                      title: 'لا يوجد رقم بصمة بعد',
+                      detail:
+                          'أضف رقم هذا الشخص على جهاز البصمة ليُسجَّل حضوره '
+                          'تلقائيًا كلما وضع إصبعه على الجهاز',
+                    )
+                  else
+                    Column(
+                      mainAxisSize: .min,
+                      children: [
+                        for (final (index, fingerprintId)
+                            in fingerprintIds.indexed) ...[
+                          if (index > 0) const Divider(height: 1),
+                          PersonFingerprintIdTile(
+                            fingerprintId: fingerprintId,
+                            onRemove: state.acceptsWrites
+                                ? () => _removeIfConfirmed(fingerprintId)
+                                : null,
+                          ),
+                        ],
+                      ],
+                    ),
+                  TextField(
+                    key: PersonFingerprintIdsSheetKeys.employeeCodeField,
+                    controller: _employeeCodeController,
+                    enabled: state.acceptsWrites,
+                    keyboardType: TextInputType.visiblePassword,
+                    textInputAction: TextInputAction.done,
+                    decoration: InputDecoration(
+                      labelText: 'رقم البصمة الجديد',
+                      prefixIcon: const Icon(Symbols.dialpad),
+                      error: switch (write) {
+                        FingerprintIdsWriteFailed(
+                          error: FingerprintEmployeeCodeAlreadyLinkedException(),
+                        ) =>
+                          const Text(
+                            'هذا الرقم مسجَّل من قبل لهذا الشخص أو لشخص آخر',
+                            key: PersonFingerprintIdsSheetKeys
+                                .employeeCodeAlreadyLinkedMessage,
+                          ),
+                        FingerprintIdsWriteFailed(
+                          error: BlankFingerprintEmployeeCodeException(),
+                        ) =>
+                          const Text(
+                            'اكتب رقم البصمة أولًا',
+                            key: PersonFingerprintIdsSheetKeys
+                                .blankEmployeeCodeMessage,
+                          ),
+                        FingerprintIdsWriteFailed() => const Text(
+                          'تعذر حفظ التغيير، تأكد من الاتصال بالإنترنت ثم '
+                          'حاول مرة أخرى',
+                          key: PersonFingerprintIdsSheetKeys.writeFailedMessage,
+                        ),
+                        NoFingerprintIdsWrite() ||
+                        FingerprintIdsWriteInProgress() ||
+                        FingerprintEmployeeCodeAdded() ||
+                        FingerprintIdRemoved() => null,
+                      },
+                    ),
+                    onChanged: (_) => context
+                        .read<PersonFingerprintIdsCubit>()
+                        .acknowledgeWriteFailureIfAny(),
+                    onSubmitted: (_) => _addEmployeeCode(),
+                  ),
+                  ValueListenableBuilder(
+                    valueListenable: _employeeCodeController,
+                    builder: (context, employeeCode, _) => FilledButton.icon(
+                      key: PersonFingerprintIdsSheetKeys.addButton,
+                      onPressed:
+                          state.acceptsWrites &&
+                              employeeCode.text.trim().isNotEmpty
+                          ? _addEmployeeCode
+                          : null,
+                      icon: switch (write) {
+                        FingerprintIdsWriteInProgress() =>
+                          const SizedBox.square(
+                            dimension: 18,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
+                        _ => const Icon(Symbols.add),
+                      },
+                      label: const Text('إضافة الرقم'),
+                    ),
+                  ),
+                ],
+            },
+          ],
+        ),
+      ),
     );
   }
 
-  void _clearFieldIfCodeAdded(FingerprintIdsWrite write) {
-    if (write is FingerprintEmployeeCodeAdded) _employeeCodeController.clear();
-  }
-
-  void _recordWriteError(FingerprintIdsWrite write) {
-    setState(
-      () => _unacknowledgedWriteError = switch (write) {
-        FingerprintIdsWriteFailed(:final error) => error,
-        _ => null,
-      },
-    );
+  void _clearFieldIfCodeAdded(PersonFingerprintIdsState state) {
+    if (state case PersonFingerprintIdsLoaded(
+      write: FingerprintEmployeeCodeAdded(),
+    )) {
+      _employeeCodeController.clear();
+    }
   }
 
   void _addEmployeeCode() => unawaited(

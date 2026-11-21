@@ -1,34 +1,50 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
-class PersonFingerprintIdsState extends Equatable {
-  final List<PersonFingerprintId>? fingerprintIds;
-  final Object? loadError;
+sealed class PersonFingerprintIdsState with Equatable {
+  bool get acceptsWrites => false;
+
+  @override
+  List<Object?> get props => [];
+
+  const PersonFingerprintIdsState();
+
+  PersonFingerprintIdsLoaded loaded(List<PersonFingerprintId> fingerprintIds) =>
+      PersonFingerprintIdsLoaded(fingerprintIds: fingerprintIds);
+}
+
+final class PersonFingerprintIdsLoading extends PersonFingerprintIdsState {
+  const PersonFingerprintIdsLoading();
+}
+
+final class PersonFingerprintIdsFailedToLoad extends PersonFingerprintIdsState {
+  final Object error;
+
+  @override
+  List<Object?> get props => [error];
+
+  const PersonFingerprintIdsFailedToLoad({required this.error});
+}
+
+final class PersonFingerprintIdsLoaded extends PersonFingerprintIdsState {
+  final List<PersonFingerprintId> fingerprintIds;
   final FingerprintIdsWrite write;
 
   @override
-  List<Object?> get props => [fingerprintIds, loadError, write];
+  bool get acceptsWrites => write is! FingerprintIdsWriteInProgress;
 
-  const PersonFingerprintIdsState({
+  @override
+  List<Object?> get props => [fingerprintIds, write];
+
+  const PersonFingerprintIdsLoaded({
+    required this.fingerprintIds,
     this.write = const NoFingerprintIdsWrite(),
-    this.fingerprintIds,
-    this.loadError,
   });
 
-  PersonFingerprintIdsState loaded(List<PersonFingerprintId> fingerprintIds) =>
-      PersonFingerprintIdsState(fingerprintIds: fingerprintIds, write: write);
+  @override
+  PersonFingerprintIdsLoaded loaded(List<PersonFingerprintId> fingerprintIds) =>
+      PersonFingerprintIdsLoaded(fingerprintIds: fingerprintIds, write: write);
 
-  PersonFingerprintIdsState failedToLoad(Object error) =>
-      PersonFingerprintIdsState(
-        fingerprintIds: fingerprintIds,
-        loadError: error,
-        write: write,
-      );
-
-  PersonFingerprintIdsState withWrite(FingerprintIdsWrite write) =>
-      PersonFingerprintIdsState(
-        fingerprintIds: fingerprintIds,
-        loadError: loadError,
-        write: write,
-      );
+  PersonFingerprintIdsLoaded withWrite(FingerprintIdsWrite write) =>
+      PersonFingerprintIdsLoaded(fingerprintIds: fingerprintIds, write: write);
 }

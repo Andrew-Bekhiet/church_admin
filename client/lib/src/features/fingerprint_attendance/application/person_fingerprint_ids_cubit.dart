@@ -13,56 +13,58 @@ class PersonFingerprintIdsCubit extends Cubit<PersonFingerprintIdsState> {
     FingerprintIdsDAO? fingerprintIdsDao,
   }) : _fingerprintIdsDao =
            fingerprintIdsDao ?? DatabaseService.I.fingerprintIds,
-       super(const PersonFingerprintIdsState()) {
+       super(const PersonFingerprintIdsLoading()) {
     _subscription = _fingerprintIdsDao
         .streamOfPerson(_personId)
         .listen(
           (fingerprintIds) => emit(state.loaded(fingerprintIds)),
-          onError: (Object error) => emit(state.failedToLoad(error)),
+          onError: _reportLoadErrorUnlessFingerprintIdsAreShown,
         );
   }
 
-  Future<void> addEmployeeCode(String employeeCode) async {
-    final trimmedCode = employeeCode.trim();
+  Future<void> addEmployeeCode(String employeeCode) =>
+      _runWriteIfStateAcceptsWrites(() async {
+        final trimmedCode = employeeCode.trim();
 
-    if (trimmedCode.isEmpty) {
-      return _emitAsNewWriteUnlessOneIsInProgress(
-        const FingerprintIdsWriteFailed(
-          BlankFingerprintEmployeeCodeException(),
-        ),
-      );
-    }
+        if (trimmedCode.isEmpty) {
+          throw const BlankFingerprintEmployeeCodeException();
+        }
 
-    await _runWriteUnlessOneIsInProgress(() async {
-      await _fingerprintIdsDao.addEmployeeCode(
-        personId: _personId,
-        employeeCode: trimmedCode,
-      );
+        await _fingerprintIdsDao.addEmployeeCode(
+          personId: _personId,
+          employeeCode: trimmedCode,
+        );
 
-      return FingerprintEmployeeCodeAdded(trimmedCode);
-    });
-  }
+        return FingerprintEmployeeCodeAdded(trimmedCode);
+      });
 
   Future<void> remove(PersonFingerprintId fingerprintId) =>
-      _runWriteUnlessOneIsInProgress(() async {
+      _runWriteIfStateAcceptsWrites(() async {
         await _fingerprintIdsDao.remove(fingerprintId.id);
 
         return FingerprintIdRemoved(fingerprintId.id);
       });
 
-  void _emitAsNewWriteUnlessOneIsInProgress(FingerprintIdsWrite write) {
-    if (state.write is FingerprintIdsWriteInProgress) return;
-
-    emit(state.withWrite(const NoFingerprintIdsWrite()));
-    emit(state.withWrite(write));
+  void acknowledgeWriteFailureIfAny() {
+    if (state case PersonFingerprintIdsLoaded(
+      write: FingerprintIdsWriteFailed(),
+    )) {
+      _emitWriteIfLoaded(const NoFingerprintIdsWrite());
+    }
   }
 
-  Future<void> _runWriteUnlessOneIsInProgress(
+  void _reportLoadErrorUnlessFingerprintIdsAreShown(Object error) {
+    if (state is PersonFingerprintIdsLoaded) return;
+
+    emit(PersonFingerprintIdsFailedToLoad(error: error));
+  }
+
+  Future<void> _runWriteIfStateAcceptsWrites(
     Future<FingerprintIdsWrite> Function() write,
   ) async {
-    if (state.write is FingerprintIdsWriteInProgress) return;
+    if (!state.acceptsWrites) return;
 
-    emit(state.withWrite(const FingerprintIdsWriteInProgress()));
+    _emitWriteIfLoaded(const FingerprintIdsWriteInProgress());
 
     FingerprintIdsWrite finishedWrite;
     try {
@@ -73,7 +75,13 @@ class PersonFingerprintIdsCubit extends Cubit<PersonFingerprintIdsState> {
 
     if (isClosed) return;
 
-    emit(state.withWrite(finishedWrite));
+    _emitWriteIfLoaded(finishedWrite);
+  }
+
+  void _emitWriteIfLoaded(FingerprintIdsWrite write) {
+    if (state case final PersonFingerprintIdsLoaded loaded) {
+      emit(loaded.withWrite(write));
+    }
   }
 
   @override

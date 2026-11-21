@@ -21,8 +21,12 @@ class _MockPersonsDAO extends Mock implements PersonsDAO {}
 class _MockFingerprintIdsDAO extends Mock implements FingerprintIdsDAO {}
 
 void main() {
-  final editableMina = Person(id: 'mina-id', name: 'مينا', userCanEdit: true);
-  final readOnlyMina = Person(id: 'mina-id', name: 'مينا');
+  final editablePerson = Person(
+    id: 'person-id',
+    name: 'اسم الشخص',
+    userCanEdit: true,
+  );
+  final readOnlyPerson = Person(id: 'person-id', name: 'اسم الشخص');
 
   late MockAuthBloc authBloc;
   late _MockPersonsDAO persons;
@@ -98,8 +102,7 @@ void main() {
         ),
       ),
     );
-    await tester.pump();
-    await tester.pump();
+    await tester.pumpAndSettle();
   }
 
   testWidgets(
@@ -107,7 +110,7 @@ void main() {
     (tester) async {
       await pumpPersonViewedBy(
         tester,
-        person: editableMina,
+        person: editablePerson,
         viewerPermissions: {
           UserPermission.approved,
           UserPermission.manageFingerprintIds,
@@ -134,7 +137,7 @@ void main() {
     (tester) async {
       await pumpPersonViewedBy(
         tester,
-        person: editableMina,
+        person: editablePerson,
         viewerPermissions: {
           UserPermission.approved,
           UserPermission.manageFingerprintIds,
@@ -165,7 +168,7 @@ void main() {
     (tester) async {
       await pumpPersonViewedBy(
         tester,
-        person: readOnlyMina,
+        person: readOnlyPerson,
         viewerPermissions: {
           UserPermission.approved,
           UserPermission.manageFingerprintIds,
@@ -182,7 +185,7 @@ void main() {
     (tester) async {
       await pumpPersonViewedBy(
         tester,
-        person: readOnlyMina,
+        person: readOnlyPerson,
         viewerPermissions: {
           UserPermission.approved,
           UserPermission.readAllData,
@@ -201,7 +204,7 @@ void main() {
     (tester) async {
       await pumpPersonViewedBy(
         tester,
-        person: editableMina,
+        person: editablePerson,
         viewerPermissions: {UserPermission.approved},
         fingerprintIds: const [],
       );

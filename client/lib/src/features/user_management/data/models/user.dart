@@ -62,7 +62,8 @@ class User extends ViewableWithIDAndImage
   @QueryableField(label: 'currentUserCanManageThisUser', codeOnly: true)
   final bool currentUserCanManageThisUser;
 
-  @JsonKey(fromJson: UserType.fromStoredName, toJson: UserType.toStoredName)
+  @JsonKey(unknownEnumValue: UserType.unknownNonHuman)
+  @QueryableField(label: 'نوع الحساب', codeOnly: true)
   final UserType userType;
 
   @override
@@ -152,15 +153,6 @@ class UserFields extends _UserFields {
     operators: {...StringOperator.values},
     isCodeOnly: true,
     getValue: (obj) => obj is User ? obj.authId : null,
-  );
-
-  FieldMetadata<String> get userType => FieldMetadata<String>(
-    parentType: User,
-    name: 'userType',
-    label: 'نوع الحساب',
-    operators: {...StringOperator.values},
-    isCodeOnly: true,
-    getValue: (obj) => obj is User ? obj.userType.storedName : null,
   );
 
   FieldMetadata<AggregateData> get permissionsAggregate => FieldMetadata(

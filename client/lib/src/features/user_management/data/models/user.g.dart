@@ -119,6 +119,15 @@ class _UserFields {
     operators: {...BooleanOperator.values},
   );
 
+  final FieldMetadata<UserType> userType = FieldMetadata<UserType>(
+    getValue: (obj) => obj is User ? obj.userType : null,
+    parentType: User,
+    name: 'userType',
+    label: 'نوع الحساب',
+    isCodeOnly: true,
+    operators: {...MultiSelectOperator.values},
+  );
+
   late final List<FieldMetadata<Object>> allFields = [
     uid,
     name,
@@ -129,6 +138,7 @@ class _UserFields {
     lastEdit,
     person,
     currentUserCanManageThisUser,
+    userType,
   ];
 
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
@@ -141,6 +151,7 @@ class _UserFields {
     'lastEdit': lastEdit,
     'person': person,
     'currentUserCanManageThisUser': currentUserCanManageThisUser,
+    'userType': userType,
   };
 }
 
@@ -161,9 +172,13 @@ User _$UserFromJson(Map json) => User(
       [],
   currentUserCanManageThisUser:
       json['currentUserCanManageThisUser'] as bool? ?? false,
-  userType: json['userType'] == null
-      ? UserType.human
-      : UserType.fromStoredName(json['userType'] as String?),
+  userType:
+      $enumDecodeNullable(
+        _$UserTypeEnumMap,
+        json['userType'],
+        unknownValue: UserType.unknownNonHuman,
+      ) ??
+      UserType.human,
   email: json['email'] as String?,
   photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
     json['photoUpdatedAt'],
@@ -223,7 +238,14 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
   'classesHistory': instance.classesHistory?.map((e) => e.toJson()).toList(),
   'groupsHistory': instance.groupsHistory?.map((e) => e.toJson()).toList(),
   'invitation': instance.invitation?.toJson(),
-  'userType': UserType.toStoredName(instance.userType),
+  'userType': _$UserTypeEnumMap[instance.userType]!,
+};
+
+const _$UserTypeEnumMap = {
+  UserType.human: 'human',
+  UserType.fingerprintBot: 'fingerprint_bot',
+  UserType.maintenanceBot: 'maintenance_bot',
+  UserType.unknownNonHuman: 'unknown_non_human',
 };
 
 Value? _$JsonConverterFromJson<Json, Value>(

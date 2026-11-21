@@ -33,6 +33,11 @@ class ManageUsersGroupKindIcon extends StatelessWidget {
         colors.surfaceContainerHighest,
         colors.onSurfaceVariant,
       ),
+      UserAdminGroupKind.automatedAccounts => (
+        Symbols.smart_toy,
+        colors.surfaceContainerHighest,
+        colors.onSurfaceVariant,
+      ),
     };
 
     return DecoratedBox(

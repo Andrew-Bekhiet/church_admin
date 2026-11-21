@@ -12,22 +12,22 @@ void main() {
   testWidgets('the add button can be scrolled into reach when the numbers and '
       'the form are taller than the screen', (tester) async {
     const shortPhoneWithKeyboardOpen = Size(320, 200);
-    final mina = Person(id: 'mina-id', name: 'مينا');
+    final person = Person(id: 'person-id', name: 'اسم الشخص');
     final fingerprintIds = [
       for (final code in ['1042', '2077', '3051'])
         PersonFingerprintId(
           id: 'id-of-$code',
           employeeCode: code,
           addedAt: DateTime(2026, 1, 9, 12),
-          addedBy: const User(uid: 'abanoub-id', name: 'أبانوب'),
+          addedBy: const User(uid: 'added-by-id', name: 'مضيف الأرقام'),
         ),
     ];
     final dao = _MockFingerprintIdsDAO();
     when(
-      () => dao.streamOfPerson(mina.id),
+      () => dao.streamOfPerson(person.id),
     ).thenAnswer((_) => Stream.value(fingerprintIds));
     final cubit = PersonFingerprintIdsCubit(
-      personId: mina.id,
+      personId: person.id,
       fingerprintIdsDao: dao,
     );
     addTearDown(cubit.close);
@@ -42,16 +42,16 @@ void main() {
           textDirection: TextDirection.rtl,
           child: BlocProvider.value(
             value: cubit,
-            child: PersonFingerprintIdsSheet(personName: mina.name),
+            child: PersonFingerprintIdsSheet(personName: person.name),
           ),
         ),
       ),
     );
-    await tester.pump();
+    await tester.pumpAndSettle();
     await tester.ensureVisible(
       find.byKey(PersonFingerprintIdsSheetKeys.addButton),
     );
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     expect(tester.takeException(), isNull);
     expect(

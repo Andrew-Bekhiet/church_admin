@@ -12,18 +12,18 @@ import '../../../../material_ui_test_app.dart';
 class _MockFingerprintIdsDAO extends Mock implements FingerprintIdsDAO {}
 
 void main() {
-  final mina = Person(id: 'mina-id', name: 'مينا');
+  final person = Person(id: 'person-id', name: 'اسم الشخص');
   final oldFingerprintId = PersonFingerprintId(
     id: 'old-code-id',
     employeeCode: '1042',
     addedAt: DateTime(2025, 3, 14, 12),
-    addedBy: const User(uid: 'abanoub-id', name: 'أبانوب'),
+    addedBy: const User(uid: 'old-code-adder-id', name: 'مضيف الرقم القديم'),
   );
   final newFingerprintId = PersonFingerprintId(
     id: 'new-code-id',
     employeeCode: '2077',
     addedAt: DateTime(2026, 1, 9, 12),
-    addedBy: const User(uid: 'kirollos-id', name: 'كيرلس'),
+    addedBy: const User(uid: 'new-code-adder-id', name: 'مضيف الرقم الجديد'),
   );
 
   late _MockFingerprintIdsDAO dao;
@@ -39,13 +39,13 @@ void main() {
     when(() => dao.remove(any())).thenAnswer((_) async {});
   });
 
-  Future<void> pumpSheetShowing(
+  Future<void> pumpSheetWhileLoading(
     WidgetTester tester,
     Stream<List<PersonFingerprintId>> fingerprintIds,
   ) async {
-    when(() => dao.streamOfPerson(mina.id)).thenAnswer((_) => fingerprintIds);
+    when(() => dao.streamOfPerson(person.id)).thenAnswer((_) => fingerprintIds);
     final cubit = PersonFingerprintIdsCubit(
-      personId: mina.id,
+      personId: person.id,
       fingerprintIdsDao: dao,
     );
     addTearDown(cubit.close);
@@ -56,12 +56,19 @@ void main() {
           textDirection: TextDirection.rtl,
           child: BlocProvider.value(
             value: cubit,
-            child: PersonFingerprintIdsSheet(personName: mina.name),
+            child: PersonFingerprintIdsSheet(personName: person.name),
           ),
         ),
       ),
     );
-    await tester.pump();
+  }
+
+  Future<void> pumpSheetShowing(
+    WidgetTester tester,
+    Stream<List<PersonFingerprintId>> fingerprintIds,
+  ) async {
+    await pumpSheetWhileLoading(tester, fingerprintIds);
+    await tester.pumpAndSettle();
   }
 
   Future<void> submitEmployeeCode(WidgetTester tester, String code) async {
@@ -69,9 +76,9 @@ void main() {
       find.byKey(PersonFingerprintIdsSheetKeys.employeeCodeField),
       code,
     );
-    await tester.pump();
+    await tester.pumpAndSettle();
     await tester.tap(find.byKey(PersonFingerprintIdsSheetKeys.addButton));
-    await tester.pump();
+    await tester.pumpAndSettle();
   }
 
   testWidgets('every fingerprint number of the person is listed', (
@@ -146,7 +153,7 @@ void main() {
     final neverLoaded = StreamController<List<PersonFingerprintId>>();
     addTearDown(neverLoaded.close);
 
-    await pumpSheetShowing(tester, neverLoaded.stream);
+    await pumpSheetWhileLoading(tester, neverLoaded.stream);
 
     expect(
       find.byKey(PersonFingerprintIdsSheetKeys.loadingIndicator),
@@ -178,7 +185,7 @@ void main() {
 
     verify(
       () => dao.addEmployeeCode(
-        personId: mina.id,
+        personId: person.id,
         employeeCode: newFingerprintId.employeeCode,
       ),
     );
@@ -200,7 +207,7 @@ void main() {
   ) async {
     when(
       () => dao.addEmployeeCode(
-        personId: mina.id,
+        personId: person.id,
         employeeCode: oldFingerprintId.employeeCode,
       ),
     ).thenThrow(
@@ -226,7 +233,7 @@ void main() {
   ) async {
     when(
       () => dao.addEmployeeCode(
-        personId: mina.id,
+        personId: person.id,
         employeeCode: oldFingerprintId.employeeCode,
       ),
     ).thenThrow(
@@ -250,7 +257,7 @@ void main() {
   ) async {
     when(
       () => dao.addEmployeeCode(
-        personId: mina.id,
+        personId: person.id,
         employeeCode: newFingerprintId.employeeCode,
       ),
     ).thenThrow(Exception('offline'));
@@ -267,7 +274,7 @@ void main() {
   testWidgets('correcting the number dismisses the refusal', (tester) async {
     when(
       () => dao.addEmployeeCode(
-        personId: mina.id,
+        personId: person.id,
         employeeCode: oldFingerprintId.employeeCode,
       ),
     ).thenThrow(
@@ -283,7 +290,7 @@ void main() {
       find.byKey(PersonFingerprintIdsSheetKeys.employeeCodeField),
       newFingerprintId.employeeCode,
     );
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     expect(
       find.byKey(
@@ -302,7 +309,7 @@ void main() {
       find.byKey(PersonFingerprintIdsSheetKeys.employeeCodeField),
       '   ',
     );
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     final addButton = tester.widget<FilledButton>(
       find.byKey(PersonFingerprintIdsSheetKeys.addButton),
@@ -319,7 +326,7 @@ void main() {
       '   ',
     );
     await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     expect(
       find.byKey(PersonFingerprintIdsSheetKeys.blankEmployeeCodeMessage),

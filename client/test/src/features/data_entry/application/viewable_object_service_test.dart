@@ -76,7 +76,7 @@ void main() {
       'hold', () {
     const servant = User(
       uid: 'servant-id',
-      name: 'مينا',
+      name: 'خادم',
       permissions: PermissionsSet.fromSet({
         UserPermission.approved,
         UserPermission.deleteData,

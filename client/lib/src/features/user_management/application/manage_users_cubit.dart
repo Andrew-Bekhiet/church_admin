@@ -30,8 +30,8 @@ class ManageUsersCubit extends Cubit<ManageUsersState> {
           ),
           Filter(
             UserFields().userType,
-            StringOperator.neq,
-            UserType.human.storedName,
+            MultiSelectOperator.noneOf,
+            [UserType.human.storedName],
           ),
         ]),
       ]),

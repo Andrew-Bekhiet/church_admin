@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin_annotations/church_admin_annotations.dart';
+import 'package:collection/collection.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -63,7 +64,20 @@ enum UserPermission implements LabeledEnum {
     icon: Symbols.screenshot_monitor,
   );
 
+  static const Map<UserPermission, UserPermission> _legacyPermissionsRenamedTo =
+      {UserPermission.maintenanceNotifications: UserPermission.appMaintenance};
+
   static UserPermission byName(String value) => values.byName(value);
+
+  static UserPermission? tryParseMigratingLegacyName(
+    String nameStoredOnServer,
+  ) {
+    final stored = values.firstWhereOrNull(
+      (permission) => permission.name == nameStoredOnServer,
+    );
+
+    return _legacyPermissionsRenamedTo[stored] ?? stored;
+  }
 
   @override
   final String label;
@@ -102,14 +116,11 @@ enum UserPermission implements LabeledEnum {
     _ => UserPermissionSection.general,
   };
 
-  UserPermission get currentPermission => switch (this) {
-    UserPermission.maintenanceNotifications => UserPermission.appMaintenance,
-    _ => this,
-  };
-
-  Set<UserPermission> get permissionsFoldedIntoIt => {
-    for (final permission in values)
-      if (permission.currentPermission == currentPermission) permission,
+  Set<String> get namesStoredOnServer => {
+    name,
+    for (final MapEntry(key: legacyPermission, value: renamedTo)
+        in _legacyPermissionsRenamedTo.entries)
+      if (renamedTo == this) legacyPermission.name,
   };
 
   String get subtitle => this != UserPermission.approved

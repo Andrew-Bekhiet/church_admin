@@ -53,9 +53,9 @@ void main() {
     );
     final editedUser = User(
       uid: 'edited-id',
-      name: 'مينا',
+      name: 'الخادم المعدَّل',
       authId: 'edited-auth-id',
-      email: 'mina@example.com',
+      email: 'edited@example.com',
       permissions: PermissionsSet.fromSet(editedUserPermissions),
     );
     final cubit = EditUserCubit(
@@ -231,7 +231,7 @@ void main() {
 
       await tester.ensureVisible(checkbox);
       await tester.tap(checkbox);
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       expect(
         cubit.state.draft.permissions,
