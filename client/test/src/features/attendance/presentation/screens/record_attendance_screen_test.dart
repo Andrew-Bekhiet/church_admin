@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:timeago/timeago.dart';
 
 import '../../../../fakes/fake_logging_service.dart';
 import '../../../../fakes/mock_auth_bloc.dart';
@@ -63,6 +67,7 @@ void main() {
 
   setUpAll(() async {
     await initializeDateFormatting('ar');
+    setLocaleMessages('ar', ArMessages());
     registerFallbackValue(meeting);
     registerFallbackValue(mina);
     registerFallbackValue(const MeetingAnalysisSubject(meeting));
@@ -221,37 +226,91 @@ void main() {
   );
 
   testWidgets(
-    'a meeting that records attendance from fingerprint punches shows when '
-    'the fingerprint sync last reached the app',
+    'a meeting that records attendance from fingerprint punches shows how '
+    'long ago the fingerprint sync last reached the app beside the counts',
     (tester) async {
       final lastSyncedAt = DateTime.utc(2026, 11, 20, 7, 5);
+      final now = lastSyncedAt.add(const Duration(minutes: 3));
       when(
         fingerprintSyncStatus.streamLastSyncedAtOrNullIfNeverSynced,
       ).thenAnswer((_) => Stream.value(lastSyncedAt));
 
-      await openScreenOf(
-        tester,
-        const Meeting(
-          id: 'friday-meeting',
-          name: 'اجتماع الجمعة',
-          audience: MeetingAudience.onlyPersons,
-          isArchived: false,
-          autoAttendanceWeekday: DateTime.friday,
-        ),
-      );
+      await withClock(Clock.fixed(now), () async {
+        await openScreenOf(
+          tester,
+          const Meeting(
+            id: 'friday-meeting',
+            name: 'اجتماع الجمعة',
+            audience: MeetingAudience.onlyPersons,
+            isArchived: false,
+            autoAttendanceWeekday: DateTime.friday,
+          ),
+        );
 
-      expect(
-        tester
-            .widget<Text>(find.byKey(FingerprintLastSyncLineKeys.lastSyncedAt))
-            .data,
-        contains(lastSyncedAt.toLocalArabicWeekdayDateAndTime()),
-      );
+        expect(
+          tester
+              .widget<Text>(
+                find.descendant(
+                  of: find.byKey(AttendanceSummaryBarKeys.self),
+                  matching: find.byKey(
+                    FingerprintLastSyncIndicatorKeys.elapsedSinceLastSync,
+                  ),
+                ),
+              )
+              .data,
+          lastSyncedAt.toArabicElapsedTimeOrNowIfUnderAMinute(now: now),
+        );
+      });
+    },
+  );
+
+  testWidgets(
+    'a fingerprint sync that arrives while the screen is open replaces the '
+    'elapsed time of the previous one',
+    (tester) async {
+      final previousSync = DateTime.utc(2026, 11, 20, 7, 5);
+      final arrivingSync = DateTime.utc(2026, 11, 20, 7, 15);
+      final now = DateTime.utc(2026, 11, 20, 7, 17);
+      final serverLastSyncedAt = StreamController<DateTime?>();
+      addTearDown(serverLastSyncedAt.close);
+      when(
+        fingerprintSyncStatus.streamLastSyncedAtOrNullIfNeverSynced,
+      ).thenAnswer((_) => serverLastSyncedAt.stream);
+
+      await withClock(Clock.fixed(now), () async {
+        serverLastSyncedAt.add(previousSync);
+        await openScreenOf(
+          tester,
+          const Meeting(
+            id: 'friday-meeting',
+            name: 'اجتماع الجمعة',
+            audience: MeetingAudience.onlyPersons,
+            isArchived: false,
+            autoAttendanceWeekday: DateTime.friday,
+          ),
+        );
+
+        serverLastSyncedAt.add(arrivingSync);
+        await tester.pump();
+        await tester.pump();
+
+        expect(
+          tester
+              .widget<Text>(
+                find.byKey(
+                  FingerprintLastSyncIndicatorKeys.elapsedSinceLastSync,
+                ),
+              )
+              .data,
+          arrivingSync.toArabicElapsedTimeOrNowIfUnderAMinute(now: now),
+        );
+      });
     },
   );
 
   testWidgets(
     'a meeting without an automatic attendance schedule shows no fingerprint '
-    'sync line',
+    'sync time',
     (tester) async {
       when(
         fingerprintSyncStatus.streamLastSyncedAtOrNullIfNeverSynced,
@@ -259,7 +318,7 @@ void main() {
 
       await openScreenOf(tester, meeting);
 
-      expect(find.byKey(FingerprintLastSyncLineKeys.self), findsNothing);
+      expect(find.byKey(FingerprintLastSyncIndicatorKeys.self), findsNothing);
     },
   );
 
