@@ -43,7 +43,7 @@ void main() {
 
       expect(
         shownElapsedSinceLastSync(tester),
-        lastSyncedAt.toArabicElapsedTimeOrNowIfUnderAMinute(now: now),
+        'منذ 3 دقائق',
       );
     });
   });
@@ -65,9 +65,7 @@ void main() {
 
       expect(
         shownElapsedSinceLastSync(tester),
-        lastSyncedAt.toArabicElapsedTimeOrNowIfUnderAMinute(
-          now: lastSyncedAt.add(const Duration(minutes: 4)),
-        ),
+        'منذ 4 دقائق',
       );
     });
   });
@@ -85,7 +83,7 @@ void main() {
 
       expect(
         shownElapsedSinceLastSync(tester),
-        newerSync.toArabicElapsedTimeOrNowIfUnderAMinute(now: now),
+        'منذ دقيقتين',
       );
     });
   });
