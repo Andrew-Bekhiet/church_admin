@@ -61,8 +61,7 @@ class Meeting extends ViewableWithID
 
   final int? autoAttendanceWeekday;
 
-  bool get recordsAttendanceFromFingerprintPunches =>
-      autoAttendanceWeekday != null;
+  bool get hasAutoAttendanceSchedule => autoAttendanceWeekday != null;
 
   @override
   String get typeName => AdvancedQueriesMetadata().meeting.name;

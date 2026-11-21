@@ -259,7 +259,7 @@ void main() {
 
       await openScreenOf(tester, meeting);
 
-      expect(find.byType(FingerprintLastSyncLine), findsNothing);
+      expect(find.byKey(FingerprintLastSyncLineKeys.self), findsNothing);
     },
   );
 
@@ -295,7 +295,10 @@ void main() {
         ),
       );
 
-      expect(find.byType(AttendancePersonCard), findsOneWidget);
+      expect(
+        find.byKey(AttendancePersonCardKeys.entry(mina.id, asServant: false)),
+        findsOneWidget,
+      );
     },
   );
 }

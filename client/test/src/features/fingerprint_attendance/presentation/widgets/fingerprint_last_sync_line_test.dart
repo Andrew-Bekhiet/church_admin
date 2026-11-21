@@ -23,7 +23,7 @@ void main() {
   testWidgets('shows the date and time of the last sync', (tester) async {
     final lastSyncedAt = DateTime.utc(2026, 11, 20, 7, 5);
 
-    await pumpLineShowing(tester, FingerprintLastSyncedAt(lastSyncedAt));
+    await pumpLineShowing(tester, FingerprintLastSyncKnown(lastSyncedAt));
 
     expect(
       tester
@@ -34,7 +34,7 @@ void main() {
   });
 
   testWidgets('says the fingerprint device has never synced', (tester) async {
-    await pumpLineShowing(tester, const FingerprintNeverSynced());
+    await pumpLineShowing(tester, const FingerprintLastSyncNever());
 
     expect(find.byKey(FingerprintLastSyncLineKeys.neverSynced), findsOneWidget);
   });

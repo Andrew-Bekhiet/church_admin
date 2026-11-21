@@ -14,8 +14,8 @@ class FingerprintLastSyncCubit extends Cubit<FingerprintLastSyncState> {
             .listen(
               (lastSyncedAt) => emit(
                 lastSyncedAt == null
-                    ? const FingerprintNeverSynced()
-                    : FingerprintLastSyncedAt(lastSyncedAt),
+                    ? const FingerprintLastSyncNever()
+                    : FingerprintLastSyncKnown(lastSyncedAt),
               ),
               onError: (Object error) =>
                   emit(FingerprintLastSyncUnavailable(error)),
