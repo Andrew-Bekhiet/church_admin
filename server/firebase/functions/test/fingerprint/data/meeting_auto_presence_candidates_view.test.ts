@@ -238,6 +238,57 @@ describe("meeting_auto_presence_candidates filtered by a presence's Cairo weekda
     );
   });
 
+  it("returns each presence's own window, and no other, when several presences are ored together", async () => {
+    const morning = await seedScheduledMeeting(
+      { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
+    );
+    const evening = await seedScheduledMeeting(
+      { isoWeekday: FRIDAY, attendance: ["17:00", "19:00"] },
+      morning.serviceId,
+    );
+    const amira = await seedMemberWithEmployeeCode(morning.serviceId);
+    const bishoy = await seedMemberWithEmployeeCode(morning.serviceId);
+
+    const response = await graphqlAs(
+      "fingerprint_sync",
+      `{ historyMeetingAutoPresenceCandidates(where: { _or: [
+           {
+             personId: { _eq: "${amira.personId}" }
+             isoWeekday: { _eq: ${FRIDAY} }
+             windowStartTime: { _lte: "09:30:00" }
+             windowEndTime: { _gt: "09:30:00" }
+           }
+           {
+             personId: { _eq: "${bishoy.personId}" }
+             isoWeekday: { _eq: ${FRIDAY} }
+             windowStartTime: { _lte: "17:30:00" }
+             windowEndTime: { _gt: "17:30:00" }
+           }
+         ] }) { personId meetingId isoWeekday windowStartTime windowEndTime } }`,
+    );
+
+    assert.equal(response.errors, undefined);
+    assert.deepEqual(
+      new Set(response.data!["historyMeetingAutoPresenceCandidates"] as unknown[]),
+      new Set([
+        {
+          personId: amira.personId,
+          meetingId: morning.meetingId,
+          isoWeekday: FRIDAY,
+          windowStartTime: "09:00:00",
+          windowEndTime: "11:00:00",
+        },
+        {
+          personId: bishoy.personId,
+          meetingId: evening.meetingId,
+          isoWeekday: FRIDAY,
+          windowStartTime: "17:00:00",
+          windowEndTime: "19:00:00",
+        },
+      ]),
+    );
+  });
+
   it("matches 08:30 UTC only on the Fridays it is 10:30 in Cairo, either side of both clock changes", async () => {
     const { serviceId } = await seedScheduledMeeting(
       { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },

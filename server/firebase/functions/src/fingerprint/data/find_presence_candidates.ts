@@ -1,5 +1,10 @@
+import { Duration } from "luxon";
 import { cairoWallClockAt } from "../domain/cairo_wall_clock";
-import { PersonPresence, PresenceWithCandidates } from "../domain/presence";
+import {
+  PersonPresence,
+  PresenceCandidate,
+  PresenceWithCandidates,
+} from "../domain/presence";
 import { requestAsFingerprintSync } from "./request_as_fingerprint_sync";
 
 export interface FingerprintBotAndPresencesWithCandidates {
@@ -7,12 +12,53 @@ export interface FingerprintBotAndPresencesWithCandidates {
   presencesWithCandidates: PresenceWithCandidates[];
 }
 
+interface WindowHoldingOnePresenceBoolExp {
+  personId: { _eq: string };
+  isoWeekday: { _eq: number };
+  windowStartTime: { _lte: string };
+  windowEndTime: { _gt: string };
+}
+
+interface CandidateWindowRow extends PresenceCandidate {
+  personId: string;
+  isoWeekday: number;
+  windowStartTime: string;
+  windowEndTime: string;
+}
+
+interface CandidateWindow {
+  candidate: PresenceCandidate;
+  personId: string;
+  isoWeekday: number;
+  startMillisSinceMidnight: number;
+  endMillisSinceMidnight: number;
+}
+
+const FINGERPRINT_BOT_UID_AND_CANDIDATE_WINDOWS_QUERY = `
+  query findFingerprintBotUidAndCandidatesOfEachPresence(
+    $where: HistoryMeetingAutoPresenceCandidatesBoolExp!
+  ) {
+    authUsersData {
+      uid
+    }
+    historyMeetingAutoPresenceCandidates(where: $where) {
+      personId
+      isoWeekday
+      windowStartTime
+      windowEndTime
+      meetingId
+      asServant
+      windowKind
+    }
+  }
+`;
+
 export async function findFingerprintBotUidAndCandidatesOfEachPresence(
   presences: PersonPresence[],
 ): Promise<FingerprintBotAndPresencesWithCandidates> {
   const data = await requestAsFingerprintSync(
-    fingerprintBotAndCandidatesQueryFor(presences.length),
-    cairoWallClockVariablesOf(presences),
+    FINGERPRINT_BOT_UID_AND_CANDIDATE_WINDOWS_QUERY,
+    { where: { _or: oneWindowFilterPerDistinctPersonAndCairoTime(presences) } },
     "findFingerprintBotUidAndCandidatesOfEachPresence",
   );
   const fingerprintBots: { uid: string }[] = data["authUsersData"];
@@ -23,63 +69,83 @@ export async function findFingerprintBotUidAndCandidatesOfEachPresence(
     );
   }
 
+  const candidateWindows = candidateWindowsOf(
+    data["historyMeetingAutoPresenceCandidates"],
+  );
+
   return {
     fingerprintBotUid: fingerprintBots[0].uid,
-    presencesWithCandidates: presences.map((presence, index) => ({
+    presencesWithCandidates: presences.map((presence) => ({
       presence,
-      candidates: data[candidatesAliasOf(index)],
+      candidates: candidatesWhoseWindowHolds(presence, candidateWindows),
     })),
   };
 }
 
-function fingerprintBotAndCandidatesQueryFor(presenceCount: number): string {
-  const presenceIndexes = [...Array(presenceCount).keys()];
-  const variableDefinitions = presenceIndexes.map((index) => `
-        $personId${index}: uuid!
-        $isoWeekday${index}: smallint!
-        $timeOfDay${index}: time!`);
-  const candidatesOfEachPresence = presenceIndexes.map((index) => `
-        ${candidatesAliasOf(index)}: historyMeetingAutoPresenceCandidates(
-          where: {
-            personId: { _eq: $personId${index} }
-            isoWeekday: { _eq: $isoWeekday${index} }
-            windowStartTime: { _lte: $timeOfDay${index} }
-            windowEndTime: { _gt: $timeOfDay${index} }
-          }
-        ) {
-          meetingId
-          asServant
-          windowKind
-        }`);
-
-  return `
-      query findFingerprintBotUidAndCandidatesOfEachPresence(
-        ${variableDefinitions.join("")}
-      ) {
-        authUsersData {
-          uid
-        }
-        ${candidatesOfEachPresence.join("")}
-      }
-    `;
-}
-
-function cairoWallClockVariablesOf(
+function oneWindowFilterPerDistinctPersonAndCairoTime(
   presences: PersonPresence[],
-): Record<string, unknown> {
-  return Object.fromEntries(
-    presences.flatMap((presence, index) => {
-      const { isoWeekday, timeOfDay } = cairoWallClockAt(presence.at);
+): WindowHoldingOnePresenceBoolExp[] {
+  const filtersByPersonAndCairoTime = new Map<
+    string,
+    WindowHoldingOnePresenceBoolExp
+  >();
 
-      return [
-        [`personId${index}`, presence.personId],
-        [`isoWeekday${index}`, isoWeekday],
-        [`timeOfDay${index}`, timeOfDay],
-      ];
-    }),
-  );
+  for (const { personId, at } of presences) {
+    const { isoWeekday, timeOfDay } = cairoWallClockAt(at);
+
+    filtersByPersonAndCairoTime.set(
+      [personId, isoWeekday, timeOfDay].join("|"),
+      {
+        personId: { _eq: personId },
+        isoWeekday: { _eq: isoWeekday },
+        windowStartTime: { _lte: timeOfDay },
+        windowEndTime: { _gt: timeOfDay },
+      },
+    );
+  }
+
+  return [...filtersByPersonAndCairoTime.values()];
 }
 
-function candidatesAliasOf(presenceIndex: number): string {
-  return `candidatesOfPresence${presenceIndex}`;
+function candidateWindowsOf(rows: CandidateWindowRow[]): CandidateWindow[] {
+  return rows.map((row) => ({
+    candidate: {
+      meetingId: row.meetingId,
+      asServant: row.asServant,
+      windowKind: row.windowKind,
+    },
+    personId: row.personId,
+    isoWeekday: row.isoWeekday,
+    startMillisSinceMidnight: millisSinceMidnightAt(row.windowStartTime),
+    endMillisSinceMidnight: millisSinceMidnightAt(row.windowEndTime),
+  }));
+}
+
+function millisSinceMidnightAt(timeOfDay: string): number {
+  const sinceMidnight = Duration.fromISOTime(timeOfDay);
+
+  if (!sinceMidnight.isValid) {
+    throw new RangeError(
+      `Not a time of day: ${sinceMidnight.invalidExplanation}`,
+    );
+  }
+
+  return sinceMidnight.toMillis();
+}
+
+function candidatesWhoseWindowHolds(
+  presence: PersonPresence,
+  candidateWindows: CandidateWindow[],
+): PresenceCandidate[] {
+  const { isoWeekday, timeOfDay } = cairoWallClockAt(presence.at);
+  const presenceMillisSinceMidnight = millisSinceMidnightAt(timeOfDay);
+
+  return candidateWindows
+    .filter((window) =>
+      window.personId === presence.personId &&
+      window.isoWeekday === isoWeekday &&
+      window.startMillisSinceMidnight <= presenceMillisSinceMidnight &&
+      presenceMillisSinceMidnight < window.endMillisSinceMidnight
+    )
+    .map((window) => window.candidate);
 }

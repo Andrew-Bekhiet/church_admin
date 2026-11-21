@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it, mock } from "node:test";
+import axios from "axios";
 import { DateTime } from "luxon";
 import { recordFingerprintPunchesAndMarkSynced } from "../../../src/fingerprint/application/record_fingerprint_punches_and_mark_synced";
 import { cairoWallClockAt } from "../../../src/fingerprint/domain/cairo_wall_clock";
@@ -23,6 +24,7 @@ import {
 
 const FRIDAY = 5;
 const fridayNoonUtc = instant("2026-11-13T12:00:00Z");
+const fridayEveningUtc = instant("2026-11-13T16:00:00Z");
 
 function punch(employeeCode: string, punchedAt: string) {
   return { employeeCode, punchedAt, terminalSerial: "test-terminal" };
@@ -136,6 +138,35 @@ describe("recordFingerprintPunches recording rules", () => {
     );
 
     assert.deepEqual(await attendanceOf(mina.personId), []);
+  });
+
+  it("counts each punch of one request against its own window's start and end", async () => {
+    const { meetingId, serviceId } = await seedScheduledMeeting(
+      { isoWeekday: FRIDAY, communion: ["07:00", "09:00"], attendance: ["09:00", "11:00"] },
+    );
+    const atStart = await seedMemberWithEmployeeCode(serviceId);
+    const inLastSecond = await seedMemberWithEmployeeCode(serviceId);
+    const atEnd = await seedMemberWithEmployeeCode(serviceId);
+
+    await syncPunches(
+      [
+        punch(atStart.employeeCode, "2026-11-13T09:00:00+02:00"),
+        punch(inLastSecond.employeeCode, "2026-11-13T10:59:59+02:00"),
+        punch(atEnd.employeeCode, "2026-11-13T11:00:00+02:00"),
+      ],
+      fridayNoonUtc,
+    );
+
+    assert.deepEqual(
+      (await attendanceOf(atStart.personId)).map((row) => [row.meetingId, row.at]),
+      [[meetingId, "2026-11-13T07:00:00Z"]],
+    );
+    assert.deepEqual(await communionDaysOf(atStart.personId), []);
+    assert.deepEqual(
+      (await attendanceOf(inLastSecond.personId)).map((row) => [row.meetingId, row.at]),
+      [[meetingId, "2026-11-13T08:59:59Z"]],
+    );
+    assert.deepEqual(await attendanceOf(atEnd.personId), []);
   });
 
   it("ignores a punch on another weekday", async () => {
@@ -394,6 +425,64 @@ describe("recordFingerprintPunches recording rules", () => {
         recordedBy: servantUid,
       },
     ]);
+  });
+
+  it("records each person only in the meeting whose window holds their own punch when both are on both rosters", async () => {
+    const morning = await seedScheduledMeeting(
+      { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
+    );
+    const evening = await seedScheduledMeeting(
+      { isoWeekday: FRIDAY, attendance: ["17:00", "19:00"] },
+      morning.serviceId,
+    );
+    const amira = await seedMemberWithEmployeeCode(morning.serviceId);
+    const bishoy = await seedMemberWithEmployeeCode(morning.serviceId);
+
+    await syncPunches(
+      [
+        punch(amira.employeeCode, "2026-11-13T09:30:00+02:00"),
+        punch(bishoy.employeeCode, "2026-11-13T17:30:00+02:00"),
+      ],
+      fridayEveningUtc,
+    );
+
+    assert.deepEqual(
+      (await attendanceOf(amira.personId)).map((row) => [row.meetingId, row.at]),
+      [[morning.meetingId, "2026-11-13T07:30:00Z"]],
+    );
+    assert.deepEqual(
+      (await attendanceOf(bishoy.personId)).map((row) => [row.meetingId, row.at]),
+      [[evening.meetingId, "2026-11-13T15:30:00Z"]],
+    );
+  });
+
+  it("records each of one person's two punches only in the meeting whose window holds it", async () => {
+    const morning = await seedScheduledMeeting(
+      { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
+    );
+    const evening = await seedScheduledMeeting(
+      { isoWeekday: FRIDAY, attendance: ["17:00", "19:00"] },
+      morning.serviceId,
+    );
+    const mina = await seedMemberWithEmployeeCode(morning.serviceId);
+
+    await syncPunches(
+      [
+        punch(mina.employeeCode, "2026-11-13T09:30:00+02:00"),
+        punch(mina.employeeCode, "2026-11-13T17:30:00+02:00"),
+      ],
+      fridayEveningUtc,
+    );
+
+    assert.deepEqual(
+      Object.fromEntries(
+        (await attendanceOf(mina.personId)).map((row) => [row.meetingId, row.at]),
+      ),
+      {
+        [morning.meetingId]: "2026-11-13T07:30:00Z",
+        [evening.meetingId]: "2026-11-13T15:30:00Z",
+      },
+    );
   });
 });
 
@@ -792,6 +881,42 @@ describe("recordFingerprintPunches warnings", () => {
     );
   });
 
+  it("warns once for each copy of the same punch that matches no window", async () => {
+    const { serviceId } = await seedScheduledMeeting(
+      { isoWeekday: FRIDAY, communion: ["07:00", "09:00"], attendance: ["09:00", "11:00"] },
+    );
+    const mina = await seedMemberWithEmployeeCode(serviceId);
+    const samePunch = punch(mina.employeeCode, "2026-11-13T12:30:00+02:00");
+
+    assert.equal(
+      await warningCountWhileSyncing(
+        [samePunch, samePunch],
+        biotimeClockMatchingCairo,
+      ),
+      2,
+    );
+  });
+
+  it("warns once for each copy of the same punch recorded in several meetings", async () => {
+    const first = await seedScheduledMeeting(
+      { isoWeekday: FRIDAY, communion: ["07:00", "09:00"], attendance: ["09:00", "11:00"] },
+    );
+    await seedScheduledMeeting(
+      { isoWeekday: FRIDAY, attendance: ["09:15", "10:00"] },
+      first.serviceId,
+    );
+    const mina = await seedMemberWithEmployeeCode(first.serviceId);
+    const samePunch = punch(mina.employeeCode, "2026-11-13T09:30:00+02:00");
+
+    assert.equal(
+      await warningCountWhileSyncing(
+        [samePunch, samePunch],
+        biotimeClockMatchingCairo,
+      ),
+      2,
+    );
+  });
+
   it("warns about an unlinked employee code", async () => {
     assert.equal(
       await warningCountWhileSyncing(
@@ -847,5 +972,61 @@ describe("recordFingerprintPunches sync status", () => {
     await syncPunches([], instant("2026-11-14T05:00:00Z"));
 
     assert.equal(await lastSyncedAt(), "2026-11-14T05:00:15Z");
+  });
+});
+
+describe("recordFingerprintPunches Hasura requests", () => {
+  async function hasuraOperationsWhileSyncing(punches: unknown[]): Promise<string[]> {
+    const post = mock.method(axios, "post");
+
+    try {
+      await syncPunches(punches, fridayNoonUtc);
+
+      return post.mock.calls.map(
+        (call) => JSON.parse(call.arguments[1] as string).operationName,
+      );
+    } finally {
+      post.mock.restore();
+    }
+  }
+
+  it("sends four requests for a batch of two people's punches", async () => {
+    const { serviceId } = await seedScheduledMeeting(
+      { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
+    );
+    const amira = await seedMemberWithEmployeeCode(serviceId);
+    const bishoy = await seedMemberWithEmployeeCode(serviceId);
+
+    assert.deepEqual(
+      await hasuraOperationsWhileSyncing([
+        punch(amira.employeeCode, "2026-11-13T09:10:00+02:00"),
+        punch(bishoy.employeeCode, "2026-11-13T10:40:00+02:00"),
+      ]),
+      [
+        "findPersonIdsByEmployeeCodes",
+        "findFingerprintBotUidAndCandidatesOfEachPresence",
+        "writePresenceRecords",
+        "markFingerprintSyncedAtUnlessALaterSyncIsRecorded",
+      ],
+    );
+  });
+
+  it("asks for no candidates and writes no presence when no punch of the batch is linked", async () => {
+    assert.deepEqual(
+      await hasuraOperationsWhileSyncing([
+        punch("code-nobody-holds", "2026-11-13T09:30:00+02:00"),
+      ]),
+      [
+        "findPersonIdsByEmployeeCodes",
+        "markFingerprintSyncedAtUnlessALaterSyncIsRecorded",
+      ],
+    );
+  });
+
+  it("only marks the sync time for a batch without punches", async () => {
+    assert.deepEqual(
+      await hasuraOperationsWhileSyncing([]),
+      ["markFingerprintSyncedAtUnlessALaterSyncIsRecorded"],
+    );
   });
 });
