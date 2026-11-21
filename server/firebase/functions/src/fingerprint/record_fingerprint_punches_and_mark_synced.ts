@@ -2,7 +2,7 @@ import { z } from "zod";
 import { driftFromCairoWallClockMs } from "./cairo_wall_clock";
 import { PersonPresence } from "./presence_matching";
 import { findPersonIdsByEmployeeCodes } from "./find_person_ids_by_employee_codes";
-import { markFingerprintSyncedAt } from "./mark_fingerprint_synced_at";
+import { markFingerprintSyncedAtUnlessALaterSyncIsRecorded } from "./mark_fingerprint_synced_at";
 import { recordPresencesInMatchingWindows } from "./record_presences_in_matching_windows";
 
 const MAX_PUNCHES_PER_REQUEST = 500;
@@ -102,7 +102,7 @@ export async function recordFingerprintPunchesAndMarkSynced(
   await recordPresencesInMatchingWindows(presences);
 
   try {
-    await markFingerprintSyncedAt(now);
+    await markFingerprintSyncedAtUnlessALaterSyncIsRecorded(now);
   } catch (e) {
     console.error("Recorded the punches but failed to mark the sync time", e);
   }
