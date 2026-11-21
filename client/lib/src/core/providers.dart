@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/data_export/application/export_operations_storage.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -95,25 +96,7 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
       ),
       link: Link.concat(
         loggingService.loggingLink,
-        AddAuthLink(
-          credentialsStream: ref
-              .watch(authStorageProvider)
-              .getAuthDataFromCache()
-              .asStream()
-              .concatWith([ref.watch(authRepositoryProvider).userChanges])
-              .map(
-                (user) => switch (user) {
-                  AuthUser(:final uid, :final hasuraUserId, :final idToken) =>
-                    AuthLinkCredentials(
-                      uid: uid,
-                      hasuraUserId: hasuraUserId,
-                      idToken: idToken,
-                    ),
-                  null => null,
-                },
-              ),
-          url: ref.watch(secretsServiceProvider).hasuraServer,
-        ),
+        ref.watch(addAuthLinkProvider),
       ),
       cache: GraphQLCache(
         store: ref.watch(graphQLCacheStore),
@@ -124,6 +107,28 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
           .connectivityStream,
     );
   },
+);
+
+final addAuthLinkProvider = Provider<AddAuthLink>(
+  (ref) => AddAuthLink(
+    credentialsStream: ref
+        .watch(authStorageProvider)
+        .getAuthDataFromCache()
+        .asStream()
+        .concatWith([ref.watch(authRepositoryProvider).userChanges])
+        .map(
+          (user) => switch (user) {
+            AuthUser(:final uid, :final hasuraUserId, :final idToken) =>
+              AuthLinkCredentials(
+                uid: uid,
+                hasuraUserId: hasuraUserId,
+                idToken: idToken,
+              ),
+            null => null,
+          },
+        ),
+    url: ref.watch(secretsServiceProvider).hasuraServer,
+  ),
 );
 
 final graphQLCacheStore = Provider<GqlKvStore>((ref) {
@@ -497,6 +502,24 @@ final Provider<UserDataWiper> userDataWiperProvider = Provider<UserDataWiper>(
     final wiper = UserDataWiper(
       userChangesStream: ref.watch(authRepositoryProvider).userChanges,
     )..register(SyncKVStore.clearAllLoaded);
+
+    ref.onDispose(wiper.dispose);
+
+    return wiper;
+  },
+);
+
+final accessChangeCacheWiperProvider = Provider<AccessChangeCacheWiper>(
+  (ref) {
+    final wiper = AccessChangeCacheWiper(
+      userDataStream: ref.watch(authBlocProvider).userDataStream,
+      graphQLCacheStore: ref.watch(graphQLCacheStore),
+      clearsOfOtherAccessScopedCaches: [
+        ref.watch(baseCacheManagerProvider).emptyCache,
+        ref.watch(ExportOperationsStorage.provider).deleteSavedFiles,
+      ],
+      refetchOpenSubscriptions: ref.watch(addAuthLinkProvider).reconnectSocket,
+    );
 
     ref.onDispose(wiper.dispose);
 

@@ -14,9 +14,21 @@ class GqlKvStore extends gql.Store {
       'GQLCacheV$version',
   ];
 
+  static const String _filledUnderAccessKey = '@filledUnderAccess';
+
   final SyncKVStore<Map<String, dynamic>> _storage;
 
+  /// The access of the user whose queries filled this cache, kept inside the
+  /// cache so that clearing one always clears the other.
+  Json? get filledUnderAccess => _storage.get(_filledUnderAccessKey);
+
   GqlKvStore(this._storage);
+
+  Future<void> resetFilledUnder(Json access) async {
+    await _storage.clear();
+    _storage.put(_filledUnderAccessKey, access);
+    await _storage.flush();
+  }
 
   @override
   Map<String, dynamic>? get(String dataId) => _storage.get(dataId);
