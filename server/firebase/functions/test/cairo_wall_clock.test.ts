@@ -89,4 +89,11 @@ describe("driftFromCairoWallClockMs", () => {
       60 * 60 * 1000,
     );
   });
+
+  it("is minus one hour for a server clock an hour behind Cairo time", () => {
+    assert.equal(
+      driftFromCairoWallClockMs("2026-11-13T08:00:00", now),
+      -60 * 60 * 1000,
+    );
+  });
 });
