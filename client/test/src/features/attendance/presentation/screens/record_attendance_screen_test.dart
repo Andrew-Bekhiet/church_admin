@@ -258,7 +258,7 @@ void main() {
                 ),
               )
               .data,
-          lastSyncedAt.toArabicElapsedTimeOrNowIfUnderAMinute(now: now),
+          'منذ 3 دقائق',
         );
       });
     },
@@ -302,7 +302,7 @@ void main() {
                 ),
               )
               .data,
-          arrivingSync.toArabicElapsedTimeOrNowIfUnderAMinute(now: now),
+          'منذ دقيقتين',
         );
       });
     },
