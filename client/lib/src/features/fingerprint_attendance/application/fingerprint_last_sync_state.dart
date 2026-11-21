@@ -11,17 +11,17 @@ class FingerprintLastSyncLoading extends FingerprintLastSyncState {
   const FingerprintLastSyncLoading();
 }
 
-class FingerprintNeverSynced extends FingerprintLastSyncState {
-  const FingerprintNeverSynced();
+class FingerprintLastSyncNever extends FingerprintLastSyncState {
+  const FingerprintLastSyncNever();
 }
 
-class FingerprintLastSyncedAt extends FingerprintLastSyncState {
+class FingerprintLastSyncKnown extends FingerprintLastSyncState {
   final DateTime time;
 
   @override
   List<Object?> get props => [time];
 
-  const FingerprintLastSyncedAt(this.time);
+  const FingerprintLastSyncKnown(this.time);
 }
 
 class FingerprintLastSyncUnavailable extends FingerprintLastSyncState {

@@ -15,11 +15,11 @@ class FingerprintLastSyncLine extends StatelessWidget {
         FingerprintLastSyncLineKeys.loading,
         'آخر مزامنة للبصمة: …',
       ),
-      FingerprintNeverSynced() => (
+      FingerprintLastSyncNever() => (
         FingerprintLastSyncLineKeys.neverSynced,
         'لم تتم مزامنة البصمة حتى الآن',
       ),
-      FingerprintLastSyncedAt(:final time) => (
+      FingerprintLastSyncKnown(:final time) => (
         FingerprintLastSyncLineKeys.lastSyncedAt,
         'آخر مزامنة للبصمة: ${time.toLocalArabicWeekdayDateAndTime()}',
       ),
@@ -30,6 +30,7 @@ class FingerprintLastSyncLine extends StatelessWidget {
     };
 
     return Padding(
+      key: FingerprintLastSyncLineKeys.self,
       padding: const EdgeInsetsDirectional.symmetric(
         horizontal: 16,
         vertical: 6,
@@ -61,6 +62,7 @@ class FingerprintLastSyncLine extends StatelessWidget {
 }
 
 abstract final class FingerprintLastSyncLineKeys extends WidgetKeys {
+  static const Key self = ValueKey((FingerprintLastSyncLineKeys, #self));
   static const Key loading = ValueKey((FingerprintLastSyncLineKeys, #loading));
   static const Key neverSynced = ValueKey(
     (FingerprintLastSyncLineKeys, #neverSynced),
