@@ -27,6 +27,7 @@ class _RecordAttendanceScreenState extends State<RecordAttendanceScreen> {
       providers: [
         BlocProvider.value(value: _cubit),
         BlocProvider.value(value: _kodasCubit),
+        BlocProvider(create: (_) => FingerprintLastSyncCubit()),
       ],
       child: SelectSearchTextOnAttendanceMarked(
         controller: _searchController,

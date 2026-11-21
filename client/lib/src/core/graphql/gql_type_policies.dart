@@ -59,5 +59,6 @@ abstract final class GqlTypePolicies {
     'AuthUsersPermissions': _embedded,
     'UsersFcmTokens': _embedded,
     'UsersPreferences': _embedded,
+    'OperationsFingerprintSyncStatus': _embedded,
   };
 }

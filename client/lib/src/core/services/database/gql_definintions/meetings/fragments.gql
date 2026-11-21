@@ -5,6 +5,7 @@ fragment Meeting on HistoryMeetings {
   color
   isArchived
   showKodasCheckbox
+  autoAttendanceWeekday
   serviceId
   serviceGender
   serviceStudyYear

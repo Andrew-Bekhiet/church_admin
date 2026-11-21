@@ -1,4 +1,5 @@
 import 'package:clock/clock.dart';
+import 'package:intl/intl.dart' hide TextDirection;
 import 'package:material_ui/material_ui.dart';
 import 'package:timeago/timeago.dart';
 
@@ -14,6 +15,9 @@ extension DateTimeExtensions on DateTime {
       clock: now ?? clock.now(),
     ).replaceAll('منذ ', '');
   }
+
+  String toLocalArabicWeekdayDateAndTime() =>
+      DateFormat.yMEd('ar').add_jm().format(toLocal());
 
   int calendarDaysUntil(DateTime other) {
     return DateTime.utc(
