@@ -32,6 +32,7 @@ class InitializationService {
     BlocObserverInit(),
     LoggingSyncInit(),
     ImageUrlCacheMigrationInit(),
+    AccessChangeCacheWiperInit(),
   };
 
   InitializationService();

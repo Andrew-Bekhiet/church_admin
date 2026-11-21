@@ -9,15 +9,14 @@ import 'package:rxdart/rxdart.dart';
 
 class ExportOperationsStorage {
   static ExportOperationsStorage get I =>
-      globalProviderContainer.read(_exportOperationsStorageProvider);
-  static final _exportOperationsStorageProvider =
-      Provider<ExportOperationsStorage>(
-        (ref) => ExportOperationsStorage(
-          dioClient: ref.read(dioProvider),
-          fileSystem: ref.read(fileSystemProvider),
-          userDataWiper: ref.read(userDataWiperProvider),
-        ),
-      );
+      globalProviderContainer.read(provider);
+  static final provider = Provider<ExportOperationsStorage>(
+    (ref) => ExportOperationsStorage(
+      dioClient: ref.read(dioProvider),
+      fileSystem: ref.read(fileSystemProvider),
+      userDataWiper: ref.read(userDataWiperProvider),
+    ),
+  );
 
   final Dio _dioClient;
   final FileSystem _fileSystem;

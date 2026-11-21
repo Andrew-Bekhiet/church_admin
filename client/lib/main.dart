@@ -31,6 +31,7 @@ Future<void> main() async {
   FlutterNativeSplash.remove();
 
   await AuthBloc.I.loaded;
+  await globalProviderContainer.read(AccessChangeCacheWiper.provider).settled;
 
   runApp(
     UncontrolledProviderScope(

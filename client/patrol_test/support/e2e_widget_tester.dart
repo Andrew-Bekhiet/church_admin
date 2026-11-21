@@ -30,6 +30,12 @@ extension E2eWidgetTester on WidgetTester {
     waitingFor: '${finder.toString(describeSelf: true)} to go',
   );
 
+  Future<void> waitUntil(
+    bool Function() isDone, {
+    required String waitingFor,
+    Duration timeout = defaultTimeout,
+  }) => _pollUntil(isDone, timeout: timeout, waitingFor: waitingFor);
+
   Future<void> tapOn(Finder finder, {Duration timeout = defaultTimeout}) async {
     final deadline = DateTime.now().add(timeout);
     final target = finder.first;

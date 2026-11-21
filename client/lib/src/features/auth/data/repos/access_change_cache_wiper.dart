@@ -1,0 +1,101 @@
+import 'dart:async';
+
+import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/data_export/application/export_operations_storage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rxdart/rxdart.dart';
+
+class AccessChangeCacheWiper {
+  /// At launch the user restored from the device is checked at once, while the
+  /// cached and then the network copy of the user follow within about a second.
+  static const accessSettleDelay = Duration(seconds: 2);
+
+  static final provider = Provider<AccessChangeCacheWiper>((ref) {
+    final wiper = AccessChangeCacheWiper(
+      userDataStream: ref.watch(authBlocProvider).userDataStream,
+      graphQLCacheStore: ref.watch(graphQLCacheStore),
+      clearsOfCachesBesideGraphQL: [
+        ref.watch(imageUrlCacheServiceProvider).box.clear,
+        ref.watch(baseCacheManagerProvider).emptyCache,
+        ref.watch(ExportOperationsStorage.provider).deleteSavedFiles,
+      ],
+      refetchOpenSubscriptions: ref.watch(addAuthLinkProvider).reconnectSocket,
+    );
+
+    ref.onDispose(wiper.dispose);
+
+    return wiper;
+  });
+
+  final GqlKvStore _graphQLCacheStore;
+  final List<Future<void> Function()> _clearsOfCachesBesideGraphQL;
+  final void Function() _refetchOpenSubscriptions;
+
+  late final StreamSubscription<void> _subscription;
+  late final StreamSubscription<void> _accessesConnection;
+  Future<void> _settled = Future.value();
+
+  /// Completes once every access checked so far has been handled, including
+  /// any wipe it started. A later access waits for [accessSettleDelay] first.
+  Future<void> get settled => _settled;
+
+  AccessChangeCacheWiper({
+    required Stream<User?> userDataStream,
+    required this._graphQLCacheStore,
+    required this._clearsOfCachesBesideGraphQL,
+    required this._refetchOpenSubscriptions,
+  }) {
+    final accesses = userDataStream
+        .whereType<User>()
+        .map(UserAccess.of)
+        .publish();
+    _subscription =
+        Rx.merge([
+          accesses.take(1),
+          accesses.skip(1).debounceTime(accessSettleDelay),
+        ]).listen(
+          (access) => _settled = _settled
+              .then(
+                (_) => _maybeWipeCachesAndRefetchIfAccessChanged(access),
+              )
+              .catchError(_logFailure),
+        );
+    _accessesConnection = accesses.connect();
+  }
+
+  Future<void> _maybeWipeCachesAndRefetchIfAccessChanged(
+    UserAccess access,
+  ) async {
+    final filledUnderAccess = switch (_graphQLCacheStore.filledUnderAccess) {
+      final json? => UserAccess.fromJson(json),
+      null => null,
+    };
+    if (filledUnderAccess == access) return;
+
+    bool everyCacheBesideGraphQLCleared = true;
+    for (final clear in _clearsOfCachesBesideGraphQL) {
+      try {
+        await clear();
+      } catch (error, stackTrace) {
+        everyCacheBesideGraphQLCleared = false;
+        _logFailure(error, stackTrace);
+      }
+    }
+
+    if (everyCacheBesideGraphQLCleared) {
+      await _graphQLCacheStore.resetFilledUnder(access.toJson());
+    } else {
+      await _graphQLCacheStore.resetLeavingAccessUnrecorded();
+    }
+    _refetchOpenSubscriptions();
+  }
+
+  void _logFailure(Object error, StackTrace stackTrace) => unawaited(
+    LoggingService.I.exception(LogRecord(error: error, stackTrace: stackTrace)),
+  );
+
+  void dispose() {
+    unawaited(_subscription.cancel());
+    unawaited(_accessesConnection.cancel());
+  }
+}
