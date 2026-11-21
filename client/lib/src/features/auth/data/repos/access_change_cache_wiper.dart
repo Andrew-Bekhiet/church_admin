@@ -1,10 +1,7 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/user_permissions/user_permissions_update_helper.dart';
 import 'package:church_admin/src/features/data_export/application/export_operations_storage.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -45,38 +42,24 @@ class AccessChangeCacheWiper {
   }) {
     _subscription = userDataStream
         .whereType<User>()
-        .map(_accessOf)
+        .map(UserAccess.of)
         .listen(
           (access) => _settled = _settled
               .then(
-                (_) => _wipeCachesAndRefetchIfFilledUnderOtherAccess(access),
+                (_) => _maybeWipeCachesAndRefetchIfAccessChanged(access),
               )
               .catchError(_logFailure),
         );
   }
 
-  Json _accessOf(User user) => {
-    'uid': user.uid,
-    'permissions': user.permissions.map((p) => p.name).sorted(),
-    'adminOn': [
-      for (final scope in user.adminOn ?? const <AdminOnData>[])
-        jsonEncode(
-          UserPermissionsUpdateHelper.adminOnInsertInputFrom(
-            null,
-            scope,
-          ).toJson(),
-        ),
-    ].sorted(),
-  };
-
-  Future<void> _wipeCachesAndRefetchIfFilledUnderOtherAccess(
-    Json access,
+  Future<void> _maybeWipeCachesAndRefetchIfAccessChanged(
+    UserAccess access,
   ) async {
-    final isFilledUnderSameAccess = const DeepCollectionEquality().equals(
-      _graphQLCacheStore.filledUnderAccess,
-      access,
-    );
-    if (isFilledUnderSameAccess) return;
+    final filledUnderAccess = switch (_graphQLCacheStore.filledUnderAccess) {
+      final json? => UserAccess.fromJson(json),
+      null => null,
+    };
+    if (filledUnderAccess == access) return;
 
     bool everyCacheBesideGraphQLCleared = true;
     for (final clear in _clearsOfCachesBesideGraphQL) {
@@ -89,7 +72,7 @@ class AccessChangeCacheWiper {
     }
 
     if (everyCacheBesideGraphQLCleared) {
-      await _graphQLCacheStore.resetFilledUnder(access);
+      await _graphQLCacheStore.resetFilledUnder(access.toJson());
     } else {
       await _graphQLCacheStore.resetLeavingAccessUnrecorded();
     }
