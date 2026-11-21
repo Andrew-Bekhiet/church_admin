@@ -15,7 +15,7 @@ void main() {
     MaterialUiTestApp.withThemeAndLocale(
       child: Directionality(
         textDirection: TextDirection.rtl,
-        child: FingerprintLastSyncIndicator(state: state),
+        child: Row(children: [FingerprintLastSyncIndicator(state: state)]),
       ),
     ),
   );
@@ -110,6 +110,17 @@ void main() {
           contains(lastSyncedAt.toLocalArabicWeekdayDateAndTime()),
         );
       },
+    );
+  });
+
+  testWidgets('is tall enough to tap comfortably', (tester) async {
+    const smallestComfortableTapTargetHeight = 40.0;
+
+    await pumpIndicatorShowing(tester, const FingerprintLastSyncNever());
+
+    expect(
+      tester.getSize(find.byKey(FingerprintLastSyncIndicatorKeys.self)).height,
+      greaterThanOrEqualTo(smallestComfortableTapTargetHeight),
     );
   });
 

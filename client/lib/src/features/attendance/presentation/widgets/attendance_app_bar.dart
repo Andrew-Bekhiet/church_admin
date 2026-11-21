@@ -47,12 +47,17 @@ class AttendanceAppBar extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Center(
-                  child: MeetingSelectorButton(
-                    key: AttendanceAppBarKeys.meetingSelector,
-                    meeting: meeting,
-                    onTap: () => _switchMeeting(context, cubit),
-                  ),
+                child: Row(
+                  mainAxisAlignment: .center,
+                  children: [
+                    Flexible(
+                      child: MeetingSelectorButton(
+                        key: AttendanceAppBarKeys.meetingSelector,
+                        meeting: meeting,
+                        onTap: () => _switchMeeting(context, cubit),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               if (meeting.hasAutoAttendanceSchedule)

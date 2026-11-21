@@ -19,7 +19,7 @@ class _FingerprintLastSyncIndicatorState
     extends State<FingerprintLastSyncIndicator> {
   static const Duration _elapsedTimeRefreshInterval = Duration(seconds: 30);
   static const Duration _tooltipShowDuration = Duration(seconds: 4);
-  static const double _minTapTargetHeight = 40;
+  static const double _tapTargetPaddingAroundPill = 9;
 
   late final Timer _elapsedTimeRefresh;
   late DateTime _now = clock.now();
@@ -70,43 +70,41 @@ class _FingerprintLastSyncIndicatorState
       message: details,
       triggerMode: .tap,
       showDuration: _tooltipShowDuration,
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(minHeight: _minTapTargetHeight),
-        child: Align(
-          widthFactor: 1,
-          heightFactor: 1,
-          child: DecoratedBox(
-            decoration: ShapeDecoration(
-              shape: const StadiumBorder(),
-              color: colorScheme.onSurface.withValues(alpha: 0.07),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: _tapTargetPaddingAroundPill,
+        ),
+        child: DecoratedBox(
+          decoration: ShapeDecoration(
+            shape: const StadiumBorder(),
+            color: colorScheme.onSurface.withValues(alpha: 0.07),
+          ),
+          child: Padding(
+            padding: const EdgeInsetsDirectional.only(
+              start: 6,
+              end: 9,
+              top: 4,
+              bottom: 4,
             ),
-            child: Padding(
-              padding: const EdgeInsetsDirectional.only(
-                start: 6,
-                end: 9,
-                top: 4,
-                bottom: 4,
-              ),
-              child: Row(
-                mainAxisSize: .min,
-                spacing: 3,
-                children: [
-                  Icon(
-                    Symbols.fingerprint,
-                    size: 14,
+            child: Row(
+              mainAxisSize: .min,
+              spacing: 3,
+              children: [
+                Icon(
+                  Symbols.fingerprint,
+                  size: 14,
+                  color: colorScheme.onSurfaceVariant,
+                ),
+                Text(
+                  text,
+                  key: textKey,
+                  style: TextTheme.of(context).labelSmall?.copyWith(
                     color: colorScheme.onSurfaceVariant,
+                    height: 1.1,
                   ),
-                  Text(
-                    text,
-                    key: textKey,
-                    style: TextTheme.of(context).labelSmall?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
-                      height: 1.1,
-                    ),
-                    maxLines: 1,
-                  ),
-                ],
-              ),
+                  maxLines: 1,
+                ),
+              ],
             ),
           ),
         ),
