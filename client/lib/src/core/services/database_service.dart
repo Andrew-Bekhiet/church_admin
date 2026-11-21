@@ -38,6 +38,7 @@ class DatabaseService {
   late final dataChecks = DataChecksDAO(db: this);
   late final fcmTokens = FcmTokensDAO(db: this);
   late final fingerprintIds = FingerprintIdsDAO(db: this);
+  late final fingerprintSyncStatus = FingerprintSyncStatusDAO(db: this);
   late final screenCaptureAttempts = ScreenCaptureAttemptsDAO(db: this);
 
   late final metadata = MetadataDAO(db: this);

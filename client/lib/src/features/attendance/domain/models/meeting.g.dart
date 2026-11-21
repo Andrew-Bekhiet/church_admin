@@ -193,6 +193,7 @@ Meeting _$MeetingFromJson(Map json) => Meeting(
   group: json['group'] == null
       ? null
       : Group.fromJson(Map<String, Object?>.from(json['group'] as Map)),
+  autoAttendanceWeekday: (json['autoAttendanceWeekday'] as num?)?.toInt(),
 );
 
 Map<String, dynamic> _$MeetingToJson(Meeting instance) => <String, dynamic>{
@@ -209,6 +210,7 @@ Map<String, dynamic> _$MeetingToJson(Meeting instance) => <String, dynamic>{
   'serviceGender': const GenderIsMaleConverter().toJson(instance.serviceGender),
   'groupId': instance.groupId,
   'group': instance.group?.toJson(),
+  'autoAttendanceWeekday': instance.autoAttendanceWeekday,
 };
 
 const _$MeetingAudienceEnumMap = {

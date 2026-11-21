@@ -3013,6 +3013,7 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
     this.color,
     required this.isArchived,
     required this.showKodasCheckbox,
+    this.autoAttendanceWeekday,
     this.serviceId,
     this.serviceGender,
     this.serviceStudyYear,
@@ -3033,6 +3034,7 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
     final l$color = json['color'];
     final l$isArchived = json['isArchived'];
     final l$showKodasCheckbox = json['showKodasCheckbox'];
+    final l$autoAttendanceWeekday = json['autoAttendanceWeekday'];
     final l$serviceId = json['serviceId'];
     final l$serviceGender = json['serviceGender'];
     final l$serviceStudyYear = json['serviceStudyYear'];
@@ -3049,6 +3051,7 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
       color: (l$color as int?),
       isArchived: (l$isArchived as bool),
       showKodasCheckbox: (l$showKodasCheckbox as bool),
+      autoAttendanceWeekday: (l$autoAttendanceWeekday as int?),
       serviceId: l$serviceId == null ? null : stringToUuid(l$serviceId),
       serviceGender: (l$serviceGender as bool?),
       serviceStudyYear: (l$serviceStudyYear as int?),
@@ -3088,6 +3091,8 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
 
   final bool showKodasCheckbox;
 
+  final int? autoAttendanceWeekday;
+
   final UuidValue? serviceId;
 
   final bool? serviceGender;
@@ -3120,6 +3125,8 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
     _resultData['isArchived'] = l$isArchived;
     final l$showKodasCheckbox = showKodasCheckbox;
     _resultData['showKodasCheckbox'] = l$showKodasCheckbox;
+    final l$autoAttendanceWeekday = autoAttendanceWeekday;
+    _resultData['autoAttendanceWeekday'] = l$autoAttendanceWeekday;
     final l$serviceId = serviceId;
     _resultData['serviceId'] = l$serviceId == null
         ? null
@@ -3151,6 +3158,7 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
     final l$color = color;
     final l$isArchived = isArchived;
     final l$showKodasCheckbox = showKodasCheckbox;
+    final l$autoAttendanceWeekday = autoAttendanceWeekday;
     final l$serviceId = serviceId;
     final l$serviceGender = serviceGender;
     final l$serviceStudyYear = serviceStudyYear;
@@ -3167,6 +3175,7 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
       l$color,
       l$isArchived,
       l$showKodasCheckbox,
+      l$autoAttendanceWeekday,
       l$serviceId,
       l$serviceGender,
       l$serviceStudyYear,
@@ -3216,6 +3225,11 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
     final l$showKodasCheckbox = showKodasCheckbox;
     final lOther$showKodasCheckbox = other.showKodasCheckbox;
     if (l$showKodasCheckbox != lOther$showKodasCheckbox) {
+      return false;
+    }
+    final l$autoAttendanceWeekday = autoAttendanceWeekday;
+    final lOther$autoAttendanceWeekday = other.autoAttendanceWeekday;
+    if (l$autoAttendanceWeekday != lOther$autoAttendanceWeekday) {
       return false;
     }
     final l$serviceId = serviceId;
@@ -3300,6 +3314,7 @@ abstract class CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings<TRes> {
     int? color,
     bool? isArchived,
     bool? showKodasCheckbox,
+    int? autoAttendanceWeekday,
     UuidValue? serviceId,
     bool? serviceGender,
     int? serviceStudyYear,
@@ -3345,6 +3360,7 @@ class _CopyWithImpl_Query_meetingsAttendanceAnalysis_historyMeetings<TRes>
     Object? color = _undefined,
     Object? isArchived = _undefined,
     Object? showKodasCheckbox = _undefined,
+    Object? autoAttendanceWeekday = _undefined,
     Object? serviceId = _undefined,
     Object? serviceGender = _undefined,
     Object? serviceStudyYear = _undefined,
@@ -3371,6 +3387,9 @@ class _CopyWithImpl_Query_meetingsAttendanceAnalysis_historyMeetings<TRes>
           showKodasCheckbox == _undefined || showKodasCheckbox == null
           ? _instance.showKodasCheckbox
           : (showKodasCheckbox as bool),
+      autoAttendanceWeekday: autoAttendanceWeekday == _undefined
+          ? _instance.autoAttendanceWeekday
+          : (autoAttendanceWeekday as int?),
       serviceId: serviceId == _undefined
           ? _instance.serviceId
           : (serviceId as UuidValue?),
@@ -3463,6 +3482,7 @@ class _CopyWithStubImpl_Query_meetingsAttendanceAnalysis_historyMeetings<TRes>
     int? color,
     bool? isArchived,
     bool? showKodasCheckbox,
+    int? autoAttendanceWeekday,
     UuidValue? serviceId,
     bool? serviceGender,
     int? serviceStudyYear,
