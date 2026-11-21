@@ -119,6 +119,38 @@ void main() {
     },
   );
 
+  test('the wiper settles only once a wipe in progress has finished', () async {
+    final user = BehaviorSubject<User?>.seeded(globalAccessUser);
+    addTearDown(user.close);
+    final photosClearing = Completer<void>();
+    final wiper = AccessChangeCacheWiper(
+      userDataStream: user,
+      graphQLCacheStore: store,
+      clearsOfCachesBesideGraphQL: [
+        () async {
+          if (store.filledUnderAccess != null) await photosClearing.future;
+          cachedPhotos.clear();
+        },
+      ],
+      refetchOpenSubscriptions: () {},
+    );
+    addTearDown(wiper.dispose);
+    await pumpEventQueue();
+    cachedPhotos.add(photo);
+
+    user.add(scopedUser);
+    await pumpEventQueue();
+    bool hasSettled = false;
+    unawaited(wiper.settled.then((_) => hasSettled = true));
+    await pumpEventQueue();
+    expect(hasSettled, isFalse);
+
+    photosClearing.complete();
+    await wiper.settled;
+
+    expect(cachedPhotos, isEmpty);
+  });
+
   test('losing global read access drops cached photos too', () async {
     final user = BehaviorSubject<User?>.seeded(globalAccessUser);
     addTearDown(user.close);

@@ -31,6 +31,11 @@ class AccessChangeCacheWiper {
   final void Function() _refetchOpenSubscriptions;
 
   late final StreamSubscription<void> _subscription;
+  Future<void> _settled = Future.value();
+
+  /// Completes once every user seen so far has been checked, and any wipe
+  /// that check started has finished.
+  Future<void> get settled => _settled;
 
   AccessChangeCacheWiper({
     required Stream<User?> userDataStream,
@@ -41,8 +46,13 @@ class AccessChangeCacheWiper {
     _subscription = userDataStream
         .whereType<User>()
         .map(_accessOf)
-        .asyncMap(_wipeCachesAndRefetchIfFilledUnderOtherAccess)
-        .listen(null, onError: _logFailure);
+        .listen(
+          (access) => _settled = _settled
+              .then(
+                (_) => _wipeCachesAndRefetchIfFilledUnderOtherAccess(access),
+              )
+              .catchError(_logFailure),
+        );
   }
 
   Json _accessOf(User user) => {
