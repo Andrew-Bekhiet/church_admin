@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:rxdart/rxdart.dart';
@@ -45,10 +46,14 @@ void main() {
       if (key.startsWith('Persons:')) key.substring('Persons:'.length),
   };
 
-  Future<void> startWiper(
+  void letAccessSettle(FakeAsync async) =>
+      async.elapse(AccessChangeCacheWiper.accessSettleDelay);
+
+  void startWiper(
+    FakeAsync async,
     Stream<User?> userDataStream, {
     required List<Json> refetchedPersons,
-  }) async {
+  }) {
     final wiper = AccessChangeCacheWiper(
       userDataStream: userDataStream,
       graphQLCacheStore: store,
@@ -64,10 +69,10 @@ void main() {
       ),
     );
     addTearDown(wiper.dispose);
-    await pumpEventQueue();
+    async.flushMicrotasks();
   }
 
-  Future<void> browsePersons(List<Json> onServer) async {
+  void browsePersons(FakeAsync async, List<Json> onServer) {
     link.dataByOperationName[personsOperation] = {'persons': onServer};
     final subscription = client
         .subscribe(
@@ -79,8 +84,8 @@ void main() {
           ),
         )
         .listen(null);
-    addTearDown(subscription.cancel);
-    await pumpEventQueue();
+    addTearDown(() => unawaited(subscription.cancel()));
+    async.flushMicrotasks();
   }
 
   setUp(() {
@@ -105,174 +110,220 @@ void main() {
   test(
     'losing global read access drops out-of-scope people from the device and '
     'keeps the people still in scope',
-    () async {
+    () => fakeAsync((async) {
       final user = BehaviorSubject<User?>.seeded(globalAccessUser);
       addTearDown(user.close);
-      await startWiper(user, refetchedPersons: [insider]);
-      await browsePersons([insider, outsider]);
+      startWiper(async, user, refetchedPersons: [insider]);
+      browsePersons(async, [insider, outsider]);
       expect(cachedPersonIds(), {insider['id'], outsider['id']});
 
       user.add(scopedUser);
-      await pumpEventQueue();
+      letAccessSettle(async);
 
       expect(cachedPersonIds(), {insider['id']});
-    },
+    }),
   );
 
-  test('the wiper settles only once a wipe in progress has finished', () async {
-    final user = BehaviorSubject<User?>.seeded(globalAccessUser);
-    addTearDown(user.close);
-    final photosClearing = Completer<void>();
-    final wiper = AccessChangeCacheWiper(
-      userDataStream: user,
-      graphQLCacheStore: store,
-      clearsOfCachesBesideGraphQL: [
-        () async {
-          if (store.filledUnderAccess != null) await photosClearing.future;
-          cachedPhotos.clear();
-        },
-      ],
-      refetchOpenSubscriptions: () {},
-    );
-    addTearDown(wiper.dispose);
-    await pumpEventQueue();
-    cachedPhotos.add(photo);
+  test(
+    'a change of access is acted on only once it settles',
+    () => fakeAsync((async) {
+      final user = BehaviorSubject<User?>.seeded(globalAccessUser);
+      addTearDown(user.close);
+      startWiper(async, user, refetchedPersons: [insider]);
+      browsePersons(async, [insider, outsider]);
 
-    user.add(scopedUser);
-    await pumpEventQueue();
-    bool hasSettled = false;
-    unawaited(wiper.settled.then((_) => hasSettled = true));
-    await pumpEventQueue();
-    expect(hasSettled, isFalse);
+      user.add(scopedUser);
+      async.elapse(AccessChangeCacheWiper.accessSettleDelay ~/ 2);
 
-    photosClearing.complete();
-    await wiper.settled;
-
-    expect(cachedPhotos, isEmpty);
-  });
-
-  test('losing global read access drops cached photos too', () async {
-    final user = BehaviorSubject<User?>.seeded(globalAccessUser);
-    addTearDown(user.close);
-    await startWiper(user, refetchedPersons: []);
-    cachedPhotos.add(photo);
-
-    user.add(scopedUser);
-    await pumpEventQueue();
-
-    expect(cachedPhotos, isEmpty);
-  });
-
-  test('another account signing in gets a fresh cache', () async {
-    final user = BehaviorSubject<User?>.seeded(scopedUser);
-    addTearDown(user.close);
-    await startWiper(user, refetchedPersons: []);
-    cachedPhotos.add(photo);
-
-    user.add(scopedUser.copyWith(uid: 'another-servant'));
-    await pumpEventQueue();
-
-    expect(cachedPhotos, isEmpty);
-  });
+      expect(cachedPersonIds(), {insider['id'], outsider['id']});
+    }),
+  );
 
   test(
-    'a device whose access changed while the app was closed is cleaned on the '
-    'next launch, even though it already saved the new permissions',
-    () async {
-      final beforeRestart = BehaviorSubject<User?>.seeded(globalAccessUser);
-      await startWiper(beforeRestart, refetchedPersons: []);
-      await browsePersons([insider, outsider]);
-      await beforeRestart.close();
+    'an access that changes back before settling keeps the caches',
+    () => fakeAsync((async) {
+      final user = BehaviorSubject<User?>.seeded(globalAccessUser);
+      addTearDown(user.close);
+      startWiper(async, user, refetchedPersons: []);
+      cachedPhotos.add(photo);
 
-      await startWiper(Stream.value(scopedUser), refetchedPersons: [insider]);
+      user.add(scopedUser);
+      async.elapse(AccessChangeCacheWiper.accessSettleDelay ~/ 2);
+      user.add(globalAccessUser);
+      letAccessSettle(async);
+
+      expect(cachedPhotos, {photo});
+    }),
+  );
+
+  test(
+    'the wiper settles only once a wipe in progress has finished',
+    () => fakeAsync((async) {
+      final user = BehaviorSubject<User?>.seeded(globalAccessUser);
+      addTearDown(user.close);
+      final photosClearing = Completer<void>();
+      final wiper = AccessChangeCacheWiper(
+        userDataStream: user,
+        graphQLCacheStore: store,
+        clearsOfCachesBesideGraphQL: [
+          () async {
+            if (store.filledUnderAccess != null) await photosClearing.future;
+            cachedPhotos.clear();
+          },
+        ],
+        refetchOpenSubscriptions: () {},
+      );
+      addTearDown(wiper.dispose);
+      async.flushMicrotasks();
+      cachedPhotos.add(photo);
+
+      user.add(scopedUser);
+      letAccessSettle(async);
+      bool hasSettled = false;
+      unawaited(wiper.settled.then((_) => hasSettled = true));
+      async.flushMicrotasks();
+      expect(hasSettled, isFalse);
+
+      photosClearing.complete();
+      async.flushMicrotasks();
+
+      expect(hasSettled, isTrue);
+      expect(cachedPhotos, isEmpty);
+    }),
+  );
+
+  test(
+    'losing global read access drops cached photos too',
+    () => fakeAsync((async) {
+      final user = BehaviorSubject<User?>.seeded(globalAccessUser);
+      addTearDown(user.close);
+      startWiper(async, user, refetchedPersons: []);
+      cachedPhotos.add(photo);
+
+      user.add(scopedUser);
+      letAccessSettle(async);
+
+      expect(cachedPhotos, isEmpty);
+    }),
+  );
+
+  test(
+    'another account signing in gets a fresh cache',
+    () => fakeAsync((async) {
+      final user = BehaviorSubject<User?>.seeded(scopedUser);
+      addTearDown(user.close);
+      startWiper(async, user, refetchedPersons: []);
+      cachedPhotos.add(photo);
+
+      user.add(scopedUser.copyWith(uid: 'another-servant'));
+      letAccessSettle(async);
+
+      expect(cachedPhotos, isEmpty);
+    }),
+  );
+
+  test(
+    'a device whose access changed while the app was closed is cleaned at '
+    'once on the next launch, even though it already saved the new '
+    'permissions',
+    () => fakeAsync((async) {
+      final beforeRestart = BehaviorSubject<User?>.seeded(globalAccessUser);
+      startWiper(async, beforeRestart, refetchedPersons: []);
+      browsePersons(async, [insider, outsider]);
+      unawaited(beforeRestart.close());
+
+      startWiper(async, Stream.value(scopedUser), refetchedPersons: [insider]);
 
       expect(cachedPersonIds(), {insider['id']});
-    },
+    }),
   );
 
   test(
     'a relaunch that reads the cache back from disk keeps it while the access '
     'is unchanged',
-    () async {
+    () => fakeAsync((async) {
       final beforeRestart = BehaviorSubject<User?>.seeded(scopedUser);
-      await startWiper(beforeRestart, refetchedPersons: []);
+      startWiper(async, beforeRestart, refetchedPersons: []);
       cachedPhotos.add(photo);
-      await beforeRestart.close();
+      unawaited(beforeRestart.close());
 
       for (final MapEntry(:key, :value) in storage.toMap().entries.toList()) {
         storage.put(key, jsonDecode(jsonEncode(value)) as Json);
       }
-      await startWiper(Stream.value(scopedUser), refetchedPersons: []);
+      startWiper(async, Stream.value(scopedUser), refetchedPersons: []);
 
       expect(cachedPhotos, {photo});
-    },
+    }),
   );
 
   test(
     'a photo cache that fails to clear still lets out-of-scope people leave '
     'the device',
-    () async {
+    () => fakeAsync((async) {
       final user = BehaviorSubject<User?>.seeded(globalAccessUser);
       addTearDown(user.close);
-      await startWiper(user, refetchedPersons: [insider]);
-      await browsePersons([insider, outsider]);
+      startWiper(async, user, refetchedPersons: [insider]);
+      browsePersons(async, [insider, outsider]);
       photosClearFailure = Exception('photos are locked');
 
       user.add(scopedUser);
-      await pumpEventQueue();
+      letAccessSettle(async);
 
       expect(cachedPersonIds(), {insider['id']});
-    },
+    }),
   );
 
   test(
     'a photo cache that failed to clear is cleaned again on the next launch',
-    () async {
+    () => fakeAsync((async) {
       final beforeRestart = BehaviorSubject<User?>.seeded(globalAccessUser);
-      await startWiper(beforeRestart, refetchedPersons: []);
+      startWiper(async, beforeRestart, refetchedPersons: []);
       cachedPhotos.add(photo);
       photosClearFailure = Exception('photos are locked');
       beforeRestart.add(scopedUser);
-      await pumpEventQueue();
-      await beforeRestart.close();
+      letAccessSettle(async);
+      unawaited(beforeRestart.close());
       expect(cachedPhotos, {photo});
 
       photosClearFailure = null;
-      await startWiper(Stream.value(scopedUser), refetchedPersons: []);
+      startWiper(async, Stream.value(scopedUser), refetchedPersons: []);
 
       expect(cachedPhotos, isEmpty);
-    },
+    }),
   );
 
   test(
-    'a cache filled before access was recorded is cleaned on launch',
-    () async {
-      await browsePersons([insider, outsider]);
+    'a cache filled before access was recorded is cleaned at once on launch',
+    () => fakeAsync((async) {
+      browsePersons(async, [insider, outsider]);
 
-      await startWiper(Stream.value(scopedUser), refetchedPersons: [insider]);
+      startWiper(async, Stream.value(scopedUser), refetchedPersons: [insider]);
 
       expect(cachedPersonIds(), {insider['id']});
-    },
+    }),
   );
 
-  test('gaining edit rights on an admin-on scope cleans the cache', () async {
-    final user = BehaviorSubject<User?>.seeded(scopedUser);
-    addTearDown(user.close);
-    await startWiper(user, refetchedPersons: []);
-    await browsePersons([insider]);
+  test(
+    'gaining edit rights on an admin-on scope cleans the cache',
+    () => fakeAsync((async) {
+      final user = BehaviorSubject<User?>.seeded(scopedUser);
+      addTearDown(user.close);
+      startWiper(async, user, refetchedPersons: []);
+      browsePersons(async, [insider]);
 
-    user.add(
-      scopedUser.copyWith(adminOn: [scopeA.copyWith(serviceAllowEdit: true)]),
-    );
-    await pumpEventQueue();
+      user.add(
+        scopedUser.copyWith(adminOn: [scopeA.copyWith(serviceAllowEdit: true)]),
+      );
+      letAccessSettle(async);
 
-    expect(cachedPersonIds(), isEmpty);
-  });
+      expect(cachedPersonIds(), isEmpty);
+    }),
+  );
 
   test(
     'the user restored from the device on launch keeps the cache filled under '
     'the same access',
-    () async {
+    () => fakeAsync((async) {
       final user = scopedUser.copyWith(
         adminOn: [
           scopeA.copyWith(
@@ -300,34 +351,37 @@ void main() {
       );
       final userData = BehaviorSubject<User?>.seeded(restoredFromDevice);
       addTearDown(userData.close);
-      await startWiper(userData, refetchedPersons: []);
+      startWiper(async, userData, refetchedPersons: []);
       cachedPhotos.add(photo);
 
       userData.add(user);
-      await pumpEventQueue();
+      letAccessSettle(async);
 
       expect(cachedPhotos, {photo});
-    },
+    }),
   );
 
-  test('an update that keeps the same access keeps cached photos', () async {
-    final user = BehaviorSubject<User?>.seeded(scopedUser);
-    addTearDown(user.close);
-    await startWiper(user, refetchedPersons: []);
-    cachedPhotos.add(photo);
+  test(
+    'an update that keeps the same access keeps cached photos',
+    () => fakeAsync((async) {
+      final user = BehaviorSubject<User?>.seeded(scopedUser);
+      addTearDown(user.close);
+      startWiper(async, user, refetchedPersons: []);
+      cachedPhotos.add(photo);
 
-    user.add(
-      scopedUser.copyWith(
-        name: 'Renamed',
-        adminOn: [
-          scopeA.copyWith(
-            service: const Service(id: 'service-a', name: 'Renamed A'),
-          ),
-        ],
-      ),
-    );
-    await pumpEventQueue();
+      user.add(
+        scopedUser.copyWith(
+          name: 'Renamed',
+          adminOn: [
+            scopeA.copyWith(
+              service: const Service(id: 'service-a', name: 'Renamed A'),
+            ),
+          ],
+        ),
+      );
+      letAccessSettle(async);
 
-    expect(cachedPhotos, {photo});
-  });
+      expect(cachedPhotos, {photo});
+    }),
+  );
 }
