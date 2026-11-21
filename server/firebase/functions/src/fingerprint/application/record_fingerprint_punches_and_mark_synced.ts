@@ -13,6 +13,30 @@ import {
 import { presencesOfLinkedPunches } from "./presences_of_linked_punches";
 import { recordPresencesInCandidateWindows } from "./record_presences_in_candidate_windows";
 
+export async function recordFingerprintPunchesAndMarkSynced(
+  request: FingerprintPunchesRequest,
+  now: DateTime<true>,
+): Promise<void> {
+  warnUnlessBiotimeClockIsKnownToMatchCairoTime(
+    request.biotimeServerLocalTime,
+    now,
+  );
+
+  const validPunches = punchesWithinAcceptedAge(
+    wellFormedPunchesOf(request.punches),
+    now,
+  );
+  const presenceRecords = await presencesOfLinkedPunches(validPunches);
+
+  await recordPresencesInCandidateWindows(presenceRecords);
+
+  try {
+    await markFingerprintSyncedAtUnlessALaterSyncIsRecorded(now);
+  } catch (e) {
+    console.error("Recorded the punches but failed to mark the sync time", e);
+  }
+}
+
 function warnUnlessBiotimeClockIsKnownToMatchCairoTime(
   biotimeServerLocalTime: string,
   now: DateTime<true>,
@@ -47,26 +71,4 @@ function punchesWithinAcceptedAge(
 
     return isAccepted;
   });
-}
-
-export async function recordFingerprintPunchesAndMarkSynced(
-  request: FingerprintPunchesRequest,
-  now: DateTime<true>,
-): Promise<void> {
-  warnUnlessBiotimeClockIsKnownToMatchCairoTime(
-    request.biotimeServerLocalTime,
-    now,
-  );
-
-  await recordPresencesInCandidateWindows(
-    await presencesOfLinkedPunches(
-      punchesWithinAcceptedAge(wellFormedPunchesOf(request.punches), now),
-    ),
-  );
-
-  try {
-    await markFingerprintSyncedAtUnlessALaterSyncIsRecorded(now);
-  } catch (e) {
-    console.error("Recorded the punches but failed to mark the sync time", e);
-  }
 }

@@ -1,8 +1,5 @@
 import { cairoWallClockAt } from "../domain/cairo_wall_clock";
-import {
-  PersonPresence,
-  PresenceWithCandidates,
-} from "../domain/presence";
+import { PersonPresence, PresenceWithCandidates } from "../domain/presence";
 import { requestAsFingerprintSync } from "./request_as_fingerprint_sync";
 
 export interface FingerprintBotAndPresencesWithCandidates {
@@ -10,8 +7,29 @@ export interface FingerprintBotAndPresencesWithCandidates {
   presencesWithCandidates: PresenceWithCandidates[];
 }
 
-function candidatesAliasOf(presenceIndex: number): string {
-  return `candidatesOfPresence${presenceIndex}`;
+export async function findFingerprintBotUidAndCandidatesOfEachPresence(
+  presences: PersonPresence[],
+): Promise<FingerprintBotAndPresencesWithCandidates> {
+  const data = await requestAsFingerprintSync(
+    fingerprintBotAndCandidatesQueryFor(presences.length),
+    cairoWallClockVariablesOf(presences),
+    "findFingerprintBotUidAndCandidatesOfEachPresence",
+  );
+  const fingerprintBots: { uid: string }[] = data["authUsersData"];
+
+  if (fingerprintBots.length !== 1) {
+    throw new Error(
+      `Expected one fingerprint bot user, found ${fingerprintBots.length}`,
+    );
+  }
+
+  return {
+    fingerprintBotUid: fingerprintBots[0].uid,
+    presencesWithCandidates: presences.map((presence, index) => ({
+      presence,
+      candidates: data[candidatesAliasOf(index)],
+    })),
+  };
 }
 
 function fingerprintBotAndCandidatesQueryFor(presenceCount: number): string {
@@ -62,27 +80,6 @@ function cairoWallClockVariablesOf(
   );
 }
 
-export async function findFingerprintBotUidAndCandidatesOfEachPresence(
-  presences: PersonPresence[],
-): Promise<FingerprintBotAndPresencesWithCandidates> {
-  const data = await requestAsFingerprintSync(
-    fingerprintBotAndCandidatesQueryFor(presences.length),
-    cairoWallClockVariablesOf(presences),
-    "findFingerprintBotUidAndCandidatesOfEachPresence",
-  );
-  const fingerprintBots: { uid: string }[] = data["authUsersData"];
-
-  if (fingerprintBots.length !== 1) {
-    throw new Error(
-      `Expected one fingerprint bot user, found ${fingerprintBots.length}`,
-    );
-  }
-
-  return {
-    fingerprintBotUid: fingerprintBots[0].uid,
-    presencesWithCandidates: presences.map((presence, index) => ({
-      presence,
-      candidates: data[candidatesAliasOf(index)],
-    })),
-  };
+function candidatesAliasOf(presenceIndex: number): string {
+  return `candidatesOfPresence${presenceIndex}`;
 }
