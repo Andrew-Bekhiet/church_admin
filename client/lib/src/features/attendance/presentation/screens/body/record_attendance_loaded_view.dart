@@ -93,13 +93,6 @@ class _RecordAttendanceLoadedViewState
                       totalCount: state.eligibleCount ?? 0,
                       filter: state.presenceFilter,
                       onFilterTapped: cubit.togglePresenceFilter,
-                      trailing: state.meeting.hasAutoAttendanceSchedule
-                          ? FingerprintLastSyncIndicator(
-                              state: context
-                                  .watch<FingerprintLastSyncCubit>()
-                                  .state,
-                            )
-                          : null,
                     ),
                     switch (state.rosterStatus) {
                       RosterStatus.loading => const SliverFillRemaining(
