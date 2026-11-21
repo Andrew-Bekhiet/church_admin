@@ -1,9 +1,8 @@
 import assert from "node:assert/strict";
 import { createServer } from "node:net";
-import { afterEach, beforeEach, describe, it } from "node:test";
+import { afterEach, beforeEach, describe, it, mock } from "node:test";
 import type { Request } from "firebase-functions/v2/https";
 import type { Response } from "express";
-import { cairoWallClockAt } from "../src/fingerprint/cairo_wall_clock";
 import { recordFingerprintPunches } from "../src/record_fingerprint_punches";
 import {
   attendanceOf,
@@ -77,6 +76,8 @@ describe("recordFingerprintPunches endpoint", () => {
   });
 
   afterEach(() => {
+    mock.timers.reset();
+
     if (previousSecret === undefined) {
       delete process.env.FINGERPRINT_SYNC_SECRET;
     } else {
@@ -91,22 +92,22 @@ describe("recordFingerprintPunches endpoint", () => {
   });
 
   it("answers 204 with no body and records the punch it was sent", async () => {
-    const punchedAt = new Date(Date.now() - 90 * 1000);
-    const { isoWeekday } = cairoWallClockAt(punchedAt);
+    const fridayHalfPastNineInCairo = new Date("2026-11-13T07:30:00Z");
+    mock.timers.enable({ apis: ["Date"], now: fridayHalfPastNineInCairo });
     const { meetingId, serviceId } = await seedScheduledMeeting({
-      isoWeekday,
-      attendance: ["00:00", "23:59:59"],
+      isoWeekday: 5,
+      attendance: ["09:00", "11:00"],
     });
     const mina = await seedMemberWithEmployeeCode(serviceId);
     await resetLastSyncedAt();
 
     const reply = await post(
       {
-        ...emptyBatch,
+        biotimeServerLocalTime: "2026-11-13T09:30:00",
         punches: [
           {
             employeeCode: mina.employeeCode,
-            punchedAt: punchedAt.toISOString(),
+            punchedAt: "2026-11-13T09:28:30+02:00",
             terminalSerial: "t",
           },
         ],
@@ -119,7 +120,7 @@ describe("recordFingerprintPunches endpoint", () => {
       (await attendanceOf(mina.personId)).map((row) => row.meetingId),
       [meetingId],
     );
-    assert.notEqual(await lastSyncedAt(), undefined);
+    assert.equal(await lastSyncedAt(), "2026-11-13T07:30:00Z");
   });
 
   it("answers 401 to a wrong secret", async () => {
@@ -171,6 +172,10 @@ describe("recordFingerprintPunches endpoint", () => {
 
   it("answers 500 when Hasura cannot be reached", async () => {
     process.env.HASURA_SERVER = await unusedLocalhostUrl();
+    mock.timers.enable({
+      apis: ["Date"],
+      now: new Date("2026-11-13T07:30:00Z"),
+    });
 
     const reply = await post(
       {
@@ -178,7 +183,7 @@ describe("recordFingerprintPunches endpoint", () => {
         punches: [
           {
             employeeCode: "1042",
-            punchedAt: new Date(Date.now() - 60 * 1000).toISOString(),
+            punchedAt: "2026-11-13T09:29:00+02:00",
             terminalSerial: "t",
           },
         ],

@@ -8,6 +8,11 @@ insert_permissions:
       columns:
         - last_synced_at
 select_permissions:
+  - role: fingerprint_sync
+    permission:
+      columns:
+        - last_synced_at
+      filter: {}
   - role: user
     permission:
       columns:

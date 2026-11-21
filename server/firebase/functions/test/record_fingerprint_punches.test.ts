@@ -842,6 +842,15 @@ describe("recordFingerprintPunches sync status", () => {
 
     assert.equal(await lastSyncedAt(), "2026-11-14T05:00:15Z");
   });
+
+  it("keeps the later sync time when an earlier call finishes after it", async () => {
+    await resetLastSyncedAt();
+    await syncPunches([], new Date("2026-11-14T05:00:15Z"));
+
+    await syncPunches([], new Date("2026-11-14T05:00:00Z"));
+
+    assert.equal(await lastSyncedAt(), "2026-11-14T05:00:15Z");
+  });
 });
 
 describe("the fingerprint_sync role", () => {
