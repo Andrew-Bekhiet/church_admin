@@ -272,4 +272,25 @@ void main() {
     );
     expect(addButton.enabled, isFalse);
   });
+
+  testWidgets('the number field asks for a plain text keyboard that neither '
+      'autocorrects nor suggests', (tester) async {
+    await pumpSheetShowing(tester, Stream.value([oldFingerprintId]));
+
+    expect(
+      employeeCodeTextField(tester),
+      isA<TextField>()
+          .having(
+            (field) => field.keyboardType,
+            'keyboardType',
+            TextInputType.text,
+          )
+          .having((field) => field.autocorrect, 'autocorrect', isFalse)
+          .having(
+            (field) => field.enableSuggestions,
+            'enableSuggestions',
+            isFalse,
+          ),
+    );
+  });
 }

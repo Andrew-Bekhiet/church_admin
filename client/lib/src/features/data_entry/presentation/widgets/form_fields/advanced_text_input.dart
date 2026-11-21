@@ -13,6 +13,8 @@ class AdvancedTextInput<E extends Object> extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextInputAction textInputAction;
   final TextCapitalization textCapitalization;
+  final bool? autocorrect;
+  final bool enableSuggestions;
   final Iterable<String>? autofillHints;
   final List<TextInputFormatter>? inputFormatters;
   final int? maxLength;
@@ -27,6 +29,7 @@ class AdvancedTextInput<E extends Object> extends StatelessWidget {
     required this.translateError,
     this.textInputAction = TextInputAction.next,
     this.textCapitalization = TextCapitalization.none,
+    this.enableSuggestions = true,
     this.maxLines = 1,
     this.labelText,
     this.label,
@@ -34,6 +37,7 @@ class AdvancedTextInput<E extends Object> extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.keyboardType,
+    this.autocorrect,
     this.autofillHints,
     this.inputFormatters,
     this.maxLength,
@@ -59,6 +63,8 @@ class AdvancedTextInput<E extends Object> extends StatelessWidget {
           keyboardType: keyboardType,
           textInputAction: textInputAction,
           textCapitalization: textCapitalization,
+          autocorrect: autocorrect,
+          enableSuggestions: enableSuggestions,
           autofillHints: autofillHints,
           inputFormatters: inputFormatters,
           maxLength: maxLength,
