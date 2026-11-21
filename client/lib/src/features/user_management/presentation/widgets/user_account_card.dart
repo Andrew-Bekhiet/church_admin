@@ -20,9 +20,15 @@ class UserAccountCard extends StatelessWidget {
       title: 'الحساب',
       child: Column(
         children: [
-          UserAccountStatusBanner(status: status, email: user.email),
+          UserAccountStatusBanner(
+            status: status,
+            userType: user.userType,
+            email: user.email,
+          ),
           if (user.invitation case final invitation?
-              when !invitation.isClaimed && user.authId == null) ...[
+              when !invitation.isClaimed &&
+                  user.authId == null &&
+                  user.userType.isHuman) ...[
             const Divider(height: 1),
             UserInvitationCodeTile(invitation: invitation),
           ],

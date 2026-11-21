@@ -26,6 +26,7 @@ export 'widgets/person_details_list.dart';
 export 'widgets/person_history_section.dart';
 export 'widgets/person_identity_section.dart';
 export 'widgets/person_location_section.dart';
+export 'widgets/person_overflow_menu.dart';
 export 'widgets/person_service_selection_page.dart';
 export 'widgets/person_tags_section.dart';
 export 'widgets/person_work_and_study_section.dart';

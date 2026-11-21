@@ -21,6 +21,9 @@ class ViewUser extends StatefulWidget {
 abstract final class ViewUserScreenKeys {
   static const Key editButton = ValueKey('Edit User Button Key');
   static const Key linkedPerson = ValueKey('User Linked Person Key');
+  static const Key approveButton = ValueKey(
+    (ViewUserScreenKeys, #approveButton),
+  );
 }
 
 class _ViewUserState extends State<ViewUser> {
@@ -38,13 +41,16 @@ class _ViewUserState extends State<ViewUser> {
       object: widget.user,
       objectStream: stream,
       detailsBuilder: (context, user) {
+        if (!user.userType.isHuman) {
+          return SliverToBoxAdapter(child: UserAccountCard(user));
+        }
+
         final currentUserData = AuthBloc.I.currentUserData;
         final appUserPermissions =
             currentUserData?.permissions ?? const PermissionsSet.empty();
         final isMyAccount = currentUserData?.id == user.id;
         final isUserApproved = user.permissions.approved;
 
-        final theme = Theme.of(context);
         final permissions = user.permissions;
 
         final userInfoWidgets = [
@@ -66,19 +72,8 @@ class _ViewUserState extends State<ViewUser> {
               title: Text('الصلاحيات'),
               subtitle: Text('لا يملك هذا الخادم صلاحيات محددة'),
             )
-          else ...[
-            ListTile(
-              leading: const Icon(Symbols.shield),
-              title: Text(
-                'صلاحيات عامة',
-                style: theme.textTheme.titleMedium,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: PermissionsSetWidget(permissions: permissions),
-            ),
-          ],
+          else
+            PermissionsSetWidget(permissions: permissions),
           AdminOnDataWidget(adminOn: user.adminOn ?? []),
           const SizedBox(height: 10),
           const Divider(thickness: 1),
@@ -125,6 +120,7 @@ class _ViewUserState extends State<ViewUser> {
                   subtitle: Text('يجب تفعيل الحساب للسماح للمستخدم بالدخول'),
                 ),
                 ListTile(
+                  key: ViewUserScreenKeys.approveButton,
                   title: FilledButton.tonalIcon(
                     style: Theme.of(context).filledTonalButtonStyleWorkaround,
                     icon: const Icon(Symbols.person_check),

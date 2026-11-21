@@ -1,4 +1,6 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/user_management/presentation/widgets/user_section_card.dart';
+import 'package:collection/collection.dart';
 import 'package:material_ui/material_ui.dart';
 
 class PermissionsSetWidget extends StatelessWidget {
@@ -10,26 +12,43 @@ class PermissionsSetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final grantedPermissionsBySection = UserPermission.values
+        .where(
+          (permission) =>
+              permission != UserPermission.approved &&
+              permissions.contains(permission),
+        )
+        .groupListsBy((permission) => permission.section);
 
-    return Card.outlined(
-      color: theme.colorScheme.surfaceContainerLow,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: theme.colorScheme.outline),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        children: [
-          for (final permission in UserPermission.values)
-            if (permission != UserPermission.approved &&
-                permissions.contains(permission))
-              ListTile(
-                leading: Icon(permission.icon),
-                title: Text(permission.label),
-                subtitle: Text(permission.label),
+    return Column(
+      mainAxisSize: .min,
+      children: [
+        for (final section in UserPermissionSection.values)
+          if (grantedPermissionsBySection[section] case final granted?)
+            UserSectionCard(
+              key: PermissionsSetWidgetKeys.sectionFor(section),
+              icon: section.icon,
+              title: section.title,
+              helper: section.helper,
+              child: Column(
+                children: [
+                  for (final permission in granted)
+                    ListTile(
+                      key: PermissionsSetWidgetKeys.permissionFor(permission),
+                      leading: Icon(permission.icon),
+                      title: Text(permission.label),
+                    ),
+                ],
               ),
-        ],
-      ),
+            ),
+      ],
     );
   }
+}
+
+abstract final class PermissionsSetWidgetKeys extends WidgetKeys {
+  static Key sectionFor(UserPermissionSection section) =>
+      ValueKey((PermissionsSetWidgetKeys, #sectionFor, section));
+  static Key permissionFor(UserPermission permission) =>
+      ValueKey((PermissionsSetWidgetKeys, #permissionFor, permission));
 }

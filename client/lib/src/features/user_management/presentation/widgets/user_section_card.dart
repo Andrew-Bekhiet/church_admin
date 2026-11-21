@@ -1,14 +1,17 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
 class UserSectionCard extends StatelessWidget {
   final IconData icon;
   final String title;
+  final String? helper;
   final Widget child;
 
   const UserSectionCard({
     required this.icon,
     required this.title,
     required this.child,
+    this.helper,
     super.key,
   });
 
@@ -22,6 +25,10 @@ class UserSectionCard extends StatelessWidget {
         ListTile(
           leading: Icon(icon),
           title: Text(title, style: TextTheme.of(context).titleMedium),
+          subtitle: switch (helper) {
+            final helper? => Text(helper, key: UserSectionCardKeys.helper),
+            null => null,
+          },
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -38,4 +45,8 @@ class UserSectionCard extends StatelessWidget {
       ],
     );
   }
+}
+
+abstract final class UserSectionCardKeys extends WidgetKeys {
+  static const Key helper = ValueKey((UserSectionCardKeys, #helper));
 }

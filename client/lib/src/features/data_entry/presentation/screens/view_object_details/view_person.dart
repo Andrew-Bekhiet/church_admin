@@ -57,6 +57,11 @@ class _ViewPersonState extends State<ViewPerson> {
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),
+      extraAppBarActionsBuilder: (context, person) => [
+        if (AuthBloc.I.currentUserData?.canManageFingerprintIdsOf(person) ??
+            false)
+          PersonOverflowMenu(person: person),
+      ],
       notFoundBuilder: (context) => Center(
         child: Text(
           'لم يتم العثور على المخدوم',
@@ -78,6 +83,6 @@ class _ViewPersonState extends State<ViewPerson> {
   }
 }
 
-abstract final class ViewPersonKeys {
+abstract final class ViewPersonKeys extends WidgetKeys {
   static const Key editButton = ValueKey('View Person Edit Button Key');
 }

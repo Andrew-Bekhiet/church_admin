@@ -127,6 +127,9 @@ class ViewableObjectService {
     }
 
     switch (value) {
+      case PermissionsSet() when object is User && !object.userType.isHuman:
+        return UserAccountStatus.automated.label;
+
       case PermissionsSet(:final toHumanReadableString):
         return toHumanReadableString();
 

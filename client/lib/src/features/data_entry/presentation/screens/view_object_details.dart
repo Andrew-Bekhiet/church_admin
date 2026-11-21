@@ -74,6 +74,8 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
 
   final WidgetBuilder notFoundBuilder;
   final WidgetBuilderWithObject<T> editButtonBuilder;
+  final List<Widget> Function(BuildContext context, T object)?
+  extraAppBarActionsBuilder;
   final WidgetBuilderWithObject<T> detailsBuilder;
   final SliverPersistentHeaderDelegate? sliverPersistentHeaderDelegate;
   final Map<Type, Widget Function(BuildContext)> tabsContentBuilders;
@@ -90,6 +92,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
     this.childrenTypes = const [],
     this.tabsContentBuilders = const {},
     this.bottomNavBarBuilder,
+    this.extraAppBarActionsBuilder,
     this.sliverPersistentHeaderDelegate,
     this.floatingActionButtonBuilder,
     this.object,
@@ -165,8 +168,11 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
                   padding: EdgeInsets.all(8),
                   child: Center(child: CircularProgressIndicator()),
                 )
-              else if (canEditObject)
-                widget.editButtonBuilder(context, objectData),
+              else ...[
+                if (canEditObject)
+                  widget.editButtonBuilder(context, objectData),
+                ...?widget.extraAppBarActionsBuilder?.call(context, objectData),
+              ],
             ],
             flexibleSpace: ViewableObjectAppBar(
               circleCrop: objectData is Person || objectData is User,

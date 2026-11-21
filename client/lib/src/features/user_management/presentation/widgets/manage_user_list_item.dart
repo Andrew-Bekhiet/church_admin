@@ -15,19 +15,32 @@ class ManageUserListItem extends StatelessWidget {
     return ViewableObjectWidget(
       user,
       trailing: UserAccountStatusIndicators(user),
-      subtitle: onlyApproved
-          ? null
-          : Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                for (final permission in permissions)
-                  if (permission != UserPermission.approved)
-                    Tooltip(
-                      message: permission.label,
-                      child: Icon(permission.icon, size: 20),
-                    ),
-              ],
-            ),
+      subtitle: switch (user.userType.automatedAccountDescription) {
+        final automatedAccountDescription? => Text(
+          automatedAccountDescription,
+          key: ManageUserListItemKeys.automatedAccountDescription,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+        null when onlyApproved => null,
+        null => Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            for (final permission in permissions)
+              if (permission != UserPermission.approved)
+                Tooltip(
+                  message: permission.label,
+                  child: Icon(permission.icon, size: 20),
+                ),
+          ],
+        ),
+      },
     );
   }
+}
+
+abstract final class ManageUserListItemKeys extends WidgetKeys {
+  static const Key automatedAccountDescription = ValueKey(
+    (ManageUserListItemKeys, #automatedAccountDescription),
+  );
 }
