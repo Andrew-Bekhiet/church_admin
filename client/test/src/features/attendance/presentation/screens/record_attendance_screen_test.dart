@@ -227,7 +227,7 @@ void main() {
 
   testWidgets(
     'a meeting that records attendance from fingerprint punches shows how '
-    'long ago the fingerprint sync last reached the app beside the counts',
+    'long ago the fingerprint sync last reached the app',
     (tester) async {
       final lastSyncedAt = DateTime.utc(2026, 11, 20, 7, 5);
       final now = lastSyncedAt.add(const Duration(minutes: 3));
@@ -250,11 +250,8 @@ void main() {
         expect(
           tester
               .widget<Text>(
-                find.descendant(
-                  of: find.byKey(AttendanceSummaryBarKeys.self),
-                  matching: find.byKey(
-                    FingerprintLastSyncIndicatorKeys.elapsedSinceLastSync,
-                  ),
+                find.byKey(
+                  FingerprintLastSyncIndicatorKeys.elapsedSinceLastSync,
                 ),
               )
               .data,

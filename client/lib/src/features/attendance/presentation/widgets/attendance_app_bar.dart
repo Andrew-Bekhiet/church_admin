@@ -6,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 
 class AttendanceAppBar extends StatelessWidget {
   static const double _kAttendanceToolbarHeight = 96;
+  static const double _kOverflowMenuHeight = 40;
 
   final Meeting meeting;
   final DateTime selectedDate;
@@ -41,12 +42,36 @@ class AttendanceAppBar extends StatelessWidget {
       centerTitle: true,
       title: Column(
         mainAxisSize: MainAxisSize.min,
-        spacing: 10,
+        spacing: 6,
         children: [
-          MeetingSelectorButton(
-            key: AttendanceAppBarKeys.meetingSelector,
-            meeting: meeting,
-            onTap: () => _switchMeeting(context, cubit),
+          Row(
+            children: [
+              Expanded(
+                child: Center(
+                  child: MeetingSelectorButton(
+                    key: AttendanceAppBarKeys.meetingSelector,
+                    meeting: meeting,
+                    onTap: () => _switchMeeting(context, cubit),
+                  ),
+                ),
+              ),
+              if (meeting.hasAutoAttendanceSchedule)
+                FingerprintLastSyncIndicator(
+                  state: context.watch<FingerprintLastSyncCubit>().state,
+                ),
+              SizedBox(
+                height: _kOverflowMenuHeight,
+                child: AttendanceOverflowMenu(
+                  openAnalysis: () => _openAnalysis(context, cubit),
+                  sorting: sorting,
+                  grouping: grouping,
+                  streakWindowDays: streakWindowDays,
+                  onSortChanged: cubit.changeSorting,
+                  onGroupingChanged: cubit.changeGrouping,
+                  onStreakWindowChanged: cubit.changeStreakWindow,
+                ),
+              ),
+            ],
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -69,17 +94,6 @@ class AttendanceAppBar extends StatelessWidget {
           ),
         ],
       ),
-      actions: [
-        AttendanceOverflowMenu(
-          openAnalysis: () => _openAnalysis(context, cubit),
-          sorting: sorting,
-          grouping: grouping,
-          streakWindowDays: streakWindowDays,
-          onSortChanged: cubit.changeSorting,
-          onGroupingChanged: cubit.changeGrouping,
-          onStreakWindowChanged: cubit.changeStreakWindow,
-        ),
-      ],
     );
   }
 

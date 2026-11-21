@@ -9,7 +9,6 @@ class AttendanceSummaryBar extends StatelessWidget {
   final int totalCount;
   final AttendancePresenceFilter filter;
   final ValueChanged<AttendancePresenceFilter> onFilterTapped;
-  final Widget? trailing;
 
   const AttendanceSummaryBar({
     required this.presentCount,
@@ -17,7 +16,6 @@ class AttendanceSummaryBar extends StatelessWidget {
     required this.totalCount,
     required this.filter,
     required this.onFilterTapped,
-    this.trailing,
     super.key,
   });
 
@@ -26,7 +24,6 @@ class AttendanceSummaryBar extends StatelessWidget {
     final dividerColor = Theme.of(context).colorScheme.outlineVariant;
 
     return SliverAppBar(
-      key: AttendanceSummaryBarKeys.self,
       pinned: true,
       automaticallyImplyLeading: false,
       toolbarHeight: kAttendanceSummaryHeight,
@@ -74,23 +71,10 @@ class AttendanceSummaryBar extends StatelessWidget {
                   onTap: () => onFilterTapped(AttendancePresenceFilter.all),
                 ),
               ),
-              if (trailing case final trailing?) ...[
-                VerticalDivider(
-                  width: 1,
-                  indent: 8,
-                  endIndent: 8,
-                  color: dividerColor,
-                ),
-                trailing,
-              ],
             ],
           ),
         ),
       ),
     );
   }
-}
-
-abstract final class AttendanceSummaryBarKeys extends WidgetKeys {
-  static const Key self = ValueKey((AttendanceSummaryBarKeys, #self));
 }
