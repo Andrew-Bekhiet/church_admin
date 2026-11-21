@@ -232,7 +232,9 @@ void main() {
       browsePersons(async, [insider, outsider]);
       unawaited(beforeRestart.close());
 
-      startWiper(async, Stream.value(scopedUser), refetchedPersons: [insider]);
+      final relaunched = BehaviorSubject<User?>.seeded(scopedUser);
+      addTearDown(relaunched.close);
+      startWiper(async, relaunched, refetchedPersons: [insider]);
 
       expect(cachedPersonIds(), {insider['id']});
     }),
@@ -250,7 +252,9 @@ void main() {
       for (final MapEntry(:key, :value) in storage.toMap().entries.toList()) {
         storage.put(key, jsonDecode(jsonEncode(value)) as Json);
       }
-      startWiper(async, Stream.value(scopedUser), refetchedPersons: []);
+      final relaunched = BehaviorSubject<User?>.seeded(scopedUser);
+      addTearDown(relaunched.close);
+      startWiper(async, relaunched, refetchedPersons: []);
 
       expect(cachedPhotos, {photo});
     }),
@@ -286,7 +290,9 @@ void main() {
       expect(cachedPhotos, {photo});
 
       photosClearFailure = null;
-      startWiper(async, Stream.value(scopedUser), refetchedPersons: []);
+      final relaunched = BehaviorSubject<User?>.seeded(scopedUser);
+      addTearDown(relaunched.close);
+      startWiper(async, relaunched, refetchedPersons: []);
 
       expect(cachedPhotos, isEmpty);
     }),
@@ -297,7 +303,9 @@ void main() {
     () => fakeAsync((async) {
       browsePersons(async, [insider, outsider]);
 
-      startWiper(async, Stream.value(scopedUser), refetchedPersons: [insider]);
+      final relaunched = BehaviorSubject<User?>.seeded(scopedUser);
+      addTearDown(relaunched.close);
+      startWiper(async, relaunched, refetchedPersons: [insider]);
 
       expect(cachedPersonIds(), {insider['id']});
     }),
