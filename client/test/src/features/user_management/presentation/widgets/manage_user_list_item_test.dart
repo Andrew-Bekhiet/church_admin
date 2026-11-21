@@ -70,22 +70,9 @@ void main() {
 
     expect(
       find.byKey(
-        UserAccountStatusIndicatorsKeys.statusFor(UserAccountStatus.automated),
+        UserAccountStatusIndicatorsKeys.selfFor(UserAccountStatus.automated),
       ),
       findsOneWidget,
-    );
-  });
-
-  testWidgets('the fingerprint bot is not marked as lacking an account', (
-    tester,
-  ) async {
-    await pumpListItemOf(tester, fingerprintBot);
-
-    expect(
-      find.byKey(
-        UserAccountStatusIndicatorsKeys.statusFor(UserAccountStatus.noAccount),
-      ),
-      findsNothing,
     );
   });
 
@@ -98,7 +85,7 @@ void main() {
 
       expect(
         find.byKey(
-          UserAccountStatusIndicatorsKeys.statusFor(
+          UserAccountStatusIndicatorsKeys.selfFor(
             UserAccountStatus.noAccount,
           ),
         ),

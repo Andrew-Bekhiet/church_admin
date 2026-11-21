@@ -47,7 +47,15 @@ void main() {
     currentUserCanManageThisUser: true,
   );
 
+  const userManagerPermissions = {
+    UserPermission.approved,
+    UserPermission.readAllData,
+    UserPermission.writeAllData,
+    UserPermission.manageAllUsers,
+  };
+
   late _MockUsersDAO users;
+  late MockAuthBloc authBloc;
 
   setUpAll(() => registerFallbackValue(const User(uid: '', name: '')));
 
@@ -55,19 +63,7 @@ void main() {
     users = _MockUsersDAO();
     final database = MockDatabaseService();
     when(() => database.users).thenReturn(users);
-    final authBloc = MockAuthBloc();
-    when(() => authBloc.currentUserData).thenReturn(
-      const User(
-        uid: 'manager-id',
-        name: 'أمين الخدمة',
-        permissions: PermissionsSet.fromSet({
-          UserPermission.approved,
-          UserPermission.readAllData,
-          UserPermission.writeAllData,
-          UserPermission.manageAllUsers,
-        }),
-      ),
-    );
+    authBloc = MockAuthBloc();
     final preferences = MockUserPreferencesService();
     when(() => preferences.themeChoice).thenReturn(ThemeChoice.light);
     when(() => preferences.greatFeastTheme).thenReturn(false);
@@ -94,7 +90,18 @@ void main() {
   });
   tearDown(defaultTearDown);
 
-  Future<void> pumpViewOf(WidgetTester tester, User user) async {
+  Future<void> pumpViewOf(
+    WidgetTester tester,
+    User user, {
+    required Set<UserPermission> viewerPermissions,
+  }) async {
+    when(() => authBloc.currentUserData).thenReturn(
+      User(
+        uid: 'manager-id',
+        name: 'أمين الخدمة',
+        permissions: PermissionsSet.fromSet(viewerPermissions),
+      ),
+    );
     final liveUser = StreamController<User?>()..add(user);
     addTearDown(liveUser.close);
     when(
@@ -120,7 +127,11 @@ void main() {
   testWidgets('the fingerprint bot is presented as an automated account', (
     tester,
   ) async {
-    await pumpViewOf(tester, fingerprintBot);
+    await pumpViewOf(
+      tester,
+      fingerprintBot,
+      viewerPermissions: userManagerPermissions,
+    );
 
     expect(
       find.byKey(
@@ -133,7 +144,11 @@ void main() {
   testWidgets('a user manager is not offered to approve the fingerprint bot', (
     tester,
   ) async {
-    await pumpViewOf(tester, fingerprintBot);
+    await pumpViewOf(
+      tester,
+      fingerprintBot,
+      viewerPermissions: userManagerPermissions,
+    );
 
     expect(find.byKey(ViewUserScreenKeys.approveButton), findsNothing);
   });
@@ -141,39 +156,101 @@ void main() {
   testWidgets('a user manager is offered to approve an unapproved servant', (
     tester,
   ) async {
-    await pumpViewOf(tester, unapprovedServant);
+    await pumpViewOf(
+      tester,
+      unapprovedServant,
+      viewerPermissions: userManagerPermissions,
+    );
 
     expect(find.byKey(ViewUserScreenKeys.approveButton), findsOneWidget);
   });
 
   testWidgets('the fingerprint bot shows no invitation code', (tester) async {
-    await pumpViewOf(tester, fingerprintBot);
+    await pumpViewOf(
+      tester,
+      fingerprintBot,
+      viewerPermissions: userManagerPermissions,
+    );
 
     expect(find.byKey(UserInvitationCodeTileKeys.code), findsNothing);
   });
 
-  testWidgets('the fingerprint bot offers no password reset', (tester) async {
-    await pumpViewOf(tester, fingerprintBot);
+  testWidgets('a bot that never signed in shows no invitation code', (
+    tester,
+  ) async {
+    final botWithoutAccount = User(
+      uid: 'viewed-id',
+      name: 'بصمة الحضور',
+      userType: UserType.fingerprintBot,
+      invitation: unclaimedInvitation,
+      currentUserCanManageThisUser: true,
+    );
 
-    expect(find.byType(SendPasswordResetButton), findsNothing);
+    await pumpViewOf(
+      tester,
+      botWithoutAccount,
+      viewerPermissions: userManagerPermissions,
+    );
+
+    expect(find.byKey(UserInvitationCodeTileKeys.code), findsNothing);
+  });
+
+  testWidgets('an unapproved servant who never signed in shows the invitation '
+      'code', (tester) async {
+    final servantWithoutAccount = User(
+      uid: 'viewed-id',
+      name: 'مينا',
+      invitation: unclaimedInvitation,
+      currentUserCanManageThisUser: true,
+    );
+
+    await pumpViewOf(
+      tester,
+      servantWithoutAccount,
+      viewerPermissions: userManagerPermissions,
+    );
+
+    expect(find.byKey(UserInvitationCodeTileKeys.code), findsOneWidget);
+  });
+
+  testWidgets('the fingerprint bot offers no password reset', (tester) async {
+    await pumpViewOf(
+      tester,
+      fingerprintBot,
+      viewerPermissions: userManagerPermissions,
+    );
+
+    expect(find.byKey(SendPasswordResetButtonKeys.self), findsNothing);
   });
 
   testWidgets('an unapproved servant can be sent a password reset', (
     tester,
   ) async {
-    await pumpViewOf(tester, unapprovedServant);
+    await pumpViewOf(
+      tester,
+      unapprovedServant,
+      viewerPermissions: userManagerPermissions,
+    );
 
-    expect(find.byType(SendPasswordResetButton), findsOneWidget);
+    expect(find.byKey(SendPasswordResetButtonKeys.self), findsOneWidget);
   });
 
   testWidgets('the fingerprint bot cannot be edited', (tester) async {
-    await pumpViewOf(tester, fingerprintBot);
+    await pumpViewOf(
+      tester,
+      fingerprintBot,
+      viewerPermissions: userManagerPermissions,
+    );
 
     expect(find.byKey(ViewUserScreenKeys.editButton), findsNothing);
   });
 
   testWidgets('a servant the manager manages can be edited', (tester) async {
-    await pumpViewOf(tester, unapprovedServant);
+    await pumpViewOf(
+      tester,
+      unapprovedServant,
+      viewerPermissions: userManagerPermissions,
+    );
 
     expect(find.byKey(ViewUserScreenKeys.editButton), findsOneWidget);
   });

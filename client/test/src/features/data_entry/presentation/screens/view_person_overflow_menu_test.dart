@@ -26,19 +26,17 @@ void main() {
 
   late MockAuthBloc authBloc;
   late _MockPersonsDAO persons;
+  late _MockFingerprintIdsDAO fingerprintIdsDao;
 
   setUpAll(() => registerFallbackValue(Person(id: '', name: '')));
 
   setUp(() {
     authBloc = MockAuthBloc();
     persons = _MockPersonsDAO();
-    final fingerprintIds = _MockFingerprintIdsDAO();
-    when(
-      () => fingerprintIds.streamOfPerson(any()),
-    ).thenAnswer((_) => Stream.value([]));
+    fingerprintIdsDao = _MockFingerprintIdsDAO();
     final database = MockDatabaseService();
     when(() => database.persons).thenReturn(persons);
-    when(() => database.fingerprintIds).thenReturn(fingerprintIds);
+    when(() => database.fingerprintIds).thenReturn(fingerprintIdsDao);
     final preferences = MockUserPreferencesService();
     when(() => preferences.themeChoice).thenReturn(ThemeChoice.light);
     when(() => preferences.greatFeastTheme).thenReturn(false);
@@ -65,7 +63,11 @@ void main() {
     WidgetTester tester, {
     required Person person,
     required Set<UserPermission> viewerPermissions,
+    required List<PersonFingerprintId> fingerprintIds,
   }) async {
+    when(
+      () => fingerprintIdsDao.streamOfPerson(person.id),
+    ).thenAnswer((_) => Stream.value(fingerprintIds));
     when(() => authBloc.currentUserData).thenReturn(
       User(
         uid: 'viewer-id',
@@ -110,6 +112,7 @@ void main() {
           UserPermission.approved,
           UserPermission.manageFingerprintIds,
         },
+        fingerprintIds: const [],
       );
 
       await tester.tap(find.byKey(PersonOverflowMenuKeys.self));
@@ -136,6 +139,7 @@ void main() {
           UserPermission.approved,
           UserPermission.manageFingerprintIds,
         },
+        fingerprintIds: const [],
       );
       await tester.tap(find.byKey(PersonOverflowMenuKeys.self));
       await tester.pumpAndSettle();
@@ -166,9 +170,29 @@ void main() {
           UserPermission.approved,
           UserPermission.manageFingerprintIds,
         },
+        fingerprintIds: const [],
       );
 
       expect(find.byKey(PersonOverflowMenuKeys.self), findsNothing);
+    },
+  );
+
+  testWidgets(
+    'a fingerprint manager who may edit all data finds the overflow menu for a person not marked editable',
+    (tester) async {
+      await pumpPersonViewedBy(
+        tester,
+        person: readOnlyMina,
+        viewerPermissions: {
+          UserPermission.approved,
+          UserPermission.readAllData,
+          UserPermission.writeAllData,
+          UserPermission.manageFingerprintIds,
+        },
+        fingerprintIds: const [],
+      );
+
+      expect(find.byKey(PersonOverflowMenuKeys.self), findsOneWidget);
     },
   );
 
@@ -179,6 +203,7 @@ void main() {
         tester,
         person: editableMina,
         viewerPermissions: {UserPermission.approved},
+        fingerprintIds: const [],
       );
 
       expect(find.byKey(PersonOverflowMenuKeys.self), findsNothing);

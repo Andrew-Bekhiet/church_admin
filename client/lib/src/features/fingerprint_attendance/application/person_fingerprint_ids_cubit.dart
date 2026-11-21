@@ -5,15 +5,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PersonFingerprintIdsCubit extends Cubit<PersonFingerprintIdsState> {
   final String _personId;
-  final FingerprintIdsDAO _fingerprintIds;
+  final FingerprintIdsDAO _fingerprintIdsDao;
   late final StreamSubscription<List<PersonFingerprintId>> _subscription;
 
   PersonFingerprintIdsCubit({
     required this._personId,
-    FingerprintIdsDAO? fingerprintIds,
-  }) : _fingerprintIds = fingerprintIds ?? DatabaseService.I.fingerprintIds,
+    FingerprintIdsDAO? fingerprintIdsDao,
+  }) : _fingerprintIdsDao =
+           fingerprintIdsDao ?? DatabaseService.I.fingerprintIds,
        super(const PersonFingerprintIdsState()) {
-    _subscription = _fingerprintIds
+    _subscription = _fingerprintIdsDao
         .streamOfPerson(_personId)
         .listen(
           (fingerprintIds) => emit(state.loaded(fingerprintIds)),
@@ -25,7 +26,7 @@ class PersonFingerprintIdsCubit extends Cubit<PersonFingerprintIdsState> {
     final trimmedCode = employeeCode.trim();
 
     if (trimmedCode.isEmpty) {
-      return _emitWriteUnlessOneIsInProgress(
+      return _emitAsNewWriteUnlessOneIsInProgress(
         const FingerprintIdsWriteFailed(
           BlankFingerprintEmployeeCodeException(),
         ),
@@ -33,7 +34,7 @@ class PersonFingerprintIdsCubit extends Cubit<PersonFingerprintIdsState> {
     }
 
     await _runWriteUnlessOneIsInProgress(() async {
-      await _fingerprintIds.addEmployeeCode(
+      await _fingerprintIdsDao.addEmployeeCode(
         personId: _personId,
         employeeCode: trimmedCode,
       );
@@ -44,14 +45,15 @@ class PersonFingerprintIdsCubit extends Cubit<PersonFingerprintIdsState> {
 
   Future<void> remove(PersonFingerprintId fingerprintId) =>
       _runWriteUnlessOneIsInProgress(() async {
-        await _fingerprintIds.remove(fingerprintId.id);
+        await _fingerprintIdsDao.remove(fingerprintId.id);
 
         return FingerprintIdRemoved(fingerprintId.id);
       });
 
-  void _emitWriteUnlessOneIsInProgress(FingerprintIdsWrite write) {
+  void _emitAsNewWriteUnlessOneIsInProgress(FingerprintIdsWrite write) {
     if (state.write is FingerprintIdsWriteInProgress) return;
 
+    emit(state.withWrite(const NoFingerprintIdsWrite()));
     emit(state.withWrite(write));
   }
 

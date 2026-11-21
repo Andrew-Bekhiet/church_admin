@@ -39,7 +39,10 @@ class _PersonFingerprintIdsSheetState extends State<PersonFingerprintIdsSheet> {
 
     return BlocConsumer<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
       listenWhen: (previous, current) => previous.write != current.write,
-      listener: (_, state) => _showOutcomeOfWrite(state.write),
+      listener: (_, state) {
+        _clearFieldIfCodeAdded(state.write);
+        _recordWriteError(state.write);
+      },
       builder: (context, state) {
         final isWriting = state.write is FingerprintIdsWriteInProgress;
         final isEmployeeCodeBlank = _employeeCodeController.text.trim().isEmpty;
@@ -158,9 +161,11 @@ class _PersonFingerprintIdsSheetState extends State<PersonFingerprintIdsSheet> {
     );
   }
 
-  void _showOutcomeOfWrite(FingerprintIdsWrite write) {
+  void _clearFieldIfCodeAdded(FingerprintIdsWrite write) {
     if (write is FingerprintEmployeeCodeAdded) _employeeCodeController.clear();
+  }
 
+  void _recordWriteError(FingerprintIdsWrite write) {
     setState(
       () => _unacknowledgedWriteError = switch (write) {
         FingerprintIdsWriteFailed(:final error) => error,

@@ -14,6 +14,10 @@ class UserAccountCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final now = DateTime.now();
     final status = UserAccountStatus.of(user, now);
+    final isHumanAwaitingInvitationClaim =
+        user.userType.isHuman &&
+        user.authId == null &&
+        user.invitation?.isClaimed == false;
 
     return UserSectionCard(
       icon: Symbols.account_circle,
@@ -26,9 +30,7 @@ class UserAccountCard extends StatelessWidget {
             email: user.email,
           ),
           if (user.invitation case final invitation?
-              when !invitation.isClaimed &&
-                  user.authId == null &&
-                  user.userType.isHuman) ...[
+              when isHumanAwaitingInvitationClaim) ...[
             const Divider(height: 1),
             UserInvitationCodeTile(invitation: invitation),
           ],

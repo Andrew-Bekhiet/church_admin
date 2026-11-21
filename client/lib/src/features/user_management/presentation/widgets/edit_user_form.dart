@@ -3,7 +3,6 @@ import 'package:church_admin/src/features/user_management/presentation/widgets/u
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_invitation_field.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_person_link_field.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_section_card.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
@@ -24,13 +23,6 @@ class EditUserForm extends StatelessWidget {
     };
     final callerPermissions =
         AuthBloc.I.currentUserData?.permissions ?? const PermissionsSet.empty();
-    final grantablePermissionsBySection = UserPermission.values
-        .where(
-          (permission) =>
-              permission != UserPermission.approved &&
-              callerPermissions.contains(permission),
-        )
-        .groupListsBy((permission) => permission.section);
 
     return Column(
       spacing: 8,
@@ -75,26 +67,26 @@ class EditUserForm extends StatelessWidget {
             ],
           ),
         ),
-        for (final section in UserPermissionSection.values)
-          if (grantablePermissionsBySection[section] case final grantable?)
-            UserSectionCard(
-              key: EditUserFormKeys.permissionsSectionFor(section),
-              icon: section.icon,
-              title: section.title,
-              helper: section.helper,
-              child: Column(
-                children: [
-                  for (final permission in grantable)
-                    PermissionCheckWidget(
-                      key: EditUserFormKeys.permission(permission),
-                      permission: permission,
-                      permissions: draft.permissions,
-                      onToggle: cubit.togglePermission,
-                      subtitleText: permission.label,
-                    ),
-                ],
-              ),
+        for (final MapEntry(key: section, value: grantable)
+            in callerPermissions.groupedBySection.entries)
+          UserSectionCard(
+            key: EditUserFormKeys.permissionsSectionFor(section),
+            icon: section.icon,
+            title: section.title,
+            helper: section.helper,
+            child: Column(
+              children: [
+                for (final permission in grantable)
+                  PermissionCheckWidget(
+                    key: EditUserFormKeys.permission(permission),
+                    permission: permission,
+                    permissions: draft.permissions,
+                    onToggle: cubit.togglePermission,
+                    subtitleText: permission.label,
+                  ),
+              ],
             ),
+          ),
         ListTile(
           leading: const Icon(Symbols.admin_panel_settings),
           title: Text('أمين على', style: theme.textTheme.titleMedium),

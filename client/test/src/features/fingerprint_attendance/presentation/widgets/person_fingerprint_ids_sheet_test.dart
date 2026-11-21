@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
@@ -12,13 +13,13 @@ class _MockFingerprintIdsDAO extends Mock implements FingerprintIdsDAO {}
 
 void main() {
   final mina = Person(id: 'mina-id', name: 'مينا');
-  final oldCode = PersonFingerprintId(
+  final oldFingerprintId = PersonFingerprintId(
     id: 'old-code-id',
     employeeCode: '1042',
     addedAt: DateTime(2025, 3, 14, 12),
     addedBy: const User(uid: 'abanoub-id', name: 'أبانوب'),
   );
-  final newCode = PersonFingerprintId(
+  final newFingerprintId = PersonFingerprintId(
     id: 'new-code-id',
     employeeCode: '2077',
     addedAt: DateTime(2026, 1, 9, 12),
@@ -45,7 +46,7 @@ void main() {
     when(() => dao.streamOfPerson(mina.id)).thenAnswer((_) => fingerprintIds);
     final cubit = PersonFingerprintIdsCubit(
       personId: mina.id,
-      fingerprintIds: dao,
+      fingerprintIdsDao: dao,
     );
     addTearDown(cubit.close);
 
@@ -76,11 +77,14 @@ void main() {
   testWidgets('every fingerprint number of the person is listed', (
     tester,
   ) async {
-    await pumpSheetShowing(tester, Stream.value([oldCode, newCode]));
+    await pumpSheetShowing(
+      tester,
+      Stream.value([oldFingerprintId, newFingerprintId]),
+    );
 
     expect(
       [
-        for (final fingerprintId in [oldCode, newCode])
+        for (final fingerprintId in [oldFingerprintId, newFingerprintId])
           tester
               .widget<Text>(
                 find.byKey(
@@ -89,19 +93,40 @@ void main() {
               )
               .data,
       ],
-      [oldCode.employeeCode, newCode.employeeCode],
+      [oldFingerprintId.employeeCode, newFingerprintId.employeeCode],
     );
   });
 
   testWidgets('a fingerprint number names the user who added it', (
     tester,
   ) async {
-    await pumpSheetShowing(tester, Stream.value([oldCode, newCode]));
-
-    final addition = tester.widget<Text>(
-      find.byKey(PersonFingerprintIdTileKeys.additionFor(newCode.id)),
+    await pumpSheetShowing(
+      tester,
+      Stream.value([oldFingerprintId, newFingerprintId]),
     );
-    expect(addition.data, contains(newCode.addedBy.name));
+
+    final addedByAndDate = tester.widget<Text>(
+      find.byKey(
+        PersonFingerprintIdTileKeys.addedByAndDateFor(newFingerprintId.id),
+      ),
+    );
+    expect(addedByAndDate.data, contains(newFingerprintId.addedBy.name));
+  });
+
+  testWidgets('a fingerprint number shows the day it was added', (
+    tester,
+  ) async {
+    await pumpSheetShowing(tester, Stream.value([newFingerprintId]));
+
+    final addedByAndDate = tester.widget<Text>(
+      find.byKey(
+        PersonFingerprintIdTileKeys.addedByAndDateFor(newFingerprintId.id),
+      ),
+    );
+    expect(
+      addedByAndDate.data,
+      contains('${Unicode.LRI}2026/1/9${Unicode.PDI}'),
+    );
   });
 
   testWidgets('a person without fingerprint numbers sees what they are for', (
@@ -147,22 +172,22 @@ void main() {
   testWidgets('adding a number links the typed code to the person', (
     tester,
   ) async {
-    await pumpSheetShowing(tester, Stream.value([oldCode]));
+    await pumpSheetShowing(tester, Stream.value([oldFingerprintId]));
 
-    await submitEmployeeCode(tester, newCode.employeeCode);
+    await submitEmployeeCode(tester, newFingerprintId.employeeCode);
 
     verify(
       () => dao.addEmployeeCode(
         personId: mina.id,
-        employeeCode: newCode.employeeCode,
+        employeeCode: newFingerprintId.employeeCode,
       ),
     );
   });
 
   testWidgets('the field empties once the number is added', (tester) async {
-    await pumpSheetShowing(tester, Stream.value([oldCode]));
+    await pumpSheetShowing(tester, Stream.value([oldFingerprintId]));
 
-    await submitEmployeeCode(tester, newCode.employeeCode);
+    await submitEmployeeCode(tester, newFingerprintId.employeeCode);
 
     final field = tester.widget<TextField>(
       find.byKey(PersonFingerprintIdsSheetKeys.employeeCodeField),
@@ -176,17 +201,17 @@ void main() {
     when(
       () => dao.addEmployeeCode(
         personId: mina.id,
-        employeeCode: oldCode.employeeCode,
+        employeeCode: oldFingerprintId.employeeCode,
       ),
     ).thenThrow(
       FingerprintEmployeeCodeAlreadyLinkedException(
-        employeeCode: oldCode.employeeCode,
+        employeeCode: oldFingerprintId.employeeCode,
         upstreamMessage: 'duplicate key',
       ),
     );
-    await pumpSheetShowing(tester, Stream.value([oldCode]));
+    await pumpSheetShowing(tester, Stream.value([oldFingerprintId]));
 
-    await submitEmployeeCode(tester, oldCode.employeeCode);
+    await submitEmployeeCode(tester, oldFingerprintId.employeeCode);
 
     expect(
       find.byKey(
@@ -202,22 +227,22 @@ void main() {
     when(
       () => dao.addEmployeeCode(
         personId: mina.id,
-        employeeCode: oldCode.employeeCode,
+        employeeCode: oldFingerprintId.employeeCode,
       ),
     ).thenThrow(
       FingerprintEmployeeCodeAlreadyLinkedException(
-        employeeCode: oldCode.employeeCode,
+        employeeCode: oldFingerprintId.employeeCode,
         upstreamMessage: 'duplicate key',
       ),
     );
-    await pumpSheetShowing(tester, Stream.value([oldCode]));
+    await pumpSheetShowing(tester, Stream.value([oldFingerprintId]));
 
-    await submitEmployeeCode(tester, oldCode.employeeCode);
+    await submitEmployeeCode(tester, oldFingerprintId.employeeCode);
 
     final field = tester.widget<TextField>(
       find.byKey(PersonFingerprintIdsSheetKeys.employeeCodeField),
     );
-    expect(field.controller?.text, oldCode.employeeCode);
+    expect(field.controller?.text, oldFingerprintId.employeeCode);
   });
 
   testWidgets('an add that fails for another reason reports a failed save', (
@@ -226,12 +251,12 @@ void main() {
     when(
       () => dao.addEmployeeCode(
         personId: mina.id,
-        employeeCode: newCode.employeeCode,
+        employeeCode: newFingerprintId.employeeCode,
       ),
     ).thenThrow(Exception('offline'));
-    await pumpSheetShowing(tester, Stream.value([oldCode]));
+    await pumpSheetShowing(tester, Stream.value([oldFingerprintId]));
 
-    await submitEmployeeCode(tester, newCode.employeeCode);
+    await submitEmployeeCode(tester, newFingerprintId.employeeCode);
 
     expect(
       find.byKey(PersonFingerprintIdsSheetKeys.writeFailedMessage),
@@ -243,20 +268,20 @@ void main() {
     when(
       () => dao.addEmployeeCode(
         personId: mina.id,
-        employeeCode: oldCode.employeeCode,
+        employeeCode: oldFingerprintId.employeeCode,
       ),
     ).thenThrow(
       FingerprintEmployeeCodeAlreadyLinkedException(
-        employeeCode: oldCode.employeeCode,
+        employeeCode: oldFingerprintId.employeeCode,
         upstreamMessage: 'duplicate key',
       ),
     );
-    await pumpSheetShowing(tester, Stream.value([oldCode]));
-    await submitEmployeeCode(tester, oldCode.employeeCode);
+    await pumpSheetShowing(tester, Stream.value([oldFingerprintId]));
+    await submitEmployeeCode(tester, oldFingerprintId.employeeCode);
 
     await tester.enterText(
       find.byKey(PersonFingerprintIdsSheetKeys.employeeCodeField),
-      newCode.employeeCode,
+      newFingerprintId.employeeCode,
     );
     await tester.pump();
 
@@ -268,24 +293,50 @@ void main() {
     );
   });
 
-  testWidgets('a blank number cannot be added', (tester) async {
-    await pumpSheetShowing(tester, Stream.value([oldCode]));
+  testWidgets('a blank number cannot be added with the add button', (
+    tester,
+  ) async {
+    await pumpSheetShowing(tester, Stream.value([oldFingerprintId]));
 
-    await submitEmployeeCode(tester, '   ');
+    await tester.enterText(
+      find.byKey(PersonFingerprintIdsSheetKeys.employeeCodeField),
+      '   ',
+    );
+    await tester.pump();
 
-    verifyNever(
-      () => dao.addEmployeeCode(
-        personId: any(named: 'personId'),
-        employeeCode: any(named: 'employeeCode'),
-      ),
+    final addButton = tester.widget<FilledButton>(
+      find.byKey(PersonFingerprintIdsSheetKeys.addButton),
+    );
+    expect(addButton.enabled, isFalse);
+  });
+
+  testWidgets('a blank number submitted from the keyboard is refused beside '
+      'the field', (tester) async {
+    await pumpSheetShowing(tester, Stream.value([oldFingerprintId]));
+
+    await tester.enterText(
+      find.byKey(PersonFingerprintIdsSheetKeys.employeeCodeField),
+      '   ',
+    );
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pump();
+
+    expect(
+      find.byKey(PersonFingerprintIdsSheetKeys.blankEmployeeCodeMessage),
+      findsOneWidget,
     );
   });
 
   testWidgets('removing a number asks for confirmation first', (tester) async {
-    await pumpSheetShowing(tester, Stream.value([oldCode, newCode]));
+    await pumpSheetShowing(
+      tester,
+      Stream.value([oldFingerprintId, newFingerprintId]),
+    );
 
     await tester.tap(
-      find.byKey(PersonFingerprintIdTileKeys.removeButtonFor(oldCode.id)),
+      find.byKey(
+        PersonFingerprintIdTileKeys.removeButtonFor(oldFingerprintId.id),
+      ),
     );
     await tester.pumpAndSettle();
 
@@ -296,23 +347,33 @@ void main() {
   testWidgets('confirming the removal removes only that number', (
     tester,
   ) async {
-    await pumpSheetShowing(tester, Stream.value([oldCode, newCode]));
+    await pumpSheetShowing(
+      tester,
+      Stream.value([oldFingerprintId, newFingerprintId]),
+    );
     await tester.tap(
-      find.byKey(PersonFingerprintIdTileKeys.removeButtonFor(oldCode.id)),
+      find.byKey(
+        PersonFingerprintIdTileKeys.removeButtonFor(oldFingerprintId.id),
+      ),
     );
     await tester.pumpAndSettle();
 
     await tester.tap(find.byKey(ConfirmationDialogKeys.confirmButton));
     await tester.pumpAndSettle();
 
-    verify(() => dao.remove(oldCode.id));
-    verifyNever(() => dao.remove(newCode.id));
+    verify(() => dao.remove(oldFingerprintId.id));
+    verifyNever(() => dao.remove(newFingerprintId.id));
   });
 
   testWidgets('cancelling the removal keeps the number', (tester) async {
-    await pumpSheetShowing(tester, Stream.value([oldCode, newCode]));
+    await pumpSheetShowing(
+      tester,
+      Stream.value([oldFingerprintId, newFingerprintId]),
+    );
     await tester.tap(
-      find.byKey(PersonFingerprintIdTileKeys.removeButtonFor(oldCode.id)),
+      find.byKey(
+        PersonFingerprintIdTileKeys.removeButtonFor(oldFingerprintId.id),
+      ),
     );
     await tester.pumpAndSettle();
 

@@ -102,14 +102,14 @@ enum UserPermission implements LabeledEnum {
     _ => UserPermissionSection.general,
   };
 
-  UserPermission get currentName => switch (this) {
+  UserPermission get currentPermission => switch (this) {
     UserPermission.maintenanceNotifications => UserPermission.appMaintenance,
     _ => this,
   };
 
-  Set<UserPermission> get everyNameGrantingIt => {
-    for (final permission in UserPermission.values)
-      if (permission.currentName == this) permission,
+  Set<UserPermission> get permissionsFoldedIntoIt => {
+    for (final permission in values)
+      if (permission.currentPermission == currentPermission) permission,
   };
 
   String get subtitle => this != UserPermission.approved

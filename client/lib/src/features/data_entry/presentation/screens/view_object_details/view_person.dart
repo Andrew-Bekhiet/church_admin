@@ -83,6 +83,6 @@ class _ViewPersonState extends State<ViewPerson> {
   }
 }
 
-abstract final class ViewPersonKeys extends WidgetKeys {
+abstract final class ViewPersonKeys {
   static const Key editButton = ValueKey('View Person Edit Button Key');
 }

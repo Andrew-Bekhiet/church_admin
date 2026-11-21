@@ -26,17 +26,22 @@ void main() {
   });
 
   group('User.fromJson user type', () {
-    User userOfType(String? serverName) => User.fromJson({
+    User userOfType(String? storedName) => User.fromJson({
       'uid': 'uid',
       'name': 'account',
-      'userType': ?serverName,
+      'userType': ?storedName,
     });
 
-    test('reads the fingerprint bot', () {
-      expect(
-        userOfType(UserType.fingerprintBot.serverName).userType,
-        UserType.fingerprintBot,
-      );
+    test('reads the fingerprint bot from its stored name', () {
+      expect(userOfType('fingerprint_bot').userType, UserType.fingerprintBot);
+    });
+
+    test('reads the maintenance bot from its stored name', () {
+      expect(userOfType('maintenance_bot').userType, UserType.maintenanceBot);
+    });
+
+    test('reads a human from its stored name', () {
+      expect(userOfType('human').userType, UserType.human);
     });
 
     test('treats a type this app version does not know as non-human', () {
@@ -100,6 +105,16 @@ void main() {
       final user = userWith({UserPermission.manageFingerprintIds});
 
       expect(user.canManageFingerprintIdsOf(readOnlyPerson), isFalse);
+    });
+
+    test('a holder of manageFingerprintIds who may edit all data can manage '
+        'a person not marked editable', () {
+      final user = userWith({
+        UserPermission.manageFingerprintIds,
+        UserPermission.writeAllData,
+      });
+
+      expect(user.canManageFingerprintIdsOf(readOnlyPerson), isTrue);
     });
 
     test('refuses a user without the permission on a person they can edit', () {

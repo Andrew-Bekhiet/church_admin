@@ -11,13 +11,13 @@ void main() {
   group('PersonFingerprintIdsCubit', () {
     const mina = 'mina-person-id';
     const servant = User(uid: 'servant', name: 'Servant');
-    final gateCode = PersonFingerprintId(
+    final gateFingerprintId = PersonFingerprintId(
       id: 'gate',
       employeeCode: '1042',
       addedAt: DateTime.utc(2026, 11, 6, 9),
       addedBy: servant,
     );
-    final hallCode = PersonFingerprintId(
+    final hallFingerprintId = PersonFingerprintId(
       id: 'hall',
       employeeCode: '77',
       addedAt: DateTime.utc(2026, 11, 13, 9),
@@ -28,7 +28,7 @@ void main() {
     late StreamController<List<PersonFingerprintId>> serverCodes;
 
     PersonFingerprintIdsCubit cubitForMina() =>
-        PersonFingerprintIdsCubit(personId: mina, fingerprintIds: dao);
+        PersonFingerprintIdsCubit(personId: mina, fingerprintIdsDao: dao);
 
     setUp(() {
       dao = _MockFingerprintIdsDAO();
@@ -54,31 +54,34 @@ void main() {
     blocTest<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
       'shows the codes the person holds',
       build: cubitForMina,
-      act: (_) => serverCodes.add([gateCode, hallCode]),
-      verify: (cubit) =>
-          expect(cubit.state.fingerprintIds, [gateCode, hallCode]),
+      act: (_) => serverCodes.add([gateFingerprintId, hallFingerprintId]),
+      verify: (cubit) => expect(cubit.state.fingerprintIds, [
+        gateFingerprintId,
+        hallFingerprintId,
+      ]),
     );
 
     blocTest<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
       'a failed load is reported and keeps the codes already shown',
       build: cubitForMina,
       act: (_) => serverCodes
-        ..add([gateCode])
+        ..add([gateFingerprintId])
         ..addError(StateError('offline')),
       verify: (cubit) {
         expect(cubit.state.loadError, isStateError);
-        expect(cubit.state.fingerprintIds, [gateCode]);
+        expect(cubit.state.fingerprintIds, [gateFingerprintId]);
       },
     );
 
     blocTest<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
       'an added code is sent trimmed for that person',
       build: cubitForMina,
-      act: (cubit) => cubit.addEmployeeCode(' ${gateCode.employeeCode} '),
+      act: (cubit) =>
+          cubit.addEmployeeCode(' ${gateFingerprintId.employeeCode} '),
       verify: (_) => verify(
         () => dao.addEmployeeCode(
           personId: mina,
-          employeeCode: gateCode.employeeCode,
+          employeeCode: gateFingerprintId.employeeCode,
         ),
       ),
     );
@@ -86,10 +89,10 @@ void main() {
     blocTest<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
       'reports the code as added once the server accepts it',
       build: cubitForMina,
-      act: (cubit) => cubit.addEmployeeCode(gateCode.employeeCode),
+      act: (cubit) => cubit.addEmployeeCode(gateFingerprintId.employeeCode),
       verify: (cubit) => expect(
         cubit.state.write,
-        FingerprintEmployeeCodeAdded(gateCode.employeeCode),
+        FingerprintEmployeeCodeAdded(gateFingerprintId.employeeCode),
       ),
     );
 
@@ -108,22 +111,83 @@ void main() {
     );
 
     blocTest<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
-      'a code the server rejects is reported with the server error',
+      'every blank code submitted in a row is refused anew',
+      build: cubitForMina,
+      act: (cubit) async {
+        await cubit.addEmployeeCode('   ');
+        await cubit.addEmployeeCode('   ');
+      },
+      expect: () => const [
+        PersonFingerprintIdsState(),
+        PersonFingerprintIdsState(
+          write: FingerprintIdsWriteFailed(
+            BlankFingerprintEmployeeCodeException(),
+          ),
+        ),
+        PersonFingerprintIdsState(),
+        PersonFingerprintIdsState(
+          write: FingerprintIdsWriteFailed(
+            BlankFingerprintEmployeeCodeException(),
+          ),
+        ),
+      ],
+    );
+
+    blocTest<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
+      'a second code can be added after the first one was added',
+      build: cubitForMina,
+      act: (cubit) async {
+        await cubit.addEmployeeCode(gateFingerprintId.employeeCode);
+        await cubit.addEmployeeCode(hallFingerprintId.employeeCode);
+      },
+      verify: (cubit) => expect(
+        cubit.state.write,
+        FingerprintEmployeeCodeAdded(hallFingerprintId.employeeCode),
+      ),
+    );
+
+    blocTest<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
+      'a code that failed to save can be added on a second attempt',
+      setUp: () {
+        final outcomesOfAttempts = [
+          () => Future<void>.error(Exception('offline')),
+          Future<void>.value,
+        ].iterator;
+        when(
+          () => dao.addEmployeeCode(
+            personId: mina,
+            employeeCode: gateFingerprintId.employeeCode,
+          ),
+        ).thenAnswer((_) => (outcomesOfAttempts..moveNext()).current());
+      },
+      build: cubitForMina,
+      act: (cubit) async {
+        await cubit.addEmployeeCode(gateFingerprintId.employeeCode);
+        await cubit.addEmployeeCode(gateFingerprintId.employeeCode);
+      },
+      verify: (cubit) => expect(
+        cubit.state.write,
+        FingerprintEmployeeCodeAdded(gateFingerprintId.employeeCode),
+      ),
+    );
+
+    blocTest<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
+      'a code already linked to someone is reported as already linked',
       setUp: () {
         when(
           () => dao.addEmployeeCode(
             personId: mina,
-            employeeCode: gateCode.employeeCode,
+            employeeCode: gateFingerprintId.employeeCode,
           ),
         ).thenThrow(
           FingerprintEmployeeCodeAlreadyLinkedException(
-            employeeCode: gateCode.employeeCode,
+            employeeCode: gateFingerprintId.employeeCode,
             upstreamMessage: 'duplicate',
           ),
         );
       },
       build: cubitForMina,
-      act: (cubit) => cubit.addEmployeeCode(gateCode.employeeCode),
+      act: (cubit) => cubit.addEmployeeCode(gateFingerprintId.employeeCode),
       verify: (cubit) => expect(
         cubit.state.write,
         isA<FingerprintIdsWriteFailed>().having(
@@ -142,21 +206,21 @@ void main() {
         when(
           () => dao.addEmployeeCode(
             personId: mina,
-            employeeCode: gateCode.employeeCode,
+            employeeCode: gateFingerprintId.employeeCode,
           ),
         ).thenAnswer((_) => firstSave.future);
       },
       build: cubitForMina,
       act: (cubit) async {
-        unawaited(cubit.addEmployeeCode(gateCode.employeeCode));
-        await cubit.addEmployeeCode(hallCode.employeeCode);
+        unawaited(cubit.addEmployeeCode(gateFingerprintId.employeeCode));
+        await cubit.addEmployeeCode(hallFingerprintId.employeeCode);
       },
       verify: (cubit) {
         expect(cubit.state.write, const FingerprintIdsWriteInProgress());
         verifyNever(
           () => dao.addEmployeeCode(
             personId: mina,
-            employeeCode: hallCode.employeeCode,
+            employeeCode: hallFingerprintId.employeeCode,
           ),
         );
       },
@@ -165,25 +229,25 @@ void main() {
     blocTest<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
       'removing a code asks the server to remove that code',
       build: cubitForMina,
-      act: (cubit) => cubit.remove(hallCode),
-      verify: (_) => verify(() => dao.remove(hallCode.id)),
+      act: (cubit) => cubit.remove(hallFingerprintId),
+      verify: (_) => verify(() => dao.remove(hallFingerprintId.id)),
     );
 
     blocTest<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
       'reports the code as removed once the server removes it',
       build: cubitForMina,
-      act: (cubit) => cubit.remove(hallCode),
+      act: (cubit) => cubit.remove(hallFingerprintId),
       verify: (cubit) =>
-          expect(cubit.state.write, FingerprintIdRemoved(hallCode.id)),
+          expect(cubit.state.write, FingerprintIdRemoved(hallFingerprintId.id)),
     );
 
     blocTest<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
       'a removal the server refuses is reported',
       setUp: () => when(
-        () => dao.remove(hallCode.id),
-      ).thenThrow(FingerprintIdNotRemovedException(hallCode.id)),
+        () => dao.remove(hallFingerprintId.id),
+      ).thenThrow(FingerprintIdNotRemovedException(hallFingerprintId.id)),
       build: cubitForMina,
-      act: (cubit) => cubit.remove(hallCode),
+      act: (cubit) => cubit.remove(hallFingerprintId),
       verify: (cubit) => expect(
         cubit.state.write,
         isA<FingerprintIdsWriteFailed>().having(

@@ -3,36 +3,43 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
 enum UserType {
-  human(serverName: 'human', icon: Symbols.person),
+  human(storedName: 'human', icon: Symbols.person),
   fingerprintBot(
-    serverName: 'fingerprint_bot',
+    storedName: 'fingerprint_bot',
     icon: Symbols.fingerprint,
     automatedAccountDescription: 'يسجّل الحضور تلقائيًا من جهاز البصمة',
   ),
-  otherNonHuman(
-    serverName: 'other_non_human',
+  maintenanceBot(
+    storedName: 'maintenance_bot',
+    icon: Symbols.build,
+    automatedAccountDescription: 'يرسل تنبيهات صيانة التطبيق تلقائيًا',
+  ),
+  unknownNonHuman(
+    storedName: 'unknown_non_human',
     icon: Symbols.smart_toy,
     automatedAccountDescription: 'يعمل تلقائيًا ولا يستخدمه أحد الخدام',
   );
 
-  final String serverName;
+  final String storedName;
   final IconData icon;
   final String? automatedAccountDescription;
 
   bool get isHuman => this == UserType.human;
 
+  bool get isAutomated => !isHuman;
+
   const UserType({
-    required this.serverName,
+    required this.storedName,
     required this.icon,
     this.automatedAccountDescription,
   });
 
-  static UserType fromServerName(String? serverName) {
-    if (serverName == null) return UserType.human;
+  static UserType fromStoredName(String? storedName) {
+    if (storedName == null) return UserType.human;
 
-    return values.firstWhereOrNull((type) => type.serverName == serverName) ??
-        UserType.otherNonHuman;
+    return values.firstWhereOrNull((type) => type.storedName == storedName) ??
+        UserType.unknownNonHuman;
   }
 
-  static String toServerName(UserType type) => type.serverName;
+  static String toStoredName(UserType type) => type.storedName;
 }

@@ -62,7 +62,7 @@ class User extends ViewableWithIDAndImage
   @QueryableField(label: 'currentUserCanManageThisUser', codeOnly: true)
   final bool currentUserCanManageThisUser;
 
-  @JsonKey(fromJson: UserType.fromServerName, toJson: UserType.toServerName)
+  @JsonKey(fromJson: UserType.fromStoredName, toJson: UserType.toStoredName)
   final UserType userType;
 
   @override
@@ -113,7 +113,9 @@ class User extends ViewableWithIDAndImage
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
   bool canEditObject(ViewableWithID object) {
-    if (object case User(:final userType) when !userType.isHuman) return false;
+    if (object case User(:final userType) when userType.isAutomated) {
+      return false;
+    }
     if (permissions.writeAllData) return true;
 
     return switch (object) {
@@ -150,6 +152,15 @@ class UserFields extends _UserFields {
     operators: {...StringOperator.values},
     isCodeOnly: true,
     getValue: (obj) => obj is User ? obj.authId : null,
+  );
+
+  FieldMetadata<String> get userType => FieldMetadata<String>(
+    parentType: User,
+    name: 'userType',
+    label: 'نوع الحساب',
+    operators: {...StringOperator.values},
+    isCodeOnly: true,
+    getValue: (obj) => obj is User ? obj.userType.storedName : null,
   );
 
   FieldMetadata<AggregateData> get permissionsAggregate => FieldMetadata(

@@ -29,14 +29,40 @@ void main() {
       expect(permissions, {UserPermission.appMaintenance});
     });
 
-    test('a user holding both maintenance permission names holds '
-        'app maintenance once', () {
-      final permissions = PermissionsSet.parse({
-        UserPermission.maintenanceNotifications.name,
-        UserPermission.appMaintenance.name,
+    test('held permissions are grouped by section in the order the app lists '
+        'them, leaving out account approval', () {
+      const permissions = PermissionsSet.fromSet({
+        UserPermission.manageFingerprintIds,
+        UserPermission.approved,
+        UserPermission.readAllData,
+        UserPermission.deleteData,
+        UserPermission.manageAllUsers,
       });
 
-      expect(permissions, {UserPermission.appMaintenance});
+      expect(
+        permissions.groupedBySection.entries.map((e) => [e.key, e.value]),
+        [
+          [
+            UserPermissionSection.general,
+            [UserPermission.manageAllUsers, UserPermission.readAllData],
+          ],
+          [
+            UserPermissionSection.scopeBound,
+            [UserPermission.deleteData, UserPermission.manageFingerprintIds],
+          ],
+        ],
+      );
+    });
+
+    test('a section none of the held permissions belongs to is left out', () {
+      const permissions = PermissionsSet.fromSet({
+        UserPermission.approved,
+        UserPermission.deleteData,
+      });
+
+      expect(permissions.groupedBySection.keys, [
+        UserPermissionSection.scopeBound,
+      ]);
     });
   });
 }

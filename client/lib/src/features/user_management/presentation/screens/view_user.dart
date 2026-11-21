@@ -18,7 +18,7 @@ class ViewUser extends StatefulWidget {
   State<ViewUser> createState() => _ViewUserState();
 }
 
-abstract final class ViewUserScreenKeys {
+abstract final class ViewUserScreenKeys extends WidgetKeys {
   static const Key editButton = ValueKey('Edit User Button Key');
   static const Key linkedPerson = ValueKey('User Linked Person Key');
   static const Key approveButton = ValueKey(
@@ -41,7 +41,7 @@ class _ViewUserState extends State<ViewUser> {
       object: widget.user,
       objectStream: stream,
       detailsBuilder: (context, user) {
-        if (!user.userType.isHuman) {
+        if (user.userType.isAutomated) {
           return SliverToBoxAdapter(child: UserAccountCard(user));
         }
 

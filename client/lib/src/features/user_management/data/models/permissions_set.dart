@@ -26,6 +26,20 @@ class PermissionsSet extends DelegatingSet<UserPermission> with Equatable {
 
   bool get isSuperAdmin => readAllData || writeAllData || manageAllUsers;
 
+  Map<UserPermissionSection, List<UserPermission>> get groupedBySection {
+    final heldBySection = UserPermission.values
+        .where(
+          (permission) =>
+              permission != UserPermission.approved && contains(permission),
+        )
+        .groupListsBy((permission) => permission.section);
+
+    return {
+      for (final section in UserPermissionSection.values)
+        if (heldBySection[section] case final held?) section: held,
+    };
+  }
+
   @override
   List<Object?> get props => toList();
 
@@ -38,7 +52,7 @@ class PermissionsSet extends DelegatingSet<UserPermission> with Equatable {
               (p) => UserPermission.values.firstWhereOrNull((e) => e.name == p),
             )
             .nonNulls
-            .map((permission) => permission.currentName)
+            .map((permission) => permission.currentPermission)
             .toSet(),
       );
 

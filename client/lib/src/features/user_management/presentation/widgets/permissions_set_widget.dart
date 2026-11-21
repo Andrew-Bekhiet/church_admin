@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_section_card.dart';
-import 'package:collection/collection.dart';
 import 'package:material_ui/material_ui.dart';
 
 class PermissionsSetWidget extends StatelessWidget {
@@ -12,35 +11,27 @@ class PermissionsSetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final grantedPermissionsBySection = UserPermission.values
-        .where(
-          (permission) =>
-              permission != UserPermission.approved &&
-              permissions.contains(permission),
-        )
-        .groupListsBy((permission) => permission.section);
-
     return Column(
       mainAxisSize: .min,
       children: [
-        for (final section in UserPermissionSection.values)
-          if (grantedPermissionsBySection[section] case final granted?)
-            UserSectionCard(
-              key: PermissionsSetWidgetKeys.sectionFor(section),
-              icon: section.icon,
-              title: section.title,
-              helper: section.helper,
-              child: Column(
-                children: [
-                  for (final permission in granted)
-                    ListTile(
-                      key: PermissionsSetWidgetKeys.permissionFor(permission),
-                      leading: Icon(permission.icon),
-                      title: Text(permission.label),
-                    ),
-                ],
-              ),
+        for (final MapEntry(key: section, value: granted)
+            in permissions.groupedBySection.entries)
+          UserSectionCard(
+            key: PermissionsSetWidgetKeys.sectionFor(section),
+            icon: section.icon,
+            title: section.title,
+            helper: section.helper,
+            child: Column(
+              children: [
+                for (final permission in granted)
+                  ListTile(
+                    key: PermissionsSetWidgetKeys.permissionFor(permission),
+                    leading: Icon(permission.icon),
+                    title: Text(permission.label),
+                  ),
+              ],
             ),
+          ),
       ],
     );
   }

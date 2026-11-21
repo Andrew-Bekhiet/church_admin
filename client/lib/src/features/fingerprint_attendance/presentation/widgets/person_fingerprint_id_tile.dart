@@ -34,7 +34,7 @@ class PersonFingerprintIdTile extends StatelessWidget {
       subtitle: Text(
         'بواسطة ${fingerprintId.addedBy.name} • '
         '${Unicode.LRI}$addedOn${Unicode.PDI}',
-        key: PersonFingerprintIdTileKeys.additionFor(fingerprintId.id),
+        key: PersonFingerprintIdTileKeys.addedByAndDateFor(fingerprintId.id),
       ),
       trailing: IconButton(
         key: PersonFingerprintIdTileKeys.removeButtonFor(fingerprintId.id),
@@ -50,8 +50,9 @@ class PersonFingerprintIdTile extends StatelessWidget {
 abstract final class PersonFingerprintIdTileKeys extends WidgetKeys {
   static Key employeeCodeFor(String fingerprintId) =>
       ValueKey((PersonFingerprintIdTileKeys, #employeeCodeFor, fingerprintId));
-  static Key additionFor(String fingerprintId) =>
-      ValueKey((PersonFingerprintIdTileKeys, #additionFor, fingerprintId));
+  static Key addedByAndDateFor(String fingerprintId) => ValueKey(
+    (PersonFingerprintIdTileKeys, #addedByAndDateFor, fingerprintId),
+  );
   static Key removeButtonFor(String fingerprintId) =>
       ValueKey((PersonFingerprintIdTileKeys, #removeButtonFor, fingerprintId));
 }

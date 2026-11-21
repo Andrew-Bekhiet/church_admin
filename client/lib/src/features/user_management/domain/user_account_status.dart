@@ -15,7 +15,7 @@ enum UserAccountStatus {
   const UserAccountStatus(this.icon, this.label);
 
   static UserAccountStatus of(User user, DateTime now) => switch (user) {
-    User(:final userType) when !userType.isHuman => automated,
+    User(:final userType) when userType.isAutomated => automated,
     User(authId: final _?) => claimed,
     User(:final invitation?) when invitation.isActiveAt(now) =>
       pendingInvitation,

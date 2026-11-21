@@ -17,20 +17,21 @@ class UserAccountStatusBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = ColorScheme.of(context);
     final textTheme = TextTheme.of(context);
-    final automatedAccountDescription = userType.automatedAccountDescription;
+    final descriptionOrEmail = userType.automatedAccountDescription ?? email;
+    final isShowingNoEmailPlaceholder = descriptionOrEmail == null;
 
     return ListTile(
       key: UserAccountStatusBannerKeys.selfFor(status),
       leading: CircleAvatar(
         backgroundColor: status.container(colorScheme),
         foregroundColor: status.color(colorScheme),
-        child: Icon(userType.isHuman ? status.icon : userType.icon),
+        child: Icon(userType.isAutomated ? userType.icon : status.icon),
       ),
       title: Text(status.label, style: textTheme.titleMedium),
       subtitle: Text(
-        automatedAccountDescription ?? email ?? 'بدون بريد إلكتروني',
+        descriptionOrEmail ?? 'بدون بريد إلكتروني',
         style: textTheme.bodyMedium?.copyWith(
-          color: automatedAccountDescription == null && email == null
+          color: isShowingNoEmailPlaceholder
               ? colorScheme.onSurfaceVariant
               : null,
         ),
