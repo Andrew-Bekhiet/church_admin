@@ -237,6 +237,47 @@ void main() {
     expect(cachedPersonIds(), isEmpty);
   });
 
+  test(
+    'the user restored from the device on launch keeps the cache filled under '
+    'the same access',
+    () async {
+      final user = scopedUser.copyWith(
+        adminOn: [
+          scopeA.copyWith(
+            serviceStudyYearData: StudyYear(order: 10, name: 'أولى ثانوي'),
+            serviceGender: Gender.female,
+            serviceAllowEdit: true,
+            serviceAllowRecordAttendance: true,
+            classes: const [Class(id: 'class-a', name: 'Class A')],
+          ),
+          const AdminOnData(
+            permissionId: 'area-scope',
+            area: Area(id: 'area-a', name: 'Area A'),
+            areaAllowExport: true,
+          ),
+          const AdminOnData(
+            permissionId: 'group-scope',
+            group: Group(id: 'group-a', name: 'Group A'),
+            groupAdminOnUsers: true,
+            groupAllowEdit: true,
+          ),
+        ],
+      );
+      final restoredFromDevice = User.fromJson(
+        jsonDecode(jsonEncode(user.toJson())) as Json,
+      );
+      final userData = BehaviorSubject<User?>.seeded(restoredFromDevice);
+      addTearDown(userData.close);
+      await startWiper(userData, refetchedPersons: []);
+      cachedPhotos.add(photo);
+
+      userData.add(user);
+      await pumpEventQueue();
+
+      expect(cachedPhotos, {photo});
+    },
+  );
+
   test('an update that keeps the same access keeps cached photos', () async {
     final user = BehaviorSubject<User?>.seeded(scopedUser);
     addTearDown(user.close);
