@@ -153,9 +153,9 @@ export async function makeServantOf(
   return uid;
 }
 
-export async function seedServant(serviceId: string): Promise<SeededPerson> {
-  const homeServiceId = await seedService();
-  const servant = await seedMemberWithEmployeeCode(homeServiceId);
+export async function seedServantOnlyOn(serviceId: string): Promise<SeededPerson> {
+  const otherServiceId = await seedService();
+  const servant = await seedMemberWithEmployeeCode(otherServiceId);
 
   await makeServantOf(serviceId, servant.personId);
 
@@ -228,4 +228,8 @@ export async function lastSyncedAt(): Promise<string | undefined> {
   );
 
   return rows[0]?.[0];
+}
+
+export async function resetLastSyncedAt(): Promise<void> {
+  await runSql("delete from operations.fingerprint_sync_status;");
 }
