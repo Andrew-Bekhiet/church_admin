@@ -7,6 +7,23 @@ import {
   PresenceWithCandidates,
 } from "../domain/presence";
 
+export async function recordPresencesInCandidateWindows(
+  presences: PersonPresence[],
+): Promise<void> {
+  if (presences.length === 0) return;
+
+  const { fingerprintBotUid, presencesWithCandidates } =
+    await findFingerprintBotUidAndCandidatesOfEachPresence(presences);
+
+  presencesWithCandidates.forEach(warnUnlessPresenceMatchedExactlyOneMeeting);
+
+  await writePresenceRecords(
+    fingerprintBotUid,
+    presencesWithCandidates.flatMap(attendanceToRecordFor),
+    presencesWithCandidates.flatMap(communionToRecordIfInACommunionWindow),
+  );
+}
+
 function warnUnlessPresenceMatchedExactlyOneMeeting(
   { presence, candidates }: PresenceWithCandidates,
 ): void {
@@ -28,21 +45,4 @@ function warnUnlessPresenceMatchedExactlyOneMeeting(
       matchedMeetingIds,
     );
   }
-}
-
-export async function recordPresencesInCandidateWindows(
-  presences: PersonPresence[],
-): Promise<void> {
-  if (presences.length === 0) return;
-
-  const { fingerprintBotUid, presencesWithCandidates } =
-    await findFingerprintBotUidAndCandidatesOfEachPresence(presences);
-
-  presencesWithCandidates.forEach(warnUnlessPresenceMatchedExactlyOneMeeting);
-
-  await writePresenceRecords(
-    fingerprintBotUid,
-    presencesWithCandidates.flatMap(attendanceToRecordFor),
-    presencesWithCandidates.flatMap(communionToRecordIfInACommunionWindow),
-  );
 }

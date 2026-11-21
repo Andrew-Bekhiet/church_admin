@@ -1,12 +1,37 @@
 import { AttendanceToRecord, CommunionToRecord } from "../domain/presence";
 import { requestAsFingerprintSync } from "./request_as_fingerprint_sync";
 
-function attendanceKeyOf(attendance: AttendanceToRecord): string {
-  return [
-    attendance.meetingId,
-    attendance.personId,
-    attendance.asServant,
-  ].join("|");
+interface CommunionRow {
+  dayId: string;
+  personId: string;
+  recordedBy: string;
+}
+
+export async function writePresenceRecords(
+  fingerprintBotUid: string,
+  attendance: AttendanceToRecord[],
+  communions: CommunionToRecord[],
+): Promise<void> {
+  const attendanceGroups = distinctAttendanceGroupedByTimeEarliestFirst(
+    attendance,
+  );
+  const communionRows = communionRowsWithoutDuplicates(
+    communions,
+    fingerprintBotUid,
+  );
+
+  if (attendanceGroups.length === 0 && communionRows.length === 0) return;
+
+  await requestAsFingerprintSync(
+    recordPresenceMutationFor(attendanceGroups.length),
+    {
+      days: [...new Set(communionRows.map((row) => row.dayId))]
+        .map((day) => ({ day })),
+      communions: communionRows,
+      ...attendanceVariablesOf(attendanceGroups, fingerprintBotUid),
+    },
+    "writePresenceRecords",
+  );
 }
 
 function distinctAttendanceGroupedByTimeEarliestFirst(
@@ -31,10 +56,12 @@ function distinctAttendanceGroupedByTimeEarliestFirst(
     .map(([, sameTimeRecords]) => [...sameTimeRecords.values()]);
 }
 
-interface CommunionRow {
-  dayId: string;
-  personId: string;
-  recordedBy: string;
+function attendanceKeyOf(attendance: AttendanceToRecord): string {
+  return [
+    attendance.meetingId,
+    attendance.personId,
+    attendance.asServant,
+  ].join("|");
 }
 
 function communionRowsWithoutDuplicates(
@@ -52,27 +79,6 @@ function communionRowsWithoutDuplicates(
   }
 
   return [...rowsByDayAndPerson.values()];
-}
-
-function attendanceVariablesOf(
-  attendanceGroups: AttendanceToRecord[][],
-  fingerprintBotUid: string,
-): Record<string, unknown> {
-  return Object.fromEntries(
-    attendanceGroups.flatMap((group, index) => [
-      [`at${index}`, group[0].at.toUTC().toISO()],
-      [
-        `attendance${index}`,
-        group.map((record) => ({
-          meetingId: record.meetingId,
-          personId: record.personId,
-          asServant: record.asServant,
-          datetime: record.at.toUTC().toISO(),
-          recordedBy: fingerprintBotUid,
-        })),
-      ],
-    ]),
-  );
 }
 
 function recordPresenceMutationFor(attendanceGroupCount: number): string {
@@ -118,29 +124,23 @@ function recordPresenceMutationFor(attendanceGroupCount: number): string {
     `;
 }
 
-export async function writePresenceRecords(
+function attendanceVariablesOf(
+  attendanceGroups: AttendanceToRecord[][],
   fingerprintBotUid: string,
-  attendance: AttendanceToRecord[],
-  communions: CommunionToRecord[],
-): Promise<void> {
-  const attendanceGroups = distinctAttendanceGroupedByTimeEarliestFirst(
-    attendance,
-  );
-  const communionRows = communionRowsWithoutDuplicates(
-    communions,
-    fingerprintBotUid,
-  );
-
-  if (attendanceGroups.length === 0 && communionRows.length === 0) return;
-
-  await requestAsFingerprintSync(
-    recordPresenceMutationFor(attendanceGroups.length),
-    {
-      days: [...new Set(communionRows.map((row) => row.dayId))]
-        .map((day) => ({ day })),
-      communions: communionRows,
-      ...attendanceVariablesOf(attendanceGroups, fingerprintBotUid),
-    },
-    "writePresenceRecords",
+): Record<string, unknown> {
+  return Object.fromEntries(
+    attendanceGroups.flatMap((group, index) => [
+      [`at${index}`, group[0].at.toUTC().toISO()],
+      [
+        `attendance${index}`,
+        group.map((record) => ({
+          meetingId: record.meetingId,
+          personId: record.personId,
+          asServant: record.asServant,
+          datetime: record.at.toUTC().toISO(),
+          recordedBy: fingerprintBotUid,
+        })),
+      ],
+    ]),
   );
 }
