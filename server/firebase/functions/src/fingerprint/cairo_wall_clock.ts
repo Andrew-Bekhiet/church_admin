@@ -1,26 +1,6 @@
+import { DateTime } from "luxon";
+
 const CAIRO_TIME_ZONE = "Africa/Cairo";
-
-const ISO_WEEKDAY_BY_SHORT_NAME: Record<string, number> = {
-  Mon: 1,
-  Tue: 2,
-  Wed: 3,
-  Thu: 4,
-  Fri: 5,
-  Sat: 6,
-  Sun: 7,
-};
-
-const cairoPartsFormat = new Intl.DateTimeFormat("en-US", {
-  timeZone: CAIRO_TIME_ZONE,
-  hourCycle: "h23",
-  weekday: "short",
-  year: "numeric",
-  month: "2-digit",
-  day: "2-digit",
-  hour: "2-digit",
-  minute: "2-digit",
-  second: "2-digit",
-});
 
 export interface CairoWallClock {
   isoWeekday: number;
@@ -28,26 +8,47 @@ export interface CairoWallClock {
   timeOfDay: string;
 }
 
+function cairoTimeAt(instant: Date): DateTime<true> {
+  const cairoTime = DateTime.fromJSDate(instant, { zone: CAIRO_TIME_ZONE });
+
+  if (!cairoTime.isValid) {
+    throw new RangeError(`Not an instant: ${cairoTime.invalidExplanation}`);
+  }
+
+  return cairoTime;
+}
+
 export function cairoWallClockAt(instant: Date): CairoWallClock {
-  const parts = Object.fromEntries(
-    cairoPartsFormat
-      .formatToParts(instant)
-      .map((part) => [part.type, part.value]),
-  );
+  const cairoTime = cairoTimeAt(instant);
 
   return {
-    isoWeekday: ISO_WEEKDAY_BY_SHORT_NAME[parts.weekday],
-    date: `${parts.year}-${parts.month}-${parts.day}`,
-    timeOfDay: `${parts.hour}:${parts.minute}:${parts.second}`,
+    isoWeekday: cairoTime.weekday,
+    date: cairoTime.toISODate(),
+    timeOfDay: cairoTime.toFormat("HH:mm:ss"),
   };
 }
 
-export function driftFromCairoWallClockMs(
+function isReadableAndZoneless(isoTime: string): boolean {
+  const timeInCairoUnlessItCarriesAZone = DateTime.fromISO(isoTime, {
+    zone: CAIRO_TIME_ZONE,
+    setZone: true,
+  });
+
+  return timeInCairoUnlessItCarriesAZone.zoneName === CAIRO_TIME_ZONE;
+}
+
+export function driftFromCairoWallClockMsOrNaNIfUnreadable(
   zonelessLocalTime: string,
   now: Date,
 ): number {
-  const { date, timeOfDay } = cairoWallClockAt(now);
+  if (!isReadableAndZoneless(zonelessLocalTime)) return NaN;
 
-  return Date.parse(`${zonelessLocalTime}Z`) -
-    Date.parse(`${date}T${timeOfDay}Z`);
+  const wallClockReadAsUtc = DateTime.fromISO(zonelessLocalTime, {
+    zone: "utc",
+  });
+  const cairoWallClockReadAsUtc = cairoTimeAt(now).setZone("utc", {
+    keepLocalTime: true,
+  });
+
+  return wallClockReadAsUtc.toMillis() - cairoWallClockReadAsUtc.toMillis();
 }

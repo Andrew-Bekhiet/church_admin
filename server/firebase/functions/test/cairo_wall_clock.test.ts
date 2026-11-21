@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
   cairoWallClockAt,
-  driftFromCairoWallClockMs,
+  driftFromCairoWallClockMsOrNaNIfUnreadable,
 } from "../src/fingerprint/cairo_wall_clock";
 
 describe("cairoWallClockAt", () => {
@@ -76,24 +76,73 @@ describe("cairoWallClockAt", () => {
   });
 });
 
-describe("driftFromCairoWallClockMs", () => {
+describe("driftFromCairoWallClockMsOrNaNIfUnreadable", () => {
   const now = new Date("2026-11-13T07:00:00Z");
 
   it("is zero for a server clock showing Cairo time", () => {
-    assert.equal(driftFromCairoWallClockMs("2026-11-13T09:00:00", now), 0);
+    assert.equal(
+      driftFromCairoWallClockMsOrNaNIfUnreadable("2026-11-13T09:00:00", now),
+      0,
+    );
   });
 
   it("is one hour for a server clock that missed the change back from summer time", () => {
     assert.equal(
-      driftFromCairoWallClockMs("2026-11-13T10:00:00", now),
+      driftFromCairoWallClockMsOrNaNIfUnreadable("2026-11-13T10:00:00", now),
       60 * 60 * 1000,
     );
   });
 
   it("is minus one hour for a server clock an hour behind Cairo time", () => {
     assert.equal(
-      driftFromCairoWallClockMs("2026-11-13T08:00:00", now),
+      driftFromCairoWallClockMsOrNaNIfUnreadable("2026-11-13T08:00:00", now),
       -60 * 60 * 1000,
+    );
+  });
+
+  it("is zero in both passes of the hour repeated when clocks go back", () => {
+    assert.deepEqual(
+      [
+        driftFromCairoWallClockMsOrNaNIfUnreadable(
+          "2026-10-29T23:30:00",
+          new Date("2026-10-29T20:30:00Z"),
+        ),
+        driftFromCairoWallClockMsOrNaNIfUnreadable(
+          "2026-10-29T23:30:00",
+          new Date("2026-10-29T21:30:00Z"),
+        ),
+      ],
+      [0, 0],
+    );
+  });
+
+  it("is minus one hour for a server clock showing a time in the hour Cairo skipped", () => {
+    assert.equal(
+      driftFromCairoWallClockMsOrNaNIfUnreadable(
+        "2026-04-24T00:30:00",
+        new Date("2026-04-23T22:30:00Z"),
+      ),
+      -60 * 60 * 1000,
+    );
+  });
+
+  it("is not a number for a server time that carries a zone", () => {
+    assert.deepEqual(
+      [
+        driftFromCairoWallClockMsOrNaNIfUnreadable("2026-11-13T09:00:00Z", now),
+        driftFromCairoWallClockMsOrNaNIfUnreadable(
+          "2026-11-13T09:00:00+02:00",
+          now,
+        ),
+      ],
+      [NaN, NaN],
+    );
+  });
+
+  it("is not a number for a server time that is not a time", () => {
+    assert.equal(
+      driftFromCairoWallClockMsOrNaNIfUnreadable("nine o'clock", now),
+      NaN,
     );
   });
 });
