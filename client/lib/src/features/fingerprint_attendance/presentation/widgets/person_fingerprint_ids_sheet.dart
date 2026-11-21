@@ -47,7 +47,7 @@ class _PersonFingerprintIdsSheetState extends State<PersonFingerprintIdsSheet> {
         final isWriting = state.write is FingerprintIdsWriteInProgress;
         final isEmployeeCodeBlank = _employeeCodeController.text.trim().isEmpty;
 
-        return Padding(
+        return SingleChildScrollView(
           padding: EdgeInsetsDirectional.only(
             start: 20,
             end: 20,
@@ -88,22 +88,20 @@ class _PersonFingerprintIdsSheetState extends State<PersonFingerprintIdsSheet> {
                       'أضف رقم هذا الشخص على جهاز البصمة ليُسجَّل حضوره '
                       'تلقائيًا كلما وضع إصبعه على الجهاز',
                 ),
-                (final fingerprintIds?, _) => Flexible(
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    itemCount: fingerprintIds.length,
-                    separatorBuilder: (_, _) => const Divider(height: 1),
-                    itemBuilder: (context, index) {
-                      final fingerprintId = fingerprintIds[index];
-
-                      return PersonFingerprintIdTile(
+                (final fingerprintIds?, _) => Column(
+                  mainAxisSize: .min,
+                  children: [
+                    for (final (index, fingerprintId)
+                        in fingerprintIds.indexed) ...[
+                      if (index > 0) const Divider(height: 1),
+                      PersonFingerprintIdTile(
                         fingerprintId: fingerprintId,
                         onRemove: isWriting
                             ? null
                             : () => _removeIfConfirmed(fingerprintId),
-                      );
-                    },
-                  ),
+                      ),
+                    ],
+                  ],
                 ),
               },
               if (state.fingerprintIds != null) ...[
