@@ -94,14 +94,10 @@ class _RecordAttendanceLoadedViewState
                       filter: state.presenceFilter,
                       onFilterTapped: cubit.togglePresenceFilter,
                       trailing: state.meeting.hasAutoAttendanceSchedule
-                          ? BlocBuilder<
-                              FingerprintLastSyncCubit,
-                              FingerprintLastSyncState
-                            >(
-                              builder: (context, lastSyncState) =>
-                                  FingerprintLastSyncIndicator(
-                                    state: lastSyncState,
-                                  ),
+                          ? FingerprintLastSyncIndicator(
+                              state: context
+                                  .watch<FingerprintLastSyncCubit>()
+                                  .state,
                             )
                           : null,
                     ),

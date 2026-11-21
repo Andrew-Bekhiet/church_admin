@@ -36,10 +36,11 @@ void main() {
   });
 
   test('the sync status row yields the time it last synced at', () async {
+    final syncedAt = DateTime.utc(2026, 11, 20, 7, 5);
     final dao = daoReporting([
       {
         '__typename': 'OperationsFingerprintSyncStatus',
-        'lastSyncedAt': '2026-11-20T07:05:00+00:00',
+        'lastSyncedAt': syncedAt.toIso8601String(),
       },
     ]);
 
@@ -48,9 +49,6 @@ void main() {
         .first;
 
     expect(lastSyncedAt, isNotNull);
-    expect(
-      lastSyncedAt!.isAtSameMomentAs(DateTime.utc(2026, 11, 20, 7, 5)),
-      isTrue,
-    );
+    expect(lastSyncedAt!.isAtSameMomentAs(syncedAt), isTrue);
   });
 }
