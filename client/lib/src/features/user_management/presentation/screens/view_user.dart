@@ -19,8 +19,8 @@ class ViewUser extends StatefulWidget {
 }
 
 abstract final class ViewUserScreenKeys extends WidgetKeys {
-  static const Key editButton = ValueKey('Edit User Button Key');
-  static const Key linkedPerson = ValueKey('User Linked Person Key');
+  static const Key editButton = ValueKey((ViewUserScreenKeys, #editButton));
+  static const Key linkedPerson = ValueKey((ViewUserScreenKeys, #linkedPerson));
   static const Key approveButton = ValueKey(
     (ViewUserScreenKeys, #approveButton),
   );
