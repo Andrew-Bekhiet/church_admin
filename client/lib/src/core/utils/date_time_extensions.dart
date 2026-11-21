@@ -16,6 +16,15 @@ extension DateTimeExtensions on DateTime {
     ).replaceAll('منذ ', '');
   }
 
+  String toArabicElapsedTimeOrNowIfUnderAMinute({DateTime? now}) {
+    final currentTime = now ?? clock.now();
+    if (currentTime.difference(this) < const Duration(minutes: 1)) {
+      return 'الآن';
+    }
+
+    return toDurationString(now: currentTime);
+  }
+
   String toLocalArabicWeekdayDateAndTime() =>
       DateFormat.yMEd('ar').add_jm().format(toLocal());
 
