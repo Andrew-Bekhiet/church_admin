@@ -36,6 +36,7 @@ void main() {
   late DBGraphQLClient client;
   late List<Json> personsOnServer;
   late Set<String> cachedPhotos;
+  late Exception? photosClearFailure;
 
   Set<String> cachedPersonIds() => {
     for (final key in store.toMap().keys)
@@ -46,7 +47,12 @@ void main() {
     final wiper = AccessChangeCacheWiper(
       userDataStream: userDataStream,
       graphQLCacheStore: store,
-      clearsOfOtherAccessScopedCaches: [() async => cachedPhotos.clear()],
+      clearsOfOtherAccessScopedCaches: [
+        () async {
+          if (photosClearFailure case final failure?) throw failure;
+          cachedPhotos.clear();
+        },
+      ],
       refetchOpenSubscriptions: () => link.pushToOpenSubscriptions(
         personsOperation,
         {'persons': personsOnServer},
@@ -88,6 +94,7 @@ void main() {
     );
     personsOnServer = [];
     cachedPhotos = {};
+    photosClearFailure = null;
   });
 
   tearDown(() => connectivity.close());
@@ -100,13 +107,13 @@ void main() {
       addTearDown(user.close);
       await startWiper(user);
       await browsePersons([insider, outsider]);
-      expect(cachedPersonIds(), {'insider', 'outsider'});
+      expect(cachedPersonIds(), {insider['id'], outsider['id']});
 
       personsOnServer = [insider];
       user.add(scopedUser);
       await pumpEventQueue();
 
-      expect(cachedPersonIds(), {'insider'});
+      expect(cachedPersonIds(), {insider['id']});
     },
   );
 
@@ -134,7 +141,7 @@ void main() {
       personsOnServer = [insider];
       await startWiper(Stream.value(scopedUser));
 
-      expect(cachedPersonIds(), {'insider'});
+      expect(cachedPersonIds(), {insider['id']});
     },
   );
 
@@ -157,6 +164,25 @@ void main() {
   );
 
   test(
+    'a photo cache that failed to clear is cleaned again on the next launch',
+    () async {
+      final beforeRestart = BehaviorSubject<User?>.seeded(superUser);
+      await startWiper(beforeRestart);
+      cachedPhotos.add(photo);
+      photosClearFailure = Exception('photos are locked');
+      beforeRestart.add(scopedUser);
+      await pumpEventQueue();
+      await beforeRestart.close();
+      expect(cachedPhotos, {photo});
+
+      photosClearFailure = null;
+      await startWiper(Stream.value(scopedUser));
+
+      expect(cachedPhotos, isEmpty);
+    },
+  );
+
+  test(
     'a cache filled before access was recorded is cleaned once on launch',
     () async {
       await browsePersons([insider, outsider]);
@@ -164,7 +190,7 @@ void main() {
 
       await startWiper(Stream.value(scopedUser));
 
-      expect(cachedPersonIds(), {'insider'});
+      expect(cachedPersonIds(), {insider['id']});
     },
   );
 

@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/features/data_export/application/export_operations_storage.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -502,25 +501,6 @@ final Provider<UserDataWiper> userDataWiperProvider = Provider<UserDataWiper>(
     final wiper = UserDataWiper(
       userChangesStream: ref.watch(authRepositoryProvider).userChanges,
     )..register(SyncKVStore.clearAllLoaded);
-
-    ref.onDispose(wiper.dispose);
-
-    return wiper;
-  },
-);
-
-final accessChangeCacheWiperProvider = Provider<AccessChangeCacheWiper>(
-  (ref) {
-    final wiper = AccessChangeCacheWiper(
-      userDataStream: ref.watch(authBlocProvider).userDataStream,
-      graphQLCacheStore: ref.watch(graphQLCacheStore),
-      clearsOfOtherAccessScopedCaches: [
-        ref.watch(baseCacheManagerProvider).emptyCache,
-        ref.watch(imageUrlCacheServiceProvider).box.clear,
-        ref.watch(ExportOperationsStorage.provider).deleteSavedFiles,
-      ],
-      refetchOpenSubscriptions: ref.watch(addAuthLinkProvider).reconnectSocket,
-    );
 
     ref.onDispose(wiper.dispose);
 

@@ -3,10 +3,29 @@ import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/user_permissions/user_permissions_update_helper.dart';
+import 'package:church_admin/src/features/data_export/application/export_operations_storage.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AccessChangeCacheWiper {
+  static final provider = Provider<AccessChangeCacheWiper>((ref) {
+    final wiper = AccessChangeCacheWiper(
+      userDataStream: ref.watch(authBlocProvider).userDataStream,
+      graphQLCacheStore: ref.watch(graphQLCacheStore),
+      clearsOfOtherAccessScopedCaches: [
+        ref.watch(imageUrlCacheServiceProvider).box.clear,
+        ref.watch(baseCacheManagerProvider).emptyCache,
+        ref.watch(ExportOperationsStorage.provider).deleteSavedFiles,
+      ],
+      refetchOpenSubscriptions: ref.watch(addAuthLinkProvider).reconnectSocket,
+    );
+
+    ref.onDispose(wiper.dispose);
+
+    return wiper;
+  });
+
   final GqlKvStore _graphQLCacheStore;
   final List<Future<void> Function()> _clearsOfOtherAccessScopedCaches;
   final void Function() _refetchOpenSubscriptions;
@@ -47,15 +66,21 @@ class AccessChangeCacheWiper {
     );
     if (isFilledUnderSameAccess) return;
 
+    bool everyOtherCacheCleared = true;
     for (final clear in _clearsOfOtherAccessScopedCaches) {
       try {
         await clear();
       } catch (error, stackTrace) {
+        everyOtherCacheCleared = false;
         _logFailure(error, stackTrace);
       }
     }
 
-    await _graphQLCacheStore.resetFilledUnder(access);
+    if (everyOtherCacheCleared) {
+      await _graphQLCacheStore.resetFilledUnder(access);
+    } else {
+      _graphQLCacheStore.reset();
+    }
     _refetchOpenSubscriptions();
   }
 

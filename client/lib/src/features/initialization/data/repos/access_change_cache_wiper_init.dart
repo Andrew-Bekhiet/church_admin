@@ -5,7 +5,7 @@ class AccessChangeCacheWiperInit implements Initializer {
 
   @override
   Future<void>? initialize() {
-    globalProviderContainer.read(accessChangeCacheWiperProvider);
+    globalProviderContainer.read(AccessChangeCacheWiper.provider);
 
     return null;
   }
