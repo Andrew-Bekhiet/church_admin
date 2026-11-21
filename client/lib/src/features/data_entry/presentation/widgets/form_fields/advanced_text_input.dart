@@ -20,6 +20,7 @@ class AdvancedTextInput<E extends Object> extends StatelessWidget {
   final int? errorMaxLines;
   final int? maxLines;
   final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
 
   const AdvancedTextInput({
     required this.field,
@@ -39,6 +40,7 @@ class AdvancedTextInput<E extends Object> extends StatelessWidget {
     this.counterText,
     this.errorMaxLines,
     this.onChanged,
+    this.onSubmitted,
     super.key,
   });
 
@@ -62,6 +64,7 @@ class AdvancedTextInput<E extends Object> extends StatelessWidget {
           maxLength: maxLength,
           maxLines: maxLines,
           onChanged: onChanged,
+          onSubmitted: onSubmitted,
           decoration: InputDecoration(
             labelText: labelText,
             label: label,

@@ -55,11 +55,10 @@ void main() {
     });
 
     blocTest<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
-      'an added code is sent trimmed for that person',
+      'an added code is sent for that person',
       build: cubitOfPerson,
       seed: () => const PersonFingerprintIdsLoaded(fingerprintIds: []),
-      act: (cubit) =>
-          cubit.addEmployeeCode(' ${gateFingerprintId.employeeCode} '),
+      act: (cubit) => cubit.addEmployeeCode(gateFingerprintId.employeeCode),
       verify: (_) => verify(
         () => dao.addEmployeeCode(
           personId: personId,
@@ -73,76 +72,6 @@ void main() {
       build: cubitOfPerson,
       seed: () => const PersonFingerprintIdsLoaded(fingerprintIds: []),
       act: (cubit) => cubit.addEmployeeCode(gateFingerprintId.employeeCode),
-      verify: (cubit) => expect(
-        writeOf(cubit.state),
-        FingerprintEmployeeCodeAdded(gateFingerprintId.employeeCode),
-      ),
-    );
-
-    blocTest<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
-      'a blank code is refused',
-      build: cubitOfPerson,
-      seed: () => const PersonFingerprintIdsLoaded(fingerprintIds: []),
-      act: (cubit) => cubit.addEmployeeCode('   '),
-      verify: (cubit) => expect(
-        writeOf(cubit.state),
-        isA<FingerprintIdsWriteFailed>().having(
-          (write) => write.error,
-          'error',
-          isA<BlankFingerprintEmployeeCodeException>(),
-        ),
-      ),
-    );
-
-    blocTest<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
-      'a blank code submitted again is still refused',
-      build: cubitOfPerson,
-      seed: () => const PersonFingerprintIdsLoaded(fingerprintIds: []),
-      act: (cubit) async {
-        await cubit.addEmployeeCode('   ');
-        await cubit.addEmployeeCode('   ');
-      },
-      verify: (cubit) => expect(
-        writeOf(cubit.state),
-        const FingerprintIdsWriteFailed(
-          BlankFingerprintEmployeeCodeException(),
-        ),
-      ),
-    );
-
-    blocTest<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
-      'a blank code is not sent',
-      build: cubitOfPerson,
-      seed: () => const PersonFingerprintIdsLoaded(fingerprintIds: []),
-      act: (cubit) => cubit.addEmployeeCode('   '),
-      verify: (_) => verifyNever(
-        () => dao.addEmployeeCode(
-          personId: any(named: 'personId'),
-          employeeCode: any(named: 'employeeCode'),
-        ),
-      ),
-    );
-
-    blocTest<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
-      'acknowledging a refused code clears the refusal',
-      build: cubitOfPerson,
-      seed: () => const PersonFingerprintIdsLoaded(fingerprintIds: []),
-      act: (cubit) async {
-        await cubit.addEmployeeCode('   ');
-        cubit.acknowledgeWriteFailureIfAny();
-      },
-      verify: (cubit) =>
-          expect(writeOf(cubit.state), const NoFingerprintIdsWrite()),
-    );
-
-    blocTest<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
-      'acknowledging when nothing was refused keeps the added code reported',
-      build: cubitOfPerson,
-      seed: () => const PersonFingerprintIdsLoaded(fingerprintIds: []),
-      act: (cubit) async {
-        await cubit.addEmployeeCode(gateFingerprintId.employeeCode);
-        cubit.acknowledgeWriteFailureIfAny();
-      },
       verify: (cubit) => expect(
         writeOf(cubit.state),
         FingerprintEmployeeCodeAdded(gateFingerprintId.employeeCode),

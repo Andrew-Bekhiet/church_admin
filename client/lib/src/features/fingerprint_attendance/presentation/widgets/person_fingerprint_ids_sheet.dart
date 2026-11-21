@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:advanced_forms/advanced_forms.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -29,7 +30,17 @@ class PersonFingerprintIdsSheet extends StatefulWidget {
 }
 
 class _PersonFingerprintIdsSheetState extends State<PersonFingerprintIdsSheet> {
-  final _employeeCodeController = TextEditingController();
+  late final FingerprintEmployeeCodeFormController _form;
+
+  @override
+  void initState() {
+    super.initState();
+    _form = FingerprintEmployeeCodeFormController(
+      addEmployeeCode: context
+          .read<PersonFingerprintIdsCubit>()
+          .addEmployeeCode,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +48,19 @@ class _PersonFingerprintIdsSheetState extends State<PersonFingerprintIdsSheet> {
     final textTheme = TextTheme.of(context);
 
     return BlocConsumer<PersonFingerprintIdsCubit, PersonFingerprintIdsState>(
-      listenWhen: (previous, _) => switch (previous) {
-        PersonFingerprintIdsLoaded(write: FingerprintIdsWriteInProgress()) =>
-          true,
+      listenWhen: (previous, current) => switch ((previous, current)) {
+        (
+          PersonFingerprintIdsLoaded(write: final previousWrite),
+          PersonFingerprintIdsLoaded(write: final currentWrite),
+        ) =>
+          previousWrite != currentWrite,
         _ => false,
       },
-      listener: (_, state) => _clearFieldIfCodeAdded(state),
+      listener: (_, state) {
+        if (state case PersonFingerprintIdsLoaded(:final write)) {
+          _form.lockWhileWritingAndShowOutcomeOf(write);
+        }
+      },
       builder: (context, state) => SingleChildScrollView(
         padding: EdgeInsetsDirectional.only(
           start: 20,
@@ -107,56 +125,23 @@ class _PersonFingerprintIdsSheetState extends State<PersonFingerprintIdsSheet> {
                         ],
                       ],
                     ),
-                  TextField(
+                  AdvancedTextInput<FingerprintEmployeeCodeError>(
                     key: PersonFingerprintIdsSheetKeys.employeeCodeField,
-                    controller: _employeeCodeController,
-                    enabled: state.acceptsWrites,
+                    field: _form.employeeCode,
+                    translateError: FingerprintEmployeeCodeError.messageOf,
+                    labelText: 'رقم البصمة الجديد',
+                    prefixIcon: const Icon(Symbols.dialpad),
                     keyboardType: TextInputType.visiblePassword,
                     textInputAction: TextInputAction.done,
-                    decoration: InputDecoration(
-                      labelText: 'رقم البصمة الجديد',
-                      prefixIcon: const Icon(Symbols.dialpad),
-                      error: switch (write) {
-                        FingerprintIdsWriteFailed(
-                          error: FingerprintEmployeeCodeAlreadyLinkedException(),
-                        ) =>
-                          const Text(
-                            'هذا الرقم مسجَّل من قبل لهذا الشخص أو لشخص آخر',
-                            key: PersonFingerprintIdsSheetKeys
-                                .employeeCodeAlreadyLinkedMessage,
-                          ),
-                        FingerprintIdsWriteFailed(
-                          error: BlankFingerprintEmployeeCodeException(),
-                        ) =>
-                          const Text(
-                            'اكتب رقم البصمة أولًا',
-                            key: PersonFingerprintIdsSheetKeys
-                                .blankEmployeeCodeMessage,
-                          ),
-                        FingerprintIdsWriteFailed() => const Text(
-                          'تعذر حفظ التغيير، تأكد من الاتصال بالإنترنت ثم '
-                          'حاول مرة أخرى',
-                          key: PersonFingerprintIdsSheetKeys.writeFailedMessage,
-                        ),
-                        NoFingerprintIdsWrite() ||
-                        FingerprintIdsWriteInProgress() ||
-                        FingerprintEmployeeCodeAdded() ||
-                        FingerprintIdRemoved() => null,
-                      },
-                    ),
-                    onChanged: (_) => context
-                        .read<PersonFingerprintIdsCubit>()
-                        .acknowledgeWriteFailureIfAny(),
-                    onSubmitted: (_) => _addEmployeeCode(),
+                    errorMaxLines: 3,
+                    onSubmitted: (_) => _addEmployeeCodeIfValid(),
                   ),
-                  ValueListenableBuilder(
-                    valueListenable: _employeeCodeController,
-                    builder: (context, employeeCode, _) => FilledButton.icon(
+                  AdvancedFieldBuilder<String, FingerprintEmployeeCodeError>(
+                    field: _form.employeeCode,
+                    builder: (context, _, _) => FilledButton.icon(
                       key: PersonFingerprintIdsSheetKeys.addButton,
-                      onPressed:
-                          state.acceptsWrites &&
-                              employeeCode.text.trim().isNotEmpty
-                          ? _addEmployeeCode
+                      onPressed: state.acceptsWrites && !_form.isBlank
+                          ? _addEmployeeCodeIfValid
                           : null,
                       icon: switch (write) {
                         FingerprintIdsWriteInProgress() =>
@@ -177,19 +162,7 @@ class _PersonFingerprintIdsSheetState extends State<PersonFingerprintIdsSheet> {
     );
   }
 
-  void _clearFieldIfCodeAdded(PersonFingerprintIdsState state) {
-    if (state case PersonFingerprintIdsLoaded(
-      write: FingerprintEmployeeCodeAdded(),
-    )) {
-      _employeeCodeController.clear();
-    }
-  }
-
-  void _addEmployeeCode() => unawaited(
-    context.read<PersonFingerprintIdsCubit>().addEmployeeCode(
-      _employeeCodeController.text,
-    ),
-  );
+  void _addEmployeeCodeIfValid() => unawaited(_form.submitIfValid());
 
   Future<void> _removeIfConfirmed(PersonFingerprintId fingerprintId) async {
     final cubit = context.read<PersonFingerprintIdsCubit>();
@@ -211,7 +184,7 @@ class _PersonFingerprintIdsSheetState extends State<PersonFingerprintIdsSheet> {
 
   @override
   void dispose() {
-    _employeeCodeController.dispose();
+    _form.dispose();
     super.dispose();
   }
 }
@@ -231,14 +204,5 @@ abstract final class PersonFingerprintIdsSheetKeys extends WidgetKeys {
   );
   static const Key addButton = ValueKey(
     (PersonFingerprintIdsSheetKeys, #addButton),
-  );
-  static const Key employeeCodeAlreadyLinkedMessage = ValueKey(
-    (PersonFingerprintIdsSheetKeys, #employeeCodeAlreadyLinkedMessage),
-  );
-  static const Key blankEmployeeCodeMessage = ValueKey(
-    (PersonFingerprintIdsSheetKeys, #blankEmployeeCodeMessage),
-  );
-  static const Key writeFailedMessage = ValueKey(
-    (PersonFingerprintIdsSheetKeys, #writeFailedMessage),
   );
 }

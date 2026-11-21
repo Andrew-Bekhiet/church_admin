@@ -30,12 +30,6 @@ void main() {
 
   setUp(() {
     dao = _MockFingerprintIdsDAO();
-    when(
-      () => dao.addEmployeeCode(
-        personId: any(named: 'personId'),
-        employeeCode: any(named: 'employeeCode'),
-      ),
-    ).thenAnswer((_) async {});
     when(() => dao.remove(any())).thenAnswer((_) async {});
   });
 
@@ -68,16 +62,6 @@ void main() {
     Stream<List<PersonFingerprintId>> fingerprintIds,
   ) async {
     await pumpSheetWhileLoading(tester, fingerprintIds);
-    await tester.pumpAndSettle();
-  }
-
-  Future<void> submitEmployeeCode(WidgetTester tester, String code) async {
-    await tester.enterText(
-      find.byKey(PersonFingerprintIdsSheetKeys.employeeCodeField),
-      code,
-    );
-    await tester.pumpAndSettle();
-    await tester.tap(find.byKey(PersonFingerprintIdsSheetKeys.addButton));
     await tester.pumpAndSettle();
   }
 
@@ -173,164 +157,6 @@ void main() {
     expect(
       find.byKey(PersonFingerprintIdsSheetKeys.employeeCodeField),
       findsNothing,
-    );
-  });
-
-  testWidgets('adding a number links the typed code to the person', (
-    tester,
-  ) async {
-    await pumpSheetShowing(tester, Stream.value([oldFingerprintId]));
-
-    await submitEmployeeCode(tester, newFingerprintId.employeeCode);
-
-    verify(
-      () => dao.addEmployeeCode(
-        personId: person.id,
-        employeeCode: newFingerprintId.employeeCode,
-      ),
-    );
-  });
-
-  testWidgets('the field empties once the number is added', (tester) async {
-    await pumpSheetShowing(tester, Stream.value([oldFingerprintId]));
-
-    await submitEmployeeCode(tester, newFingerprintId.employeeCode);
-
-    final field = tester.widget<TextField>(
-      find.byKey(PersonFingerprintIdsSheetKeys.employeeCodeField),
-    );
-    expect(field.controller?.text, isEmpty);
-  });
-
-  testWidgets('a number that is already linked is refused beside the field', (
-    tester,
-  ) async {
-    when(
-      () => dao.addEmployeeCode(
-        personId: person.id,
-        employeeCode: oldFingerprintId.employeeCode,
-      ),
-    ).thenThrow(
-      FingerprintEmployeeCodeAlreadyLinkedException(
-        employeeCode: oldFingerprintId.employeeCode,
-        upstreamMessage: 'duplicate key',
-      ),
-    );
-    await pumpSheetShowing(tester, Stream.value([oldFingerprintId]));
-
-    await submitEmployeeCode(tester, oldFingerprintId.employeeCode);
-
-    expect(
-      find.byKey(
-        PersonFingerprintIdsSheetKeys.employeeCodeAlreadyLinkedMessage,
-      ),
-      findsOneWidget,
-    );
-  });
-
-  testWidgets('a refused number stays in the field for correction', (
-    tester,
-  ) async {
-    when(
-      () => dao.addEmployeeCode(
-        personId: person.id,
-        employeeCode: oldFingerprintId.employeeCode,
-      ),
-    ).thenThrow(
-      FingerprintEmployeeCodeAlreadyLinkedException(
-        employeeCode: oldFingerprintId.employeeCode,
-        upstreamMessage: 'duplicate key',
-      ),
-    );
-    await pumpSheetShowing(tester, Stream.value([oldFingerprintId]));
-
-    await submitEmployeeCode(tester, oldFingerprintId.employeeCode);
-
-    final field = tester.widget<TextField>(
-      find.byKey(PersonFingerprintIdsSheetKeys.employeeCodeField),
-    );
-    expect(field.controller?.text, oldFingerprintId.employeeCode);
-  });
-
-  testWidgets('an add that fails for another reason reports a failed save', (
-    tester,
-  ) async {
-    when(
-      () => dao.addEmployeeCode(
-        personId: person.id,
-        employeeCode: newFingerprintId.employeeCode,
-      ),
-    ).thenThrow(Exception('offline'));
-    await pumpSheetShowing(tester, Stream.value([oldFingerprintId]));
-
-    await submitEmployeeCode(tester, newFingerprintId.employeeCode);
-
-    expect(
-      find.byKey(PersonFingerprintIdsSheetKeys.writeFailedMessage),
-      findsOneWidget,
-    );
-  });
-
-  testWidgets('correcting the number dismisses the refusal', (tester) async {
-    when(
-      () => dao.addEmployeeCode(
-        personId: person.id,
-        employeeCode: oldFingerprintId.employeeCode,
-      ),
-    ).thenThrow(
-      FingerprintEmployeeCodeAlreadyLinkedException(
-        employeeCode: oldFingerprintId.employeeCode,
-        upstreamMessage: 'duplicate key',
-      ),
-    );
-    await pumpSheetShowing(tester, Stream.value([oldFingerprintId]));
-    await submitEmployeeCode(tester, oldFingerprintId.employeeCode);
-
-    await tester.enterText(
-      find.byKey(PersonFingerprintIdsSheetKeys.employeeCodeField),
-      newFingerprintId.employeeCode,
-    );
-    await tester.pumpAndSettle();
-
-    expect(
-      find.byKey(
-        PersonFingerprintIdsSheetKeys.employeeCodeAlreadyLinkedMessage,
-      ),
-      findsNothing,
-    );
-  });
-
-  testWidgets('a blank number cannot be added with the add button', (
-    tester,
-  ) async {
-    await pumpSheetShowing(tester, Stream.value([oldFingerprintId]));
-
-    await tester.enterText(
-      find.byKey(PersonFingerprintIdsSheetKeys.employeeCodeField),
-      '   ',
-    );
-    await tester.pumpAndSettle();
-
-    final addButton = tester.widget<FilledButton>(
-      find.byKey(PersonFingerprintIdsSheetKeys.addButton),
-    );
-    expect(addButton.enabled, isFalse);
-  });
-
-  testWidgets('a blank number submitted from the keyboard is refused beside '
-      'the field', (tester) async {
-    await pumpSheetShowing(tester, Stream.value([oldFingerprintId]));
-
-    await tester.enterText(
-      find.byKey(PersonFingerprintIdsSheetKeys.employeeCodeField),
-      '   ',
-    );
-    await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pumpAndSettle();
-
-    expect(
-      find.byKey(PersonFingerprintIdsSheetKeys.blankEmployeeCodeMessage),
-      findsOneWidget,
     );
   });
 

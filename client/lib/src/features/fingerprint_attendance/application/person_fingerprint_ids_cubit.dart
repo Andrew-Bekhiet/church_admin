@@ -24,18 +24,12 @@ class PersonFingerprintIdsCubit extends Cubit<PersonFingerprintIdsState> {
 
   Future<void> addEmployeeCode(String employeeCode) =>
       _runWriteIfStateAcceptsWrites(() async {
-        final trimmedCode = employeeCode.trim();
-
-        if (trimmedCode.isEmpty) {
-          throw const BlankFingerprintEmployeeCodeException();
-        }
-
         await _fingerprintIdsDao.addEmployeeCode(
           personId: _personId,
-          employeeCode: trimmedCode,
+          employeeCode: employeeCode,
         );
 
-        return FingerprintEmployeeCodeAdded(trimmedCode);
+        return FingerprintEmployeeCodeAdded(employeeCode);
       });
 
   Future<void> remove(PersonFingerprintId fingerprintId) =>
@@ -44,14 +38,6 @@ class PersonFingerprintIdsCubit extends Cubit<PersonFingerprintIdsState> {
 
         return FingerprintIdRemoved(fingerprintId.id);
       });
-
-  void acknowledgeWriteFailureIfAny() {
-    if (state case PersonFingerprintIdsLoaded(
-      write: FingerprintIdsWriteFailed(),
-    )) {
-      _emitWriteIfLoaded(const NoFingerprintIdsWrite());
-    }
-  }
 
   void _reportLoadErrorUnlessFingerprintIdsAreShown(Object error) {
     if (state is PersonFingerprintIdsLoaded) return;
