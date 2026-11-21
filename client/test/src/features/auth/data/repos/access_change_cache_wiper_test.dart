@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,7 +13,7 @@ void main() {
   const personsOperation = 'watchPersonsNames';
   const insider = {'__typename': 'Persons', 'id': 'insider', 'name': 'In'};
   const outsider = {'__typename': 'Persons', 'id': 'outsider', 'name': 'Out'};
-  const outsiderPhoto = 'outsider-photo';
+  const photo = 'cached-photo';
   const serviceA = Service(id: 'service-a', name: 'A');
   const scopedUser = User(
     uid: 'servant',
@@ -28,6 +29,7 @@ void main() {
     }),
   );
 
+  late FakeSyncKVStore<Json> storage;
   late GqlKvStore store;
   late RecordingSubscriptionLink link;
   late BehaviorSubject<bool> connectivity;
@@ -54,8 +56,9 @@ void main() {
     await pumpEventQueue();
   }
 
-  Future<void> browsePersons() async {
-    link.dataByOperationName[personsOperation] = {'persons': personsOnServer};
+  Future<void> browsePersons(List<Json> onServer) async {
+    personsOnServer = onServer;
+    link.dataByOperationName[personsOperation] = {'persons': onServer};
     final subscription = client
         .subscribe(
           SubscriptionOptions(
@@ -68,11 +71,11 @@ void main() {
         .listen(null);
     addTearDown(subscription.cancel);
     await pumpEventQueue();
-    cachedPhotos.add(outsiderPhoto);
   }
 
   setUp(() {
-    store = GqlKvStore(FakeSyncKVStore());
+    storage = FakeSyncKVStore();
+    store = GqlKvStore(storage);
     link = RecordingSubscriptionLink({});
     connectivity = BehaviorSubject.seeded(true);
     client = DBGraphQLClient(
@@ -83,7 +86,7 @@ void main() {
       ),
       cache: GraphQLCache(store: store, typePolicies: GqlTypePolicies.policies),
     );
-    personsOnServer = [insider, outsider];
+    personsOnServer = [];
     cachedPhotos = {};
   });
 
@@ -96,7 +99,7 @@ void main() {
       final user = BehaviorSubject<User?>.seeded(superUser);
       addTearDown(user.close);
       await startWiper(user);
-      await browsePersons();
+      await browsePersons([insider, outsider]);
       expect(cachedPersonIds(), {'insider', 'outsider'});
 
       personsOnServer = [insider];
@@ -111,7 +114,7 @@ void main() {
     final user = BehaviorSubject<User?>.seeded(superUser);
     addTearDown(user.close);
     await startWiper(user);
-    await browsePersons();
+    cachedPhotos.add(photo);
 
     user.add(scopedUser);
     await pumpEventQueue();
@@ -125,7 +128,7 @@ void main() {
     () async {
       final beforeRestart = BehaviorSubject<User?>.seeded(superUser);
       await startWiper(beforeRestart);
-      await browsePersons();
+      await browsePersons([insider, outsider]);
       await beforeRestart.close();
 
       personsOnServer = [insider];
@@ -136,9 +139,27 @@ void main() {
   );
 
   test(
+    'a relaunch that reads the cache back from disk keeps it while the access '
+    'is unchanged',
+    () async {
+      final beforeRestart = BehaviorSubject<User?>.seeded(scopedUser);
+      await startWiper(beforeRestart);
+      cachedPhotos.add(photo);
+      await beforeRestart.close();
+
+      for (final MapEntry(:key, :value) in storage.toMap().entries.toList()) {
+        storage.put(key, jsonDecode(jsonEncode(value)) as Json);
+      }
+      await startWiper(Stream.value(scopedUser));
+
+      expect(cachedPhotos, {photo});
+    },
+  );
+
+  test(
     'a cache filled before access was recorded is cleaned once on launch',
     () async {
-      await browsePersons();
+      await browsePersons([insider, outsider]);
       personsOnServer = [insider];
 
       await startWiper(Stream.value(scopedUser));
@@ -151,7 +172,7 @@ void main() {
     final user = BehaviorSubject<User?>.seeded(scopedUser);
     addTearDown(user.close);
     await startWiper(user);
-    await browsePersons();
+    await browsePersons([insider]);
 
     personsOnServer = [];
     user.add(
@@ -174,7 +195,7 @@ void main() {
     final user = BehaviorSubject<User?>.seeded(scopedUser);
     addTearDown(user.close);
     await startWiper(user);
-    await browsePersons();
+    cachedPhotos.add(photo);
 
     user.add(
       scopedUser.copyWith(
@@ -189,6 +210,6 @@ void main() {
     );
     await pumpEventQueue();
 
-    expect(cachedPhotos, {outsiderPhoto});
+    expect(cachedPhotos, {photo});
   });
 }

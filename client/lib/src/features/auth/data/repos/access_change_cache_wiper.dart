@@ -22,8 +22,8 @@ class AccessChangeCacheWiper {
     _subscription = userDataStream
         .whereType<User>()
         .map(_accessOf)
-        .asyncMap(_wipeCachesIfFilledUnderOtherAccess)
-        .listen(null);
+        .asyncMap(_refillCachesIfFilledUnderOtherAccess)
+        .listen(null, onError: _logFailure);
   }
 
   Json _accessOf(User user) => {
@@ -40,7 +40,7 @@ class AccessChangeCacheWiper {
     ].sorted(),
   };
 
-  Future<void> _wipeCachesIfFilledUnderOtherAccess(Json access) async {
+  Future<void> _refillCachesIfFilledUnderOtherAccess(Json access) async {
     final isFilledUnderSameAccess = const DeepCollectionEquality().equals(
       _graphQLCacheStore.filledUnderAccess,
       access,
@@ -51,15 +51,17 @@ class AccessChangeCacheWiper {
       try {
         await clear();
       } catch (error, stackTrace) {
-        await LoggingService.I.exception(
-          LogRecord(error: error, stackTrace: stackTrace),
-        );
+        _logFailure(error, stackTrace);
       }
     }
 
     await _graphQLCacheStore.resetFilledUnder(access);
     _refetchOpenSubscriptions();
   }
+
+  void _logFailure(Object error, StackTrace stackTrace) => unawaited(
+    LoggingService.I.exception(LogRecord(error: error, stackTrace: stackTrace)),
+  );
 
   void dispose() => unawaited(_subscription.cancel());
 }

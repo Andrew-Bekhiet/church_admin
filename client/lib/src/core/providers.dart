@@ -516,6 +516,7 @@ final accessChangeCacheWiperProvider = Provider<AccessChangeCacheWiper>(
       graphQLCacheStore: ref.watch(graphQLCacheStore),
       clearsOfOtherAccessScopedCaches: [
         ref.watch(baseCacheManagerProvider).emptyCache,
+        ref.watch(imageUrlCacheServiceProvider).box.clear,
         ref.watch(ExportOperationsStorage.provider).deleteSavedFiles,
       ],
       refetchOpenSubscriptions: ref.watch(addAuthLinkProvider).reconnectSocket,
