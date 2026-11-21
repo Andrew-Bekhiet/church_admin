@@ -1,0 +1,31 @@
+import { DateTime } from "luxon";
+
+export const CAIRO_TIME_ZONE = "Africa/Cairo";
+
+export function cairoTimeAt(instant: DateTime<true>): DateTime<true> {
+  const cairoTime = instant.setZone(CAIRO_TIME_ZONE);
+
+  if (!cairoTime.isValid) {
+    throw new RangeError(
+      `Cairo time zone is unavailable: ${cairoTime.invalidExplanation}`,
+    );
+  }
+
+  return cairoTime;
+}
+
+export interface CairoWallClock {
+  isoWeekday: number;
+  date: string;
+  timeOfDay: string;
+}
+
+export function cairoWallClockAt(instant: DateTime<true>): CairoWallClock {
+  const cairoTime = cairoTimeAt(instant);
+
+  return {
+    isoWeekday: cairoTime.weekday,
+    date: cairoTime.toISODate(),
+    timeOfDay: cairoTime.toFormat("HH:mm:ss"),
+  };
+}

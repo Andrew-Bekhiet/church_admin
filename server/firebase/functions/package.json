@@ -9,7 +9,7 @@
     "start": "npm run shell",
     "deploy": "npm run build && firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "test": "npx tsc -p tsconfig.test.json && node --test --test-concurrency=1 \"lib_test/test/**/*.test.js\""
+    "test": "rm -rf lib_test && npx tsc -p tsconfig.test.json && node --test --test-concurrency=1 \"lib_test/test/**/*.test.js\""
   },
   "engines": {
     "node": "24"

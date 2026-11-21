@@ -1,7 +1,8 @@
+import { DateTime } from "luxon";
 import { requestAsFingerprintSync } from "./request_as_fingerprint_sync";
 
 export async function markFingerprintSyncedAtUnlessALaterSyncIsRecorded(
-  syncedAt: Date,
+  syncedAt: DateTime<true>,
 ): Promise<void> {
   await requestAsFingerprintSync(
     `
@@ -18,7 +19,7 @@ export async function markFingerprintSyncedAtUnlessALaterSyncIsRecorded(
         }
       }
     `,
-    { lastSyncedAt: syncedAt.toISOString() },
+    { lastSyncedAt: syncedAt.toUTC().toISO() },
     "markFingerprintSyncedAtUnlessALaterSyncIsRecorded",
   );
 }

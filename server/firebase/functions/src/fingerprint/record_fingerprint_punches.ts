@@ -1,20 +1,23 @@
 import { createHash, timingSafeEqual } from "node:crypto";
 import { defineSecret } from "firebase-functions/params";
 import { https } from "firebase-functions/v2";
-import {
-  fingerprintPunchesRequest,
-  recordFingerprintPunchesAndMarkSynced,
-} from "./fingerprint/record_fingerprint_punches_and_mark_synced";
-import { hasuraAdminSecret } from "./secrets";
+import { DateTime } from "luxon";
+import { hasuraAdminSecret } from "../secrets";
+import { recordFingerprintPunchesAndMarkSynced } from "./application/record_fingerprint_punches_and_mark_synced";
+import { fingerprintPunchesRequest } from "./domain/fingerprint_punches_request";
 
 const fingerprintSyncSecret = defineSecret("FINGERPRINT_SYNC_SECRET");
 
-function isSameSecret(received: string | undefined, configured: string) {
-  const digestOf = (value: string) =>
-    createHash("sha256").update(value).digest();
+function fixedLengthDigestOf(secret: string): Buffer {
+  return createHash("sha256").update(secret).digest();
+}
 
+function isSameSecret(received: string | undefined, configured: string) {
   return received !== undefined &&
-    timingSafeEqual(digestOf(received), digestOf(configured));
+    timingSafeEqual(
+      fixedLengthDigestOf(received),
+      fixedLengthDigestOf(configured),
+    );
 }
 
 export const recordFingerprintPunches = https.onRequest(
@@ -48,7 +51,10 @@ export const recordFingerprintPunches = https.onRequest(
     }
 
     try {
-      await recordFingerprintPunchesAndMarkSynced(requestData.data, new Date());
+      await recordFingerprintPunchesAndMarkSynced(
+        requestData.data,
+        DateTime.now(),
+      );
     } catch (e) {
       console.error("Failed to record fingerprint punches", e);
       res.status(500).send();

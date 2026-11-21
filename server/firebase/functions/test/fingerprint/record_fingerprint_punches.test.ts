@@ -3,14 +3,15 @@ import { createServer } from "node:net";
 import { afterEach, beforeEach, describe, it, mock } from "node:test";
 import type { Request } from "firebase-functions/v2/https";
 import type { Response } from "express";
-import { recordFingerprintPunches } from "../src/record_fingerprint_punches";
+import { recordFingerprintPunches } from "../../src/fingerprint/record_fingerprint_punches";
+import { instant } from "../support/instant";
 import {
   attendanceOf,
   lastSyncedAt,
   resetLastSyncedAt,
   seedMemberWithEmployeeCode,
   seedScheduledMeeting,
-} from "./support/local_hasura";
+} from "../support/local_hasura";
 
 const CONFIGURED_SECRET = "the-configured-fingerprint-sync-secret";
 
@@ -92,8 +93,11 @@ describe("recordFingerprintPunches endpoint", () => {
   });
 
   it("answers 204 with no body and records the punch it was sent", async () => {
-    const fridayHalfPastNineInCairo = new Date("2026-11-13T07:30:00Z");
-    mock.timers.enable({ apis: ["Date"], now: fridayHalfPastNineInCairo });
+    const fridayHalfPastNineInCairo = instant("2026-11-13T07:30:00Z");
+    mock.timers.enable({
+      apis: ["Date"],
+      now: fridayHalfPastNineInCairo.toMillis(),
+    });
     const { meetingId, serviceId } = await seedScheduledMeeting({
       isoWeekday: 5,
       attendance: ["09:00", "11:00"],
@@ -174,7 +178,7 @@ describe("recordFingerprintPunches endpoint", () => {
     process.env.HASURA_SERVER = await unusedLocalhostUrl();
     mock.timers.enable({
       apis: ["Date"],
-      now: new Date("2026-11-13T07:30:00Z"),
+      now: instant("2026-11-13T07:30:00Z").toMillis(),
     });
 
     const reply = await post(

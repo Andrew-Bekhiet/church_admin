@@ -1,4 +1,4 @@
-import { dataOrThrow, makeGraphqlRequest } from "../hasura_interface";
+import { dataOrThrow, makeGraphqlRequest } from "../../hasura_interface";
 
 const FINGERPRINT_SYNC_ROLE = "fingerprint_sync";
 
