@@ -19,7 +19,7 @@ class _FingerprintLastSyncIndicatorState
     extends State<FingerprintLastSyncIndicator> {
   static const double _width = 84;
   static const Duration _elapsedTimeRefreshInterval = Duration(seconds: 30);
-  static const Duration _detailsShowDuration = Duration(seconds: 4);
+  static const Duration _tooltipShowDuration = Duration(seconds: 4);
 
   late final Timer _elapsedTimeRefresh;
   late DateTime _now = clock.now();
@@ -69,7 +69,7 @@ class _FingerprintLastSyncIndicatorState
       key: FingerprintLastSyncIndicatorKeys.self,
       message: details,
       triggerMode: .tap,
-      showDuration: _detailsShowDuration,
+      showDuration: _tooltipShowDuration,
       child: SizedBox(
         width: _width,
         child: Padding(
