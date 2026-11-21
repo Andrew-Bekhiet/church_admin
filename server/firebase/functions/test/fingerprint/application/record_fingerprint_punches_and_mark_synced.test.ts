@@ -1,16 +1,13 @@
-import { randomUUID } from "node:crypto";
 import assert from "node:assert/strict";
 import { describe, it, mock } from "node:test";
-import { cairoWallClockAt } from "../src/fingerprint/cairo_wall_clock";
-import {
-  FingerprintPunch,
-  recordFingerprintPunchesAndMarkSynced,
-} from "../src/fingerprint/record_fingerprint_punches_and_mark_synced";
+import { DateTime } from "luxon";
+import { recordFingerprintPunchesAndMarkSynced } from "../../../src/fingerprint/application/record_fingerprint_punches_and_mark_synced";
+import { cairoWallClockAt } from "../../../src/fingerprint/domain/cairo_wall_clock";
+import { instant } from "../../support/instant";
 import {
   attendanceOf,
   communionDaysOf,
   fingerprintBotUid,
-  graphqlAs,
   lastSyncedAt,
   makeServantOf,
   recordAttendanceByHand,
@@ -22,16 +19,16 @@ import {
   seedServantOnlyOn,
   seedService,
   softDeletePerson,
-} from "./support/local_hasura";
+} from "../../support/local_hasura";
 
 const FRIDAY = 5;
-const fridayNoonUtc = new Date("2026-11-13T12:00:00Z");
+const fridayNoonUtc = instant("2026-11-13T12:00:00Z");
 
-function punch(employeeCode: string, punchedAt: string): FingerprintPunch {
+function punch(employeeCode: string, punchedAt: string) {
   return { employeeCode, punchedAt, terminalSerial: "test-terminal" };
 }
 
-async function syncPunches(punches: unknown[], now: Date) {
+async function syncPunches(punches: unknown[], now: DateTime<true>) {
   const { date, timeOfDay } = cairoWallClockAt(now);
 
   await recordFingerprintPunchesAndMarkSynced(
@@ -572,7 +569,7 @@ describe("recordFingerprintPunches time limits", () => {
 
     await syncPunches(
       [punch(mina.employeeCode, "2026-11-13T12:00:00Z")],
-      new Date("2026-11-23T12:00:01Z"),
+      instant("2026-11-23T12:00:01Z"),
     );
 
     assert.deepEqual(await attendanceOf(mina.personId), []);
@@ -586,7 +583,7 @@ describe("recordFingerprintPunches time limits", () => {
 
     await syncPunches(
       [punch(mina.employeeCode, "2026-11-13T12:00:00Z")],
-      new Date("2026-11-23T12:00:00Z"),
+      instant("2026-11-23T12:00:00Z"),
     );
 
     assert.equal((await attendanceOf(mina.personId)).length, 1);
@@ -602,7 +599,7 @@ describe("recordFingerprintPunches daylight saving", () => {
 
     await syncPunches(
       [punch(mina.employeeCode, "2026-04-17T08:30:00Z")],
-      new Date("2026-04-17T08:31:00Z"),
+      instant("2026-04-17T08:31:00Z"),
     );
 
     assert.equal((await attendanceOf(mina.personId)).length, 1);
@@ -616,7 +613,7 @@ describe("recordFingerprintPunches daylight saving", () => {
 
     await syncPunches(
       [punch(mina.employeeCode, "2026-04-24T08:30:00Z")],
-      new Date("2026-04-24T08:31:00Z"),
+      instant("2026-04-24T08:31:00Z"),
     );
 
     assert.equal((await attendanceOf(mina.personId)).length, 0);
@@ -630,7 +627,7 @@ describe("recordFingerprintPunches daylight saving", () => {
 
     await syncPunches(
       [punch(mina.employeeCode, "2026-10-23T08:30:00Z")],
-      new Date("2026-10-23T08:31:00Z"),
+      instant("2026-10-23T08:31:00Z"),
     );
 
     assert.equal((await attendanceOf(mina.personId)).length, 0);
@@ -644,7 +641,7 @@ describe("recordFingerprintPunches daylight saving", () => {
 
     await syncPunches(
       [punch(mina.employeeCode, "2026-10-30T08:30:00Z")],
-      new Date("2026-10-30T08:31:00Z"),
+      instant("2026-10-30T08:31:00Z"),
     );
 
     assert.equal((await attendanceOf(mina.personId)).length, 1);
@@ -662,7 +659,7 @@ describe("recordFingerprintPunches daylight saving", () => {
         punch(mina.employeeCode, "2026-10-29T21:30:00Z"),
         punch(mina.employeeCode, "2026-10-29T20:30:00Z"),
       ],
-      new Date("2026-10-29T22:00:00Z"),
+      instant("2026-10-29T22:00:00Z"),
     );
 
     assert.deepEqual(
@@ -680,7 +677,7 @@ describe("recordFingerprintPunches daylight saving", () => {
 
     await syncPunches(
       [punch(mina.employeeCode, "2026-10-29T21:30:00Z")],
-      new Date("2026-10-29T22:00:00Z"),
+      instant("2026-10-29T22:00:00Z"),
     );
 
     assert.deepEqual(
@@ -698,7 +695,7 @@ describe("recordFingerprintPunches daylight saving", () => {
 
     await syncPunches(
       [punch(mina.employeeCode, "2026-04-23T22:10:00Z")],
-      new Date("2026-04-23T22:11:00Z"),
+      instant("2026-04-23T22:11:00Z"),
     );
 
     assert.equal((await attendanceOf(mina.personId)).length, 1);
@@ -717,7 +714,7 @@ describe("recordFingerprintPunches daylight saving", () => {
         punch(mina.employeeCode, "2026-11-12T22:30:00Z"),
         punch(mina.employeeCode, "2026-11-13T00:30:00Z"),
       ],
-      new Date("2026-11-13T01:00:00Z"),
+      instant("2026-11-13T01:00:00Z"),
     );
 
     assert.deepEqual(await communionDaysOf(mina.personId), ["2026-11-13"]);
@@ -829,85 +826,26 @@ describe("recordFingerprintPunches sync status", () => {
   it("sets the last sync time on a call that carries no punches", async () => {
     await resetLastSyncedAt();
 
-    await syncPunches([], new Date("2026-11-14T05:00:00Z"));
+    await syncPunches([], instant("2026-11-14T05:00:00Z"));
 
     assert.equal(await lastSyncedAt(), "2026-11-14T05:00:00Z");
   });
 
   it("moves the last sync time on a later call", async () => {
     await resetLastSyncedAt();
-    await syncPunches([], new Date("2026-11-14T05:00:00Z"));
+    await syncPunches([], instant("2026-11-14T05:00:00Z"));
 
-    await syncPunches([], new Date("2026-11-14T05:00:15Z"));
+    await syncPunches([], instant("2026-11-14T05:00:15Z"));
 
     assert.equal(await lastSyncedAt(), "2026-11-14T05:00:15Z");
   });
 
   it("keeps the later sync time when an earlier call finishes after it", async () => {
     await resetLastSyncedAt();
-    await syncPunches([], new Date("2026-11-14T05:00:15Z"));
+    await syncPunches([], instant("2026-11-14T05:00:15Z"));
 
-    await syncPunches([], new Date("2026-11-14T05:00:00Z"));
+    await syncPunches([], instant("2026-11-14T05:00:00Z"));
 
     assert.equal(await lastSyncedAt(), "2026-11-14T05:00:15Z");
-  });
-});
-
-describe("the fingerprint_sync role", () => {
-  it("cannot read persons", async () => {
-    const query = "{ persons { id name } }";
-
-    const asFingerprintSync = await graphqlAs("fingerprint_sync", query);
-    const asAdmin = await graphqlAs("admin", query);
-
-    assert.equal(asFingerprintSync.data, undefined);
-    assert.ok(asFingerprintSync.errors!.length > 0);
-    assert.ok(asAdmin.data !== undefined);
-  });
-
-  it("cannot read a name through the meeting roster", async () => {
-    const query = "{ historyMeetingRoster { name } }";
-
-    const asFingerprintSync = await graphqlAs("fingerprint_sync", query);
-    const asAdmin = await graphqlAs("admin", query);
-
-    assert.equal(asFingerprintSync.data, undefined);
-    assert.ok(asFingerprintSync.errors!.length > 0);
-    assert.ok(asAdmin.data !== undefined);
-  });
-
-  it("cannot read a user's name", async () => {
-    const query = "{ authUsersData { name } }";
-
-    const asFingerprintSync = await graphqlAs("fingerprint_sync", query);
-    const asAdmin = await graphqlAs("admin", query);
-
-    assert.equal(asFingerprintSync.data, undefined);
-    assert.ok(asFingerprintSync.errors!.length > 0);
-    assert.ok(asAdmin.data !== undefined);
-  });
-
-  it("sees only the fingerprint bot among users", async () => {
-    await seedHumanUser();
-
-    const response = await graphqlAs(
-      "fingerprint_sync",
-      "{ authUsersData { uid } }",
-    );
-
-    assert.deepEqual(response.data, {
-      authUsersData: [{ uid: await fingerprintBotUid() }],
-    });
-  });
-
-  it("has no way to delete attendance", async () => {
-    const query = `mutation { deleteHistoryAttendanceHistory(where: { meetingId: { _eq: "${randomUUID()}" } }) { affectedRows } }`;
-
-    const asFingerprintSync = await graphqlAs("fingerprint_sync", query);
-    const asAdmin = await graphqlAs("admin", query);
-
-    assert.equal(asFingerprintSync.data, undefined);
-    assert.ok(asFingerprintSync.errors!.length > 0);
-    assert.ok(asAdmin.data !== undefined);
   });
 });

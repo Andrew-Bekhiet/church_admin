@@ -1,85 +1,5 @@
-import {
-  AttendanceToRecord,
-  CommunionToRecord,
-  MeetingAutoAttendanceSchedule,
-  PersonPresence,
-  presenceRecordsFor,
-  RosterMembership,
-} from "./presence_matching";
+import { AttendanceToRecord, CommunionToRecord } from "../domain/presence";
 import { requestAsFingerprintSync } from "./request_as_fingerprint_sync";
-
-interface ScheduledMeetingRow {
-  id: string;
-  autoAttendanceWeekday: number;
-  autoAttendanceStartTime: string;
-  autoAttendanceEndTime: string;
-  autoCommunionStartTime: string | null;
-  autoCommunionEndTime: string | null;
-  autoAttendanceRecordsServants: boolean;
-}
-
-interface PresenceRecordingContext {
-  fingerprintBotUid: string;
-  schedulesByMeetingId: Map<string, MeetingAutoAttendanceSchedule>;
-  rosterMemberships: RosterMembership[];
-}
-
-async function fetchPresenceRecordingContext(
-  personIds: string[],
-): Promise<PresenceRecordingContext> {
-  const data = await requestAsFingerprintSync(
-    `
-      query presenceRecordingContext($personIds: [uuid!]!) {
-        authUsersData {
-          uid
-        }
-        historyMeetings {
-          id
-          autoAttendanceWeekday
-          autoAttendanceStartTime
-          autoAttendanceEndTime
-          autoCommunionStartTime
-          autoCommunionEndTime
-          autoAttendanceRecordsServants
-        }
-        historyMeetingRoster(where: { personId: { _in: $personIds } }) {
-          meetingId
-          personId
-          asServant
-        }
-      }
-    `,
-    { personIds },
-    "presenceRecordingContext",
-  );
-  const fingerprintBots: { uid: string }[] = data["authUsersData"];
-  const scheduledMeetings: ScheduledMeetingRow[] = data["historyMeetings"];
-
-  if (fingerprintBots.length !== 1) {
-    throw new Error(
-      `Expected one fingerprint bot user, found ${fingerprintBots.length}`,
-    );
-  }
-
-  return {
-    fingerprintBotUid: fingerprintBots[0].uid,
-    schedulesByMeetingId: new Map(
-      scheduledMeetings.map((meeting) => [
-        meeting.id,
-        {
-          meetingId: meeting.id,
-          isoWeekday: meeting.autoAttendanceWeekday,
-          attendanceStartTime: meeting.autoAttendanceStartTime,
-          attendanceEndTime: meeting.autoAttendanceEndTime,
-          communionStartTime: meeting.autoCommunionStartTime,
-          communionEndTime: meeting.autoCommunionEndTime,
-          recordsServants: meeting.autoAttendanceRecordsServants,
-        },
-      ]),
-    ),
-    rosterMemberships: data["historyMeetingRoster"],
-  };
-}
 
 function attendanceKeyOf(attendance: AttendanceToRecord): string {
   return [
@@ -98,7 +18,7 @@ function distinctAttendanceGroupedByTimeEarliestFirst(
   >();
 
   for (const record of attendance) {
-    const presenceTime = record.at.getTime();
+    const presenceTime = record.at.toMillis();
     const sameTimeRecords = attendanceByTime.get(presenceTime) ??
       new Map<string, AttendanceToRecord>();
 
@@ -140,14 +60,14 @@ function attendanceVariablesOf(
 ): Record<string, unknown> {
   return Object.fromEntries(
     attendanceGroups.flatMap((group, index) => [
-      [`at${index}`, group[0].at.toISOString()],
+      [`at${index}`, group[0].at.toUTC().toISO()],
       [
         `attendance${index}`,
         group.map((record) => ({
           meetingId: record.meetingId,
           personId: record.personId,
           asServant: record.asServant,
-          datetime: record.at.toISOString(),
+          datetime: record.at.toUTC().toISO(),
           recordedBy: fingerprintBotUid,
         })),
       ],
@@ -173,7 +93,7 @@ function recordPresenceMutationFor(attendanceGroupCount: number): string {
         }`);
 
   return `
-      mutation recordPresencesInMatchingWindows(
+      mutation writePresenceRecords(
         $days: [HistoryAttendanceDaysInsertInput!]!
         $communions: [HistoryKodasHistoryInsertInput!]!
         ${attendanceVariableDefinitions.join("")}
@@ -198,7 +118,7 @@ function recordPresenceMutationFor(attendanceGroupCount: number): string {
     `;
 }
 
-async function writePresenceRecords(
+export async function writePresenceRecords(
   fingerprintBotUid: string,
   attendance: AttendanceToRecord[],
   communions: CommunionToRecord[],
@@ -221,50 +141,6 @@ async function writePresenceRecords(
       communions: communionRows,
       ...attendanceVariablesOf(attendanceGroups, fingerprintBotUid),
     },
-    "recordPresencesInMatchingWindows",
-  );
-}
-
-export async function recordPresencesInMatchingWindows(
-  presences: PersonPresence[],
-): Promise<void> {
-  if (presences.length === 0) return;
-
-  const context = await fetchPresenceRecordingContext([
-    ...new Set(presences.map((presence) => presence.personId)),
-  ]);
-  const attendance: AttendanceToRecord[] = [];
-  const communions: CommunionToRecord[] = [];
-
-  for (const presence of presences) {
-    const records = presenceRecordsFor(
-      presence,
-      context.schedulesByMeetingId,
-      context.rosterMemberships,
-    );
-
-    if (records.matchedMeetingIds.length === 0) {
-      console.warn(
-        "Presence matched no meeting window",
-        presence.personId,
-        presence.at.toISOString(),
-      );
-    } else if (records.matchedMeetingIds.length > 1) {
-      console.warn(
-        "Presence matched several meetings",
-        presence.personId,
-        presence.at.toISOString(),
-        records.matchedMeetingIds,
-      );
-    }
-
-    attendance.push(...records.attendance);
-    if (records.communion) communions.push(records.communion);
-  }
-
-  await writePresenceRecords(
-    context.fingerprintBotUid,
-    attendance,
-    communions,
+    "writePresenceRecords",
   );
 }
