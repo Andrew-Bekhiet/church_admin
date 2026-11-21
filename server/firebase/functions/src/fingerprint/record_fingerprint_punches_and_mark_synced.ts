@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { driftFromCairoWallClockMs } from "./cairo_wall_clock";
+import { driftFromCairoWallClockMsOrNaNIfUnreadable } from "./cairo_wall_clock";
 import { PersonPresence } from "./presence_matching";
 import { findPersonIdsByEmployeeCodes } from "./find_person_ids_by_employee_codes";
 import { markFingerprintSyncedAtUnlessALaterSyncIsRecorded } from "./mark_fingerprint_synced_at";
@@ -47,7 +47,7 @@ export async function recordFingerprintPunchesAndMarkSynced(
   request: FingerprintPunchesRequest,
   now: Date,
 ): Promise<void> {
-  const biotimeClockDriftMs = driftFromCairoWallClockMs(
+  const biotimeClockDriftMs = driftFromCairoWallClockMsOrNaNIfUnreadable(
     request.biotimeServerLocalTime,
     now,
   );
