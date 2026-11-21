@@ -145,9 +145,11 @@ class _PersonFingerprintIdsSheetState extends State<PersonFingerprintIdsSheet> {
                           : null,
                       icon: switch (write) {
                         FingerprintIdsWriteInProgress() =>
-                          const SizedBox.square(
-                            dimension: 18,
-                            child: CircularProgressIndicator(strokeWidth: 2),
+                          CircularProgressIndicator(
+                            strokeWidth: 2,
+                            constraints: BoxConstraints.tight(
+                              const Size.square(18),
+                            ),
                           ),
                         _ => const Icon(Symbols.add),
                       },
