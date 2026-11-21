@@ -13,7 +13,7 @@ class AccessChangeCacheWiper {
     final wiper = AccessChangeCacheWiper(
       userDataStream: ref.watch(authBlocProvider).userDataStream,
       graphQLCacheStore: ref.watch(graphQLCacheStore),
-      clearsOfOtherAccessScopedCaches: [
+      clearsOfCachesBesideGraphQL: [
         ref.watch(imageUrlCacheServiceProvider).box.clear,
         ref.watch(baseCacheManagerProvider).emptyCache,
         ref.watch(ExportOperationsStorage.provider).deleteSavedFiles,
@@ -27,7 +27,7 @@ class AccessChangeCacheWiper {
   });
 
   final GqlKvStore _graphQLCacheStore;
-  final List<Future<void> Function()> _clearsOfOtherAccessScopedCaches;
+  final List<Future<void> Function()> _clearsOfCachesBesideGraphQL;
   final void Function() _refetchOpenSubscriptions;
 
   late final StreamSubscription<void> _subscription;
@@ -35,13 +35,13 @@ class AccessChangeCacheWiper {
   AccessChangeCacheWiper({
     required Stream<User?> userDataStream,
     required this._graphQLCacheStore,
-    required this._clearsOfOtherAccessScopedCaches,
+    required this._clearsOfCachesBesideGraphQL,
     required this._refetchOpenSubscriptions,
   }) {
     _subscription = userDataStream
         .whereType<User>()
         .map(_accessOf)
-        .asyncMap(_refillCachesIfFilledUnderOtherAccess)
+        .asyncMap(_wipeCachesAndRefetchIfFilledUnderOtherAccess)
         .listen(null, onError: _logFailure);
   }
 
@@ -59,27 +59,29 @@ class AccessChangeCacheWiper {
     ].sorted(),
   };
 
-  Future<void> _refillCachesIfFilledUnderOtherAccess(Json access) async {
+  Future<void> _wipeCachesAndRefetchIfFilledUnderOtherAccess(
+    Json access,
+  ) async {
     final isFilledUnderSameAccess = const DeepCollectionEquality().equals(
       _graphQLCacheStore.filledUnderAccess,
       access,
     );
     if (isFilledUnderSameAccess) return;
 
-    bool everyOtherCacheCleared = true;
-    for (final clear in _clearsOfOtherAccessScopedCaches) {
+    bool everyCacheBesideGraphQLCleared = true;
+    for (final clear in _clearsOfCachesBesideGraphQL) {
       try {
         await clear();
       } catch (error, stackTrace) {
-        everyOtherCacheCleared = false;
+        everyCacheBesideGraphQLCleared = false;
         _logFailure(error, stackTrace);
       }
     }
 
-    if (everyOtherCacheCleared) {
+    if (everyCacheBesideGraphQLCleared) {
       await _graphQLCacheStore.resetFilledUnder(access);
     } else {
-      _graphQLCacheStore.reset();
+      await _graphQLCacheStore.resetLeavingAccessUnrecorded();
     }
     _refetchOpenSubscriptions();
   }

@@ -30,6 +30,8 @@ class GqlKvStore extends gql.Store {
     await _storage.flush();
   }
 
+  Future<void> resetLeavingAccessUnrecorded() => _storage.clear();
+
   @override
   Map<String, dynamic>? get(String dataId) => _storage.get(dataId);
 

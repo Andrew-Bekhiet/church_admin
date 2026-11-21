@@ -14,14 +14,17 @@ void main() {
   const insider = {'__typename': 'Persons', 'id': 'insider', 'name': 'In'};
   const outsider = {'__typename': 'Persons', 'id': 'outsider', 'name': 'Out'};
   const photo = 'cached-photo';
-  const serviceA = Service(id: 'service-a', name: 'A');
+  const scopeA = AdminOnData(
+    permissionId: 'scope-a',
+    service: Service(id: 'service-a', name: 'A'),
+  );
   const scopedUser = User(
     uid: 'servant',
     name: 'Servant',
     permissions: PermissionsSet.fromSet({UserPermission.approved}),
-    adminOn: [AdminOnData(permissionId: 'scope-a', service: serviceA)],
+    adminOn: [scopeA],
   );
-  final superUser = scopedUser.copyWith(
+  final globalAccessUser = scopedUser.copyWith(
     permissions: const PermissionsSet.fromSet({
       UserPermission.approved,
       UserPermission.readAllData,
@@ -34,7 +37,6 @@ void main() {
   late RecordingSubscriptionLink link;
   late BehaviorSubject<bool> connectivity;
   late DBGraphQLClient client;
-  late List<Json> personsOnServer;
   late Set<String> cachedPhotos;
   late Exception? photosClearFailure;
 
@@ -43,11 +45,14 @@ void main() {
       if (key.startsWith('Persons:')) key.substring('Persons:'.length),
   };
 
-  Future<void> startWiper(Stream<User?> userDataStream) async {
+  Future<void> startWiper(
+    Stream<User?> userDataStream, {
+    required List<Json> refetchedPersons,
+  }) async {
     final wiper = AccessChangeCacheWiper(
       userDataStream: userDataStream,
       graphQLCacheStore: store,
-      clearsOfOtherAccessScopedCaches: [
+      clearsOfCachesBesideGraphQL: [
         () async {
           if (photosClearFailure case final failure?) throw failure;
           cachedPhotos.clear();
@@ -55,7 +60,7 @@ void main() {
       ],
       refetchOpenSubscriptions: () => link.pushToOpenSubscriptions(
         personsOperation,
-        {'persons': personsOnServer},
+        {'persons': refetchedPersons},
       ),
     );
     addTearDown(wiper.dispose);
@@ -63,7 +68,6 @@ void main() {
   }
 
   Future<void> browsePersons(List<Json> onServer) async {
-    personsOnServer = onServer;
     link.dataByOperationName[personsOperation] = {'persons': onServer};
     final subscription = client
         .subscribe(
@@ -92,7 +96,6 @@ void main() {
       ),
       cache: GraphQLCache(store: store, typePolicies: GqlTypePolicies.policies),
     );
-    personsOnServer = [];
     cachedPhotos = {};
     photosClearFailure = null;
   });
@@ -103,13 +106,12 @@ void main() {
     'losing global read access drops out-of-scope people from the device and '
     'keeps the people still in scope',
     () async {
-      final user = BehaviorSubject<User?>.seeded(superUser);
+      final user = BehaviorSubject<User?>.seeded(globalAccessUser);
       addTearDown(user.close);
-      await startWiper(user);
+      await startWiper(user, refetchedPersons: [insider]);
       await browsePersons([insider, outsider]);
       expect(cachedPersonIds(), {insider['id'], outsider['id']});
 
-      personsOnServer = [insider];
       user.add(scopedUser);
       await pumpEventQueue();
 
@@ -118,12 +120,24 @@ void main() {
   );
 
   test('losing global read access drops cached photos too', () async {
-    final user = BehaviorSubject<User?>.seeded(superUser);
+    final user = BehaviorSubject<User?>.seeded(globalAccessUser);
     addTearDown(user.close);
-    await startWiper(user);
+    await startWiper(user, refetchedPersons: []);
     cachedPhotos.add(photo);
 
     user.add(scopedUser);
+    await pumpEventQueue();
+
+    expect(cachedPhotos, isEmpty);
+  });
+
+  test('another account signing in gets a fresh cache', () async {
+    final user = BehaviorSubject<User?>.seeded(scopedUser);
+    addTearDown(user.close);
+    await startWiper(user, refetchedPersons: []);
+    cachedPhotos.add(photo);
+
+    user.add(scopedUser.copyWith(uid: 'another-servant'));
     await pumpEventQueue();
 
     expect(cachedPhotos, isEmpty);
@@ -133,13 +147,12 @@ void main() {
     'a device whose access changed while the app was closed is cleaned on the '
     'next launch, even though it already saved the new permissions',
     () async {
-      final beforeRestart = BehaviorSubject<User?>.seeded(superUser);
-      await startWiper(beforeRestart);
+      final beforeRestart = BehaviorSubject<User?>.seeded(globalAccessUser);
+      await startWiper(beforeRestart, refetchedPersons: []);
       await browsePersons([insider, outsider]);
       await beforeRestart.close();
 
-      personsOnServer = [insider];
-      await startWiper(Stream.value(scopedUser));
+      await startWiper(Stream.value(scopedUser), refetchedPersons: [insider]);
 
       expect(cachedPersonIds(), {insider['id']});
     },
@@ -150,24 +163,41 @@ void main() {
     'is unchanged',
     () async {
       final beforeRestart = BehaviorSubject<User?>.seeded(scopedUser);
-      await startWiper(beforeRestart);
+      await startWiper(beforeRestart, refetchedPersons: []);
       cachedPhotos.add(photo);
       await beforeRestart.close();
 
       for (final MapEntry(:key, :value) in storage.toMap().entries.toList()) {
         storage.put(key, jsonDecode(jsonEncode(value)) as Json);
       }
-      await startWiper(Stream.value(scopedUser));
+      await startWiper(Stream.value(scopedUser), refetchedPersons: []);
 
       expect(cachedPhotos, {photo});
     },
   );
 
   test(
+    'a photo cache that fails to clear still lets out-of-scope people leave '
+    'the device',
+    () async {
+      final user = BehaviorSubject<User?>.seeded(globalAccessUser);
+      addTearDown(user.close);
+      await startWiper(user, refetchedPersons: [insider]);
+      await browsePersons([insider, outsider]);
+      photosClearFailure = Exception('photos are locked');
+
+      user.add(scopedUser);
+      await pumpEventQueue();
+
+      expect(cachedPersonIds(), {insider['id']});
+    },
+  );
+
+  test(
     'a photo cache that failed to clear is cleaned again on the next launch',
     () async {
-      final beforeRestart = BehaviorSubject<User?>.seeded(superUser);
-      await startWiper(beforeRestart);
+      final beforeRestart = BehaviorSubject<User?>.seeded(globalAccessUser);
+      await startWiper(beforeRestart, refetchedPersons: []);
       cachedPhotos.add(photo);
       photosClearFailure = Exception('photos are locked');
       beforeRestart.add(scopedUser);
@@ -176,41 +206,31 @@ void main() {
       expect(cachedPhotos, {photo});
 
       photosClearFailure = null;
-      await startWiper(Stream.value(scopedUser));
+      await startWiper(Stream.value(scopedUser), refetchedPersons: []);
 
       expect(cachedPhotos, isEmpty);
     },
   );
 
   test(
-    'a cache filled before access was recorded is cleaned once on launch',
+    'a cache filled before access was recorded is cleaned on launch',
     () async {
       await browsePersons([insider, outsider]);
-      personsOnServer = [insider];
 
-      await startWiper(Stream.value(scopedUser));
+      await startWiper(Stream.value(scopedUser), refetchedPersons: [insider]);
 
       expect(cachedPersonIds(), {insider['id']});
     },
   );
 
-  test('changing an admin-on scope cleans the cache', () async {
+  test('gaining edit rights on an admin-on scope cleans the cache', () async {
     final user = BehaviorSubject<User?>.seeded(scopedUser);
     addTearDown(user.close);
-    await startWiper(user);
+    await startWiper(user, refetchedPersons: []);
     await browsePersons([insider]);
 
-    personsOnServer = [];
     user.add(
-      scopedUser.copyWith(
-        adminOn: const [
-          AdminOnData(
-            permissionId: 'scope-a',
-            service: serviceA,
-            serviceAllowEdit: true,
-          ),
-        ],
-      ),
+      scopedUser.copyWith(adminOn: [scopeA.copyWith(serviceAllowEdit: true)]),
     );
     await pumpEventQueue();
 
@@ -220,16 +240,15 @@ void main() {
   test('an update that keeps the same access keeps cached photos', () async {
     final user = BehaviorSubject<User?>.seeded(scopedUser);
     addTearDown(user.close);
-    await startWiper(user);
+    await startWiper(user, refetchedPersons: []);
     cachedPhotos.add(photo);
 
     user.add(
       scopedUser.copyWith(
         name: 'Renamed',
-        adminOn: const [
-          AdminOnData(
-            permissionId: 'scope-a',
-            service: Service(id: 'service-a', name: 'Renamed A'),
+        adminOn: [
+          scopeA.copyWith(
+            service: const Service(id: 'service-a', name: 'Renamed A'),
           ),
         ],
       ),
