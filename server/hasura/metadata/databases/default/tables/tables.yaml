@@ -19,6 +19,7 @@
 - "!include history_latest_father_visits.yaml"
 - "!include history_latest_kodases.yaml"
 - "!include history_latest_visits.yaml"
+- "!include history_meeting_auto_presence_candidates.yaml"
 - "!include history_meeting_days.yaml"
 - "!include history_meeting_roster.yaml"
 - "!include history_meetings.yaml"

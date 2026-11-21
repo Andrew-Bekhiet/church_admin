@@ -1,0 +1,15 @@
+table:
+  name: meeting_auto_presence_candidates
+  schema: history
+select_permissions:
+  - role: fingerprint_sync
+    permission:
+      columns:
+        - as_servant
+        - iso_weekday
+        - meeting_id
+        - person_id
+        - window_end_time
+        - window_kind
+        - window_start_time
+      filter: {}
