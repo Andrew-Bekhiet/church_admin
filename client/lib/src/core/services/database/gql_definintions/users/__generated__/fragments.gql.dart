@@ -18,6 +18,7 @@ class Fragment_User implements Fragment_UserNoPhoto {
     required this.uid,
     required this.name,
     this.email,
+    required this.userType,
     this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
     this.blurhash,
@@ -27,6 +28,7 @@ class Fragment_User implements Fragment_UserNoPhoto {
     final l$uid = json['uid'];
     final l$name = json['name'];
     final l$email = json['email'];
+    final l$userType = json['userType'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -34,6 +36,7 @@ class Fragment_User implements Fragment_UserNoPhoto {
       uid: stringToUuid(l$uid),
       name: (l$name as String),
       email: (l$email as String?),
+      userType: (l$userType as String),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -47,6 +50,8 @@ class Fragment_User implements Fragment_UserNoPhoto {
   final String name;
 
   final String? email;
+
+  final String userType;
 
   final String $__typename;
 
@@ -62,6 +67,8 @@ class Fragment_User implements Fragment_UserNoPhoto {
     _resultData['name'] = l$name;
     final l$email = email;
     _resultData['email'] = l$email;
+    final l$userType = userType;
+    _resultData['userType'] = l$userType;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -78,6 +85,7 @@ class Fragment_User implements Fragment_UserNoPhoto {
     final l$uid = uid;
     final l$name = name;
     final l$email = email;
+    final l$userType = userType;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -85,6 +93,7 @@ class Fragment_User implements Fragment_UserNoPhoto {
       l$uid,
       l$name,
       l$email,
+      l$userType,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -112,6 +121,11 @@ class Fragment_User implements Fragment_UserNoPhoto {
     final l$email = email;
     final lOther$email = other.email;
     if (l$email != lOther$email) {
+      return false;
+    }
+    final l$userType = userType;
+    final lOther$userType = other.userType;
+    if (l$userType != lOther$userType) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -151,6 +165,7 @@ abstract class CopyWith_Fragment_User<TRes> {
     UuidValue? uid,
     String? name,
     String? email,
+    String? userType,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -171,6 +186,7 @@ class _CopyWithImpl_Fragment_User<TRes>
     Object? uid = _undefined,
     Object? name = _undefined,
     Object? email = _undefined,
+    Object? userType = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -183,6 +199,9 @@ class _CopyWithImpl_Fragment_User<TRes>
           ? _instance.name
           : (name as String),
       email: email == _undefined ? _instance.email : (email as String?),
+      userType: userType == _undefined || userType == null
+          ? _instance.userType
+          : (userType as String),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -206,6 +225,7 @@ class _CopyWithStubImpl_Fragment_User<TRes>
     UuidValue? uid,
     String? name,
     String? email,
+    String? userType,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -257,6 +277,7 @@ class Fragment_UserNoPhoto {
     required this.uid,
     required this.name,
     this.email,
+    required this.userType,
     this.$__typename = 'AuthUsersData',
   });
 
@@ -264,11 +285,13 @@ class Fragment_UserNoPhoto {
     final l$uid = json['uid'];
     final l$name = json['name'];
     final l$email = json['email'];
+    final l$userType = json['userType'];
     final l$$__typename = json['__typename'];
     return Fragment_UserNoPhoto(
       uid: stringToUuid(l$uid),
       name: (l$name as String),
       email: (l$email as String?),
+      userType: (l$userType as String),
       $__typename: (l$$__typename as String),
     );
   }
@@ -278,6 +301,8 @@ class Fragment_UserNoPhoto {
   final String name;
 
   final String? email;
+
+  final String userType;
 
   final String $__typename;
 
@@ -289,6 +314,8 @@ class Fragment_UserNoPhoto {
     _resultData['name'] = l$name;
     final l$email = email;
     _resultData['email'] = l$email;
+    final l$userType = userType;
+    _resultData['userType'] = l$userType;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -299,8 +326,9 @@ class Fragment_UserNoPhoto {
     final l$uid = uid;
     final l$name = name;
     final l$email = email;
+    final l$userType = userType;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$uid, l$name, l$email, l$$__typename]);
+    return Object.hashAll([l$uid, l$name, l$email, l$userType, l$$__typename]);
   }
 
   @override
@@ -326,6 +354,11 @@ class Fragment_UserNoPhoto {
     if (l$email != lOther$email) {
       return false;
     }
+    final l$userType = userType;
+    final lOther$userType = other.userType;
+    if (l$userType != lOther$userType) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -349,7 +382,13 @@ abstract class CopyWith_Fragment_UserNoPhoto<TRes> {
   factory CopyWith_Fragment_UserNoPhoto.stub(TRes res) =
       _CopyWithStubImpl_Fragment_UserNoPhoto;
 
-  TRes call({UuidValue? uid, String? name, String? email, String? $__typename});
+  TRes call({
+    UuidValue? uid,
+    String? name,
+    String? email,
+    String? userType,
+    String? $__typename,
+  });
 }
 
 class _CopyWithImpl_Fragment_UserNoPhoto<TRes>
@@ -366,6 +405,7 @@ class _CopyWithImpl_Fragment_UserNoPhoto<TRes>
     Object? uid = _undefined,
     Object? name = _undefined,
     Object? email = _undefined,
+    Object? userType = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Fragment_UserNoPhoto(
@@ -376,6 +416,9 @@ class _CopyWithImpl_Fragment_UserNoPhoto<TRes>
           ? _instance.name
           : (name as String),
       email: email == _undefined ? _instance.email : (email as String?),
+      userType: userType == _undefined || userType == null
+          ? _instance.userType
+          : (userType as String),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -389,8 +432,13 @@ class _CopyWithStubImpl_Fragment_UserNoPhoto<TRes>
 
   TRes _res;
 
-  call({UuidValue? uid, String? name, String? email, String? $__typename}) =>
-      _res;
+  call({
+    UuidValue? uid,
+    String? name,
+    String? email,
+    String? userType,
+    String? $__typename,
+  }) => _res;
 }
 
 const fragmentDefinitionUserNoPhoto = FragmentDefinitionNode(
@@ -423,6 +471,13 @@ const fragmentDefinitionUserNoPhoto = FragmentDefinitionNode(
         selectionSet: null,
       ),
       FieldNode(
+        name: NameNode(value: 'userType'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
         name: NameNode(value: '__typename'),
         alias: null,
         arguments: [],
@@ -442,6 +497,7 @@ class Fragment_UserOverview
     required this.uid,
     required this.name,
     this.email,
+    required this.userType,
     this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
     this.blurhash,
@@ -456,6 +512,7 @@ class Fragment_UserOverview
     final l$uid = json['uid'];
     final l$name = json['name'];
     final l$email = json['email'];
+    final l$userType = json['userType'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -468,6 +525,7 @@ class Fragment_UserOverview
       uid: stringToUuid(l$uid),
       name: (l$name as String),
       email: (l$email as String?),
+      userType: (l$userType as String),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -501,6 +559,8 @@ class Fragment_UserOverview
 
   final String? email;
 
+  final String userType;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -525,6 +585,8 @@ class Fragment_UserOverview
     _resultData['name'] = l$name;
     final l$email = email;
     _resultData['email'] = l$email;
+    final l$userType = userType;
+    _resultData['userType'] = l$userType;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -552,6 +614,7 @@ class Fragment_UserOverview
     final l$uid = uid;
     final l$name = name;
     final l$email = email;
+    final l$userType = userType;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -564,6 +627,7 @@ class Fragment_UserOverview
       l$uid,
       l$name,
       l$email,
+      l$userType,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -596,6 +660,11 @@ class Fragment_UserOverview
     final l$email = email;
     final lOther$email = other.email;
     if (l$email != lOther$email) {
+      return false;
+    }
+    final l$userType = userType;
+    final lOther$userType = other.userType;
+    if (l$userType != lOther$userType) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -668,6 +737,7 @@ abstract class CopyWith_Fragment_UserOverview<TRes> {
     UuidValue? uid,
     String? name,
     String? email,
+    String? userType,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -705,6 +775,7 @@ class _CopyWithImpl_Fragment_UserOverview<TRes>
     Object? uid = _undefined,
     Object? name = _undefined,
     Object? email = _undefined,
+    Object? userType = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -722,6 +793,9 @@ class _CopyWithImpl_Fragment_UserOverview<TRes>
           ? _instance.name
           : (name as String),
       email: email == _undefined ? _instance.email : (email as String?),
+      userType: userType == _undefined || userType == null
+          ? _instance.userType
+          : (userType as String),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -795,6 +869,7 @@ class _CopyWithStubImpl_Fragment_UserOverview<TRes>
     UuidValue? uid,
     String? name,
     String? email,
+    String? userType,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -1416,6 +1491,7 @@ class Fragment_UserDetails
     required this.uid,
     required this.name,
     this.email,
+    required this.userType,
     this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
     this.blurhash,
@@ -1434,6 +1510,7 @@ class Fragment_UserDetails
     final l$uid = json['uid'];
     final l$name = json['name'];
     final l$email = json['email'];
+    final l$userType = json['userType'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -1450,6 +1527,7 @@ class Fragment_UserDetails
       uid: stringToUuid(l$uid),
       name: (l$name as String),
       email: (l$email as String?),
+      userType: (l$userType as String),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -1503,6 +1581,8 @@ class Fragment_UserDetails
 
   final String? email;
 
+  final String userType;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -1535,6 +1615,8 @@ class Fragment_UserDetails
     _resultData['name'] = l$name;
     final l$email = email;
     _resultData['email'] = l$email;
+    final l$userType = userType;
+    _resultData['userType'] = l$userType;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -1570,6 +1652,7 @@ class Fragment_UserDetails
     final l$uid = uid;
     final l$name = name;
     final l$email = email;
+    final l$userType = userType;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -1586,6 +1669,7 @@ class Fragment_UserDetails
       l$uid,
       l$name,
       l$email,
+      l$userType,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -1622,6 +1706,11 @@ class Fragment_UserDetails
     final l$email = email;
     final lOther$email = other.email;
     if (l$email != lOther$email) {
+      return false;
+    }
+    final l$userType = userType;
+    final lOther$userType = other.userType;
+    if (l$userType != lOther$userType) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1728,6 +1817,7 @@ abstract class CopyWith_Fragment_UserDetails<TRes> {
     UuidValue? uid,
     String? name,
     String? email,
+    String? userType,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -1785,6 +1875,7 @@ class _CopyWithImpl_Fragment_UserDetails<TRes>
     Object? uid = _undefined,
     Object? name = _undefined,
     Object? email = _undefined,
+    Object? userType = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -1806,6 +1897,9 @@ class _CopyWithImpl_Fragment_UserDetails<TRes>
           ? _instance.name
           : (name as String),
       email: email == _undefined ? _instance.email : (email as String?),
+      userType: userType == _undefined || userType == null
+          ? _instance.userType
+          : (userType as String),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -1937,6 +2031,7 @@ class _CopyWithStubImpl_Fragment_UserDetails<TRes>
     UuidValue? uid,
     String? name,
     String? email,
+    String? userType,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,

@@ -2,7 +2,8 @@ enum UserAdminGroupKind {
   superAdmins(title: 'مسؤلون'),
   service(),
   area(),
-  unscoped(title: 'بدون مسؤولية');
+  unscoped(title: 'بدون مسؤولية'),
+  automatedAccounts(title: 'حسابات آلية');
 
   final String? title;
 

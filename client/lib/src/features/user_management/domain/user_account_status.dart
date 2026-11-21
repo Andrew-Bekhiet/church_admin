@@ -6,7 +6,8 @@ enum UserAccountStatus {
   claimed(Symbols.verified_user, 'حساب مرتبط'),
   pendingInvitation(Symbols.schedule_send, 'دعوة بانتظار القبول'),
   expiredInvitation(Symbols.event_busy, 'انتهت صلاحية الدعوة'),
-  noAccount(Symbols.no_accounts, 'لم يسجّل حسابه بعد');
+  noAccount(Symbols.no_accounts, 'لم يسجّل حسابه بعد'),
+  automated(Symbols.smart_toy, 'حساب آلي');
 
   final IconData icon;
   final String label;
@@ -14,6 +15,7 @@ enum UserAccountStatus {
   const UserAccountStatus(this.icon, this.label);
 
   static UserAccountStatus of(User user, DateTime now) => switch (user) {
+    User(:final userType) when userType.isAutomated => automated,
     User(authId: final _?) => claimed,
     User(:final invitation?) when invitation.isActiveAt(now) =>
       pendingInvitation,
@@ -27,6 +29,7 @@ enum UserAccountStatus {
     pendingInvitation => colorScheme.onSurface,
     expiredInvitation => colorScheme.error,
     noAccount => colorScheme.onSurfaceVariant,
+    automated => colorScheme.onSecondaryContainer,
   };
 
   Color container(ColorScheme colorScheme) => switch (this) {
@@ -34,5 +37,6 @@ enum UserAccountStatus {
     pendingInvitation => colorScheme.surfaceContainerHighest,
     expiredInvitation => colorScheme.errorContainer,
     noAccount => colorScheme.surfaceContainerHighest,
+    automated => colorScheme.secondaryContainer,
   };
 }

@@ -9,6 +9,7 @@ export 'features/data_checks.dart';
 export 'features/data_entry.dart';
 export 'features/data_export.dart';
 export 'features/download_app.dart';
+export 'features/fingerprint_attendance.dart';
 export 'features/history.dart';
 export 'features/home.dart';
 export 'features/initialization.dart';

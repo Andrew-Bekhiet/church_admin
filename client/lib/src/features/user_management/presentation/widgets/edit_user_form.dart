@@ -21,7 +21,8 @@ class EditUserForm extends StatelessWidget {
       UpdateUser(:final user) => user,
       CreateUser() => null,
     };
-    final callerPermissions = AuthBloc.I.currentUserData?.permissions;
+    final callerPermissions =
+        AuthBloc.I.currentUserData?.permissions ?? const PermissionsSet.empty();
 
     return Column(
       spacing: 8,
@@ -66,28 +67,26 @@ class EditUserForm extends StatelessWidget {
             ],
           ),
         ),
-        UserSectionCard(
-          icon: Symbols.shield,
-          title: 'صلاحيات عامة',
-          child: Column(
-            children: UserPermission.values
-                .where(
-                  (p) =>
-                      p != UserPermission.approved &&
-                      (callerPermissions?.contains(p) ?? false),
-                )
-                .map(
-                  (p) => PermissionCheckWidget(
-                    key: EditUserFormKeys.permission(p),
-                    permission: p,
+        for (final MapEntry(key: section, value: grantable)
+            in callerPermissions.groupedBySection.entries)
+          UserSectionCard(
+            key: EditUserFormKeys.permissionsSectionFor(section),
+            icon: section.icon,
+            title: section.title,
+            helper: section.helper,
+            child: Column(
+              children: [
+                for (final permission in grantable)
+                  PermissionCheckWidget(
+                    key: EditUserFormKeys.permission(permission),
+                    permission: permission,
                     permissions: draft.permissions,
                     onToggle: cubit.togglePermission,
-                    subtitleText: p.label,
+                    subtitleText: permission.label,
                   ),
-                )
-                .toList(),
+              ],
+            ),
           ),
-        ),
         ListTile(
           leading: const Icon(Symbols.admin_panel_settings),
           title: Text('أمين على', style: theme.textTheme.titleMedium),
@@ -102,7 +101,9 @@ class EditUserForm extends StatelessWidget {
   }
 }
 
-abstract final class EditUserFormKeys {
+abstract final class EditUserFormKeys extends WidgetKeys {
+  static Key permissionsSectionFor(UserPermissionSection section) =>
+      ValueKey((EditUserFormKeys, #permissionsSectionFor, section));
   static Key permission(UserPermission permission) =>
       ValueKey(('User Permission Key', permission));
 }

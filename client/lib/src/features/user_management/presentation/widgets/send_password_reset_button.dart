@@ -21,6 +21,7 @@ class SendPasswordResetButton extends StatelessWidget {
       child: BlocConsumer<PasswordResetCubit, PasswordResetState>(
         listener: _listenToPasswordResetState,
         builder: (context, state) => ListTile(
+          key: SendPasswordResetButtonKeys.self,
           title: FilledButton.tonalIcon(
             style: Theme.of(context).filledTonalButtonStyleWorkaround,
             icon: const Icon(Symbols.lock_reset),
@@ -80,4 +81,8 @@ class SendPasswordResetButton extends StatelessWidget {
 
     await cubit.sendPasswordResetEmail(email, userId: userId);
   }
+}
+
+abstract final class SendPasswordResetButtonKeys extends WidgetKeys {
+  static const Key self = ValueKey((SendPasswordResetButtonKeys, #self));
 }

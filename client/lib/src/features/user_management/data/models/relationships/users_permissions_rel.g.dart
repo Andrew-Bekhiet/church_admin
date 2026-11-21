@@ -85,6 +85,8 @@ const _$UserPermissionEnumMap = {
   UserPermission.deleteData: 'deleteData',
   UserPermission.recoverDeleted: 'recoverDeleted',
   UserPermission.changeDataChecks: 'changeDataChecks',
+  UserPermission.manageFingerprintIds: 'manageFingerprintIds',
+  UserPermission.appMaintenance: 'appMaintenance',
   UserPermission.maintenanceNotifications: 'maintenanceNotifications',
   UserPermission.screenCaptureNotifications: 'screenCaptureNotifications',
 };

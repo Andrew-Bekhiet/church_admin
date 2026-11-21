@@ -112,6 +112,7 @@ void main() {
             uid: stringToUuid(userUid),
             name: 'Nabil',
             email: 'nabil@example.com',
+            userType: UserType.human.storedName,
             permissions: [],
             adminOn: [],
           ),

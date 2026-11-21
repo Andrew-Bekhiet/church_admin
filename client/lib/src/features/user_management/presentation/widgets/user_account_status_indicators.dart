@@ -13,8 +13,14 @@ class UserAccountStatusIndicators extends StatelessWidget {
     if (status == UserAccountStatus.claimed) return const SizedBox.shrink();
 
     return Tooltip(
+      key: UserAccountStatusIndicatorsKeys.selfFor(status),
       message: status.label,
       child: Icon(status.icon, color: status.color(ColorScheme.of(context))),
     );
   }
+}
+
+abstract final class UserAccountStatusIndicatorsKeys extends WidgetKeys {
+  static Key selfFor(UserAccountStatus status) =>
+      ValueKey((UserAccountStatusIndicatorsKeys, #selfFor, status));
 }

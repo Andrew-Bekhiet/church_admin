@@ -1,0 +1,8 @@
+subscription watchPersonFingerprintIds($personId: uuid!) {
+  personsFingerprintIds(
+    where: { personId: { _eq: $personId } }
+    orderBy: [{ addedAt: ASC }, { id: ASC }]
+  ) {
+    ...PersonFingerprintId
+  }
+}

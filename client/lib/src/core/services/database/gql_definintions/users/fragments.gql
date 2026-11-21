@@ -8,6 +8,7 @@ fragment UserNoPhoto on AuthUsersData {
   uid
   name
   email
+  userType
 }
 
 fragment UserOverview on AuthUsersData {

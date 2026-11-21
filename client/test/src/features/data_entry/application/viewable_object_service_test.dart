@@ -57,4 +57,35 @@ void main() {
       expect(router.stack, [const HomeScreenRoute(), expectedRoute]);
     });
   }
+
+  test('the permissions of an automated account read as an automated '
+      'account', () {
+    const bot = User(
+      uid: 'bot-id',
+      name: 'بصمة الحضور',
+      userType: UserType.fingerprintBot,
+    );
+
+    expect(
+      viewableObjects.getFormattedValue(bot, UserFields().permissionsRel),
+      UserAccountStatus.automated.label,
+    );
+  });
+
+  test('the permissions of a human user read as the permissions they '
+      'hold', () {
+    const servant = User(
+      uid: 'servant-id',
+      name: 'خادم',
+      permissions: PermissionsSet.fromSet({
+        UserPermission.approved,
+        UserPermission.deleteData,
+      }),
+    );
+
+    expect(
+      viewableObjects.getFormattedValue(servant, UserFields().permissionsRel),
+      servant.permissions.toHumanReadableString(),
+    );
+  });
 }

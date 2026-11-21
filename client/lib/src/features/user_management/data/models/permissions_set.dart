@@ -21,8 +21,24 @@ class PermissionsSet extends DelegatingSet<UserPermission> with Equatable {
   bool get recoverDeleted => contains(UserPermission.recoverDeleted);
   bool get exportAllData => contains(UserPermission.exportAllData);
   bool get changeDataChecks => contains(UserPermission.changeDataChecks);
+  bool get manageFingerprintIds =>
+      contains(UserPermission.manageFingerprintIds);
 
   bool get isSuperAdmin => readAllData || writeAllData || manageAllUsers;
+
+  Map<UserPermissionSection, List<UserPermission>> get groupedBySection {
+    final heldBySection = UserPermission.values
+        .where(
+          (permission) =>
+              permission != UserPermission.approved && contains(permission),
+        )
+        .groupListsBy((permission) => permission.section);
+
+    return {
+      for (final section in UserPermissionSection.values)
+        if (heldBySection[section] case final held?) section: held,
+    };
+  }
 
   @override
   List<Object?> get props => toList();
@@ -32,9 +48,7 @@ class PermissionsSet extends DelegatingSet<UserPermission> with Equatable {
   PermissionsSet.parse(Set<String> permissions)
     : super(
         permissions
-            .map(
-              (p) => UserPermission.values.firstWhereOrNull((e) => e.name == p),
-            )
+            .map(UserPermission.tryParseMigratingLegacyName)
             .nonNulls
             .toSet(),
       );

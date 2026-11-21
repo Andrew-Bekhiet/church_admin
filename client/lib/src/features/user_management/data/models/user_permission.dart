@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin_annotations/church_admin_annotations.dart';
+import 'package:collection/collection.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -46,8 +47,16 @@ enum UserPermission implements LabeledEnum {
     label: 'تعديل حالة اكتمال البيانات',
     icon: Symbols.fact_check,
   ),
+  manageFingerprintIds(
+    label: 'إدارة أرقام البصمة',
+    icon: Symbols.fingerprint,
+  ),
+  appMaintenance(
+    label: 'صيانة التطبيق',
+    icon: Symbols.build,
+  ),
   maintenanceNotifications(
-    label: 'استلام إشعارات الصيانة',
+    label: 'استلام إشعارات الصيانة (الاسم القديم لصيانة التطبيق)',
     icon: Symbols.build,
   ),
   screenCaptureNotifications(
@@ -55,7 +64,20 @@ enum UserPermission implements LabeledEnum {
     icon: Symbols.screenshot_monitor,
   );
 
+  static const Map<UserPermission, UserPermission> _legacyPermissionsRenamedTo =
+      {UserPermission.maintenanceNotifications: UserPermission.appMaintenance};
+
   static UserPermission byName(String value) => values.byName(value);
+
+  static UserPermission? tryParseMigratingLegacyName(
+    String nameStoredOnServer,
+  ) {
+    final stored = values.firstWhereOrNull(
+      (permission) => permission.name == nameStoredOnServer,
+    );
+
+    return _legacyPermissionsRenamedTo[stored] ?? stored;
+  }
 
   @override
   final String label;
@@ -86,6 +108,20 @@ enum UserPermission implements LabeledEnum {
       },
     };
   }
+
+  UserPermissionSection get section => switch (this) {
+    UserPermission.deleteData ||
+    UserPermission.changeDataChecks ||
+    UserPermission.manageFingerprintIds => UserPermissionSection.scopeBound,
+    _ => UserPermissionSection.general,
+  };
+
+  Set<String> get namesStoredOnServer => {
+    name,
+    for (final MapEntry(key: legacyPermission, value: renamedTo)
+        in _legacyPermissionsRenamedTo.entries)
+      if (renamedTo == this) legacyPermission.name,
+  };
 
   String get subtitle => this != UserPermission.approved
       ? 'السماح ب$label'

@@ -22,11 +22,18 @@ class ManageUsersCubit extends Cubit<ManageUsersState> {
       streamAllConfig: dao.baseStreamAllConfig,
       searchQuery: _search.stream,
       where: Stream.value([
-        Filter(
-          UserFields().currentUserCanManageThisUser,
-          PrimitiveOperator.eq,
-          true,
-        ),
+        Filter(const DotField(), LogicalOperator.or, [
+          Filter(
+            UserFields().currentUserCanManageThisUser,
+            PrimitiveOperator.eq,
+            true,
+          ),
+          Filter(
+            UserFields().userType,
+            MultiSelectOperator.noneOf,
+            [UserType.human.storedName],
+          ),
+        ]),
       ]),
       overrideTotalLimit: _pageSize,
     );
