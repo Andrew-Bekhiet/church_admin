@@ -14,6 +14,9 @@ import '../../../../fakes/mock_meetings_dao.dart';
 import '../../../../fakes/mock_viewable_object_service.dart';
 import '../../../../utils.dart';
 
+class _MockFingerprintSyncStatusDAO extends Mock
+    implements FingerprintSyncStatusDAO {}
+
 void main() {
   const meeting = Meeting(
     id: 'meeting-1',
@@ -32,7 +35,9 @@ void main() {
   TextSelection? searchSelection(WidgetTester tester) =>
       tester.widget<TextField>(searchField()).controller?.selection;
 
-  Future<void> openScreenAndSearch(WidgetTester tester) async {
+  late _MockFingerprintSyncStatusDAO fingerprintSyncStatus;
+
+  Future<void> openScreenOf(WidgetTester tester, Meeting meeting) async {
     await tester.pumpWidget(
       MaterialApp(
         scaffoldMessengerKey: scaffoldMessengerKey,
@@ -43,10 +48,14 @@ void main() {
           isDarkOverride: false,
           greatFeastThemeOverride: false,
         ),
-        home: const RecordAttendanceScreen(meeting: meeting),
+        home: RecordAttendanceScreen(meeting: meeting),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(RecordAttendanceCubit.searchDebounce);
+  }
+
+  Future<void> openScreenAndSearch(WidgetTester tester) async {
+    await openScreenOf(tester, meeting);
 
     await tester.enterText(searchField(), query);
     await tester.pumpAndSettle(const Duration(milliseconds: 300));
@@ -139,6 +148,10 @@ void main() {
     final database = MockDatabaseService();
     when(() => database.meetings).thenReturn(meetings);
     when(() => database.history).thenReturn(history);
+    fingerprintSyncStatus = _MockFingerprintSyncStatusDAO();
+    when(
+      () => database.fingerprintSyncStatus,
+    ).thenReturn(fingerprintSyncStatus);
 
     final authBloc = MockAuthBloc();
     when(() => authBloc.currentUserData).thenReturn(
@@ -204,6 +217,85 @@ void main() {
         searchSelection(tester),
         const TextSelection(baseOffset: 0, extentOffset: query.length),
       );
+    },
+  );
+
+  testWidgets(
+    'a meeting that records attendance from fingerprint punches shows when '
+    'the fingerprint sync last reached the app',
+    (tester) async {
+      final lastSyncedAt = DateTime.utc(2026, 11, 20, 7, 5);
+      when(
+        fingerprintSyncStatus.streamLastSyncedAtOrNullIfNeverSynced,
+      ).thenAnswer((_) => Stream.value(lastSyncedAt));
+
+      await openScreenOf(
+        tester,
+        const Meeting(
+          id: 'friday-meeting',
+          name: 'اجتماع الجمعة',
+          audience: MeetingAudience.onlyPersons,
+          isArchived: false,
+          autoAttendanceWeekday: DateTime.friday,
+        ),
+      );
+
+      expect(
+        tester
+            .widget<Text>(find.byKey(FingerprintLastSyncLineKeys.lastSyncedAt))
+            .data,
+        contains(lastSyncedAt.toLocalArabicWeekdayDateAndTime()),
+      );
+    },
+  );
+
+  testWidgets(
+    'a meeting without an automatic attendance schedule shows no fingerprint '
+    'sync line',
+    (tester) async {
+      when(
+        fingerprintSyncStatus.streamLastSyncedAtOrNullIfNeverSynced,
+      ).thenAnswer((_) => Stream.value(DateTime.utc(2026, 11, 20, 7, 5)));
+
+      await openScreenOf(tester, meeting);
+
+      expect(find.byType(FingerprintLastSyncLine), findsNothing);
+    },
+  );
+
+  testWidgets(
+    'a meeting without an automatic attendance schedule never asks the '
+    'server for the fingerprint sync status',
+    (tester) async {
+      when(
+        fingerprintSyncStatus.streamLastSyncedAtOrNullIfNeverSynced,
+      ).thenAnswer((_) => Stream.value(DateTime.utc(2026, 11, 20, 7, 5)));
+
+      await openScreenOf(tester, meeting);
+
+      verifyNever(fingerprintSyncStatus.streamLastSyncedAtOrNullIfNeverSynced);
+    },
+  );
+
+  testWidgets(
+    'the roster stays usable when the fingerprint sync status cannot be read',
+    (tester) async {
+      when(
+        fingerprintSyncStatus.streamLastSyncedAtOrNullIfNeverSynced,
+      ).thenAnswer((_) => Stream.error(StateError('offline')));
+
+      await openScreenOf(
+        tester,
+        const Meeting(
+          id: 'friday-meeting',
+          name: 'اجتماع الجمعة',
+          audience: MeetingAudience.onlyPersons,
+          isArchived: false,
+          autoAttendanceWeekday: DateTime.friday,
+        ),
+      );
+
+      expect(find.byType(AttendancePersonCard), findsOneWidget);
     },
   );
 }

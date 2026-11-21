@@ -94,6 +94,17 @@ class _RecordAttendanceLoadedViewState
                       filter: state.presenceFilter,
                       onFilterTapped: cubit.togglePresenceFilter,
                     ),
+                    if (state.meeting.recordsAttendanceFromFingerprintPunches)
+                      SliverToBoxAdapter(
+                        child:
+                            BlocBuilder<
+                              FingerprintLastSyncCubit,
+                              FingerprintLastSyncState
+                            >(
+                              builder: (context, lastSync) =>
+                                  FingerprintLastSyncLine(state: lastSync),
+                            ),
+                      ),
                     switch (state.rosterStatus) {
                       RosterStatus.loading => const SliverFillRemaining(
                         child: Center(child: CircularProgressIndicator()),

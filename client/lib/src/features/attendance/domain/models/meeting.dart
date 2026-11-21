@@ -59,6 +59,11 @@ class Meeting extends ViewableWithID
   @QueryableField(label: 'المجموعة')
   final Group? group;
 
+  final int? autoAttendanceWeekday;
+
+  bool get recordsAttendanceFromFingerprintPunches =>
+      autoAttendanceWeekday != null;
+
   @override
   String get typeName => AdvancedQueriesMetadata().meeting.name;
 
@@ -76,6 +81,7 @@ class Meeting extends ViewableWithID
     this.studyYear,
     this.groupId,
     this.group,
+    this.autoAttendanceWeekday,
   });
 
   factory Meeting.fromJson(Map<String, Object?> json) =>

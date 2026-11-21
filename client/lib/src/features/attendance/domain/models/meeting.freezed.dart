@@ -50,7 +50,12 @@ mixin _$Meeting {
             (identical(other.groupId, _this.groupId) ||
                 other.groupId == _this.groupId) &&
             (identical(other.group, _this.group) ||
-                other.group == _this.group));
+                other.group == _this.group) &&
+            (identical(
+                  other.autoAttendanceWeekday,
+                  _this.autoAttendanceWeekday,
+                ) ||
+                other.autoAttendanceWeekday == _this.autoAttendanceWeekday));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -72,13 +77,14 @@ mixin _$Meeting {
       _this.serviceGender,
       _this.groupId,
       _this.group,
+      _this.autoAttendanceWeekday,
     );
   }
 
   @override
   String toString() {
     final _this = this as Meeting;
-    return 'Meeting(id: ${_this.id}, name: ${_this.name}, audience: ${_this.audience}, isArchived: ${_this.isArchived}, showKodasCheckbox: ${_this.showKodasCheckbox}, color: ${_this.color}, serviceId: ${_this.serviceId}, service: ${_this.service}, serviceStudyYear: ${_this.serviceStudyYear}, studyYear: ${_this.studyYear}, serviceGender: ${_this.serviceGender}, groupId: ${_this.groupId}, group: ${_this.group})';
+    return 'Meeting(id: ${_this.id}, name: ${_this.name}, audience: ${_this.audience}, isArchived: ${_this.isArchived}, showKodasCheckbox: ${_this.showKodasCheckbox}, color: ${_this.color}, serviceId: ${_this.serviceId}, service: ${_this.service}, serviceStudyYear: ${_this.serviceStudyYear}, studyYear: ${_this.studyYear}, serviceGender: ${_this.serviceGender}, groupId: ${_this.groupId}, group: ${_this.group}, autoAttendanceWeekday: ${_this.autoAttendanceWeekday})';
   }
 }
 
@@ -101,6 +107,7 @@ abstract mixin class $MeetingCopyWith<$Res> {
     StudyYear? studyYear,
     String? groupId,
     Group? group,
+    int? autoAttendanceWeekday,
   });
 
   $ServiceCopyWith<$Res>? get service;
@@ -133,6 +140,7 @@ class _$MeetingCopyWithImpl<$Res> implements $MeetingCopyWith<$Res> {
     Object? studyYear = freezed,
     Object? groupId = freezed,
     Object? group = freezed,
+    Object? autoAttendanceWeekday = freezed,
   }) {
     return _then(
       Meeting(
@@ -188,6 +196,10 @@ class _$MeetingCopyWithImpl<$Res> implements $MeetingCopyWith<$Res> {
             ? _self.group
             : group // ignore: cast_nullable_to_non_nullable
                   as Group?,
+        autoAttendanceWeekday: freezed == autoAttendanceWeekday
+            ? _self.autoAttendanceWeekday
+            : autoAttendanceWeekday // ignore: cast_nullable_to_non_nullable
+                  as int?,
       ),
     );
   }
