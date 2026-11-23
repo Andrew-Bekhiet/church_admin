@@ -15,7 +15,7 @@ class FlutterLocalNotificationsInit implements Initializer {
     final bool initialized =
         await localNotificationsPlugin.initialize(
           settings: const InitializationSettings(
-            android: AndroidInitializationSettings('warning'),
+            android: AndroidInitializationSettings('@mipmap/ic_launcher'),
             iOS: DarwinInitializationSettings(),
           ),
           onDidReceiveNotificationResponse:
