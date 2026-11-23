@@ -18,7 +18,7 @@ export interface FingerprintSyncConfig {
 
 type Environment = Record<string, string | undefined>;
 
-const configFileWithoutSecrets = z.object({
+const configFileWithoutSecrets = z.strictObject({
   biotime: z.strictObject({
     baseUrl: z.url(),
     username: z.string().min(1),

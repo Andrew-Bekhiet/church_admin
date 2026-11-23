@@ -185,10 +185,16 @@ On Windows, from an administrator PowerShell in `C:\fingerprint_sync`:
 $env:BIOTIME_PASSWORD_FILE = "C:\fingerprint_sync\secrets\biotime-password"; $env:FINGERPRINT_SYNC_SECRET_FILE = "C:\fingerprint_sync\secrets\fingerprint-sync-secret"; node lib/main.js send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"
 ```
 
-On Linux, run it through systemd so it can read the encrypted secrets:
+On Linux, run it through systemd so it can read the secrets. With secrets encrypted by `systemd-creds`:
 
 ```bash
 sudo systemd-run --pipe --wait --uid=fingerprint-sync -p WorkingDirectory=/opt/fingerprint_sync -p LoadCredentialEncrypted=biotime-password:/etc/credstore.encrypted/biotime-password -p LoadCredentialEncrypted=fingerprint-sync-secret:/etc/credstore.encrypted/fingerprint-sync-secret /bin/sh -c 'BIOTIME_PASSWORD_FILE="$CREDENTIALS_DIRECTORY/biotime-password" FINGERPRINT_SYNC_SECRET_FILE="$CREDENTIALS_DIRECTORY/fingerprint-sync-secret" exec /usr/bin/node lib/main.js send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"'
+```
+
+With unencrypted secrets in `/etc/credstore/` (systemd older than 250):
+
+```bash
+sudo systemd-run --pipe --wait --uid=fingerprint-sync -p WorkingDirectory=/opt/fingerprint_sync -p LoadCredential=biotime-password:/etc/credstore/biotime-password -p LoadCredential=fingerprint-sync-secret:/etc/credstore/fingerprint-sync-secret /bin/sh -c 'BIOTIME_PASSWORD_FILE="$CREDENTIALS_DIRECTORY/biotime-password" FINGERPRINT_SYNC_SECRET_FILE="$CREDENTIALS_DIRECTORY/fingerprint-sync-secret" exec /usr/bin/node lib/main.js send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"'
 ```
 
 The times are the BioTime server's local time, inclusive. The command does not move the cursor, so the service can keep running. The function rejects punches older than 10 days.
