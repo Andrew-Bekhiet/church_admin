@@ -129,3 +129,15 @@ test("refuses a secret written in the config file", async (t) => {
     /password/,
   );
 });
+
+test("refuses a secret written at the top level of the config file", async (t) => {
+  const { path } = await configFileWith(t, {
+    ...configWithoutPollInterval,
+    secret: "sync-secret",
+  });
+
+  await assert.rejects(
+    loadConfig(path, secretsInVariables),
+    /secret/,
+  );
+});
