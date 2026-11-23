@@ -1,0 +1,106 @@
+name: Build & Release fingerprint sync
+
+on:
+  push:
+    tags:
+      - "fingerprint-sync-v*"
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+    working-directory: server/fingerprint_sync
+
+env:
+  GH_TOKEN: ${{ github.token }}
+  REPO: ${{ github.repository }}
+  TAG: ${{ github.ref_name }}
+
+jobs:
+  draft:
+    name: Draft the release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Create a draft release that is never marked latest
+        run: |
+          gh release create "$TAG" --repo "$REPO" --draft --latest=false --verify-tag \
+            --title "$TAG" \
+            --notes "Fingerprint sync poller. Download the binary for your system, the matching install script and config.example.json into one folder, then follow server/fingerprint_sync/README.md."
+
+  build:
+    name: Test and build the executable (${{ matrix.os }})
+    needs: draft
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
+
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: server/fingerprint_sync/.nvmrc
+          cache: npm
+          cache-dependency-path: server/fingerprint_sync/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test
+        run: npm test
+
+      - name: Build the executable
+        run: npm run build:executable
+
+      - name: Check the executable starts and prints its usage
+        run: |
+          binary=$(ls dist/fingerprint-sync-*)
+          if "$binary" unknown-command; then exit 1; else status=$?; fi
+          test "$status" -eq 2
+
+      - name: Attach the executable to the draft release
+        run: gh release upload "$TAG" dist/fingerprint-sync-* --repo "$REPO" --clobber
+
+  publish:
+    name: Publish the release
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Attach the install scripts and example config
+        run: gh release upload "$TAG" scripts/install.sh scripts/install.ps1 config.example.json --repo "$REPO" --clobber
+
+      - name: Publish without marking it latest
+        run: gh release edit "$TAG" --repo "$REPO" --draft=false --latest=false

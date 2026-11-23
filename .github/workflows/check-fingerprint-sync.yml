@@ -1,4 +1,4 @@
-name: Fingerprint sync
+name: Lint & Test fingerprint sync
 
 on:
   pull_request:
@@ -61,3 +61,34 @@ jobs:
 
       - name: Test
         run: npm test
+
+      - name: Check the Linux install script with ShellCheck
+        if: runner.os == 'Linux'
+        run: shellcheck scripts/install.sh
+
+      - name: Check the Windows install script parses in Windows PowerShell 5.1
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          $parseErrors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path scripts/install.ps1), [ref]$null, [ref]$parseErrors) | Out-Null
+          if ($parseErrors) { $parseErrors; exit 1 }
+
+      - name: Check the Windows install script with PSScriptAnalyzer
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          if (-not (Get-Module -ListAvailable -Name PSScriptAnalyzer)) { Install-Module PSScriptAnalyzer -Scope CurrentUser -Force }
+          $findings = Invoke-ScriptAnalyzer -Path scripts/install.ps1 -Settings PSGallery
+          $findings | Format-Table -AutoSize
+          if ($findings) { exit 1 }
+
+      - name: Build the executable
+        run: npm run build:executable
+
+      - name: Check the executable starts and prints its usage
+        shell: bash
+        run: |
+          binary=$(ls dist/fingerprint-sync-*)
+          if "$binary" unknown-command; then exit 1; else status=$?; fi
+          test "$status" -eq 2
