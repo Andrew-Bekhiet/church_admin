@@ -3,6 +3,12 @@ import { z } from "zod";
 
 const MAX_PUNCHES_PER_REQUEST = 500;
 
+export type FingerprintPunch = z.infer<typeof fingerprintPunch>;
+
+export type FingerprintPunchesRequest = z.infer<
+  typeof fingerprintPunchesRequest
+>;
+
 const fingerprintPunch = z.object({
   employeeCode: z.string().trim().min(1),
   punchedAt: z.iso.datetime({ offset: true }).transform(
@@ -28,12 +34,6 @@ export const fingerprintPunchesRequest = z.object({
   biotimeServerLocalTime: z.iso.datetime({ local: true }),
   punches: z.array(z.unknown()).max(MAX_PUNCHES_PER_REQUEST),
 });
-
-export type FingerprintPunch = z.infer<typeof fingerprintPunch>;
-
-export type FingerprintPunchesRequest = z.infer<
-  typeof fingerprintPunchesRequest
->;
 
 export function wellFormedPunchesOf(punches: unknown[]): FingerprintPunch[] {
   return punches.flatMap((punch) => {

@@ -34,7 +34,11 @@ interface CandidateWindow {
   endMillisSinceMidnight: number;
 }
 
-const FINGERPRINT_BOT_UID_AND_CANDIDATE_WINDOWS_QUERY = `
+export async function findFingerprintBotUidAndCandidatesOfEachPresence(
+  presences: PersonPresence[],
+): Promise<FingerprintBotAndPresencesWithCandidates> {
+  const data = await requestAsFingerprintSync(
+    `
   query findFingerprintBotUidAndCandidatesOfEachPresence(
     $where: HistoryMeetingAutoPresenceCandidatesBoolExp!
   ) {
@@ -51,13 +55,7 @@ const FINGERPRINT_BOT_UID_AND_CANDIDATE_WINDOWS_QUERY = `
       windowKind
     }
   }
-`;
-
-export async function findFingerprintBotUidAndCandidatesOfEachPresence(
-  presences: PersonPresence[],
-): Promise<FingerprintBotAndPresencesWithCandidates> {
-  const data = await requestAsFingerprintSync(
-    FINGERPRINT_BOT_UID_AND_CANDIDATE_WINDOWS_QUERY,
+`,
     { where: { _or: oneWindowFilterPerDistinctPersonAndCairoTime(presences) } },
     "findFingerprintBotUidAndCandidatesOfEachPresence",
   );
