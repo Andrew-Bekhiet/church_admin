@@ -17,8 +17,12 @@ class PersonFingerprintIdsCubit extends Cubit<PersonFingerprintIdsState> {
     _subscription = _fingerprintIdsDao
         .streamOfPerson(_personId)
         .listen(
-          (fingerprintIds) =>
-              emit(PersonFingerprintIdsLoaded(fingerprintIds: fingerprintIds)),
+          (fingerprintIds) => emit(switch (state) {
+            final PersonFingerprintIdsLoaded state => state.copyWith(
+              fingerprintIds: fingerprintIds,
+            ),
+            _ => PersonFingerprintIdsLoaded(fingerprintIds: fingerprintIds),
+          }),
           onError: _reportLoadErrorUnlessFingerprintIdsAreShown,
         );
   }
