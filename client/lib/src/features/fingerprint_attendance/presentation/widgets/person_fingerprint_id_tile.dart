@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
@@ -17,7 +16,7 @@ class PersonFingerprintIdTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = ColorScheme.of(context);
-    final addedOn = DateFormat.yMd().format(fingerprintId.addedAt);
+    final addedOn = DateFormat.yMd('ar-EG').format(fingerprintId.addedAt);
 
     return ListTile(
       contentPadding: EdgeInsets.zero,
@@ -33,7 +32,7 @@ class PersonFingerprintIdTile extends StatelessWidget {
       ),
       subtitle: Text(
         'بواسطة ${fingerprintId.addedBy.name} • '
-        '${Unicode.LRI}$addedOn${Unicode.PDI}',
+        '$addedOn',
         key: PersonFingerprintIdTileKeys.addedByAndDateFor(fingerprintId.id),
       ),
       trailing: IconButton(

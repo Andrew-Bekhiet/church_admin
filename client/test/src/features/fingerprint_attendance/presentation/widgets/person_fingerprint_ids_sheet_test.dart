@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
@@ -116,7 +115,7 @@ void main() {
     );
     expect(
       addedByAndDate.data,
-      contains('${Unicode.LRI}2026/1/9${Unicode.PDI}'),
+      contains('٢٠٢٦/١/٩'),
     );
   });
 
