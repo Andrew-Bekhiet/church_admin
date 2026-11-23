@@ -25,11 +25,24 @@ export class BiotimeClient {
 
   constructor(private readonly config: FingerprintSyncConfig["biotime"]) {}
 
-  async transactionsFrom(startTime: string): Promise<BiotimeTransaction[]> {
+  async transactionsFrom(
+    startTime: string,
+    untilTime?: string,
+  ): Promise<BiotimeTransaction[]> {
+    const url = new URL("/iclock/api/transactions/", this.config.baseUrl);
+    url.searchParams.set("start_time", startTime);
+
+    if (untilTime !== undefined) {
+      url.searchParams.set("end_time", untilTime);
+    }
+
+    url.searchParams.set("page_size", String(PAGE_SIZE));
+
     const transactions: BiotimeTransaction[] = [];
 
     for (let pageNumber = 1; ; pageNumber++) {
-      const page = await this.transactionsPage(startTime, pageNumber);
+      url.searchParams.set("page", String(pageNumber));
+      const page = await this.transactionsPage(url);
       transactions.push(...readableTransactionsOf(page.data));
 
       if (page.next === null) {
@@ -39,14 +52,8 @@ export class BiotimeClient {
   }
 
   private async transactionsPage(
-    startTime: string,
-    pageNumber: number,
+    url: URL,
   ): Promise<z.infer<typeof transactionsPage>> {
-    const url = new URL("/iclock/api/transactions/", this.config.baseUrl);
-    url.searchParams.set("start_time", startTime);
-    url.searchParams.set("page", String(pageNumber));
-    url.searchParams.set("page_size", String(PAGE_SIZE));
-
     let response = await this.authorizedGet(url);
 
     if (response.status === 401) {

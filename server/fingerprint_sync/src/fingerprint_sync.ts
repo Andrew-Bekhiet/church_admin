@@ -47,6 +47,14 @@ export class FingerprintSync {
     }
   }
 
+  async sendPunchesBetween(startTime: string, endTime: string): Promise<void> {
+    const transactions = await this.biotime.transactionsFrom(startTime, endTime);
+
+    for (const batch of batchesOfAtLeastOne(transactions.sort(byPunchTimeThenId))) {
+      await this.recordPunches(batch);
+    }
+  }
+
   private async recordPunches(transactions: BiotimeTransaction[]) {
     await this.recordPunchesFunction.recordPunches(
       transactions.map(punchOf),
