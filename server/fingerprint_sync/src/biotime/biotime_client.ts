@@ -12,7 +12,7 @@ const biotimeTransaction = z.object({
   terminal_sn: z.string().nullable().transform((serial) => serial ?? ""),
 });
 
-const transactionsPage = z.object({
+const transactionsPageResponse = z.object({
   next: z.string().nullable(),
   data: z.array(z.unknown()),
 });
@@ -26,15 +26,15 @@ export class BiotimeClient {
 
   constructor(private readonly config: FingerprintSyncConfig["biotime"]) {}
 
-  async transactionsFrom(
+  async readableTransactionsBetween(
     startTime: string,
-    untilTime?: string,
+    endTime?: string,
   ): Promise<BiotimeTransaction[]> {
     const url = new URL("/iclock/api/transactions/", this.config.baseUrl);
     url.searchParams.set("start_time", startTime);
 
-    if (untilTime !== undefined) {
-      url.searchParams.set("end_time", untilTime);
+    if (endTime !== undefined) {
+      url.searchParams.set("end_time", endTime);
     }
 
     url.searchParams.set("page_size", String(PAGE_SIZE));
@@ -43,7 +43,7 @@ export class BiotimeClient {
 
     for (let pageNumber = 1; ; pageNumber++) {
       url.searchParams.set("page", String(pageNumber));
-      const page = await this.transactionsPage(url);
+      const page = await this.fetchTransactionsPageLoggingInAgainOn401(url);
       transactions.push(...readableTransactionsOf(page.data));
 
       if (page.next === null) {
@@ -52,9 +52,9 @@ export class BiotimeClient {
     }
   }
 
-  private async transactionsPage(
+  private async fetchTransactionsPageLoggingInAgainOn401(
     url: URL,
-  ): Promise<z.infer<typeof transactionsPage>> {
+  ): Promise<z.infer<typeof transactionsPageResponse>> {
     let response = await this.authorizedGet(url);
 
     if (response.status === 401) {
@@ -62,7 +62,7 @@ export class BiotimeClient {
       response = await this.authorizedGet(url);
     }
 
-    return transactionsPage.parse(await jsonOfSuccessful(response));
+    return transactionsPageResponse.parse(await jsonOfSuccessful(response));
   }
 
   private async authorizedGet(url: URL): Promise<Response> {

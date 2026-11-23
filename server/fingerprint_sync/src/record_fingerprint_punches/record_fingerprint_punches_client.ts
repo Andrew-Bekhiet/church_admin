@@ -6,9 +6,9 @@ export interface Punch {
   terminalSerial: string;
 }
 
-export class RecordPunchesFunctionClient {
+export class RecordFingerprintPunchesClient {
   constructor(
-    private readonly config: FingerprintSyncConfig["recordPunchesFunction"],
+    private readonly config: FingerprintSyncConfig["recordFingerprintPunches"],
   ) {}
 
   async recordPunches(
@@ -26,7 +26,7 @@ export class RecordPunchesFunctionClient {
 
     if (!response.ok) {
       throw new Error(
-        `The record punches function answered ${response.status}: ${await response.text()}`,
+        `recordFingerprintPunches answered ${response.status}: ${await response.text()}`,
       );
     }
   }

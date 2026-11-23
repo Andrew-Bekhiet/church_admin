@@ -8,57 +8,81 @@ import {
   cairoInstantOfBiotimeTime,
 } from "./biotime/biotime_time";
 import { FingerprintSyncConfig } from "./config";
-import { Cursor, readCursorIfSaved, saveCursor } from "./cursor/cursor_file";
+import {
+  Cursor,
+  readCursorIfSaved,
+  saveCursorDurably,
+} from "./cursor/cursor_file";
 import { logInfo } from "./log";
 import {
   Punch,
-  RecordPunchesFunctionClient,
-} from "./punches_function/record_punches_function_client";
+  RecordFingerprintPunchesClient,
+} from "./record_fingerprint_punches/record_fingerprint_punches_client";
 
-const ISO_LOCAL_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+const ISO_LOCAL_DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
 const MAX_PUNCHES_PER_REQUEST = 500;
 
 export class FingerprintSync {
   private readonly biotime: BiotimeClient;
-  private readonly recordPunchesFunction: RecordPunchesFunctionClient;
+  private readonly recordFingerprintPunches: RecordFingerprintPunchesClient;
 
   constructor(
     private readonly config: FingerprintSyncConfig,
     private readonly serverLocalNow: () => DateTime<true>,
   ) {
     this.biotime = new BiotimeClient(config.biotime);
-    this.recordPunchesFunction = new RecordPunchesFunctionClient(
-      config.recordPunchesFunction,
+    this.recordFingerprintPunches = new RecordFingerprintPunchesClient(
+      config.recordFingerprintPunches,
     );
   }
 
   async pollOnce(): Promise<void> {
-    const cursor = await this.savedCursorOrOneStartingNow();
-    const transactions = await this.biotime.transactionsFrom(cursor.punchTime);
-    const unsent = transactions
-      .filter((transaction) => !wasSentBefore(transaction, cursor))
+    const cursor = await this.readCursorOrSaveOneStartingNow();
+    const transactions = await this.biotime.readableTransactionsBetween(
+      cursor.forwardedUpTo,
+    );
+    const unforwarded = transactions
+      .filter((transaction) => !wasForwardedBefore(transaction, cursor))
       .sort(byPunchTimeThenId);
 
-    let cursorAfterSentBatches = cursor;
+    let cursorAfterForwardedBatches = cursor;
 
-    for (const batch of batchesOfAtLeastOne(unsent)) {
+    for (const batch of requestBatchesOrOneEmpty(unforwarded)) {
       await this.recordPunches(batch);
-      cursorAfterSentBatches = cursorAfter(cursorAfterSentBatches, batch);
-      await saveCursor(this.config.cursorFile, cursorAfterSentBatches);
+
+      if (batch.length > 0) {
+        cursorAfterForwardedBatches = cursorAfter(
+          cursorAfterForwardedBatches,
+          batch,
+        );
+        await saveCursorDurably(
+          this.config.cursorFile,
+          cursorAfterForwardedBatches,
+        );
+      }
     }
 
-    if (unsent.length > 0) {
+    if (unforwarded.length > 0) {
       logInfo(
-        `Forwarded ${unsent.length} punches up to ${cursorAfterSentBatches.punchTime}`,
+        `Forwarded ${unforwarded.length} punches up to ${cursorAfterForwardedBatches.forwardedUpTo}`,
       );
     }
   }
 
   async sendPunchesBetween(startTime: string, endTime: string): Promise<void> {
-    const transactions = await this.biotime.transactionsFrom(startTime, endTime);
+    const transactions = await this.biotime.readableTransactionsBetween(
+      startTime,
+      endTime,
+    );
 
-    for (const batch of batchesOfAtLeastOne(transactions.sort(byPunchTimeThenId))) {
+    for (const batch of requestBatchesOrOneEmpty(transactions.sort(byPunchTimeThenId))) {
       await this.recordPunches(batch);
+
+      if (batch.length > 0) {
+        logInfo(
+          `Sent ${batch.length} punches up to ${batch.at(-1)!.punch_time}`,
+        );
+      }
     }
 
     logInfo(
@@ -67,13 +91,13 @@ export class FingerprintSync {
   }
 
   private async recordPunches(transactions: BiotimeTransaction[]) {
-    await this.recordPunchesFunction.recordPunches(
+    await this.recordFingerprintPunches.recordPunches(
       transactions.map(punchOf),
-      this.serverLocalNow().toFormat(ISO_LOCAL_TIME_FORMAT),
+      this.serverLocalNow().toFormat(ISO_LOCAL_DATE_TIME_FORMAT),
     );
   }
 
-  private async savedCursorOrOneStartingNow(): Promise<Cursor> {
+  private async readCursorOrSaveOneStartingNow(): Promise<Cursor> {
     const savedCursor = await readCursorIfSaved(this.config.cursorFile);
 
     if (savedCursor) {
@@ -81,29 +105,29 @@ export class FingerprintSync {
     }
 
     const cursorStartingNow = {
-      punchTime: this.serverLocalNow().toFormat(BIOTIME_TIME_FORMAT),
-      sentIdsAtPunchTime: [],
+      forwardedUpTo: this.serverLocalNow().toFormat(BIOTIME_TIME_FORMAT),
+      forwardedTransactionIdsAtThatTime: [],
     };
-    await saveCursor(this.config.cursorFile, cursorStartingNow);
+    await saveCursorDurably(this.config.cursorFile, cursorStartingNow);
     logInfo(
-      `No cursor file at ${this.config.cursorFile}, forwarding punches from ${cursorStartingNow.punchTime}`,
+      `No cursor file at ${this.config.cursorFile}, forwarding punches from ${cursorStartingNow.forwardedUpTo}`,
     );
 
     return cursorStartingNow;
   }
 }
 
-function wasSentBefore(transaction: BiotimeTransaction, cursor: Cursor) {
-  return transaction.punch_time < cursor.punchTime ||
-    (transaction.punch_time === cursor.punchTime &&
-      cursor.sentIdsAtPunchTime.includes(transaction.id));
+function wasForwardedBefore(transaction: BiotimeTransaction, cursor: Cursor) {
+  return transaction.punch_time < cursor.forwardedUpTo ||
+    (transaction.punch_time === cursor.forwardedUpTo &&
+      cursor.forwardedTransactionIdsAtThatTime.includes(transaction.id));
 }
 
 function byPunchTimeThenId(a: BiotimeTransaction, b: BiotimeTransaction) {
   return a.punch_time.localeCompare(b.punch_time) || a.id - b.id;
 }
 
-function batchesOfAtLeastOne(
+function requestBatchesOrOneEmpty(
   transactions: BiotimeTransaction[],
 ): BiotimeTransaction[][] {
   const batches: BiotimeTransaction[][] = [];
@@ -112,7 +136,9 @@ function batchesOfAtLeastOne(
     batches.push(transactions.slice(start, start + MAX_PUNCHES_PER_REQUEST));
   }
 
-  return batches.length > 0 ? batches : [[]];
+  const oneEmptyBatchSoTheFunctionStillHearsFromUs = [[]];
+
+  return batches.length > 0 ? batches : oneEmptyBatchSoTheFunctionStillHearsFromUs;
 }
 
 function punchOf(transaction: BiotimeTransaction): Punch {
@@ -123,16 +149,16 @@ function punchOf(transaction: BiotimeTransaction): Punch {
   };
 }
 
-function cursorAfter(cursor: Cursor, sent: BiotimeTransaction[]): Cursor {
-  const latestPunchTime = sent.at(-1)?.punch_time ?? cursor.punchTime;
-  const idsSentAtLatestPunchTime = sent
+function cursorAfter(cursor: Cursor, forwarded: BiotimeTransaction[]): Cursor {
+  const latestPunchTime = forwarded.at(-1)?.punch_time ?? cursor.forwardedUpTo;
+  const idsForwardedAtLatestPunchTime = forwarded
     .filter((transaction) => transaction.punch_time === latestPunchTime)
     .map((transaction) => transaction.id);
 
   return {
-    punchTime: latestPunchTime,
-    sentIdsAtPunchTime: latestPunchTime === cursor.punchTime
-      ? [...cursor.sentIdsAtPunchTime, ...idsSentAtLatestPunchTime]
-      : idsSentAtLatestPunchTime,
+    forwardedUpTo: latestPunchTime,
+    forwardedTransactionIdsAtThatTime: latestPunchTime === cursor.forwardedUpTo
+      ? [...cursor.forwardedTransactionIdsAtThatTime, ...idsForwardedAtLatestPunchTime]
+      : idsForwardedAtLatestPunchTime,
   };
 }

@@ -11,12 +11,12 @@ test("sends every punch between two times, including ones older than the cursor"
     terminal_sn: "CQZ7224960170",
   });
   harness.biotime.addPunch({ emp_code: "1003", punch_time: "2026-11-27 10:15:00" });
-  const sync = harness.startSync();
+  const sync = harness.newSync();
   await sync.pollOnce();
 
   await sync.sendPunchesBetween("2026-11-27 09:00:00", "2026-11-27 10:00:00");
 
-  assert.deepEqual(harness.punchesFunction.accepted.at(-1), {
+  assert.deepEqual(harness.recordFingerprintPunches.acceptedRequests.at(-1), {
     biotimeServerLocalTime: "2026-11-27T12:00:00",
     punches: [{
       employeeCode: "1002",
@@ -26,18 +26,20 @@ test("sends every punch between two times, including ones older than the cursor"
   });
 });
 
-test("leaves the regular polls where they were", async (t) => {
+test("does not move the cursor, so the next poll forwards only new punches", async (t) => {
   const harness = await startSyncHarness(t, "2026-11-27 12:00:00");
   harness.biotime.addPunch({ emp_code: "1001", punch_time: "2026-11-27 09:30:00" });
-  const sync = harness.startSync();
+  harness.biotime.addPunch({ emp_code: "1003", punch_time: "2026-11-27 10:30:00" });
+  const sync = harness.newSync();
   await sync.pollOnce();
   harness.biotime.addPunch({ emp_code: "1002", punch_time: "2026-11-27 12:00:10" });
   await sync.sendPunchesBetween("2026-11-27 09:00:00", "2026-11-27 10:00:00");
+  harness.serverLocalTime = "2026-11-27 12:05:00";
 
   await sync.pollOnce();
 
   assert.deepEqual(
-    harness.punchesFunction.acceptedPunches.map((punch) => punch.employeeCode),
+    harness.recordFingerprintPunches.acceptedPunches.map((punch) => punch.employeeCode),
     ["1001", "1002"],
   );
 });

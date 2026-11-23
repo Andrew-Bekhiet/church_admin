@@ -44,8 +44,8 @@ Copy `config.example.json` to `config.json` in the same folder and fill it in:
 | -- | -- |
 | `biotime.baseUrl` | BioTime's address as seen from this server, for example `http://127.0.0.1:8090` |
 | `biotime.username`, `biotime.password` | The BioTime API account |
-| `recordPunchesFunction.url` | The function's URL |
-| `recordPunchesFunction.secret` | The shared secret |
+| `recordFingerprintPunches.url` | The function's URL |
+| `recordFingerprintPunches.secret` | The shared secret |
 | `cursorFile` | Where the cursor is saved. A relative path is relative to `config.json` |
 | `pollIntervalSeconds` | Seconds between polls. Defaults to 20 |
 
@@ -131,6 +131,8 @@ node lib/main.js send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:
 ```
 
 The times are the BioTime server's local time, inclusive. The command does not move the cursor, so the service can keep running. The function rejects punches older than 10 days.
+
+It logs `Sent N punches up to <time>` after each batch of 500. If it fails partway, rerun it with `--from` just after the last time it logged.
 
 Sending a range again records its punches again. An attendance record a servant deleted by hand comes back, so choose the range narrowly.
 
