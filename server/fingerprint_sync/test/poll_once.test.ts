@@ -73,10 +73,8 @@ test("after a restart, forwards only the punches it has not sent", async (t) => 
   await restartedSync.pollOnce();
 
   assert.deepEqual(
-    harness.punchesFunction.accepted.map((request) =>
-      request.punches.map((punch) => punch.employeeCode)
-    ),
-    [[], ["1001"], ["1002"]],
+    harness.punchesFunction.acceptedPunches.map((punch) => punch.employeeCode),
+    ["1001", "1002"],
   );
 });
 
@@ -154,8 +152,10 @@ test("sends at most 500 punches per request", async (t) => {
   await sync.pollOnce();
 
   assert.deepEqual(
-    harness.punchesFunction.accepted.map((request) => request.punches.length),
-    [0, 500, 500, 201],
+    harness.punchesFunction.acceptedRequestsWithPunches.map((request) =>
+      request.punches.length
+    ),
+    [500, 500, 201],
   );
 });
 
@@ -165,18 +165,21 @@ test("after the function rejects a later batch, resends only the punches it had 
   harness.biotime.listsNewestFirst = true;
   const sync = harness.startSync();
   await sync.pollOnce();
-  addPunchesOnePerSecond(harness.biotime, 700, "2026-11-27 09:00:00");
-  harness.punchesFunction.requestsToAcceptBeforeFailing = 2;
+  const addedEmployeeCodes = addPunchesOnePerSecond(
+    harness.biotime,
+    700,
+    "2026-11-27 09:00:00",
+  );
+  harness.punchesFunction.failAfterAccepting(1);
   await assert.rejects(sync.pollOnce());
-  harness.punchesFunction.requestsToAcceptBeforeFailing = Infinity;
+  harness.punchesFunction.acceptEveryRequest();
 
   await sync.pollOnce();
 
   const sentEmployeeCodes = harness.punchesFunction.acceptedPunches.map(
     (punch) => punch.employeeCode,
   );
-  assert.equal(sentEmployeeCodes.length, 700);
-  assert.equal(new Set(sentEmployeeCodes).size, 700);
+  assert.deepEqual(sentEmployeeCodes.sort(), addedEmployeeCodes.sort());
 });
 
 test("forwards a punch made in the same second as punches already sent, without resending them", async (t) => {
@@ -217,13 +220,18 @@ function addPunchesOnePerSecond(
   biotime: FakeBiotimeServer,
   count: number,
   firstPunchTime: string,
-) {
+): string[] {
   const first = DateTime.fromSQL(firstPunchTime);
+  const addedEmployeeCodes: string[] = [];
 
   for (let index = 0; index < count; index++) {
+    const employeeCode = String(index + 1);
     biotime.addPunch({
-      emp_code: String(index + 1),
+      emp_code: employeeCode,
       punch_time: first.plus({ seconds: index }).toFormat("yyyy-MM-dd HH:mm:ss"),
     });
+    addedEmployeeCodes.push(employeeCode);
   }
+
+  return addedEmployeeCodes;
 }

@@ -19,7 +19,7 @@ export interface ReceivedRequest {
 export class FakePunchesFunction {
   readonly accepted: ReceivedRequest[] = [];
   respondWithStatus = 204;
-  requestsToAcceptBeforeFailing = Infinity;
+  private requestsToAcceptBeforeFailing = Infinity;
 
   private constructor(private readonly server: Server) {}
 
@@ -41,6 +41,18 @@ export class FakePunchesFunction {
 
   get acceptedPunches(): ReceivedPunch[] {
     return this.accepted.flatMap((request) => request.punches);
+  }
+
+  get acceptedRequestsWithPunches(): ReceivedRequest[] {
+    return this.accepted.filter((request) => request.punches.length > 0);
+  }
+
+  failAfterAccepting(requestCount: number): void {
+    this.requestsToAcceptBeforeFailing = this.accepted.length + requestCount;
+  }
+
+  acceptEveryRequest(): void {
+    this.requestsToAcceptBeforeFailing = Infinity;
   }
 
   async stop(): Promise<void> {
