@@ -132,7 +132,7 @@ node lib/main.js send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:
 
 The times are the BioTime server's local time, inclusive. The command does not move the cursor, so the service can keep running. The function rejects punches older than 10 days.
 
-It logs `Sent N punches up to <time>` after each batch of 500. If it fails partway, rerun it with `--from` just after the last time it logged.
+It logs `Sent N punches up to <time>` after each batch of 500. If it fails partway, rerun it with `--from` set to the last time it logged, not after it: a batch can end partway through the punches of one second. Punches at that time that were already sent are sent again.
 
 Sending a range again records its punches again. An attendance record a servant deleted by hand comes back, so choose the range narrowly.
 
