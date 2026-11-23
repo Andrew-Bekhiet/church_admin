@@ -8,9 +8,6 @@ sealed class PersonFingerprintIdsState with Equatable {
   List<Object?> get props => [];
 
   const PersonFingerprintIdsState();
-
-  PersonFingerprintIdsLoaded loaded(List<PersonFingerprintId> fingerprintIds) =>
-      PersonFingerprintIdsLoaded(fingerprintIds: fingerprintIds);
 }
 
 final class PersonFingerprintIdsLoading extends PersonFingerprintIdsState {
@@ -41,10 +38,11 @@ final class PersonFingerprintIdsLoaded extends PersonFingerprintIdsState {
     this.write = const NoFingerprintIdsWrite(),
   });
 
-  @override
-  PersonFingerprintIdsLoaded loaded(List<PersonFingerprintId> fingerprintIds) =>
-      PersonFingerprintIdsLoaded(fingerprintIds: fingerprintIds, write: write);
-
-  PersonFingerprintIdsLoaded withWrite(FingerprintIdsWrite write) =>
-      PersonFingerprintIdsLoaded(fingerprintIds: fingerprintIds, write: write);
+  PersonFingerprintIdsLoaded copyWith({
+    List<PersonFingerprintId>? fingerprintIds,
+    FingerprintIdsWrite? write,
+  }) => PersonFingerprintIdsLoaded(
+    fingerprintIds: fingerprintIds ?? this.fingerprintIds,
+    write: write ?? this.write,
+  );
 }
