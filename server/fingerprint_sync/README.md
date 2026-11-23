@@ -87,7 +87,7 @@ Save-Secret fingerprint-sync-secret
 
 #### Linux
 
-On systemd 250 or newer (`systemctl --version`), encrypt each secret with `systemd-creds`. It is tied to this machine, and to its TPM when there is one, and only systemd decrypts it, into the service's private credentials folder:
+The service needs systemd 247 or newer (`systemctl --version`). On systemd 250 or newer, encrypt each secret with `systemd-creds`. It is tied to this machine, and to its TPM when there is one, and only systemd decrypts it, into the service's private credentials folder:
 
 ```bash
 sudo mkdir -p /etc/credstore.encrypted
@@ -101,7 +101,7 @@ read -rsp "BioTime password: " secret && printf '%s' "$secret" | sudo systemd-cr
 read -rsp "Sync secret: " secret && printf '%s' "$secret" | sudo systemd-creds encrypt --name=fingerprint-sync-secret - /etc/credstore.encrypted/fingerprint-sync-secret; unset secret
 ```
 
-On older systemd, write the two files unencrypted to `/etc/credstore/` with `sudo install -m 600 /dev/null <file>` and an editor, and use `LoadCredential=` in place of `LoadCredentialEncrypted=` in the unit below. Only root can read them, and systemd copies them into the service's private credentials folder.
+On systemd 247 to 249, write the two files unencrypted to `/etc/credstore/` with `sudo install -m 600 /dev/null <file>` and an editor, and use `LoadCredential=` in place of `LoadCredentialEncrypted=` in the unit below. Only root can read them, and systemd copies them into the service's private credentials folder.
 
 ### 4. Install as a service
 
@@ -149,8 +149,8 @@ User=fingerprint-sync
 WorkingDirectory=/opt/fingerprint_sync
 LoadCredentialEncrypted=biotime-password:/etc/credstore.encrypted/biotime-password
 LoadCredentialEncrypted=fingerprint-sync-secret:/etc/credstore.encrypted/fingerprint-sync-secret
-Environment=BIOTIME_PASSWORD_FILE=%d/biotime-password
-Environment=FINGERPRINT_SYNC_SECRET_FILE=%d/fingerprint-sync-secret
+Environment=BIOTIME_PASSWORD_FILE=/run/credentials/fingerprint-sync.service/biotime-password
+Environment=FINGERPRINT_SYNC_SECRET_FILE=/run/credentials/fingerprint-sync.service/fingerprint-sync-secret
 ExecStart=/usr/bin/node /opt/fingerprint_sync/lib/main.js
 Restart=always
 RestartSec=10
@@ -159,7 +159,7 @@ RestartSec=10
 WantedBy=multi-user.target
 ```
 
-`%d` is the service's private credentials folder. Then start it:
+`/run/credentials/fingerprint-sync.service` is the service's private credentials folder while it runs. Then start it:
 
 ```bash
 sudo systemctl daemon-reload
@@ -185,10 +185,16 @@ On Windows, from an administrator PowerShell in `C:\fingerprint_sync`:
 $env:BIOTIME_PASSWORD_FILE = "C:\fingerprint_sync\secrets\biotime-password"; $env:FINGERPRINT_SYNC_SECRET_FILE = "C:\fingerprint_sync\secrets\fingerprint-sync-secret"; node lib/main.js send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"
 ```
 
-On Linux, run it through systemd so it can read the encrypted secrets:
+On Linux, run it through systemd so it can read the secrets. With secrets encrypted by `systemd-creds`:
 
 ```bash
 sudo systemd-run --pipe --wait --uid=fingerprint-sync -p WorkingDirectory=/opt/fingerprint_sync -p LoadCredentialEncrypted=biotime-password:/etc/credstore.encrypted/biotime-password -p LoadCredentialEncrypted=fingerprint-sync-secret:/etc/credstore.encrypted/fingerprint-sync-secret /bin/sh -c 'BIOTIME_PASSWORD_FILE="$CREDENTIALS_DIRECTORY/biotime-password" FINGERPRINT_SYNC_SECRET_FILE="$CREDENTIALS_DIRECTORY/fingerprint-sync-secret" exec /usr/bin/node lib/main.js send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"'
+```
+
+With unencrypted secrets in `/etc/credstore/` (systemd older than 250):
+
+```bash
+sudo systemd-run --pipe --wait --uid=fingerprint-sync -p WorkingDirectory=/opt/fingerprint_sync -p LoadCredential=biotime-password:/etc/credstore/biotime-password -p LoadCredential=fingerprint-sync-secret:/etc/credstore/fingerprint-sync-secret /bin/sh -c 'BIOTIME_PASSWORD_FILE="$CREDENTIALS_DIRECTORY/biotime-password" FINGERPRINT_SYNC_SECRET_FILE="$CREDENTIALS_DIRECTORY/fingerprint-sync-secret" exec /usr/bin/node lib/main.js send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"'
 ```
 
 The times are the BioTime server's local time, inclusive. The command does not move the cursor, so the service can keep running. The function rejects punches older than 10 days.
