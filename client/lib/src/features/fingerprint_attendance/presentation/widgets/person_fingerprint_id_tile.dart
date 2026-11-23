@@ -17,7 +17,7 @@ class PersonFingerprintIdTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = ColorScheme.of(context);
-    final addedOn = DateFormat('yyyy/M/d').format(fingerprintId.addedAt);
+    final addedOn = DateFormat.yMd().format(fingerprintId.addedAt);
 
     return ListTile(
       contentPadding: EdgeInsets.zero,
