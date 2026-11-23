@@ -9,6 +9,7 @@ import {
 } from "./biotime/biotime_time";
 import { FingerprintSyncConfig } from "./config";
 import { Cursor, readCursorIfSaved, saveCursor } from "./cursor/cursor_file";
+import { logInfo } from "./log";
 import {
   Punch,
   RecordPunchesFunctionClient,
@@ -45,6 +46,12 @@ export class FingerprintSync {
       cursorAfterSentBatches = cursorAfter(cursorAfterSentBatches, batch);
       await saveCursor(this.config.cursorFile, cursorAfterSentBatches);
     }
+
+    if (unsent.length > 0) {
+      logInfo(
+        `Forwarded ${unsent.length} punches up to ${cursorAfterSentBatches.punchTime}`,
+      );
+    }
   }
 
   async sendPunchesBetween(startTime: string, endTime: string): Promise<void> {
@@ -53,6 +60,10 @@ export class FingerprintSync {
     for (const batch of batchesOfAtLeastOne(transactions.sort(byPunchTimeThenId))) {
       await this.recordPunches(batch);
     }
+
+    logInfo(
+      `Sent ${transactions.length} punches between ${startTime} and ${endTime}`,
+    );
   }
 
   private async recordPunches(transactions: BiotimeTransaction[]) {
@@ -74,6 +85,9 @@ export class FingerprintSync {
       sentIdsAtPunchTime: [],
     };
     await saveCursor(this.config.cursorFile, cursorStartingNow);
+    logInfo(
+      `No cursor file at ${this.config.cursorFile}, forwarding punches from ${cursorStartingNow.punchTime}`,
+    );
 
     return cursorStartingNow;
   }

@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { FingerprintSyncConfig } from "../config";
+import { logWarning } from "../log";
 import { isReadableBiotimeTime } from "./biotime_time";
 
 export type BiotimeTransaction = z.infer<typeof biotimeTransaction>;
@@ -98,7 +99,7 @@ function readableTransactionsOf(rawTransactions: unknown[]) {
     const transaction = biotimeTransaction.safeParse(rawTransaction);
 
     if (!transaction.success) {
-      console.warn(
+      logWarning(
         "Skipped an unreadable BioTime transaction",
         JSON.stringify(rawTransaction),
         transaction.error.issues,

@@ -1,0 +1,13 @@
+{
+  "biotime": {
+    "baseUrl": "http://127.0.0.1:8090",
+    "username": "fingerprint-sync",
+    "password": "change-me"
+  },
+  "recordPunchesFunction": {
+    "url": "https://<region>-<project-id>.cloudfunctions.net/recordFingerprintPunches",
+    "secret": "change-me"
+  },
+  "cursorFile": "cursor.json",
+  "pollIntervalSeconds": 20
+}
