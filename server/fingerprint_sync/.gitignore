@@ -1,0 +1,5 @@
+node_modules/
+lib/
+lib_test/
+config.json
+cursor.json
