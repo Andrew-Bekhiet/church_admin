@@ -7,7 +7,7 @@ on:
       - "server/hasura/**"
       - "server/postgres/**"
       - "server/docker-compose.yml"
-      - ".github/workflows/functions-test.yml"
+      - ".github/workflows/functions-tests.yml"
 
   push:
     branches: [master]
@@ -16,7 +16,7 @@ on:
       - "server/hasura/**"
       - "server/postgres/**"
       - "server/docker-compose.yml"
-      - ".github/workflows/functions-test.yml"
+      - ".github/workflows/functions-tests.yml"
 
 permissions: {}
 
