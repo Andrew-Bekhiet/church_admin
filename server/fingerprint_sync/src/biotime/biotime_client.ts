@@ -8,8 +8,11 @@ export interface BiotimeTransaction {
 }
 
 interface TransactionsPage {
+  next: string | null;
   data: BiotimeTransaction[];
 }
+
+const PAGE_SIZE = 100;
 
 export class BiotimeClient {
   private token: string | undefined;
@@ -17,15 +20,41 @@ export class BiotimeClient {
   constructor(private readonly config: FingerprintSyncConfig["biotime"]) {}
 
   async transactionsFrom(startTime: string): Promise<BiotimeTransaction[]> {
+    const transactions: BiotimeTransaction[] = [];
+
+    for (let pageNumber = 1; ; pageNumber++) {
+      const page = await this.transactionsPage(startTime, pageNumber);
+      transactions.push(...page.data);
+
+      if (page.next === null) {
+        return transactions;
+      }
+    }
+  }
+
+  private async transactionsPage(
+    startTime: string,
+    pageNumber: number,
+  ): Promise<TransactionsPage> {
     const url = new URL("/iclock/api/transactions/", this.config.baseUrl);
     url.searchParams.set("start_time", startTime);
+    url.searchParams.set("page", String(pageNumber));
+    url.searchParams.set("page_size", String(PAGE_SIZE));
 
-    const response = await fetch(url, {
+    let response = await this.authorizedGet(url);
+
+    if (response.status === 401) {
+      this.token = undefined;
+      response = await this.authorizedGet(url);
+    }
+
+    return await jsonOfSuccessful(response) as TransactionsPage;
+  }
+
+  private async authorizedGet(url: URL): Promise<Response> {
+    return await fetch(url, {
       headers: { Authorization: `Token ${await this.loggedInToken()}` },
     });
-    const page = await response.json() as TransactionsPage;
-
-    return page.data;
   }
 
   private async loggedInToken(): Promise<string> {
@@ -46,8 +75,18 @@ export class BiotimeClient {
         }),
       },
     );
-    const { token } = await response.json() as { token: string };
+    const { token } = await jsonOfSuccessful(response) as { token: string };
 
     return token;
   }
+}
+
+async function jsonOfSuccessful(response: Response): Promise<unknown> {
+  if (!response.ok) {
+    throw new Error(
+      `BioTime answered ${response.status} to ${response.url}: ${await response.text()}`,
+    );
+  }
+
+  return await response.json();
 }
