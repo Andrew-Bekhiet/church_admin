@@ -19,6 +19,7 @@ export interface ReceivedRequest {
 export class FakePunchesFunction {
   readonly accepted: ReceivedRequest[] = [];
   respondWithStatus = 204;
+  requestsToAcceptBeforeFailing = Infinity;
 
   private constructor(private readonly server: Server) {}
 
@@ -53,6 +54,12 @@ export class FakePunchesFunction {
 
     if (req.headers["x-fingerprint-sync-secret"] !== FUNCTION_SECRET) {
       res.writeHead(401).end();
+
+      return;
+    }
+
+    if (this.accepted.length >= this.requestsToAcceptBeforeFailing) {
+      res.writeHead(503).end();
 
       return;
     }
