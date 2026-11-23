@@ -4,13 +4,13 @@ on:
   pull_request:
     paths:
       - "server/fingerprint_sync/**"
-      - ".github/workflows/fingerprint-sync.yml"
+      - ".github/workflows/check-fingerprint-sync.yml"
 
   push:
     branches: [master]
     paths:
       - "server/fingerprint_sync/**"
-      - ".github/workflows/fingerprint-sync.yml"
+      - ".github/workflows/check-fingerprint-sync.yml"
 
 permissions: {}
 
