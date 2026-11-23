@@ -43,21 +43,65 @@ Copy `config.example.json` to `config.json` in the same folder and fill it in:
 | Setting | Meaning |
 | -- | -- |
 | `biotime.baseUrl` | BioTime's address as seen from this server, for example `http://127.0.0.1:8090` |
-| `biotime.username`, `biotime.password` | The BioTime API account |
+| `biotime.username` | The BioTime API account |
 | `recordFingerprintPunches.url` | The function's URL |
-| `recordFingerprintPunches.secret` | The shared secret |
 | `cursorFile` | Where the cursor is saved. A relative path is relative to `config.json` |
 | `pollIntervalSeconds` | Seconds between polls. Defaults to 20 |
 
-`config.json` holds two secrets. Let only the account that runs the service and administrators read it.
+`config.json` holds no secrets. The service refuses to start if it finds a password or secret in it.
 
-### 3. Run it once by hand
+### 3. Store the secrets
 
-```bash
-node lib/main.js
+The service reads two secrets:
+
+| Secret | Read from |
+| -- | -- |
+| The BioTime API account's password | `BIOTIME_PASSWORD`, or the file named by `BIOTIME_PASSWORD_FILE` |
+| The function's shared secret | `FINGERPRINT_SYNC_SECRET`, or the file named by `FINGERPRINT_SYNC_SECRET_FILE` |
+
+Set one of the two variables for each secret. The steps below keep each secret in a file that only the service can read, and point the `_FILE` variable at it. A newline or BOM at the end of a secret file is ignored.
+
+#### Windows
+
+From an administrator PowerShell, create a folder that only `SYSTEM` (the account NSSM runs the service as) and administrators can open, then type each secret into it:
+
+```powershell
+New-Item -ItemType Directory C:\fingerprint_sync\secrets
 ```
 
-The first line says it is polling, and the next says it is forwarding punches from the current time. Punch on a device and wait for `Forwarded 1 punches`. Stop it with Ctrl+C.
+```powershell
+icacls C:\fingerprint_sync\secrets /inheritance:r /grant:r "SYSTEM:(OI)(CI)R" "Administrators:(OI)(CI)F"
+```
+
+```powershell
+function Save-Secret($name) { $typed = Read-Host $name -AsSecureString; [IO.File]::WriteAllText("C:\fingerprint_sync\secrets\$name", [Net.NetworkCredential]::new('', $typed).Password) }
+```
+
+```powershell
+Save-Secret biotime-password
+```
+
+```powershell
+Save-Secret fingerprint-sync-secret
+```
+
+#### Linux
+
+On systemd 250 or newer (`systemctl --version`), encrypt each secret with `systemd-creds`. It is tied to this machine, and to its TPM when there is one, and only systemd decrypts it, into the service's private credentials folder:
+
+```bash
+sudo mkdir -p /etc/credstore.encrypted
+```
+
+```bash
+read -rsp "BioTime password: " secret && printf '%s' "$secret" | sudo systemd-creds encrypt --name=biotime-password - /etc/credstore.encrypted/biotime-password; unset secret
+```
+
+```bash
+read -rsp "Sync secret: " secret && printf '%s' "$secret" | sudo systemd-creds encrypt --name=fingerprint-sync-secret - /etc/credstore.encrypted/fingerprint-sync-secret; unset secret
+```
+
+On older systemd, write the two files unencrypted to `/etc/credstore/` with `sudo install -m 600 /dev/null <file>` and an editor, and use `LoadCredential=` in place of `LoadCredentialEncrypted=` in the unit below. Only root can read them, and systemd copies them into the service's private credentials folder.
 
 ### 4. Install as a service
 
@@ -69,6 +113,7 @@ Use [NSSM](https://nssm.cc/download) to run it as a Windows service that starts 
 mkdir C:\fingerprint_sync\logs
 nssm install FingerprintSync "C:\Program Files\nodejs\node.exe" "C:\fingerprint_sync\lib\main.js"
 nssm set FingerprintSync AppDirectory C:\fingerprint_sync
+nssm set FingerprintSync AppEnvironmentExtra BIOTIME_PASSWORD_FILE=C:\fingerprint_sync\secrets\biotime-password FINGERPRINT_SYNC_SECRET_FILE=C:\fingerprint_sync\secrets\fingerprint-sync-secret
 nssm set FingerprintSync AppStdout C:\fingerprint_sync\logs\fingerprint_sync.log
 nssm set FingerprintSync AppStderr C:\fingerprint_sync\logs\fingerprint_sync.log
 nssm set FingerprintSync AppRotateFiles 1
@@ -77,7 +122,7 @@ nssm set FingerprintSync AppRotateBytes 10485760
 nssm start FingerprintSync
 ```
 
-The log is `C:\fingerprint_sync\logs\fingerprint_sync.log`, rotated every 10 MB. `nssm restart FingerprintSync` restarts the service.
+The environment variables hold only the paths of the secret files, not the secrets. The log is `C:\fingerprint_sync\logs\fingerprint_sync.log`, rotated every 10 MB. `nssm restart FingerprintSync` restarts the service.
 
 #### Linux
 
@@ -102,6 +147,10 @@ Wants=network-online.target
 [Service]
 User=fingerprint-sync
 WorkingDirectory=/opt/fingerprint_sync
+LoadCredentialEncrypted=biotime-password:/etc/credstore.encrypted/biotime-password
+LoadCredentialEncrypted=fingerprint-sync-secret:/etc/credstore.encrypted/fingerprint-sync-secret
+Environment=BIOTIME_PASSWORD_FILE=%d/biotime-password
+Environment=FINGERPRINT_SYNC_SECRET_FILE=%d/fingerprint-sync-secret
 ExecStart=/usr/bin/node /opt/fingerprint_sync/lib/main.js
 Restart=always
 RestartSec=10
@@ -110,7 +159,7 @@ RestartSec=10
 WantedBy=multi-user.target
 ```
 
-Then start it:
+`%d` is the service's private credentials folder. Then start it:
 
 ```bash
 sudo systemctl daemon-reload
@@ -122,12 +171,24 @@ sudo systemctl enable --now fingerprint-sync
 
 Read the log with `journalctl -u fingerprint-sync -f`.
 
+### 5. Check that it works
+
+Open the log. The first lines say it is polling, and that it is forwarding punches from the current time. Punch on a device and wait for `Forwarded 1 punches`. A wrong password or secret shows as `Poll failed` with BioTime's or the function's answer.
+
 ## Send the punches between two times
 
 When a device was offline and uploaded its punches late, punches older than the cursor are skipped. Send them once with:
 
+On Windows, from an administrator PowerShell in `C:\fingerprint_sync`:
+
+```powershell
+$env:BIOTIME_PASSWORD_FILE = "C:\fingerprint_sync\secrets\biotime-password"; $env:FINGERPRINT_SYNC_SECRET_FILE = "C:\fingerprint_sync\secrets\fingerprint-sync-secret"; node lib/main.js send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"
+```
+
+On Linux, run it through systemd so it can read the encrypted secrets:
+
 ```bash
-node lib/main.js send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"
+sudo systemd-run --pipe --wait --uid=fingerprint-sync -p WorkingDirectory=/opt/fingerprint_sync -p LoadCredentialEncrypted=biotime-password:/etc/credstore.encrypted/biotime-password -p LoadCredentialEncrypted=fingerprint-sync-secret:/etc/credstore.encrypted/fingerprint-sync-secret /bin/sh -c 'BIOTIME_PASSWORD_FILE="$CREDENTIALS_DIRECTORY/biotime-password" FINGERPRINT_SYNC_SECRET_FILE="$CREDENTIALS_DIRECTORY/fingerprint-sync-secret" exec /usr/bin/node lib/main.js send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"'
 ```
 
 The times are the BioTime server's local time, inclusive. The command does not move the cursor, so the service can keep running. The function rejects punches older than 10 days.
@@ -138,7 +199,7 @@ Sending a range again records its punches again. An attendance record a servant 
 
 ## Update
 
-Stop the service, replace the folder's files except `config.json`, `cursor.json` and `logs`, then run `npm ci` and `npm run build` and start the service again.
+Stop the service, replace the folder's files except `config.json`, `cursor.json`, `secrets` and `logs`, then run `npm ci` and `npm run build` and start the service again.
 
 ## Check on the real server
 

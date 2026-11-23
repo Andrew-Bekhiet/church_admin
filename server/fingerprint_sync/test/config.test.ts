@@ -9,18 +9,27 @@ const configWithoutPollInterval = {
   biotime: {
     baseUrl: "http://127.0.0.1:8090",
     username: "api-user",
-    password: "api-password",
   },
   recordFingerprintPunches: {
     url: "https://example.cloudfunctions.net/recordFingerprintPunches",
-    secret: "secret",
   },
   cursorFile: "cursor.json",
 };
 
-async function configFileWith(t: TestContext, content: unknown) {
+const secretsInVariables = {
+  BIOTIME_PASSWORD: "api-password",
+  FINGERPRINT_SYNC_SECRET: "sync-secret",
+};
+
+async function directoryFor(t: TestContext) {
   const directory = await mkdtemp(join(tmpdir(), "fingerprint-sync-config-"));
   t.after(() => rm(directory, { recursive: true, force: true }));
+
+  return directory;
+}
+
+async function configFileWith(t: TestContext, content: unknown) {
+  const directory = await directoryFor(t);
   const path = join(directory, "config.json");
   await writeFile(path, JSON.stringify(content));
 
@@ -33,7 +42,7 @@ test("keeps the cursor file next to the config file when its path is relative", 
     cursorFile: join("state", "cursor.json"),
   });
 
-  const config = await loadConfig(path);
+  const config = await loadConfig(path, secretsInVariables);
 
   assert.equal(config.cursorFile, join(directory, "state", "cursor.json"));
 });
@@ -41,7 +50,7 @@ test("keeps the cursor file next to the config file when its path is relative", 
 test("polls every 20 seconds by default", async (t) => {
   const { path } = await configFileWith(t, configWithoutPollInterval);
 
-  const config = await loadConfig(path);
+  const config = await loadConfig(path, secretsInVariables);
 
   assert.equal(config.pollIntervalSeconds, 20);
 });
@@ -49,10 +58,74 @@ test("polls every 20 seconds by default", async (t) => {
 test("names the missing setting when the config is incomplete", async (t) => {
   const { path } = await configFileWith(t, {
     ...configWithoutPollInterval,
-    recordFingerprintPunches: {
-      url: configWithoutPollInterval.recordFingerprintPunches.url,
-    },
+    recordFingerprintPunches: {},
   });
 
-  await assert.rejects(loadConfig(path), /recordFingerprintPunches\.secret/);
+  await assert.rejects(
+    loadConfig(path, secretsInVariables),
+    /recordFingerprintPunches\.url/,
+  );
+});
+
+test("reads the secrets from environment variables", async (t) => {
+  const { path } = await configFileWith(t, configWithoutPollInterval);
+
+  const config = await loadConfig(path, {
+    BIOTIME_PASSWORD: "api-password",
+    FINGERPRINT_SYNC_SECRET: "sync-secret",
+  });
+
+  assert.equal(config.biotime.password, "api-password");
+  assert.equal(config.recordFingerprintPunches.secret, "sync-secret");
+});
+
+test("reads the secrets from the files their _FILE variables name, without a trailing newline or BOM", async (t) => {
+  const { directory, path } = await configFileWith(t, configWithoutPollInterval);
+  const passwordFile = join(directory, "biotime-password");
+  const secretFile = join(directory, "fingerprint-sync-secret");
+  await writeFile(passwordFile, "\uFEFFapi-password\r\n");
+  await writeFile(secretFile, "sync-secret\n");
+
+  const config = await loadConfig(path, {
+    BIOTIME_PASSWORD_FILE: passwordFile,
+    FINGERPRINT_SYNC_SECRET_FILE: secretFile,
+  });
+
+  assert.equal(config.biotime.password, "api-password");
+  assert.equal(config.recordFingerprintPunches.secret, "sync-secret");
+});
+
+test("names the variables to set when a secret is missing", async (t) => {
+  const { path } = await configFileWith(t, configWithoutPollInterval);
+
+  await assert.rejects(
+    loadConfig(path, { BIOTIME_PASSWORD: "api-password" }),
+    /FINGERPRINT_SYNC_SECRET or FINGERPRINT_SYNC_SECRET_FILE/,
+  );
+});
+
+test("refuses a secret set both directly and through a file", async (t) => {
+  const { directory, path } = await configFileWith(t, configWithoutPollInterval);
+  const passwordFile = join(directory, "biotime-password");
+  await writeFile(passwordFile, "api-password");
+
+  await assert.rejects(
+    loadConfig(path, {
+      ...secretsInVariables,
+      BIOTIME_PASSWORD_FILE: passwordFile,
+    }),
+    /Both BIOTIME_PASSWORD and BIOTIME_PASSWORD_FILE are set/,
+  );
+});
+
+test("refuses a secret written in the config file", async (t) => {
+  const { path } = await configFileWith(t, {
+    ...configWithoutPollInterval,
+    biotime: { ...configWithoutPollInterval.biotime, password: "api-password" },
+  });
+
+  await assert.rejects(
+    loadConfig(path, secretsInVariables),
+    /password/,
+  );
 });
