@@ -6,7 +6,7 @@ import {
 import {
   BIOTIME_TIME_FORMAT,
   cairoInstantOfBiotimeTime,
-} from "./biotime/cairo_punch_time";
+} from "./biotime/biotime_time";
 import { FingerprintSyncConfig } from "./config";
 import { Cursor, readCursorIfSaved, saveCursor } from "./cursor/cursor_file";
 import {
@@ -15,6 +15,7 @@ import {
 } from "./punches_function/record_punches_function_client";
 
 const ISO_LOCAL_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+const MAX_PUNCHES_PER_REQUEST = 500;
 
 export class FingerprintSync {
   private readonly biotime: BiotimeClient;
@@ -33,15 +34,24 @@ export class FingerprintSync {
   async pollOnce(): Promise<void> {
     const cursor = await this.savedCursorOrOneStartingNow();
     const transactions = await this.biotime.transactionsFrom(cursor.punchTime);
-    const unsent = transactions.filter((transaction) =>
-      !cursor.sentIdsAtPunchTime.includes(transaction.id)
-    );
+    const unsent = transactions
+      .filter((transaction) => !wasSentBefore(transaction, cursor))
+      .sort(byPunchTimeThenId);
 
+    let cursorAfterSentBatches = cursor;
+
+    for (const batch of batchesOfAtLeastOne(unsent)) {
+      await this.recordPunches(batch);
+      cursorAfterSentBatches = cursorAfter(cursorAfterSentBatches, batch);
+      await saveCursor(this.config.cursorFile, cursorAfterSentBatches);
+    }
+  }
+
+  private async recordPunches(transactions: BiotimeTransaction[]) {
     await this.recordPunchesFunction.recordPunches(
-      unsent.map(punchOf),
+      transactions.map(punchOf),
       this.serverLocalNow().toFormat(ISO_LOCAL_TIME_FORMAT),
     );
-    await saveCursor(this.config.cursorFile, cursorAfter(cursor, unsent));
   }
 
   private async savedCursorOrOneStartingNow(): Promise<Cursor> {
@@ -61,6 +71,28 @@ export class FingerprintSync {
   }
 }
 
+function wasSentBefore(transaction: BiotimeTransaction, cursor: Cursor) {
+  return transaction.punch_time < cursor.punchTime ||
+    (transaction.punch_time === cursor.punchTime &&
+      cursor.sentIdsAtPunchTime.includes(transaction.id));
+}
+
+function byPunchTimeThenId(a: BiotimeTransaction, b: BiotimeTransaction) {
+  return a.punch_time.localeCompare(b.punch_time) || a.id - b.id;
+}
+
+function batchesOfAtLeastOne(
+  transactions: BiotimeTransaction[],
+): BiotimeTransaction[][] {
+  const batches: BiotimeTransaction[][] = [];
+
+  for (let start = 0; start < transactions.length; start += MAX_PUNCHES_PER_REQUEST) {
+    batches.push(transactions.slice(start, start + MAX_PUNCHES_PER_REQUEST));
+  }
+
+  return batches.length > 0 ? batches : [[]];
+}
+
 function punchOf(transaction: BiotimeTransaction): Punch {
   return {
     employeeCode: transaction.emp_code,
@@ -70,11 +102,7 @@ function punchOf(transaction: BiotimeTransaction): Punch {
 }
 
 function cursorAfter(cursor: Cursor, sent: BiotimeTransaction[]): Cursor {
-  const latestPunchTime = sent.reduce(
-    (latest, transaction) =>
-      transaction.punch_time > latest ? transaction.punch_time : latest,
-    cursor.punchTime,
-  );
+  const latestPunchTime = sent.at(-1)?.punch_time ?? cursor.punchTime;
   const idsSentAtLatestPunchTime = sent
     .filter((transaction) => transaction.punch_time === latestPunchTime)
     .map((transaction) => transaction.id);

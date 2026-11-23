@@ -16,6 +16,7 @@ export const BIOTIME_PASSWORD = "api-password";
 export class FakeBiotimeServer {
   readonly transactions: FakeTransaction[] = [];
   pageSize = 10;
+  listsNewestFirst = false;
   private validTokens = new Set<string>();
   private issuedTokens = 0;
 
@@ -111,7 +112,10 @@ export class FakeBiotimeServer {
 
     const startTime = url.searchParams.get("start_time");
     const endTime = url.searchParams.get("end_time");
-    const matching = this.transactions.filter((transaction) =>
+    const listed = this.listsNewestFirst
+      ? [...this.transactions].reverse()
+      : this.transactions;
+    const matching = listed.filter((transaction) =>
       (startTime === null || transaction.punch_time >= startTime) &&
       (endTime === null || transaction.punch_time <= endTime)
     );

@@ -15,7 +15,7 @@ export class RecordPunchesFunctionClient {
     punches: Punch[],
     biotimeServerLocalTime: string,
   ): Promise<void> {
-    await fetch(this.config.url, {
+    const response = await fetch(this.config.url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,5 +23,11 @@ export class RecordPunchesFunctionClient {
       },
       body: JSON.stringify({ biotimeServerLocalTime, punches }),
     });
+
+    if (!response.ok) {
+      throw new Error(
+        `The record punches function answered ${response.status}: ${await response.text()}`,
+      );
+    }
   }
 }

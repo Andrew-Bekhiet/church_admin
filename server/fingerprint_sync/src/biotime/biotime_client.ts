@@ -1,16 +1,22 @@
+import { z } from "zod";
 import { FingerprintSyncConfig } from "../config";
+import { isReadableBiotimeTime } from "./biotime_time";
 
-export interface BiotimeTransaction {
-  id: number;
-  emp_code: string;
-  punch_time: string;
-  terminal_sn: string;
-}
+export type BiotimeTransaction = z.infer<typeof biotimeTransaction>;
 
-interface TransactionsPage {
-  next: string | null;
-  data: BiotimeTransaction[];
-}
+const biotimeTransaction = z.object({
+  id: z.number().int(),
+  emp_code: z.string().trim().min(1),
+  punch_time: z.string().refine(isReadableBiotimeTime),
+  terminal_sn: z.string().nullable().transform((serial) => serial ?? ""),
+});
+
+const transactionsPage = z.object({
+  next: z.string().nullable(),
+  data: z.array(z.unknown()),
+});
+
+const loginResponse = z.object({ token: z.string().min(1) });
 
 const PAGE_SIZE = 100;
 
@@ -24,7 +30,7 @@ export class BiotimeClient {
 
     for (let pageNumber = 1; ; pageNumber++) {
       const page = await this.transactionsPage(startTime, pageNumber);
-      transactions.push(...page.data);
+      transactions.push(...readableTransactionsOf(page.data));
 
       if (page.next === null) {
         return transactions;
@@ -35,7 +41,7 @@ export class BiotimeClient {
   private async transactionsPage(
     startTime: string,
     pageNumber: number,
-  ): Promise<TransactionsPage> {
+  ): Promise<z.infer<typeof transactionsPage>> {
     const url = new URL("/iclock/api/transactions/", this.config.baseUrl);
     url.searchParams.set("start_time", startTime);
     url.searchParams.set("page", String(pageNumber));
@@ -48,7 +54,7 @@ export class BiotimeClient {
       response = await this.authorizedGet(url);
     }
 
-    return await jsonOfSuccessful(response) as TransactionsPage;
+    return transactionsPage.parse(await jsonOfSuccessful(response));
   }
 
   private async authorizedGet(url: URL): Promise<Response> {
@@ -75,10 +81,27 @@ export class BiotimeClient {
         }),
       },
     );
-    const { token } = await jsonOfSuccessful(response) as { token: string };
 
-    return token;
+    return loginResponse.parse(await jsonOfSuccessful(response)).token;
   }
+}
+
+function readableTransactionsOf(rawTransactions: unknown[]) {
+  return rawTransactions.flatMap((rawTransaction) => {
+    const transaction = biotimeTransaction.safeParse(rawTransaction);
+
+    if (!transaction.success) {
+      console.warn(
+        "Skipped an unreadable BioTime transaction",
+        JSON.stringify(rawTransaction),
+        transaction.error.issues,
+      );
+
+      return [];
+    }
+
+    return [transaction.data];
+  });
 }
 
 async function jsonOfSuccessful(response: Response): Promise<unknown> {
