@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:intl/intl.dart' show DateFormat;
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -115,7 +116,7 @@ void main() {
     );
     expect(
       addedByAndDate.data,
-      contains('٢٠٢٦/١/٩'),
+      contains(DateFormat.yMd('ar-EG').format(newFingerprintId.addedAt)),
     );
   });
 
