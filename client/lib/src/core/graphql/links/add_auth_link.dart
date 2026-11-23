@@ -40,8 +40,10 @@ class AddAuthLink extends Link {
         .distinct()
         .skip(1)
         .where((identity) => identity.$1 != null)
-        .listen((_) => _wsLink?.getSocketClient?.onConnectionLost());
+        .listen((_) => reconnectSocket());
   }
+
+  void reconnectSocket() => _wsLink?.getSocketClient?.onConnectionLost();
 
   HttpLinkHeaders Function(HttpLinkHeaders?) _getHeadersWithToken(
     String token,

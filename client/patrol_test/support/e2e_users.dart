@@ -118,6 +118,30 @@ abstract final class E2eUsers {
     }
   }
 
+  static Future<void> revokePermissions(
+    String uid,
+    Set<UserPermission> permissions,
+  ) async {
+    final revoked = await E2eBackend.hasuraQuery(
+      r'''
+      mutation RevokePermissions($uid: uuid!, $permissions: [String!]!) {
+        deleteAuthUsersPermissions(
+          where: {uid: {_eq: $uid}, permission: {_in: $permissions}}
+        ) { affectedRows }
+      }
+      ''',
+      variables: {
+        'uid': uid,
+        'permissions': [for (final permission in permissions) permission.name],
+      },
+    );
+
+    if ((revoked['deleteAuthUsersPermissions'] as Map)['affectedRows'] !=
+        permissions.length) {
+      throw StateError('$uid did not hold all of $permissions');
+    }
+  }
+
   static Future<({String uid, String personId})> _insertApprovedUserData({
     required String email,
     required String name,
