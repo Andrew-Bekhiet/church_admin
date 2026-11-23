@@ -1,11 +1,11 @@
 import { DateTime } from "luxon";
 import { resolve } from "node:path";
-import { setTimeout as sleep } from "node:timers/promises";
 import { parseArgs } from "node:util";
 import { isReadableBiotimeTime } from "./biotime/biotime_time";
 import { FingerprintSyncConfig, loadConfig } from "./config";
 import { FingerprintSync } from "./fingerprint_sync";
 import { logError, logInfo } from "./log";
+import { pollUntilStopped } from "./poll_until_stopped";
 
 const USAGE = `Usage:
   node lib/main.js [--config <path>]
@@ -29,7 +29,7 @@ async function main(): Promise<number> {
 
   switch (positionals[0]) {
     case undefined:
-      await pollUntilStopped(sync, config);
+      await pollUntilSignalled(sync, config);
 
       return 0;
     case "send-range":
@@ -60,7 +60,7 @@ async function sendRangeIfReadable(
   return 0;
 }
 
-async function pollUntilStopped(
+async function pollUntilSignalled(
   sync: FingerprintSync,
   config: FingerprintSyncConfig,
 ): Promise<void> {
@@ -71,22 +71,13 @@ async function pollUntilStopped(
     `Polling ${config.biotime.baseUrl} every ${config.pollIntervalSeconds} seconds`,
   );
 
-  while (!stop.signal.aborted) {
-    await pollOnceLoggingFailure(sync);
-    await sleep(config.pollIntervalSeconds * 1000, undefined, {
-      signal: stop.signal,
-    }).catch(() => undefined);
-  }
+  await pollUntilStopped(
+    () => sync.pollOnce(),
+    config.pollIntervalSeconds,
+    stop.signal,
+  );
 
   logInfo("Stopped");
-}
-
-async function pollOnceLoggingFailure(sync: FingerprintSync): Promise<void> {
-  try {
-    await sync.pollOnce();
-  } catch (e) {
-    logError("Poll failed, the cursor stays where it was:", e);
-  }
 }
 
 main().then(

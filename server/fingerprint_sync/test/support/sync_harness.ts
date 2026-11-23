@@ -10,14 +10,14 @@ import {
   BIOTIME_USERNAME,
   FakeBiotimeServer,
 } from "./fake_biotime_server";
-import { FakePunchesFunction, FUNCTION_SECRET } from "./fake_punches_function";
+import { FakeRecordFingerprintPunches, FUNCTION_SECRET } from "./fake_record_fingerprint_punches";
 
 export interface SyncHarness {
   biotime: FakeBiotimeServer;
-  punchesFunction: FakePunchesFunction;
+  recordFingerprintPunches: FakeRecordFingerprintPunches;
   config: FingerprintSyncConfig;
   serverLocalTime: string;
-  startSync(): FingerprintSync;
+  newSync(): FingerprintSync;
 }
 
 export async function startSyncHarness(
@@ -25,18 +25,18 @@ export async function startSyncHarness(
   serverLocalTime: string,
 ): Promise<SyncHarness> {
   const biotime = await FakeBiotimeServer.start();
-  const punchesFunction = await FakePunchesFunction.start();
+  const recordFingerprintPunches = await FakeRecordFingerprintPunches.start();
   const directory = await mkdtemp(join(tmpdir(), "fingerprint-sync-"));
 
   t.after(async () => {
     await biotime.stop();
-    await punchesFunction.stop();
+    await recordFingerprintPunches.stop();
     await rm(directory, { recursive: true, force: true });
   });
 
   const harness: SyncHarness = {
     biotime,
-    punchesFunction,
+    recordFingerprintPunches,
     serverLocalTime,
     config: {
       biotime: {
@@ -44,14 +44,14 @@ export async function startSyncHarness(
         username: BIOTIME_USERNAME,
         password: BIOTIME_PASSWORD,
       },
-      recordPunchesFunction: {
-        url: punchesFunction.url,
+      recordFingerprintPunches: {
+        url: recordFingerprintPunches.url,
         secret: FUNCTION_SECRET,
       },
       cursorFile: join(directory, "cursor.json"),
       pollIntervalSeconds: 20,
     },
-    startSync: () =>
+    newSync: () =>
       new FingerprintSync(
         harness.config,
         () => DateTime.fromSQL(harness.serverLocalTime) as DateTime<true>,

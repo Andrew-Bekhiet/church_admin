@@ -10,7 +10,7 @@ const fingerprintSyncConfig = z.object({
     username: z.string().min(1),
     password: z.string().min(1),
   }),
-  recordPunchesFunction: z.object({
+  recordFingerprintPunches: z.object({
     url: z.url(),
     secret: z.string().min(1),
   }),

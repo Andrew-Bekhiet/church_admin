@@ -11,7 +11,7 @@ const configWithoutPollInterval = {
     username: "api-user",
     password: "api-password",
   },
-  recordPunchesFunction: {
+  recordFingerprintPunches: {
     url: "https://example.cloudfunctions.net/recordFingerprintPunches",
     secret: "secret",
   },
@@ -38,7 +38,7 @@ test("keeps the cursor file next to the config file when its path is relative", 
   assert.equal(config.cursorFile, join(directory, "state", "cursor.json"));
 });
 
-test("polls every 20 seconds unless the config says otherwise", async (t) => {
+test("polls every 20 seconds by default", async (t) => {
   const { path } = await configFileWith(t, configWithoutPollInterval);
 
   const config = await loadConfig(path);
@@ -49,10 +49,10 @@ test("polls every 20 seconds unless the config says otherwise", async (t) => {
 test("names the missing setting when the config is incomplete", async (t) => {
   const { path } = await configFileWith(t, {
     ...configWithoutPollInterval,
-    recordPunchesFunction: {
-      url: configWithoutPollInterval.recordPunchesFunction.url,
+    recordFingerprintPunches: {
+      url: configWithoutPollInterval.recordFingerprintPunches.url,
     },
   });
 
-  await assert.rejects(loadConfig(path), /recordPunchesFunction\.secret/);
+  await assert.rejects(loadConfig(path), /recordFingerprintPunches\.secret/);
 });

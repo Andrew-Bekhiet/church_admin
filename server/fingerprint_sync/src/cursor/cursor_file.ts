@@ -1,11 +1,11 @@
-import { readFile, rename, writeFile } from "node:fs/promises";
+import { open, readFile, rename } from "node:fs/promises";
 import { z } from "zod";
 
-export type Cursor = z.infer<typeof cursor>;
+export type Cursor = z.infer<typeof savedCursor>;
 
-const cursor = z.object({
-  punchTime: z.string(),
-  sentIdsAtPunchTime: z.array(z.number().int()),
+const savedCursor = z.object({
+  forwardedUpTo: z.string(),
+  forwardedTransactionIdsAtThatTime: z.array(z.number().int()),
 });
 
 export async function readCursorIfSaved(
@@ -23,11 +23,22 @@ export async function readCursorIfSaved(
     throw e;
   }
 
-  return cursor.parse(JSON.parse(savedText));
+  return savedCursor.parse(JSON.parse(savedText));
 }
 
-export async function saveCursor(path: string, cursor: Cursor): Promise<void> {
+export async function saveCursorDurably(
+  path: string,
+  cursor: Cursor,
+): Promise<void> {
   const temporaryPath = `${path}.tmp`;
-  await writeFile(temporaryPath, JSON.stringify(cursor));
+  const temporaryFile = await open(temporaryPath, "w");
+
+  try {
+    await temporaryFile.writeFile(JSON.stringify(cursor));
+    await temporaryFile.sync();
+  } finally {
+    await temporaryFile.close();
+  }
+
   await rename(temporaryPath, path);
 }

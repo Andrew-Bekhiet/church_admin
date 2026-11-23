@@ -16,16 +16,16 @@ export interface ReceivedRequest {
   punches: ReceivedPunch[];
 }
 
-export class FakePunchesFunction {
-  readonly accepted: ReceivedRequest[] = [];
+export class FakeRecordFingerprintPunches {
+  readonly acceptedRequests: ReceivedRequest[] = [];
   respondWithStatus = 204;
   private requestsToAcceptBeforeFailing = Infinity;
 
   private constructor(private readonly server: Server) {}
 
-  static async start(): Promise<FakePunchesFunction> {
+  static async start(): Promise<FakeRecordFingerprintPunches> {
     const server = createServer();
-    const fake = new FakePunchesFunction(server);
+    const fake = new FakeRecordFingerprintPunches(server);
     server.on("request", (req, res) => fake.handle(req, res));
     server.listen(0, "127.0.0.1");
     await once(server, "listening");
@@ -40,15 +40,15 @@ export class FakePunchesFunction {
   }
 
   get acceptedPunches(): ReceivedPunch[] {
-    return this.accepted.flatMap((request) => request.punches);
+    return this.acceptedRequests.flatMap((request) => request.punches);
   }
 
   get acceptedRequestsWithPunches(): ReceivedRequest[] {
-    return this.accepted.filter((request) => request.punches.length > 0);
+    return this.acceptedRequests.filter((request) => request.punches.length > 0);
   }
 
   failAfterAccepting(requestCount: number): void {
-    this.requestsToAcceptBeforeFailing = this.accepted.length + requestCount;
+    this.requestsToAcceptBeforeFailing = this.acceptedRequests.length + requestCount;
   }
 
   acceptEveryRequest(): void {
@@ -70,14 +70,14 @@ export class FakePunchesFunction {
       return;
     }
 
-    if (this.accepted.length >= this.requestsToAcceptBeforeFailing) {
+    if (this.acceptedRequests.length >= this.requestsToAcceptBeforeFailing) {
       res.writeHead(503).end();
 
       return;
     }
 
     if (this.respondWithStatus === 204) {
-      this.accepted.push(JSON.parse(body));
+      this.acceptedRequests.push(JSON.parse(body));
     }
 
     res.writeHead(this.respondWithStatus).end();
