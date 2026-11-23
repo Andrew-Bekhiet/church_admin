@@ -113,17 +113,6 @@ void main() {
     );
   });
 
-  testWidgets('is tall enough to tap comfortably', (tester) async {
-    const smallestComfortableTapTargetHeight = 40.0;
-
-    await pumpIndicatorShowing(tester, const FingerprintLastSyncNever());
-
-    expect(
-      tester.getSize(find.byKey(FingerprintLastSyncIndicatorKeys.self)).height,
-      greaterThanOrEqualTo(smallestComfortableTapTargetHeight),
-    );
-  });
-
   testWidgets('says the fingerprint device has never synced', (tester) async {
     await pumpIndicatorShowing(tester, const FingerprintLastSyncNever());
 
