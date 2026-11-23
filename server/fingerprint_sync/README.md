@@ -2,7 +2,7 @@
 
 A small service installed on the BioTime server. It reads new punches from BioTime's REST API every 20 seconds and posts them to the `recordFingerprintPunches` cloud function, which records attendance and last kodas.
 
-It runs on Windows and Linux with Node.js 24.
+It runs on Windows and Linux x64. Each release ships it as one executable per system, so the server needs no Node.js.
 
 ## How it behaves
 
@@ -20,9 +20,29 @@ You need:
 
 1. **A BioTime API account.** In BioTime, create a user that can read transactions. Use it only for this service.
 2. **The function's URL and shared secret.** The URL is in the Firebase console under Functions, `recordFingerprintPunches`. The secret is the `FINGERPRINT_SYNC_SECRET` function secret.
-3. **Node.js 24** on the BioTime server, from <https://nodejs.org>. Keep it updated: Node carries the time-zone rules, and Egypt has changed its daylight saving rules before.
+3. **On Windows, [NSSM](https://nssm.cc/download)**, which runs the executable as a Windows service. **On Linux, systemd 247 or newer** (`systemctl --version`).
 
-## Install
+## Install with the wizard
+
+1. On the repository's GitHub releases page, open the newest release whose tag starts with `fingerprint-sync-v`. The app's own releases are listed there too.
+2. Download into one folder on the BioTime server:
+   - Windows: `fingerprint-sync-windows-x64.exe` and `install.ps1`, plus `win64\nssm.exe` from the NSSM zip.
+   - Linux: `fingerprint-sync-linux-x64` and `install.sh`.
+3. Run the wizard from that folder:
+   - Windows, from an administrator PowerShell: `powershell -ExecutionPolicy Bypass -File .\install.ps1`
+   - Linux: `sudo bash install.sh`
+
+The wizard asks for the BioTime URL and API username, the function URL, the poll interval, the BioTime password and the sync secret. It stores the secrets as described in "Store the secrets" below. It then runs `fingerprint-sync check`, which logs in to BioTime and sends one empty request to the function. Only if both succeed does it install and start the service. A wrong URL, password or secret stops it there, with the service left stopped.
+
+It installs to `C:\fingerprint_sync` on Windows and `/opt/fingerprint_sync` on Linux. Then follow "Check that it works" below.
+
+To update, download the newer release into a folder and run the wizard again. It offers to keep the current settings and secrets, and it never touches `cursor.json`.
+
+Windows may warn the first time the executable runs, because it is not signed. The executable carries its own time-zone rules: if Egypt changes its daylight saving rules again, install a release built after the change.
+
+## Install by hand
+
+These are the steps the wizard takes, for when it cannot be used. They run the service from source with Node.js 24 from <https://nodejs.org>. Keep Node updated: it carries the time-zone rules.
 
 ### 1. Copy and build
 
@@ -177,24 +197,24 @@ Open the log. The first lines say it is polling, and that it is forwarding punch
 
 ## Send the punches between two times
 
-When a device was offline and uploaded its punches late, punches older than the cursor are skipped. Send them once with:
+When a device was offline and uploaded its punches late, punches older than the cursor are skipped. Send them once with the commands below. They are for an install made with the wizard. For an install by hand, replace the executable with `node lib/main.js`.
 
 On Windows, from an administrator PowerShell in `C:\fingerprint_sync`:
 
 ```powershell
-$env:BIOTIME_PASSWORD_FILE = "C:\fingerprint_sync\secrets\biotime-password"; $env:FINGERPRINT_SYNC_SECRET_FILE = "C:\fingerprint_sync\secrets\fingerprint-sync-secret"; node lib/main.js send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"
+$env:BIOTIME_PASSWORD_FILE = "C:\fingerprint_sync\secrets\biotime-password"; $env:FINGERPRINT_SYNC_SECRET_FILE = "C:\fingerprint_sync\secrets\fingerprint-sync-secret"; .\fingerprint-sync.exe send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"
 ```
 
 On Linux, run it through systemd so it can read the secrets. With secrets encrypted by `systemd-creds`:
 
 ```bash
-sudo systemd-run --pipe --wait --uid=fingerprint-sync -p WorkingDirectory=/opt/fingerprint_sync -p LoadCredentialEncrypted=biotime-password:/etc/credstore.encrypted/biotime-password -p LoadCredentialEncrypted=fingerprint-sync-secret:/etc/credstore.encrypted/fingerprint-sync-secret /bin/sh -c 'BIOTIME_PASSWORD_FILE="$CREDENTIALS_DIRECTORY/biotime-password" FINGERPRINT_SYNC_SECRET_FILE="$CREDENTIALS_DIRECTORY/fingerprint-sync-secret" exec /usr/bin/node lib/main.js send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"'
+sudo systemd-run --pipe --wait --uid=fingerprint-sync -p WorkingDirectory=/opt/fingerprint_sync -p LoadCredentialEncrypted=biotime-password:/etc/credstore.encrypted/biotime-password -p LoadCredentialEncrypted=fingerprint-sync-secret:/etc/credstore.encrypted/fingerprint-sync-secret /bin/sh -c 'BIOTIME_PASSWORD_FILE="$CREDENTIALS_DIRECTORY/biotime-password" FINGERPRINT_SYNC_SECRET_FILE="$CREDENTIALS_DIRECTORY/fingerprint-sync-secret" exec /opt/fingerprint_sync/fingerprint-sync send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"'
 ```
 
 With unencrypted secrets in `/etc/credstore/` (systemd older than 250):
 
 ```bash
-sudo systemd-run --pipe --wait --uid=fingerprint-sync -p WorkingDirectory=/opt/fingerprint_sync -p LoadCredential=biotime-password:/etc/credstore/biotime-password -p LoadCredential=fingerprint-sync-secret:/etc/credstore/fingerprint-sync-secret /bin/sh -c 'BIOTIME_PASSWORD_FILE="$CREDENTIALS_DIRECTORY/biotime-password" FINGERPRINT_SYNC_SECRET_FILE="$CREDENTIALS_DIRECTORY/fingerprint-sync-secret" exec /usr/bin/node lib/main.js send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"'
+sudo systemd-run --pipe --wait --uid=fingerprint-sync -p WorkingDirectory=/opt/fingerprint_sync -p LoadCredential=biotime-password:/etc/credstore/biotime-password -p LoadCredential=fingerprint-sync-secret:/etc/credstore/fingerprint-sync-secret /bin/sh -c 'BIOTIME_PASSWORD_FILE="$CREDENTIALS_DIRECTORY/biotime-password" FINGERPRINT_SYNC_SECRET_FILE="$CREDENTIALS_DIRECTORY/fingerprint-sync-secret" exec /opt/fingerprint_sync/fingerprint-sync send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"'
 ```
 
 The times are the BioTime server's local time, inclusive. The command does not move the cursor, so the service can keep running. The function rejects punches older than 10 days.
@@ -205,7 +225,7 @@ Sending a range again records its punches again. An attendance record a servant 
 
 ## Update
 
-Stop the service, replace the folder's files except `config.json`, `cursor.json`, `secrets` and `logs`, then run `npm ci` and `npm run build` and start the service again.
+With the wizard, run the newer release's wizard as described above. For an install by hand, stop the service, replace the folder's files except `config.json`, `cursor.json`, `secrets` and `logs`, run `npm ci` and `npm run build`, and start the service again.
 
 ## Check on the real server
 
@@ -227,3 +247,15 @@ npm run lint
 ```
 
 Tests run the service against a fake BioTime server and a fake function over real HTTP, with the cursor in a temporary folder.
+
+```bash
+npm run build:executable
+```
+
+This builds the executable for the system it runs on, in `dist/`. It bundles the service with esbuild and injects it into a copy of Node with postject.
+
+To publish a release, push a tag named `fingerprint-sync-v<version>`, for example `fingerprint-sync-v1.0.0`. The release workflow then:
+
+1. runs the tests and builds each executable on its own system;
+2. attaches both executables, the two wizards and `config.example.json` to a GitHub release;
+3. never marks that release as the repository's latest, so the app's releases keep that place.
