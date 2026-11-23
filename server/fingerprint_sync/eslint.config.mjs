@@ -5,7 +5,7 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default defineConfig([
-  globalIgnores(["lib/**/*", "lib_test/**/*"]),
+  globalIgnores(["lib/**/*", "lib_test/**/*", "dist/**/*"]),
   js.configs.recommended,
   tseslint.configs.recommended,
   {
