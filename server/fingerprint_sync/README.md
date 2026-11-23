@@ -32,7 +32,7 @@ You need:
    - Windows, from an administrator PowerShell: `powershell -ExecutionPolicy Bypass -File .\install.ps1`
    - Linux: `sudo bash install.sh`
 
-The wizard asks for the BioTime URL and API username, the function URL, the poll interval, the BioTime password and the sync secret. It stores the secrets as described in "Store the secrets" below. It then runs `fingerprint-sync check`, which logs in to BioTime and sends one empty request to the function. Only if both succeed does it install and start, or restart, the service. A wrong URL, password or secret stops the wizard there. A service that was already running keeps running with its old settings until the wizard is run again.
+The wizard asks for the BioTime URL and API username, the function URL, the poll interval, the BioTime password and the sync secret. It stores the secrets as described in "Store the secrets" below. It then runs `fingerprint-sync check`, which logs in to BioTime and sends one empty request to the function. Only if both succeed does it install and start, or restart, the service. A wrong URL, password or secret stops the wizard there. A service that was already running keeps running with the settings it started with. The new ones are already saved, though, and it picks them up on its next restart, for example after a reboot. So run the wizard again until the check passes.
 
 It installs to `C:\fingerprint_sync` on Windows and `/opt/fingerprint_sync` on Linux. Then follow "Check that it works" below.
 

@@ -1,4 +1,4 @@
-[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '', Justification = 'An interactive wizard talks to the person at the console.')]
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '')]
 param()
 
 Set-StrictMode -Version Latest
@@ -7,7 +7,7 @@ $ErrorActionPreference = 'Stop'
 $ServiceName = 'FingerprintSync'
 $ReleaseBinaryName = 'fingerprint-sync-windows-x64.exe'
 $InstallFolder = 'C:\fingerprint_sync'
-$ExePath = Join-Path $InstallFolder 'fingerprint-sync.exe'
+$InstalledBinaryPath = Join-Path $InstallFolder 'fingerprint-sync.exe'
 $ConfigPath = Join-Path $InstallFolder 'config.json'
 $LogsFolder = Join-Path $InstallFolder 'logs'
 $LogPath = Join-Path $LogsFolder 'fingerprint_sync.log'
@@ -104,9 +104,9 @@ function Initialize-ProtectedInstallFolder {
 
 function Copy-Binary {
     param([string]$ReleaseBinary)
-    Copy-Item -LiteralPath $ReleaseBinary -Destination $ExePath -Force
-    Unblock-File -LiteralPath $ExePath
-    Write-Host "Copied $ReleaseBinaryName to $ExePath."
+    Copy-Item -LiteralPath $ReleaseBinary -Destination $InstalledBinaryPath -Force
+    Unblock-File -LiteralPath $InstalledBinaryPath
+    Write-Host "Copied $ReleaseBinaryName to $InstalledBinaryPath."
 }
 
 function Read-YesUnlessNo {
@@ -288,10 +288,11 @@ function Save-SecretsUnlessKept {
 }
 
 function Invoke-SyncCheck {
+    param([string]$Binary)
     $env:BIOTIME_PASSWORD_FILE = $BioTimePasswordPath
     $env:FINGERPRINT_SYNC_SECRET_FILE = $SyncSecretPath
     try {
-        Invoke-NativeCommand -FilePath $ExePath -Arguments 'check'
+        Invoke-NativeCommand -FilePath $Binary -Arguments 'check', '--config', $ConfigPath
     }
     finally {
         Remove-Item Env:\BIOTIME_PASSWORD_FILE, Env:\FINGERPRINT_SYNC_SECRET_FILE -ErrorAction SilentlyContinue
@@ -299,14 +300,15 @@ function Invoke-SyncCheck {
 }
 
 function Assert-SuccessfulSyncCheck {
+    param([string]$Binary)
     Write-Host 'Checking that BioTime and the function accept these settings...'
-    $check = Invoke-SyncCheck
+    $check = Invoke-SyncCheck -Binary $Binary
     if ($check.ExitCode -ne 0) {
         throw @"
-The check failed, so the $ServiceName service was left stopped:
+The check failed. The running $ServiceName service, if any, was left as it was, and the new version was not installed:
 $($check.Output)
 
-The BioTime URL, username or password, the function URL or the sync secret is probably wrong.
+The BioTime URL, username or password, the function URL or the sync secret may be wrong, or BioTime or the function could not be reached.
 Run this script again and answer n to re-enter them.
 "@
     }
@@ -324,9 +326,9 @@ function Clear-AppParametersIfSet {
 function Install-SyncService {
     New-Item -ItemType Directory -Path $LogsFolder -Force | Out-Null
     if (-not (Get-SyncService)) {
-        Invoke-Nssm -Arguments 'install', $ServiceName, $ExePath
+        Invoke-Nssm -Arguments 'install', $ServiceName, $InstalledBinaryPath
     }
-    Invoke-Nssm -Arguments 'set', $ServiceName, 'Application', $ExePath
+    Invoke-Nssm -Arguments 'set', $ServiceName, 'Application', $InstalledBinaryPath
     Clear-AppParametersIfSet
     Invoke-Nssm -Arguments 'set', $ServiceName, 'AppDirectory', $InstallFolder
     Invoke-Nssm -Arguments 'set', $ServiceName, 'AppEnvironmentExtra', "BIOTIME_PASSWORD_FILE=$BioTimePasswordPath", "FINGERPRINT_SYNC_SECRET_FILE=$SyncSecretPath"
@@ -354,12 +356,13 @@ try {
     Assert-64BitWindows
     $script:NssmPath = Get-NssmPath
     $releaseBinary = Get-ReleaseBinaryPath
-    Stop-SyncServiceIfRunning
+    Unblock-File -LiteralPath $releaseBinary
     Initialize-ProtectedInstallFolder
-    Copy-Binary -ReleaseBinary $releaseBinary
     Save-ConfigUnlessKept
     Save-SecretsUnlessKept
-    Assert-SuccessfulSyncCheck
+    Assert-SuccessfulSyncCheck -Binary $releaseBinary
+    Stop-SyncServiceIfRunning
+    Copy-Binary -ReleaseBinary $releaseBinary
     Install-SyncService
     Start-SyncService
 }

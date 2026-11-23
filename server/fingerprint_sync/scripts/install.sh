@@ -14,7 +14,9 @@ readonly DEFAULT_BIOTIME_URL=http://127.0.0.1:8090
 readonly DEFAULT_POLL_INTERVAL_SECONDS=20
 readonly OLDEST_SYSTEMD_WITH_CREDENTIALS=247
 readonly OLDEST_SYSTEMD_WITH_ENCRYPTED_CREDENTIALS=250
-readonly CREDENTIALS_FOLDER=/run/credentials/$SERVICE_NAME.service
+readonly RUNTIME_CREDENTIALS_FOLDER=/run/credentials/$SERVICE_NAME.service
+readonly ENCRYPTED_CREDENTIAL_STORE=/etc/credstore.encrypted
+readonly PLAIN_CREDENTIAL_STORE=/etc/credstore
 readonly CHECK_COMMAND="BIOTIME_PASSWORD_FILE=\"\$CREDENTIALS_DIRECTORY/$BIOTIME_PASSWORD_CREDENTIAL\" FINGERPRINT_SYNC_SECRET_FILE=\"\$CREDENTIALS_DIRECTORY/$SYNC_SECRET_CREDENTIAL\" exec $INSTALLED_BINARY check"
 
 SCRIPT_FOLDER=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
@@ -61,7 +63,7 @@ installed_systemd_version() {
   printf '%s' "${version%%[!0-9]*}"
 }
 
-require_systemd() {
+require_systemd_with_credentials() {
   if ! command -v systemctl >/dev/null || [[ ! -d /run/systemd/system ]]; then
     fail "This machine does not run systemd, so the poller cannot be installed as a service." \
       "This installer needs a Linux server that boots with systemd."
@@ -87,7 +89,7 @@ require_release_binary() {
   fi
 }
 
-confirm() {
+confirm_yes_unless_no() {
   local answer
   while true; do
     read -r -p "$1 [Y/n] " answer || fail_because_input_closed
@@ -227,11 +229,11 @@ show_current_settings() {
     "Poll interval (seconds):" "${poll_interval_seconds:-$DEFAULT_POLL_INTERVAL_SECONDS}"
 }
 
-ask_settings() {
+ask_settings_unless_kept() {
   if [[ -f $CONFIG_FILE ]]; then
     read_settings_from "$CONFIG_FILE"
     show_current_settings
-    if confirm "Keep these settings?"; then
+    if confirm_yes_unless_no "Keep these settings?"; then
       must_write_config=false
       return
     fi
@@ -244,38 +246,43 @@ ask_settings() {
     "${poll_interval_seconds:-$DEFAULT_POLL_INTERVAL_SECONDS}"
 }
 
-choose_credential_store() {
+store_holds_both_secrets() {
+  local -r store=$1
+  [[ -f $store/$BIOTIME_PASSWORD_CREDENTIAL && -f $store/$SYNC_SECRET_CREDENTIAL ]]
+}
+
+use_credential_store() {
+  credential_store=$1
+  credential_directive=$2
+}
+
+supports_encrypted_credentials() {
   local version
   version=$(installed_systemd_version)
-  if command -v systemd-creds >/dev/null && ((version >= OLDEST_SYSTEMD_WITH_ENCRYPTED_CREDENTIALS)); then
-    credential_store=/etc/credstore.encrypted
-    credential_directive=LoadCredentialEncrypted
+  command -v systemd-creds >/dev/null && ((version >= OLDEST_SYSTEMD_WITH_ENCRYPTED_CREDENTIALS))
+}
+
+choose_credential_store() {
+  if store_holds_both_secrets "$ENCRYPTED_CREDENTIAL_STORE"; then
+    use_credential_store "$ENCRYPTED_CREDENTIAL_STORE" LoadCredentialEncrypted
+  elif store_holds_both_secrets "$PLAIN_CREDENTIAL_STORE"; then
+    use_credential_store "$PLAIN_CREDENTIAL_STORE" LoadCredential
+  elif supports_encrypted_credentials; then
+    use_credential_store "$ENCRYPTED_CREDENTIAL_STORE" LoadCredentialEncrypted
   else
-    credential_store=/etc/credstore
-    credential_directive=LoadCredential
+    use_credential_store "$PLAIN_CREDENTIAL_STORE" LoadCredential
   fi
 }
 
-are_secrets_stored() {
-  [[ -f $credential_store/$BIOTIME_PASSWORD_CREDENTIAL && -f $credential_store/$SYNC_SECRET_CREDENTIAL ]]
-}
-
-ask_secrets() {
+ask_secrets_unless_kept() {
   say ""
-  if are_secrets_stored && confirm "Keep the stored BioTime password and sync secret?"; then
+  if store_holds_both_secrets "$credential_store" && confirm_yes_unless_no "Keep the stored BioTime password and sync secret?"; then
     must_store_secrets=false
     return
   fi
   say "Typing is hidden. Each value is asked twice to catch typos."
   ask_secret_twice biotime_password "BioTime API password"
   ask_secret_twice sync_secret "Sync secret (the FINGERPRINT_SYNC_SECRET function secret)"
-}
-
-stop_service_if_installed() {
-  if [[ -f $UNIT_FILE ]]; then
-    say "" "Stopping $SERVICE_NAME to update it..."
-    systemctl stop "$SERVICE_NAME"
-  fi
 }
 
 create_service_user_if_missing() {
@@ -312,7 +319,7 @@ write_config_unless_kept() {
   fi
 }
 
-hand_install_folder_to_service_user() {
+hand_install_folder_and_config_to_service_user() {
   chmod 644 "$CONFIG_FILE"
   chown "$SERVICE_USER:" "$INSTALL_FOLDER" "$CONFIG_FILE"
 }
@@ -334,6 +341,9 @@ store_secrets_unless_kept() {
     store_credential "$BIOTIME_PASSWORD_CREDENTIAL" "$biotime_password"
     store_credential "$SYNC_SECRET_CREDENTIAL" "$sync_secret"
   fi
+}
+
+forget_typed_secrets() {
   biotime_password=""
   sync_secret=""
 }
@@ -349,9 +359,18 @@ run_check_through_systemd() {
 check_biotime_and_function_access() {
   say "" "Checking that BioTime and the function accept these settings..."
   if ! run_check_through_systemd; then
-    fail "The check failed, so $SERVICE_NAME is left stopped." \
+    fail "The check failed, so $SERVICE_NAME was not started or restarted." \
+      "$(service_state_after_failed_check)" \
       "Usually the BioTime URL, the function URL, the BioTime password or the sync secret is wrong." \
       "Run sudo bash install.sh again, and answer n to re-enter the settings or the secrets."
+  fi
+}
+
+service_state_after_failed_check() {
+  if [[ -f $UNIT_FILE ]]; then
+    say "The service already installed keeps running with the settings it started with. It reads the new ones whenever it restarts, for example after a reboot."
+  else
+    say "The service is not installed yet."
   fi
 }
 
@@ -367,8 +386,8 @@ User=$SERVICE_USER
 WorkingDirectory=$INSTALL_FOLDER
 $credential_directive=$BIOTIME_PASSWORD_CREDENTIAL:$credential_store/$BIOTIME_PASSWORD_CREDENTIAL
 $credential_directive=$SYNC_SECRET_CREDENTIAL:$credential_store/$SYNC_SECRET_CREDENTIAL
-Environment=BIOTIME_PASSWORD_FILE=$CREDENTIALS_FOLDER/$BIOTIME_PASSWORD_CREDENTIAL
-Environment=FINGERPRINT_SYNC_SECRET_FILE=$CREDENTIALS_FOLDER/$SYNC_SECRET_CREDENTIAL
+Environment=BIOTIME_PASSWORD_FILE=$RUNTIME_CREDENTIALS_FOLDER/$BIOTIME_PASSWORD_CREDENTIAL
+Environment=FINGERPRINT_SYNC_SECRET_FILE=$RUNTIME_CREDENTIALS_FOLDER/$SYNC_SECRET_CREDENTIAL
 ExecStart=$INSTALLED_BINARY
 Restart=always
 RestartSec=10
@@ -378,10 +397,11 @@ WantedBy=multi-user.target
 EOF
 }
 
-install_and_start_service() {
+install_unit_and_restart_service() {
   render_unit >"$UNIT_FILE"
   systemctl daemon-reload
-  systemctl enable --now "$SERVICE_NAME"
+  systemctl enable "$SERVICE_NAME"
+  systemctl restart "$SERVICE_NAME"
 }
 
 print_log_hint() {
@@ -390,20 +410,20 @@ print_log_hint() {
 
 main() {
   require_root
-  require_systemd
+  require_systemd_with_credentials
   require_x86_64
   require_release_binary
-  ask_settings
+  ask_settings_unless_kept
   choose_credential_store
-  ask_secrets
-  stop_service_if_installed
+  ask_secrets_unless_kept
   create_service_user_if_missing
   install_binary
   write_config_unless_kept
-  hand_install_folder_to_service_user
+  hand_install_folder_and_config_to_service_user
   store_secrets_unless_kept
+  forget_typed_secrets
   check_biotime_and_function_access
-  install_and_start_service
+  install_unit_and_restart_service
   print_log_hint
 }
 
