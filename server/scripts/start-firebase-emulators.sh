@@ -3,7 +3,12 @@ set -eu
 
 cd /srv/firebase/functions
 
-[ -x node_modules/.bin/tsc ] || npm ci
+installed_lockfile=node_modules/.installed-package-lock.json
+
+if ! cmp -s package-lock.json "$installed_lockfile"; then
+  npm ci
+  cp package-lock.json "$installed_lockfile"
+fi
 
 npm run build
 npm run build:watch &
