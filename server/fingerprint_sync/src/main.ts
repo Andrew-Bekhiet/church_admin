@@ -24,7 +24,7 @@ async function main(): Promise<number> {
       to: { type: "string" },
     },
   });
-  const config = await loadConfig(resolve(values.config));
+  const config = await loadConfig(resolve(values.config), process.env);
   const sync = new FingerprintSync(config, () => DateTime.local());
 
   switch (positionals[0]) {
