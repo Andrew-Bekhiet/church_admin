@@ -41,12 +41,32 @@ class AttendanceAppBar extends StatelessWidget {
       centerTitle: true,
       title: Column(
         mainAxisSize: MainAxisSize.min,
-        spacing: 10,
+        spacing: 6,
         children: [
-          MeetingSelectorButton(
-            key: AttendanceAppBarKeys.meetingSelector,
-            meeting: meeting,
-            onTap: () => _switchMeeting(context, cubit),
+          CenteredUnlessCrowdedTitleRow(
+            title: MeetingSelectorButton(
+              key: AttendanceAppBarKeys.meetingSelector,
+              meeting: meeting,
+              onTap: () => _switchMeeting(context, cubit),
+            ),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (meeting.hasAutoAttendanceSchedule)
+                  FingerprintLastSyncIndicator(
+                    state: context.watch<FingerprintLastSyncCubit>().state,
+                  ),
+                AttendanceOverflowMenu(
+                  openAnalysis: () => _openAnalysis(context, cubit),
+                  sorting: sorting,
+                  grouping: grouping,
+                  streakWindowDays: streakWindowDays,
+                  onSortChanged: cubit.changeSorting,
+                  onGroupingChanged: cubit.changeGrouping,
+                  onStreakWindowChanged: cubit.changeStreakWindow,
+                ),
+              ],
+            ),
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -69,17 +89,6 @@ class AttendanceAppBar extends StatelessWidget {
           ),
         ],
       ),
-      actions: [
-        AttendanceOverflowMenu(
-          openAnalysis: () => _openAnalysis(context, cubit),
-          sorting: sorting,
-          grouping: grouping,
-          streakWindowDays: streakWindowDays,
-          onSortChanged: cubit.changeSorting,
-          onGroupingChanged: cubit.changeGrouping,
-          onStreakWindowChanged: cubit.changeStreakWindow,
-        ),
-      ],
     );
   }
 

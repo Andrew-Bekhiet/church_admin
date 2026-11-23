@@ -30,6 +30,7 @@ class AttendanceOverflowMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<void>(
+      style: const ButtonStyle(tapTargetSize: MaterialTapTargetSize.shrinkWrap),
       borderRadius: BorderRadius.circular(12),
       icon: const Icon(Symbols.more_vert),
       itemBuilder: (context) {
