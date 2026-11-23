@@ -12,7 +12,7 @@ void main() {
   testWidgets('the add button can be scrolled into reach when the numbers and '
       'the form are taller than the screen', (tester) async {
     const shortPhoneWithKeyboardOpen = Size(320, 200);
-    final person = Person(id: 'person-id', name: 'اسم الشخص');
+    final person = Person(id: 'person-id', name: 'اسم المخدوم');
     final fingerprintIds = [
       for (final code in ['1042', '2077', '3051'])
         PersonFingerprintId(

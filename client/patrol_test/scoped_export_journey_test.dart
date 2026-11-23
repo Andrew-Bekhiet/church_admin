@@ -22,7 +22,7 @@ void main() {
       const otherServicePerson = 'مخدوم خدمة بلا تصدير';
       const noScopeServiceName = 'خدمة اعدادي';
       const noScopeServicePerson = 'مخدوم خدمة اعدادي';
-      const personInNoServiceOrArea = 'شخص بلا خدمة ولا منطقة';
+      const personInNoServiceOrArea = 'مخدوم بلا خدمة ولا منطقة';
       const familyInNoArea = 'عائلة بلا منطقة';
       final permissionDenied = isA<FirebaseFunctionsException>().having(
         (error) => error.code,

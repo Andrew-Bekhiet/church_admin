@@ -23,10 +23,10 @@ class _MockFingerprintIdsDAO extends Mock implements FingerprintIdsDAO {}
 void main() {
   final editablePerson = Person(
     id: 'person-id',
-    name: 'اسم الشخص',
+    name: 'اسم المخدوم',
     userCanEdit: true,
   );
-  final readOnlyPerson = Person(id: 'person-id', name: 'اسم الشخص');
+  final readOnlyPerson = Person(id: 'person-id', name: 'اسم المخدوم');
 
   late MockAuthBloc authBloc;
   late _MockPersonsDAO persons;

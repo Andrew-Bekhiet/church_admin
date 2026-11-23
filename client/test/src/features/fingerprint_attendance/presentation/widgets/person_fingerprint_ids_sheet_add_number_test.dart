@@ -11,7 +11,7 @@ import '../../../../material_ui_test_app.dart';
 class _MockFingerprintIdsDAO extends Mock implements FingerprintIdsDAO {}
 
 void main() {
-  final person = Person(id: 'person-id', name: 'اسم الشخص');
+  final person = Person(id: 'person-id', name: 'اسم المخدوم');
   final oldFingerprintId = PersonFingerprintId(
     id: 'old-code-id',
     employeeCode: '1042',

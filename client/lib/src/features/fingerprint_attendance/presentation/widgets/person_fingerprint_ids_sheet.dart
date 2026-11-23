@@ -106,7 +106,7 @@ class _PersonFingerprintIdsSheetState extends State<PersonFingerprintIdsSheet> {
                       icon: Symbols.fingerprint,
                       title: 'لا يوجد رقم بصمة بعد',
                       detail:
-                          'أضف رقم هذا الشخص على جهاز البصمة ليُسجَّل حضوره '
+                          'أضف رقم هذا المخدوم على جهاز البصمة ليُسجَّل حضوره '
                           'تلقائيًا كلما وضع إصبعه على الجهاز',
                     )
                   else
