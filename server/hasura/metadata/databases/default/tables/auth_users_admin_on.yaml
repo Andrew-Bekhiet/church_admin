@@ -69,6 +69,9 @@ insert_permissions:
                       _ceq:
                         - $
                         - uid
+        user:
+          user_type:
+            _eq: human
       columns:
         - admin_on_area
         - admin_on_group
@@ -146,3 +149,6 @@ delete_permissions:
         _or:
           - *any_user_editable
           - *user_by_uid_editable
+        user:
+          user_type:
+            _eq: human

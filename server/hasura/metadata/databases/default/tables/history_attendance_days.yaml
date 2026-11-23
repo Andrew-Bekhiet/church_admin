@@ -17,6 +17,11 @@ array_relationships:
           name: kodas_history
           schema: history
 insert_permissions:
+  - role: fingerprint_sync
+    permission:
+      check: {}
+      columns:
+        - day
   - role: user
     permission:
       check: &approved_user

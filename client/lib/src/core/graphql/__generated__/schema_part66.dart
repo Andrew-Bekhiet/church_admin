@@ -1,6 +1,482 @@
 // Part 66 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_classesAggregateBoolExpBool_or<TRes> {
+  factory CopyWith_Input_classesAggregateBoolExpBool_or(
+    Input_classesAggregateBoolExpBool_or instance,
+    TRes Function(Input_classesAggregateBoolExpBool_or) then,
+  ) = _CopyWithImpl_Input_classesAggregateBoolExpBool_or;
+
+  factory CopyWith_Input_classesAggregateBoolExpBool_or.stub(TRes res) =
+      _CopyWithStubImpl_Input_classesAggregateBoolExpBool_or;
+
+  TRes call({
+    Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns?
+    arguments,
+    bool? distinct,
+    Input_ClassesBoolExp? filter,
+    Input_BooleanComparisonExp? predicate,
+  });
+  CopyWith_Input_ClassesBoolExp<TRes> get filter;
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate;
+}
+
+class _CopyWithImpl_Input_classesAggregateBoolExpBool_or<TRes>
+    implements CopyWith_Input_classesAggregateBoolExpBool_or<TRes> {
+  _CopyWithImpl_Input_classesAggregateBoolExpBool_or(
+    this._instance,
+    this._then,
+  );
+
+  final Input_classesAggregateBoolExpBool_or _instance;
+
+  final TRes Function(Input_classesAggregateBoolExpBool_or) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? arguments = _undefined,
+    Object? distinct = _undefined,
+    Object? filter = _undefined,
+    Object? predicate = _undefined,
+  }) => _then(
+    Input_classesAggregateBoolExpBool_or._({
+      ..._instance._$data,
+      if (arguments != _undefined && arguments != null)
+        'arguments':
+            (arguments
+                as Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns),
+      if (distinct != _undefined) 'distinct': (distinct as bool?),
+      if (filter != _undefined) 'filter': (filter as Input_ClassesBoolExp?),
+      if (predicate != _undefined && predicate != null)
+        'predicate': (predicate as Input_BooleanComparisonExp),
+    }),
+  );
+
+  CopyWith_Input_ClassesBoolExp<TRes> get filter {
+    final local$filter = _instance.filter;
+    return local$filter == null
+        ? CopyWith_Input_ClassesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_ClassesBoolExp(local$filter, (e) => call(filter: e));
+  }
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate {
+    final local$predicate = _instance.predicate;
+    return CopyWith_Input_BooleanComparisonExp(
+      local$predicate,
+      (e) => call(predicate: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl_Input_classesAggregateBoolExpBool_or<TRes>
+    implements CopyWith_Input_classesAggregateBoolExpBool_or<TRes> {
+  _CopyWithStubImpl_Input_classesAggregateBoolExpBool_or(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns?
+    arguments,
+    bool? distinct,
+    Input_ClassesBoolExp? filter,
+    Input_BooleanComparisonExp? predicate,
+  }) => _res;
+
+  CopyWith_Input_ClassesBoolExp<TRes> get filter =>
+      CopyWith_Input_ClassesBoolExp.stub(_res);
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
+}
+
+class Input_classesAggregateBoolExpCount {
+  factory Input_classesAggregateBoolExpCount({
+    List<Enum_ClassesSelectColumn>? arguments,
+    bool? distinct,
+    Input_ClassesBoolExp? filter,
+    required Input_IntComparisonExp predicate,
+  }) => Input_classesAggregateBoolExpCount._({
+    if (arguments != null) r'arguments': arguments,
+    if (distinct != null) r'distinct': distinct,
+    if (filter != null) r'filter': filter,
+    r'predicate': predicate,
+  });
+
+  Input_classesAggregateBoolExpCount._(this._$data);
+
+  factory Input_classesAggregateBoolExpCount.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('arguments')) {
+      final l$arguments = data['arguments'];
+      result$data['arguments'] = (l$arguments as List<dynamic>?)
+          ?.map((e) => fromJson_Enum_ClassesSelectColumn((e as String)))
+          .toList();
+    }
+    if (data.containsKey('distinct')) {
+      final l$distinct = data['distinct'];
+      result$data['distinct'] = (l$distinct as bool?);
+    }
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_ClassesBoolExp.fromJson((l$filter as Map<String, dynamic>));
+    }
+    final l$predicate = data['predicate'];
+    result$data['predicate'] = Input_IntComparisonExp.fromJson(
+      (l$predicate as Map<String, dynamic>),
+    );
+    return Input_classesAggregateBoolExpCount._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Enum_ClassesSelectColumn>? get arguments =>
+      (_$data['arguments'] as List<Enum_ClassesSelectColumn>?);
+
+  bool? get distinct => (_$data['distinct'] as bool?);
+
+  Input_ClassesBoolExp? get filter =>
+      (_$data['filter'] as Input_ClassesBoolExp?);
+
+  Input_IntComparisonExp get predicate =>
+      (_$data['predicate'] as Input_IntComparisonExp);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('arguments')) {
+      final l$arguments = arguments;
+      result$data['arguments'] = l$arguments
+          ?.map((e) => toJson_Enum_ClassesSelectColumn(e))
+          .toList();
+    }
+    if (_$data.containsKey('distinct')) {
+      final l$distinct = distinct;
+      result$data['distinct'] = l$distinct;
+    }
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    final l$predicate = predicate;
+    result$data['predicate'] = l$predicate.toJson();
+    return result$data;
+  }
+
+  CopyWith_Input_classesAggregateBoolExpCount<
+    Input_classesAggregateBoolExpCount
+  >
+  get copyWith => CopyWith_Input_classesAggregateBoolExpCount(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_classesAggregateBoolExpCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$arguments = arguments;
+    final lOther$arguments = other.arguments;
+    if (_$data.containsKey('arguments') !=
+        other._$data.containsKey('arguments')) {
+      return false;
+    }
+    if (l$arguments != null && lOther$arguments != null) {
+      if (l$arguments.length != lOther$arguments.length) {
+        return false;
+      }
+      for (int i = 0; i < l$arguments.length; i++) {
+        final l$arguments$entry = l$arguments[i];
+        final lOther$arguments$entry = lOther$arguments[i];
+        if (l$arguments$entry != lOther$arguments$entry) {
+          return false;
+        }
+      }
+    } else if (l$arguments != lOther$arguments) {
+      return false;
+    }
+    final l$distinct = distinct;
+    final lOther$distinct = other.distinct;
+    if (_$data.containsKey('distinct') !=
+        other._$data.containsKey('distinct')) {
+      return false;
+    }
+    if (l$distinct != lOther$distinct) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$predicate = predicate;
+    final lOther$predicate = other.predicate;
+    if (l$predicate != lOther$predicate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$arguments = arguments;
+    final l$distinct = distinct;
+    final l$filter = filter;
+    final l$predicate = predicate;
+    return Object.hashAll([
+      _$data.containsKey('arguments')
+          ? l$arguments == null
+                ? null
+                : Object.hashAll(l$arguments.map((v) => v))
+          : const {},
+      _$data.containsKey('distinct') ? l$distinct : const {},
+      _$data.containsKey('filter') ? l$filter : const {},
+      l$predicate,
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_classesAggregateBoolExpCount<TRes> {
+  factory CopyWith_Input_classesAggregateBoolExpCount(
+    Input_classesAggregateBoolExpCount instance,
+    TRes Function(Input_classesAggregateBoolExpCount) then,
+  ) = _CopyWithImpl_Input_classesAggregateBoolExpCount;
+
+  factory CopyWith_Input_classesAggregateBoolExpCount.stub(TRes res) =
+      _CopyWithStubImpl_Input_classesAggregateBoolExpCount;
+
+  TRes call({
+    List<Enum_ClassesSelectColumn>? arguments,
+    bool? distinct,
+    Input_ClassesBoolExp? filter,
+    Input_IntComparisonExp? predicate,
+  });
+  CopyWith_Input_ClassesBoolExp<TRes> get filter;
+  CopyWith_Input_IntComparisonExp<TRes> get predicate;
+}
+
+class _CopyWithImpl_Input_classesAggregateBoolExpCount<TRes>
+    implements CopyWith_Input_classesAggregateBoolExpCount<TRes> {
+  _CopyWithImpl_Input_classesAggregateBoolExpCount(this._instance, this._then);
+
+  final Input_classesAggregateBoolExpCount _instance;
+
+  final TRes Function(Input_classesAggregateBoolExpCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? arguments = _undefined,
+    Object? distinct = _undefined,
+    Object? filter = _undefined,
+    Object? predicate = _undefined,
+  }) => _then(
+    Input_classesAggregateBoolExpCount._({
+      ..._instance._$data,
+      if (arguments != _undefined)
+        'arguments': (arguments as List<Enum_ClassesSelectColumn>?),
+      if (distinct != _undefined) 'distinct': (distinct as bool?),
+      if (filter != _undefined) 'filter': (filter as Input_ClassesBoolExp?),
+      if (predicate != _undefined && predicate != null)
+        'predicate': (predicate as Input_IntComparisonExp),
+    }),
+  );
+
+  CopyWith_Input_ClassesBoolExp<TRes> get filter {
+    final local$filter = _instance.filter;
+    return local$filter == null
+        ? CopyWith_Input_ClassesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_ClassesBoolExp(local$filter, (e) => call(filter: e));
+  }
+
+  CopyWith_Input_IntComparisonExp<TRes> get predicate {
+    final local$predicate = _instance.predicate;
+    return CopyWith_Input_IntComparisonExp(
+      local$predicate,
+      (e) => call(predicate: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl_Input_classesAggregateBoolExpCount<TRes>
+    implements CopyWith_Input_classesAggregateBoolExpCount<TRes> {
+  _CopyWithStubImpl_Input_classesAggregateBoolExpCount(this._res);
+
+  TRes _res;
+
+  call({
+    List<Enum_ClassesSelectColumn>? arguments,
+    bool? distinct,
+    Input_ClassesBoolExp? filter,
+    Input_IntComparisonExp? predicate,
+  }) => _res;
+
+  CopyWith_Input_ClassesBoolExp<TRes> get filter =>
+      CopyWith_Input_ClassesBoolExp.stub(_res);
+
+  CopyWith_Input_IntComparisonExp<TRes> get predicate =>
+      CopyWith_Input_IntComparisonExp.stub(_res);
+}
+
+class Input_groupsAggregateBoolExpCount {
+  factory Input_groupsAggregateBoolExpCount({
+    List<Enum_GroupsSelectColumn>? arguments,
+    bool? distinct,
+    Input_GroupsBoolExp? filter,
+    required Input_IntComparisonExp predicate,
+  }) => Input_groupsAggregateBoolExpCount._({
+    if (arguments != null) r'arguments': arguments,
+    if (distinct != null) r'distinct': distinct,
+    if (filter != null) r'filter': filter,
+    r'predicate': predicate,
+  });
+
+  Input_groupsAggregateBoolExpCount._(this._$data);
+
+  factory Input_groupsAggregateBoolExpCount.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('arguments')) {
+      final l$arguments = data['arguments'];
+      result$data['arguments'] = (l$arguments as List<dynamic>?)
+          ?.map((e) => fromJson_Enum_GroupsSelectColumn((e as String)))
+          .toList();
+    }
+    if (data.containsKey('distinct')) {
+      final l$distinct = data['distinct'];
+      result$data['distinct'] = (l$distinct as bool?);
+    }
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_GroupsBoolExp.fromJson((l$filter as Map<String, dynamic>));
+    }
+    final l$predicate = data['predicate'];
+    result$data['predicate'] = Input_IntComparisonExp.fromJson(
+      (l$predicate as Map<String, dynamic>),
+    );
+    return Input_groupsAggregateBoolExpCount._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Enum_GroupsSelectColumn>? get arguments =>
+      (_$data['arguments'] as List<Enum_GroupsSelectColumn>?);
+
+  bool? get distinct => (_$data['distinct'] as bool?);
+
+  Input_GroupsBoolExp? get filter => (_$data['filter'] as Input_GroupsBoolExp?);
+
+  Input_IntComparisonExp get predicate =>
+      (_$data['predicate'] as Input_IntComparisonExp);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('arguments')) {
+      final l$arguments = arguments;
+      result$data['arguments'] = l$arguments
+          ?.map((e) => toJson_Enum_GroupsSelectColumn(e))
+          .toList();
+    }
+    if (_$data.containsKey('distinct')) {
+      final l$distinct = distinct;
+      result$data['distinct'] = l$distinct;
+    }
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    final l$predicate = predicate;
+    result$data['predicate'] = l$predicate.toJson();
+    return result$data;
+  }
+
+  CopyWith_Input_groupsAggregateBoolExpCount<Input_groupsAggregateBoolExpCount>
+  get copyWith => CopyWith_Input_groupsAggregateBoolExpCount(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_groupsAggregateBoolExpCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$arguments = arguments;
+    final lOther$arguments = other.arguments;
+    if (_$data.containsKey('arguments') !=
+        other._$data.containsKey('arguments')) {
+      return false;
+    }
+    if (l$arguments != null && lOther$arguments != null) {
+      if (l$arguments.length != lOther$arguments.length) {
+        return false;
+      }
+      for (int i = 0; i < l$arguments.length; i++) {
+        final l$arguments$entry = l$arguments[i];
+        final lOther$arguments$entry = lOther$arguments[i];
+        if (l$arguments$entry != lOther$arguments$entry) {
+          return false;
+        }
+      }
+    } else if (l$arguments != lOther$arguments) {
+      return false;
+    }
+    final l$distinct = distinct;
+    final lOther$distinct = other.distinct;
+    if (_$data.containsKey('distinct') !=
+        other._$data.containsKey('distinct')) {
+      return false;
+    }
+    if (l$distinct != lOther$distinct) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$predicate = predicate;
+    final lOther$predicate = other.predicate;
+    if (l$predicate != lOther$predicate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$arguments = arguments;
+    final l$distinct = distinct;
+    final l$filter = filter;
+    final l$predicate = predicate;
+    return Object.hashAll([
+      _$data.containsKey('arguments')
+          ? l$arguments == null
+                ? null
+                : Object.hashAll(l$arguments.map((v) => v))
+          : const {},
+      _$data.containsKey('distinct') ? l$distinct : const {},
+      _$data.containsKey('filter') ? l$filter : const {},
+      l$predicate,
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_groupsAggregateBoolExpCount<TRes> {
   factory CopyWith_Input_groupsAggregateBoolExpCount(
     Input_groupsAggregateBoolExpCount instance,
@@ -2172,490 +2648,6 @@ class Input_historyMeetingDaysAggregateBoolExpBool_or {
       return true;
     }
     if (other is! Input_historyMeetingDaysAggregateBoolExpBool_or ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$arguments = arguments;
-    final lOther$arguments = other.arguments;
-    if (l$arguments != lOther$arguments) {
-      return false;
-    }
-    final l$distinct = distinct;
-    final lOther$distinct = other.distinct;
-    if (_$data.containsKey('distinct') !=
-        other._$data.containsKey('distinct')) {
-      return false;
-    }
-    if (l$distinct != lOther$distinct) {
-      return false;
-    }
-    final l$filter = filter;
-    final lOther$filter = other.filter;
-    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
-      return false;
-    }
-    if (l$filter != lOther$filter) {
-      return false;
-    }
-    final l$predicate = predicate;
-    final lOther$predicate = other.predicate;
-    if (l$predicate != lOther$predicate) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$arguments = arguments;
-    final l$distinct = distinct;
-    final l$filter = filter;
-    final l$predicate = predicate;
-    return Object.hashAll([
-      l$arguments,
-      _$data.containsKey('distinct') ? l$distinct : const {},
-      _$data.containsKey('filter') ? l$filter : const {},
-      l$predicate,
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_historyMeetingDaysAggregateBoolExpBool_or<TRes> {
-  factory CopyWith_Input_historyMeetingDaysAggregateBoolExpBool_or(
-    Input_historyMeetingDaysAggregateBoolExpBool_or instance,
-    TRes Function(Input_historyMeetingDaysAggregateBoolExpBool_or) then,
-  ) = _CopyWithImpl_Input_historyMeetingDaysAggregateBoolExpBool_or;
-
-  factory CopyWith_Input_historyMeetingDaysAggregateBoolExpBool_or.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Input_historyMeetingDaysAggregateBoolExpBool_or;
-
-  TRes call({
-    Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns?
-    arguments,
-    bool? distinct,
-    Input_HistoryMeetingDaysBoolExp? filter,
-    Input_BooleanComparisonExp? predicate,
-  });
-  CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get filter;
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate;
-}
-
-class _CopyWithImpl_Input_historyMeetingDaysAggregateBoolExpBool_or<TRes>
-    implements CopyWith_Input_historyMeetingDaysAggregateBoolExpBool_or<TRes> {
-  _CopyWithImpl_Input_historyMeetingDaysAggregateBoolExpBool_or(
-    this._instance,
-    this._then,
-  );
-
-  final Input_historyMeetingDaysAggregateBoolExpBool_or _instance;
-
-  final TRes Function(Input_historyMeetingDaysAggregateBoolExpBool_or) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? arguments = _undefined,
-    Object? distinct = _undefined,
-    Object? filter = _undefined,
-    Object? predicate = _undefined,
-  }) => _then(
-    Input_historyMeetingDaysAggregateBoolExpBool_or._({
-      ..._instance._$data,
-      if (arguments != _undefined && arguments != null)
-        'arguments':
-            (arguments
-                as Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns),
-      if (distinct != _undefined) 'distinct': (distinct as bool?),
-      if (filter != _undefined)
-        'filter': (filter as Input_HistoryMeetingDaysBoolExp?),
-      if (predicate != _undefined && predicate != null)
-        'predicate': (predicate as Input_BooleanComparisonExp),
-    }),
-  );
-
-  CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get filter {
-    final local$filter = _instance.filter;
-    return local$filter == null
-        ? CopyWith_Input_HistoryMeetingDaysBoolExp.stub(_then(_instance))
-        : CopyWith_Input_HistoryMeetingDaysBoolExp(
-            local$filter,
-            (e) => call(filter: e),
-          );
-  }
-
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate {
-    final local$predicate = _instance.predicate;
-    return CopyWith_Input_BooleanComparisonExp(
-      local$predicate,
-      (e) => call(predicate: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_historyMeetingDaysAggregateBoolExpBool_or<TRes>
-    implements CopyWith_Input_historyMeetingDaysAggregateBoolExpBool_or<TRes> {
-  _CopyWithStubImpl_Input_historyMeetingDaysAggregateBoolExpBool_or(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns?
-    arguments,
-    bool? distinct,
-    Input_HistoryMeetingDaysBoolExp? filter,
-    Input_BooleanComparisonExp? predicate,
-  }) => _res;
-
-  CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get filter =>
-      CopyWith_Input_HistoryMeetingDaysBoolExp.stub(_res);
-
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
-      CopyWith_Input_BooleanComparisonExp.stub(_res);
-}
-
-class Input_historyMeetingDaysAggregateBoolExpCount {
-  factory Input_historyMeetingDaysAggregateBoolExpCount({
-    List<Enum_HistoryMeetingDaysSelectColumn>? arguments,
-    bool? distinct,
-    Input_HistoryMeetingDaysBoolExp? filter,
-    required Input_IntComparisonExp predicate,
-  }) => Input_historyMeetingDaysAggregateBoolExpCount._({
-    if (arguments != null) r'arguments': arguments,
-    if (distinct != null) r'distinct': distinct,
-    if (filter != null) r'filter': filter,
-    r'predicate': predicate,
-  });
-
-  Input_historyMeetingDaysAggregateBoolExpCount._(this._$data);
-
-  factory Input_historyMeetingDaysAggregateBoolExpCount.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('arguments')) {
-      final l$arguments = data['arguments'];
-      result$data['arguments'] = (l$arguments as List<dynamic>?)
-          ?.map(
-            (e) => fromJson_Enum_HistoryMeetingDaysSelectColumn((e as String)),
-          )
-          .toList();
-    }
-    if (data.containsKey('distinct')) {
-      final l$distinct = data['distinct'];
-      result$data['distinct'] = (l$distinct as bool?);
-    }
-    if (data.containsKey('filter')) {
-      final l$filter = data['filter'];
-      result$data['filter'] = l$filter == null
-          ? null
-          : Input_HistoryMeetingDaysBoolExp.fromJson(
-              (l$filter as Map<String, dynamic>),
-            );
-    }
-    final l$predicate = data['predicate'];
-    result$data['predicate'] = Input_IntComparisonExp.fromJson(
-      (l$predicate as Map<String, dynamic>),
-    );
-    return Input_historyMeetingDaysAggregateBoolExpCount._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  List<Enum_HistoryMeetingDaysSelectColumn>? get arguments =>
-      (_$data['arguments'] as List<Enum_HistoryMeetingDaysSelectColumn>?);
-
-  bool? get distinct => (_$data['distinct'] as bool?);
-
-  Input_HistoryMeetingDaysBoolExp? get filter =>
-      (_$data['filter'] as Input_HistoryMeetingDaysBoolExp?);
-
-  Input_IntComparisonExp get predicate =>
-      (_$data['predicate'] as Input_IntComparisonExp);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('arguments')) {
-      final l$arguments = arguments;
-      result$data['arguments'] = l$arguments
-          ?.map((e) => toJson_Enum_HistoryMeetingDaysSelectColumn(e))
-          .toList();
-    }
-    if (_$data.containsKey('distinct')) {
-      final l$distinct = distinct;
-      result$data['distinct'] = l$distinct;
-    }
-    if (_$data.containsKey('filter')) {
-      final l$filter = filter;
-      result$data['filter'] = l$filter?.toJson();
-    }
-    final l$predicate = predicate;
-    result$data['predicate'] = l$predicate.toJson();
-    return result$data;
-  }
-
-  CopyWith_Input_historyMeetingDaysAggregateBoolExpCount<
-    Input_historyMeetingDaysAggregateBoolExpCount
-  >
-  get copyWith =>
-      CopyWith_Input_historyMeetingDaysAggregateBoolExpCount(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_historyMeetingDaysAggregateBoolExpCount ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$arguments = arguments;
-    final lOther$arguments = other.arguments;
-    if (_$data.containsKey('arguments') !=
-        other._$data.containsKey('arguments')) {
-      return false;
-    }
-    if (l$arguments != null && lOther$arguments != null) {
-      if (l$arguments.length != lOther$arguments.length) {
-        return false;
-      }
-      for (int i = 0; i < l$arguments.length; i++) {
-        final l$arguments$entry = l$arguments[i];
-        final lOther$arguments$entry = lOther$arguments[i];
-        if (l$arguments$entry != lOther$arguments$entry) {
-          return false;
-        }
-      }
-    } else if (l$arguments != lOther$arguments) {
-      return false;
-    }
-    final l$distinct = distinct;
-    final lOther$distinct = other.distinct;
-    if (_$data.containsKey('distinct') !=
-        other._$data.containsKey('distinct')) {
-      return false;
-    }
-    if (l$distinct != lOther$distinct) {
-      return false;
-    }
-    final l$filter = filter;
-    final lOther$filter = other.filter;
-    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
-      return false;
-    }
-    if (l$filter != lOther$filter) {
-      return false;
-    }
-    final l$predicate = predicate;
-    final lOther$predicate = other.predicate;
-    if (l$predicate != lOther$predicate) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$arguments = arguments;
-    final l$distinct = distinct;
-    final l$filter = filter;
-    final l$predicate = predicate;
-    return Object.hashAll([
-      _$data.containsKey('arguments')
-          ? l$arguments == null
-                ? null
-                : Object.hashAll(l$arguments.map((v) => v))
-          : const {},
-      _$data.containsKey('distinct') ? l$distinct : const {},
-      _$data.containsKey('filter') ? l$filter : const {},
-      l$predicate,
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_historyMeetingDaysAggregateBoolExpCount<TRes> {
-  factory CopyWith_Input_historyMeetingDaysAggregateBoolExpCount(
-    Input_historyMeetingDaysAggregateBoolExpCount instance,
-    TRes Function(Input_historyMeetingDaysAggregateBoolExpCount) then,
-  ) = _CopyWithImpl_Input_historyMeetingDaysAggregateBoolExpCount;
-
-  factory CopyWith_Input_historyMeetingDaysAggregateBoolExpCount.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Input_historyMeetingDaysAggregateBoolExpCount;
-
-  TRes call({
-    List<Enum_HistoryMeetingDaysSelectColumn>? arguments,
-    bool? distinct,
-    Input_HistoryMeetingDaysBoolExp? filter,
-    Input_IntComparisonExp? predicate,
-  });
-  CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get filter;
-  CopyWith_Input_IntComparisonExp<TRes> get predicate;
-}
-
-class _CopyWithImpl_Input_historyMeetingDaysAggregateBoolExpCount<TRes>
-    implements CopyWith_Input_historyMeetingDaysAggregateBoolExpCount<TRes> {
-  _CopyWithImpl_Input_historyMeetingDaysAggregateBoolExpCount(
-    this._instance,
-    this._then,
-  );
-
-  final Input_historyMeetingDaysAggregateBoolExpCount _instance;
-
-  final TRes Function(Input_historyMeetingDaysAggregateBoolExpCount) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? arguments = _undefined,
-    Object? distinct = _undefined,
-    Object? filter = _undefined,
-    Object? predicate = _undefined,
-  }) => _then(
-    Input_historyMeetingDaysAggregateBoolExpCount._({
-      ..._instance._$data,
-      if (arguments != _undefined)
-        'arguments': (arguments as List<Enum_HistoryMeetingDaysSelectColumn>?),
-      if (distinct != _undefined) 'distinct': (distinct as bool?),
-      if (filter != _undefined)
-        'filter': (filter as Input_HistoryMeetingDaysBoolExp?),
-      if (predicate != _undefined && predicate != null)
-        'predicate': (predicate as Input_IntComparisonExp),
-    }),
-  );
-
-  CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get filter {
-    final local$filter = _instance.filter;
-    return local$filter == null
-        ? CopyWith_Input_HistoryMeetingDaysBoolExp.stub(_then(_instance))
-        : CopyWith_Input_HistoryMeetingDaysBoolExp(
-            local$filter,
-            (e) => call(filter: e),
-          );
-  }
-
-  CopyWith_Input_IntComparisonExp<TRes> get predicate {
-    final local$predicate = _instance.predicate;
-    return CopyWith_Input_IntComparisonExp(
-      local$predicate,
-      (e) => call(predicate: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_historyMeetingDaysAggregateBoolExpCount<TRes>
-    implements CopyWith_Input_historyMeetingDaysAggregateBoolExpCount<TRes> {
-  _CopyWithStubImpl_Input_historyMeetingDaysAggregateBoolExpCount(this._res);
-
-  TRes _res;
-
-  call({
-    List<Enum_HistoryMeetingDaysSelectColumn>? arguments,
-    bool? distinct,
-    Input_HistoryMeetingDaysBoolExp? filter,
-    Input_IntComparisonExp? predicate,
-  }) => _res;
-
-  CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get filter =>
-      CopyWith_Input_HistoryMeetingDaysBoolExp.stub(_res);
-
-  CopyWith_Input_IntComparisonExp<TRes> get predicate =>
-      CopyWith_Input_IntComparisonExp.stub(_res);
-}
-
-class Input_historyVisitHistoryAggregateBoolExpBool_and {
-  factory Input_historyVisitHistoryAggregateBoolExpBool_and({
-    required Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
-    arguments,
-    bool? distinct,
-    Input_HistoryVisitHistoryBoolExp? filter,
-    required Input_BooleanComparisonExp predicate,
-  }) => Input_historyVisitHistoryAggregateBoolExpBool_and._({
-    r'arguments': arguments,
-    if (distinct != null) r'distinct': distinct,
-    if (filter != null) r'filter': filter,
-    r'predicate': predicate,
-  });
-
-  Input_historyVisitHistoryAggregateBoolExpBool_and._(this._$data);
-
-  factory Input_historyVisitHistoryAggregateBoolExpBool_and.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    final l$arguments = data['arguments'];
-    result$data['arguments'] =
-        fromJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
-          (l$arguments as String),
-        );
-    if (data.containsKey('distinct')) {
-      final l$distinct = data['distinct'];
-      result$data['distinct'] = (l$distinct as bool?);
-    }
-    if (data.containsKey('filter')) {
-      final l$filter = data['filter'];
-      result$data['filter'] = l$filter == null
-          ? null
-          : Input_HistoryVisitHistoryBoolExp.fromJson(
-              (l$filter as Map<String, dynamic>),
-            );
-    }
-    final l$predicate = data['predicate'];
-    result$data['predicate'] = Input_BooleanComparisonExp.fromJson(
-      (l$predicate as Map<String, dynamic>),
-    );
-    return Input_historyVisitHistoryAggregateBoolExpBool_and._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
-  get arguments =>
-      (_$data['arguments']
-          as Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns);
-
-  bool? get distinct => (_$data['distinct'] as bool?);
-
-  Input_HistoryVisitHistoryBoolExp? get filter =>
-      (_$data['filter'] as Input_HistoryVisitHistoryBoolExp?);
-
-  Input_BooleanComparisonExp get predicate =>
-      (_$data['predicate'] as Input_BooleanComparisonExp);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$arguments = arguments;
-    result$data['arguments'] =
-        toJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
-          l$arguments,
-        );
-    if (_$data.containsKey('distinct')) {
-      final l$distinct = distinct;
-      result$data['distinct'] = l$distinct;
-    }
-    if (_$data.containsKey('filter')) {
-      final l$filter = filter;
-      result$data['filter'] = l$filter?.toJson();
-    }
-    final l$predicate = predicate;
-    result$data['predicate'] = l$predicate.toJson();
-    return result$data;
-  }
-
-  CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and<
-    Input_historyVisitHistoryAggregateBoolExpBool_and
-  >
-  get copyWith => CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and(
-    this,
-    (i) => i,
-  );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_historyVisitHistoryAggregateBoolExpBool_and ||
         runtimeType != other.runtimeType) {
       return false;
     }

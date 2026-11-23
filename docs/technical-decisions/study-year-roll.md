@@ -131,7 +131,8 @@ twenty-one times.
 
 Every insert into `operations.study_year_roll_runs` fires a Hasura event
 trigger; the Cloud Function pushes a maintenance notification for `failed` and
-`missed` rows to users holding the `maintenanceNotifications` permission. An
+`missed` rows to users holding the `appMaintenance` permission, or its older
+name `maintenanceNotifications`. An
 `on conflict … do update` is an update, so it does not fire that insert-only
 trigger — which is what bounds the alert to one per season.
 

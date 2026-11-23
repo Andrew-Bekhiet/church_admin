@@ -987,6 +987,7 @@ type AuthUsersData {
   photoUpdatedAt: timestamptz
   preferences: UsersPreferences
   uid: uuid!
+  userType: String!
 }
 
 type AuthUsersDataAggregate {
@@ -1018,12 +1019,14 @@ input AuthUsersDataBoolExp {
   photoUpdatedAt: TimestamptzComparisonExp
   preferences: UsersPreferencesBoolExp
   uid: UuidComparisonExp
+  userType: StringComparisonExp
 }
 
 enum AuthUsersDataConstraint {
   users_data_auth_id_key
   users_data_email_key
   users_data_name_key
+  users_data_one_user_per_non_human_type_idx
   users_data_pkey
 }
 
@@ -1043,6 +1046,7 @@ type AuthUsersDataMaxFields {
   name: String
   photoUpdatedAt: timestamptz
   uid: uuid
+  userType: String
 }
 
 type AuthUsersDataMinFields {
@@ -1052,6 +1056,7 @@ type AuthUsersDataMinFields {
   name: String
   photoUpdatedAt: timestamptz
   uid: uuid
+  userType: String
 }
 
 type AuthUsersDataMutationResponse {
@@ -1085,6 +1090,7 @@ input AuthUsersDataOrderBy {
   photoUpdatedAt: OrderBy
   preferences: UsersPreferencesOrderBy
   uid: OrderBy
+  userType: OrderBy
 }
 
 input AuthUsersDataPkColumnsInput {
@@ -1098,6 +1104,7 @@ enum AuthUsersDataSelectColumn {
   name
   photoUpdatedAt
   uid
+  userType
 }
 
 input AuthUsersDataSetInput {
@@ -1117,6 +1124,7 @@ input AuthUsersDataStreamCursorValueInput {
   name: String
   photoUpdatedAt: timestamptz
   uid: uuid
+  userType: String
 }
 
 enum AuthUsersDataUpdateColumn {
@@ -3187,7 +3195,7 @@ input HistoryAttendanceHistoryBoolExp {
 }
 
 enum HistoryAttendanceHistoryConstraint {
-  attendance_history_meeting_person_day_idx
+  attendance_history_day_meeting_id_person_id_as_servant_key
   attendance_history_pkey
 }
 
@@ -4411,6 +4419,12 @@ type HistoryMeetings {
   attendanceHistory(distinctOn: [HistoryAttendanceHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryAttendanceHistoryOrderBy!], where: HistoryAttendanceHistoryBoolExp): [HistoryAttendanceHistory!]!
   attendanceHistoryAggregate(distinctOn: [HistoryAttendanceHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryAttendanceHistoryOrderBy!], where: HistoryAttendanceHistoryBoolExp): HistoryAttendanceHistoryAggregate!
   audience: meeting_audience!
+  autoAttendanceEndTime: time
+  autoAttendanceRecordsServants: Boolean!
+  autoAttendanceStartTime: time
+  autoAttendanceWeekday: smallint
+  autoCommunionEndTime: time
+  autoCommunionStartTime: time
   color: bigint
   days(distinctOn: [HistoryMeetingDaysSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingDaysOrderBy!], where: HistoryMeetingDaysBoolExp): [HistoryMeetingDays!]!
   daysAggregate(distinctOn: [HistoryMeetingDaysSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingDaysOrderBy!], where: HistoryMeetingDaysBoolExp): HistoryMeetingDaysAggregate!
@@ -4447,6 +4461,7 @@ input HistoryMeetingsArrRelInsertInput {
 }
 
 input HistoryMeetingsAvgOrderBy {
+  autoAttendanceWeekday: OrderBy
   color: OrderBy
   serviceStudyYear: OrderBy
 }
@@ -4458,6 +4473,12 @@ input HistoryMeetingsBoolExp {
   attendanceHistory: HistoryAttendanceHistoryBoolExp
   attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateBoolExp
   audience: MeetingAudienceComparisonExp
+  autoAttendanceEndTime: TimeComparisonExp
+  autoAttendanceRecordsServants: BooleanComparisonExp
+  autoAttendanceStartTime: TimeComparisonExp
+  autoAttendanceWeekday: SmallintComparisonExp
+  autoCommunionEndTime: TimeComparisonExp
+  autoCommunionStartTime: TimeComparisonExp
   color: BigintComparisonExp
   days: HistoryMeetingDaysBoolExp
   daysAggregate: HistoryMeetingDaysAggregateBoolExp
@@ -4500,6 +4521,7 @@ input HistoryMeetingsInsertInput {
 
 input HistoryMeetingsMaxOrderBy {
   audience: OrderBy
+  autoAttendanceWeekday: OrderBy
   color: OrderBy
   groupId: OrderBy
   id: OrderBy
@@ -4510,6 +4532,7 @@ input HistoryMeetingsMaxOrderBy {
 
 input HistoryMeetingsMinOrderBy {
   audience: OrderBy
+  autoAttendanceWeekday: OrderBy
   color: OrderBy
   groupId: OrderBy
   id: OrderBy
@@ -4537,6 +4560,12 @@ input HistoryMeetingsOnConflict {
 input HistoryMeetingsOrderBy {
   attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
   audience: OrderBy
+  autoAttendanceEndTime: OrderBy
+  autoAttendanceRecordsServants: OrderBy
+  autoAttendanceStartTime: OrderBy
+  autoAttendanceWeekday: OrderBy
+  autoCommunionEndTime: OrderBy
+  autoCommunionStartTime: OrderBy
   color: OrderBy
   daysAggregate: HistoryMeetingDaysAggregateOrderBy
   group: GroupsOrderBy
@@ -4558,6 +4587,12 @@ input HistoryMeetingsPkColumnsInput {
 
 enum HistoryMeetingsSelectColumn {
   audience
+  autoAttendanceEndTime
+  autoAttendanceRecordsServants
+  autoAttendanceStartTime
+  autoAttendanceWeekday
+  autoCommunionEndTime
+  autoCommunionStartTime
   color
   groupId
   id
@@ -4578,16 +4613,19 @@ input HistoryMeetingsSetInput {
 }
 
 input HistoryMeetingsStddevOrderBy {
+  autoAttendanceWeekday: OrderBy
   color: OrderBy
   serviceStudyYear: OrderBy
 }
 
 input HistoryMeetingsStddevPopOrderBy {
+  autoAttendanceWeekday: OrderBy
   color: OrderBy
   serviceStudyYear: OrderBy
 }
 
 input HistoryMeetingsStddevSampOrderBy {
+  autoAttendanceWeekday: OrderBy
   color: OrderBy
   serviceStudyYear: OrderBy
 }
@@ -4599,6 +4637,12 @@ input HistoryMeetingsStreamCursorInput {
 
 input HistoryMeetingsStreamCursorValueInput {
   audience: meeting_audience
+  autoAttendanceEndTime: time
+  autoAttendanceRecordsServants: Boolean
+  autoAttendanceStartTime: time
+  autoAttendanceWeekday: smallint
+  autoCommunionEndTime: time
+  autoCommunionStartTime: time
   color: bigint
   groupId: uuid
   id: uuid
@@ -4611,6 +4655,7 @@ input HistoryMeetingsStreamCursorValueInput {
 }
 
 input HistoryMeetingsSumOrderBy {
+  autoAttendanceWeekday: OrderBy
   color: OrderBy
   serviceStudyYear: OrderBy
 }
@@ -4630,16 +4675,19 @@ input HistoryMeetingsUpdates {
 }
 
 input HistoryMeetingsVarPopOrderBy {
+  autoAttendanceWeekday: OrderBy
   color: OrderBy
   serviceStudyYear: OrderBy
 }
 
 input HistoryMeetingsVarSampOrderBy {
+  autoAttendanceWeekday: OrderBy
   color: OrderBy
   serviceStudyYear: OrderBy
 }
 
 input HistoryMeetingsVarianceOrderBy {
+  autoAttendanceWeekday: OrderBy
   color: OrderBy
   serviceStudyYear: OrderBy
 }
@@ -5022,6 +5070,34 @@ input NameComparisonExp {
   _lte: name
   _neq: name
   _nin: [name!]
+}
+
+type OperationsFingerprintSyncStatus {
+  lastSyncedAt: timestamptz!
+}
+
+input OperationsFingerprintSyncStatusBoolExp {
+  _and: [OperationsFingerprintSyncStatusBoolExp!]
+  _not: OperationsFingerprintSyncStatusBoolExp
+  _or: [OperationsFingerprintSyncStatusBoolExp!]
+  lastSyncedAt: TimestamptzComparisonExp
+}
+
+input OperationsFingerprintSyncStatusOrderBy {
+  lastSyncedAt: OrderBy
+}
+
+enum OperationsFingerprintSyncStatusSelectColumn {
+  lastSyncedAt
+}
+
+input OperationsFingerprintSyncStatusStreamCursorInput {
+  initialValue: OperationsFingerprintSyncStatusStreamCursorValueInput!
+  ordering: CursorOrdering
+}
+
+input OperationsFingerprintSyncStatusStreamCursorValueInput {
+  lastSyncedAt: timestamptz
 }
 
 input OperationsScreenCaptureAttemptsBoolExp {
@@ -5467,6 +5543,83 @@ input PersonsBoolExp {
 enum PersonsConstraint {
   persons_pkey
   persons_uid_key
+}
+
+type PersonsFingerprintIds {
+  addedAt: timestamptz!
+  addedBy: uuid!
+  addedByUser: AuthUsersData!
+  employeeCode: String!
+  id: uuid!
+  personId: uuid!
+}
+
+input PersonsFingerprintIdsBoolExp {
+  _and: [PersonsFingerprintIdsBoolExp!]
+  _not: PersonsFingerprintIdsBoolExp
+  _or: [PersonsFingerprintIdsBoolExp!]
+  addedAt: TimestamptzComparisonExp
+  addedBy: UuidComparisonExp
+  addedByUser: AuthUsersDataBoolExp
+  employeeCode: StringComparisonExp
+  id: UuidComparisonExp
+  personId: UuidComparisonExp
+}
+
+enum PersonsFingerprintIdsConstraint {
+  persons_fingerprint_ids_employee_code_key
+  persons_fingerprint_ids_pkey
+}
+
+input PersonsFingerprintIdsInsertInput {
+  addedByUser: AuthUsersDataObjRelInsertInput
+  employeeCode: String
+  personId: uuid
+}
+
+type PersonsFingerprintIdsMutationResponse {
+  affectedRows: Int!
+  returning: [PersonsFingerprintIds!]!
+}
+
+input PersonsFingerprintIdsOnConflict {
+  constraint: PersonsFingerprintIdsConstraint!
+  updateColumns: [PersonsFingerprintIdsUpdateColumn!]! = []
+  where: PersonsFingerprintIdsBoolExp
+}
+
+input PersonsFingerprintIdsOrderBy {
+  addedAt: OrderBy
+  addedBy: OrderBy
+  addedByUser: AuthUsersDataOrderBy
+  employeeCode: OrderBy
+  id: OrderBy
+  personId: OrderBy
+}
+
+enum PersonsFingerprintIdsSelectColumn {
+  addedAt
+  addedBy
+  employeeCode
+  id
+  personId
+}
+
+input PersonsFingerprintIdsStreamCursorInput {
+  initialValue: PersonsFingerprintIdsStreamCursorValueInput!
+  ordering: CursorOrdering
+}
+
+input PersonsFingerprintIdsStreamCursorValueInput {
+  addedAt: timestamptz
+  addedBy: uuid
+  employeeCode: String
+  id: uuid
+  personId: uuid
+}
+
+enum PersonsFingerprintIdsUpdateColumn {
+  _PLACEHOLDER
 }
 
 type PersonsGroups {
@@ -7682,6 +7835,18 @@ input TagsUpdates {
   where: TagsBoolExp!
 }
 
+input TimeComparisonExp {
+  _eq: time
+  _gt: time
+  _gte: time
+  _in: [time!]
+  _isNull: Boolean
+  _lt: time
+  _lte: time
+  _neq: time
+  _nin: [time!]
+}
+
 input TimestamptzComparisonExp {
   _eq: timestamptz
   _gt: timestamptz
@@ -8176,6 +8341,8 @@ type mutation_root {
   deletePersonTypesByPk(id: uuid!): PersonTypes
   deletePersons(where: PersonsBoolExp!): PersonsMutationResponse
   deletePersonsByPk(id: uuid!): Persons
+  deletePersonsFingerprintIds(where: PersonsFingerprintIdsBoolExp!): PersonsFingerprintIdsMutationResponse
+  deletePersonsFingerprintIdsByPk(id: uuid!): PersonsFingerprintIds
   deletePersonsGroups(where: PersonsGroupsBoolExp!): PersonsGroupsMutationResponse
   deletePersonsHobbies(where: PersonsHobbiesBoolExp!): PersonsHobbiesMutationResponse
   deletePersonsServices(where: PersonsServicesBoolExp!): PersonsServicesMutationResponse
@@ -8256,6 +8423,8 @@ type mutation_root {
   insertPersonTypes(objects: [PersonTypesInsertInput!]!, onConflict: PersonTypesOnConflict): PersonTypesMutationResponse
   insertPersonTypesOne(object: PersonTypesInsertInput!, onConflict: PersonTypesOnConflict): PersonTypes
   insertPersons(objects: [PersonsInsertInput!]!, onConflict: PersonsOnConflict): PersonsMutationResponse
+  insertPersonsFingerprintIds(objects: [PersonsFingerprintIdsInsertInput!]!, onConflict: PersonsFingerprintIdsOnConflict): PersonsFingerprintIdsMutationResponse
+  insertPersonsFingerprintIdsOne(object: PersonsFingerprintIdsInsertInput!, onConflict: PersonsFingerprintIdsOnConflict): PersonsFingerprintIds
   insertPersonsGroups(objects: [PersonsGroupsInsertInput!]!, onConflict: PersonsGroupsOnConflict): PersonsGroupsMutationResponse
   insertPersonsGroupsOne(object: PersonsGroupsInsertInput!, onConflict: PersonsGroupsOnConflict): PersonsGroups
   insertPersonsHobbies(objects: [PersonsHobbiesInsertInput!]!, onConflict: PersonsHobbiesOnConflict): PersonsHobbiesMutationResponse
@@ -8476,6 +8645,7 @@ type query_root {
   hobbiesByPk(id: uuid!): Hobbies
   jobs(distinctOn: [JobsSelectColumn!], limit: Int, offset: Int, orderBy: [JobsOrderBy!], where: JobsBoolExp): [Jobs!]!
   jobsByPk(id: uuid!): Jobs
+  operationsFingerprintSyncStatus(distinctOn: [OperationsFingerprintSyncStatusSelectColumn!], limit: Int, offset: Int, orderBy: [OperationsFingerprintSyncStatusOrderBy!], where: OperationsFingerprintSyncStatusBoolExp): [OperationsFingerprintSyncStatus!]!
   personStates(distinctOn: [PersonStatesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonStatesOrderBy!], where: PersonStatesBoolExp): [PersonStates!]!
   personStatesByPk(id: uuid!): PersonStates
   personTypes(distinctOn: [PersonTypesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonTypesOrderBy!], where: PersonTypesBoolExp): [PersonTypes!]!
@@ -8483,6 +8653,8 @@ type query_root {
   persons(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): [Persons!]!
   personsAggregate(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): PersonsAggregate!
   personsByPk(id: uuid!): Persons
+  personsFingerprintIds(distinctOn: [PersonsFingerprintIdsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsFingerprintIdsOrderBy!], where: PersonsFingerprintIdsBoolExp): [PersonsFingerprintIds!]!
+  personsFingerprintIdsByPk(id: uuid!): PersonsFingerprintIds
   personsGroups(distinctOn: [PersonsGroupsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsGroupsOrderBy!], where: PersonsGroupsBoolExp): [PersonsGroups!]!
   personsHobbies(distinctOn: [PersonsHobbiesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsHobbiesOrderBy!], where: PersonsHobbiesBoolExp): [PersonsHobbies!]!
   personsMainContacts(distinctOn: [PersonsMainContactsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsMainContactsOrderBy!], where: PersonsMainContactsBoolExp): [PersonsMainContacts!]!
@@ -8635,6 +8807,8 @@ type subscription_root {
   jobs(distinctOn: [JobsSelectColumn!], limit: Int, offset: Int, orderBy: [JobsOrderBy!], where: JobsBoolExp): [Jobs!]!
   jobsByPk(id: uuid!): Jobs
   jobsStream(batchSize: Int!, cursor: [JobsStreamCursorInput]!, where: JobsBoolExp): [Jobs!]!
+  operationsFingerprintSyncStatus(distinctOn: [OperationsFingerprintSyncStatusSelectColumn!], limit: Int, offset: Int, orderBy: [OperationsFingerprintSyncStatusOrderBy!], where: OperationsFingerprintSyncStatusBoolExp): [OperationsFingerprintSyncStatus!]!
+  operationsFingerprintSyncStatusStream(batchSize: Int!, cursor: [OperationsFingerprintSyncStatusStreamCursorInput]!, where: OperationsFingerprintSyncStatusBoolExp): [OperationsFingerprintSyncStatus!]!
   personStates(distinctOn: [PersonStatesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonStatesOrderBy!], where: PersonStatesBoolExp): [PersonStates!]!
   personStatesByPk(id: uuid!): PersonStates
   personStatesStream(batchSize: Int!, cursor: [PersonStatesStreamCursorInput]!, where: PersonStatesBoolExp): [PersonStates!]!
@@ -8644,6 +8818,9 @@ type subscription_root {
   persons(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): [Persons!]!
   personsAggregate(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): PersonsAggregate!
   personsByPk(id: uuid!): Persons
+  personsFingerprintIds(distinctOn: [PersonsFingerprintIdsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsFingerprintIdsOrderBy!], where: PersonsFingerprintIdsBoolExp): [PersonsFingerprintIds!]!
+  personsFingerprintIdsByPk(id: uuid!): PersonsFingerprintIds
+  personsFingerprintIdsStream(batchSize: Int!, cursor: [PersonsFingerprintIdsStreamCursorInput]!, where: PersonsFingerprintIdsBoolExp): [PersonsFingerprintIds!]!
   personsGroups(distinctOn: [PersonsGroupsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsGroupsOrderBy!], where: PersonsGroupsBoolExp): [PersonsGroups!]!
   personsGroupsStream(batchSize: Int!, cursor: [PersonsGroupsStreamCursorInput]!, where: PersonsGroupsBoolExp): [PersonsGroups!]!
   personsHobbies(distinctOn: [PersonsHobbiesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsHobbiesOrderBy!], where: PersonsHobbiesBoolExp): [PersonsHobbies!]!
@@ -8694,6 +8871,8 @@ type subscription_root {
   usersPreferencesByPk(uid: uuid!): UsersPreferences
   usersPreferencesStream(batchSize: Int!, cursor: [UsersPreferencesStreamCursorInput]!, where: UsersPreferencesBoolExp): [UsersPreferences!]!
 }
+
+scalar time
 
 scalar timestamptz
 
