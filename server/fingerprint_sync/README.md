@@ -87,7 +87,7 @@ Save-Secret fingerprint-sync-secret
 
 #### Linux
 
-On systemd 250 or newer (`systemctl --version`), encrypt each secret with `systemd-creds`. It is tied to this machine, and to its TPM when there is one, and only systemd decrypts it, into the service's private credentials folder:
+The service needs systemd 247 or newer (`systemctl --version`). On systemd 250 or newer, encrypt each secret with `systemd-creds`. It is tied to this machine, and to its TPM when there is one, and only systemd decrypts it, into the service's private credentials folder:
 
 ```bash
 sudo mkdir -p /etc/credstore.encrypted
@@ -101,7 +101,7 @@ read -rsp "BioTime password: " secret && printf '%s' "$secret" | sudo systemd-cr
 read -rsp "Sync secret: " secret && printf '%s' "$secret" | sudo systemd-creds encrypt --name=fingerprint-sync-secret - /etc/credstore.encrypted/fingerprint-sync-secret; unset secret
 ```
 
-On older systemd, write the two files unencrypted to `/etc/credstore/` with `sudo install -m 600 /dev/null <file>` and an editor, and use `LoadCredential=` in place of `LoadCredentialEncrypted=` in the unit below. Only root can read them, and systemd copies them into the service's private credentials folder.
+On systemd 247 to 249, write the two files unencrypted to `/etc/credstore/` with `sudo install -m 600 /dev/null <file>` and an editor, and use `LoadCredential=` in place of `LoadCredentialEncrypted=` in the unit below. Only root can read them, and systemd copies them into the service's private credentials folder.
 
 ### 4. Install as a service
 
@@ -149,8 +149,8 @@ User=fingerprint-sync
 WorkingDirectory=/opt/fingerprint_sync
 LoadCredentialEncrypted=biotime-password:/etc/credstore.encrypted/biotime-password
 LoadCredentialEncrypted=fingerprint-sync-secret:/etc/credstore.encrypted/fingerprint-sync-secret
-Environment=BIOTIME_PASSWORD_FILE=%d/biotime-password
-Environment=FINGERPRINT_SYNC_SECRET_FILE=%d/fingerprint-sync-secret
+Environment=BIOTIME_PASSWORD_FILE=/run/credentials/fingerprint-sync.service/biotime-password
+Environment=FINGERPRINT_SYNC_SECRET_FILE=/run/credentials/fingerprint-sync.service/fingerprint-sync-secret
 ExecStart=/usr/bin/node /opt/fingerprint_sync/lib/main.js
 Restart=always
 RestartSec=10
@@ -159,7 +159,7 @@ RestartSec=10
 WantedBy=multi-user.target
 ```
 
-`%d` is the service's private credentials folder. Then start it:
+`/run/credentials/fingerprint-sync.service` is the service's private credentials folder while it runs. Then start it:
 
 ```bash
 sudo systemctl daemon-reload
