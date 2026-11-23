@@ -65,7 +65,9 @@ enum UserPermission implements LabeledEnum {
   );
 
   static const Map<UserPermission, UserPermission> _legacyPermissionsRenamedTo =
-      {UserPermission.maintenanceNotifications: UserPermission.appMaintenance};
+      {
+        UserPermission.maintenanceNotifications: UserPermission.appMaintenance,
+      };
 
   static UserPermission byName(String value) => values.byName(value);
 
