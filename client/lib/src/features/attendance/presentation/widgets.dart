@@ -15,6 +15,7 @@ export 'widgets/attendance_sorting_menu_item.dart';
 export 'widgets/attendance_summary_bar.dart';
 export 'widgets/attendance_summary_segment.dart';
 export 'widgets/calendar_day_with_indicator_widget.dart';
+export 'widgets/centered_unless_crowded_title_row.dart';
 export 'widgets/kodas_chalice_icon.dart';
 export 'widgets/meeting_avatar.dart';
 export 'widgets/meeting_list_tile.dart';

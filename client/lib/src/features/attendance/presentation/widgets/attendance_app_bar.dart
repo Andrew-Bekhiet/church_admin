@@ -6,7 +6,6 @@ import 'package:material_ui/material_ui.dart';
 
 class AttendanceAppBar extends StatelessWidget {
   static const double _kAttendanceToolbarHeight = 96;
-  static const double _kOverflowMenuHeight = 40;
 
   final Meeting meeting;
   final DateTime selectedDate;
@@ -44,29 +43,20 @@ class AttendanceAppBar extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         spacing: 6,
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: .center,
-                  children: [
-                    Flexible(
-                      child: MeetingSelectorButton(
-                        key: AttendanceAppBarKeys.meetingSelector,
-                        meeting: meeting,
-                        onTap: () => _switchMeeting(context, cubit),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              if (meeting.hasAutoAttendanceSchedule)
-                FingerprintLastSyncIndicator(
-                  state: context.watch<FingerprintLastSyncCubit>().state,
-                ),
-              SizedBox(
-                height: _kOverflowMenuHeight,
-                child: AttendanceOverflowMenu(
+          CenteredUnlessCrowdedTitleRow(
+            title: MeetingSelectorButton(
+              key: AttendanceAppBarKeys.meetingSelector,
+              meeting: meeting,
+              onTap: () => _switchMeeting(context, cubit),
+            ),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (meeting.hasAutoAttendanceSchedule)
+                  FingerprintLastSyncIndicator(
+                    state: context.watch<FingerprintLastSyncCubit>().state,
+                  ),
+                AttendanceOverflowMenu(
                   openAnalysis: () => _openAnalysis(context, cubit),
                   sorting: sorting,
                   grouping: grouping,
@@ -75,8 +65,8 @@ class AttendanceAppBar extends StatelessWidget {
                   onGroupingChanged: cubit.changeGrouping,
                   onStreakWindowChanged: cubit.changeStreakWindow,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
