@@ -90,7 +90,7 @@ export class FingerprintSync {
     );
   }
 
-  async verifyBiotimeAndFunctionAccess(): Promise<void> {
+  async checkBiotimeAndFunctionAccess(): Promise<void> {
     await describingFailureAs(
       "Could not read transactions from BioTime",
       () => this.biotime.readableTransactionsBetween(

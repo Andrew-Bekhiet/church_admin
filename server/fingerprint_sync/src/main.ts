@@ -30,30 +30,56 @@ async function main(): Promise<number> {
       to: { type: "string" },
     },
   });
-  const command = positionals[0];
-  const isSendRangeWithReadableTimes = command === "send-range" &&
-    values.from !== undefined && isReadableBiotimeTime(values.from) &&
-    values.to !== undefined && isReadableBiotimeTime(values.to);
 
-  if (command !== undefined && command !== "check" && !isSendRangeWithReadableTimes) {
-    console.error(USAGE);
+  switch (positionals[0]) {
+    case undefined: {
+      const config = await loadConfig(resolve(values.config), process.env);
+      await pollUntilSignalled(syncFor(config), config);
 
-    return EXIT_USAGE;
+      return 0;
+    }
+    case "check": {
+      const config = await loadConfig(resolve(values.config), process.env);
+      await syncFor(config).checkBiotimeAndFunctionAccess();
+      logInfo("BioTime and recordFingerprintPunches both accept this config");
+
+      return 0;
+    }
+    case "send-range": {
+      const range = readableRangeFrom(values.from, values.to);
+
+      if (range === undefined) {
+        return printUsage();
+      }
+
+      const config = await loadConfig(resolve(values.config), process.env);
+      await syncFor(config).sendPunchesBetween(range.from, range.to);
+
+      return 0;
+    }
+    default:
+      return printUsage();
   }
+}
 
-  const config = await loadConfig(resolve(values.config), process.env);
-  const sync = new FingerprintSync(config, () => DateTime.local());
+function syncFor(config: FingerprintSyncConfig): FingerprintSync {
+  return new FingerprintSync(config, () => DateTime.local());
+}
 
-  if (command === "check") {
-    await sync.verifyBiotimeAndFunctionAccess();
-    logInfo("BioTime and recordFingerprintPunches both accept this config");
-  } else if (command === "send-range") {
-    await sync.sendPunchesBetween(values.from!, values.to!);
-  } else {
-    await pollUntilSignalled(sync, config);
-  }
+function readableRangeFrom(
+  from: string | undefined,
+  to: string | undefined,
+): { from: string; to: string } | undefined {
+  const isReadableRange = from !== undefined && isReadableBiotimeTime(from) &&
+    to !== undefined && isReadableBiotimeTime(to);
 
-  return 0;
+  return isReadableRange ? { from, to } : undefined;
+}
+
+function printUsage(): number {
+  console.error(USAGE);
+
+  return EXIT_USAGE;
 }
 
 function defaultConfigPath(): string {
