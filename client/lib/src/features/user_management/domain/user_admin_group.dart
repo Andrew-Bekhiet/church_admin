@@ -4,11 +4,15 @@ import 'package:equatable/equatable.dart';
 
 class UserAdminGroup with Equatable {
   static List<UserAdminGroup> groupUsers(List<User> users) {
-    final superAdmins = users.where((u) => u.permissions.isSuperAdmin);
+    final automatedAccounts = users
+        .where((u) => u.userType.isAutomated)
+        .toList();
+    final humans = users.where((u) => u.userType.isHuman);
+    final superAdmins = humans.where((u) => u.permissions.isSuperAdmin);
     final byScope = <ViewableWithIDAndImage, List<AdminOnData>>{};
     final unscoped = <User>[];
 
-    for (final user in users) {
+    for (final user in humans) {
       final scopedAdminOn = user.adminOn?.where(_hasAreaOrService) ?? [];
 
       if (scopedAdminOn.isEmpty && !user.permissions.isSuperAdmin) {
@@ -40,6 +44,11 @@ class UserAdminGroup with Equatable {
           .sorted(_compareByKindThenTitle),
       if (unscoped.isNotEmpty)
         UserAdminGroup.ofKind(UserAdminGroupKind.unscoped, users: unscoped),
+      if (automatedAccounts.isNotEmpty)
+        UserAdminGroup.ofKind(
+          UserAdminGroupKind.automatedAccounts,
+          users: automatedAccounts,
+        ),
     ];
   }
 

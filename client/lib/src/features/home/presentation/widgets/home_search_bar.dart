@@ -34,7 +34,7 @@ class _HomeSearchBarState extends State<HomeSearchBar> {
             constraints: const BoxConstraints(minHeight: 40),
             barHintText: 'بحث ...',
             barLeading: const Icon(Symbols.search),
-            viewHintText: 'ابحث عن شخص، منطقة، خدمة ...',
+            viewHintText: 'ابحث عن مخدوم، منطقة، خدمة ...',
             suggestionsBuilder: (_, _) => const [],
             viewBuilder: (_) => BlocBuilder<HomeSearchCubit, HomeSearchState>(
               bloc: cubit,

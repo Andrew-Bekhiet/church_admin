@@ -13,6 +13,8 @@ class AdvancedTextInput<E extends Object> extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextInputAction textInputAction;
   final TextCapitalization textCapitalization;
+  final bool? autocorrect;
+  final bool enableSuggestions;
   final Iterable<String>? autofillHints;
   final List<TextInputFormatter>? inputFormatters;
   final int? maxLength;
@@ -20,12 +22,14 @@ class AdvancedTextInput<E extends Object> extends StatelessWidget {
   final int? errorMaxLines;
   final int? maxLines;
   final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
 
   const AdvancedTextInput({
     required this.field,
     required this.translateError,
     this.textInputAction = TextInputAction.next,
     this.textCapitalization = TextCapitalization.none,
+    this.enableSuggestions = true,
     this.maxLines = 1,
     this.labelText,
     this.label,
@@ -33,12 +37,14 @@ class AdvancedTextInput<E extends Object> extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.keyboardType,
+    this.autocorrect,
     this.autofillHints,
     this.inputFormatters,
     this.maxLength,
     this.counterText,
     this.errorMaxLines,
     this.onChanged,
+    this.onSubmitted,
     super.key,
   });
 
@@ -57,11 +63,14 @@ class AdvancedTextInput<E extends Object> extends StatelessWidget {
           keyboardType: keyboardType,
           textInputAction: textInputAction,
           textCapitalization: textCapitalization,
+          autocorrect: autocorrect,
+          enableSuggestions: enableSuggestions,
           autofillHints: autofillHints,
           inputFormatters: inputFormatters,
           maxLength: maxLength,
           maxLines: maxLines,
           onChanged: onChanged,
+          onSubmitted: onSubmitted,
           decoration: InputDecoration(
             labelText: labelText,
             label: label,

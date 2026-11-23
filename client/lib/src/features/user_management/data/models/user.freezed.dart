@@ -74,7 +74,9 @@ mixin _$User {
                   _this.currentUserCanManageThisUser,
                 ) ||
                 other.currentUserCanManageThisUser ==
-                    _this.currentUserCanManageThisUser));
+                    _this.currentUserCanManageThisUser) &&
+            (identical(other.userType, _this.userType) ||
+                other.userType == _this.userType));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -100,13 +102,14 @@ mixin _$User {
       const DeepCollectionEquality().hash(_this.groupsHistory),
       _this.invitation,
       _this.currentUserCanManageThisUser,
+      _this.userType,
     );
   }
 
   @override
   String toString() {
     final _this = this as User;
-    return 'User(uid: ${_this.uid}, name: ${_this.name}, email: ${_this.email}, photoUpdatedAt: ${_this.photoUpdatedAt}, blurhash: ${_this.blurhash}, adminOn: ${_this.adminOn}, permissions: ${_this.permissions}, authId: ${_this.authId}, lastEdit: ${_this.lastEdit}, person: ${_this.person}, preferences: ${_this.preferences}, fcmTokens: ${_this.fcmTokens}, servicesHistory: ${_this.servicesHistory}, classesHistory: ${_this.classesHistory}, groupsHistory: ${_this.groupsHistory}, invitation: ${_this.invitation}, currentUserCanManageThisUser: ${_this.currentUserCanManageThisUser})';
+    return 'User(uid: ${_this.uid}, name: ${_this.name}, email: ${_this.email}, photoUpdatedAt: ${_this.photoUpdatedAt}, blurhash: ${_this.blurhash}, adminOn: ${_this.adminOn}, permissions: ${_this.permissions}, authId: ${_this.authId}, lastEdit: ${_this.lastEdit}, person: ${_this.person}, preferences: ${_this.preferences}, fcmTokens: ${_this.fcmTokens}, servicesHistory: ${_this.servicesHistory}, classesHistory: ${_this.classesHistory}, groupsHistory: ${_this.groupsHistory}, invitation: ${_this.invitation}, currentUserCanManageThisUser: ${_this.currentUserCanManageThisUser}, userType: ${_this.userType})';
   }
 }
 
@@ -121,6 +124,7 @@ abstract mixin class $UserCopyWith<$Res> {
     PermissionsSet permissions,
     List<FcmToken> fcmTokens,
     bool currentUserCanManageThisUser,
+    UserType userType,
     String? email,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -158,6 +162,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? permissions = null,
     Object? fcmTokens = null,
     Object? currentUserCanManageThisUser = null,
+    Object? userType = null,
     Object? email = freezed,
     Object? photoUpdatedAt = freezed,
     Object? blurhash = freezed,
@@ -193,6 +198,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
             ? _self.currentUserCanManageThisUser
             : currentUserCanManageThisUser // ignore: cast_nullable_to_non_nullable
                   as bool,
+        userType: null == userType
+            ? _self.userType
+            : userType // ignore: cast_nullable_to_non_nullable
+                  as UserType,
         email: freezed == email
             ? _self.email
             : email // ignore: cast_nullable_to_non_nullable

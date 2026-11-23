@@ -1,0 +1,8 @@
+fragment PersonFingerprintId on PersonsFingerprintIds {
+  id
+  employeeCode
+  addedAt
+  addedByUser {
+    ...User
+  }
+}

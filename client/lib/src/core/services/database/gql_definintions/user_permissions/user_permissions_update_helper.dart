@@ -70,7 +70,7 @@ class UserPermissionsUpdateHelper {
         deletePermissions: _deletePermissions,
         insertPermissions: _insertPermissions,
         permissionsToDelete: _permissionsDiff.removed
-            .map((p) => p.name)
+            .expand((p) => p.namesStoredOnServer)
             .toList(),
         permissionsToInsert: _permissionsDiff.added
             .map(

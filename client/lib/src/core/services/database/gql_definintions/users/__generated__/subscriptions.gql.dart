@@ -364,6 +364,7 @@ class Subscription_watchUser_authUsersDataByPk
     required this.uid,
     required this.name,
     this.email,
+    required this.userType,
     this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
     this.blurhash,
@@ -384,6 +385,7 @@ class Subscription_watchUser_authUsersDataByPk
     final l$uid = json['uid'];
     final l$name = json['name'];
     final l$email = json['email'];
+    final l$userType = json['userType'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -400,6 +402,7 @@ class Subscription_watchUser_authUsersDataByPk
       uid: stringToUuid(l$uid),
       name: (l$name as String),
       email: (l$email as String?),
+      userType: (l$userType as String),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -454,6 +457,8 @@ class Subscription_watchUser_authUsersDataByPk
 
   final String? email;
 
+  final String userType;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -486,6 +491,8 @@ class Subscription_watchUser_authUsersDataByPk
     _resultData['name'] = l$name;
     final l$email = email;
     _resultData['email'] = l$email;
+    final l$userType = userType;
+    _resultData['userType'] = l$userType;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -521,6 +528,7 @@ class Subscription_watchUser_authUsersDataByPk
     final l$uid = uid;
     final l$name = name;
     final l$email = email;
+    final l$userType = userType;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -537,6 +545,7 @@ class Subscription_watchUser_authUsersDataByPk
       l$uid,
       l$name,
       l$email,
+      l$userType,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -574,6 +583,11 @@ class Subscription_watchUser_authUsersDataByPk
     final l$email = email;
     final lOther$email = other.email;
     if (l$email != lOther$email) {
+      return false;
+    }
+    final l$userType = userType;
+    final lOther$userType = other.userType;
+    if (l$userType != lOther$userType) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -684,6 +698,7 @@ abstract class CopyWith_Subscription_watchUser_authUsersDataByPk<TRes> {
     UuidValue? uid,
     String? name,
     String? email,
+    String? userType,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -746,6 +761,7 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk<TRes>
     Object? uid = _undefined,
     Object? name = _undefined,
     Object? email = _undefined,
+    Object? userType = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -767,6 +783,9 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk<TRes>
           ? _instance.name
           : (name as String),
       email: email == _undefined ? _instance.email : (email as String?),
+      userType: userType == _undefined || userType == null
+          ? _instance.userType
+          : (userType as String),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -909,6 +928,7 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk<TRes>
     UuidValue? uid,
     String? name,
     String? email,
+    String? userType,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -3585,6 +3605,7 @@ class Subscription_watchAllUsers_authUsersData
     required this.uid,
     required this.name,
     this.email,
+    required this.userType,
     this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
     this.blurhash,
@@ -3602,6 +3623,7 @@ class Subscription_watchAllUsers_authUsersData
     final l$uid = json['uid'];
     final l$name = json['name'];
     final l$email = json['email'];
+    final l$userType = json['userType'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -3615,6 +3637,7 @@ class Subscription_watchAllUsers_authUsersData
       uid: stringToUuid(l$uid),
       name: (l$name as String),
       email: (l$email as String?),
+      userType: (l$userType as String),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -3656,6 +3679,8 @@ class Subscription_watchAllUsers_authUsersData
 
   final String? email;
 
+  final String userType;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -3682,6 +3707,8 @@ class Subscription_watchAllUsers_authUsersData
     _resultData['name'] = l$name;
     final l$email = email;
     _resultData['email'] = l$email;
+    final l$userType = userType;
+    _resultData['userType'] = l$userType;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -3711,6 +3738,7 @@ class Subscription_watchAllUsers_authUsersData
     final l$uid = uid;
     final l$name = name;
     final l$email = email;
+    final l$userType = userType;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -3724,6 +3752,7 @@ class Subscription_watchAllUsers_authUsersData
       l$uid,
       l$name,
       l$email,
+      l$userType,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -3758,6 +3787,11 @@ class Subscription_watchAllUsers_authUsersData
     final l$email = email;
     final lOther$email = other.email;
     if (l$email != lOther$email) {
+      return false;
+    }
+    final l$userType = userType;
+    final lOther$userType = other.userType;
+    if (l$userType != lOther$userType) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3846,6 +3880,7 @@ abstract class CopyWith_Subscription_watchAllUsers_authUsersData<TRes> {
     UuidValue? uid,
     String? name,
     String? email,
+    String? userType,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -3897,6 +3932,7 @@ class _CopyWithImpl_Subscription_watchAllUsers_authUsersData<TRes>
     Object? uid = _undefined,
     Object? name = _undefined,
     Object? email = _undefined,
+    Object? userType = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -3915,6 +3951,9 @@ class _CopyWithImpl_Subscription_watchAllUsers_authUsersData<TRes>
           ? _instance.name
           : (name as String),
       email: email == _undefined ? _instance.email : (email as String?),
+      userType: userType == _undefined || userType == null
+          ? _instance.userType
+          : (userType as String),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -4017,6 +4056,7 @@ class _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData<TRes>
     UuidValue? uid,
     String? name,
     String? email,
+    String? userType,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,

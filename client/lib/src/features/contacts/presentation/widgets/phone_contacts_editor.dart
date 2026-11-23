@@ -49,7 +49,7 @@ class PhoneContactsEditor extends StatelessWidget {
                 Text(
                   switch (form) {
                     PersonPhoneContactsFormController() =>
-                      'أضف رقم الشخص وأرقام والديه',
+                      'أضف رقم المخدوم وأرقام والديه',
                     FamilyPhoneContactsFormController() =>
                       'أضف أرقام الأب والأم وباقي مسؤولي الأسرة',
                   },
