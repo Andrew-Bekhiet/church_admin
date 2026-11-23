@@ -28,7 +28,6 @@ interface CandidateWindowRow extends PresenceCandidate {
 
 interface CandidateWindow {
   candidate: PresenceCandidate;
-  personId: string;
   isoWeekday: number;
   startMillisSinceMidnight: number;
   endMillisSinceMidnight: number;
@@ -67,7 +66,7 @@ export async function findFingerprintBotUidAndCandidatesOfEachPresence(
     );
   }
 
-  const candidateWindows = candidateWindowsOf(
+  const candidateWindowsByPersonId = candidateWindowsByPersonIdOf(
     data["historyMeetingAutoPresenceCandidates"],
   );
 
@@ -75,7 +74,10 @@ export async function findFingerprintBotUidAndCandidatesOfEachPresence(
     fingerprintBotUid: fingerprintBots[0].uid,
     presencesWithCandidates: presences.map((presence) => ({
       presence,
-      candidates: candidatesWhoseWindowHolds(presence, candidateWindows),
+      candidates: candidatesWhoseWindowHolds(
+        presence,
+        candidateWindowsByPersonId.get(presence.personId) ?? [],
+      ),
     })),
   };
 }
@@ -105,18 +107,28 @@ function oneWindowFilterPerDistinctPersonAndCairoTime(
   return [...filtersByPersonAndCairoTime.values()];
 }
 
-function candidateWindowsOf(rows: CandidateWindowRow[]): CandidateWindow[] {
-  return rows.map((row) => ({
-    candidate: {
-      meetingId: row.meetingId,
-      asServant: row.asServant,
-      windowKind: row.windowKind,
-    },
-    personId: row.personId,
-    isoWeekday: row.isoWeekday,
-    startMillisSinceMidnight: millisSinceMidnightAt(row.windowStartTime),
-    endMillisSinceMidnight: millisSinceMidnightAt(row.windowEndTime),
-  }));
+function candidateWindowsByPersonIdOf(
+  rows: CandidateWindowRow[],
+): Map<string, CandidateWindow[]> {
+  const windowsByPersonId = new Map<string, CandidateWindow[]>();
+
+  for (const row of rows) {
+    const windowsOfPerson = windowsByPersonId.get(row.personId) ?? [];
+
+    windowsOfPerson.push({
+      candidate: {
+        meetingId: row.meetingId,
+        asServant: row.asServant,
+        windowKind: row.windowKind,
+      },
+      isoWeekday: row.isoWeekday,
+      startMillisSinceMidnight: millisSinceMidnightAt(row.windowStartTime),
+      endMillisSinceMidnight: millisSinceMidnightAt(row.windowEndTime),
+    });
+    windowsByPersonId.set(row.personId, windowsOfPerson);
+  }
+
+  return windowsByPersonId;
 }
 
 function millisSinceMidnightAt(timeOfDay: string): number {
@@ -133,14 +145,13 @@ function millisSinceMidnightAt(timeOfDay: string): number {
 
 function candidatesWhoseWindowHolds(
   presence: PersonPresence,
-  candidateWindows: CandidateWindow[],
+  windowsOfPerson: CandidateWindow[],
 ): PresenceCandidate[] {
   const { isoWeekday, timeOfDay } = cairoWallClockAt(presence.at);
   const presenceMillisSinceMidnight = millisSinceMidnightAt(timeOfDay);
 
-  return candidateWindows
+  return windowsOfPerson
     .filter((window) =>
-      window.personId === presence.personId &&
       window.isoWeekday === isoWeekday &&
       window.startMillisSinceMidnight <= presenceMillisSinceMidnight &&
       presenceMillisSinceMidnight < window.endMillisSinceMidnight
