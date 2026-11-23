@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { test, TestContext } from "node:test";
 import { loadConfig } from "../src/config";
 
-const completeConfig = {
+const configWithoutPollInterval = {
   biotime: {
     baseUrl: "http://127.0.0.1:8090",
     username: "api-user",
@@ -28,15 +28,18 @@ async function configFileWith(t: TestContext, content: unknown) {
 }
 
 test("keeps the cursor file next to the config file when its path is relative", async (t) => {
-  const { directory, path } = await configFileWith(t, completeConfig);
+  const { directory, path } = await configFileWith(t, {
+    ...configWithoutPollInterval,
+    cursorFile: join("state", "cursor.json"),
+  });
 
   const config = await loadConfig(path);
 
-  assert.equal(config.cursorFile, join(directory, "cursor.json"));
+  assert.equal(config.cursorFile, join(directory, "state", "cursor.json"));
 });
 
 test("polls every 20 seconds unless the config says otherwise", async (t) => {
-  const { path } = await configFileWith(t, completeConfig);
+  const { path } = await configFileWith(t, configWithoutPollInterval);
 
   const config = await loadConfig(path);
 
@@ -45,8 +48,10 @@ test("polls every 20 seconds unless the config says otherwise", async (t) => {
 
 test("names the missing setting when the config is incomplete", async (t) => {
   const { path } = await configFileWith(t, {
-    ...completeConfig,
-    recordPunchesFunction: { url: completeConfig.recordPunchesFunction.url },
+    ...configWithoutPollInterval,
+    recordPunchesFunction: {
+      url: configWithoutPollInterval.recordPunchesFunction.url,
+    },
   });
 
   await assert.rejects(loadConfig(path), /recordPunchesFunction\.secret/);
