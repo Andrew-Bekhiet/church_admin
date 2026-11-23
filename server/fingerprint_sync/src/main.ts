@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
+import { isSea } from "node:sea";
 import { parseArgs } from "node:util";
 import { isReadableBiotimeTime } from "./biotime/biotime_time";
 import { FingerprintSyncConfig, loadConfig } from "./config";
@@ -8,56 +9,59 @@ import { logError, logInfo } from "./log";
 import { pollUntilStopped } from "./poll_until_stopped";
 
 const USAGE = `Usage:
-  node lib/main.js [--config <path>]
+  fingerprint-sync [--config <path>]
       Forward new punches every pollIntervalSeconds until stopped.
-  node lib/main.js send-range --from "YYYY-MM-DD HH:mm:ss" --to "YYYY-MM-DD HH:mm:ss" [--config <path>]
-      Send the punches between two BioTime server local times once, then exit.`;
+  fingerprint-sync check [--config <path>]
+      Log in to BioTime and send one empty request to recordFingerprintPunches, then exit.
+  fingerprint-sync send-range --from "YYYY-MM-DD HH:mm:ss" --to "YYYY-MM-DD HH:mm:ss" [--config <path>]
+      Send the punches between two BioTime server local times once, then exit.
 
-const DEFAULT_CONFIG_PATH = resolve(__dirname, "..", "config.json");
+Without --config, config.json next to the executable is used.
+Run from source, use "node lib/main.js" in place of "fingerprint-sync".`;
+
+const EXIT_USAGE = 2;
 
 async function main(): Promise<number> {
   const { values, positionals } = parseArgs({
     allowPositionals: true,
     options: {
-      config: { type: "string", default: DEFAULT_CONFIG_PATH },
+      config: { type: "string", default: defaultConfigPath() },
       from: { type: "string" },
       to: { type: "string" },
     },
   });
+  const command = positionals[0];
+  const isSendRangeWithReadableTimes = command === "send-range" &&
+    values.from !== undefined && isReadableBiotimeTime(values.from) &&
+    values.to !== undefined && isReadableBiotimeTime(values.to);
+
+  if (command !== undefined && command !== "check" && !isSendRangeWithReadableTimes) {
+    console.error(USAGE);
+
+    return EXIT_USAGE;
+  }
+
   const config = await loadConfig(resolve(values.config), process.env);
   const sync = new FingerprintSync(config, () => DateTime.local());
 
-  switch (positionals[0]) {
-    case undefined:
-      await pollUntilSignalled(sync, config);
-
-      return 0;
-    case "send-range":
-      return await sendRangeIfReadable(sync, values.from, values.to);
-    default:
-      console.error(USAGE);
-
-      return 2;
+  if (command === "check") {
+    await sync.verifyBiotimeAndFunctionAccess();
+    logInfo("BioTime and recordFingerprintPunches both accept this config");
+  } else if (command === "send-range") {
+    await sync.sendPunchesBetween(values.from!, values.to!);
+  } else {
+    await pollUntilSignalled(sync, config);
   }
-}
-
-async function sendRangeIfReadable(
-  sync: FingerprintSync,
-  from: string | undefined,
-  to: string | undefined,
-): Promise<number> {
-  if (
-    from === undefined || to === undefined ||
-    !isReadableBiotimeTime(from) || !isReadableBiotimeTime(to)
-  ) {
-    console.error(USAGE);
-
-    return 2;
-  }
-
-  await sync.sendPunchesBetween(from, to);
 
   return 0;
+}
+
+function defaultConfigPath(): string {
+  const folderHoldingConfig = isSea()
+    ? dirname(process.execPath)
+    : resolve(__dirname, "..");
+
+  return resolve(folderHoldingConfig, "config.json");
 }
 
 async function pollUntilSignalled(

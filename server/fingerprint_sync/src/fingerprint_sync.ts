@@ -90,6 +90,19 @@ export class FingerprintSync {
     );
   }
 
+  async verifyBiotimeAndFunctionAccess(): Promise<void> {
+    await describingFailureAs(
+      "Could not read transactions from BioTime",
+      () => this.biotime.readableTransactionsBetween(
+        this.serverLocalNow().toFormat(BIOTIME_TIME_FORMAT),
+      ),
+    );
+    await describingFailureAs(
+      "recordFingerprintPunches did not accept a request",
+      () => this.recordPunches([]),
+    );
+  }
+
   private async recordPunches(transactions: BiotimeTransaction[]) {
     await this.recordFingerprintPunches.recordPunches(
       transactions.map(punchOf),
@@ -115,6 +128,27 @@ export class FingerprintSync {
 
     return cursorStartingNow;
   }
+}
+
+async function describingFailureAs<T>(
+  failure: string,
+  attempt: () => Promise<T>,
+): Promise<T> {
+  try {
+    return await attempt();
+  } catch (e) {
+    throw new Error(`${failure}: ${messageWithCauses(e)}`, { cause: e });
+  }
+}
+
+function messageWithCauses(error: unknown): string {
+  if (!(error instanceof Error)) {
+    return String(error);
+  }
+
+  return error.cause === undefined
+    ? error.message
+    : `${error.message} (${messageWithCauses(error.cause)})`;
 }
 
 function wasForwardedBefore(transaction: BiotimeTransaction, cursor: Cursor) {
