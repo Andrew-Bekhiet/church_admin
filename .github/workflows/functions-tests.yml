@@ -1,0 +1,55 @@
+name: Cloud Functions tests
+
+on:
+  pull_request:
+    paths:
+      - "server/firebase/functions/**"
+      - "server/hasura/**"
+      - "server/postgres/**"
+      - "server/docker-compose.yml"
+      - ".github/workflows/functions-tests.yml"
+
+  push:
+    branches: [master]
+    paths:
+      - "server/firebase/functions/**"
+      - "server/hasura/**"
+      - "server/postgres/**"
+      - "server/docker-compose.yml"
+      - ".github/workflows/functions-tests.yml"
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: server/firebase/functions
+
+jobs:
+  test:
+    name: Functions tests against a fresh Hasura
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: server/firebase/functions/.nvmrc
+          cache: npm
+          cache-dependency-path: server/firebase/functions/package-lock.json
+
+      - name: Install Firebase Functions dependencies
+        run: npm ci
+
+      - name: Run the tests against Hasura built from this commit's migrations and metadata
+        run: scripts/test_against_fresh_hasura.sh
