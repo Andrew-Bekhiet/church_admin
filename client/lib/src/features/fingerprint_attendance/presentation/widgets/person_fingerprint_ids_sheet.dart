@@ -62,6 +62,7 @@ class _PersonFingerprintIdsSheetState extends State<PersonFingerprintIdsSheet> {
         }
       },
       builder: (context, state) => SingleChildScrollView(
+        reverse: true,
         padding: EdgeInsetsDirectional.only(
           start: 20,
           end: 20,
@@ -113,16 +114,13 @@ class _PersonFingerprintIdsSheetState extends State<PersonFingerprintIdsSheet> {
                     Column(
                       mainAxisSize: .min,
                       children: [
-                        for (final (index, fingerprintId)
-                            in fingerprintIds.indexed) ...[
-                          if (index > 0) const Divider(height: 1),
+                        for (final fingerprintId in fingerprintIds)
                           PersonFingerprintIdTile(
                             fingerprintId: fingerprintId,
                             onRemove: state.acceptsWrites
                                 ? () => _removeIfConfirmed(fingerprintId)
                                 : null,
                           ),
-                        ],
                       ],
                     ),
                   AdvancedTextInput<FingerprintEmployeeCodeError>(
