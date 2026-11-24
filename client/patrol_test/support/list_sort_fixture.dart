@@ -166,8 +166,8 @@ class ListSortFixture {
         ],
         'families': [
           for (final (i, id) in childFamilyIds.indexed)
-            _familyOnStreet(id, 'عائلة ${_letters[i]}', houseNumber: i + 1),
-          _familyOnStreet(familyId, 'عائلة ج', houseNumber: 4),
+            _familyOnStreet(id, 'عائلة ${_letters[i]}', houseCode: '${i + 1}'),
+          _familyOnStreet(familyId, 'عائلة ج', houseCode: '4'),
           for (final (i, id) in parentFamilyIds.indexed)
             {
               'id': id,
@@ -176,7 +176,7 @@ class ListSortFixture {
                 'data': {
                   'areaId': otherAreaId,
                   'streetId': otherAreaStreetIds.first,
-                  'houseNumber': i + 5,
+                  'houseCode': '${i + 5}',
                 },
               },
             },
@@ -232,7 +232,7 @@ class ListSortFixture {
   Map<String, Object> _familyOnStreet(
     String id,
     String name, {
-    required int houseNumber,
+    required String houseCode,
   }) => {
     'id': id,
     'name': name,
@@ -240,7 +240,7 @@ class ListSortFixture {
       'data': {
         'areaId': areaId,
         'streetId': streetId,
-        'houseNumber': houseNumber,
+        'houseCode': houseCode,
       },
     },
   };
