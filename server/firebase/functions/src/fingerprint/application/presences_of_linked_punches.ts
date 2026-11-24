@@ -7,17 +7,17 @@ export async function presencesOfLinkedPunches(
 ): Promise<PersonPresence[]> {
   if (punches.length === 0) return [];
 
-  const personIdsByEmployeeCode = await findPersonIdsByEmployeeCodes([
-    ...new Set(punches.map((punch) => punch.employeeCode)),
+  const personIdsByFingerprintId = await findPersonIdsByEmployeeCodes([
+    ...new Set(punches.map((punch) => punch.fingerprintId)),
   ]);
 
   return punches.flatMap((punch) => {
-    const personId = personIdsByEmployeeCode.get(punch.employeeCode);
+    const personId = personIdsByFingerprintId.get(punch.fingerprintId);
 
     if (personId === undefined) {
       console.warn(
-        "Skipped a punch with an unlinked employee code",
-        punch.employeeCode,
+        "Skipped a punch with an unlinked fingerprint ID",
+        punch.fingerprintId,
         punch.terminalSerial,
       );
 

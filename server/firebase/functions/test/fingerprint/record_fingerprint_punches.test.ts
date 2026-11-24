@@ -111,7 +111,7 @@ describe("recordFingerprintPunches endpoint", () => {
         punches: [
           {
             employeeCode: mina.employeeCode,
-            punchedAt: "2026-11-13T09:28:30+02:00",
+            punchedAtCairoTime: "2026-11-13 09:28:30",
             terminalSerial: "t",
           },
         ],
@@ -156,7 +156,7 @@ describe("recordFingerprintPunches endpoint", () => {
         ...emptyBatch,
         punches: Array.from({ length: 501 }, () => ({
           employeeCode: "1042",
-          punchedAt: "2026-11-13T09:30:00+02:00",
+          punchedAtCairoTime: "2026-11-13 09:30:00",
           terminalSerial: "t",
         })),
       },
@@ -187,7 +187,7 @@ describe("recordFingerprintPunches endpoint", () => {
         punches: [
           {
             employeeCode: "1042",
-            punchedAt: "2026-11-13T09:29:00+02:00",
+            punchedAtCairoTime: "2026-11-13 09:29:00",
             terminalSerial: "t",
           },
         ],

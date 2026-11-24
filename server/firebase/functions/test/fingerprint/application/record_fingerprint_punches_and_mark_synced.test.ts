@@ -26,8 +26,8 @@ const FRIDAY = 5;
 const fridayNoonUtc = instant("2026-11-13T12:00:00Z");
 const fridayEveningUtc = instant("2026-11-13T16:00:00Z");
 
-function punch(employeeCode: string, punchedAt: string) {
-  return { employeeCode, punchedAt, terminalSerial: "test-terminal" };
+function punch(employeeCode: string, punchedAtCairoTime: string) {
+  return { employeeCode, punchedAtCairoTime, terminalSerial: "test-terminal" };
 }
 
 async function syncPunches(punches: unknown[], now: DateTime<true>) {
@@ -47,7 +47,7 @@ describe("recordFingerprintPunches recording rules", () => {
     const mina = await seedMemberWithEmployeeCode(serviceId);
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T09:30:00+02:00")],
+      [punch(mina.employeeCode, "2026-11-13 09:30:00")],
       fridayNoonUtc,
     );
 
@@ -68,7 +68,7 @@ describe("recordFingerprintPunches recording rules", () => {
     const mina = await seedMemberWithEmployeeCode(serviceId);
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T07:30:00+02:00")],
+      [punch(mina.employeeCode, "2026-11-13 07:30:00")],
       fridayNoonUtc,
     );
 
@@ -83,7 +83,7 @@ describe("recordFingerprintPunches recording rules", () => {
     const mina = await seedMemberWithEmployeeCode(serviceId);
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T09:30:00+02:00")],
+      [punch(mina.employeeCode, "2026-11-13 09:30:00")],
       fridayNoonUtc,
     );
 
@@ -98,8 +98,8 @@ describe("recordFingerprintPunches recording rules", () => {
 
     await syncPunches(
       [
-        punch(mina.employeeCode, "2026-11-13T08:10:00+02:00"),
-        punch(mina.employeeCode, "2026-11-13T09:05:00+02:00"),
+        punch(mina.employeeCode, "2026-11-13 08:10:00"),
+        punch(mina.employeeCode, "2026-11-13 09:05:00"),
       ],
       fridayNoonUtc,
     );
@@ -118,7 +118,7 @@ describe("recordFingerprintPunches recording rules", () => {
     const mina = await seedMemberWithEmployeeCode(serviceId);
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T09:00:00+02:00")],
+      [punch(mina.employeeCode, "2026-11-13 09:00:00")],
       fridayNoonUtc,
     );
 
@@ -133,7 +133,7 @@ describe("recordFingerprintPunches recording rules", () => {
     const mina = await seedMemberWithEmployeeCode(serviceId);
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T11:00:00+02:00")],
+      [punch(mina.employeeCode, "2026-11-13 11:00:00")],
       fridayNoonUtc,
     );
 
@@ -150,9 +150,9 @@ describe("recordFingerprintPunches recording rules", () => {
 
     await syncPunches(
       [
-        punch(atStart.employeeCode, "2026-11-13T09:00:00+02:00"),
-        punch(inLastSecond.employeeCode, "2026-11-13T10:59:59+02:00"),
-        punch(atEnd.employeeCode, "2026-11-13T11:00:00+02:00"),
+        punch(atStart.employeeCode, "2026-11-13 09:00:00"),
+        punch(inLastSecond.employeeCode, "2026-11-13 10:59:59"),
+        punch(atEnd.employeeCode, "2026-11-13 11:00:00"),
       ],
       fridayNoonUtc,
     );
@@ -176,7 +176,7 @@ describe("recordFingerprintPunches recording rules", () => {
     const mina = await seedMemberWithEmployeeCode(serviceId);
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-12T09:30:00+02:00")],
+      [punch(mina.employeeCode, "2026-11-12 09:30:00")],
       fridayNoonUtc,
     );
 
@@ -190,7 +190,7 @@ describe("recordFingerprintPunches recording rules", () => {
     const mina = await seedMemberWithEmployeeCode(serviceId);
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T09:30:00+02:00")],
+      [punch(mina.employeeCode, "2026-11-13 09:30:00")],
       fridayNoonUtc,
     );
 
@@ -205,8 +205,8 @@ describe("recordFingerprintPunches recording rules", () => {
 
     await syncPunches(
       [
-        punch(mina.employeeCode, "2026-11-13T08:00:00+02:00"),
-        punch(mina.employeeCode, "2026-11-13T09:30:00+02:00"),
+        punch(mina.employeeCode, "2026-11-13 08:00:00"),
+        punch(mina.employeeCode, "2026-11-13 09:30:00"),
       ],
       fridayNoonUtc,
     );
@@ -222,7 +222,7 @@ describe("recordFingerprintPunches recording rules", () => {
     const outsider = await seedMemberWithEmployeeCode(await seedService());
 
     await syncPunches(
-      [punch(outsider.employeeCode, "2026-11-13T09:30:00+02:00")],
+      [punch(outsider.employeeCode, "2026-11-13 09:30:00")],
       fridayNoonUtc,
     );
 
@@ -240,7 +240,7 @@ describe("recordFingerprintPunches recording rules", () => {
     const mina = await seedMemberWithEmployeeCode(first.serviceId);
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T09:30:00+02:00")],
+      [punch(mina.employeeCode, "2026-11-13 09:30:00")],
       fridayNoonUtc,
     );
 
@@ -257,7 +257,7 @@ describe("recordFingerprintPunches recording rules", () => {
     const servant = await seedServantOnlyOn(serviceId);
 
     await syncPunches(
-      [punch(servant.employeeCode, "2026-11-13T09:30:00+02:00")],
+      [punch(servant.employeeCode, "2026-11-13 09:30:00")],
       fridayNoonUtc,
     );
 
@@ -271,7 +271,7 @@ describe("recordFingerprintPunches recording rules", () => {
     const servant = await seedServantOnlyOn(serviceId);
 
     await syncPunches(
-      [punch(servant.employeeCode, "2026-11-13T09:30:00+02:00")],
+      [punch(servant.employeeCode, "2026-11-13 09:30:00")],
       fridayNoonUtc,
     );
 
@@ -291,7 +291,7 @@ describe("recordFingerprintPunches recording rules", () => {
     const servant = await seedServantOnlyOn(serviceId);
 
     await syncPunches(
-      [punch(servant.employeeCode, "2026-11-13T08:00:00+02:00")],
+      [punch(servant.employeeCode, "2026-11-13 08:00:00")],
       fridayNoonUtc,
     );
 
@@ -306,7 +306,7 @@ describe("recordFingerprintPunches recording rules", () => {
     await makeServantOf(serviceId, mina.personId);
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T09:30:00+02:00")],
+      [punch(mina.employeeCode, "2026-11-13 09:30:00")],
       fridayNoonUtc,
     );
 
@@ -324,8 +324,8 @@ describe("recordFingerprintPunches recording rules", () => {
 
     await syncPunches(
       [
-        punch("code-nobody-holds", "2026-11-13T09:30:00+02:00"),
-        punch(mina.employeeCode, "2026-11-13T09:31:00+02:00"),
+        punch("code-nobody-holds", "2026-11-13 09:30:00"),
+        punch(mina.employeeCode, "2026-11-13 09:31:00"),
       ],
       fridayNoonUtc,
     );
@@ -342,8 +342,8 @@ describe("recordFingerprintPunches recording rules", () => {
 
     await syncPunches(
       [
-        punch(mina.employeeCode, "2026-11-13T08:00:00+02:00"),
-        punch(mina.employeeCode, "2026-11-13T09:30:00+02:00"),
+        punch(mina.employeeCode, "2026-11-13 08:00:00"),
+        punch(mina.employeeCode, "2026-11-13 09:30:00"),
       ],
       fridayNoonUtc,
     );
@@ -352,7 +352,7 @@ describe("recordFingerprintPunches recording rules", () => {
     assert.deepEqual(await communionDaysOf(mina.personId), []);
   });
 
-  it("skips a punch without a zone offset and still records the rest of the batch", async () => {
+  it("skips a punch whose time carries a zone offset and still records the rest of the batch", async () => {
     const { serviceId } = await seedScheduledMeeting(
       { isoWeekday: FRIDAY, communion: ["07:00", "09:00"], attendance: ["09:00", "11:00"] },
     );
@@ -360,8 +360,8 @@ describe("recordFingerprintPunches recording rules", () => {
 
     await syncPunches(
       [
-        punch(mina.employeeCode, "2026-11-13T07:10:00"),
-        punch(mina.employeeCode, "2026-11-13T09:31:00+02:00"),
+        punch(mina.employeeCode, "2026-11-13T09:10:00+02:00"),
+        punch(mina.employeeCode, "2026-11-13 09:31:00"),
       ],
       fridayNoonUtc,
     );
@@ -377,7 +377,7 @@ describe("recordFingerprintPunches recording rules", () => {
       { isoWeekday: FRIDAY, communion: ["07:00", "09:00"], attendance: ["09:00", "11:00"] },
     );
     const mina = await seedMemberWithEmployeeCode(serviceId);
-    const samePunch = punch(mina.employeeCode, "2026-11-13T09:30:00+02:00");
+    const samePunch = punch(mina.employeeCode, "2026-11-13 09:30:00");
 
     await syncPunches([samePunch, samePunch], fridayNoonUtc);
 
@@ -403,8 +403,8 @@ describe("recordFingerprintPunches recording rules", () => {
 
     await syncPunches(
       [
-        punch(amira.employeeCode, "2026-11-13T09:10:00+02:00"),
-        punch(bishoy.employeeCode, "2026-11-13T10:40:00+02:00"),
+        punch(amira.employeeCode, "2026-11-13 09:10:00"),
+        punch(bishoy.employeeCode, "2026-11-13 10:40:00"),
       ],
       fridayNoonUtc,
     );
@@ -440,8 +440,8 @@ describe("recordFingerprintPunches recording rules", () => {
 
     await syncPunches(
       [
-        punch(amira.employeeCode, "2026-11-13T09:30:00+02:00"),
-        punch(bishoy.employeeCode, "2026-11-13T17:30:00+02:00"),
+        punch(amira.employeeCode, "2026-11-13 09:30:00"),
+        punch(bishoy.employeeCode, "2026-11-13 17:30:00"),
       ],
       fridayEveningUtc,
     );
@@ -468,8 +468,8 @@ describe("recordFingerprintPunches recording rules", () => {
 
     await syncPunches(
       [
-        punch(mina.employeeCode, "2026-11-13T09:30:00+02:00"),
-        punch(mina.employeeCode, "2026-11-13T17:30:00+02:00"),
+        punch(mina.employeeCode, "2026-11-13 09:30:00"),
+        punch(mina.employeeCode, "2026-11-13 17:30:00"),
       ],
       fridayEveningUtc,
     );
@@ -494,11 +494,11 @@ describe("recordFingerprintPunches earliest time and last writer", () => {
     const mina = await seedMemberWithEmployeeCode(serviceId);
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T09:10:00+02:00")],
+      [punch(mina.employeeCode, "2026-11-13 09:10:00")],
       fridayNoonUtc,
     );
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T10:40:00+02:00")],
+      [punch(mina.employeeCode, "2026-11-13 10:40:00")],
       fridayNoonUtc,
     );
 
@@ -516,8 +516,8 @@ describe("recordFingerprintPunches earliest time and last writer", () => {
 
     await syncPunches(
       [
-        punch(mina.employeeCode, "2026-11-13T10:40:00+02:00"),
-        punch(mina.employeeCode, "2026-11-13T09:10:00+02:00"),
+        punch(mina.employeeCode, "2026-11-13 10:40:00"),
+        punch(mina.employeeCode, "2026-11-13 09:10:00"),
       ],
       fridayNoonUtc,
     );
@@ -535,11 +535,11 @@ describe("recordFingerprintPunches earliest time and last writer", () => {
     const mina = await seedMemberWithEmployeeCode(serviceId);
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T10:40:00+02:00")],
+      [punch(mina.employeeCode, "2026-11-13 10:40:00")],
       fridayNoonUtc,
     );
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T09:10:00+02:00")],
+      [punch(mina.employeeCode, "2026-11-13 09:10:00")],
       fridayNoonUtc,
     );
 
@@ -563,7 +563,7 @@ describe("recordFingerprintPunches earliest time and last writer", () => {
     });
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T09:30:00+02:00")],
+      [punch(mina.employeeCode, "2026-11-13 09:30:00")],
       fridayNoonUtc,
     );
 
@@ -589,7 +589,7 @@ describe("recordFingerprintPunches earliest time and last writer", () => {
     });
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T09:30:00+02:00")],
+      [punch(mina.employeeCode, "2026-11-13 09:30:00")],
       fridayNoonUtc,
     );
 
@@ -609,11 +609,11 @@ describe("recordFingerprintPunches earliest time and last writer", () => {
     const mina = await seedMemberWithEmployeeCode(serviceId);
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T07:10:00+02:00")],
+      [punch(mina.employeeCode, "2026-11-13 07:10:00")],
       fridayNoonUtc,
     );
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T08:10:00+02:00")],
+      [punch(mina.employeeCode, "2026-11-13 08:10:00")],
       fridayNoonUtc,
     );
 
@@ -629,7 +629,7 @@ describe("recordFingerprintPunches time limits", () => {
     const mina = await seedMemberWithEmployeeCode(serviceId);
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T12:06:00Z")],
+      [punch(mina.employeeCode, "2026-11-13 14:06:00")],
       fridayNoonUtc,
     );
 
@@ -643,7 +643,7 @@ describe("recordFingerprintPunches time limits", () => {
     const mina = await seedMemberWithEmployeeCode(serviceId);
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T12:04:00Z")],
+      [punch(mina.employeeCode, "2026-11-13 14:04:00")],
       fridayNoonUtc,
     );
 
@@ -657,7 +657,7 @@ describe("recordFingerprintPunches time limits", () => {
     const mina = await seedMemberWithEmployeeCode(serviceId);
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T12:00:00Z")],
+      [punch(mina.employeeCode, "2026-11-13 14:00:00")],
       instant("2026-11-23T12:00:01Z"),
     );
 
@@ -671,7 +671,7 @@ describe("recordFingerprintPunches time limits", () => {
     const mina = await seedMemberWithEmployeeCode(serviceId);
 
     await syncPunches(
-      [punch(mina.employeeCode, "2026-11-13T12:00:00Z")],
+      [punch(mina.employeeCode, "2026-11-13 14:00:00")],
       instant("2026-11-23T12:00:00Z"),
     );
 
@@ -680,114 +680,97 @@ describe("recordFingerprintPunches time limits", () => {
 });
 
 describe("recordFingerprintPunches daylight saving", () => {
-  it("records 08:30 UTC on the Friday before clocks go forward, which is 10:30 in Cairo", async () => {
-    const { serviceId } = await seedScheduledMeeting(
-      { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
-    );
-    const mina = await seedMemberWithEmployeeCode(serviceId);
-
-    await syncPunches(
-      [punch(mina.employeeCode, "2026-04-17T08:30:00Z")],
-      instant("2026-04-17T08:31:00Z"),
-    );
-
-    assert.equal((await attendanceOf(mina.personId)).length, 1);
-  });
-
-  it("ignores 08:30 UTC on the Friday clocks go forward, which is 11:30 in Cairo", async () => {
-    const { serviceId } = await seedScheduledMeeting(
-      { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
-    );
-    const mina = await seedMemberWithEmployeeCode(serviceId);
-
-    await syncPunches(
-      [punch(mina.employeeCode, "2026-04-24T08:30:00Z")],
-      instant("2026-04-24T08:31:00Z"),
-    );
-
-    assert.equal((await attendanceOf(mina.personId)).length, 0);
-  });
-
-  it("ignores 08:30 UTC on the Friday before clocks go back, which is 11:30 in Cairo", async () => {
-    const { serviceId } = await seedScheduledMeeting(
-      { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
-    );
-    const mina = await seedMemberWithEmployeeCode(serviceId);
-
-    await syncPunches(
-      [punch(mina.employeeCode, "2026-10-23T08:30:00Z")],
-      instant("2026-10-23T08:31:00Z"),
-    );
-
-    assert.equal((await attendanceOf(mina.personId)).length, 0);
-  });
-
-  it("records 08:30 UTC on the Friday after clocks go back, which is 10:30 in Cairo", async () => {
-    const { serviceId } = await seedScheduledMeeting(
-      { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
-    );
-    const mina = await seedMemberWithEmployeeCode(serviceId);
-
-    await syncPunches(
-      [punch(mina.employeeCode, "2026-10-30T08:30:00Z")],
-      instant("2026-10-30T08:31:00Z"),
-    );
-
-    assert.equal((await attendanceOf(mina.personId)).length, 1);
-  });
-
-  it("keeps the first pass when both passes of the hour repeated when clocks go back are sent", async () => {
+  async function recordedTimesOfPunchAt(
+    punchedAtCairoTime: string,
+    attendance: [string, string],
+    now: DateTime<true>,
+  ): Promise<string[]> {
     const { serviceId } = await seedScheduledMeeting({
-      isoWeekday: 4,
-      attendance: ["23:00", "23:59"],
+      isoWeekday: cairoWallClockAt(now).isoWeekday,
+      attendance,
     });
     const mina = await seedMemberWithEmployeeCode(serviceId);
 
-    await syncPunches(
-      [
-        punch(mina.employeeCode, "2026-10-29T21:30:00Z"),
-        punch(mina.employeeCode, "2026-10-29T20:30:00Z"),
-      ],
-      instant("2026-10-29T22:00:00Z"),
-    );
+    await syncPunches([punch(mina.employeeCode, punchedAtCairoTime)], now);
 
+    return (await attendanceOf(mina.personId)).map((row) => row.at);
+  }
+
+  it("records 10:30 on the Friday before clocks go forward as 08:30 UTC", async () => {
     assert.deepEqual(
-      (await attendanceOf(mina.personId)).map((row) => row.at),
+      await recordedTimesOfPunchAt(
+        "2026-04-17 10:30:00",
+        ["09:00", "11:00"],
+        instant("2026-04-17T08:31:00Z"),
+      ),
+      ["2026-04-17T08:30:00Z"],
+    );
+  });
+
+  it("records 10:30 on the Friday clocks go forward as 07:30 UTC", async () => {
+    assert.deepEqual(
+      await recordedTimesOfPunchAt(
+        "2026-04-24 10:30:00",
+        ["09:00", "11:00"],
+        instant("2026-04-24T07:31:00Z"),
+      ),
+      ["2026-04-24T07:30:00Z"],
+    );
+  });
+
+  it("records 10:30 on the Friday before clocks go back as 07:30 UTC", async () => {
+    assert.deepEqual(
+      await recordedTimesOfPunchAt(
+        "2026-10-23 10:30:00",
+        ["09:00", "11:00"],
+        instant("2026-10-23T07:31:00Z"),
+      ),
+      ["2026-10-23T07:30:00Z"],
+    );
+  });
+
+  it("records 10:30 on the Friday after clocks go back as 08:30 UTC", async () => {
+    assert.deepEqual(
+      await recordedTimesOfPunchAt(
+        "2026-10-30 10:30:00",
+        ["09:00", "11:00"],
+        instant("2026-10-30T08:31:00Z"),
+      ),
+      ["2026-10-30T08:30:00Z"],
+    );
+  });
+
+  it("records a punch in the hour repeated when clocks go back at its first pass", async () => {
+    assert.deepEqual(
+      await recordedTimesOfPunchAt(
+        "2026-10-29 23:30:00",
+        ["23:00", "23:59"],
+        instant("2026-10-29T22:00:00Z"),
+      ),
       ["2026-10-29T20:30:00Z"],
     );
   });
 
-  it("records a punch from the second pass of the hour repeated when clocks go back when it is sent alone", async () => {
-    const { serviceId } = await seedScheduledMeeting({
-      isoWeekday: 4,
-      attendance: ["23:00", "23:59"],
-    });
-    const mina = await seedMemberWithEmployeeCode(serviceId);
-
-    await syncPunches(
-      [punch(mina.employeeCode, "2026-10-29T21:30:00Z")],
-      instant("2026-10-29T22:00:00Z"),
-    );
-
+  it("records a punch in the hour skipped when clocks go forward an hour later, on the new day", async () => {
     assert.deepEqual(
-      (await attendanceOf(mina.personId)).map((row) => row.at),
-      ["2026-10-29T21:30:00Z"],
+      await recordedTimesOfPunchAt(
+        "2026-04-24 00:30:00",
+        ["01:00", "02:00"],
+        instant("2026-04-23T22:31:00Z"),
+      ),
+      ["2026-04-23T22:30:00Z"],
     );
   });
 
   it("records a punch just after the hour skipped when clocks go forward on the new day", async () => {
-    const { serviceId } = await seedScheduledMeeting({
-      isoWeekday: FRIDAY,
-      attendance: ["01:00", "02:00"],
-    });
-    const mina = await seedMemberWithEmployeeCode(serviceId);
-
-    await syncPunches(
-      [punch(mina.employeeCode, "2026-04-23T22:10:00Z")],
-      instant("2026-04-23T22:11:00Z"),
+    assert.deepEqual(
+      await recordedTimesOfPunchAt(
+        "2026-04-24 01:10:00",
+        ["01:00", "02:00"],
+        instant("2026-04-23T22:11:00Z"),
+      ),
+      ["2026-04-23T22:10:00Z"],
     );
-
-    assert.equal((await attendanceOf(mina.personId)).length, 1);
   });
 
   it("records the Cairo date, not the UTC date, as the communion day of a punch in the communion window after Cairo midnight", async () => {
@@ -800,8 +783,8 @@ describe("recordFingerprintPunches daylight saving", () => {
 
     await syncPunches(
       [
-        punch(mina.employeeCode, "2026-11-12T22:30:00Z"),
-        punch(mina.employeeCode, "2026-11-13T00:30:00Z"),
+        punch(mina.employeeCode, "2026-11-13 00:30:00"),
+        punch(mina.employeeCode, "2026-11-13 02:30:00"),
       ],
       instant("2026-11-13T01:00:00Z"),
     );
@@ -840,7 +823,7 @@ describe("recordFingerprintPunches warnings", () => {
 
     assert.equal(
       await warningCountWhileSyncing(
-        [punch(mina.employeeCode, "2026-11-13T09:30:00+02:00")],
+        [punch(mina.employeeCode, "2026-11-13 09:30:00")],
         biotimeClockMatchingCairo,
       ),
       0,
@@ -855,7 +838,7 @@ describe("recordFingerprintPunches warnings", () => {
 
     assert.equal(
       await warningCountWhileSyncing(
-        [punch(mina.employeeCode, "2026-11-13T12:30:00+02:00")],
+        [punch(mina.employeeCode, "2026-11-13 12:30:00")],
         biotimeClockMatchingCairo,
       ),
       1,
@@ -874,7 +857,7 @@ describe("recordFingerprintPunches warnings", () => {
 
     assert.equal(
       await warningCountWhileSyncing(
-        [punch(mina.employeeCode, "2026-11-13T09:30:00+02:00")],
+        [punch(mina.employeeCode, "2026-11-13 09:30:00")],
         biotimeClockMatchingCairo,
       ),
       1,
@@ -886,7 +869,7 @@ describe("recordFingerprintPunches warnings", () => {
       { isoWeekday: FRIDAY, communion: ["07:00", "09:00"], attendance: ["09:00", "11:00"] },
     );
     const mina = await seedMemberWithEmployeeCode(serviceId);
-    const samePunch = punch(mina.employeeCode, "2026-11-13T12:30:00+02:00");
+    const samePunch = punch(mina.employeeCode, "2026-11-13 12:30:00");
 
     assert.equal(
       await warningCountWhileSyncing(
@@ -906,7 +889,7 @@ describe("recordFingerprintPunches warnings", () => {
       first.serviceId,
     );
     const mina = await seedMemberWithEmployeeCode(first.serviceId);
-    const samePunch = punch(mina.employeeCode, "2026-11-13T09:30:00+02:00");
+    const samePunch = punch(mina.employeeCode, "2026-11-13 09:30:00");
 
     assert.equal(
       await warningCountWhileSyncing(
@@ -920,7 +903,7 @@ describe("recordFingerprintPunches warnings", () => {
   it("warns about an unlinked employee code", async () => {
     assert.equal(
       await warningCountWhileSyncing(
-        [punch("code-nobody-holds", "2026-11-13T09:30:00+02:00")],
+        [punch("code-nobody-holds", "2026-11-13 09:30:00")],
         biotimeClockMatchingCairo,
       ),
       1,
@@ -999,8 +982,8 @@ describe("recordFingerprintPunches Hasura requests", () => {
 
     assert.deepEqual(
       await hasuraOperationsWhileSyncing([
-        punch(amira.employeeCode, "2026-11-13T09:10:00+02:00"),
-        punch(bishoy.employeeCode, "2026-11-13T10:40:00+02:00"),
+        punch(amira.employeeCode, "2026-11-13 09:10:00"),
+        punch(bishoy.employeeCode, "2026-11-13 10:40:00"),
       ]),
       [
         "findPersonIdsByEmployeeCodes",
@@ -1014,7 +997,7 @@ describe("recordFingerprintPunches Hasura requests", () => {
   it("asks for no candidates and writes no presence when no punch of the batch is linked", async () => {
     assert.deepEqual(
       await hasuraOperationsWhileSyncing([
-        punch("code-nobody-holds", "2026-11-13T09:30:00+02:00"),
+        punch("code-nobody-holds", "2026-11-13 09:30:00"),
       ]),
       [
         "findPersonIdsByEmployeeCodes",
