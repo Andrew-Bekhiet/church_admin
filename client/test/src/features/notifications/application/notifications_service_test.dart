@@ -403,6 +403,9 @@ void main() {
                   [RecordingAnalyticsProvider()],
                   FakeLoggingService(),
                 ),
+                functionsService: globalProviderContainer.read(
+                  functionsServiceProvider,
+                ),
                 settings: MockNotificationsSettingsStorage(),
                 localNotificationsPlugin: globalProviderContainer.read(
                   localNotificationsPluginProvider,
@@ -540,61 +543,6 @@ void main() {
                   ),
                 ],
               );
-            },
-          );
-
-          test(
-            'registerFCMTokenAndListenForChanges',
-            () async {
-              final unit = _createNewUnit();
-              addTearDown(unit.dispose);
-
-              const expectedToken = '_token_';
-              const expectedUid = '_uid_';
-
-              when(
-                globalProviderContainer
-                    .read(firebaseMessagingProvider)
-                    .isSupported(),
-              ).thenAnswer((_) async => true);
-              when(
-                globalProviderContainer
-                    .read(firebaseMessagingProvider)
-                    // The service still reads FCM tokens rather than installation IDs
-                    // ignore: deprecated_member_use
-                    .getToken(),
-              ).thenAnswer((_) async => expectedToken);
-
-              final authBloc = globalProviderContainer.read(authBlocProvider);
-              when(authBloc.currentUserData).thenReturn(
-                const User(
-                  uid: expectedUid,
-                  name: 'n',
-                  email: 'e',
-                ),
-              );
-
-              final fcmTokens = globalProviderContainer
-                  .read(databaseServiceProvider)
-                  .fcmTokens;
-              when(
-                fcmTokens.registerToken(
-                  uid: expectedUid,
-                  token: expectedToken,
-                ),
-              ).thenAnswer((_) async => null);
-
-              await expectLater(
-                unit.registerFCMTokenAndListenForChanges(),
-                completion(isTrue),
-              );
-
-              verify(
-                fcmTokens.registerToken(
-                  uid: expectedUid,
-                  token: expectedToken,
-                ),
-              ).called(1);
             },
           );
         },
@@ -925,6 +873,7 @@ NotificationsService _createNewUnit() {
       FakeLoggingService(),
     ),
     databaseService: globalProviderContainer.read(databaseServiceProvider),
+    functionsService: globalProviderContainer.read(functionsServiceProvider),
     localNotificationsPlugin: globalProviderContainer.read(
       localNotificationsPluginProvider,
     ),

@@ -6,23 +6,21 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 
 import 'dart:async' as _i11;
-import 'dart:convert' as _i21;
+import 'dart:convert' as _i20;
 import 'dart:io' as _i9;
-import 'dart:typed_data' as _i20;
+import 'dart:typed_data' as _i19;
 
 import 'package:bloc/bloc.dart' as _i16;
 import 'package:church_admin/church_admin.dart' as _i4;
-import 'package:church_admin/src/core/services/database/gql_definintions/fcm_tokens/__generated__/fragments.gql.dart'
-    as _i17;
 import 'package:cloud_functions/cloud_functions.dart' as _i5;
 import 'package:dio/dio.dart' as _i6;
 import 'package:file/file.dart' as _i7;
 import 'package:firebase_core/firebase_core.dart' as _i2;
 import 'package:firebase_messaging/firebase_messaging.dart' as _i3;
 import 'package:flutter_cache_manager/src/cache_managers/base_cache_manager.dart'
-    as _i18;
+    as _i17;
 import 'package:flutter_cache_manager/src/result/file_info.dart' as _i8;
-import 'package:flutter_cache_manager/src/result/file_response.dart' as _i19;
+import 'package:flutter_cache_manager/src/result/file_response.dart' as _i18;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart'
     as _i13;
 import 'package:mockito/mockito.dart' as _i1;
@@ -1272,14 +1270,14 @@ class MockFcmTokensDAO extends _i1.Mock implements _i4.FcmTokensDAO {
   ) as _i4.DBGraphQLClient);
 
   @override
-  _i11.Future<_i17.Fragment_FcmToken?> registerToken({
+  _i11.Future<void> deleteByUidAndToken({
     required String? uid,
     required String? token,
   }) => (super.noSuchMethod(
-    Invocation.method(#registerToken, [], {#uid: uid, #token: token}),
-    returnValue: _i11.Future<_i17.Fragment_FcmToken?>.value(),
-    returnValueForMissingStub: _i11.Future<_i17.Fragment_FcmToken?>.value(),
-  ) as _i11.Future<_i17.Fragment_FcmToken?>);
+    Invocation.method(#deleteByUidAndToken, [], {#uid: uid, #token: token}),
+    returnValue: _i11.Future<void>.value(),
+    returnValueForMissingStub: _i11.Future<void>.value(),
+  ) as _i11.Future<void>);
 }
 
 /// A class which mocks [FunctionsService].
@@ -1431,6 +1429,14 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
   _i11.Future<void> applyInvitationCode(String? invitationCode) =>
       (super.noSuchMethod(
         Invocation.method(#applyInvitationCode, [invitationCode]),
+        returnValue: _i11.Future<void>.value(),
+        returnValueForMissingStub: _i11.Future<void>.value(),
+      ) as _i11.Future<void>);
+
+  @override
+  _i11.Future<void> registerFirebaseInstallation(String? installationId) =>
+      (super.noSuchMethod(
+        Invocation.method(#registerFirebaseInstallation, [installationId]),
         returnValue: _i11.Future<void>.value(),
         returnValueForMissingStub: _i11.Future<void>.value(),
       ) as _i11.Future<void>);
@@ -1756,15 +1762,19 @@ class MockNotificationsService extends _i1.Mock
   ) as _i11.Future<void>);
 
   @override
-  _i11.Future<bool> registerFCMTokenAndListenForChanges({
-    String? cachedToken,
-  }) => (super.noSuchMethod(
-    Invocation.method(#registerFCMTokenAndListenForChanges, [], {
-      #cachedToken: cachedToken,
-    }),
-    returnValue: _i11.Future<bool>.value(false),
-    returnValueForMissingStub: _i11.Future<bool>.value(false),
-  ) as _i11.Future<bool>);
+  _i11.Future<void> registerThisDeviceForPushNotifications() =>
+      (super.noSuchMethod(
+        Invocation.method(#registerThisDeviceForPushNotifications, []),
+        returnValue: _i11.Future<void>.value(),
+        returnValueForMissingStub: _i11.Future<void>.value(),
+      ) as _i11.Future<void>);
+
+  @override
+  _i11.Future<void> stopPushNotificationsToThisDevice() => (super.noSuchMethod(
+    Invocation.method(#stopPushNotificationsToThisDevice, []),
+    returnValue: _i11.Future<void>.value(),
+    returnValueForMissingStub: _i11.Future<void>.value(),
+  ) as _i11.Future<void>);
 
   @override
   _i11.Future<bool> requestNotificationsPermission() => (super.noSuchMethod(
@@ -1841,7 +1851,7 @@ class MockNotificationsService extends _i1.Mock
 /// A class which mocks [BaseCacheManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockBaseCacheManager extends _i1.Mock implements _i18.BaseCacheManager {
+class MockBaseCacheManager extends _i1.Mock implements _i17.BaseCacheManager {
   @override
   _i11.Future<_i7.File> getSingleFile(
     String? url, {
@@ -1883,7 +1893,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i18.BaseCacheManager {
   ) as _i11.Stream<_i8.FileInfo>);
 
   @override
-  _i11.Stream<_i19.FileResponse> getFileStream(
+  _i11.Stream<_i18.FileResponse> getFileStream(
     String? url, {
     String? key,
     Map<String, String>? headers,
@@ -1894,9 +1904,9 @@ class MockBaseCacheManager extends _i1.Mock implements _i18.BaseCacheManager {
       [url],
       {#key: key, #headers: headers, #withProgress: withProgress},
     ),
-    returnValue: _i11.Stream<_i19.FileResponse>.empty(),
-    returnValueForMissingStub: _i11.Stream<_i19.FileResponse>.empty(),
-  ) as _i11.Stream<_i19.FileResponse>);
+    returnValue: _i11.Stream<_i18.FileResponse>.empty(),
+    returnValueForMissingStub: _i11.Stream<_i18.FileResponse>.empty(),
+  ) as _i11.Stream<_i18.FileResponse>);
 
   @override
   _i11.Future<_i8.FileInfo> downloadFile(
@@ -1957,7 +1967,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i18.BaseCacheManager {
   @override
   _i11.Future<_i7.File> putFile(
     String? url,
-    _i20.Uint8List? fileBytes, {
+    _i19.Uint8List? fileBytes, {
     String? key,
     String? eTag,
     Duration? maxAge = const Duration(days: 30),
@@ -2239,7 +2249,7 @@ class MockFile extends _i1.Mock implements _i7.File {
   _i11.Future<_i7.File> writeAsString(
     String? contents, {
     _i9.FileMode? mode = _i9.FileMode.write,
-    _i21.Encoding? encoding = const _i21.Utf8Codec(),
+    _i20.Encoding? encoding = const _i20.Utf8Codec(),
     bool? flush = false,
   }) => (super.noSuchMethod(
     Invocation.method(
@@ -2510,7 +2520,7 @@ class MockFile extends _i1.Mock implements _i7.File {
   @override
   _i9.IOSink openWrite({
     _i9.FileMode? mode = _i9.FileMode.write,
-    _i21.Encoding? encoding = const _i21.Utf8Codec(),
+    _i20.Encoding? encoding = const _i20.Utf8Codec(),
   }) => (super.noSuchMethod(
     Invocation.method(#openWrite, [], {#mode: mode, #encoding: encoding}),
     returnValue: _FakeIOSink_39(
@@ -2524,24 +2534,24 @@ class MockFile extends _i1.Mock implements _i7.File {
   ) as _i9.IOSink);
 
   @override
-  _i11.Future<_i20.Uint8List> readAsBytes() => (super.noSuchMethod(
+  _i11.Future<_i19.Uint8List> readAsBytes() => (super.noSuchMethod(
     Invocation.method(#readAsBytes, []),
-    returnValue: _i11.Future<_i20.Uint8List>.value(_i20.Uint8List(0)),
-    returnValueForMissingStub: _i11.Future<_i20.Uint8List>.value(
-      _i20.Uint8List(0),
+    returnValue: _i11.Future<_i19.Uint8List>.value(_i19.Uint8List(0)),
+    returnValueForMissingStub: _i11.Future<_i19.Uint8List>.value(
+      _i19.Uint8List(0),
     ),
-  ) as _i11.Future<_i20.Uint8List>);
+  ) as _i11.Future<_i19.Uint8List>);
 
   @override
-  _i20.Uint8List readAsBytesSync() => (super.noSuchMethod(
+  _i19.Uint8List readAsBytesSync() => (super.noSuchMethod(
     Invocation.method(#readAsBytesSync, []),
-    returnValue: _i20.Uint8List(0),
-    returnValueForMissingStub: _i20.Uint8List(0),
-  ) as _i20.Uint8List);
+    returnValue: _i19.Uint8List(0),
+    returnValueForMissingStub: _i19.Uint8List(0),
+  ) as _i19.Uint8List);
 
   @override
   _i11.Future<String> readAsString({
-    _i21.Encoding? encoding = const _i21.Utf8Codec(),
+    _i20.Encoding? encoding = const _i20.Utf8Codec(),
   }) => (super.noSuchMethod(
     Invocation.method(#readAsString, [], {#encoding: encoding}),
     returnValue: _i11.Future<String>.value(
@@ -2559,7 +2569,7 @@ class MockFile extends _i1.Mock implements _i7.File {
   ) as _i11.Future<String>);
 
   @override
-  String readAsStringSync({_i21.Encoding? encoding = const _i21.Utf8Codec()}) =>
+  String readAsStringSync({_i20.Encoding? encoding = const _i20.Utf8Codec()}) =>
       (super.noSuchMethod(
         Invocation.method(#readAsStringSync, [], {#encoding: encoding}),
         returnValue: _i15.dummyValue<String>(
@@ -2574,7 +2584,7 @@ class MockFile extends _i1.Mock implements _i7.File {
 
   @override
   _i11.Future<List<String>> readAsLines({
-    _i21.Encoding? encoding = const _i21.Utf8Codec(),
+    _i20.Encoding? encoding = const _i20.Utf8Codec(),
   }) => (super.noSuchMethod(
     Invocation.method(#readAsLines, [], {#encoding: encoding}),
     returnValue: _i11.Future<List<String>>.value(<String>[]),
@@ -2583,7 +2593,7 @@ class MockFile extends _i1.Mock implements _i7.File {
 
   @override
   List<String> readAsLinesSync({
-    _i21.Encoding? encoding = const _i21.Utf8Codec(),
+    _i20.Encoding? encoding = const _i20.Utf8Codec(),
   }) => (super.noSuchMethod(
     Invocation.method(#readAsLinesSync, [], {#encoding: encoding}),
     returnValue: <String>[],
@@ -2604,7 +2614,7 @@ class MockFile extends _i1.Mock implements _i7.File {
   void writeAsStringSync(
     String? contents, {
     _i9.FileMode? mode = _i9.FileMode.write,
-    _i21.Encoding? encoding = const _i21.Utf8Codec(),
+    _i20.Encoding? encoding = const _i20.Utf8Codec(),
     bool? flush = false,
   }) => super.noSuchMethod(
     Invocation.method(

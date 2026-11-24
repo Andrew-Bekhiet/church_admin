@@ -1338,6 +1338,14 @@ class MockFunctionsService extends _i1.Mock implements _i2.FunctionsService {
       ) as _i7.Future<void>);
 
   @override
+  _i7.Future<void> registerFirebaseInstallation(String? installationId) =>
+      (super.noSuchMethod(
+        Invocation.method(#registerFirebaseInstallation, [installationId]),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
   _i7.Future<String> getAppDownloadLink(String? platform) =>
       (super.noSuchMethod(
         Invocation.method(#getAppDownloadLink, [platform]),

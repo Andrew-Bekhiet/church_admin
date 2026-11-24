@@ -25,6 +25,8 @@ class _MockAuthBloc extends Mock implements AuthBloc {}
 
 class _MockDatabaseService extends Mock implements DatabaseService {}
 
+class _MockFunctionsService extends Mock implements FunctionsService {}
+
 class _MockNotificationsStorage extends Mock implements NotificationsStorage {}
 
 class _MockNotificationsSettingsStorage extends Mock
@@ -78,9 +80,10 @@ void main() {
         () => firebaseMessaging.requestPermission(),
       ).thenAnswer((_) async => fcmSettings);
       when(firebaseMessaging.isSupported).thenAnswer((_) async => true);
-      // The service registers FCM tokens, as NotificationsService explains
-      // ignore: deprecated_member_use
-      when(firebaseMessaging.getToken).thenAnswer((_) async => null);
+      when(
+        () => firebaseMessaging.onRegistered,
+      ).thenAnswer((_) => const Stream.empty());
+      when(() => firebaseMessaging.register()).thenAnswer((_) async {});
 
       when(() => authBloc.isSignedIn).thenReturn(true);
 
@@ -92,6 +95,7 @@ void main() {
         authBloc: authBloc,
         analyticsService: AnalyticsService([analytics], FakeLoggingService()),
         databaseService: _MockDatabaseService(),
+        functionsService: _MockFunctionsService(),
         storage: _MockNotificationsStorage(),
         settings: _MockNotificationsSettingsStorage(),
       );

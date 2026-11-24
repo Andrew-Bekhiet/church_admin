@@ -290,6 +290,7 @@ final notificationsServiceProvider = Provider<NotificationsService>((ref) {
     storage: ref.watch(notificationsStorageProvider),
     onForegroundMessageStream: FirebaseMessaging.onMessage,
     onMessageOpenedAppStream: FirebaseMessaging.onMessageOpenedApp,
+    functionsService: ref.watch(functionsServiceProvider),
   );
 
   ref.onDispose(notificationsService.dispose);

@@ -986,14 +986,19 @@ class MockNotificationsService extends _i1.Mock
   ) as _i6.Future<void>);
 
   @override
-  _i6.Future<bool> registerFCMTokenAndListenForChanges({String? cachedToken}) =>
+  _i6.Future<void> registerThisDeviceForPushNotifications() =>
       (super.noSuchMethod(
-        Invocation.method(#registerFCMTokenAndListenForChanges, [], {
-          #cachedToken: cachedToken,
-        }),
-        returnValue: _i6.Future<bool>.value(false),
-        returnValueForMissingStub: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        Invocation.method(#registerThisDeviceForPushNotifications, []),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<void> stopPushNotificationsToThisDevice() => (super.noSuchMethod(
+    Invocation.method(#stopPushNotificationsToThisDevice, []),
+    returnValue: _i6.Future<void>.value(),
+    returnValueForMissingStub: _i6.Future<void>.value(),
+  ) as _i6.Future<void>);
 
   @override
   _i6.Future<bool> requestNotificationsPermission() => (super.noSuchMethod(

@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/fcm_tokens/__generated__/fragments.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/fcm_tokens/__generated__/mutations.gql.dart';
 import 'package:graphql/client.dart';
 
@@ -8,22 +7,21 @@ class FcmTokensDAO {
   DBGraphQLClient get graphQLClient => _db.graphQLClient;
   FcmTokensDAO({required this._db});
 
-  Future<Fragment_FcmToken?> registerToken({
+  Future<void> deleteByUidAndToken({
     required String uid,
     required String token,
-  }) {
-    return graphQLClient.mutateAndReturnParsedNullable(
+  }) async {
+    await graphQLClient.mutateAndReturnParsedNullable(
       MutationOptions(
-        document: documentNodeMutationregisterFcmToken,
-        operationName: 'registerFcmToken',
-        variables: Variables_Mutation_registerFcmToken(
-          object: Input_UsersFcmTokensInsertInput(
-            uid: uid.toUuid(),
-            token: token,
-          ),
+        document: documentNodeMutationdeleteFcmTokenByUidAndToken,
+        operationName: 'deleteFcmTokenByUidAndToken',
+        variables: Variables_Mutation_deleteFcmTokenByUidAndToken(
+          uid: uid.toUuid(),
+          token: token,
         ).toJson(),
-        parserFn: (json) =>
-            Mutation_registerFcmToken.fromJson(json).insertUsersFcmTokensOne,
+        parserFn: (json) => Mutation_deleteFcmTokenByUidAndToken.fromJson(
+          json,
+        ).deleteUsersFcmTokensByPk,
       ),
     );
   }

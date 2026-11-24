@@ -79,6 +79,7 @@ class NotificationsService extends BlocObserver {
 
   final AuthBloc _authBloc;
   final DatabaseService _databaseService;
+  final FunctionsService _functionsService;
   final AnalyticsService _analyticsService;
 
   final BehaviorSubject<bool> _isPausedSubject = BehaviorSubject.seeded(true);
@@ -88,7 +89,8 @@ class NotificationsService extends BlocObserver {
 
   late final StreamSubscription<Notification> _onMessageOpenedAppSubscription;
   late final StreamSubscription<Notification> _onForegroundMessageSubscription;
-  StreamSubscription<String?>? _onFCMTokenRefresh;
+  StreamSubscription<String>? _installationRegistrationSubscription;
+  String? _registeredInstallationId;
 
   late final Stream<Notification> onNotificationTapStream =
       getInitialNotification()
@@ -122,6 +124,7 @@ class NotificationsService extends BlocObserver {
     required Stream<RemoteMessage> onMessageOpenedAppStream,
     required this._authBloc,
     required this._analyticsService,
+    required this._functionsService,
     DatabaseService? databaseService,
     NotificationsStorage? storage,
     NotificationsSettingsStorage? settings,
@@ -288,46 +291,60 @@ class NotificationsService extends BlocObserver {
     );
   }
 
-  Future<bool> registerFCMTokenAndListenForChanges({
-    String? cachedToken,
-  }) async {
-    if (!_authBloc.isSignedIn || !await _firebaseMessaging.isSupported()) {
-      return false;
+  Future<void> registerThisDeviceForPushNotifications() async {
+    if (!await _firebaseMessaging.isSupported() ||
+        !await requestNotificationsPermission()) {
+      return;
     }
 
-    final permissionGranted = await requestNotificationsPermission();
-
-    if (!permissionGranted) {
-      return false;
-    }
-
-    final uid = _authBloc.currentUserData?.uid;
-    // The functions send to FCM tokens; register() yields installation IDs
-    // for direct send, which the backend does not support yet
-    // ignore: deprecated_member_use
-    final token = cachedToken ?? await _firebaseMessaging.getToken();
-
-    if (uid == null || token == null) {
-      return false;
-    }
-
-    final alreadyRegistered =
-        _authBloc.currentUserData?.fcmTokens.any((t) => t.token == token) ??
-        false;
-    if (!alreadyRegistered) {
-      await _databaseService.fcmTokens.registerToken(uid: uid, token: token);
-    }
-
-    // The functions send to FCM tokens; register() yields installation IDs
-    // for direct send, which the backend does not support yet
-    // ignore: deprecated_member_use
-    _onFCMTokenRefresh ??= _firebaseMessaging.onTokenRefresh
-        .delayWhen((_) => _isPausedSubject.where((isPaused) => !isPaused))
+    final previousSubscription = _installationRegistrationSubscription;
+    _installationRegistrationSubscription = _firebaseMessaging.onRegistered
         .listen(
-          (t) => registerFCMTokenAndListenForChanges(cachedToken: t),
+          _registerInstallationIdWithServer,
+          onError: _logInstallationRegistrationError,
         );
+    await previousSubscription?.cancel();
 
-    return true;
+    await _firebaseMessaging.register.runBestEffort();
+  }
+
+  Future<void> stopPushNotificationsToThisDevice() async {
+    final installationId = _registeredInstallationId;
+    final uid = _authBloc.currentUser?.hasuraUserId;
+    _registeredInstallationId = null;
+
+    await _stopListeningForInstallationIds();
+
+    if (installationId != null && uid != null) {
+      await (() => _databaseService.fcmTokens.deleteByUidAndToken(
+        uid: uid,
+        token: installationId,
+      )).runBestEffort();
+    }
+
+    await _firebaseMessaging.unregister.runBestEffort();
+  }
+
+  void _registerInstallationIdWithServer(String installationId) {
+    _registeredInstallationId = installationId;
+
+    unawaited(
+      (() => _functionsService.registerFirebaseInstallation(
+        installationId,
+      )).runBestEffort(),
+    );
+  }
+
+  Future<void> _logInstallationRegistrationError(
+    Object error,
+    StackTrace stackTrace,
+  ) =>
+      LoggingService.I.warning(LogRecord(error: error, stackTrace: stackTrace));
+
+  Future<void> _stopListeningForInstallationIds() async {
+    final subscription = _installationRegistrationSubscription;
+    _installationRegistrationSubscription = null;
+    await subscription?.cancel();
   }
 
   Future<bool> requestNotificationsPermission() async {
@@ -373,7 +390,7 @@ class NotificationsService extends BlocObserver {
         await scheduleDefaultNotifications();
       }
 
-      await registerFCMTokenAndListenForChanges();
+      await registerThisDeviceForPushNotifications();
     }
   }
 
@@ -381,6 +398,6 @@ class NotificationsService extends BlocObserver {
     await _isPausedSubject.close();
     await _onMessageOpenedAppSubscription.cancel();
     await _onForegroundMessageSubscription.cancel();
-    await _onFCMTokenRefresh?.cancel();
+    await _installationRegistrationSubscription?.cancel();
   }
 }
