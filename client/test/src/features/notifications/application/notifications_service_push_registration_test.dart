@@ -323,6 +323,42 @@ void main() {
           );
         },
       );
+
+      test(
+        'a registration still pending when signing out finishes before the row is deleted',
+        () async {
+          final installationId = installationIdsIssuedOnRegister.single;
+          final backendOutcomes = <String>[];
+          final registrationFinishes = Completer<void>();
+          when(
+            () => functionsService.registerFirebaseInstallation(any()),
+          ).thenAnswer((_) async {
+            await registrationFinishes.future;
+            backendOutcomes.add('registered $installationId');
+          });
+          when(
+            () => fcmTokens.deleteByUidAndToken(
+              uid: any(named: 'uid'),
+              token: any(named: 'token'),
+            ),
+          ).thenAnswer((invocation) async {
+            backendOutcomes.add(
+              'deleted ${invocation.namedArguments[#token]}',
+            );
+          });
+          await unit.onTransition(authBloc, signIn);
+
+          final signOut = unit.stopPushNotificationsToThisDevice();
+          await pumpEventQueue();
+          registrationFinishes.complete();
+          await signOut;
+
+          expect(backendOutcomes, [
+            'registered $installationId',
+            'deleted $installationId',
+          ]);
+        },
+      );
     });
   });
 }

@@ -91,6 +91,7 @@ class NotificationsService extends BlocObserver {
   late final StreamSubscription<Notification> _onForegroundMessageSubscription;
   StreamSubscription<String>? _installationRegistrationSubscription;
   String? _registeredInstallationId;
+  Future<void>? _latestInstallationRegistration;
 
   late final Stream<Notification> onNotificationTapStream =
       getInitialNotification()
@@ -314,6 +315,7 @@ class NotificationsService extends BlocObserver {
     _registeredInstallationId = null;
 
     await _stopListeningForInstallationIds();
+    await _latestInstallationRegistration;
 
     if (installationId != null && uid != null) {
       await (() => _databaseService.fcmTokens.deleteByUidAndToken(
@@ -328,11 +330,10 @@ class NotificationsService extends BlocObserver {
   void _registerInstallationIdWithServer(String installationId) {
     _registeredInstallationId = installationId;
 
-    unawaited(
-      (() => _functionsService.registerFirebaseInstallation(
-        installationId,
-      )).runBestEffort(),
-    );
+    _latestInstallationRegistration =
+        (() => _functionsService.registerFirebaseInstallation(
+          installationId,
+        )).runBestEffort();
   }
 
   Future<void> _logInstallationRegistrationError(
