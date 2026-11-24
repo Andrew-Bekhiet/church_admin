@@ -94,7 +94,7 @@ function Read-Secrets {
 
 function Invoke-JsonRequest([string]$Method, [string]$Uri, [hashtable]$Headers, $Body) {
     if ($RunClock.Elapsed.TotalSeconds -ge $script:PollDeadlineSeconds) {
-        throw 'Out of time for this poll; the next poll continues from the saved cursor'
+        throw 'Out of time for this poll; the next poll rereads what this one did not send'
     }
     $request = @{ Method = $Method; Uri = $Uri; Headers = $Headers; TimeoutSec = $HttpTimeoutSeconds; UseBasicParsing = $true }
     if ($null -ne $Body) {
