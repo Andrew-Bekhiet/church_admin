@@ -6,6 +6,8 @@ readonly SERVICE_USER=fingerprint-sync
 readonly INSTALL_FOLDER=/opt/fingerprint_sync
 readonly INSTALLED_BINARY=$INSTALL_FOLDER/fingerprint-sync
 readonly CONFIG_FILE=$INSTALL_FOLDER/config.json
+readonly STATE_FOLDER=/var/lib/$SERVICE_NAME
+readonly DEFAULT_CURSOR_FILE=$STATE_FOLDER/cursor.json
 readonly UNIT_FILE=/etc/systemd/system/$SERVICE_NAME.service
 readonly RELEASE_BINARY_NAME=fingerprint-sync-linux-x64
 readonly BIOTIME_PASSWORD_CREDENTIAL=biotime-password
@@ -27,6 +29,7 @@ biotime_url=""
 biotime_username=""
 function_url=""
 poll_interval_seconds=""
+cursor_file=""
 biotime_password=""
 sync_secret=""
 must_write_config=true
@@ -80,6 +83,28 @@ require_x86_64() {
   if [[ $architecture != x86_64 ]]; then
     fail "$RELEASE_BINARY_NAME runs on x86_64 machines only, and this one is $architecture."
   fi
+}
+
+refuse_symlink() {
+  local -r path=$1
+  if [[ -L $path ]]; then
+    fail "$path is a symbolic link, so the installer will not write to it." \
+      "Replace it with a regular file or folder, or remove it, and run the script again."
+  fi
+}
+
+refuse_hard_linked_config() {
+  if [[ -f $CONFIG_FILE ]] && (($(stat -c %h "$CONFIG_FILE") > 1)); then
+    fail "$CONFIG_FILE has more than one hard link, so the installer will not write to it." \
+      "Remove the other links, or replace it with a copy, and run the script again."
+  fi
+}
+
+refuse_linked_install_paths() {
+  refuse_symlink "$INSTALL_FOLDER"
+  refuse_symlink "$CONFIG_FILE"
+  refuse_symlink "$INSTALLED_BINARY"
+  refuse_hard_linked_config
 }
 
 require_release_binary() {
@@ -218,6 +243,7 @@ read_settings_from() {
   biotime_username=$(json_string_value username "$json")
   function_url=$(json_string_value url "$json")
   poll_interval_seconds=$(json_number_value pollIntervalSeconds "$json")
+  cursor_file=$(json_string_value cursorFile "$json")
 }
 
 show_current_settings() {
@@ -226,7 +252,8 @@ show_current_settings() {
     "BioTime URL:" "${biotime_url:-(not set)}" \
     "BioTime API username:" "${biotime_username:-(not set)}" \
     "Function URL:" "${function_url:-(not set)}" \
-    "Poll interval (seconds):" "${poll_interval_seconds:-$DEFAULT_POLL_INTERVAL_SECONDS}"
+    "Poll interval (seconds):" "${poll_interval_seconds:-$DEFAULT_POLL_INTERVAL_SECONDS}" \
+    "Cursor file:" "${cursor_file:-(not set)}"
 }
 
 ask_settings_unless_kept() {
@@ -262,6 +289,22 @@ supports_encrypted_credentials() {
   command -v systemd-creds >/dev/null && ((version >= OLDEST_SYSTEMD_WITH_ENCRYPTED_CREDENTIALS))
 }
 
+is_cursor_unset_or_inside_install_folder() {
+  [[ -z $cursor_file || $cursor_file != /* || $cursor_file == "$INSTALL_FOLDER"/* ]]
+}
+
+move_cursor_to_state_folder_if_unset_or_inside_install_folder() {
+  if ! is_cursor_unset_or_inside_install_folder; then
+    return
+  fi
+  if [[ -n $cursor_file ]]; then
+    say "" "The cursor moves from $cursor_file to $DEFAULT_CURSOR_FILE, because only root may write in $INSTALL_FOLDER now." \
+      "The service continues from the time it restarts. To send punches from the minutes before that, see \"Send the punches between two times\" in the README."
+  fi
+  cursor_file=$DEFAULT_CURSOR_FILE
+  must_write_config=true
+}
+
 choose_credential_store() {
   if store_holds_both_secrets "$ENCRYPTED_CREDENTIAL_STORE"; then
     use_credential_store "$ENCRYPTED_CREDENTIAL_STORE" LoadCredentialEncrypted
@@ -291,13 +334,20 @@ create_service_user_if_missing() {
   fi
 }
 
-install_binary() {
+take_install_folder_for_root() {
+  refuse_symlink "$INSTALL_FOLDER"
   mkdir -p "$INSTALL_FOLDER"
+  chown root:root "$INSTALL_FOLDER"
+  chmod 755 "$INSTALL_FOLDER"
+  refuse_linked_install_paths
+}
+
+install_binary() {
   install -m 755 -o root -g root "$RELEASE_BINARY" "$INSTALLED_BINARY"
 }
 
 render_config() {
-  local -r baseUrl=$1 username=$2 url=$3 pollIntervalSeconds=$4
+  local -r baseUrl=$1 username=$2 url=$3 pollIntervalSeconds=$4 cursorFile=$5
   cat <<EOF
 {
   "biotime": {
@@ -307,7 +357,7 @@ render_config() {
   "recordFingerprintPunches": {
     "url": "$(json_escape "$url")"
   },
-  "cursorFile": "cursor.json",
+  "cursorFile": "$(json_escape "$cursorFile")",
   "pollIntervalSeconds": $pollIntervalSeconds
 }
 EOF
@@ -315,13 +365,14 @@ EOF
 
 write_config_unless_kept() {
   if [[ $must_write_config == true ]]; then
-    render_config "$biotime_url" "$biotime_username" "$function_url" "$poll_interval_seconds" >"$CONFIG_FILE"
+    render_config "$biotime_url" "$biotime_username" "$function_url" \
+      "${poll_interval_seconds:-$DEFAULT_POLL_INTERVAL_SECONDS}" "$cursor_file" >"$CONFIG_FILE"
   fi
 }
 
-hand_install_folder_and_config_to_service_user() {
+make_config_root_owned_and_readable() {
+  chown root:root "$CONFIG_FILE"
   chmod 644 "$CONFIG_FILE"
-  chown "$SERVICE_USER:" "$INSTALL_FOLDER" "$CONFIG_FILE"
 }
 
 store_credential() {
@@ -384,6 +435,7 @@ Wants=network-online.target
 [Service]
 User=$SERVICE_USER
 WorkingDirectory=$INSTALL_FOLDER
+StateDirectory=$SERVICE_NAME
 $credential_directive=$BIOTIME_PASSWORD_CREDENTIAL:$credential_store/$BIOTIME_PASSWORD_CREDENTIAL
 $credential_directive=$SYNC_SECRET_CREDENTIAL:$credential_store/$SYNC_SECRET_CREDENTIAL
 Environment=BIOTIME_PASSWORD_FILE=$RUNTIME_CREDENTIALS_FOLDER/$BIOTIME_PASSWORD_CREDENTIAL
@@ -413,13 +465,16 @@ main() {
   require_systemd_with_credentials
   require_x86_64
   require_release_binary
+  refuse_linked_install_paths
   ask_settings_unless_kept
+  move_cursor_to_state_folder_if_unset_or_inside_install_folder
   choose_credential_store
   ask_secrets_unless_kept
   create_service_user_if_missing
+  take_install_folder_for_root
   install_binary
   write_config_unless_kept
-  hand_install_folder_and_config_to_service_user
+  make_config_root_owned_and_readable
   store_secrets_unless_kept
   forget_typed_secrets
   check_biotime_and_function_access

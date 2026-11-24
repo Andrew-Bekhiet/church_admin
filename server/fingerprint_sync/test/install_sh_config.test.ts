@@ -14,6 +14,7 @@ const awkwardSettings = {
   biotimeUsername: "o\"brien \\ tab\there\nnew line é ✓",
   functionUrl: "https://europe-west1-example.cloudfunctions.net/recordFingerprintPunches",
   pollIntervalSeconds: "45",
+  cursorFile: "/var/lib/fingerprint-sync/o\"brien \\ cursor é.json",
 };
 
 function runInstallScriptFunction(shellCode: string, ...args: string[]): string {
@@ -26,11 +27,12 @@ function runInstallScriptFunction(shellCode: string, ...args: string[]): string 
 
 function renderedConfigFor(settings: typeof awkwardSettings): string {
   return runInstallScriptFunction(
-    "render_config \"$1\" \"$2\" \"$3\" \"$4\"",
+    "render_config \"$1\" \"$2\" \"$3\" \"$4\" \"$5\"",
     settings.biotimeUrl,
     settings.biotimeUsername,
     settings.functionUrl,
     settings.pollIntervalSeconds,
+    settings.cursorFile,
   );
 }
 
@@ -55,20 +57,22 @@ test("the Linux wizard writes awkward settings as a config the service accepts",
   assert.equal(config.biotime.username, awkwardSettings.biotimeUsername);
   assert.equal(config.recordFingerprintPunches.url, awkwardSettings.functionUrl);
   assert.equal(config.pollIntervalSeconds, 45);
+  assert.equal(config.cursorFile, awkwardSettings.cursorFile);
 });
 
 test("the Linux wizard reads back the settings it wrote", RUNS_ONLY_WHERE_THE_SCRIPT_RUNS, async (t) => {
   const path = await fileWith(t, renderedConfigFor(awkwardSettings));
 
   const readBack = runInstallScriptFunction(
-    "read_settings_from \"$1\"; printf '%s\\0' \"$biotime_url\" \"$biotime_username\" \"$function_url\" \"$poll_interval_seconds\"",
+    "read_settings_from \"$1\"; printf '%s\\0' \"$biotime_url\" \"$biotime_username\" \"$function_url\" \"$poll_interval_seconds\" \"$cursor_file\"",
     path,
-  ).split("\0").slice(0, 4);
+  ).split("\0").slice(0, 5);
 
   assert.deepEqual(readBack, [
     awkwardSettings.biotimeUrl,
     awkwardSettings.biotimeUsername,
     awkwardSettings.functionUrl,
     awkwardSettings.pollIntervalSeconds,
+    awkwardSettings.cursorFile,
   ]);
 });

@@ -34,7 +34,7 @@ You need:
 
 The wizard asks for the BioTime URL and API username, the function URL, the poll interval, the BioTime password and the sync secret. It stores the secrets as described in "Store the secrets" below. It then runs `fingerprint-sync check`, which logs in to BioTime and sends one empty request to the function. Only if both succeed does it install and start, or restart, the service. A wrong URL, password or secret stops the wizard there. A service that was already running keeps running with the settings it started with. The new ones are already saved, though, and it picks them up on its next restart, for example after a reboot. So run the wizard again until the check passes.
 
-It installs to `C:\fingerprint_sync` on Windows and `/opt/fingerprint_sync` on Linux. Then follow "Check that it works" below.
+It installs to `C:\fingerprint_sync` on Windows and `/opt/fingerprint_sync` on Linux. On Linux the cursor lives in `/var/lib/fingerprint-sync`, the one folder the service may write to. Then follow "Check that it works" below.
 
 To update, download the newer release into a folder and run the wizard again. It offers to keep the current settings and secrets, and it never touches `cursor.json`.
 
