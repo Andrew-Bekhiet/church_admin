@@ -37,6 +37,11 @@ async function post(
 
         return response;
       },
+      json(sentBody: unknown) {
+        resolve({ status, body: sentBody });
+
+        return response;
+      },
     };
 
     void recordFingerprintPunches(
@@ -60,6 +65,15 @@ async function unusedLocalhostUrl(): Promise<string> {
 
   return `http://127.0.0.1:${port}/v1/graphql`;
 }
+
+const nothingIgnored = {
+  matchedAWindow: 0,
+  matchedNoWindow: 0,
+  ignoredMalformed: 0,
+  ignoredTooOld: 0,
+  ignoredInFuture: 0,
+  ignoredUnlinkedEmployeeCode: 0,
+};
 
 const emptyBatch = {
   biotimeServerLocalTime: "2026-11-13T14:00:00",
@@ -92,7 +106,7 @@ describe("recordFingerprintPunches endpoint", () => {
     }
   });
 
-  it("answers 204 with no body and records the punch it was sent", async () => {
+  it("answers 200 with what it did with the punch and records it", async () => {
     const fridayHalfPastNineInCairo = instant("2026-11-13T07:30:00Z");
     mock.timers.enable({
       apis: ["Date"],
@@ -119,7 +133,10 @@ describe("recordFingerprintPunches endpoint", () => {
       CONFIGURED_SECRET,
     );
 
-    assert.deepEqual(reply, { status: 204, body: undefined });
+    assert.deepEqual(reply, {
+      status: 200,
+      body: { ...nothingIgnored, matchedAWindow: 1 },
+    });
     assert.deepEqual(
       (await attendanceOf(mina.personId)).map((row) => row.meetingId),
       [meetingId],
@@ -141,13 +158,23 @@ describe("recordFingerprintPunches endpoint", () => {
     assert.equal((await post(emptyBatch, "")).status, 401);
   });
 
-  it("answers 204 to a batch that holds a malformed punch", async () => {
+  it("answers 200 and counts a malformed punch in a batch", async () => {
     const reply = await post(
       { ...emptyBatch, punches: [{ employeeCode: "1042" }] },
       CONFIGURED_SECRET,
     );
 
-    assert.equal(reply.status, 204);
+    assert.deepEqual(reply, {
+      status: 200,
+      body: { ...nothingIgnored, ignoredMalformed: 1 },
+    });
+  });
+
+  it("answers 200 with nothing counted to an empty batch", async () => {
+    assert.deepEqual(await post(emptyBatch, CONFIGURED_SECRET), {
+      status: 200,
+      body: nothingIgnored,
+    });
   });
 
   it("answers 400 to more punches than one request may carry", async () => {

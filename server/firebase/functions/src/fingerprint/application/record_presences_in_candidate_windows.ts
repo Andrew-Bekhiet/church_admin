@@ -7,10 +7,15 @@ import {
   PresenceWithCandidates,
 } from "../domain/presence";
 
+export interface PresenceWindowMatches {
+  matchedAWindow: number;
+  matchedNoWindow: number;
+}
+
 export async function recordPresencesInCandidateWindows(
   presences: PersonPresence[],
-): Promise<void> {
-  if (presences.length === 0) return;
+): Promise<PresenceWindowMatches> {
+  if (presences.length === 0) return { matchedAWindow: 0, matchedNoWindow: 0 };
 
   const { fingerprintBotUid, presencesWithCandidates } =
     await findFingerprintBotUidAndCandidatesOfEachPresence(presences);
@@ -22,6 +27,15 @@ export async function recordPresencesInCandidateWindows(
     presencesWithCandidates.flatMap(attendanceToRecordFor),
     presencesWithCandidates.flatMap(communionToRecordIfInACommunionWindow),
   );
+
+  const matchedAWindow = presencesWithCandidates
+    .filter(({ candidates }) => candidates.length > 0)
+    .length;
+
+  return {
+    matchedAWindow,
+    matchedNoWindow: presencesWithCandidates.length - matchedAWindow,
+  };
 }
 
 function warnUnlessPresenceMatchedExactlyOneMeeting(

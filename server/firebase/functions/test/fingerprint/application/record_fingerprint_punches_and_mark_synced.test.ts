@@ -679,6 +679,41 @@ describe("recordFingerprintPunches time limits", () => {
   });
 });
 
+describe("recordFingerprintPunches report", () => {
+  it("counts each punch of a batch under what became of it", async () => {
+    const { serviceId } = await seedScheduledMeeting(
+      { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
+    );
+    const mina = await seedMemberWithEmployeeCode(serviceId);
+
+    const report = await recordFingerprintPunchesAndMarkSynced(
+      {
+        biotimeServerLocalTime: "2026-11-13T14:00:00",
+        punches: [
+          punch(mina.employeeCode, "2026-11-13 09:30:00"),
+          punch(mina.employeeCode, "2026-11-13 09:40:00"),
+          punch(mina.employeeCode, "2026-11-13 12:30:00"),
+          punch(mina.employeeCode, "2026-11-13T09:30:00+02:00"),
+          { employeeCode: mina.employeeCode },
+          punch(mina.employeeCode, "2026-11-03 13:59:59"),
+          punch(mina.employeeCode, "2026-11-13 14:05:01"),
+          punch("code-nobody-holds", "2026-11-13 09:30:00"),
+        ],
+      },
+      fridayNoonUtc,
+    );
+
+    assert.deepEqual(report, {
+      matchedAWindow: 2,
+      matchedNoWindow: 1,
+      ignoredMalformed: 2,
+      ignoredTooOld: 1,
+      ignoredInFuture: 1,
+      ignoredUnlinkedEmployeeCode: 1,
+    });
+  });
+});
+
 describe("recordFingerprintPunches daylight saving", () => {
   async function recordedTimesOfPunchAt(
     punchedAtCairoTime: string,
@@ -897,6 +932,16 @@ describe("recordFingerprintPunches warnings", () => {
         biotimeClockMatchingCairo,
       ),
       2,
+    );
+  });
+
+  it("warns about a punch from the future", async () => {
+    assert.equal(
+      await warningCountWhileSyncing(
+        [punch("code-nobody-holds", "2026-11-13 14:06:00")],
+        biotimeClockMatchingCairo,
+      ),
+      1,
     );
   });
 
