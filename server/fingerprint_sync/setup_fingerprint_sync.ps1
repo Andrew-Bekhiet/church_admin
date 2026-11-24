@@ -77,12 +77,16 @@ if ((Test-Path $CursorPath) -and $newConfig.biotimeBaseUrl -ne ([string]$config.
     Write-Host "The BioTime address changed and $CursorPath was kept. If this is a different BioTime database, not a new address for the same one, delete it so the poller starts from the newest punch there."
 }
 
-# Recreated rather than reset, because a reset would give it the folder's read access for Users.
-if (Test-Path $SecretsPath) { Remove-Item -LiteralPath $SecretsPath -Force }
-New-Item -ItemType File -Path $SecretsPath | Out-Null
-Invoke-Icacls $SecretsPath /inheritance:r /grant:r "${Administrators}:F" "${System}:F"
+# A new file rather than a reset, because a reset would give it the folder's read access for Users.
+# Moved rather than [IO.File]::Replace'd, because Replace keeps the old file's ACL.
+$temporarySecretsPath = "$SecretsPath.tmp"
+if (Test-Path $temporarySecretsPath) { Remove-Item -LiteralPath $temporarySecretsPath -Force }
+New-Item -ItemType File -Path $temporarySecretsPath | Out-Null
+Invoke-Icacls $temporarySecretsPath /inheritance:r /grant:r "${Administrators}:F" "${System}:F"
 $plain = [Text.Encoding]::UTF8.GetBytes((ConvertTo-Json -InputObject $newSecrets -Compress))
-[IO.File]::WriteAllBytes($SecretsPath, [Security.Cryptography.ProtectedData]::Protect($plain, $null, [Security.Cryptography.DataProtectionScope]::LocalMachine))
+[IO.File]::WriteAllBytes($temporarySecretsPath, [Security.Cryptography.ProtectedData]::Protect($plain, $null, [Security.Cryptography.DataProtectionScope]::LocalMachine))
+if (Test-Path $SecretsPath) { Remove-Item -LiteralPath $SecretsPath -Force }
+[IO.File]::Move($temporarySecretsPath, $SecretsPath)
 Write-Host "Saved $ConfigPath and the encrypted $SecretsPath"
 
 & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $PollerPath check
