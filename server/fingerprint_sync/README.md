@@ -40,6 +40,8 @@ It logs in to BioTime, reads one transaction, and sends the function a request t
 
 Copy the new scripts over the old ones and run setup again. It offers the saved values; press Enter to keep each one. It keeps `cursor.json`, so no punches are sent twice or skipped.
 
+The cursor is a transaction id from one BioTime database. A new address for the same server keeps it. When BioTime moves to a different database, delete `cursor.json`. Until then the poller sends nothing from the new database whose ids are below the cursor. After the deletion it starts from the newest punch on the new server and does not send punches that were already there.
+
 ## Uninstall
 
 ```powershell

@@ -8,6 +8,7 @@ $TaskName = 'Fingerprint sync'
 $PollerPath = Join-Path $PSScriptRoot 'fingerprint_sync.ps1'
 $ConfigPath = Join-Path $PSScriptRoot 'config.json'
 $SecretsPath = Join-Path $PSScriptRoot 'secrets.bin'
+$CursorPath = Join-Path $PSScriptRoot 'cursor.json'
 $Administrators = '*S-1-5-32-544'
 $System = '*S-1-5-18'
 $Users = '*S-1-5-32-545'
@@ -67,6 +68,9 @@ $newSecrets = [ordered]@{
 }
 
 Set-Content -Path $ConfigPath -Value (ConvertTo-Json -InputObject $newConfig) -Encoding UTF8
+if ((Test-Path $CursorPath) -and $newConfig.biotimeBaseUrl -ne ([string]$config.biotimeBaseUrl).TrimEnd('/')) {
+    Write-Host "The BioTime address changed and $CursorPath was kept. If this is a different BioTime database, not a new address for the same one, delete it so the poller starts from the newest punch there."
+}
 
 if (-not (Test-Path $SecretsPath)) { New-Item -ItemType File -Path $SecretsPath | Out-Null }
 Invoke-Icacls $SecretsPath /inheritance:r /grant:r "${Administrators}:F" "${System}:F"
