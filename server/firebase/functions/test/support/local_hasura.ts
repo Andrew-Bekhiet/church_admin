@@ -233,3 +233,60 @@ export async function lastSyncedAt(): Promise<string | undefined> {
 export async function resetLastSyncedAt(): Promise<void> {
   await runSql("delete from operations.fingerprint_sync_status;");
 }
+
+export type PushTargetKind = "registration_token" | "installation_id";
+
+export interface SeededPushTarget {
+  kind: PushTargetKind;
+  token: string;
+}
+
+export async function seedPermission(): Promise<string> {
+  const permission = `permission-${randomUUID()}`;
+
+  await runSql(`insert into auth.permissions (name) values ('${permission}');`);
+
+  return permission;
+}
+
+export async function seedHumanUserHolding(permission: string): Promise<string> {
+  const uid = await seedHumanUser();
+
+  await runSql(
+    `insert into auth.users_permissions (uid, permission) values ('${uid}', '${permission}');`,
+  );
+
+  return uid;
+}
+
+export function newPushToken(): string {
+  return `token-${randomUUID()}`;
+}
+
+export async function seedPushTarget(
+  uid: string,
+  target: SeededPushTarget,
+): Promise<void> {
+  await runSql(
+    `insert into public.users_fcm_tokens (uid, token, kind)
+     values ('${uid}', '${target.token}', '${target.kind}');`,
+  );
+}
+
+export async function pushTargetsOf(uid: string): Promise<SeededPushTarget[]> {
+  const rows = await runSql(
+    `select kind, token from public.users_fcm_tokens
+     where uid = '${uid}' order by kind, token;`,
+  );
+
+  return rows.map(([kind, token]) => ({ kind: kind as PushTargetKind, token }));
+}
+
+export async function ownersOfInstallationId(installationId: string): Promise<string[]> {
+  const rows = await runSql(
+    `select uid from public.users_fcm_tokens
+     where kind = 'installation_id' and token = '${installationId}' order by uid;`,
+  );
+
+  return rows.map(([uid]) => uid);
+}

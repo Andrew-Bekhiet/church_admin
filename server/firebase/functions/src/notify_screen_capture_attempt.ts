@@ -1,7 +1,7 @@
-import { getMessaging, SendResponse } from "firebase-admin/messaging";
 import { defineSecret } from "firebase-functions/params";
 import { https } from "firebase-functions/v2";
-import { getFcmTokensForAnyOfPermissions, getUserName } from "./hasura_interface";
+import { getUserName } from "./hasura_interface";
+import { sendPushToHoldersOfAnyPermissionAndPruneUnregistered } from "./push/send_push_to_holders_of_any_permission_and_prune_unregistered";
 import { hasuraAdminSecret } from "./secrets";
 
 const screenCaptureWebhookSecret = defineSecret(
@@ -68,40 +68,32 @@ export const notifyScreenCaptureAttempt = https.onRequest(
     }
 
     try {
-      const tokens = await getFcmTokensForAnyOfPermissions([
-        SCREEN_CAPTURE_NOTIFICATIONS_PERMISSION,
-      ]);
+      const { deliveryErrors } =
+        await sendPushToHoldersOfAnyPermissionAndPruneUnregistered({
+          permissions: [SCREEN_CAPTURE_NOTIFICATIONS_PERMISSION],
+          payload: async () => {
+            const userName = (await getUserName(attempt.uid)) ??
+              "مستخدم غير معروف";
 
-      if (tokens.length === 0) {
-        res.status(200).send();
-
-        return;
-      }
-
-      const userName = (await getUserName(attempt.uid)) ?? "مستخدم غير معروف";
-
-      const response = await getMessaging().sendEach(
-        tokens.map((token) => ({
-          token,
-          notification: {
-            title: "تنبيه أمان",
-            body: NOTIFICATION_BODY_BY_KIND[attempt.capture_kind](userName),
+            return {
+              notification: {
+                title: "تنبيه أمان",
+                body: NOTIFICATION_BODY_BY_KIND[attempt.capture_kind](userName),
+              },
+              data: {
+                senderUID: attempt.uid,
+                code: "screenCaptureAttempt",
+                captureKind: attempt.capture_kind,
+                recordedAt: attempt.recorded_at,
+              },
+            };
           },
-          data: {
-            senderUID: attempt.uid,
-            code: "screenCaptureAttempt",
-            captureKind: attempt.capture_kind,
-            recordedAt: attempt.recorded_at,
-          },
-        })),
-      );
+        });
 
-      if (response.failureCount > 0) {
+      if (deliveryErrors.length > 0) {
         console.error(
           "Failed to deliver some screen capture notifications",
-          response.responses
-            .filter((r: SendResponse) => !r.success)
-            .map((r: SendResponse) => r.error),
+          deliveryErrors,
         );
       }
     } catch (e) {

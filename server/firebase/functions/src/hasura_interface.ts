@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { https } from "firebase-functions/v1";
 import { AdminOnEntry } from "./auth/caller_manages_scopes";
+import { PushTarget } from "./push/push_target";
 import { hasuraAdminSecret, hasuraServer } from "./secrets";
 
 export const publicPhotoTables = [
@@ -506,35 +507,96 @@ export async function releaseUserAccount(hasuraUID: string): Promise<void> {
   }
 }
 
-export async function getFcmTokensForAnyOfPermissions(
+export async function getPushTargetsForAnyOfPermissions(
   permissions: string[],
-): Promise<string[]> {
+): Promise<PushTarget[]> {
   const hasura_response = await makeGraphqlRequest({
     query: `
-            query getFcmTokensForAnyOfPermissions($permissions: [String!]!) {
+            query getPushTargetsForAnyOfPermissions($permissions: [String!]!) {
               authUsersData(where: { permissions: { permission: { _in: $permissions } } }) {
                 fcmTokens {
+                  kind
                   token
                 }
               }
             }
           `,
     variables: { permissions },
-    operationName: "getFcmTokensForAnyOfPermissions",
+    operationName: "getPushTargetsForAnyOfPermissions",
   });
 
-  if (hasura_response.data?.["errors"]) {
-    throw new https.HttpsError(
-      "internal",
-      "Failed to fetch FCM tokens for permissions",
-      hasura_response.data?.["errors"],
-    );
+  const users: { fcmTokens: PushTarget[] }[] =
+    dataOrThrow(hasura_response)["authUsersData"] ?? [];
+  const targetsByKindAndToken = new Map<string, PushTarget>();
+
+  for (const { kind, token } of users.flatMap((u) => u.fcmTokens)) {
+    targetsByKindAndToken.set(`${kind}:${token}`, { kind, token });
   }
 
-  const users: { fcmTokens: { token: string }[] }[] =
-    hasura_response.data?.["data"]?.["authUsersData"] ?? [];
+  return [...targetsByKindAndToken.values()];
+}
 
-  return [...new Set(users.flatMap((u) => u.fcmTokens.map((t) => t.token)))];
+export async function deletePushTargetsOfAnyOwner(
+  targets: PushTarget[],
+): Promise<void> {
+  if (targets.length === 0) {
+    return;
+  }
+
+  const hasura_response = await makeGraphqlRequest({
+    query: `
+            mutation deletePushTargetsOfAnyOwner($targets: [UsersFcmTokensBoolExp!]!) {
+              deleteUsersFcmTokens(where: { _or: $targets }) {
+                affectedRows
+              }
+            }
+          `,
+    variables: {
+      targets: targets.map(({ kind, token }) => ({
+        kind: { _eq: kind },
+        token: { _eq: token },
+      })),
+    },
+    operationName: "deletePushTargetsOfAnyOwner",
+  });
+
+  dataOrThrow(hasura_response);
+}
+
+export async function registerFirebaseInstallationReplacingRegistrationTokens(
+  uid: string,
+  installationId: string,
+): Promise<void> {
+  const hasura_response = await makeGraphqlRequest({
+    query: `
+            mutation registerFirebaseInstallationReplacingRegistrationTokens($uid: uuid!, $installationId: String!) {
+              deleteInstallationIdFromOtherUsers: deleteUsersFcmTokens(
+                where: {
+                  kind: { _eq: "installation_id" }
+                  token: { _eq: $installationId }
+                  uid: { _neq: $uid }
+                }
+              ) {
+                affectedRows
+              }
+              deleteRegistrationTokensOfUser: deleteUsersFcmTokens(
+                where: { kind: { _eq: "registration_token" }, uid: { _eq: $uid } }
+              ) {
+                affectedRows
+              }
+              insertUsersFcmTokensOne(
+                object: { uid: $uid, token: $installationId, kind: "installation_id" }
+                onConflict: { constraint: users_fcm_tokens_pkey, updateColumns: [kind] }
+              ) {
+                uid
+              }
+            }
+          `,
+    variables: { uid, installationId },
+    operationName: "registerFirebaseInstallationReplacingRegistrationTokens",
+  });
+
+  dataOrThrow(hasura_response);
 }
 
 export async function getUserName(uid: string): Promise<string | null> {
