@@ -21,8 +21,8 @@ Two Windows PowerShell 5.1 scripts for the fingerprint server (BioTime, Windows 
 
 Setup then:
 
-- limits `C:\fingerprint_sync` to Administrators and SYSTEM, with read access for other users, because SYSTEM runs the script from there;
-- saves the settings in `config.json`, and the password and secret in `secrets.bin`, encrypted for this machine with DPAPI and readable only by Administrators and SYSTEM;
+- resets the access of `C:\fingerprint_sync` and everything in it to Administrators and SYSTEM, with read access for other users and none for anyone granted more before, because SYSTEM runs the script from there;
+- saves the settings in `config.json`, and the password and secret in `secrets.bin`, encrypted for this machine with DPAPI and recreated on every run so that only Administrators and SYSTEM can read it;
 - runs the check below, and stops if it fails;
 - registers the `Fingerprint sync` task: every minute, as SYSTEM, whether or not anyone is logged on, never two runs at once, stopped after 2 minutes if it hangs. Then it starts the task.
 

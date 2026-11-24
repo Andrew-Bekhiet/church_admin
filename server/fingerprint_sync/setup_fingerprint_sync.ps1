@@ -47,7 +47,12 @@ function Read-SecretSetting([string]$Prompt, [string]$Current) {
 }
 
 # SYSTEM runs the poller, so anyone who can edit it, or the config it trusts, runs code as SYSTEM.
+# /grant:r replaces only the named accounts' grants, so a reset first drops what anyone else was granted.
+Invoke-Icacls $PSScriptRoot /reset
 Invoke-Icacls $PSScriptRoot /inheritance:r /grant:r "${Administrators}:(OI)(CI)F" "${System}:(OI)(CI)F" "${Users}:(OI)(CI)RX"
+Get-ChildItem -LiteralPath $PSScriptRoot -Force | Where-Object { $_.FullName -ne $SecretsPath } | ForEach-Object {
+    if ($_.PSIsContainer) { Invoke-Icacls $_.FullName /reset /T } else { Invoke-Icacls $_.FullName /reset }
+}
 
 $config = [pscustomobject]@{ biotimeBaseUrl = 'http://127.0.0.1:8082'; biotimeUsername = ''; functionUrl = '' }
 if (Test-Path $ConfigPath) { $config = Get-Content -Raw -Path $ConfigPath | ConvertFrom-Json }
@@ -72,7 +77,9 @@ if ((Test-Path $CursorPath) -and $newConfig.biotimeBaseUrl -ne ([string]$config.
     Write-Host "The BioTime address changed and $CursorPath was kept. If this is a different BioTime database, not a new address for the same one, delete it so the poller starts from the newest punch there."
 }
 
-if (-not (Test-Path $SecretsPath)) { New-Item -ItemType File -Path $SecretsPath | Out-Null }
+# Recreated rather than reset, because a reset would give it the folder's read access for Users.
+if (Test-Path $SecretsPath) { Remove-Item -LiteralPath $SecretsPath -Force }
+New-Item -ItemType File -Path $SecretsPath | Out-Null
 Invoke-Icacls $SecretsPath /inheritance:r /grant:r "${Administrators}:F" "${System}:F"
 $plain = [Text.Encoding]::UTF8.GetBytes((ConvertTo-Json -InputObject $newSecrets -Compress))
 [IO.File]::WriteAllBytes($SecretsPath, [Security.Cryptography.ProtectedData]::Protect($plain, $null, [Security.Cryptography.DataProtectionScope]::LocalMachine))
