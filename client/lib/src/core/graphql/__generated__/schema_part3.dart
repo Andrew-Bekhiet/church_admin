@@ -18,7 +18,6 @@ abstract class CopyWith_Input_AddressesSetInput<TRes> {
     UuidValue? familyId,
     Map<String, dynamic>? geolocation,
     String? houseCode,
-    int? houseNumber,
     String? specialLandmark,
     UuidValue? storeId,
     int? storeyNumber,
@@ -45,7 +44,6 @@ class _CopyWithImpl_Input_AddressesSetInput<TRes>
     Object? familyId = _undefined,
     Object? geolocation = _undefined,
     Object? houseCode = _undefined,
-    Object? houseNumber = _undefined,
     Object? specialLandmark = _undefined,
     Object? storeId = _undefined,
     Object? storeyNumber = _undefined,
@@ -64,7 +62,6 @@ class _CopyWithImpl_Input_AddressesSetInput<TRes>
       if (geolocation != _undefined)
         'geolocation': (geolocation as Map<String, dynamic>?),
       if (houseCode != _undefined) 'houseCode': (houseCode as String?),
-      if (houseNumber != _undefined) 'houseNumber': (houseNumber as int?),
       if (specialLandmark != _undefined)
         'specialLandmark': (specialLandmark as String?),
       if (storeId != _undefined) 'storeId': (storeId as UuidValue?),
@@ -90,7 +87,6 @@ class _CopyWithStubImpl_Input_AddressesSetInput<TRes>
     UuidValue? familyId,
     Map<String, dynamic>? geolocation,
     String? houseCode,
-    int? houseNumber,
     String? specialLandmark,
     UuidValue? storeId,
     int? storeyNumber,
@@ -102,11 +98,9 @@ class _CopyWithStubImpl_Input_AddressesSetInput<TRes>
 class Input_AddressesStddevOrderBy {
   factory Input_AddressesStddevOrderBy({
     Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
   }) => Input_AddressesStddevOrderBy._({
     if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
-    if (houseNumber != null) r'houseNumber': houseNumber,
     if (storeyNumber != null) r'storeyNumber': storeyNumber,
   });
 
@@ -119,12 +113,6 @@ class Input_AddressesStddevOrderBy {
       result$data['apartmentNumber'] = l$apartmentNumber == null
           ? null
           : fromJson_Enum_OrderBy((l$apartmentNumber as String));
-    }
-    if (data.containsKey('houseNumber')) {
-      final l$houseNumber = data['houseNumber'];
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : fromJson_Enum_OrderBy((l$houseNumber as String));
     }
     if (data.containsKey('storeyNumber')) {
       final l$storeyNumber = data['storeyNumber'];
@@ -140,8 +128,6 @@ class Input_AddressesStddevOrderBy {
   Enum_OrderBy? get apartmentNumber =>
       (_$data['apartmentNumber'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get houseNumber => (_$data['houseNumber'] as Enum_OrderBy?);
-
   Enum_OrderBy? get storeyNumber => (_$data['storeyNumber'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
@@ -151,12 +137,6 @@ class Input_AddressesStddevOrderBy {
       result$data['apartmentNumber'] = l$apartmentNumber == null
           ? null
           : toJson_Enum_OrderBy(l$apartmentNumber);
-    }
-    if (_$data.containsKey('houseNumber')) {
-      final l$houseNumber = houseNumber;
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('storeyNumber')) {
       final l$storeyNumber = storeyNumber;
@@ -188,15 +168,6 @@ class Input_AddressesStddevOrderBy {
     if (l$apartmentNumber != lOther$apartmentNumber) {
       return false;
     }
-    final l$houseNumber = houseNumber;
-    final lOther$houseNumber = other.houseNumber;
-    if (_$data.containsKey('houseNumber') !=
-        other._$data.containsKey('houseNumber')) {
-      return false;
-    }
-    if (l$houseNumber != lOther$houseNumber) {
-      return false;
-    }
     final l$storeyNumber = storeyNumber;
     final lOther$storeyNumber = other.storeyNumber;
     if (_$data.containsKey('storeyNumber') !=
@@ -212,11 +183,9 @@ class Input_AddressesStddevOrderBy {
   @override
   int get hashCode {
     final l$apartmentNumber = apartmentNumber;
-    final l$houseNumber = houseNumber;
     final l$storeyNumber = storeyNumber;
     return Object.hashAll([
       _$data.containsKey('apartmentNumber') ? l$apartmentNumber : const {},
-      _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('storeyNumber') ? l$storeyNumber : const {},
     ]);
   }
@@ -231,11 +200,7 @@ abstract class CopyWith_Input_AddressesStddevOrderBy<TRes> {
   factory CopyWith_Input_AddressesStddevOrderBy.stub(TRes res) =
       _CopyWithStubImpl_Input_AddressesStddevOrderBy;
 
-  TRes call({
-    Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
-    Enum_OrderBy? storeyNumber,
-  });
+  TRes call({Enum_OrderBy? apartmentNumber, Enum_OrderBy? storeyNumber});
 }
 
 class _CopyWithImpl_Input_AddressesStddevOrderBy<TRes>
@@ -250,15 +215,12 @@ class _CopyWithImpl_Input_AddressesStddevOrderBy<TRes>
 
   TRes call({
     Object? apartmentNumber = _undefined,
-    Object? houseNumber = _undefined,
     Object? storeyNumber = _undefined,
   }) => _then(
     Input_AddressesStddevOrderBy._({
       ..._instance._$data,
       if (apartmentNumber != _undefined)
         'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
-      if (houseNumber != _undefined)
-        'houseNumber': (houseNumber as Enum_OrderBy?),
       if (storeyNumber != _undefined)
         'storeyNumber': (storeyNumber as Enum_OrderBy?),
     }),
@@ -271,21 +233,15 @@ class _CopyWithStubImpl_Input_AddressesStddevOrderBy<TRes>
 
   TRes _res;
 
-  call({
-    Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
-    Enum_OrderBy? storeyNumber,
-  }) => _res;
+  call({Enum_OrderBy? apartmentNumber, Enum_OrderBy? storeyNumber}) => _res;
 }
 
 class Input_AddressesStddevPopOrderBy {
   factory Input_AddressesStddevPopOrderBy({
     Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
   }) => Input_AddressesStddevPopOrderBy._({
     if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
-    if (houseNumber != null) r'houseNumber': houseNumber,
     if (storeyNumber != null) r'storeyNumber': storeyNumber,
   });
 
@@ -298,12 +254,6 @@ class Input_AddressesStddevPopOrderBy {
       result$data['apartmentNumber'] = l$apartmentNumber == null
           ? null
           : fromJson_Enum_OrderBy((l$apartmentNumber as String));
-    }
-    if (data.containsKey('houseNumber')) {
-      final l$houseNumber = data['houseNumber'];
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : fromJson_Enum_OrderBy((l$houseNumber as String));
     }
     if (data.containsKey('storeyNumber')) {
       final l$storeyNumber = data['storeyNumber'];
@@ -319,8 +269,6 @@ class Input_AddressesStddevPopOrderBy {
   Enum_OrderBy? get apartmentNumber =>
       (_$data['apartmentNumber'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get houseNumber => (_$data['houseNumber'] as Enum_OrderBy?);
-
   Enum_OrderBy? get storeyNumber => (_$data['storeyNumber'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
@@ -330,12 +278,6 @@ class Input_AddressesStddevPopOrderBy {
       result$data['apartmentNumber'] = l$apartmentNumber == null
           ? null
           : toJson_Enum_OrderBy(l$apartmentNumber);
-    }
-    if (_$data.containsKey('houseNumber')) {
-      final l$houseNumber = houseNumber;
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('storeyNumber')) {
       final l$storeyNumber = storeyNumber;
@@ -367,15 +309,6 @@ class Input_AddressesStddevPopOrderBy {
     if (l$apartmentNumber != lOther$apartmentNumber) {
       return false;
     }
-    final l$houseNumber = houseNumber;
-    final lOther$houseNumber = other.houseNumber;
-    if (_$data.containsKey('houseNumber') !=
-        other._$data.containsKey('houseNumber')) {
-      return false;
-    }
-    if (l$houseNumber != lOther$houseNumber) {
-      return false;
-    }
     final l$storeyNumber = storeyNumber;
     final lOther$storeyNumber = other.storeyNumber;
     if (_$data.containsKey('storeyNumber') !=
@@ -391,11 +324,9 @@ class Input_AddressesStddevPopOrderBy {
   @override
   int get hashCode {
     final l$apartmentNumber = apartmentNumber;
-    final l$houseNumber = houseNumber;
     final l$storeyNumber = storeyNumber;
     return Object.hashAll([
       _$data.containsKey('apartmentNumber') ? l$apartmentNumber : const {},
-      _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('storeyNumber') ? l$storeyNumber : const {},
     ]);
   }
@@ -410,11 +341,7 @@ abstract class CopyWith_Input_AddressesStddevPopOrderBy<TRes> {
   factory CopyWith_Input_AddressesStddevPopOrderBy.stub(TRes res) =
       _CopyWithStubImpl_Input_AddressesStddevPopOrderBy;
 
-  TRes call({
-    Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
-    Enum_OrderBy? storeyNumber,
-  });
+  TRes call({Enum_OrderBy? apartmentNumber, Enum_OrderBy? storeyNumber});
 }
 
 class _CopyWithImpl_Input_AddressesStddevPopOrderBy<TRes>
@@ -429,15 +356,12 @@ class _CopyWithImpl_Input_AddressesStddevPopOrderBy<TRes>
 
   TRes call({
     Object? apartmentNumber = _undefined,
-    Object? houseNumber = _undefined,
     Object? storeyNumber = _undefined,
   }) => _then(
     Input_AddressesStddevPopOrderBy._({
       ..._instance._$data,
       if (apartmentNumber != _undefined)
         'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
-      if (houseNumber != _undefined)
-        'houseNumber': (houseNumber as Enum_OrderBy?),
       if (storeyNumber != _undefined)
         'storeyNumber': (storeyNumber as Enum_OrderBy?),
     }),
@@ -450,21 +374,15 @@ class _CopyWithStubImpl_Input_AddressesStddevPopOrderBy<TRes>
 
   TRes _res;
 
-  call({
-    Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
-    Enum_OrderBy? storeyNumber,
-  }) => _res;
+  call({Enum_OrderBy? apartmentNumber, Enum_OrderBy? storeyNumber}) => _res;
 }
 
 class Input_AddressesStddevSampOrderBy {
   factory Input_AddressesStddevSampOrderBy({
     Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
   }) => Input_AddressesStddevSampOrderBy._({
     if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
-    if (houseNumber != null) r'houseNumber': houseNumber,
     if (storeyNumber != null) r'storeyNumber': storeyNumber,
   });
 
@@ -477,12 +395,6 @@ class Input_AddressesStddevSampOrderBy {
       result$data['apartmentNumber'] = l$apartmentNumber == null
           ? null
           : fromJson_Enum_OrderBy((l$apartmentNumber as String));
-    }
-    if (data.containsKey('houseNumber')) {
-      final l$houseNumber = data['houseNumber'];
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : fromJson_Enum_OrderBy((l$houseNumber as String));
     }
     if (data.containsKey('storeyNumber')) {
       final l$storeyNumber = data['storeyNumber'];
@@ -498,8 +410,6 @@ class Input_AddressesStddevSampOrderBy {
   Enum_OrderBy? get apartmentNumber =>
       (_$data['apartmentNumber'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get houseNumber => (_$data['houseNumber'] as Enum_OrderBy?);
-
   Enum_OrderBy? get storeyNumber => (_$data['storeyNumber'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
@@ -509,12 +419,6 @@ class Input_AddressesStddevSampOrderBy {
       result$data['apartmentNumber'] = l$apartmentNumber == null
           ? null
           : toJson_Enum_OrderBy(l$apartmentNumber);
-    }
-    if (_$data.containsKey('houseNumber')) {
-      final l$houseNumber = houseNumber;
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('storeyNumber')) {
       final l$storeyNumber = storeyNumber;
@@ -546,15 +450,6 @@ class Input_AddressesStddevSampOrderBy {
     if (l$apartmentNumber != lOther$apartmentNumber) {
       return false;
     }
-    final l$houseNumber = houseNumber;
-    final lOther$houseNumber = other.houseNumber;
-    if (_$data.containsKey('houseNumber') !=
-        other._$data.containsKey('houseNumber')) {
-      return false;
-    }
-    if (l$houseNumber != lOther$houseNumber) {
-      return false;
-    }
     final l$storeyNumber = storeyNumber;
     final lOther$storeyNumber = other.storeyNumber;
     if (_$data.containsKey('storeyNumber') !=
@@ -570,11 +465,9 @@ class Input_AddressesStddevSampOrderBy {
   @override
   int get hashCode {
     final l$apartmentNumber = apartmentNumber;
-    final l$houseNumber = houseNumber;
     final l$storeyNumber = storeyNumber;
     return Object.hashAll([
       _$data.containsKey('apartmentNumber') ? l$apartmentNumber : const {},
-      _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('storeyNumber') ? l$storeyNumber : const {},
     ]);
   }
@@ -589,11 +482,7 @@ abstract class CopyWith_Input_AddressesStddevSampOrderBy<TRes> {
   factory CopyWith_Input_AddressesStddevSampOrderBy.stub(TRes res) =
       _CopyWithStubImpl_Input_AddressesStddevSampOrderBy;
 
-  TRes call({
-    Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
-    Enum_OrderBy? storeyNumber,
-  });
+  TRes call({Enum_OrderBy? apartmentNumber, Enum_OrderBy? storeyNumber});
 }
 
 class _CopyWithImpl_Input_AddressesStddevSampOrderBy<TRes>
@@ -608,15 +497,12 @@ class _CopyWithImpl_Input_AddressesStddevSampOrderBy<TRes>
 
   TRes call({
     Object? apartmentNumber = _undefined,
-    Object? houseNumber = _undefined,
     Object? storeyNumber = _undefined,
   }) => _then(
     Input_AddressesStddevSampOrderBy._({
       ..._instance._$data,
       if (apartmentNumber != _undefined)
         'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
-      if (houseNumber != _undefined)
-        'houseNumber': (houseNumber as Enum_OrderBy?),
       if (storeyNumber != _undefined)
         'storeyNumber': (storeyNumber as Enum_OrderBy?),
     }),
@@ -629,11 +515,7 @@ class _CopyWithStubImpl_Input_AddressesStddevSampOrderBy<TRes>
 
   TRes _res;
 
-  call({
-    Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
-    Enum_OrderBy? storeyNumber,
-  }) => _res;
+  call({Enum_OrderBy? apartmentNumber, Enum_OrderBy? storeyNumber}) => _res;
 }
 
 class Input_AddressesStreamCursorInput {
@@ -796,7 +678,6 @@ class Input_AddressesStreamCursorValueInput {
     UuidValue? familyId,
     Map<String, dynamic>? geolocation,
     String? houseCode,
-    int? houseNumber,
     UuidValue? id,
     String? specialLandmark,
     UuidValue? storeId,
@@ -811,7 +692,6 @@ class Input_AddressesStreamCursorValueInput {
     if (familyId != null) r'familyId': familyId,
     if (geolocation != null) r'geolocation': geolocation,
     if (houseCode != null) r'houseCode': houseCode,
-    if (houseNumber != null) r'houseNumber': houseNumber,
     if (id != null) r'id': id,
     if (specialLandmark != null) r'specialLandmark': specialLandmark,
     if (storeId != null) r'storeId': storeId,
@@ -857,10 +737,6 @@ class Input_AddressesStreamCursorValueInput {
     if (data.containsKey('houseCode')) {
       final l$houseCode = data['houseCode'];
       result$data['houseCode'] = (l$houseCode as String?);
-    }
-    if (data.containsKey('houseNumber')) {
-      final l$houseNumber = data['houseNumber'];
-      result$data['houseNumber'] = (l$houseNumber as int?);
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -910,8 +786,6 @@ class Input_AddressesStreamCursorValueInput {
 
   String? get houseCode => (_$data['houseCode'] as String?);
 
-  int? get houseNumber => (_$data['houseNumber'] as int?);
-
   UuidValue? get id => (_$data['id'] as UuidValue?);
 
   String? get specialLandmark => (_$data['specialLandmark'] as String?);
@@ -957,10 +831,6 @@ class Input_AddressesStreamCursorValueInput {
     if (_$data.containsKey('houseCode')) {
       final l$houseCode = houseCode;
       result$data['houseCode'] = l$houseCode;
-    }
-    if (_$data.containsKey('houseNumber')) {
-      final l$houseNumber = houseNumber;
-      result$data['houseNumber'] = l$houseNumber;
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -1070,15 +940,6 @@ class Input_AddressesStreamCursorValueInput {
     if (l$houseCode != lOther$houseCode) {
       return false;
     }
-    final l$houseNumber = houseNumber;
-    final lOther$houseNumber = other.houseNumber;
-    if (_$data.containsKey('houseNumber') !=
-        other._$data.containsKey('houseNumber')) {
-      return false;
-    }
-    if (l$houseNumber != lOther$houseNumber) {
-      return false;
-    }
     final l$id = id;
     final lOther$id = other.id;
     if (_$data.containsKey('id') != other._$data.containsKey('id')) {
@@ -1143,7 +1004,6 @@ class Input_AddressesStreamCursorValueInput {
     final l$familyId = familyId;
     final l$geolocation = geolocation;
     final l$houseCode = houseCode;
-    final l$houseNumber = houseNumber;
     final l$id = id;
     final l$specialLandmark = specialLandmark;
     final l$storeId = storeId;
@@ -1158,7 +1018,6 @@ class Input_AddressesStreamCursorValueInput {
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('houseCode') ? l$houseCode : const {},
-      _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('specialLandmark') ? l$specialLandmark : const {},
       _$data.containsKey('storeId') ? l$storeId : const {},
@@ -1186,7 +1045,6 @@ abstract class CopyWith_Input_AddressesStreamCursorValueInput<TRes> {
     UuidValue? familyId,
     Map<String, dynamic>? geolocation,
     String? houseCode,
-    int? houseNumber,
     UuidValue? id,
     String? specialLandmark,
     UuidValue? storeId,
@@ -1217,7 +1075,6 @@ class _CopyWithImpl_Input_AddressesStreamCursorValueInput<TRes>
     Object? familyId = _undefined,
     Object? geolocation = _undefined,
     Object? houseCode = _undefined,
-    Object? houseNumber = _undefined,
     Object? id = _undefined,
     Object? specialLandmark = _undefined,
     Object? storeId = _undefined,
@@ -1237,7 +1094,6 @@ class _CopyWithImpl_Input_AddressesStreamCursorValueInput<TRes>
       if (geolocation != _undefined)
         'geolocation': (geolocation as Map<String, dynamic>?),
       if (houseCode != _undefined) 'houseCode': (houseCode as String?),
-      if (houseNumber != _undefined) 'houseNumber': (houseNumber as int?),
       if (id != _undefined) 'id': (id as UuidValue?),
       if (specialLandmark != _undefined)
         'specialLandmark': (specialLandmark as String?),
@@ -1264,7 +1120,6 @@ class _CopyWithStubImpl_Input_AddressesStreamCursorValueInput<TRes>
     UuidValue? familyId,
     Map<String, dynamic>? geolocation,
     String? houseCode,
-    int? houseNumber,
     UuidValue? id,
     String? specialLandmark,
     UuidValue? storeId,
@@ -1277,11 +1132,9 @@ class _CopyWithStubImpl_Input_AddressesStreamCursorValueInput<TRes>
 class Input_AddressesSumOrderBy {
   factory Input_AddressesSumOrderBy({
     Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
   }) => Input_AddressesSumOrderBy._({
     if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
-    if (houseNumber != null) r'houseNumber': houseNumber,
     if (storeyNumber != null) r'storeyNumber': storeyNumber,
   });
 
@@ -1294,12 +1147,6 @@ class Input_AddressesSumOrderBy {
       result$data['apartmentNumber'] = l$apartmentNumber == null
           ? null
           : fromJson_Enum_OrderBy((l$apartmentNumber as String));
-    }
-    if (data.containsKey('houseNumber')) {
-      final l$houseNumber = data['houseNumber'];
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : fromJson_Enum_OrderBy((l$houseNumber as String));
     }
     if (data.containsKey('storeyNumber')) {
       final l$storeyNumber = data['storeyNumber'];
@@ -1315,8 +1162,6 @@ class Input_AddressesSumOrderBy {
   Enum_OrderBy? get apartmentNumber =>
       (_$data['apartmentNumber'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get houseNumber => (_$data['houseNumber'] as Enum_OrderBy?);
-
   Enum_OrderBy? get storeyNumber => (_$data['storeyNumber'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
@@ -1326,12 +1171,6 @@ class Input_AddressesSumOrderBy {
       result$data['apartmentNumber'] = l$apartmentNumber == null
           ? null
           : toJson_Enum_OrderBy(l$apartmentNumber);
-    }
-    if (_$data.containsKey('houseNumber')) {
-      final l$houseNumber = houseNumber;
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('storeyNumber')) {
       final l$storeyNumber = storeyNumber;
@@ -1363,15 +1202,6 @@ class Input_AddressesSumOrderBy {
     if (l$apartmentNumber != lOther$apartmentNumber) {
       return false;
     }
-    final l$houseNumber = houseNumber;
-    final lOther$houseNumber = other.houseNumber;
-    if (_$data.containsKey('houseNumber') !=
-        other._$data.containsKey('houseNumber')) {
-      return false;
-    }
-    if (l$houseNumber != lOther$houseNumber) {
-      return false;
-    }
     final l$storeyNumber = storeyNumber;
     final lOther$storeyNumber = other.storeyNumber;
     if (_$data.containsKey('storeyNumber') !=
@@ -1387,11 +1217,9 @@ class Input_AddressesSumOrderBy {
   @override
   int get hashCode {
     final l$apartmentNumber = apartmentNumber;
-    final l$houseNumber = houseNumber;
     final l$storeyNumber = storeyNumber;
     return Object.hashAll([
       _$data.containsKey('apartmentNumber') ? l$apartmentNumber : const {},
-      _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('storeyNumber') ? l$storeyNumber : const {},
     ]);
   }
@@ -1406,11 +1234,7 @@ abstract class CopyWith_Input_AddressesSumOrderBy<TRes> {
   factory CopyWith_Input_AddressesSumOrderBy.stub(TRes res) =
       _CopyWithStubImpl_Input_AddressesSumOrderBy;
 
-  TRes call({
-    Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
-    Enum_OrderBy? storeyNumber,
-  });
+  TRes call({Enum_OrderBy? apartmentNumber, Enum_OrderBy? storeyNumber});
 }
 
 class _CopyWithImpl_Input_AddressesSumOrderBy<TRes>
@@ -1425,15 +1249,12 @@ class _CopyWithImpl_Input_AddressesSumOrderBy<TRes>
 
   TRes call({
     Object? apartmentNumber = _undefined,
-    Object? houseNumber = _undefined,
     Object? storeyNumber = _undefined,
   }) => _then(
     Input_AddressesSumOrderBy._({
       ..._instance._$data,
       if (apartmentNumber != _undefined)
         'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
-      if (houseNumber != _undefined)
-        'houseNumber': (houseNumber as Enum_OrderBy?),
       if (storeyNumber != _undefined)
         'storeyNumber': (storeyNumber as Enum_OrderBy?),
     }),
@@ -1446,11 +1267,7 @@ class _CopyWithStubImpl_Input_AddressesSumOrderBy<TRes>
 
   TRes _res;
 
-  call({
-    Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
-    Enum_OrderBy? storeyNumber,
-  }) => _res;
+  call({Enum_OrderBy? apartmentNumber, Enum_OrderBy? storeyNumber}) => _res;
 }
 
 class Input_AddressesUpdates {
@@ -1649,11 +1466,9 @@ class _CopyWithStubImpl_Input_AddressesUpdates<TRes>
 class Input_AddressesVarPopOrderBy {
   factory Input_AddressesVarPopOrderBy({
     Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
   }) => Input_AddressesVarPopOrderBy._({
     if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
-    if (houseNumber != null) r'houseNumber': houseNumber,
     if (storeyNumber != null) r'storeyNumber': storeyNumber,
   });
 
@@ -1666,12 +1481,6 @@ class Input_AddressesVarPopOrderBy {
       result$data['apartmentNumber'] = l$apartmentNumber == null
           ? null
           : fromJson_Enum_OrderBy((l$apartmentNumber as String));
-    }
-    if (data.containsKey('houseNumber')) {
-      final l$houseNumber = data['houseNumber'];
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : fromJson_Enum_OrderBy((l$houseNumber as String));
     }
     if (data.containsKey('storeyNumber')) {
       final l$storeyNumber = data['storeyNumber'];
@@ -1687,8 +1496,6 @@ class Input_AddressesVarPopOrderBy {
   Enum_OrderBy? get apartmentNumber =>
       (_$data['apartmentNumber'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get houseNumber => (_$data['houseNumber'] as Enum_OrderBy?);
-
   Enum_OrderBy? get storeyNumber => (_$data['storeyNumber'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
@@ -1698,12 +1505,6 @@ class Input_AddressesVarPopOrderBy {
       result$data['apartmentNumber'] = l$apartmentNumber == null
           ? null
           : toJson_Enum_OrderBy(l$apartmentNumber);
-    }
-    if (_$data.containsKey('houseNumber')) {
-      final l$houseNumber = houseNumber;
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('storeyNumber')) {
       final l$storeyNumber = storeyNumber;
@@ -1735,15 +1536,6 @@ class Input_AddressesVarPopOrderBy {
     if (l$apartmentNumber != lOther$apartmentNumber) {
       return false;
     }
-    final l$houseNumber = houseNumber;
-    final lOther$houseNumber = other.houseNumber;
-    if (_$data.containsKey('houseNumber') !=
-        other._$data.containsKey('houseNumber')) {
-      return false;
-    }
-    if (l$houseNumber != lOther$houseNumber) {
-      return false;
-    }
     final l$storeyNumber = storeyNumber;
     final lOther$storeyNumber = other.storeyNumber;
     if (_$data.containsKey('storeyNumber') !=
@@ -1759,11 +1551,9 @@ class Input_AddressesVarPopOrderBy {
   @override
   int get hashCode {
     final l$apartmentNumber = apartmentNumber;
-    final l$houseNumber = houseNumber;
     final l$storeyNumber = storeyNumber;
     return Object.hashAll([
       _$data.containsKey('apartmentNumber') ? l$apartmentNumber : const {},
-      _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('storeyNumber') ? l$storeyNumber : const {},
     ]);
   }
@@ -1778,11 +1568,7 @@ abstract class CopyWith_Input_AddressesVarPopOrderBy<TRes> {
   factory CopyWith_Input_AddressesVarPopOrderBy.stub(TRes res) =
       _CopyWithStubImpl_Input_AddressesVarPopOrderBy;
 
-  TRes call({
-    Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
-    Enum_OrderBy? storeyNumber,
-  });
+  TRes call({Enum_OrderBy? apartmentNumber, Enum_OrderBy? storeyNumber});
 }
 
 class _CopyWithImpl_Input_AddressesVarPopOrderBy<TRes>
@@ -1797,15 +1583,12 @@ class _CopyWithImpl_Input_AddressesVarPopOrderBy<TRes>
 
   TRes call({
     Object? apartmentNumber = _undefined,
-    Object? houseNumber = _undefined,
     Object? storeyNumber = _undefined,
   }) => _then(
     Input_AddressesVarPopOrderBy._({
       ..._instance._$data,
       if (apartmentNumber != _undefined)
         'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
-      if (houseNumber != _undefined)
-        'houseNumber': (houseNumber as Enum_OrderBy?),
       if (storeyNumber != _undefined)
         'storeyNumber': (storeyNumber as Enum_OrderBy?),
     }),
@@ -1818,21 +1601,15 @@ class _CopyWithStubImpl_Input_AddressesVarPopOrderBy<TRes>
 
   TRes _res;
 
-  call({
-    Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
-    Enum_OrderBy? storeyNumber,
-  }) => _res;
+  call({Enum_OrderBy? apartmentNumber, Enum_OrderBy? storeyNumber}) => _res;
 }
 
 class Input_AddressesVarSampOrderBy {
   factory Input_AddressesVarSampOrderBy({
     Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
   }) => Input_AddressesVarSampOrderBy._({
     if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
-    if (houseNumber != null) r'houseNumber': houseNumber,
     if (storeyNumber != null) r'storeyNumber': storeyNumber,
   });
 
@@ -1845,12 +1622,6 @@ class Input_AddressesVarSampOrderBy {
       result$data['apartmentNumber'] = l$apartmentNumber == null
           ? null
           : fromJson_Enum_OrderBy((l$apartmentNumber as String));
-    }
-    if (data.containsKey('houseNumber')) {
-      final l$houseNumber = data['houseNumber'];
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : fromJson_Enum_OrderBy((l$houseNumber as String));
     }
     if (data.containsKey('storeyNumber')) {
       final l$storeyNumber = data['storeyNumber'];
@@ -1866,8 +1637,6 @@ class Input_AddressesVarSampOrderBy {
   Enum_OrderBy? get apartmentNumber =>
       (_$data['apartmentNumber'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get houseNumber => (_$data['houseNumber'] as Enum_OrderBy?);
-
   Enum_OrderBy? get storeyNumber => (_$data['storeyNumber'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
@@ -1877,12 +1646,6 @@ class Input_AddressesVarSampOrderBy {
       result$data['apartmentNumber'] = l$apartmentNumber == null
           ? null
           : toJson_Enum_OrderBy(l$apartmentNumber);
-    }
-    if (_$data.containsKey('houseNumber')) {
-      final l$houseNumber = houseNumber;
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('storeyNumber')) {
       final l$storeyNumber = storeyNumber;
@@ -1914,15 +1677,6 @@ class Input_AddressesVarSampOrderBy {
     if (l$apartmentNumber != lOther$apartmentNumber) {
       return false;
     }
-    final l$houseNumber = houseNumber;
-    final lOther$houseNumber = other.houseNumber;
-    if (_$data.containsKey('houseNumber') !=
-        other._$data.containsKey('houseNumber')) {
-      return false;
-    }
-    if (l$houseNumber != lOther$houseNumber) {
-      return false;
-    }
     final l$storeyNumber = storeyNumber;
     final lOther$storeyNumber = other.storeyNumber;
     if (_$data.containsKey('storeyNumber') !=
@@ -1938,11 +1692,9 @@ class Input_AddressesVarSampOrderBy {
   @override
   int get hashCode {
     final l$apartmentNumber = apartmentNumber;
-    final l$houseNumber = houseNumber;
     final l$storeyNumber = storeyNumber;
     return Object.hashAll([
       _$data.containsKey('apartmentNumber') ? l$apartmentNumber : const {},
-      _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('storeyNumber') ? l$storeyNumber : const {},
     ]);
   }
@@ -1957,11 +1709,7 @@ abstract class CopyWith_Input_AddressesVarSampOrderBy<TRes> {
   factory CopyWith_Input_AddressesVarSampOrderBy.stub(TRes res) =
       _CopyWithStubImpl_Input_AddressesVarSampOrderBy;
 
-  TRes call({
-    Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
-    Enum_OrderBy? storeyNumber,
-  });
+  TRes call({Enum_OrderBy? apartmentNumber, Enum_OrderBy? storeyNumber});
 }
 
 class _CopyWithImpl_Input_AddressesVarSampOrderBy<TRes>
@@ -1976,15 +1724,12 @@ class _CopyWithImpl_Input_AddressesVarSampOrderBy<TRes>
 
   TRes call({
     Object? apartmentNumber = _undefined,
-    Object? houseNumber = _undefined,
     Object? storeyNumber = _undefined,
   }) => _then(
     Input_AddressesVarSampOrderBy._({
       ..._instance._$data,
       if (apartmentNumber != _undefined)
         'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
-      if (houseNumber != _undefined)
-        'houseNumber': (houseNumber as Enum_OrderBy?),
       if (storeyNumber != _undefined)
         'storeyNumber': (storeyNumber as Enum_OrderBy?),
     }),
@@ -1997,21 +1742,15 @@ class _CopyWithStubImpl_Input_AddressesVarSampOrderBy<TRes>
 
   TRes _res;
 
-  call({
-    Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
-    Enum_OrderBy? storeyNumber,
-  }) => _res;
+  call({Enum_OrderBy? apartmentNumber, Enum_OrderBy? storeyNumber}) => _res;
 }
 
 class Input_AddressesVarianceOrderBy {
   factory Input_AddressesVarianceOrderBy({
     Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
   }) => Input_AddressesVarianceOrderBy._({
     if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
-    if (houseNumber != null) r'houseNumber': houseNumber,
     if (storeyNumber != null) r'storeyNumber': storeyNumber,
   });
 
@@ -2024,12 +1763,6 @@ class Input_AddressesVarianceOrderBy {
       result$data['apartmentNumber'] = l$apartmentNumber == null
           ? null
           : fromJson_Enum_OrderBy((l$apartmentNumber as String));
-    }
-    if (data.containsKey('houseNumber')) {
-      final l$houseNumber = data['houseNumber'];
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : fromJson_Enum_OrderBy((l$houseNumber as String));
     }
     if (data.containsKey('storeyNumber')) {
       final l$storeyNumber = data['storeyNumber'];
@@ -2045,8 +1778,6 @@ class Input_AddressesVarianceOrderBy {
   Enum_OrderBy? get apartmentNumber =>
       (_$data['apartmentNumber'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get houseNumber => (_$data['houseNumber'] as Enum_OrderBy?);
-
   Enum_OrderBy? get storeyNumber => (_$data['storeyNumber'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
@@ -2056,12 +1787,6 @@ class Input_AddressesVarianceOrderBy {
       result$data['apartmentNumber'] = l$apartmentNumber == null
           ? null
           : toJson_Enum_OrderBy(l$apartmentNumber);
-    }
-    if (_$data.containsKey('houseNumber')) {
-      final l$houseNumber = houseNumber;
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('storeyNumber')) {
       final l$storeyNumber = storeyNumber;
@@ -2093,15 +1818,6 @@ class Input_AddressesVarianceOrderBy {
     if (l$apartmentNumber != lOther$apartmentNumber) {
       return false;
     }
-    final l$houseNumber = houseNumber;
-    final lOther$houseNumber = other.houseNumber;
-    if (_$data.containsKey('houseNumber') !=
-        other._$data.containsKey('houseNumber')) {
-      return false;
-    }
-    if (l$houseNumber != lOther$houseNumber) {
-      return false;
-    }
     final l$storeyNumber = storeyNumber;
     final lOther$storeyNumber = other.storeyNumber;
     if (_$data.containsKey('storeyNumber') !=
@@ -2117,11 +1833,9 @@ class Input_AddressesVarianceOrderBy {
   @override
   int get hashCode {
     final l$apartmentNumber = apartmentNumber;
-    final l$houseNumber = houseNumber;
     final l$storeyNumber = storeyNumber;
     return Object.hashAll([
       _$data.containsKey('apartmentNumber') ? l$apartmentNumber : const {},
-      _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('storeyNumber') ? l$storeyNumber : const {},
     ]);
   }
@@ -2136,11 +1850,7 @@ abstract class CopyWith_Input_AddressesVarianceOrderBy<TRes> {
   factory CopyWith_Input_AddressesVarianceOrderBy.stub(TRes res) =
       _CopyWithStubImpl_Input_AddressesVarianceOrderBy;
 
-  TRes call({
-    Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
-    Enum_OrderBy? storeyNumber,
-  });
+  TRes call({Enum_OrderBy? apartmentNumber, Enum_OrderBy? storeyNumber});
 }
 
 class _CopyWithImpl_Input_AddressesVarianceOrderBy<TRes>
@@ -2155,15 +1865,12 @@ class _CopyWithImpl_Input_AddressesVarianceOrderBy<TRes>
 
   TRes call({
     Object? apartmentNumber = _undefined,
-    Object? houseNumber = _undefined,
     Object? storeyNumber = _undefined,
   }) => _then(
     Input_AddressesVarianceOrderBy._({
       ..._instance._$data,
       if (apartmentNumber != _undefined)
         'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
-      if (houseNumber != _undefined)
-        'houseNumber': (houseNumber as Enum_OrderBy?),
       if (storeyNumber != _undefined)
         'storeyNumber': (storeyNumber as Enum_OrderBy?),
     }),
@@ -2176,11 +1883,7 @@ class _CopyWithStubImpl_Input_AddressesVarianceOrderBy<TRes>
 
   TRes _res;
 
-  call({
-    Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
-    Enum_OrderBy? storeyNumber,
-  }) => _res;
+  call({Enum_OrderBy? apartmentNumber, Enum_OrderBy? storeyNumber}) => _res;
 }
 
 class Input_AreasBoolExp {
@@ -2684,5 +2387,408 @@ class Input_AreasBoolExp {
       _$data.containsKey('streets') ? l$streets : const {},
       _$data.containsKey('userCanEdit') ? l$userCanEdit : const {},
     ]);
+  }
+}
+
+abstract class CopyWith_Input_AreasBoolExp<TRes> {
+  factory CopyWith_Input_AreasBoolExp(
+    Input_AreasBoolExp instance,
+    TRes Function(Input_AreasBoolExp) then,
+  ) = _CopyWithImpl_Input_AreasBoolExp;
+
+  factory CopyWith_Input_AreasBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_AreasBoolExp;
+
+  TRes call({
+    List<Input_AreasBoolExp>? $_and,
+    Input_AreasBoolExp? $_not,
+    List<Input_AreasBoolExp>? $_or,
+    Input_AddressesBoolExp? addresses,
+    Input_AuthUsersAdminOnBoolExp? adminUsers,
+    Input_StringComparisonExp? blurhash,
+    Input_GeographyComparisonExp? bounds,
+    Input_BigintComparisonExp? color,
+    Input_HistoryEditHistoryBoolExp? editHistory,
+    Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
+    Input_UuidComparisonExp? id,
+    Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_StringComparisonExp? name,
+    Input_TimestamptzComparisonExp? photoUpdatedAt,
+    Input_AreasStreetsBoolExp? streets,
+    Input_BooleanComparisonExp? userCanEdit,
+  });
+  TRes $_and(
+    Iterable<Input_AreasBoolExp>? Function(
+      Iterable<CopyWith_Input_AreasBoolExp<Input_AreasBoolExp>>?,
+    )
+    _fn,
+  );
+  CopyWith_Input_AreasBoolExp<TRes> get $_not;
+  TRes $_or(
+    Iterable<Input_AreasBoolExp>? Function(
+      Iterable<CopyWith_Input_AreasBoolExp<Input_AreasBoolExp>>?,
+    )
+    _fn,
+  );
+  CopyWith_Input_AddressesBoolExp<TRes> get addresses;
+  CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers;
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash;
+  CopyWith_Input_GeographyComparisonExp<TRes> get bounds;
+  CopyWith_Input_BigintComparisonExp<TRes> get color;
+  CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistory;
+  CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
+  get editHistoryAggregate;
+  CopyWith_Input_UuidComparisonExp<TRes> get id;
+  CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit;
+  CopyWith_Input_StringComparisonExp<TRes> get name;
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt;
+  CopyWith_Input_AreasStreetsBoolExp<TRes> get streets;
+  CopyWith_Input_BooleanComparisonExp<TRes> get userCanEdit;
+}
+
+class _CopyWithImpl_Input_AreasBoolExp<TRes>
+    implements CopyWith_Input_AreasBoolExp<TRes> {
+  _CopyWithImpl_Input_AreasBoolExp(this._instance, this._then);
+
+  final Input_AreasBoolExp _instance;
+
+  final TRes Function(Input_AreasBoolExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_and = _undefined,
+    Object? $_not = _undefined,
+    Object? $_or = _undefined,
+    Object? addresses = _undefined,
+    Object? adminUsers = _undefined,
+    Object? blurhash = _undefined,
+    Object? bounds = _undefined,
+    Object? color = _undefined,
+    Object? editHistory = _undefined,
+    Object? editHistoryAggregate = _undefined,
+    Object? id = _undefined,
+    Object? lastEdit = _undefined,
+    Object? name = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? streets = _undefined,
+    Object? userCanEdit = _undefined,
+  }) => _then(
+    Input_AreasBoolExp._({
+      ..._instance._$data,
+      if ($_and != _undefined) '_and': ($_and as List<Input_AreasBoolExp>?),
+      if ($_not != _undefined) '_not': ($_not as Input_AreasBoolExp?),
+      if ($_or != _undefined) '_or': ($_or as List<Input_AreasBoolExp>?),
+      if (addresses != _undefined)
+        'addresses': (addresses as Input_AddressesBoolExp?),
+      if (adminUsers != _undefined)
+        'adminUsers': (adminUsers as Input_AuthUsersAdminOnBoolExp?),
+      if (blurhash != _undefined)
+        'blurhash': (blurhash as Input_StringComparisonExp?),
+      if (bounds != _undefined)
+        'bounds': (bounds as Input_GeographyComparisonExp?),
+      if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
+      if (editHistory != _undefined)
+        'editHistory': (editHistory as Input_HistoryEditHistoryBoolExp?),
+      if (editHistoryAggregate != _undefined)
+        'editHistoryAggregate':
+            (editHistoryAggregate as Input_HistoryEditHistoryAggregateBoolExp?),
+      if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
+      if (lastEdit != _undefined)
+        'lastEdit': (lastEdit as Input_HistoryLatestEditsBoolExp?),
+      if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
+      if (photoUpdatedAt != _undefined)
+        'photoUpdatedAt': (photoUpdatedAt as Input_TimestamptzComparisonExp?),
+      if (streets != _undefined)
+        'streets': (streets as Input_AreasStreetsBoolExp?),
+      if (userCanEdit != _undefined)
+        'userCanEdit': (userCanEdit as Input_BooleanComparisonExp?),
+    }),
+  );
+
+  TRes $_and(
+    Iterable<Input_AreasBoolExp>? Function(
+      Iterable<CopyWith_Input_AreasBoolExp<Input_AreasBoolExp>>?,
+    )
+    _fn,
+  ) => call(
+    $_and: _fn(
+      _instance.$_and?.map((e) => CopyWith_Input_AreasBoolExp(e, (i) => i)),
+    )?.toList(),
+  );
+
+  CopyWith_Input_AreasBoolExp<TRes> get $_not {
+    final local$$_not = _instance.$_not;
+    return local$$_not == null
+        ? CopyWith_Input_AreasBoolExp.stub(_then(_instance))
+        : CopyWith_Input_AreasBoolExp(local$$_not, (e) => call($_not: e));
+  }
+
+  TRes $_or(
+    Iterable<Input_AreasBoolExp>? Function(
+      Iterable<CopyWith_Input_AreasBoolExp<Input_AreasBoolExp>>?,
+    )
+    _fn,
+  ) => call(
+    $_or: _fn(
+      _instance.$_or?.map((e) => CopyWith_Input_AreasBoolExp(e, (i) => i)),
+    )?.toList(),
+  );
+
+  CopyWith_Input_AddressesBoolExp<TRes> get addresses {
+    final local$addresses = _instance.addresses;
+    return local$addresses == null
+        ? CopyWith_Input_AddressesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_AddressesBoolExp(
+            local$addresses,
+            (e) => call(addresses: e),
+          );
+  }
+
+  CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers {
+    final local$adminUsers = _instance.adminUsers;
+    return local$adminUsers == null
+        ? CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersAdminOnBoolExp(
+            local$adminUsers,
+            (e) => call(adminUsers: e),
+          );
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash {
+    final local$blurhash = _instance.blurhash;
+    return local$blurhash == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$blurhash,
+            (e) => call(blurhash: e),
+          );
+  }
+
+  CopyWith_Input_GeographyComparisonExp<TRes> get bounds {
+    final local$bounds = _instance.bounds;
+    return local$bounds == null
+        ? CopyWith_Input_GeographyComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_GeographyComparisonExp(
+            local$bounds,
+            (e) => call(bounds: e),
+          );
+  }
+
+  CopyWith_Input_BigintComparisonExp<TRes> get color {
+    final local$color = _instance.color;
+    return local$color == null
+        ? CopyWith_Input_BigintComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BigintComparisonExp(
+            local$color,
+            (e) => call(color: e),
+          );
+  }
+
+  CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistory {
+    final local$editHistory = _instance.editHistory;
+    return local$editHistory == null
+        ? CopyWith_Input_HistoryEditHistoryBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryEditHistoryBoolExp(
+            local$editHistory,
+            (e) => call(editHistory: e),
+          );
+  }
+
+  CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
+  get editHistoryAggregate {
+    final local$editHistoryAggregate = _instance.editHistoryAggregate;
+    return local$editHistoryAggregate == null
+        ? CopyWith_Input_HistoryEditHistoryAggregateBoolExp.stub(
+            _then(_instance),
+          )
+        : CopyWith_Input_HistoryEditHistoryAggregateBoolExp(
+            local$editHistoryAggregate,
+            (e) => call(editHistoryAggregate: e),
+          );
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get id {
+    final local$id = _instance.id;
+    return local$id == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(local$id, (e) => call(id: e));
+  }
+
+  CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit {
+    final local$lastEdit = _instance.lastEdit;
+    return local$lastEdit == null
+        ? CopyWith_Input_HistoryLatestEditsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestEditsBoolExp(
+            local$lastEdit,
+            (e) => call(lastEdit: e),
+          );
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get name {
+    final local$name = _instance.name;
+    return local$name == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(local$name, (e) => call(name: e));
+  }
+
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt {
+    final local$photoUpdatedAt = _instance.photoUpdatedAt;
+    return local$photoUpdatedAt == null
+        ? CopyWith_Input_TimestamptzComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_TimestamptzComparisonExp(
+            local$photoUpdatedAt,
+            (e) => call(photoUpdatedAt: e),
+          );
+  }
+
+  CopyWith_Input_AreasStreetsBoolExp<TRes> get streets {
+    final local$streets = _instance.streets;
+    return local$streets == null
+        ? CopyWith_Input_AreasStreetsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_AreasStreetsBoolExp(
+            local$streets,
+            (e) => call(streets: e),
+          );
+  }
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get userCanEdit {
+    final local$userCanEdit = _instance.userCanEdit;
+    return local$userCanEdit == null
+        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BooleanComparisonExp(
+            local$userCanEdit,
+            (e) => call(userCanEdit: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_AreasBoolExp<TRes>
+    implements CopyWith_Input_AreasBoolExp<TRes> {
+  _CopyWithStubImpl_Input_AreasBoolExp(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_AreasBoolExp>? $_and,
+    Input_AreasBoolExp? $_not,
+    List<Input_AreasBoolExp>? $_or,
+    Input_AddressesBoolExp? addresses,
+    Input_AuthUsersAdminOnBoolExp? adminUsers,
+    Input_StringComparisonExp? blurhash,
+    Input_GeographyComparisonExp? bounds,
+    Input_BigintComparisonExp? color,
+    Input_HistoryEditHistoryBoolExp? editHistory,
+    Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
+    Input_UuidComparisonExp? id,
+    Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_StringComparisonExp? name,
+    Input_TimestamptzComparisonExp? photoUpdatedAt,
+    Input_AreasStreetsBoolExp? streets,
+    Input_BooleanComparisonExp? userCanEdit,
+  }) => _res;
+
+  $_and(_fn) => _res;
+
+  CopyWith_Input_AreasBoolExp<TRes> get $_not =>
+      CopyWith_Input_AreasBoolExp.stub(_res);
+
+  $_or(_fn) => _res;
+
+  CopyWith_Input_AddressesBoolExp<TRes> get addresses =>
+      CopyWith_Input_AddressesBoolExp.stub(_res);
+
+  CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers =>
+      CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+
+  CopyWith_Input_GeographyComparisonExp<TRes> get bounds =>
+      CopyWith_Input_GeographyComparisonExp.stub(_res);
+
+  CopyWith_Input_BigintComparisonExp<TRes> get color =>
+      CopyWith_Input_BigintComparisonExp.stub(_res);
+
+  CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistory =>
+      CopyWith_Input_HistoryEditHistoryBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
+  get editHistoryAggregate =>
+      CopyWith_Input_HistoryEditHistoryAggregateBoolExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get id =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit =>
+      CopyWith_Input_HistoryLatestEditsBoolExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get name =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt =>
+      CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
+  CopyWith_Input_AreasStreetsBoolExp<TRes> get streets =>
+      CopyWith_Input_AreasStreetsBoolExp.stub(_res);
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get userCanEdit =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
+}
+
+class Input_AreasIncInput {
+  factory Input_AreasIncInput({int? color}) =>
+      Input_AreasIncInput._({if (color != null) r'color': color});
+
+  Input_AreasIncInput._(this._$data);
+
+  factory Input_AreasIncInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    return Input_AreasIncInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  int? get color => (_$data['color'] as int?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_AreasIncInput<Input_AreasIncInput> get copyWith =>
+      CopyWith_Input_AreasIncInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_AreasIncInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$color = color;
+    return Object.hashAll([_$data.containsKey('color') ? l$color : const {}]);
   }
 }

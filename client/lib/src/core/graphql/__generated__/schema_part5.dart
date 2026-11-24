@@ -1,352 +1,6 @@
 // Part 5 of the schema
 part of "schema.graphql.dart";
 
-abstract class CopyWith_Input_AreasStreetsArrRelInsertInput<TRes> {
-  factory CopyWith_Input_AreasStreetsArrRelInsertInput(
-    Input_AreasStreetsArrRelInsertInput instance,
-    TRes Function(Input_AreasStreetsArrRelInsertInput) then,
-  ) = _CopyWithImpl_Input_AreasStreetsArrRelInsertInput;
-
-  factory CopyWith_Input_AreasStreetsArrRelInsertInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_AreasStreetsArrRelInsertInput;
-
-  TRes call({
-    List<Input_AreasStreetsInsertInput>? data,
-    Input_AreasStreetsOnConflict? onConflict,
-  });
-  TRes data(
-    Iterable<Input_AreasStreetsInsertInput> Function(
-      Iterable<
-        CopyWith_Input_AreasStreetsInsertInput<Input_AreasStreetsInsertInput>
-      >,
-    )
-    _fn,
-  );
-  CopyWith_Input_AreasStreetsOnConflict<TRes> get onConflict;
-}
-
-class _CopyWithImpl_Input_AreasStreetsArrRelInsertInput<TRes>
-    implements CopyWith_Input_AreasStreetsArrRelInsertInput<TRes> {
-  _CopyWithImpl_Input_AreasStreetsArrRelInsertInput(this._instance, this._then);
-
-  final Input_AreasStreetsArrRelInsertInput _instance;
-
-  final TRes Function(Input_AreasStreetsArrRelInsertInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
-      _then(
-        Input_AreasStreetsArrRelInsertInput._({
-          ..._instance._$data,
-          if (data != _undefined && data != null)
-            'data': (data as List<Input_AreasStreetsInsertInput>),
-          if (onConflict != _undefined)
-            'onConflict': (onConflict as Input_AreasStreetsOnConflict?),
-        }),
-      );
-
-  TRes data(
-    Iterable<Input_AreasStreetsInsertInput> Function(
-      Iterable<
-        CopyWith_Input_AreasStreetsInsertInput<Input_AreasStreetsInsertInput>
-      >,
-    )
-    _fn,
-  ) => call(
-    data: _fn(
-      _instance.data.map(
-        (e) => CopyWith_Input_AreasStreetsInsertInput(e, (i) => i),
-      ),
-    ).toList(),
-  );
-
-  CopyWith_Input_AreasStreetsOnConflict<TRes> get onConflict {
-    final local$onConflict = _instance.onConflict;
-    return local$onConflict == null
-        ? CopyWith_Input_AreasStreetsOnConflict.stub(_then(_instance))
-        : CopyWith_Input_AreasStreetsOnConflict(
-            local$onConflict,
-            (e) => call(onConflict: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_AreasStreetsArrRelInsertInput<TRes>
-    implements CopyWith_Input_AreasStreetsArrRelInsertInput<TRes> {
-  _CopyWithStubImpl_Input_AreasStreetsArrRelInsertInput(this._res);
-
-  TRes _res;
-
-  call({
-    List<Input_AreasStreetsInsertInput>? data,
-    Input_AreasStreetsOnConflict? onConflict,
-  }) => _res;
-
-  data(_fn) => _res;
-
-  CopyWith_Input_AreasStreetsOnConflict<TRes> get onConflict =>
-      CopyWith_Input_AreasStreetsOnConflict.stub(_res);
-}
-
-class Input_AreasStreetsBoolExp {
-  factory Input_AreasStreetsBoolExp({
-    List<Input_AreasStreetsBoolExp>? $_and,
-    Input_AreasStreetsBoolExp? $_not,
-    List<Input_AreasStreetsBoolExp>? $_or,
-    Input_AreasBoolExp? area,
-    Input_UuidComparisonExp? areaId,
-    Input_StreetsBoolExp? street,
-    Input_UuidComparisonExp? streetId,
-  }) => Input_AreasStreetsBoolExp._({
-    if ($_and != null) r'_and': $_and,
-    if ($_not != null) r'_not': $_not,
-    if ($_or != null) r'_or': $_or,
-    if (area != null) r'area': area,
-    if (areaId != null) r'areaId': areaId,
-    if (street != null) r'street': street,
-    if (streetId != null) r'streetId': streetId,
-  });
-
-  Input_AreasStreetsBoolExp._(this._$data);
-
-  factory Input_AreasStreetsBoolExp.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('_and')) {
-      final l$$_and = data['_and'];
-      result$data['_and'] = (l$$_and as List<dynamic>?)
-          ?.map(
-            (e) =>
-                Input_AreasStreetsBoolExp.fromJson((e as Map<String, dynamic>)),
-          )
-          .toList();
-    }
-    if (data.containsKey('_not')) {
-      final l$$_not = data['_not'];
-      result$data['_not'] = l$$_not == null
-          ? null
-          : Input_AreasStreetsBoolExp.fromJson(
-              (l$$_not as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('_or')) {
-      final l$$_or = data['_or'];
-      result$data['_or'] = (l$$_or as List<dynamic>?)
-          ?.map(
-            (e) =>
-                Input_AreasStreetsBoolExp.fromJson((e as Map<String, dynamic>)),
-          )
-          .toList();
-    }
-    if (data.containsKey('area')) {
-      final l$area = data['area'];
-      result$data['area'] = l$area == null
-          ? null
-          : Input_AreasBoolExp.fromJson((l$area as Map<String, dynamic>));
-    }
-    if (data.containsKey('areaId')) {
-      final l$areaId = data['areaId'];
-      result$data['areaId'] = l$areaId == null
-          ? null
-          : Input_UuidComparisonExp.fromJson(
-              (l$areaId as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('street')) {
-      final l$street = data['street'];
-      result$data['street'] = l$street == null
-          ? null
-          : Input_StreetsBoolExp.fromJson((l$street as Map<String, dynamic>));
-    }
-    if (data.containsKey('streetId')) {
-      final l$streetId = data['streetId'];
-      result$data['streetId'] = l$streetId == null
-          ? null
-          : Input_UuidComparisonExp.fromJson(
-              (l$streetId as Map<String, dynamic>),
-            );
-    }
-    return Input_AreasStreetsBoolExp._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  List<Input_AreasStreetsBoolExp>? get $_and =>
-      (_$data['_and'] as List<Input_AreasStreetsBoolExp>?);
-
-  Input_AreasStreetsBoolExp? get $_not =>
-      (_$data['_not'] as Input_AreasStreetsBoolExp?);
-
-  List<Input_AreasStreetsBoolExp>? get $_or =>
-      (_$data['_or'] as List<Input_AreasStreetsBoolExp>?);
-
-  Input_AreasBoolExp? get area => (_$data['area'] as Input_AreasBoolExp?);
-
-  Input_UuidComparisonExp? get areaId =>
-      (_$data['areaId'] as Input_UuidComparisonExp?);
-
-  Input_StreetsBoolExp? get street =>
-      (_$data['street'] as Input_StreetsBoolExp?);
-
-  Input_UuidComparisonExp? get streetId =>
-      (_$data['streetId'] as Input_UuidComparisonExp?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_and')) {
-      final l$$_and = $_and;
-      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('_not')) {
-      final l$$_not = $_not;
-      result$data['_not'] = l$$_not?.toJson();
-    }
-    if (_$data.containsKey('_or')) {
-      final l$$_or = $_or;
-      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('area')) {
-      final l$area = area;
-      result$data['area'] = l$area?.toJson();
-    }
-    if (_$data.containsKey('areaId')) {
-      final l$areaId = areaId;
-      result$data['areaId'] = l$areaId?.toJson();
-    }
-    if (_$data.containsKey('street')) {
-      final l$street = street;
-      result$data['street'] = l$street?.toJson();
-    }
-    if (_$data.containsKey('streetId')) {
-      final l$streetId = streetId;
-      result$data['streetId'] = l$streetId?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_AreasStreetsBoolExp<Input_AreasStreetsBoolExp> get copyWith =>
-      CopyWith_Input_AreasStreetsBoolExp(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_AreasStreetsBoolExp ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_and = $_and;
-    final lOther$$_and = other.$_and;
-    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
-      return false;
-    }
-    if (l$$_and != null && lOther$$_and != null) {
-      if (l$$_and.length != lOther$$_and.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_and.length; i++) {
-        final l$$_and$entry = l$$_and[i];
-        final lOther$$_and$entry = lOther$$_and[i];
-        if (l$$_and$entry != lOther$$_and$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_and != lOther$$_and) {
-      return false;
-    }
-    final l$$_not = $_not;
-    final lOther$$_not = other.$_not;
-    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
-      return false;
-    }
-    if (l$$_not != lOther$$_not) {
-      return false;
-    }
-    final l$$_or = $_or;
-    final lOther$$_or = other.$_or;
-    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
-      return false;
-    }
-    if (l$$_or != null && lOther$$_or != null) {
-      if (l$$_or.length != lOther$$_or.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_or.length; i++) {
-        final l$$_or$entry = l$$_or[i];
-        final lOther$$_or$entry = lOther$$_or[i];
-        if (l$$_or$entry != lOther$$_or$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_or != lOther$$_or) {
-      return false;
-    }
-    final l$area = area;
-    final lOther$area = other.area;
-    if (_$data.containsKey('area') != other._$data.containsKey('area')) {
-      return false;
-    }
-    if (l$area != lOther$area) {
-      return false;
-    }
-    final l$areaId = areaId;
-    final lOther$areaId = other.areaId;
-    if (_$data.containsKey('areaId') != other._$data.containsKey('areaId')) {
-      return false;
-    }
-    if (l$areaId != lOther$areaId) {
-      return false;
-    }
-    final l$street = street;
-    final lOther$street = other.street;
-    if (_$data.containsKey('street') != other._$data.containsKey('street')) {
-      return false;
-    }
-    if (l$street != lOther$street) {
-      return false;
-    }
-    final l$streetId = streetId;
-    final lOther$streetId = other.streetId;
-    if (_$data.containsKey('streetId') !=
-        other._$data.containsKey('streetId')) {
-      return false;
-    }
-    if (l$streetId != lOther$streetId) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_and = $_and;
-    final l$$_not = $_not;
-    final l$$_or = $_or;
-    final l$area = area;
-    final l$areaId = areaId;
-    final l$street = street;
-    final l$streetId = streetId;
-    return Object.hashAll([
-      _$data.containsKey('_and')
-          ? l$$_and == null
-                ? null
-                : Object.hashAll(l$$_and.map((v) => v))
-          : const {},
-      _$data.containsKey('_not') ? l$$_not : const {},
-      _$data.containsKey('_or')
-          ? l$$_or == null
-                ? null
-                : Object.hashAll(l$$_or.map((v) => v))
-          : const {},
-      _$data.containsKey('area') ? l$area : const {},
-      _$data.containsKey('areaId') ? l$areaId : const {},
-      _$data.containsKey('street') ? l$street : const {},
-      _$data.containsKey('streetId') ? l$streetId : const {},
-    ]);
-  }
-}
-
 abstract class CopyWith_Input_AreasStreetsBoolExp<TRes> {
   factory CopyWith_Input_AreasStreetsBoolExp(
     Input_AreasStreetsBoolExp instance,
@@ -2754,6 +2408,185 @@ class Input_AuthInvitationsInsertInput {
       _$data.containsKey('expiresAt') ? l$expiresAt : const {},
       _$data.containsKey('user') ? l$user : const {},
       _$data.containsKey('userUid') ? l$userUid : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_AuthInvitationsInsertInput<TRes> {
+  factory CopyWith_Input_AuthInvitationsInsertInput(
+    Input_AuthInvitationsInsertInput instance,
+    TRes Function(Input_AuthInvitationsInsertInput) then,
+  ) = _CopyWithImpl_Input_AuthInvitationsInsertInput;
+
+  factory CopyWith_Input_AuthInvitationsInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_AuthInvitationsInsertInput;
+
+  TRes call({
+    Input_AuthUsersDataObjRelInsertInput? creator,
+    DateTime? expiresAt,
+    Input_AuthUsersDataObjRelInsertInput? user,
+    UuidValue? userUid,
+  });
+  CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get creator;
+  CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user;
+}
+
+class _CopyWithImpl_Input_AuthInvitationsInsertInput<TRes>
+    implements CopyWith_Input_AuthInvitationsInsertInput<TRes> {
+  _CopyWithImpl_Input_AuthInvitationsInsertInput(this._instance, this._then);
+
+  final Input_AuthInvitationsInsertInput _instance;
+
+  final TRes Function(Input_AuthInvitationsInsertInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? creator = _undefined,
+    Object? expiresAt = _undefined,
+    Object? user = _undefined,
+    Object? userUid = _undefined,
+  }) => _then(
+    Input_AuthInvitationsInsertInput._({
+      ..._instance._$data,
+      if (creator != _undefined)
+        'creator': (creator as Input_AuthUsersDataObjRelInsertInput?),
+      if (expiresAt != _undefined) 'expiresAt': (expiresAt as DateTime?),
+      if (user != _undefined)
+        'user': (user as Input_AuthUsersDataObjRelInsertInput?),
+      if (userUid != _undefined) 'userUid': (userUid as UuidValue?),
+    }),
+  );
+
+  CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get creator {
+    final local$creator = _instance.creator;
+    return local$creator == null
+        ? CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersDataObjRelInsertInput(
+            local$creator,
+            (e) => call(creator: e),
+          );
+  }
+
+  CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersDataObjRelInsertInput(
+            local$user,
+            (e) => call(user: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_AuthInvitationsInsertInput<TRes>
+    implements CopyWith_Input_AuthInvitationsInsertInput<TRes> {
+  _CopyWithStubImpl_Input_AuthInvitationsInsertInput(this._res);
+
+  TRes _res;
+
+  call({
+    Input_AuthUsersDataObjRelInsertInput? creator,
+    DateTime? expiresAt,
+    Input_AuthUsersDataObjRelInsertInput? user,
+    UuidValue? userUid,
+  }) => _res;
+
+  CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get creator =>
+      CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_res);
+
+  CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user =>
+      CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_res);
+}
+
+class Input_AuthInvitationsObjRelInsertInput {
+  factory Input_AuthInvitationsObjRelInsertInput({
+    required Input_AuthInvitationsInsertInput data,
+    Input_AuthInvitationsOnConflict? onConflict,
+  }) => Input_AuthInvitationsObjRelInsertInput._({
+    r'data': data,
+    if (onConflict != null) r'onConflict': onConflict,
+  });
+
+  Input_AuthInvitationsObjRelInsertInput._(this._$data);
+
+  factory Input_AuthInvitationsObjRelInsertInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$data = data['data'];
+    result$data['data'] = Input_AuthInvitationsInsertInput.fromJson(
+      (l$data as Map<String, dynamic>),
+    );
+    if (data.containsKey('onConflict')) {
+      final l$onConflict = data['onConflict'];
+      result$data['onConflict'] = l$onConflict == null
+          ? null
+          : Input_AuthInvitationsOnConflict.fromJson(
+              (l$onConflict as Map<String, dynamic>),
+            );
+    }
+    return Input_AuthInvitationsObjRelInsertInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_AuthInvitationsInsertInput get data =>
+      (_$data['data'] as Input_AuthInvitationsInsertInput);
+
+  Input_AuthInvitationsOnConflict? get onConflict =>
+      (_$data['onConflict'] as Input_AuthInvitationsOnConflict?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$data = data;
+    result$data['data'] = l$data.toJson();
+    if (_$data.containsKey('onConflict')) {
+      final l$onConflict = onConflict;
+      result$data['onConflict'] = l$onConflict?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_AuthInvitationsObjRelInsertInput<
+    Input_AuthInvitationsObjRelInsertInput
+  >
+  get copyWith =>
+      CopyWith_Input_AuthInvitationsObjRelInsertInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_AuthInvitationsObjRelInsertInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$data = data;
+    final lOther$data = other.data;
+    if (l$data != lOther$data) {
+      return false;
+    }
+    final l$onConflict = onConflict;
+    final lOther$onConflict = other.onConflict;
+    if (_$data.containsKey('onConflict') !=
+        other._$data.containsKey('onConflict')) {
+      return false;
+    }
+    if (l$onConflict != lOther$onConflict) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$data = data;
+    final l$onConflict = onConflict;
+    return Object.hashAll([
+      l$data,
+      _$data.containsKey('onConflict') ? l$onConflict : const {},
     ]);
   }
 }

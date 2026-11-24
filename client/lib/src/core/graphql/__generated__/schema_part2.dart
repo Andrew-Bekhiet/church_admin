@@ -21,7 +21,6 @@ abstract class CopyWith_Input_AddressesInsertInput<TRes> {
     UuidValue? familyId,
     Map<String, dynamic>? geolocation,
     String? houseCode,
-    int? houseNumber,
     String? specialLandmark,
     Input_StoresObjRelInsertInput? store,
     UuidValue? storeId,
@@ -58,7 +57,6 @@ class _CopyWithImpl_Input_AddressesInsertInput<TRes>
     Object? familyId = _undefined,
     Object? geolocation = _undefined,
     Object? houseCode = _undefined,
-    Object? houseNumber = _undefined,
     Object? specialLandmark = _undefined,
     Object? store = _undefined,
     Object? storeId = _undefined,
@@ -84,7 +82,6 @@ class _CopyWithImpl_Input_AddressesInsertInput<TRes>
       if (geolocation != _undefined)
         'geolocation': (geolocation as Map<String, dynamic>?),
       if (houseCode != _undefined) 'houseCode': (houseCode as String?),
-      if (houseNumber != _undefined) 'houseNumber': (houseNumber as int?),
       if (specialLandmark != _undefined)
         'specialLandmark': (specialLandmark as String?),
       if (store != _undefined)
@@ -167,7 +164,6 @@ class _CopyWithStubImpl_Input_AddressesInsertInput<TRes>
     UuidValue? familyId,
     Map<String, dynamic>? geolocation,
     String? houseCode,
-    int? houseNumber,
     String? specialLandmark,
     Input_StoresObjRelInsertInput? store,
     UuidValue? storeId,
@@ -201,7 +197,6 @@ class Input_AddressesMaxOrderBy {
     Enum_OrderBy? districtId,
     Enum_OrderBy? familyId,
     Enum_OrderBy? houseCode,
-    Enum_OrderBy? houseNumber,
     Enum_OrderBy? id,
     Enum_OrderBy? specialLandmark,
     Enum_OrderBy? storeId,
@@ -215,7 +210,6 @@ class Input_AddressesMaxOrderBy {
     if (districtId != null) r'districtId': districtId,
     if (familyId != null) r'familyId': familyId,
     if (houseCode != null) r'houseCode': houseCode,
-    if (houseNumber != null) r'houseNumber': houseNumber,
     if (id != null) r'id': id,
     if (specialLandmark != null) r'specialLandmark': specialLandmark,
     if (storeId != null) r'storeId': storeId,
@@ -263,12 +257,6 @@ class Input_AddressesMaxOrderBy {
       result$data['houseCode'] = l$houseCode == null
           ? null
           : fromJson_Enum_OrderBy((l$houseCode as String));
-    }
-    if (data.containsKey('houseNumber')) {
-      final l$houseNumber = data['houseNumber'];
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : fromJson_Enum_OrderBy((l$houseNumber as String));
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -325,8 +313,6 @@ class Input_AddressesMaxOrderBy {
 
   Enum_OrderBy? get houseCode => (_$data['houseCode'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get houseNumber => (_$data['houseNumber'] as Enum_OrderBy?);
-
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
 
   Enum_OrderBy? get specialLandmark =>
@@ -377,12 +363,6 @@ class Input_AddressesMaxOrderBy {
       result$data['houseCode'] = l$houseCode == null
           ? null
           : toJson_Enum_OrderBy(l$houseCode);
-    }
-    if (_$data.containsKey('houseNumber')) {
-      final l$houseNumber = houseNumber;
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -486,15 +466,6 @@ class Input_AddressesMaxOrderBy {
     if (l$houseCode != lOther$houseCode) {
       return false;
     }
-    final l$houseNumber = houseNumber;
-    final lOther$houseNumber = other.houseNumber;
-    if (_$data.containsKey('houseNumber') !=
-        other._$data.containsKey('houseNumber')) {
-      return false;
-    }
-    if (l$houseNumber != lOther$houseNumber) {
-      return false;
-    }
     final l$id = id;
     final lOther$id = other.id;
     if (_$data.containsKey('id') != other._$data.containsKey('id')) {
@@ -558,7 +529,6 @@ class Input_AddressesMaxOrderBy {
     final l$districtId = districtId;
     final l$familyId = familyId;
     final l$houseCode = houseCode;
-    final l$houseNumber = houseNumber;
     final l$id = id;
     final l$specialLandmark = specialLandmark;
     final l$storeId = storeId;
@@ -572,7 +542,6 @@ class Input_AddressesMaxOrderBy {
       _$data.containsKey('districtId') ? l$districtId : const {},
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('houseCode') ? l$houseCode : const {},
-      _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('specialLandmark') ? l$specialLandmark : const {},
       _$data.containsKey('storeId') ? l$storeId : const {},
@@ -599,7 +568,6 @@ abstract class CopyWith_Input_AddressesMaxOrderBy<TRes> {
     Enum_OrderBy? districtId,
     Enum_OrderBy? familyId,
     Enum_OrderBy? houseCode,
-    Enum_OrderBy? houseNumber,
     Enum_OrderBy? id,
     Enum_OrderBy? specialLandmark,
     Enum_OrderBy? storeId,
@@ -626,7 +594,6 @@ class _CopyWithImpl_Input_AddressesMaxOrderBy<TRes>
     Object? districtId = _undefined,
     Object? familyId = _undefined,
     Object? houseCode = _undefined,
-    Object? houseNumber = _undefined,
     Object? id = _undefined,
     Object? specialLandmark = _undefined,
     Object? storeId = _undefined,
@@ -644,8 +611,6 @@ class _CopyWithImpl_Input_AddressesMaxOrderBy<TRes>
       if (districtId != _undefined) 'districtId': (districtId as Enum_OrderBy?),
       if (familyId != _undefined) 'familyId': (familyId as Enum_OrderBy?),
       if (houseCode != _undefined) 'houseCode': (houseCode as Enum_OrderBy?),
-      if (houseNumber != _undefined)
-        'houseNumber': (houseNumber as Enum_OrderBy?),
       if (id != _undefined) 'id': (id as Enum_OrderBy?),
       if (specialLandmark != _undefined)
         'specialLandmark': (specialLandmark as Enum_OrderBy?),
@@ -672,7 +637,6 @@ class _CopyWithStubImpl_Input_AddressesMaxOrderBy<TRes>
     Enum_OrderBy? districtId,
     Enum_OrderBy? familyId,
     Enum_OrderBy? houseCode,
-    Enum_OrderBy? houseNumber,
     Enum_OrderBy? id,
     Enum_OrderBy? specialLandmark,
     Enum_OrderBy? storeId,
@@ -690,7 +654,6 @@ class Input_AddressesMinOrderBy {
     Enum_OrderBy? districtId,
     Enum_OrderBy? familyId,
     Enum_OrderBy? houseCode,
-    Enum_OrderBy? houseNumber,
     Enum_OrderBy? id,
     Enum_OrderBy? specialLandmark,
     Enum_OrderBy? storeId,
@@ -704,7 +667,6 @@ class Input_AddressesMinOrderBy {
     if (districtId != null) r'districtId': districtId,
     if (familyId != null) r'familyId': familyId,
     if (houseCode != null) r'houseCode': houseCode,
-    if (houseNumber != null) r'houseNumber': houseNumber,
     if (id != null) r'id': id,
     if (specialLandmark != null) r'specialLandmark': specialLandmark,
     if (storeId != null) r'storeId': storeId,
@@ -752,12 +714,6 @@ class Input_AddressesMinOrderBy {
       result$data['houseCode'] = l$houseCode == null
           ? null
           : fromJson_Enum_OrderBy((l$houseCode as String));
-    }
-    if (data.containsKey('houseNumber')) {
-      final l$houseNumber = data['houseNumber'];
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : fromJson_Enum_OrderBy((l$houseNumber as String));
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -814,8 +770,6 @@ class Input_AddressesMinOrderBy {
 
   Enum_OrderBy? get houseCode => (_$data['houseCode'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get houseNumber => (_$data['houseNumber'] as Enum_OrderBy?);
-
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
 
   Enum_OrderBy? get specialLandmark =>
@@ -866,12 +820,6 @@ class Input_AddressesMinOrderBy {
       result$data['houseCode'] = l$houseCode == null
           ? null
           : toJson_Enum_OrderBy(l$houseCode);
-    }
-    if (_$data.containsKey('houseNumber')) {
-      final l$houseNumber = houseNumber;
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -975,15 +923,6 @@ class Input_AddressesMinOrderBy {
     if (l$houseCode != lOther$houseCode) {
       return false;
     }
-    final l$houseNumber = houseNumber;
-    final lOther$houseNumber = other.houseNumber;
-    if (_$data.containsKey('houseNumber') !=
-        other._$data.containsKey('houseNumber')) {
-      return false;
-    }
-    if (l$houseNumber != lOther$houseNumber) {
-      return false;
-    }
     final l$id = id;
     final lOther$id = other.id;
     if (_$data.containsKey('id') != other._$data.containsKey('id')) {
@@ -1047,7 +986,6 @@ class Input_AddressesMinOrderBy {
     final l$districtId = districtId;
     final l$familyId = familyId;
     final l$houseCode = houseCode;
-    final l$houseNumber = houseNumber;
     final l$id = id;
     final l$specialLandmark = specialLandmark;
     final l$storeId = storeId;
@@ -1061,7 +999,6 @@ class Input_AddressesMinOrderBy {
       _$data.containsKey('districtId') ? l$districtId : const {},
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('houseCode') ? l$houseCode : const {},
-      _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('specialLandmark') ? l$specialLandmark : const {},
       _$data.containsKey('storeId') ? l$storeId : const {},
@@ -1088,7 +1025,6 @@ abstract class CopyWith_Input_AddressesMinOrderBy<TRes> {
     Enum_OrderBy? districtId,
     Enum_OrderBy? familyId,
     Enum_OrderBy? houseCode,
-    Enum_OrderBy? houseNumber,
     Enum_OrderBy? id,
     Enum_OrderBy? specialLandmark,
     Enum_OrderBy? storeId,
@@ -1115,7 +1051,6 @@ class _CopyWithImpl_Input_AddressesMinOrderBy<TRes>
     Object? districtId = _undefined,
     Object? familyId = _undefined,
     Object? houseCode = _undefined,
-    Object? houseNumber = _undefined,
     Object? id = _undefined,
     Object? specialLandmark = _undefined,
     Object? storeId = _undefined,
@@ -1133,8 +1068,6 @@ class _CopyWithImpl_Input_AddressesMinOrderBy<TRes>
       if (districtId != _undefined) 'districtId': (districtId as Enum_OrderBy?),
       if (familyId != _undefined) 'familyId': (familyId as Enum_OrderBy?),
       if (houseCode != _undefined) 'houseCode': (houseCode as Enum_OrderBy?),
-      if (houseNumber != _undefined)
-        'houseNumber': (houseNumber as Enum_OrderBy?),
       if (id != _undefined) 'id': (id as Enum_OrderBy?),
       if (specialLandmark != _undefined)
         'specialLandmark': (specialLandmark as Enum_OrderBy?),
@@ -1161,7 +1094,6 @@ class _CopyWithStubImpl_Input_AddressesMinOrderBy<TRes>
     Enum_OrderBy? districtId,
     Enum_OrderBy? familyId,
     Enum_OrderBy? houseCode,
-    Enum_OrderBy? houseNumber,
     Enum_OrderBy? id,
     Enum_OrderBy? specialLandmark,
     Enum_OrderBy? storeId,
@@ -1540,7 +1472,6 @@ class Input_AddressesOrderBy {
     Enum_OrderBy? fullAddressText,
     Enum_OrderBy? geolocation,
     Enum_OrderBy? houseCode,
-    Enum_OrderBy? houseNumber,
     Enum_OrderBy? id,
     Enum_OrderBy? specialLandmark,
     Input_StoresOrderBy? store,
@@ -1561,7 +1492,6 @@ class Input_AddressesOrderBy {
     if (fullAddressText != null) r'fullAddressText': fullAddressText,
     if (geolocation != null) r'geolocation': geolocation,
     if (houseCode != null) r'houseCode': houseCode,
-    if (houseNumber != null) r'houseNumber': houseNumber,
     if (id != null) r'id': id,
     if (specialLandmark != null) r'specialLandmark': specialLandmark,
     if (store != null) r'store': store,
@@ -1644,12 +1574,6 @@ class Input_AddressesOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$houseCode as String));
     }
-    if (data.containsKey('houseNumber')) {
-      final l$houseNumber = data['houseNumber'];
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : fromJson_Enum_OrderBy((l$houseNumber as String));
-    }
     if (data.containsKey('id')) {
       final l$id = data['id'];
       result$data['id'] = l$id == null
@@ -1730,8 +1654,6 @@ class Input_AddressesOrderBy {
 
   Enum_OrderBy? get houseCode => (_$data['houseCode'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get houseNumber => (_$data['houseNumber'] as Enum_OrderBy?);
-
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
 
   Enum_OrderBy? get specialLandmark =>
@@ -1811,12 +1733,6 @@ class Input_AddressesOrderBy {
       result$data['houseCode'] = l$houseCode == null
           ? null
           : toJson_Enum_OrderBy(l$houseCode);
-    }
-    if (_$data.containsKey('houseNumber')) {
-      final l$houseNumber = houseNumber;
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -1970,15 +1886,6 @@ class Input_AddressesOrderBy {
     if (l$houseCode != lOther$houseCode) {
       return false;
     }
-    final l$houseNumber = houseNumber;
-    final lOther$houseNumber = other.houseNumber;
-    if (_$data.containsKey('houseNumber') !=
-        other._$data.containsKey('houseNumber')) {
-      return false;
-    }
-    if (l$houseNumber != lOther$houseNumber) {
-      return false;
-    }
     final l$id = id;
     final lOther$id = other.id;
     if (_$data.containsKey('id') != other._$data.containsKey('id')) {
@@ -2063,7 +1970,6 @@ class Input_AddressesOrderBy {
     final l$fullAddressText = fullAddressText;
     final l$geolocation = geolocation;
     final l$houseCode = houseCode;
-    final l$houseNumber = houseNumber;
     final l$id = id;
     final l$specialLandmark = specialLandmark;
     final l$store = store;
@@ -2084,7 +1990,6 @@ class Input_AddressesOrderBy {
       _$data.containsKey('fullAddressText') ? l$fullAddressText : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('houseCode') ? l$houseCode : const {},
-      _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('specialLandmark') ? l$specialLandmark : const {},
       _$data.containsKey('store') ? l$store : const {},
@@ -2118,7 +2023,6 @@ abstract class CopyWith_Input_AddressesOrderBy<TRes> {
     Enum_OrderBy? fullAddressText,
     Enum_OrderBy? geolocation,
     Enum_OrderBy? houseCode,
-    Enum_OrderBy? houseNumber,
     Enum_OrderBy? id,
     Enum_OrderBy? specialLandmark,
     Input_StoresOrderBy? store,
@@ -2157,7 +2061,6 @@ class _CopyWithImpl_Input_AddressesOrderBy<TRes>
     Object? fullAddressText = _undefined,
     Object? geolocation = _undefined,
     Object? houseCode = _undefined,
-    Object? houseNumber = _undefined,
     Object? id = _undefined,
     Object? specialLandmark = _undefined,
     Object? store = _undefined,
@@ -2185,8 +2088,6 @@ class _CopyWithImpl_Input_AddressesOrderBy<TRes>
       if (geolocation != _undefined)
         'geolocation': (geolocation as Enum_OrderBy?),
       if (houseCode != _undefined) 'houseCode': (houseCode as Enum_OrderBy?),
-      if (houseNumber != _undefined)
-        'houseNumber': (houseNumber as Enum_OrderBy?),
       if (id != _undefined) 'id': (id as Enum_OrderBy?),
       if (specialLandmark != _undefined)
         'specialLandmark': (specialLandmark as Enum_OrderBy?),
@@ -2258,7 +2159,6 @@ class _CopyWithStubImpl_Input_AddressesOrderBy<TRes>
     Enum_OrderBy? fullAddressText,
     Enum_OrderBy? geolocation,
     Enum_OrderBy? houseCode,
-    Enum_OrderBy? houseNumber,
     Enum_OrderBy? id,
     Enum_OrderBy? specialLandmark,
     Input_StoresOrderBy? store,
@@ -2384,7 +2284,6 @@ class Input_AddressesSetInput {
     UuidValue? familyId,
     Map<String, dynamic>? geolocation,
     String? houseCode,
-    int? houseNumber,
     String? specialLandmark,
     UuidValue? storeId,
     int? storeyNumber,
@@ -2398,7 +2297,6 @@ class Input_AddressesSetInput {
     if (familyId != null) r'familyId': familyId,
     if (geolocation != null) r'geolocation': geolocation,
     if (houseCode != null) r'houseCode': houseCode,
-    if (houseNumber != null) r'houseNumber': houseNumber,
     if (specialLandmark != null) r'specialLandmark': specialLandmark,
     if (storeId != null) r'storeId': storeId,
     if (storeyNumber != null) r'storeyNumber': storeyNumber,
@@ -2441,10 +2339,6 @@ class Input_AddressesSetInput {
     if (data.containsKey('houseCode')) {
       final l$houseCode = data['houseCode'];
       result$data['houseCode'] = (l$houseCode as String?);
-    }
-    if (data.containsKey('houseNumber')) {
-      final l$houseNumber = data['houseNumber'];
-      result$data['houseNumber'] = (l$houseNumber as int?);
     }
     if (data.containsKey('specialLandmark')) {
       final l$specialLandmark = data['specialLandmark'];
@@ -2490,8 +2384,6 @@ class Input_AddressesSetInput {
 
   String? get houseCode => (_$data['houseCode'] as String?);
 
-  int? get houseNumber => (_$data['houseNumber'] as int?);
-
   String? get specialLandmark => (_$data['specialLandmark'] as String?);
 
   UuidValue? get storeId => (_$data['storeId'] as UuidValue?);
@@ -2535,10 +2427,6 @@ class Input_AddressesSetInput {
     if (_$data.containsKey('houseCode')) {
       final l$houseCode = houseCode;
       result$data['houseCode'] = l$houseCode;
-    }
-    if (_$data.containsKey('houseNumber')) {
-      final l$houseNumber = houseNumber;
-      result$data['houseNumber'] = l$houseNumber;
     }
     if (_$data.containsKey('specialLandmark')) {
       final l$specialLandmark = specialLandmark;
@@ -2640,15 +2528,6 @@ class Input_AddressesSetInput {
     if (l$houseCode != lOther$houseCode) {
       return false;
     }
-    final l$houseNumber = houseNumber;
-    final lOther$houseNumber = other.houseNumber;
-    if (_$data.containsKey('houseNumber') !=
-        other._$data.containsKey('houseNumber')) {
-      return false;
-    }
-    if (l$houseNumber != lOther$houseNumber) {
-      return false;
-    }
     final l$specialLandmark = specialLandmark;
     final lOther$specialLandmark = other.specialLandmark;
     if (_$data.containsKey('specialLandmark') !=
@@ -2705,7 +2584,6 @@ class Input_AddressesSetInput {
     final l$familyId = familyId;
     final l$geolocation = geolocation;
     final l$houseCode = houseCode;
-    final l$houseNumber = houseNumber;
     final l$specialLandmark = specialLandmark;
     final l$storeId = storeId;
     final l$storeyNumber = storeyNumber;
@@ -2719,7 +2597,6 @@ class Input_AddressesSetInput {
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('houseCode') ? l$houseCode : const {},
-      _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('specialLandmark') ? l$specialLandmark : const {},
       _$data.containsKey('storeId') ? l$storeId : const {},
       _$data.containsKey('storeyNumber') ? l$storeyNumber : const {},

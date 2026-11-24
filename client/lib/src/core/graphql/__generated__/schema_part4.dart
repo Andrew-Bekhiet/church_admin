@@ -1,409 +1,6 @@
 // Part 4 of the schema
 part of "schema.graphql.dart";
 
-abstract class CopyWith_Input_AreasBoolExp<TRes> {
-  factory CopyWith_Input_AreasBoolExp(
-    Input_AreasBoolExp instance,
-    TRes Function(Input_AreasBoolExp) then,
-  ) = _CopyWithImpl_Input_AreasBoolExp;
-
-  factory CopyWith_Input_AreasBoolExp.stub(TRes res) =
-      _CopyWithStubImpl_Input_AreasBoolExp;
-
-  TRes call({
-    List<Input_AreasBoolExp>? $_and,
-    Input_AreasBoolExp? $_not,
-    List<Input_AreasBoolExp>? $_or,
-    Input_AddressesBoolExp? addresses,
-    Input_AuthUsersAdminOnBoolExp? adminUsers,
-    Input_StringComparisonExp? blurhash,
-    Input_GeographyComparisonExp? bounds,
-    Input_BigintComparisonExp? color,
-    Input_HistoryEditHistoryBoolExp? editHistory,
-    Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
-    Input_UuidComparisonExp? id,
-    Input_HistoryLatestEditsBoolExp? lastEdit,
-    Input_StringComparisonExp? name,
-    Input_TimestamptzComparisonExp? photoUpdatedAt,
-    Input_AreasStreetsBoolExp? streets,
-    Input_BooleanComparisonExp? userCanEdit,
-  });
-  TRes $_and(
-    Iterable<Input_AreasBoolExp>? Function(
-      Iterable<CopyWith_Input_AreasBoolExp<Input_AreasBoolExp>>?,
-    )
-    _fn,
-  );
-  CopyWith_Input_AreasBoolExp<TRes> get $_not;
-  TRes $_or(
-    Iterable<Input_AreasBoolExp>? Function(
-      Iterable<CopyWith_Input_AreasBoolExp<Input_AreasBoolExp>>?,
-    )
-    _fn,
-  );
-  CopyWith_Input_AddressesBoolExp<TRes> get addresses;
-  CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers;
-  CopyWith_Input_StringComparisonExp<TRes> get blurhash;
-  CopyWith_Input_GeographyComparisonExp<TRes> get bounds;
-  CopyWith_Input_BigintComparisonExp<TRes> get color;
-  CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistory;
-  CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
-  get editHistoryAggregate;
-  CopyWith_Input_UuidComparisonExp<TRes> get id;
-  CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit;
-  CopyWith_Input_StringComparisonExp<TRes> get name;
-  CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt;
-  CopyWith_Input_AreasStreetsBoolExp<TRes> get streets;
-  CopyWith_Input_BooleanComparisonExp<TRes> get userCanEdit;
-}
-
-class _CopyWithImpl_Input_AreasBoolExp<TRes>
-    implements CopyWith_Input_AreasBoolExp<TRes> {
-  _CopyWithImpl_Input_AreasBoolExp(this._instance, this._then);
-
-  final Input_AreasBoolExp _instance;
-
-  final TRes Function(Input_AreasBoolExp) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? $_and = _undefined,
-    Object? $_not = _undefined,
-    Object? $_or = _undefined,
-    Object? addresses = _undefined,
-    Object? adminUsers = _undefined,
-    Object? blurhash = _undefined,
-    Object? bounds = _undefined,
-    Object? color = _undefined,
-    Object? editHistory = _undefined,
-    Object? editHistoryAggregate = _undefined,
-    Object? id = _undefined,
-    Object? lastEdit = _undefined,
-    Object? name = _undefined,
-    Object? photoUpdatedAt = _undefined,
-    Object? streets = _undefined,
-    Object? userCanEdit = _undefined,
-  }) => _then(
-    Input_AreasBoolExp._({
-      ..._instance._$data,
-      if ($_and != _undefined) '_and': ($_and as List<Input_AreasBoolExp>?),
-      if ($_not != _undefined) '_not': ($_not as Input_AreasBoolExp?),
-      if ($_or != _undefined) '_or': ($_or as List<Input_AreasBoolExp>?),
-      if (addresses != _undefined)
-        'addresses': (addresses as Input_AddressesBoolExp?),
-      if (adminUsers != _undefined)
-        'adminUsers': (adminUsers as Input_AuthUsersAdminOnBoolExp?),
-      if (blurhash != _undefined)
-        'blurhash': (blurhash as Input_StringComparisonExp?),
-      if (bounds != _undefined)
-        'bounds': (bounds as Input_GeographyComparisonExp?),
-      if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
-      if (editHistory != _undefined)
-        'editHistory': (editHistory as Input_HistoryEditHistoryBoolExp?),
-      if (editHistoryAggregate != _undefined)
-        'editHistoryAggregate':
-            (editHistoryAggregate as Input_HistoryEditHistoryAggregateBoolExp?),
-      if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
-      if (lastEdit != _undefined)
-        'lastEdit': (lastEdit as Input_HistoryLatestEditsBoolExp?),
-      if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
-      if (photoUpdatedAt != _undefined)
-        'photoUpdatedAt': (photoUpdatedAt as Input_TimestamptzComparisonExp?),
-      if (streets != _undefined)
-        'streets': (streets as Input_AreasStreetsBoolExp?),
-      if (userCanEdit != _undefined)
-        'userCanEdit': (userCanEdit as Input_BooleanComparisonExp?),
-    }),
-  );
-
-  TRes $_and(
-    Iterable<Input_AreasBoolExp>? Function(
-      Iterable<CopyWith_Input_AreasBoolExp<Input_AreasBoolExp>>?,
-    )
-    _fn,
-  ) => call(
-    $_and: _fn(
-      _instance.$_and?.map((e) => CopyWith_Input_AreasBoolExp(e, (i) => i)),
-    )?.toList(),
-  );
-
-  CopyWith_Input_AreasBoolExp<TRes> get $_not {
-    final local$$_not = _instance.$_not;
-    return local$$_not == null
-        ? CopyWith_Input_AreasBoolExp.stub(_then(_instance))
-        : CopyWith_Input_AreasBoolExp(local$$_not, (e) => call($_not: e));
-  }
-
-  TRes $_or(
-    Iterable<Input_AreasBoolExp>? Function(
-      Iterable<CopyWith_Input_AreasBoolExp<Input_AreasBoolExp>>?,
-    )
-    _fn,
-  ) => call(
-    $_or: _fn(
-      _instance.$_or?.map((e) => CopyWith_Input_AreasBoolExp(e, (i) => i)),
-    )?.toList(),
-  );
-
-  CopyWith_Input_AddressesBoolExp<TRes> get addresses {
-    final local$addresses = _instance.addresses;
-    return local$addresses == null
-        ? CopyWith_Input_AddressesBoolExp.stub(_then(_instance))
-        : CopyWith_Input_AddressesBoolExp(
-            local$addresses,
-            (e) => call(addresses: e),
-          );
-  }
-
-  CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers {
-    final local$adminUsers = _instance.adminUsers;
-    return local$adminUsers == null
-        ? CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_then(_instance))
-        : CopyWith_Input_AuthUsersAdminOnBoolExp(
-            local$adminUsers,
-            (e) => call(adminUsers: e),
-          );
-  }
-
-  CopyWith_Input_StringComparisonExp<TRes> get blurhash {
-    final local$blurhash = _instance.blurhash;
-    return local$blurhash == null
-        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_StringComparisonExp(
-            local$blurhash,
-            (e) => call(blurhash: e),
-          );
-  }
-
-  CopyWith_Input_GeographyComparisonExp<TRes> get bounds {
-    final local$bounds = _instance.bounds;
-    return local$bounds == null
-        ? CopyWith_Input_GeographyComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_GeographyComparisonExp(
-            local$bounds,
-            (e) => call(bounds: e),
-          );
-  }
-
-  CopyWith_Input_BigintComparisonExp<TRes> get color {
-    final local$color = _instance.color;
-    return local$color == null
-        ? CopyWith_Input_BigintComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_BigintComparisonExp(
-            local$color,
-            (e) => call(color: e),
-          );
-  }
-
-  CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistory {
-    final local$editHistory = _instance.editHistory;
-    return local$editHistory == null
-        ? CopyWith_Input_HistoryEditHistoryBoolExp.stub(_then(_instance))
-        : CopyWith_Input_HistoryEditHistoryBoolExp(
-            local$editHistory,
-            (e) => call(editHistory: e),
-          );
-  }
-
-  CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
-  get editHistoryAggregate {
-    final local$editHistoryAggregate = _instance.editHistoryAggregate;
-    return local$editHistoryAggregate == null
-        ? CopyWith_Input_HistoryEditHistoryAggregateBoolExp.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_HistoryEditHistoryAggregateBoolExp(
-            local$editHistoryAggregate,
-            (e) => call(editHistoryAggregate: e),
-          );
-  }
-
-  CopyWith_Input_UuidComparisonExp<TRes> get id {
-    final local$id = _instance.id;
-    return local$id == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(local$id, (e) => call(id: e));
-  }
-
-  CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit {
-    final local$lastEdit = _instance.lastEdit;
-    return local$lastEdit == null
-        ? CopyWith_Input_HistoryLatestEditsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_HistoryLatestEditsBoolExp(
-            local$lastEdit,
-            (e) => call(lastEdit: e),
-          );
-  }
-
-  CopyWith_Input_StringComparisonExp<TRes> get name {
-    final local$name = _instance.name;
-    return local$name == null
-        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_StringComparisonExp(local$name, (e) => call(name: e));
-  }
-
-  CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt {
-    final local$photoUpdatedAt = _instance.photoUpdatedAt;
-    return local$photoUpdatedAt == null
-        ? CopyWith_Input_TimestamptzComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_TimestamptzComparisonExp(
-            local$photoUpdatedAt,
-            (e) => call(photoUpdatedAt: e),
-          );
-  }
-
-  CopyWith_Input_AreasStreetsBoolExp<TRes> get streets {
-    final local$streets = _instance.streets;
-    return local$streets == null
-        ? CopyWith_Input_AreasStreetsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_AreasStreetsBoolExp(
-            local$streets,
-            (e) => call(streets: e),
-          );
-  }
-
-  CopyWith_Input_BooleanComparisonExp<TRes> get userCanEdit {
-    final local$userCanEdit = _instance.userCanEdit;
-    return local$userCanEdit == null
-        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_BooleanComparisonExp(
-            local$userCanEdit,
-            (e) => call(userCanEdit: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_AreasBoolExp<TRes>
-    implements CopyWith_Input_AreasBoolExp<TRes> {
-  _CopyWithStubImpl_Input_AreasBoolExp(this._res);
-
-  TRes _res;
-
-  call({
-    List<Input_AreasBoolExp>? $_and,
-    Input_AreasBoolExp? $_not,
-    List<Input_AreasBoolExp>? $_or,
-    Input_AddressesBoolExp? addresses,
-    Input_AuthUsersAdminOnBoolExp? adminUsers,
-    Input_StringComparisonExp? blurhash,
-    Input_GeographyComparisonExp? bounds,
-    Input_BigintComparisonExp? color,
-    Input_HistoryEditHistoryBoolExp? editHistory,
-    Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
-    Input_UuidComparisonExp? id,
-    Input_HistoryLatestEditsBoolExp? lastEdit,
-    Input_StringComparisonExp? name,
-    Input_TimestamptzComparisonExp? photoUpdatedAt,
-    Input_AreasStreetsBoolExp? streets,
-    Input_BooleanComparisonExp? userCanEdit,
-  }) => _res;
-
-  $_and(_fn) => _res;
-
-  CopyWith_Input_AreasBoolExp<TRes> get $_not =>
-      CopyWith_Input_AreasBoolExp.stub(_res);
-
-  $_or(_fn) => _res;
-
-  CopyWith_Input_AddressesBoolExp<TRes> get addresses =>
-      CopyWith_Input_AddressesBoolExp.stub(_res);
-
-  CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers =>
-      CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_res);
-
-  CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
-      CopyWith_Input_StringComparisonExp.stub(_res);
-
-  CopyWith_Input_GeographyComparisonExp<TRes> get bounds =>
-      CopyWith_Input_GeographyComparisonExp.stub(_res);
-
-  CopyWith_Input_BigintComparisonExp<TRes> get color =>
-      CopyWith_Input_BigintComparisonExp.stub(_res);
-
-  CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistory =>
-      CopyWith_Input_HistoryEditHistoryBoolExp.stub(_res);
-
-  CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
-  get editHistoryAggregate =>
-      CopyWith_Input_HistoryEditHistoryAggregateBoolExp.stub(_res);
-
-  CopyWith_Input_UuidComparisonExp<TRes> get id =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-
-  CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit =>
-      CopyWith_Input_HistoryLatestEditsBoolExp.stub(_res);
-
-  CopyWith_Input_StringComparisonExp<TRes> get name =>
-      CopyWith_Input_StringComparisonExp.stub(_res);
-
-  CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt =>
-      CopyWith_Input_TimestamptzComparisonExp.stub(_res);
-
-  CopyWith_Input_AreasStreetsBoolExp<TRes> get streets =>
-      CopyWith_Input_AreasStreetsBoolExp.stub(_res);
-
-  CopyWith_Input_BooleanComparisonExp<TRes> get userCanEdit =>
-      CopyWith_Input_BooleanComparisonExp.stub(_res);
-}
-
-class Input_AreasIncInput {
-  factory Input_AreasIncInput({int? color}) =>
-      Input_AreasIncInput._({if (color != null) r'color': color});
-
-  Input_AreasIncInput._(this._$data);
-
-  factory Input_AreasIncInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] = (l$color as int?);
-    }
-    return Input_AreasIncInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  int? get color => (_$data['color'] as int?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] = l$color;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_AreasIncInput<Input_AreasIncInput> get copyWith =>
-      CopyWith_Input_AreasIncInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_AreasIncInput || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$color = color;
-    return Object.hashAll([_$data.containsKey('color') ? l$color : const {}]);
-  }
-}
-
 abstract class CopyWith_Input_AreasIncInput<TRes> {
   factory CopyWith_Input_AreasIncInput(
     Input_AreasIncInput instance,
@@ -2577,6 +2174,352 @@ class Input_AreasStreetsArrRelInsertInput {
     return Object.hashAll([
       Object.hashAll(l$data.map((v) => v)),
       _$data.containsKey('onConflict') ? l$onConflict : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_AreasStreetsArrRelInsertInput<TRes> {
+  factory CopyWith_Input_AreasStreetsArrRelInsertInput(
+    Input_AreasStreetsArrRelInsertInput instance,
+    TRes Function(Input_AreasStreetsArrRelInsertInput) then,
+  ) = _CopyWithImpl_Input_AreasStreetsArrRelInsertInput;
+
+  factory CopyWith_Input_AreasStreetsArrRelInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_AreasStreetsArrRelInsertInput;
+
+  TRes call({
+    List<Input_AreasStreetsInsertInput>? data,
+    Input_AreasStreetsOnConflict? onConflict,
+  });
+  TRes data(
+    Iterable<Input_AreasStreetsInsertInput> Function(
+      Iterable<
+        CopyWith_Input_AreasStreetsInsertInput<Input_AreasStreetsInsertInput>
+      >,
+    )
+    _fn,
+  );
+  CopyWith_Input_AreasStreetsOnConflict<TRes> get onConflict;
+}
+
+class _CopyWithImpl_Input_AreasStreetsArrRelInsertInput<TRes>
+    implements CopyWith_Input_AreasStreetsArrRelInsertInput<TRes> {
+  _CopyWithImpl_Input_AreasStreetsArrRelInsertInput(this._instance, this._then);
+
+  final Input_AreasStreetsArrRelInsertInput _instance;
+
+  final TRes Function(Input_AreasStreetsArrRelInsertInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
+      _then(
+        Input_AreasStreetsArrRelInsertInput._({
+          ..._instance._$data,
+          if (data != _undefined && data != null)
+            'data': (data as List<Input_AreasStreetsInsertInput>),
+          if (onConflict != _undefined)
+            'onConflict': (onConflict as Input_AreasStreetsOnConflict?),
+        }),
+      );
+
+  TRes data(
+    Iterable<Input_AreasStreetsInsertInput> Function(
+      Iterable<
+        CopyWith_Input_AreasStreetsInsertInput<Input_AreasStreetsInsertInput>
+      >,
+    )
+    _fn,
+  ) => call(
+    data: _fn(
+      _instance.data.map(
+        (e) => CopyWith_Input_AreasStreetsInsertInput(e, (i) => i),
+      ),
+    ).toList(),
+  );
+
+  CopyWith_Input_AreasStreetsOnConflict<TRes> get onConflict {
+    final local$onConflict = _instance.onConflict;
+    return local$onConflict == null
+        ? CopyWith_Input_AreasStreetsOnConflict.stub(_then(_instance))
+        : CopyWith_Input_AreasStreetsOnConflict(
+            local$onConflict,
+            (e) => call(onConflict: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_AreasStreetsArrRelInsertInput<TRes>
+    implements CopyWith_Input_AreasStreetsArrRelInsertInput<TRes> {
+  _CopyWithStubImpl_Input_AreasStreetsArrRelInsertInput(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_AreasStreetsInsertInput>? data,
+    Input_AreasStreetsOnConflict? onConflict,
+  }) => _res;
+
+  data(_fn) => _res;
+
+  CopyWith_Input_AreasStreetsOnConflict<TRes> get onConflict =>
+      CopyWith_Input_AreasStreetsOnConflict.stub(_res);
+}
+
+class Input_AreasStreetsBoolExp {
+  factory Input_AreasStreetsBoolExp({
+    List<Input_AreasStreetsBoolExp>? $_and,
+    Input_AreasStreetsBoolExp? $_not,
+    List<Input_AreasStreetsBoolExp>? $_or,
+    Input_AreasBoolExp? area,
+    Input_UuidComparisonExp? areaId,
+    Input_StreetsBoolExp? street,
+    Input_UuidComparisonExp? streetId,
+  }) => Input_AreasStreetsBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (area != null) r'area': area,
+    if (areaId != null) r'areaId': areaId,
+    if (street != null) r'street': street,
+    if (streetId != null) r'streetId': streetId,
+  });
+
+  Input_AreasStreetsBoolExp._(this._$data);
+
+  factory Input_AreasStreetsBoolExp.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_and')) {
+      final l$$_and = data['_and'];
+      result$data['_and'] = (l$$_and as List<dynamic>?)
+          ?.map(
+            (e) =>
+                Input_AreasStreetsBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList();
+    }
+    if (data.containsKey('_not')) {
+      final l$$_not = data['_not'];
+      result$data['_not'] = l$$_not == null
+          ? null
+          : Input_AreasStreetsBoolExp.fromJson(
+              (l$$_not as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('_or')) {
+      final l$$_or = data['_or'];
+      result$data['_or'] = (l$$_or as List<dynamic>?)
+          ?.map(
+            (e) =>
+                Input_AreasStreetsBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList();
+    }
+    if (data.containsKey('area')) {
+      final l$area = data['area'];
+      result$data['area'] = l$area == null
+          ? null
+          : Input_AreasBoolExp.fromJson((l$area as Map<String, dynamic>));
+    }
+    if (data.containsKey('areaId')) {
+      final l$areaId = data['areaId'];
+      result$data['areaId'] = l$areaId == null
+          ? null
+          : Input_UuidComparisonExp.fromJson(
+              (l$areaId as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('street')) {
+      final l$street = data['street'];
+      result$data['street'] = l$street == null
+          ? null
+          : Input_StreetsBoolExp.fromJson((l$street as Map<String, dynamic>));
+    }
+    if (data.containsKey('streetId')) {
+      final l$streetId = data['streetId'];
+      result$data['streetId'] = l$streetId == null
+          ? null
+          : Input_UuidComparisonExp.fromJson(
+              (l$streetId as Map<String, dynamic>),
+            );
+    }
+    return Input_AreasStreetsBoolExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_AreasStreetsBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_AreasStreetsBoolExp>?);
+
+  Input_AreasStreetsBoolExp? get $_not =>
+      (_$data['_not'] as Input_AreasStreetsBoolExp?);
+
+  List<Input_AreasStreetsBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_AreasStreetsBoolExp>?);
+
+  Input_AreasBoolExp? get area => (_$data['area'] as Input_AreasBoolExp?);
+
+  Input_UuidComparisonExp? get areaId =>
+      (_$data['areaId'] as Input_UuidComparisonExp?);
+
+  Input_StreetsBoolExp? get street =>
+      (_$data['street'] as Input_StreetsBoolExp?);
+
+  Input_UuidComparisonExp? get streetId =>
+      (_$data['streetId'] as Input_UuidComparisonExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_and')) {
+      final l$$_and = $_and;
+      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('_not')) {
+      final l$$_not = $_not;
+      result$data['_not'] = l$$_not?.toJson();
+    }
+    if (_$data.containsKey('_or')) {
+      final l$$_or = $_or;
+      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('area')) {
+      final l$area = area;
+      result$data['area'] = l$area?.toJson();
+    }
+    if (_$data.containsKey('areaId')) {
+      final l$areaId = areaId;
+      result$data['areaId'] = l$areaId?.toJson();
+    }
+    if (_$data.containsKey('street')) {
+      final l$street = street;
+      result$data['street'] = l$street?.toJson();
+    }
+    if (_$data.containsKey('streetId')) {
+      final l$streetId = streetId;
+      result$data['streetId'] = l$streetId?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_AreasStreetsBoolExp<Input_AreasStreetsBoolExp> get copyWith =>
+      CopyWith_Input_AreasStreetsBoolExp(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_AreasStreetsBoolExp ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_and = $_and;
+    final lOther$$_and = other.$_and;
+    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
+      return false;
+    }
+    if (l$$_and != null && lOther$$_and != null) {
+      if (l$$_and.length != lOther$$_and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_and.length; i++) {
+        final l$$_and$entry = l$$_and[i];
+        final lOther$$_and$entry = lOther$$_and[i];
+        if (l$$_and$entry != lOther$$_and$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_and != lOther$$_and) {
+      return false;
+    }
+    final l$$_not = $_not;
+    final lOther$$_not = other.$_not;
+    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
+      return false;
+    }
+    if (l$$_not != lOther$$_not) {
+      return false;
+    }
+    final l$$_or = $_or;
+    final lOther$$_or = other.$_or;
+    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
+      return false;
+    }
+    if (l$$_or != null && lOther$$_or != null) {
+      if (l$$_or.length != lOther$$_or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_or.length; i++) {
+        final l$$_or$entry = l$$_or[i];
+        final lOther$$_or$entry = lOther$$_or[i];
+        if (l$$_or$entry != lOther$$_or$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_or != lOther$$_or) {
+      return false;
+    }
+    final l$area = area;
+    final lOther$area = other.area;
+    if (_$data.containsKey('area') != other._$data.containsKey('area')) {
+      return false;
+    }
+    if (l$area != lOther$area) {
+      return false;
+    }
+    final l$areaId = areaId;
+    final lOther$areaId = other.areaId;
+    if (_$data.containsKey('areaId') != other._$data.containsKey('areaId')) {
+      return false;
+    }
+    if (l$areaId != lOther$areaId) {
+      return false;
+    }
+    final l$street = street;
+    final lOther$street = other.street;
+    if (_$data.containsKey('street') != other._$data.containsKey('street')) {
+      return false;
+    }
+    if (l$street != lOther$street) {
+      return false;
+    }
+    final l$streetId = streetId;
+    final lOther$streetId = other.streetId;
+    if (_$data.containsKey('streetId') !=
+        other._$data.containsKey('streetId')) {
+      return false;
+    }
+    if (l$streetId != lOther$streetId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_and = $_and;
+    final l$$_not = $_not;
+    final l$$_or = $_or;
+    final l$area = area;
+    final l$areaId = areaId;
+    final l$street = street;
+    final l$streetId = streetId;
+    return Object.hashAll([
+      _$data.containsKey('_and')
+          ? l$$_and == null
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
+          : const {},
+      _$data.containsKey('_not') ? l$$_not : const {},
+      _$data.containsKey('_or')
+          ? l$$_or == null
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
+          : const {},
+      _$data.containsKey('area') ? l$area : const {},
+      _$data.containsKey('areaId') ? l$areaId : const {},
+      _$data.containsKey('street') ? l$street : const {},
+      _$data.containsKey('streetId') ? l$streetId : const {},
     ]);
   }
 }
