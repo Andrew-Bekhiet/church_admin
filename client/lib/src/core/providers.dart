@@ -161,7 +161,7 @@ final secretsServiceProvider = Provider<SecretsService>(
   (ref) => const SecretsService(),
 );
 
-final authBlocProvider = Provider<AuthBloc>((ref) {
+final Provider<AuthBloc> authBlocProvider = Provider<AuthBloc>((ref) {
   final authBloc = AuthBloc(
     authRepository: ref.watch(authRepositoryProvider),
     authStorage: ref.watch(authStorageProvider),
@@ -172,6 +172,9 @@ final authBlocProvider = Provider<AuthBloc>((ref) {
     functionsService: ref.watch(functionsServiceProvider),
     featureFlagsRepository: ref.watch(featureFlagsRepoProvider),
     analyticsService: ref.watch(analyticsServiceProvider),
+    stopPushNotificationsBeforeSignOut: () => ref
+        .read(notificationsServiceProvider)
+        .stopPushNotificationsToThisDevice(),
   );
 
   ref.onDispose(authBloc.close);
@@ -287,10 +290,10 @@ final notificationsServiceProvider = Provider<NotificationsService>((ref) {
     authBloc: ref.watch(authBlocProvider),
     analyticsService: ref.watch(analyticsServiceProvider),
     databaseService: ref.watch(databaseServiceProvider),
+    functionsService: ref.watch(functionsServiceProvider),
     storage: ref.watch(notificationsStorageProvider),
     onForegroundMessageStream: FirebaseMessaging.onMessage,
     onMessageOpenedAppStream: FirebaseMessaging.onMessageOpenedApp,
-    functionsService: ref.watch(functionsServiceProvider),
   );
 
   ref.onDispose(notificationsService.dispose);

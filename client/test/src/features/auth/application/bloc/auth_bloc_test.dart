@@ -869,6 +869,7 @@ AuthBloc _createAuthBloc({
       enableAccountClaimingByEmail: enableAccountClaimingByEmail,
     ),
     analyticsService: AnalyticsService([analytics], FakeLoggingService()),
+    stopPushNotificationsBeforeSignOut: () async {},
     loadCachedUser: !noCachedUser,
   );
 }
