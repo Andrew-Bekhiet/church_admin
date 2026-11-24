@@ -76,3 +76,24 @@ test("the Linux wizard reads back the settings it wrote", RUNS_ONLY_WHERE_THE_SC
     awkwardSettings.cursorFile,
   ]);
 });
+
+function cursorAfterTheLinuxWizardChecksWhereItLives(cursorFile: string): string {
+  return runInstallScriptFunction(
+    "cursor_file=$1; move_cursor_to_state_folder_if_unset_or_inside_install_folder >/dev/null; printf '%s' \"$cursor_file\"",
+    cursorFile,
+  );
+}
+
+test("the Linux wizard keeps a relative cursor that points outside the install folder", RUNS_ONLY_WHERE_THE_SCRIPT_RUNS, () => {
+  assert.equal(
+    cursorAfterTheLinuxWizardChecksWhereItLives("../state/cursor.json"),
+    "../state/cursor.json",
+  );
+});
+
+test("the Linux wizard moves a cursor inside the root-owned install folder to the state folder", RUNS_ONLY_WHERE_THE_SCRIPT_RUNS, () => {
+  assert.equal(
+    cursorAfterTheLinuxWizardChecksWhereItLives("data/../cursor.json"),
+    "/var/lib/fingerprint-sync/cursor.json",
+  );
+});

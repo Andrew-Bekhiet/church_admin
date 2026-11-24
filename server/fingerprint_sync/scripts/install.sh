@@ -289,8 +289,21 @@ supports_encrypted_credentials() {
   command -v systemd-creds >/dev/null && ((version >= OLDEST_SYSTEMD_WITH_ENCRYPTED_CREDENTIALS))
 }
 
+cursor_path_resolved_from_install_folder() {
+  if [[ $cursor_file == /* ]]; then
+    realpath -ms -- "$cursor_file"
+  else
+    realpath -ms -- "$INSTALL_FOLDER/$cursor_file"
+  fi
+}
+
 is_cursor_unset_or_inside_install_folder() {
-  [[ -z $cursor_file || $cursor_file != /* || $cursor_file == "$INSTALL_FOLDER"/* ]]
+  if [[ -z $cursor_file ]]; then
+    return 0
+  fi
+  local resolved_cursor
+  resolved_cursor=$(cursor_path_resolved_from_install_folder)
+  [[ $resolved_cursor == "$INSTALL_FOLDER" || $resolved_cursor == "$INSTALL_FOLDER"/* ]]
 }
 
 move_cursor_to_state_folder_if_unset_or_inside_install_folder() {
