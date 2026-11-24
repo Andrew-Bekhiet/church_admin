@@ -47,12 +47,12 @@ Where a family, person or store is found: a street, a house code and optionally 
 **Family address**:
 The one address shared by every member of a family. Editing it from any member changes it for the whole family.
 
-**Service area**:
-A named neighbourhood the church serves. A street can belong to several service areas.
-_Avoid_: Area (when the geocoded area could be meant)
+**Area**:
+A named neighbourhood the church serves. A street can belong to several areas.
+_Avoid_: Service area, region
 
 **Street**:
-A named street that belongs to one or more service areas.
+A named street that belongs to one or more areas.
 
 **House code**:
 The label of a building within its street. It is numeric and may carry a letter suffix.

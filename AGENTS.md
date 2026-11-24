@@ -19,7 +19,7 @@ Each area's rules load when you work under it. The repo carries only `AGENTS.md`
 
 ## Issues and domain docs
 
-- **Issue tracker**: issues live in Linear, team ENG, reached through the `linear-server` MCP. GitHub Issues are not used. See `docs/agents/issue-tracker.md`.
+- **Issue tracker**: issues live in Linear, team ENG, reached through [Linear's MCP server](https://linear.app/docs/mcp) (`https://mcp.linear.app/mcp`, installed in Claude Code as the `linear@claude-plugins-official` plugin). GitHub Issues are not used. See `docs/agents/issue-tracker.md`.
 - **Domain glossary**: `CONTEXT.md` at the repo root names the domain concepts. Use its terms, and add a term there when you sharpen one. See `docs/agents/domain.md`.
 - **Decisions**: design docs and decisions are Linear documents on their issue, not `docs/adr/`.
 
