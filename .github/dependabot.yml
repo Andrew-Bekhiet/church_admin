@@ -67,37 +67,6 @@ updates:
         update-types:
           - version-update:semver-major
 
-  - package-ecosystem: npm
-    directory: /server/fingerprint_sync
-    schedule:
-      interval: weekly
-    cooldown:
-      default-days: 4
-      semver-major-days: 15
-    commit-message:
-      prefix: build
-      include: scope
-    groups:
-      fingerprint-sync-npm:
-        patterns:
-          - "*"
-        update-types:
-          - minor
-          - patch
-      fingerprint-sync-npm-security:
-        applies-to: security-updates
-        patterns:
-          - "*"
-    ignore:
-      # The README installs Node 24 on the BioTime server.
-      - dependency-name: "@types/node"
-        update-types:
-          - version-update:semver-major
-      # typescript-eslint 8 accepts typescript <6.1.
-      - dependency-name: typescript
-        versions:
-          - ">= 6.1.0"
-
   - package-ecosystem: pub
     directories:
       - /client

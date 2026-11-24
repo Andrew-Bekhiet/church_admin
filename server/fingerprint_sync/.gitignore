@@ -1,5 +1,5 @@
-node_modules/
-lib/
-lib_test/
 config.json
+secrets.bin
 cursor.json
+cursor.json.tmp
+logs/
