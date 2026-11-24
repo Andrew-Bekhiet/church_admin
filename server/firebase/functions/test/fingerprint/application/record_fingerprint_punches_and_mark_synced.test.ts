@@ -22,6 +22,7 @@ import {
   softDeletePerson,
 } from "../../support/local_hasura";
 
+const THURSDAY = 4;
 const FRIDAY = 5;
 const fridayNoonUtc = instant("2026-11-13T12:00:00Z");
 const fridayEveningUtc = instant("2026-11-13T16:00:00Z");
@@ -717,13 +718,10 @@ describe("recordFingerprintPunches report", () => {
 describe("recordFingerprintPunches daylight saving", () => {
   async function recordedTimesOfPunchAt(
     punchedAtCairoTime: string,
-    attendance: [string, string],
+    schedule: { isoWeekday: number; attendance: [string, string] },
     now: DateTime<true>,
   ): Promise<string[]> {
-    const { serviceId } = await seedScheduledMeeting({
-      isoWeekday: cairoWallClockAt(now).isoWeekday,
-      attendance,
-    });
+    const { serviceId } = await seedScheduledMeeting(schedule);
     const mina = await seedMemberWithEmployeeCode(serviceId);
 
     await syncPunches([punch(mina.employeeCode, punchedAtCairoTime)], now);
@@ -735,7 +733,7 @@ describe("recordFingerprintPunches daylight saving", () => {
     assert.deepEqual(
       await recordedTimesOfPunchAt(
         "2026-04-17 10:30:00",
-        ["09:00", "11:00"],
+        { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
         instant("2026-04-17T08:31:00Z"),
       ),
       ["2026-04-17T08:30:00Z"],
@@ -746,7 +744,7 @@ describe("recordFingerprintPunches daylight saving", () => {
     assert.deepEqual(
       await recordedTimesOfPunchAt(
         "2026-04-24 10:30:00",
-        ["09:00", "11:00"],
+        { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
         instant("2026-04-24T07:31:00Z"),
       ),
       ["2026-04-24T07:30:00Z"],
@@ -757,7 +755,7 @@ describe("recordFingerprintPunches daylight saving", () => {
     assert.deepEqual(
       await recordedTimesOfPunchAt(
         "2026-10-23 10:30:00",
-        ["09:00", "11:00"],
+        { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
         instant("2026-10-23T07:31:00Z"),
       ),
       ["2026-10-23T07:30:00Z"],
@@ -768,7 +766,7 @@ describe("recordFingerprintPunches daylight saving", () => {
     assert.deepEqual(
       await recordedTimesOfPunchAt(
         "2026-10-30 10:30:00",
-        ["09:00", "11:00"],
+        { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
         instant("2026-10-30T08:31:00Z"),
       ),
       ["2026-10-30T08:30:00Z"],
@@ -779,7 +777,7 @@ describe("recordFingerprintPunches daylight saving", () => {
     assert.deepEqual(
       await recordedTimesOfPunchAt(
         "2026-10-29 23:30:00",
-        ["23:00", "23:59"],
+        { isoWeekday: THURSDAY, attendance: ["23:00", "23:59"] },
         instant("2026-10-29T22:00:00Z"),
       ),
       ["2026-10-29T20:30:00Z"],
@@ -790,7 +788,7 @@ describe("recordFingerprintPunches daylight saving", () => {
     assert.deepEqual(
       await recordedTimesOfPunchAt(
         "2026-04-24 00:30:00",
-        ["01:00", "02:00"],
+        { isoWeekday: FRIDAY, attendance: ["01:00", "02:00"] },
         instant("2026-04-23T22:31:00Z"),
       ),
       ["2026-04-23T22:30:00Z"],
@@ -801,7 +799,7 @@ describe("recordFingerprintPunches daylight saving", () => {
     assert.deepEqual(
       await recordedTimesOfPunchAt(
         "2026-04-24 01:10:00",
-        ["01:00", "02:00"],
+        { isoWeekday: FRIDAY, attendance: ["01:00", "02:00"] },
         instant("2026-04-23T22:11:00Z"),
       ),
       ["2026-04-23T22:10:00Z"],
