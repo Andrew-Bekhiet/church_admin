@@ -55,7 +55,9 @@ This removes the task. Delete `C:\fingerprint_sync` afterwards to remove the set
 | Line | Meaning |
 | -- | -- |
 | `ERROR ... skipping the rest of this run` | BioTime or the function failed or timed out. Batches already sent stay sent; the next minute retries the rest. |
+| `ERROR ... not yyyy-MM-dd HH:mm:ss` | BioTime returned a punch time in a layout the function cannot read. The poller stops before that transaction, so nothing after it is sent until BioTime returns the expected layout or the transaction is older than 48 hours. |
 | `WARN ... linked to no person` | A punch's fingerprint ID matches no person in the app. The function reports only how many, so the line lists the batch's employee codes, which include the unlinked ones. Set the fingerprint ID on each person. |
+| `WARN ... rejected by the function as malformed` | The function could not read a punch, for example one with no employee code. It is not recorded. |
 | `WARN ... older than the function accepts` | The punches were more than 10 days old, usually from a device that was offline. They are not recorded. |
 | `WARN ... in the future` | The fingerprint server's or a device's clock is ahead of Cairo time. Fix the clock. |
 

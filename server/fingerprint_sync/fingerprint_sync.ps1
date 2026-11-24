@@ -178,6 +178,9 @@ function Save-Cursor($Cursor) {
 
 function Send-Punches($Config, $Secrets, $Transactions) {
     $punches = @(foreach ($transaction in $Transactions) {
+        if ([string]$transaction.punch_time -notmatch '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$') {
+            throw "BioTime transaction $($transaction.id) has punch_time '$($transaction.punch_time)', not $BiotimeTimeFormat; the cursor stays before it"
+        }
         [ordered]@{
             employeeCode = [string]$transaction.emp_code
             punchedAtCairoTime = [string]$transaction.punch_time
@@ -226,6 +229,7 @@ function Invoke-Poll($Config, $Secrets) {
     } while ($start -lt $unsent.Count)
     $counts = ($ReportFields | ForEach-Object { "$_=$($totals[$_])" }) -join ' '
     Write-Log 'INFO' "read=$($transactions.Count) unsent=$($unsent.Count) sent=$sent $counts cursor=$($cursor.highestSentId)"
+    if ($totals.ignoredMalformed -gt 0) { $warnings.Add("$($totals.ignoredMalformed) punches were rejected by the function as malformed") }
     if ($totals.ignoredTooOld -gt 0) { $warnings.Add("$($totals.ignoredTooOld) punches were older than the function accepts") }
     if ($totals.ignoredInFuture -gt 0) { $warnings.Add("$($totals.ignoredInFuture) punches were in the future; check the BioTime server and device clocks") }
     foreach ($warning in $warnings) { Write-Log 'WARN' $warning }
