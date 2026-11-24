@@ -173,7 +173,7 @@ function Save-Cursor($Cursor) {
     $bytes = [Text.Encoding]::UTF8.GetBytes((ConvertTo-Json -InputObject $Cursor -Compress))
     $stream = [IO.File]::Open($temporaryPath, [IO.FileMode]::Create, [IO.FileAccess]::Write)
     try { $stream.Write($bytes, 0, $bytes.Length); $stream.Flush($true) } finally { $stream.Dispose() }
-    if (Test-Path $CursorPath) { [IO.File]::Replace($temporaryPath, $CursorPath, $null) } else { [IO.File]::Move($temporaryPath, $CursorPath) }
+    if (Test-Path $CursorPath) { [IO.File]::Replace($temporaryPath, $CursorPath, [NullString]::Value) } else { [IO.File]::Move($temporaryPath, $CursorPath) }
 }
 
 function Send-Punches($Config, $Secrets, $Transactions) {
