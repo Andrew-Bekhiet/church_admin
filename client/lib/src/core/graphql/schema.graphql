@@ -18,7 +18,6 @@ type Addresses {
   fullAddressText: String
   geolocation: geography
   houseCode: String
-  houseNumber: smallint
   id: uuid!
   specialLandmark: String
   store: Stores
@@ -50,7 +49,6 @@ input AddressesArrRelInsertInput {
 
 input AddressesAvgOrderBy {
   apartmentNumber: OrderBy
-  houseNumber: OrderBy
   storeyNumber: OrderBy
 }
 
@@ -69,7 +67,6 @@ input AddressesBoolExp {
   fullAddressText: StringComparisonExp
   geolocation: GeographyComparisonExp
   houseCode: StringComparisonExp
-  houseNumber: SmallintComparisonExp
   id: UuidComparisonExp
   specialLandmark: StringComparisonExp
   store: StoresBoolExp
@@ -88,7 +85,6 @@ enum AddressesConstraint {
 
 input AddressesIncInput {
   apartmentNumber: smallint
-  houseNumber: smallint
   storeyNumber: smallint
 }
 
@@ -103,7 +99,6 @@ input AddressesInsertInput {
   familyId: uuid
   geolocation: geography
   houseCode: String
-  houseNumber: smallint
   specialLandmark: String
   store: StoresObjRelInsertInput
   storeId: uuid
@@ -120,7 +115,6 @@ input AddressesMaxOrderBy {
   districtId: OrderBy
   familyId: OrderBy
   houseCode: OrderBy
-  houseNumber: OrderBy
   id: OrderBy
   specialLandmark: OrderBy
   storeId: OrderBy
@@ -136,7 +130,6 @@ input AddressesMinOrderBy {
   districtId: OrderBy
   familyId: OrderBy
   houseCode: OrderBy
-  houseNumber: OrderBy
   id: OrderBy
   specialLandmark: OrderBy
   storeId: OrderBy
@@ -173,7 +166,6 @@ input AddressesOrderBy {
   fullAddressText: OrderBy
   geolocation: OrderBy
   houseCode: OrderBy
-  houseNumber: OrderBy
   id: OrderBy
   specialLandmark: OrderBy
   store: StoresOrderBy
@@ -196,7 +188,6 @@ enum AddressesSelectColumn {
   familyId
   geolocation
   houseCode
-  houseNumber
   id
   specialLandmark
   storeId
@@ -213,7 +204,6 @@ input AddressesSetInput {
   familyId: uuid
   geolocation: geography
   houseCode: String
-  houseNumber: smallint
   specialLandmark: String
   storeId: uuid
   storeyNumber: smallint
@@ -223,19 +213,16 @@ input AddressesSetInput {
 
 input AddressesStddevOrderBy {
   apartmentNumber: OrderBy
-  houseNumber: OrderBy
   storeyNumber: OrderBy
 }
 
 input AddressesStddevPopOrderBy {
   apartmentNumber: OrderBy
-  houseNumber: OrderBy
   storeyNumber: OrderBy
 }
 
 input AddressesStddevSampOrderBy {
   apartmentNumber: OrderBy
-  houseNumber: OrderBy
   storeyNumber: OrderBy
 }
 
@@ -252,7 +239,6 @@ input AddressesStreamCursorValueInput {
   familyId: uuid
   geolocation: geography
   houseCode: String
-  houseNumber: smallint
   id: uuid
   specialLandmark: String
   storeId: uuid
@@ -263,7 +249,6 @@ input AddressesStreamCursorValueInput {
 
 input AddressesSumOrderBy {
   apartmentNumber: OrderBy
-  houseNumber: OrderBy
   storeyNumber: OrderBy
 }
 
@@ -275,7 +260,6 @@ enum AddressesUpdateColumn {
   familyId
   geolocation
   houseCode
-  houseNumber
   specialLandmark
   storeId
   storeyNumber
@@ -291,19 +275,16 @@ input AddressesUpdates {
 
 input AddressesVarPopOrderBy {
   apartmentNumber: OrderBy
-  houseNumber: OrderBy
   storeyNumber: OrderBy
 }
 
 input AddressesVarSampOrderBy {
   apartmentNumber: OrderBy
-  houseNumber: OrderBy
   storeyNumber: OrderBy
 }
 
 input AddressesVarianceOrderBy {
   apartmentNumber: OrderBy
-  houseNumber: OrderBy
   storeyNumber: OrderBy
 }
 

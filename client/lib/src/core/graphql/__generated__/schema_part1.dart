@@ -736,11 +736,9 @@ class _CopyWithStubImpl_Input_AddressesArrRelInsertInput<TRes>
 class Input_AddressesAvgOrderBy {
   factory Input_AddressesAvgOrderBy({
     Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
   }) => Input_AddressesAvgOrderBy._({
     if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
-    if (houseNumber != null) r'houseNumber': houseNumber,
     if (storeyNumber != null) r'storeyNumber': storeyNumber,
   });
 
@@ -753,12 +751,6 @@ class Input_AddressesAvgOrderBy {
       result$data['apartmentNumber'] = l$apartmentNumber == null
           ? null
           : fromJson_Enum_OrderBy((l$apartmentNumber as String));
-    }
-    if (data.containsKey('houseNumber')) {
-      final l$houseNumber = data['houseNumber'];
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : fromJson_Enum_OrderBy((l$houseNumber as String));
     }
     if (data.containsKey('storeyNumber')) {
       final l$storeyNumber = data['storeyNumber'];
@@ -774,8 +766,6 @@ class Input_AddressesAvgOrderBy {
   Enum_OrderBy? get apartmentNumber =>
       (_$data['apartmentNumber'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get houseNumber => (_$data['houseNumber'] as Enum_OrderBy?);
-
   Enum_OrderBy? get storeyNumber => (_$data['storeyNumber'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
@@ -785,12 +775,6 @@ class Input_AddressesAvgOrderBy {
       result$data['apartmentNumber'] = l$apartmentNumber == null
           ? null
           : toJson_Enum_OrderBy(l$apartmentNumber);
-    }
-    if (_$data.containsKey('houseNumber')) {
-      final l$houseNumber = houseNumber;
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('storeyNumber')) {
       final l$storeyNumber = storeyNumber;
@@ -822,15 +806,6 @@ class Input_AddressesAvgOrderBy {
     if (l$apartmentNumber != lOther$apartmentNumber) {
       return false;
     }
-    final l$houseNumber = houseNumber;
-    final lOther$houseNumber = other.houseNumber;
-    if (_$data.containsKey('houseNumber') !=
-        other._$data.containsKey('houseNumber')) {
-      return false;
-    }
-    if (l$houseNumber != lOther$houseNumber) {
-      return false;
-    }
     final l$storeyNumber = storeyNumber;
     final lOther$storeyNumber = other.storeyNumber;
     if (_$data.containsKey('storeyNumber') !=
@@ -846,11 +821,9 @@ class Input_AddressesAvgOrderBy {
   @override
   int get hashCode {
     final l$apartmentNumber = apartmentNumber;
-    final l$houseNumber = houseNumber;
     final l$storeyNumber = storeyNumber;
     return Object.hashAll([
       _$data.containsKey('apartmentNumber') ? l$apartmentNumber : const {},
-      _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('storeyNumber') ? l$storeyNumber : const {},
     ]);
   }
@@ -865,11 +838,7 @@ abstract class CopyWith_Input_AddressesAvgOrderBy<TRes> {
   factory CopyWith_Input_AddressesAvgOrderBy.stub(TRes res) =
       _CopyWithStubImpl_Input_AddressesAvgOrderBy;
 
-  TRes call({
-    Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
-    Enum_OrderBy? storeyNumber,
-  });
+  TRes call({Enum_OrderBy? apartmentNumber, Enum_OrderBy? storeyNumber});
 }
 
 class _CopyWithImpl_Input_AddressesAvgOrderBy<TRes>
@@ -884,15 +853,12 @@ class _CopyWithImpl_Input_AddressesAvgOrderBy<TRes>
 
   TRes call({
     Object? apartmentNumber = _undefined,
-    Object? houseNumber = _undefined,
     Object? storeyNumber = _undefined,
   }) => _then(
     Input_AddressesAvgOrderBy._({
       ..._instance._$data,
       if (apartmentNumber != _undefined)
         'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
-      if (houseNumber != _undefined)
-        'houseNumber': (houseNumber as Enum_OrderBy?),
       if (storeyNumber != _undefined)
         'storeyNumber': (storeyNumber as Enum_OrderBy?),
     }),
@@ -905,11 +871,7 @@ class _CopyWithStubImpl_Input_AddressesAvgOrderBy<TRes>
 
   TRes _res;
 
-  call({
-    Enum_OrderBy? apartmentNumber,
-    Enum_OrderBy? houseNumber,
-    Enum_OrderBy? storeyNumber,
-  }) => _res;
+  call({Enum_OrderBy? apartmentNumber, Enum_OrderBy? storeyNumber}) => _res;
 }
 
 class Input_AddressesBoolExp {
@@ -928,7 +890,6 @@ class Input_AddressesBoolExp {
     Input_StringComparisonExp? fullAddressText,
     Input_GeographyComparisonExp? geolocation,
     Input_StringComparisonExp? houseCode,
-    Input_SmallintComparisonExp? houseNumber,
     Input_UuidComparisonExp? id,
     Input_StringComparisonExp? specialLandmark,
     Input_StoresBoolExp? store,
@@ -952,7 +913,6 @@ class Input_AddressesBoolExp {
     if (fullAddressText != null) r'fullAddressText': fullAddressText,
     if (geolocation != null) r'geolocation': geolocation,
     if (houseCode != null) r'houseCode': houseCode,
-    if (houseNumber != null) r'houseNumber': houseNumber,
     if (id != null) r'id': id,
     if (specialLandmark != null) r'specialLandmark': specialLandmark,
     if (store != null) r'store': store,
@@ -1073,14 +1033,6 @@ class Input_AddressesBoolExp {
               (l$houseCode as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('houseNumber')) {
-      final l$houseNumber = data['houseNumber'];
-      result$data['houseNumber'] = l$houseNumber == null
-          ? null
-          : Input_SmallintComparisonExp.fromJson(
-              (l$houseNumber as Map<String, dynamic>),
-            );
-    }
     if (data.containsKey('id')) {
       final l$id = data['id'];
       result$data['id'] = l$id == null
@@ -1185,9 +1137,6 @@ class Input_AddressesBoolExp {
   Input_StringComparisonExp? get houseCode =>
       (_$data['houseCode'] as Input_StringComparisonExp?);
 
-  Input_SmallintComparisonExp? get houseNumber =>
-      (_$data['houseNumber'] as Input_SmallintComparisonExp?);
-
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
 
   Input_StringComparisonExp? get specialLandmark =>
@@ -1267,10 +1216,6 @@ class Input_AddressesBoolExp {
     if (_$data.containsKey('houseCode')) {
       final l$houseCode = houseCode;
       result$data['houseCode'] = l$houseCode?.toJson();
-    }
-    if (_$data.containsKey('houseNumber')) {
-      final l$houseNumber = houseNumber;
-      result$data['houseNumber'] = l$houseNumber?.toJson();
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -1460,15 +1405,6 @@ class Input_AddressesBoolExp {
     if (l$houseCode != lOther$houseCode) {
       return false;
     }
-    final l$houseNumber = houseNumber;
-    final lOther$houseNumber = other.houseNumber;
-    if (_$data.containsKey('houseNumber') !=
-        other._$data.containsKey('houseNumber')) {
-      return false;
-    }
-    if (l$houseNumber != lOther$houseNumber) {
-      return false;
-    }
     final l$id = id;
     final lOther$id = other.id;
     if (_$data.containsKey('id') != other._$data.containsKey('id')) {
@@ -1556,7 +1492,6 @@ class Input_AddressesBoolExp {
     final l$fullAddressText = fullAddressText;
     final l$geolocation = geolocation;
     final l$houseCode = houseCode;
-    final l$houseNumber = houseNumber;
     final l$id = id;
     final l$specialLandmark = specialLandmark;
     final l$store = store;
@@ -1588,7 +1523,6 @@ class Input_AddressesBoolExp {
       _$data.containsKey('fullAddressText') ? l$fullAddressText : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('houseCode') ? l$houseCode : const {},
-      _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('specialLandmark') ? l$specialLandmark : const {},
       _$data.containsKey('store') ? l$store : const {},
@@ -1625,7 +1559,6 @@ abstract class CopyWith_Input_AddressesBoolExp<TRes> {
     Input_StringComparisonExp? fullAddressText,
     Input_GeographyComparisonExp? geolocation,
     Input_StringComparisonExp? houseCode,
-    Input_SmallintComparisonExp? houseNumber,
     Input_UuidComparisonExp? id,
     Input_StringComparisonExp? specialLandmark,
     Input_StoresBoolExp? store,
@@ -1659,7 +1592,6 @@ abstract class CopyWith_Input_AddressesBoolExp<TRes> {
   CopyWith_Input_StringComparisonExp<TRes> get fullAddressText;
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation;
   CopyWith_Input_StringComparisonExp<TRes> get houseCode;
-  CopyWith_Input_SmallintComparisonExp<TRes> get houseNumber;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
   CopyWith_Input_StringComparisonExp<TRes> get specialLandmark;
   CopyWith_Input_StoresBoolExp<TRes> get store;
@@ -1695,7 +1627,6 @@ class _CopyWithImpl_Input_AddressesBoolExp<TRes>
     Object? fullAddressText = _undefined,
     Object? geolocation = _undefined,
     Object? houseCode = _undefined,
-    Object? houseNumber = _undefined,
     Object? id = _undefined,
     Object? specialLandmark = _undefined,
     Object? store = _undefined,
@@ -1729,8 +1660,6 @@ class _CopyWithImpl_Input_AddressesBoolExp<TRes>
         'geolocation': (geolocation as Input_GeographyComparisonExp?),
       if (houseCode != _undefined)
         'houseCode': (houseCode as Input_StringComparisonExp?),
-      if (houseNumber != _undefined)
-        'houseNumber': (houseNumber as Input_SmallintComparisonExp?),
       if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
       if (specialLandmark != _undefined)
         'specialLandmark': (specialLandmark as Input_StringComparisonExp?),
@@ -1880,16 +1809,6 @@ class _CopyWithImpl_Input_AddressesBoolExp<TRes>
           );
   }
 
-  CopyWith_Input_SmallintComparisonExp<TRes> get houseNumber {
-    final local$houseNumber = _instance.houseNumber;
-    return local$houseNumber == null
-        ? CopyWith_Input_SmallintComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_SmallintComparisonExp(
-            local$houseNumber,
-            (e) => call(houseNumber: e),
-          );
-  }
-
   CopyWith_Input_UuidComparisonExp<TRes> get id {
     final local$id = _instance.id;
     return local$id == null
@@ -1983,7 +1902,6 @@ class _CopyWithStubImpl_Input_AddressesBoolExp<TRes>
     Input_StringComparisonExp? fullAddressText,
     Input_GeographyComparisonExp? geolocation,
     Input_StringComparisonExp? houseCode,
-    Input_SmallintComparisonExp? houseNumber,
     Input_UuidComparisonExp? id,
     Input_StringComparisonExp? specialLandmark,
     Input_StoresBoolExp? store,
@@ -2034,9 +1952,6 @@ class _CopyWithStubImpl_Input_AddressesBoolExp<TRes>
   CopyWith_Input_StringComparisonExp<TRes> get houseCode =>
       CopyWith_Input_StringComparisonExp.stub(_res);
 
-  CopyWith_Input_SmallintComparisonExp<TRes> get houseNumber =>
-      CopyWith_Input_SmallintComparisonExp.stub(_res);
-
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 
@@ -2063,15 +1978,11 @@ class _CopyWithStubImpl_Input_AddressesBoolExp<TRes>
 }
 
 class Input_AddressesIncInput {
-  factory Input_AddressesIncInput({
-    int? apartmentNumber,
-    int? houseNumber,
-    int? storeyNumber,
-  }) => Input_AddressesIncInput._({
-    if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
-    if (houseNumber != null) r'houseNumber': houseNumber,
-    if (storeyNumber != null) r'storeyNumber': storeyNumber,
-  });
+  factory Input_AddressesIncInput({int? apartmentNumber, int? storeyNumber}) =>
+      Input_AddressesIncInput._({
+        if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
+        if (storeyNumber != null) r'storeyNumber': storeyNumber,
+      });
 
   Input_AddressesIncInput._(this._$data);
 
@@ -2080,10 +1991,6 @@ class Input_AddressesIncInput {
     if (data.containsKey('apartmentNumber')) {
       final l$apartmentNumber = data['apartmentNumber'];
       result$data['apartmentNumber'] = (l$apartmentNumber as int?);
-    }
-    if (data.containsKey('houseNumber')) {
-      final l$houseNumber = data['houseNumber'];
-      result$data['houseNumber'] = (l$houseNumber as int?);
     }
     if (data.containsKey('storeyNumber')) {
       final l$storeyNumber = data['storeyNumber'];
@@ -2096,8 +2003,6 @@ class Input_AddressesIncInput {
 
   int? get apartmentNumber => (_$data['apartmentNumber'] as int?);
 
-  int? get houseNumber => (_$data['houseNumber'] as int?);
-
   int? get storeyNumber => (_$data['storeyNumber'] as int?);
 
   Map<String, dynamic> toJson() {
@@ -2105,10 +2010,6 @@ class Input_AddressesIncInput {
     if (_$data.containsKey('apartmentNumber')) {
       final l$apartmentNumber = apartmentNumber;
       result$data['apartmentNumber'] = l$apartmentNumber;
-    }
-    if (_$data.containsKey('houseNumber')) {
-      final l$houseNumber = houseNumber;
-      result$data['houseNumber'] = l$houseNumber;
     }
     if (_$data.containsKey('storeyNumber')) {
       final l$storeyNumber = storeyNumber;
@@ -2137,15 +2038,6 @@ class Input_AddressesIncInput {
     if (l$apartmentNumber != lOther$apartmentNumber) {
       return false;
     }
-    final l$houseNumber = houseNumber;
-    final lOther$houseNumber = other.houseNumber;
-    if (_$data.containsKey('houseNumber') !=
-        other._$data.containsKey('houseNumber')) {
-      return false;
-    }
-    if (l$houseNumber != lOther$houseNumber) {
-      return false;
-    }
     final l$storeyNumber = storeyNumber;
     final lOther$storeyNumber = other.storeyNumber;
     if (_$data.containsKey('storeyNumber') !=
@@ -2161,11 +2053,9 @@ class Input_AddressesIncInput {
   @override
   int get hashCode {
     final l$apartmentNumber = apartmentNumber;
-    final l$houseNumber = houseNumber;
     final l$storeyNumber = storeyNumber;
     return Object.hashAll([
       _$data.containsKey('apartmentNumber') ? l$apartmentNumber : const {},
-      _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('storeyNumber') ? l$storeyNumber : const {},
     ]);
   }
@@ -2180,7 +2070,7 @@ abstract class CopyWith_Input_AddressesIncInput<TRes> {
   factory CopyWith_Input_AddressesIncInput.stub(TRes res) =
       _CopyWithStubImpl_Input_AddressesIncInput;
 
-  TRes call({int? apartmentNumber, int? houseNumber, int? storeyNumber});
+  TRes call({int? apartmentNumber, int? storeyNumber});
 }
 
 class _CopyWithImpl_Input_AddressesIncInput<TRes>
@@ -2195,14 +2085,12 @@ class _CopyWithImpl_Input_AddressesIncInput<TRes>
 
   TRes call({
     Object? apartmentNumber = _undefined,
-    Object? houseNumber = _undefined,
     Object? storeyNumber = _undefined,
   }) => _then(
     Input_AddressesIncInput._({
       ..._instance._$data,
       if (apartmentNumber != _undefined)
         'apartmentNumber': (apartmentNumber as int?),
-      if (houseNumber != _undefined) 'houseNumber': (houseNumber as int?),
       if (storeyNumber != _undefined) 'storeyNumber': (storeyNumber as int?),
     }),
   );
@@ -2214,7 +2102,7 @@ class _CopyWithStubImpl_Input_AddressesIncInput<TRes>
 
   TRes _res;
 
-  call({int? apartmentNumber, int? houseNumber, int? storeyNumber}) => _res;
+  call({int? apartmentNumber, int? storeyNumber}) => _res;
 }
 
 class Input_AddressesInsertInput {
@@ -2229,7 +2117,6 @@ class Input_AddressesInsertInput {
     UuidValue? familyId,
     Map<String, dynamic>? geolocation,
     String? houseCode,
-    int? houseNumber,
     String? specialLandmark,
     Input_StoresObjRelInsertInput? store,
     UuidValue? storeId,
@@ -2248,7 +2135,6 @@ class Input_AddressesInsertInput {
     if (familyId != null) r'familyId': familyId,
     if (geolocation != null) r'geolocation': geolocation,
     if (houseCode != null) r'houseCode': houseCode,
-    if (houseNumber != null) r'houseNumber': houseNumber,
     if (specialLandmark != null) r'specialLandmark': specialLandmark,
     if (store != null) r'store': store,
     if (storeId != null) r'storeId': storeId,
@@ -2317,10 +2203,6 @@ class Input_AddressesInsertInput {
     if (data.containsKey('houseCode')) {
       final l$houseCode = data['houseCode'];
       result$data['houseCode'] = (l$houseCode as String?);
-    }
-    if (data.containsKey('houseNumber')) {
-      final l$houseNumber = data['houseNumber'];
-      result$data['houseNumber'] = (l$houseNumber as int?);
     }
     if (data.containsKey('specialLandmark')) {
       final l$specialLandmark = data['specialLandmark'];
@@ -2391,8 +2273,6 @@ class Input_AddressesInsertInput {
 
   String? get houseCode => (_$data['houseCode'] as String?);
 
-  int? get houseNumber => (_$data['houseNumber'] as int?);
-
   String? get specialLandmark => (_$data['specialLandmark'] as String?);
 
   Input_StoresObjRelInsertInput? get store =>
@@ -2454,10 +2334,6 @@ class Input_AddressesInsertInput {
     if (_$data.containsKey('houseCode')) {
       final l$houseCode = houseCode;
       result$data['houseCode'] = l$houseCode;
-    }
-    if (_$data.containsKey('houseNumber')) {
-      final l$houseNumber = houseNumber;
-      result$data['houseNumber'] = l$houseNumber;
     }
     if (_$data.containsKey('specialLandmark')) {
       final l$specialLandmark = specialLandmark;
@@ -2593,15 +2469,6 @@ class Input_AddressesInsertInput {
     if (l$houseCode != lOther$houseCode) {
       return false;
     }
-    final l$houseNumber = houseNumber;
-    final lOther$houseNumber = other.houseNumber;
-    if (_$data.containsKey('houseNumber') !=
-        other._$data.containsKey('houseNumber')) {
-      return false;
-    }
-    if (l$houseNumber != lOther$houseNumber) {
-      return false;
-    }
     final l$specialLandmark = specialLandmark;
     final lOther$specialLandmark = other.specialLandmark;
     if (_$data.containsKey('specialLandmark') !=
@@ -2677,7 +2544,6 @@ class Input_AddressesInsertInput {
     final l$familyId = familyId;
     final l$geolocation = geolocation;
     final l$houseCode = houseCode;
-    final l$houseNumber = houseNumber;
     final l$specialLandmark = specialLandmark;
     final l$store = store;
     final l$storeId = storeId;
@@ -2696,7 +2562,6 @@ class Input_AddressesInsertInput {
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('houseCode') ? l$houseCode : const {},
-      _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('specialLandmark') ? l$specialLandmark : const {},
       _$data.containsKey('store') ? l$store : const {},
       _$data.containsKey('storeId') ? l$storeId : const {},

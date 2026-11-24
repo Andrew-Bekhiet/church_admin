@@ -2284,7 +2284,6 @@ enum Enum_AddressesSelectColumn {
   familyId,
   geolocation,
   houseCode,
-  houseNumber,
   id,
   specialLandmark,
   storeId,
@@ -2315,8 +2314,6 @@ String toJson_Enum_AddressesSelectColumn(Enum_AddressesSelectColumn e) {
       return r'geolocation';
     case Enum_AddressesSelectColumn.houseCode:
       return r'houseCode';
-    case Enum_AddressesSelectColumn.houseNumber:
-      return r'houseNumber';
     case Enum_AddressesSelectColumn.id:
       return r'id';
     case Enum_AddressesSelectColumn.specialLandmark:
@@ -2350,8 +2347,6 @@ Enum_AddressesSelectColumn fromJson_Enum_AddressesSelectColumn(String value) {
       return Enum_AddressesSelectColumn.geolocation;
     case r'houseCode':
       return Enum_AddressesSelectColumn.houseCode;
-    case r'houseNumber':
-      return Enum_AddressesSelectColumn.houseNumber;
     case r'id':
       return Enum_AddressesSelectColumn.id;
     case r'specialLandmark':
@@ -2377,7 +2372,6 @@ enum Enum_AddressesUpdateColumn {
   familyId,
   geolocation,
   houseCode,
-  houseNumber,
   specialLandmark,
   storeId,
   storeyNumber,
@@ -2407,8 +2401,6 @@ String toJson_Enum_AddressesUpdateColumn(Enum_AddressesUpdateColumn e) {
       return r'geolocation';
     case Enum_AddressesUpdateColumn.houseCode:
       return r'houseCode';
-    case Enum_AddressesUpdateColumn.houseNumber:
-      return r'houseNumber';
     case Enum_AddressesUpdateColumn.specialLandmark:
       return r'specialLandmark';
     case Enum_AddressesUpdateColumn.storeId:
@@ -2440,8 +2432,6 @@ Enum_AddressesUpdateColumn fromJson_Enum_AddressesUpdateColumn(String value) {
       return Enum_AddressesUpdateColumn.geolocation;
     case r'houseCode':
       return Enum_AddressesUpdateColumn.houseCode;
-    case r'houseNumber':
-      return Enum_AddressesUpdateColumn.houseNumber;
     case r'specialLandmark':
       return Enum_AddressesUpdateColumn.specialLandmark;
     case r'storeId':

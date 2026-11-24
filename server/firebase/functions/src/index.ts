@@ -20,6 +20,5 @@ export * from "./export/export";
 export * from "./fingerprint/record_fingerprint_punches";
 export * from "./notify_screen_capture_attempt";
 export * from "./notify_study_year_roll_failure";
-export * from "./register_fcm_token";
 export * from "./storage_proxy";
 export * from "./storage_triggers";
