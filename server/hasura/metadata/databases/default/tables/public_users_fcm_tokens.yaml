@@ -14,6 +14,12 @@ insert_permissions:
       columns:
         - uid
         - token
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        uid:
+          _eq: X-Hasura-User-Id
 select_permissions:
   - role: user
     permission:
