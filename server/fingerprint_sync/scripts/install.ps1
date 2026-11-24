@@ -8,6 +8,7 @@ $ServiceName = 'FingerprintSync'
 $ReleaseBinaryName = 'fingerprint-sync-windows-x64.exe'
 $InstallFolder = 'C:\fingerprint_sync'
 $InstalledBinaryPath = Join-Path $InstallFolder 'fingerprint-sync.exe'
+$InstalledNssmPath = Join-Path $InstallFolder 'nssm.exe'
 $ConfigPath = Join-Path $InstallFolder 'config.json'
 $LogsFolder = Join-Path $InstallFolder 'logs'
 $LogPath = Join-Path $LogsFolder 'fingerprint_sync.log'
@@ -19,6 +20,7 @@ $AdministratorsSid = '*S-1-5-32-544'
 $UsersSid = '*S-1-5-32-545'
 $DefaultBioTimeUrl = 'http://127.0.0.1:8090'
 $DefaultPollIntervalSeconds = 20
+$DefaultCursorFile = 'cursor.json'
 
 function Assert-Administrator {
     $principal = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
@@ -42,7 +44,10 @@ function Get-NssmPath {
     if ($nssmOnPath) {
         return $nssmOnPath.Path
     }
-    throw "nssm.exe was not found on the PATH or next to this script. Download NSSM from https://nssm.cc/download and put win64\nssm.exe from the zip in $PSScriptRoot."
+    if (Test-Path -LiteralPath $InstalledNssmPath -PathType Leaf) {
+        return $InstalledNssmPath
+    }
+    throw "nssm.exe was not found next to this script, on the PATH or in $InstallFolder. Download NSSM from https://nssm.cc/download and put win64\nssm.exe from the zip in $PSScriptRoot."
 }
 
 function Get-ReleaseBinaryPath {
@@ -100,6 +105,16 @@ function Initialize-ProtectedFolder {
 
 function Initialize-ProtectedInstallFolder {
     Initialize-ProtectedFolder -Path $InstallFolder -Grants "$($SystemSid):(OI)(CI)F", "$($AdministratorsSid):(OI)(CI)F", "$($UsersSid):(OI)(CI)RX"
+}
+
+function Install-Nssm {
+    $isInstalledCopy = [IO.Path]::GetFullPath($script:NssmPath) -eq [IO.Path]::GetFullPath($InstalledNssmPath)
+    if (-not $isInstalledCopy) {
+        Copy-Item -LiteralPath $script:NssmPath -Destination $InstalledNssmPath -Force
+        Unblock-File -LiteralPath $InstalledNssmPath
+        Write-Host "Copied nssm.exe to $InstalledNssmPath."
+    }
+    $script:NssmPath = $InstalledNssmPath
 }
 
 function Copy-Binary {
@@ -181,11 +196,16 @@ function Get-StoredConfig {
         if ($config.PSObject.Properties['pollIntervalSeconds']) {
             $pollIntervalSeconds = $config.pollIntervalSeconds
         }
+        $cursorFile = $DefaultCursorFile
+        if ($config.PSObject.Properties['cursorFile']) {
+            $cursorFile = $config.cursorFile
+        }
         return [pscustomobject]@{
             BioTimeUrl = [string]$config.biotime.baseUrl
             BioTimeUsername = [string]$config.biotime.username
             FunctionUrl = [string]$config.recordFingerprintPunches.url
             PollIntervalSeconds = [string]$pollIntervalSeconds
+            CursorFile = [string]$cursorFile
         }
     }
     catch {
@@ -212,6 +232,7 @@ function Read-NewConfig {
             BioTimeUsername = ''
             FunctionUrl = ''
             PollIntervalSeconds = [string]$DefaultPollIntervalSeconds
+            CursorFile = $DefaultCursorFile
         }
     }
     [pscustomobject]@{
@@ -219,6 +240,7 @@ function Read-NewConfig {
         BioTimeUsername = Read-RequiredValue -Prompt 'BioTime API username' -Default $default.BioTimeUsername
         FunctionUrl = Read-HttpUrl -Prompt 'recordFingerprintPunches function URL' -Default $default.FunctionUrl
         PollIntervalSeconds = Read-PositiveInteger -Prompt 'Poll interval in seconds' -Default $default.PollIntervalSeconds
+        CursorFile = $default.CursorFile
     }
 }
 
@@ -232,7 +254,7 @@ function Save-Config {
         recordFingerprintPunches = [ordered]@{
             url = $Settings.FunctionUrl
         }
-        cursorFile = 'cursor.json'
+        cursorFile = $Settings.CursorFile
         pollIntervalSeconds = [int]$Settings.PollIntervalSeconds
     }
     [IO.File]::WriteAllText($ConfigPath, ($config | ConvertTo-Json -Depth 5))
@@ -325,7 +347,10 @@ function Clear-AppParametersIfSet {
 
 function Install-SyncService {
     New-Item -ItemType Directory -Path $LogsFolder -Force | Out-Null
-    if (-not (Get-SyncService)) {
+    if (Get-SyncService) {
+        Invoke-CheckedNativeCommand -FilePath 'sc.exe' -Arguments 'config', $ServiceName, 'binPath=', ('"{0}"' -f $InstalledNssmPath)
+    }
+    else {
         Invoke-Nssm -Arguments 'install', $ServiceName, $InstalledBinaryPath
     }
     Invoke-Nssm -Arguments 'set', $ServiceName, 'Application', $InstalledBinaryPath
@@ -348,7 +373,7 @@ function Start-SyncService {
     Invoke-Nssm -Arguments 'start', $ServiceName
     Write-Host ''
     Write-Host "The $ServiceName service is running. Its log is $LogPath."
-    Write-Host "Restart it with: nssm restart $ServiceName"
+    Write-Host "Restart it with: $InstalledNssmPath restart $ServiceName"
 }
 
 try {
@@ -362,6 +387,7 @@ try {
     Save-SecretsUnlessKept
     Assert-SuccessfulSyncCheck -Binary $releaseBinary
     Stop-SyncServiceIfRunning
+    Install-Nssm
     Copy-Binary -ReleaseBinary $releaseBinary
     Install-SyncService
     Start-SyncService
