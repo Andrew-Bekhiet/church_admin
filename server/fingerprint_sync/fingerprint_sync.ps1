@@ -193,6 +193,9 @@ function Send-Punches($Config, $Secrets, $Transactions) {
     }
     $response = Invoke-JsonRequest 'POST' $Config.functionUrl @{ 'X-Fingerprint-Sync-Secret' = $Secrets.syncSecret } $body
     if (-not $response.Ok) { throw "recordFingerprintPunches answered HTTP $($response.Status) to a batch of $($punches.Count): $($response.Error)" }
+    foreach ($field in $ReportFields) {
+        if ($null -eq $response.Json.$field) { throw "recordFingerprintPunches answered without $field, so it may not have recorded the batch; deploy the current function" }
+    }
     return $response.Json
 }
 

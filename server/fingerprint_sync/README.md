@@ -5,7 +5,7 @@ Two Windows PowerShell 5.1 scripts for the fingerprint server (BioTime, Windows 
 ## What you need
 
 1. A BioTime user that can read transactions, used only for this.
-2. The function's URL, from the Firebase console under Functions, `recordFingerprintPunches`. It must be `https`, unless it points at localhost or a private network address.
+2. The function's URL, from the Firebase console under Functions, `recordFingerprintPunches`, deployed from the same commit as these scripts. An older function records nothing these scripts send, so the poller stops with `answered without` and keeps its cursor. It must be `https`, unless it points at localhost or a private network address.
 3. The function's `FINGERPRINT_SYNC_SECRET`.
 
 ## Install
