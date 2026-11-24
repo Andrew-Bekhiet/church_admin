@@ -1,229 +1,64 @@
 # Fingerprint sync
 
-A small service installed on the BioTime server. It reads new punches from BioTime's REST API every 20 seconds and posts them to the `recordFingerprintPunches` cloud function, which records attendance and last kodas.
+Two Windows PowerShell 5.1 scripts for the fingerprint server (BioTime, Windows 10). A scheduled task runs `fingerprint_sync.ps1` every minute as SYSTEM. Each run polls BioTime three times, at 0, 20 and 40 seconds, and posts new punches to the `recordFingerprintPunches` function, at most 500 per request. A poll with no new punches still posts an empty batch, so the app's last fingerprint attendance sync time shows the poller is alive. Every run ends within about 55 seconds.
 
-It runs on Windows and Linux with Node.js 24.
+## What you need
 
-## How it behaves
-
-- Logs in to BioTime with `POST /api-token-auth/` and logs in again when a request is rejected with 401.
-- Reads `GET /iclock/api/transactions/?start_time=<cursor>` page by page, then posts the new punches oldest first, at most 500 per request. Each request also carries the server's current local time, so the function can warn when the server clock is not Cairo time.
-- Posts on every poll, even with no new punches, so the app's last sync time shows the service is alive.
-- Saves its position in `cursor.json`: the time of the last punch sent and the BioTime ids already sent at that time. After a restart it continues from there.
-- With no `cursor.json`, it starts from the current time. Losing the file never replays old punches.
-- When the function fails or cannot be reached, the cursor stays where it was. The punches go out on a later poll.
-- Punch times from BioTime have no time zone. They are read as `Africa/Cairo` time, daylight saving included.
-
-## Before installing
-
-You need:
-
-1. **A BioTime API account.** In BioTime, create a user that can read transactions. Use it only for this service.
-2. **The function's URL and shared secret.** The URL is in the Firebase console under Functions, `recordFingerprintPunches`. The secret is the `FINGERPRINT_SYNC_SECRET` function secret.
-3. **Node.js 24** on the BioTime server, from <https://nodejs.org>. Keep it updated: Node carries the time-zone rules, and Egypt has changed its daylight saving rules before.
+1. A BioTime user that can read transactions, used only for this.
+2. The function's URL, from the Firebase console under Functions, `recordFingerprintPunches`. It must be `https`, unless it points at localhost or a private network address.
+3. The function's `FINGERPRINT_SYNC_SECRET`.
 
 ## Install
 
-### 1. Copy and build
+1. Copy `fingerprint_sync.ps1` and `setup_fingerprint_sync.ps1` to `C:\fingerprint_sync`.
+2. Open PowerShell as administrator and run:
 
-Copy this folder (`server/fingerprint_sync`) to the server, for example to `C:\fingerprint_sync` on Windows or `/opt/fingerprint_sync` on Linux. Then, from inside that folder:
+   ```powershell
+   powershell -ExecutionPolicy Bypass -File C:\fingerprint_sync\setup_fingerprint_sync.ps1
+   ```
 
-```bash
-npm ci
+3. Answer the prompts: BioTime's address (`http://<lan ip>:8082` on this server), the BioTime username, the function URL, the BioTime password and the sync secret.
+
+Setup then:
+
+- limits `C:\fingerprint_sync` to Administrators and SYSTEM, with read access for other users, because SYSTEM runs the script from there;
+- saves the settings in `config.json`, and the password and secret in `secrets.bin`, encrypted for this machine with DPAPI and readable only by Administrators and SYSTEM;
+- runs the check below, and stops if it fails;
+- registers the `Fingerprint sync` task: every minute, as SYSTEM, whether or not anyone is logged on, never two runs at once, stopped after 2 minutes if it hangs. Then it starts the task.
+
+On its first run the poller sends nothing already in BioTime. It saves the highest BioTime transaction id it found in `cursor.json` and from then on sends only transactions with a higher id.
+
+## Check
+
+```powershell
+powershell -ExecutionPolicy Bypass -File C:\fingerprint_sync\fingerprint_sync.ps1 check
 ```
 
-```bash
-npm run build
+It logs in to BioTime, reads one transaction, and sends the function a request that the function rejects as malformed only after it has accepted the secret. The check therefore does not record a sync. `accepted the sync secret` means it works. `rejected the sync secret` means the secret is wrong.
+
+## Update or change a setting
+
+Copy the new scripts over the old ones and run setup again. It offers the saved values; press Enter to keep each one. It keeps `cursor.json`, so no punches are sent twice or skipped.
+
+## Uninstall
+
+```powershell
+powershell -ExecutionPolicy Bypass -File C:\fingerprint_sync\setup_fingerprint_sync.ps1 -Uninstall
 ```
 
-### 2. Configure
+This removes the task. Delete `C:\fingerprint_sync` afterwards to remove the settings, secrets and cursor.
 
-Copy `config.example.json` to `config.json` in the same folder and fill it in:
+## Logs
 
-| Setting | Meaning |
+`C:\fingerprint_sync\logs\fingerprint_sync.log`, rolled at 1 MB, with the last three kept as `.1` to `.3`. Each poll writes one line of counts: transactions read, unsent and sent, the function's answer, and the cursor. Task Scheduler's *Last Run Result* is `0` when all went well, `1` after an error, and `2` after a warning.
+
+| Line | Meaning |
 | -- | -- |
-| `biotime.baseUrl` | BioTime's address as seen from this server, for example `http://127.0.0.1:8090` |
-| `biotime.username` | The BioTime API account |
-| `recordFingerprintPunches.url` | The function's URL |
-| `cursorFile` | Where the cursor is saved. A relative path is relative to `config.json` |
-| `pollIntervalSeconds` | Seconds between polls. Defaults to 20 |
+| `ERROR ... skipping the rest of this run` | BioTime or the function failed or timed out. Batches already sent stay sent; the next minute retries the rest. |
+| `WARN ... linked to no person` | A punch's fingerprint ID matches no person in the app. The function reports only how many, so the line lists the batch's employee codes, which include the unlinked ones. Set the fingerprint ID on each person. |
+| `WARN ... older than the function accepts` | The punches were more than 10 days old, usually from a device that was offline. They are not recorded. |
+| `WARN ... in the future` | The fingerprint server's or a device's clock is ahead of Cairo time. Fix the clock. |
 
-`config.json` holds no secrets. The service refuses to start if it finds a password or secret in it.
+## Not yet confirmed on the real server
 
-### 3. Store the secrets
-
-The service reads two secrets:
-
-| Secret | Read from |
-| -- | -- |
-| The BioTime API account's password | `BIOTIME_PASSWORD`, or the file named by `BIOTIME_PASSWORD_FILE` |
-| The function's shared secret | `FINGERPRINT_SYNC_SECRET`, or the file named by `FINGERPRINT_SYNC_SECRET_FILE` |
-
-Set one of the two variables for each secret. The steps below keep each secret in a file that only the service can read, and point the `_FILE` variable at it. A newline or BOM at the end of a secret file is ignored.
-
-#### Windows
-
-From an administrator PowerShell, create a folder that only `SYSTEM` (the account NSSM runs the service as) and administrators can open, then type each secret into it:
-
-```powershell
-New-Item -ItemType Directory C:\fingerprint_sync\secrets
-```
-
-```powershell
-icacls C:\fingerprint_sync\secrets /inheritance:r /grant:r "SYSTEM:(OI)(CI)R" "Administrators:(OI)(CI)F"
-```
-
-```powershell
-function Save-Secret($name) { $typed = Read-Host $name -AsSecureString; [IO.File]::WriteAllText("C:\fingerprint_sync\secrets\$name", [Net.NetworkCredential]::new('', $typed).Password) }
-```
-
-```powershell
-Save-Secret biotime-password
-```
-
-```powershell
-Save-Secret fingerprint-sync-secret
-```
-
-#### Linux
-
-The service needs systemd 247 or newer (`systemctl --version`). On systemd 250 or newer, encrypt each secret with `systemd-creds`. It is tied to this machine, and to its TPM when there is one, and only systemd decrypts it, into the service's private credentials folder:
-
-```bash
-sudo mkdir -p /etc/credstore.encrypted
-```
-
-```bash
-read -rsp "BioTime password: " secret && printf '%s' "$secret" | sudo systemd-creds encrypt --name=biotime-password - /etc/credstore.encrypted/biotime-password; unset secret
-```
-
-```bash
-read -rsp "Sync secret: " secret && printf '%s' "$secret" | sudo systemd-creds encrypt --name=fingerprint-sync-secret - /etc/credstore.encrypted/fingerprint-sync-secret; unset secret
-```
-
-On systemd 247 to 249, write the two files unencrypted to `/etc/credstore/` with `sudo install -m 600 /dev/null <file>` and an editor, and use `LoadCredential=` in place of `LoadCredentialEncrypted=` in the unit below. Only root can read them, and systemd copies them into the service's private credentials folder.
-
-### 4. Install as a service
-
-#### Windows
-
-Use [NSSM](https://nssm.cc/download) to run it as a Windows service that starts with the server and restarts if it stops. From an administrator command prompt, with `nssm.exe` on the `PATH`:
-
-```bat
-mkdir C:\fingerprint_sync\logs
-nssm install FingerprintSync "C:\Program Files\nodejs\node.exe" "C:\fingerprint_sync\lib\main.js"
-nssm set FingerprintSync AppDirectory C:\fingerprint_sync
-nssm set FingerprintSync AppEnvironmentExtra BIOTIME_PASSWORD_FILE=C:\fingerprint_sync\secrets\biotime-password FINGERPRINT_SYNC_SECRET_FILE=C:\fingerprint_sync\secrets\fingerprint-sync-secret
-nssm set FingerprintSync AppStdout C:\fingerprint_sync\logs\fingerprint_sync.log
-nssm set FingerprintSync AppStderr C:\fingerprint_sync\logs\fingerprint_sync.log
-nssm set FingerprintSync AppRotateFiles 1
-nssm set FingerprintSync AppRotateOnline 1
-nssm set FingerprintSync AppRotateBytes 10485760
-nssm start FingerprintSync
-```
-
-The environment variables hold only the paths of the secret files, not the secrets. The log is `C:\fingerprint_sync\logs\fingerprint_sync.log`, rotated every 10 MB. `nssm restart FingerprintSync` restarts the service.
-
-#### Linux
-
-Create a user for the service, and give it the folder:
-
-```bash
-sudo useradd --system --no-create-home fingerprint-sync
-```
-
-```bash
-sudo chown -R fingerprint-sync /opt/fingerprint_sync
-```
-
-Save this as `/etc/systemd/system/fingerprint-sync.service`, correcting the paths if Node or the folder are elsewhere (`which node`):
-
-```ini
-[Unit]
-Description=Fingerprint sync from BioTime to church_admin
-After=network-online.target
-Wants=network-online.target
-
-[Service]
-User=fingerprint-sync
-WorkingDirectory=/opt/fingerprint_sync
-LoadCredentialEncrypted=biotime-password:/etc/credstore.encrypted/biotime-password
-LoadCredentialEncrypted=fingerprint-sync-secret:/etc/credstore.encrypted/fingerprint-sync-secret
-Environment=BIOTIME_PASSWORD_FILE=/run/credentials/fingerprint-sync.service/biotime-password
-Environment=FINGERPRINT_SYNC_SECRET_FILE=/run/credentials/fingerprint-sync.service/fingerprint-sync-secret
-ExecStart=/usr/bin/node /opt/fingerprint_sync/lib/main.js
-Restart=always
-RestartSec=10
-
-[Install]
-WantedBy=multi-user.target
-```
-
-`/run/credentials/fingerprint-sync.service` is the service's private credentials folder while it runs. Then start it:
-
-```bash
-sudo systemctl daemon-reload
-```
-
-```bash
-sudo systemctl enable --now fingerprint-sync
-```
-
-Read the log with `journalctl -u fingerprint-sync -f`.
-
-### 5. Check that it works
-
-Open the log. The first lines say it is polling, and that it is forwarding punches from the current time. Punch on a device and wait for `Forwarded 1 punches`. A wrong password or secret shows as `Poll failed` with BioTime's or the function's answer.
-
-## Send the punches between two times
-
-When a device was offline and uploaded its punches late, punches older than the cursor are skipped. Send them once with:
-
-On Windows, from an administrator PowerShell in `C:\fingerprint_sync`:
-
-```powershell
-$env:BIOTIME_PASSWORD_FILE = "C:\fingerprint_sync\secrets\biotime-password"; $env:FINGERPRINT_SYNC_SECRET_FILE = "C:\fingerprint_sync\secrets\fingerprint-sync-secret"; node lib/main.js send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"
-```
-
-On Linux, run it through systemd so it can read the secrets. With secrets encrypted by `systemd-creds`:
-
-```bash
-sudo systemd-run --pipe --wait --uid=fingerprint-sync -p WorkingDirectory=/opt/fingerprint_sync -p LoadCredentialEncrypted=biotime-password:/etc/credstore.encrypted/biotime-password -p LoadCredentialEncrypted=fingerprint-sync-secret:/etc/credstore.encrypted/fingerprint-sync-secret /bin/sh -c 'BIOTIME_PASSWORD_FILE="$CREDENTIALS_DIRECTORY/biotime-password" FINGERPRINT_SYNC_SECRET_FILE="$CREDENTIALS_DIRECTORY/fingerprint-sync-secret" exec /usr/bin/node lib/main.js send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"'
-```
-
-With unencrypted secrets in `/etc/credstore/` (systemd older than 250):
-
-```bash
-sudo systemd-run --pipe --wait --uid=fingerprint-sync -p WorkingDirectory=/opt/fingerprint_sync -p LoadCredential=biotime-password:/etc/credstore/biotime-password -p LoadCredential=fingerprint-sync-secret:/etc/credstore/fingerprint-sync-secret /bin/sh -c 'BIOTIME_PASSWORD_FILE="$CREDENTIALS_DIRECTORY/biotime-password" FINGERPRINT_SYNC_SECRET_FILE="$CREDENTIALS_DIRECTORY/fingerprint-sync-secret" exec /usr/bin/node lib/main.js send-range --from "2026-11-27 07:00:00" --to "2026-11-27 13:00:00"'
-```
-
-The times are the BioTime server's local time, inclusive. The command does not move the cursor, so the service can keep running. The function rejects punches older than 10 days.
-
-It logs `Sent N punches up to <time>` after each batch of 500. If it fails partway, rerun it with `--from` set to the last time it logged, not after it: a batch can end partway through the punches of one second. Punches at that time that were already sent are sent again.
-
-Sending a range again records its punches again. An attendance record a servant deleted by hand comes back, so choose the range narrowly.
-
-## Update
-
-Stop the service, replace the folder's files except `config.json`, `cursor.json`, `secrets` and `logs`, then run `npm ci` and `npm run build` and start the service again.
-
-## Check on the real server
-
-These have not been verified against a real BioTime server yet. Check them after installing:
-
-- BioTime's `start_time` filter applies to the punch time, not the upload time.
-- The user id a person has on the device equals their BioTime employee code.
-- The server clock is Cairo time. If it is not, the function logs a clock warning on every poll.
-- The devices and the server change with daylight saving on their own. If they do not, someone must change them on the last Friday of April and the last Thursday of October.
-
-## Development
-
-```bash
-npm test
-```
-
-```bash
-npm run lint
-```
-
-Tests run the service against a fake BioTime server and a fake function over real HTTP, with the cursor in a temporary folder.
+The top of `fingerprint_sync.ps1` states two assumptions, pending a probe of the BioTime server: transaction ids rise in upload order, and BioTime's `start_time` filter is on punch time. Each poll rereads the last 48 hours, so a punch uploaded more than 48 hours after it happened is never sent.
