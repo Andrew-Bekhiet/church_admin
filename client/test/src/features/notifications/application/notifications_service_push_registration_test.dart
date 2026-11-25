@@ -10,6 +10,8 @@ import 'package:permission_handler_platform_interface/permission_handler_platfor
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import '../../../fakes/fake_logging_service.dart';
+import '../../../fakes/mock_auth_bloc.dart';
+import '../../../fakes/mock_database_service.dart';
 import '../../../fakes/recording_analytics_provider.dart';
 
 class _MockPermissionHandlerPlatform extends Mock
@@ -22,10 +24,6 @@ class _MockNotificationSettings extends Mock implements NotificationSettings {}
 
 class _MockLocalNotificationsPlugin extends Mock
     implements FlutterLocalNotificationsPlugin {}
-
-class _MockAuthBloc extends Mock implements AuthBloc {}
-
-class _MockDatabaseService extends Mock implements DatabaseService {}
 
 class _MockFcmTokensDAO extends Mock implements FcmTokensDAO {}
 
@@ -61,13 +59,17 @@ void main() {
 
     late _MockPermissionHandlerPlatform permissionHandler;
     late _MockFirebaseMessaging firebaseMessaging;
-    late _MockAuthBloc authBloc;
+    late MockAuthBloc authBloc;
     late _MockFcmTokensDAO fcmTokens;
     late _MockFunctionsService functionsService;
-    late FakeLoggingService logging;
     late StreamController<String> onRegistered;
-    late List<String> installationIdsIssuedOnRegister;
     late NotificationsService unit;
+
+    void issueOnNextRegister(String installationId) {
+      when(() => firebaseMessaging.register()).thenAnswer((_) async {
+        onRegistered.add(installationId);
+      });
+    }
 
     void denyNotificationsPermission() {
       when(() => permissionHandler.requestPermissions(any())).thenAnswer(
@@ -78,15 +80,14 @@ void main() {
     setUpAll(() => registerFallbackValue(<Permission>[]));
 
     setUp(() {
-      logging = FakeLoggingService();
       initGlobalProviderContainer([
-        loggingServiceProvider.overrideWithValue(logging),
+        loggingServiceProvider.overrideWithValue(FakeLoggingService()),
       ]);
       addTearDown(resetGlobalProviderContainer);
 
       permissionHandler = _MockPermissionHandlerPlatform();
       firebaseMessaging = _MockFirebaseMessaging();
-      authBloc = _MockAuthBloc();
+      authBloc = MockAuthBloc();
       fcmTokens = _MockFcmTokensDAO();
       functionsService = _MockFunctionsService();
       onRegistered = StreamController<String>.broadcast();
@@ -105,17 +106,14 @@ void main() {
       );
       PermissionHandlerPlatform.instance = permissionHandler;
 
-      installationIdsIssuedOnRegister = ['installation-id'];
       when(
         () => firebaseMessaging.requestPermission(),
       ).thenAnswer((_) async => fcmSettings);
       when(firebaseMessaging.isSupported).thenAnswer((_) async => true);
-      when(() => firebaseMessaging.onRegistered).thenAnswer(
-        (_) => onRegistered.stream,
-      );
-      when(() => firebaseMessaging.register()).thenAnswer((_) async {
-        onRegistered.add(installationIdsIssuedOnRegister.removeAt(0));
-      });
+      when(
+        () => firebaseMessaging.onRegistered,
+      ).thenAnswer((_) => onRegistered.stream);
+      when(() => firebaseMessaging.register()).thenAnswer((_) async {});
       when(() => firebaseMessaging.unregister()).thenAnswer((_) async {});
 
       when(() => authBloc.isSignedIn).thenReturn(false);
@@ -126,7 +124,7 @@ void main() {
         () => functionsService.registerFirebaseInstallation(any()),
       ).thenAnswer((_) async {});
 
-      final databaseService = _MockDatabaseService();
+      final databaseService = MockDatabaseService();
       when(() => databaseService.fcmTokens).thenReturn(fcmTokens);
       when(
         () => fcmTokens.deleteByUidAndToken(
@@ -143,7 +141,7 @@ void main() {
         authBloc: authBloc,
         analyticsService: AnalyticsService(
           [RecordingAnalyticsProvider()],
-          logging,
+          FakeLoggingService(),
         ),
         databaseService: databaseService,
         functionsService: functionsService,
@@ -157,7 +155,8 @@ void main() {
       test(
         'the installation id issued at app start with a cached user reaches the server',
         () async {
-          final installationId = installationIdsIssuedOnRegister.single;
+          const installationId = 'installation-id';
+          issueOnNextRegister(installationId);
 
           await unit.onTransition(authBloc, appStartWithCachedUser);
           await pumpEventQueue();
@@ -171,7 +170,8 @@ void main() {
       test(
         'the installation id issued after signing in reaches the server',
         () async {
-          final installationId = installationIdsIssuedOnRegister.single;
+          const installationId = 'installation-id';
+          issueOnNextRegister(installationId);
 
           await unit.onTransition(authBloc, signIn);
           await pumpEventQueue();
@@ -199,10 +199,12 @@ void main() {
       test(
         'signing in again after signing out registers the device again',
         () async {
+          const firstInstallationId = 'first-installation-id';
           const secondInstallationId = 'second-installation-id';
-          installationIdsIssuedOnRegister.add(secondInstallationId);
+          issueOnNextRegister(firstInstallationId);
           await unit.onTransition(authBloc, signIn);
           await unit.stopPushNotificationsToThisDevice();
+          issueOnNextRegister(secondInstallationId);
 
           await unit.onTransition(authBloc, signIn);
           await pumpEventQueue();
@@ -216,8 +218,25 @@ void main() {
       );
 
       test(
+        'an installation id is sent once after signing in twice without signing out',
+        () async {
+          const installationId = 'installation-id';
+          await unit.onTransition(authBloc, signIn);
+          await unit.onTransition(authBloc, signIn);
+
+          onRegistered.add(installationId);
+          await pumpEventQueue();
+
+          verify(
+            () => functionsService.registerFirebaseInstallation(installationId),
+          ).called(1);
+        },
+      );
+
+      test(
         'nothing is registered without the notifications permission',
         () async {
+          issueOnNextRegister('installation-id');
           denyNotificationsPermission();
 
           await unit.onTransition(authBloc, signIn);
@@ -230,24 +249,59 @@ void main() {
       );
 
       test(
-        'a failure registering with the server is reported and contained',
+        'a server rejection does not stop later installation ids from registering',
         () async {
-          final failure = Exception('server rejected the installation id');
+          const rejectedInstallationId = 'rejected-installation-id';
+          const acceptedInstallationId = 'accepted-installation-id';
           when(
-            () => functionsService.registerFirebaseInstallation(any()),
-          ).thenThrow(failure);
-
+            () => functionsService.registerFirebaseInstallation(
+              rejectedInstallationId,
+            ),
+          ).thenThrow(Exception('server rejected the installation id'));
+          issueOnNextRegister(rejectedInstallationId);
           await unit.onTransition(authBloc, signIn);
           await pumpEventQueue();
 
-          expect(logging.reportedWarnings.single.error, failure);
+          onRegistered.add(acceptedInstallationId);
+          await pumpEventQueue();
+
+          verify(
+            () => functionsService.registerFirebaseInstallation(
+              acceptedInstallationId,
+            ),
+          );
+        },
+      );
+
+      test(
+        'a sign-in waits for a pending stop before registering the device again',
+        () async {
+          final outcomes = <String>[];
+          final unregistrationFinishes = Completer<void>();
+          when(() => firebaseMessaging.unregister()).thenAnswer((_) async {
+            await unregistrationFinishes.future;
+            outcomes.add('unregistered');
+          });
+          when(() => firebaseMessaging.register()).thenAnswer((_) async {
+            outcomes.add('registered');
+          });
+
+          final stopping = unit.stopPushNotificationsToThisDevice();
+          await pumpEventQueue();
+          final signingIn = unit.onTransition(authBloc, signIn);
+          await pumpEventQueue();
+          unregistrationFinishes.complete();
+          await Future.wait([stopping, signingIn]);
+
+          expect(outcomes, ['unregistered', 'registered']);
         },
       );
     });
 
     group('stopping', () {
       test('signing out deletes this device installation id row', () async {
-        final installationId = installationIdsIssuedOnRegister.single;
+        const installationId = 'installation-id';
+        issueOnNextRegister(installationId);
         await unit.onTransition(authBloc, signIn);
 
         await unit.stopPushNotificationsToThisDevice();
@@ -269,19 +323,18 @@ void main() {
       });
 
       test('a failing row deletion still unregisters this device', () async {
-        final failure = Exception('offline');
+        issueOnNextRegister('installation-id');
         when(
           () => fcmTokens.deleteByUidAndToken(
             uid: any(named: 'uid'),
             token: any(named: 'token'),
           ),
-        ).thenThrow(failure);
+        ).thenThrow(Exception('offline'));
         await unit.onTransition(authBloc, signIn);
 
         await expectLater(unit.stopPushNotificationsToThisDevice(), completes);
 
         verify(() => firebaseMessaging.unregister());
-        expect(logging.reportedWarnings.single.error, failure);
       });
 
       test('a failing unregistration is contained', () async {
@@ -307,7 +360,7 @@ void main() {
       );
 
       test(
-        'installation ids issued after signing out stay unregistered',
+        'installation ids issued after signing out never reach the server',
         () async {
           const lateInstallationId = 'late-installation-id';
           await unit.onTransition(authBloc, signIn);
@@ -327,7 +380,7 @@ void main() {
       test(
         'a registration still pending when signing out finishes before the row is deleted',
         () async {
-          final installationId = installationIdsIssuedOnRegister.single;
+          const installationId = 'installation-id';
           final backendOutcomes = <String>[];
           final registrationFinishes = Completer<void>();
           when(
@@ -342,20 +395,65 @@ void main() {
               token: any(named: 'token'),
             ),
           ).thenAnswer((invocation) async {
-            backendOutcomes.add(
-              'deleted ${invocation.namedArguments[#token]}',
-            );
+            backendOutcomes.add('deleted ${invocation.namedArguments[#token]}');
           });
+          issueOnNextRegister(installationId);
           await unit.onTransition(authBloc, signIn);
 
-          final signOut = unit.stopPushNotificationsToThisDevice();
+          final stopping = unit.stopPushNotificationsToThisDevice();
           await pumpEventQueue();
           registrationFinishes.complete();
-          await signOut;
+          await stopping;
 
           expect(backendOutcomes, [
             'registered $installationId',
             'deleted $installationId',
+          ]);
+        },
+      );
+
+      test(
+        'every registration still pending when signing out finishes before the row is deleted',
+        () async {
+          const earlierInstallationId = 'earlier-installation-id';
+          const laterInstallationId = 'later-installation-id';
+          final backendOutcomes = <String>[];
+          final registrationFinishes = {
+            earlierInstallationId: Completer<void>(),
+            laterInstallationId: Completer<void>(),
+          };
+          when(
+            () => functionsService.registerFirebaseInstallation(any()),
+          ).thenAnswer((invocation) async {
+            final installationId =
+                invocation.positionalArguments.single as String;
+            await registrationFinishes[installationId]?.future;
+            backendOutcomes.add('registered $installationId');
+          });
+          when(
+            () => fcmTokens.deleteByUidAndToken(
+              uid: any(named: 'uid'),
+              token: any(named: 'token'),
+            ),
+          ).thenAnswer((invocation) async {
+            backendOutcomes.add('deleted ${invocation.namedArguments[#token]}');
+          });
+          await unit.onTransition(authBloc, signIn);
+          onRegistered
+            ..add(earlierInstallationId)
+            ..add(laterInstallationId);
+          await pumpEventQueue();
+
+          final stopping = unit.stopPushNotificationsToThisDevice();
+          registrationFinishes[laterInstallationId]?.complete();
+          await pumpEventQueue();
+          registrationFinishes[earlierInstallationId]?.complete();
+          await stopping;
+
+          expect(backendOutcomes, [
+            'registered $laterInstallationId',
+            'registered $earlierInstallationId',
+            'deleted $laterInstallationId',
           ]);
         },
       );

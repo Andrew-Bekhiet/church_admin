@@ -986,9 +986,9 @@ class MockNotificationsService extends _i1.Mock
   ) as _i6.Future<void>);
 
   @override
-  _i6.Future<void> registerThisDeviceForPushNotifications() =>
+  _i6.Future<void> maybeRegisterThisDeviceForPushNotifications() =>
       (super.noSuchMethod(
-        Invocation.method(#registerThisDeviceForPushNotifications, []),
+        Invocation.method(#maybeRegisterThisDeviceForPushNotifications, []),
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),
       ) as _i6.Future<void>);

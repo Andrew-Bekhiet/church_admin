@@ -90,8 +90,9 @@ class NotificationsService extends BlocObserver {
   late final StreamSubscription<Notification> _onMessageOpenedAppSubscription;
   late final StreamSubscription<Notification> _onForegroundMessageSubscription;
   StreamSubscription<String>? _installationRegistrationSubscription;
-  String? _registeredInstallationId;
+  String? _lastIssuedInstallationId;
   Future<void>? _latestInstallationRegistration;
+  Future<void>? _latestStop;
 
   late final Stream<Notification> onNotificationTapStream =
       getInitialNotification()
@@ -292,11 +293,13 @@ class NotificationsService extends BlocObserver {
     );
   }
 
-  Future<void> registerThisDeviceForPushNotifications() async {
+  Future<void> maybeRegisterThisDeviceForPushNotifications() async {
     if (!await _firebaseMessaging.isSupported() ||
         !await requestNotificationsPermission()) {
       return;
     }
+
+    await _latestStop;
 
     final previousSubscription = _installationRegistrationSubscription;
     _installationRegistrationSubscription = _firebaseMessaging.onRegistered
@@ -309,13 +312,21 @@ class NotificationsService extends BlocObserver {
     await _firebaseMessaging.register.runBestEffort();
   }
 
-  Future<void> stopPushNotificationsToThisDevice() async {
-    final installationId = _registeredInstallationId;
+  Future<void> stopPushNotificationsToThisDevice() {
+    final stopping = _cancelRegistrationDeleteRowAndUnregister.runBestEffort();
+    _latestStop = stopping;
+
+    return stopping;
+  }
+
+  Future<void> _cancelRegistrationDeleteRowAndUnregister() async {
+    final installationId = _lastIssuedInstallationId;
     final uid = _authBloc.currentUser?.hasuraUserId;
-    _registeredInstallationId = null;
+    _lastIssuedInstallationId = null;
 
     await _stopListeningForInstallationIds();
     await _latestInstallationRegistration;
+    _latestInstallationRegistration = null;
 
     if (installationId != null && uid != null) {
       await (() => _databaseService.fcmTokens.deleteByUidAndToken(
@@ -328,12 +339,16 @@ class NotificationsService extends BlocObserver {
   }
 
   void _registerInstallationIdWithServer(String installationId) {
-    _registeredInstallationId = installationId;
+    _lastIssuedInstallationId = installationId;
 
-    _latestInstallationRegistration =
-        (() => _functionsService.registerFirebaseInstallation(
-          installationId,
-        )).runBestEffort();
+    final earlierRegistrations = _latestInstallationRegistration;
+    final registration = (() => _functionsService.registerFirebaseInstallation(
+      installationId,
+    )).runBestEffort();
+    _latestInstallationRegistration = Future.wait([
+      ?earlierRegistrations,
+      registration,
+    ]);
   }
 
   Future<void> _logInstallationRegistrationError(
@@ -391,7 +406,7 @@ class NotificationsService extends BlocObserver {
         await scheduleDefaultNotifications();
       }
 
-      await registerThisDeviceForPushNotifications();
+      await maybeRegisterThisDeviceForPushNotifications();
     }
   }
 
