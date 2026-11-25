@@ -130,6 +130,7 @@ class PersonFormController extends AdvancedFormController {
     required this._photoUploader,
     required this._currentUser,
     required this._analyticsService,
+    required LoggingService loggingService,
   }) : _outOfSight = OutOfSightAfterSave(_currentUser),
        _startingPerson = switch (intent) {
          UpdatePerson(:final personWithRelationIds) => personWithRelationIds,
@@ -151,6 +152,7 @@ class PersonFormController extends AdvancedFormController {
       persons: _persons,
       currentUser: _currentUser,
       analyticsService: _analyticsService,
+      loggingService: loggingService,
     );
 
     registerFields([photo, color]);
