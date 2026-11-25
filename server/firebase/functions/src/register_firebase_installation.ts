@@ -22,8 +22,14 @@ export const registerFirebaseInstallation = https.onCall<
     );
   }
 
-  await registerFirebaseInstallationAsSoleOwnerReplacingRegistrationTokens(
-    request.auth!.token["x-hasura-user-id"],
-    requestData.data.installationId,
-  );
+  const uid = request.auth!.token["x-hasura-user-id"];
+  try {
+    await registerFirebaseInstallationAsSoleOwnerReplacingRegistrationTokens(
+      uid,
+      requestData.data.installationId,
+    );
+  } catch (e) {
+    console.error("Could not register Firebase installation", uid, e);
+    throw new https.HttpsError("internal", "installation-registration-failed");
+  }
 });
