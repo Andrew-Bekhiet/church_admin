@@ -379,7 +379,7 @@ void main() {
       );
 
       test(
-        'a stop that outlives its time limit never unregisters the next session',
+        'a stop that outlives its time limit never unregisters once a newer registration has started',
         () async {
           final stopTime = FakeAsync();
           final outcomes = <String>[];
