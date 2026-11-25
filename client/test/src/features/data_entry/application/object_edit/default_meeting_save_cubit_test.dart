@@ -14,6 +14,7 @@ void main() {
   late FakeMeetingsDAO meetings;
   late ServiceFormController form;
   late ObjectSaveOutcome<Service> outcome;
+  late FakeGroupsDAO groups;
   late ObjectSaveOutcome<Group> groupOutcome;
   late RecordingAnalyticsProvider analytics;
 
@@ -37,6 +38,7 @@ void main() {
 
   setUp(() {
     services = FakeServicesDAO();
+    groups = FakeGroupsDAO();
     meetings = FakeMeetingsDAO();
     analytics = RecordingAnalyticsProvider();
   });
@@ -97,7 +99,7 @@ void main() {
         meetingOwner: groupForm,
         meetingsDAO: meetings,
         form: groupForm,
-        dao: FakeGroupsDAO(),
+        dao: groups,
         photoUploader: FakePhotoUploader(),
         analyticsService: AnalyticsService([analytics], FakeLoggingService()),
       );
@@ -105,11 +107,17 @@ void main() {
     act: (cubit) async => groupOutcome = await cubit.submit(),
     verify: (_) => expect(
       groupOutcome,
-      isA<ObjectSaved<Group>>().having(
-        (saved) => saved.object.defaultMeeting,
-        'defaultMeeting',
-        meetings.createdMeetings.single,
-      ),
+      isA<ObjectSaved<Group>>()
+          .having(
+            (saved) => saved.object.id,
+            'id',
+            groups.createdObjects.single.id,
+          )
+          .having(
+            (saved) => saved.object.defaultMeeting?.groupId,
+            'defaultMeeting.groupId',
+            groups.createdObjects.single.id,
+          ),
     ),
   );
 
