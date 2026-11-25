@@ -60,22 +60,38 @@ class ThisDevicePushRegistration {
   bool _stoppedSince(int startGeneration) =>
       startGeneration != _pushLifecycleGeneration;
 
+  bool Function() notStoppedSinceNow() {
+    final generationNow = _pushLifecycleGeneration;
+
+    return () => !_stoppedSince(generationNow);
+  }
+
   void _registerInstallationIdWithServer(String installationId) {
     _lastIssuedInstallationId = installationId;
 
-    _latestServerWrite = _registerAfterEarlierServerWritesSettle(
+    _latestServerWrite = _maybeRegisterAfterEarlierServerWritesSettle(
       installationId,
       _latestServerWrite,
     );
   }
 
-  Future<void> _registerAfterEarlierServerWritesSettle(
+  Future<void> _maybeRegisterAfterEarlierServerWritesSettle(
     String installationId,
     Future<void>? earlierServerWrites,
   ) async {
-    await earlierServerWrites
-        ?.timeout(stopTimeLimit)
-        .logWarningInsteadOfThrowing();
+    final notStoppedSinceIssued = notStoppedSinceNow();
+    final uidWhenIssued = _readCurrentUid();
+
+    if (earlierServerWrites != null) {
+      await earlierServerWrites
+          .timeout(stopTimeLimit)
+          .logWarningInsteadOfThrowing();
+    }
+
+    final issuedForTheCurrentSession =
+        notStoppedSinceIssued() && _readCurrentUid() == uidWhenIssued;
+    if (!issuedForTheCurrentSession) return;
+
     await _functionsService
         .registerFirebaseInstallation(installationId)
         .logWarningInsteadOfThrowing();
