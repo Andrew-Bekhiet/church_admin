@@ -120,7 +120,7 @@ void main() {
         fixture.recordFirebaseOutcomesIn(outcomes);
         unawaited(unit.stop());
         async.elapse(pastTheStopTimeLimit);
-        unawaited(unit.dispose());
+        unit.dispose();
 
         deletionFinishes.complete();
         async.flushMicrotasks();

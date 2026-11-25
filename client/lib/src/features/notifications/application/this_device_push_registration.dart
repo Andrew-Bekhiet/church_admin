@@ -138,8 +138,12 @@ class ThisDevicePushRegistration {
       stopGeneration != _pushLifecycleGeneration ||
       _generationOfLatestRegistrationStart == stopGeneration;
 
-  Future<void> dispose() async {
+  void dispose() {
     _pushLifecycleGeneration++;
-    await _installationRegistrationSubscription?.cancel();
+    unawaited(
+      _installationRegistrationSubscription
+          ?.cancel()
+          .logWarningInsteadOfThrowing(),
+    );
   }
 }

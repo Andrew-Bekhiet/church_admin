@@ -351,7 +351,7 @@ class NotificationsService extends BlocObserver {
     _authRepository.removeBeforeSignOutListener(
       _thisDevicePushRegistration.stop,
     );
-    await _thisDevicePushRegistration.dispose();
+    _thisDevicePushRegistration.dispose();
     await _isPausedSubject.close();
     await _onMessageOpenedAppSubscription.cancel();
     await _onForegroundMessageSubscription.cancel();
