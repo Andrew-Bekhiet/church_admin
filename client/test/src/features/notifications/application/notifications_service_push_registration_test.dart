@@ -78,6 +78,13 @@ void main() {
       );
     }
 
+    Future<void> drainRealAndFakeMicrotasks(FakeAsync fakeTime) async {
+      for (var round = 0; round < 10; round++) {
+        await pumpEventQueue();
+        fakeTime.flushMicrotasks();
+      }
+    }
+
     setUpAll(() => registerFallbackValue(<Permission>[]));
 
     setUp(() {
@@ -358,10 +365,74 @@ void main() {
             async.flushMicrotasks();
 
             unawaited(unit.onTransition(authBloc, signIn));
-            async.elapse(const Duration(seconds: 6));
+            async.elapse(const Duration(seconds: 11));
 
             expect(registered, isTrue);
           });
+        },
+      );
+
+      test(
+        'a stop that outlives its time limit never unregisters the next session',
+        () async {
+          final stopTime = FakeAsync();
+          final outcomes = <String>[];
+          final deletionFinishes = Completer<void>();
+          issueOnNextRegister('installation-id');
+          await unit.onTransition(authBloc, signIn);
+          await pumpEventQueue();
+          when(
+            () => fcmTokens.deleteByUidAndToken(
+              uid: any(named: 'uid'),
+              token: any(named: 'token'),
+            ),
+          ).thenAnswer((_) => deletionFinishes.future);
+          when(() => firebaseMessaging.unregister()).thenAnswer((_) async {
+            outcomes.add('unregistered');
+          });
+          when(() => firebaseMessaging.register()).thenAnswer((_) async {
+            outcomes.add('registered');
+          });
+          stopTime.run(
+            (_) => unawaited(unit.stopPushNotificationsToThisDevice()),
+          );
+          await drainRealAndFakeMicrotasks(stopTime);
+          stopTime.elapse(const Duration(seconds: 6));
+          unawaited(unit.onTransition(authBloc, signIn));
+          await drainRealAndFakeMicrotasks(stopTime);
+
+          deletionFinishes.complete();
+          await drainRealAndFakeMicrotasks(stopTime);
+
+          expect(outcomes, ['registered']);
+        },
+      );
+
+      test(
+        'an unregistration still running at the time limit finishes before the next registration',
+        () async {
+          final stopTime = FakeAsync();
+          final outcomes = <String>[];
+          final unregistrationFinishes = Completer<void>();
+          when(() => firebaseMessaging.unregister()).thenAnswer((_) async {
+            await unregistrationFinishes.future;
+            outcomes.add('unregistered');
+          });
+          when(() => firebaseMessaging.register()).thenAnswer((_) async {
+            outcomes.add('registered');
+          });
+          stopTime.run(
+            (_) => unawaited(unit.stopPushNotificationsToThisDevice()),
+          );
+          await drainRealAndFakeMicrotasks(stopTime);
+          stopTime.elapse(const Duration(seconds: 6));
+          unawaited(unit.onTransition(authBloc, signIn));
+          await drainRealAndFakeMicrotasks(stopTime);
+
+          unregistrationFinishes.complete();
+          await drainRealAndFakeMicrotasks(stopTime);
+
+          expect(outcomes, ['unregistered', 'registered']);
         },
       );
 

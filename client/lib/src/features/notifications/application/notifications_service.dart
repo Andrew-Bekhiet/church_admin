@@ -96,6 +96,8 @@ class NotificationsService extends BlocObserver {
   Future<void>? _latestInstallationRegistration;
   Future<void>? _latestStop;
   int _pushLifecycleGeneration = 0;
+  int _generationOfLatestRegistrationStart = -1;
+  Future<void>? _inFlightUnregistration;
 
   late final Stream<Notification> onNotificationTapStream =
       getInitialNotification()
@@ -310,6 +312,15 @@ class NotificationsService extends BlocObserver {
     await _latestStop;
     if (stoppedSinceStart()) return;
 
+    _generationOfLatestRegistrationStart = _pushLifecycleGeneration;
+    final inFlightUnregistration = _inFlightUnregistration;
+    if (inFlightUnregistration != null) {
+      await (() => inFlightUnregistration).runBestEffort(
+        within: _stopPushNotificationsTimeout,
+      );
+    }
+    if (stoppedSinceStart()) return;
+
     final previousSubscription = _installationRegistrationSubscription;
     _installationRegistrationSubscription = _firebaseMessaging.onRegistered
         .listen(
@@ -323,16 +334,18 @@ class NotificationsService extends BlocObserver {
   }
 
   Future<void> stopPushNotificationsToThisDevice() {
-    _pushLifecycleGeneration++;
-    final stopping = _cancelRegistrationDeleteRowAndUnregister.runBestEffort(
-      within: _stopPushNotificationsTimeout,
-    );
+    final stopGeneration = ++_pushLifecycleGeneration;
+    final stopping = (() => _cancelRegistrationDeleteRowAndMaybeUnregister(
+      stopGeneration,
+    )).runBestEffort(within: _stopPushNotificationsTimeout);
     _latestStop = stopping;
 
     return stopping;
   }
 
-  Future<void> _cancelRegistrationDeleteRowAndUnregister() async {
+  Future<void> _cancelRegistrationDeleteRowAndMaybeUnregister(
+    int stopGeneration,
+  ) async {
     final installationId = _lastIssuedInstallationId;
     final uid = _authBloc.currentUser?.hasuraUserId;
     _lastIssuedInstallationId = null;
@@ -348,8 +361,16 @@ class NotificationsService extends BlocObserver {
       )).runBestEffort();
     }
 
-    await _firebaseMessaging.unregister.runBestEffort();
+    if (_laterSessionBeganSince(stopGeneration)) return;
+
+    final unregistration = _firebaseMessaging.unregister.runBestEffort();
+    _inFlightUnregistration = unregistration;
+    await unregistration;
   }
+
+  bool _laterSessionBeganSince(int stopGeneration) =>
+      stopGeneration != _pushLifecycleGeneration ||
+      _generationOfLatestRegistrationStart == stopGeneration;
 
   void _registerInstallationIdWithServer(String installationId) {
     _lastIssuedInstallationId = installationId;
