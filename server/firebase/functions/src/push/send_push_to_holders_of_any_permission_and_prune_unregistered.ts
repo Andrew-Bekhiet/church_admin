@@ -19,26 +19,6 @@ const UNREGISTERED_ERROR_CODE_BY_KIND: Record<PushTargetKind, string> = {
   installation_id: "messaging/installation-id-not-registered",
 };
 
-function sendWithFirebaseMessaging(messages: Message[]): Promise<BatchResponse> {
-  return getMessaging().sendEach(messages);
-}
-
-function messageFor(target: PushTarget, payload: PushPayload): Message {
-  return target.kind === "installation_id"
-    ? { ...payload, fid: target.token }
-    : { ...payload, token: target.token };
-}
-
-function unregisteredTargets(
-  targets: PushTarget[],
-  responses: SendResponse[],
-): PushTarget[] {
-  return targets.filter(
-    (target, index) =>
-      responses[index].error?.code === UNREGISTERED_ERROR_CODE_BY_KIND[target.kind],
-  );
-}
-
 export async function sendPushToHoldersOfAnyPermissionAndPruneUnregistered({
   permissions,
   buildPayload,
@@ -75,4 +55,24 @@ export async function sendPushToHoldersOfAnyPermissionAndPruneUnregistered({
       .filter((r) => !r.success)
       .map((r) => r.error),
   };
+}
+
+function sendWithFirebaseMessaging(messages: Message[]): Promise<BatchResponse> {
+  return getMessaging().sendEach(messages);
+}
+
+function messageFor(target: PushTarget, payload: PushPayload): Message {
+  return target.kind === "installation_id"
+    ? { ...payload, fid: target.token }
+    : { ...payload, token: target.token };
+}
+
+function unregisteredTargets(
+  targets: PushTarget[],
+  responses: SendResponse[],
+): PushTarget[] {
+  return targets.filter(
+    (target, index) =>
+      responses[index].error?.code === UNREGISTERED_ERROR_CODE_BY_KIND[target.kind],
+  );
 }

@@ -267,12 +267,6 @@ export async function seedPushTarget(
   );
 }
 
-export function sortedByKindThenToken(targets: PushTarget[]): PushTarget[] {
-  return [...targets].sort(
-    (a, b) => a.kind.localeCompare(b.kind) || a.token.localeCompare(b.token),
-  );
-}
-
 export async function pushTargetsOf(uid: string): Promise<PushTarget[]> {
   const rows = await runSql(
     `select kind, token from public.users_fcm_tokens
@@ -281,6 +275,12 @@ export async function pushTargetsOf(uid: string): Promise<PushTarget[]> {
 
   return sortedByKindThenToken(
     rows.map(([kind, token]) => ({ kind: kind as PushTargetKind, token })),
+  );
+}
+
+export function sortedByKindThenToken(targets: PushTarget[]): PushTarget[] {
+  return [...targets].sort(
+    (a, b) => a.kind.localeCompare(b.kind) || a.token.localeCompare(b.token),
   );
 }
 

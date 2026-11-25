@@ -20,55 +20,6 @@ const payload = {
   data: { code: "test" },
 };
 
-function fakeSend(errorCodeByTarget: Record<string, string> = {}) {
-  const sent: Message[] = [];
-
-  async function send(messages: Message[]): Promise<BatchResponse> {
-    sent.push(...messages);
-
-    const responses = messages.map((message) => {
-      const target = "fid" in message ? message.fid : (message as { token: string }).token;
-      const code = errorCodeByTarget[target];
-
-      return code === undefined
-        ? { success: true, messageId: "message-id" }
-        : {
-          success: false,
-          error: { code } as FirebaseMessagingError,
-        };
-    });
-    const failureCount = responses.filter((response) => !response.success).length;
-
-    return {
-      responses,
-      failureCount,
-      successCount: responses.length - failureCount,
-    };
-  }
-
-  return { send, sent };
-}
-
-function sortedByTarget(messages: Message[]): Message[] {
-  const targetOf = (message: Message) =>
-    "fid" in message ? message.fid : (message as { token: string }).token;
-
-  return [...messages].sort((a, b) => targetOf(a).localeCompare(targetOf(b)));
-}
-
-async function sendToHoldersOf(
-  permission: string,
-  send: ReturnType<typeof fakeSend>["send"],
-  deleteTargets?: (targets: PushTarget[]) => Promise<void>,
-) {
-  return sendPushToHoldersOfAnyPermissionAndPruneUnregistered({
-    permissions: [permission],
-    buildPayload: () => payload,
-    send,
-    ...(deleteTargets && { deleteTargets }),
-  });
-}
-
 describe("sendPushToHoldersOfAnyPermissionAndPruneUnregistered", () => {
   it("sends a token message to a registration token and an fid message to an installation id", async () => {
     const permission = await seedPermission();
@@ -202,3 +153,52 @@ describe("sendPushToHoldersOfAnyPermissionAndPruneUnregistered", () => {
     ]);
   });
 });
+
+function fakeSend(errorCodeByTarget: Record<string, string> = {}) {
+  const sent: Message[] = [];
+
+  async function send(messages: Message[]): Promise<BatchResponse> {
+    sent.push(...messages);
+
+    const responses = messages.map((message) => {
+      const target = "fid" in message ? message.fid : (message as { token: string }).token;
+      const code = errorCodeByTarget[target];
+
+      return code === undefined
+        ? { success: true, messageId: "message-id" }
+        : {
+          success: false,
+          error: { code } as FirebaseMessagingError,
+        };
+    });
+    const failureCount = responses.filter((response) => !response.success).length;
+
+    return {
+      responses,
+      failureCount,
+      successCount: responses.length - failureCount,
+    };
+  }
+
+  return { send, sent };
+}
+
+async function sendToHoldersOf(
+  permission: string,
+  send: ReturnType<typeof fakeSend>["send"],
+  deleteTargets?: (targets: PushTarget[]) => Promise<void>,
+) {
+  return sendPushToHoldersOfAnyPermissionAndPruneUnregistered({
+    permissions: [permission],
+    buildPayload: () => payload,
+    send,
+    ...(deleteTargets && { deleteTargets }),
+  });
+}
+
+function sortedByTarget(messages: Message[]): Message[] {
+  const targetOf = (message: Message) =>
+    "fid" in message ? message.fid : (message as { token: string }).token;
+
+  return [...messages].sort((a, b) => targetOf(a).localeCompare(targetOf(b)));
+}
