@@ -35,6 +35,7 @@ query exportData(
     }
     address {
       id
+      fullAddressText
       apartmentNumber
       houseCode
       storeyNumber
@@ -196,6 +197,7 @@ query exportData(
   families(where: $familiesWhere) @include(if: $includeFamilies) {
     address {
       id
+      fullAddressText
       apartmentNumber
       houseCode
       storeyNumber
@@ -255,6 +257,7 @@ query exportData(
   stores(where: $storesWhere) @include(if: $includeStores) {
     address {
       id
+      fullAddressText
       apartmentNumber
       houseCode
       storeyNumber

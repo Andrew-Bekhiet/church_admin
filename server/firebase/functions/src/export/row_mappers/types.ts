@@ -18,6 +18,7 @@ export type StudyYear = IdAndName & {
 
 export type Address = {
   id: string;
+  fullAddressText: string | null;
   apartmentNumber: number | null;
   houseCode: string | null;
   storeyNumber: number | null;

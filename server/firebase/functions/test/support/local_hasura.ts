@@ -28,10 +28,11 @@ export async function runSql(sql: string): Promise<string[][]> {
 export async function graphqlAs(
   role: string,
   query: string,
+  variables?: Record<string, unknown>,
 ): Promise<{ data?: Record<string, unknown>; errors?: { message: string }[] }> {
   const response = await axios.post(
     process.env.HASURA_SERVER!,
-    { query },
+    { query, variables },
     { headers: { ...adminHeaders(), "x-hasura-role": role } },
   );
 
