@@ -17,10 +17,13 @@ mixin FakeObjectWrites<T extends ViewableWithID> on Fake {
   Future<T> createObject({required T newObject}) async {
     await saveGate?.future;
     if (saveError case final error?) throw error;
-    createdObjects.add(newObject);
+    final created = withIdAssignedByServer(newObject);
+    createdObjects.add(created);
 
-    return newObject;
+    return created;
   }
+
+  T withIdAssignedByServer(T newObject) => newObject;
 
   Future<T?> updateObject({
     required T newObject,
@@ -29,8 +32,9 @@ mixin FakeObjectWrites<T extends ViewableWithID> on Fake {
     await saveGate?.future;
     if (saveError case final error?) throw error;
     updates.add((savedObject: oldObject, editedObject: newObject));
+    final updatesSavedRow = newObject.id == oldObject.id;
 
-    return updatesFindNothing ? null : newObject;
+    return updatesFindNothing || !updatesSavedRow ? null : newObject;
   }
 
   Future<T?> deleteById({required String id}) async {

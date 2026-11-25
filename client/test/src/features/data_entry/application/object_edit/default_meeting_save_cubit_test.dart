@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../../fakes/fake_groups_dao.dart';
 import '../../../../fakes/fake_logging_service.dart';
 import '../../../../fakes/fake_meetings_dao.dart';
 import '../../../../fakes/fake_photo_uploader.dart';
@@ -13,6 +14,7 @@ void main() {
   late FakeMeetingsDAO meetings;
   late ServiceFormController form;
   late ObjectSaveOutcome<Service> outcome;
+  late ObjectSaveOutcome<Group> groupOutcome;
   late RecordingAnalyticsProvider analytics;
 
   DefaultMeetingSaveCubit<Service> cubitEditing(ServiceEditIntent intent) {
@@ -53,6 +55,56 @@ void main() {
       expect(meeting.serviceId, services.createdObjects.single.id);
       expect(services.updates.single.editedObject.defaultMeeting, meeting);
     },
+  );
+
+  blocTest<DefaultMeetingSaveCubit<Service>, ObjectSaveProgress>(
+    'a new service is saved linked to its meeting',
+    build: () => cubitEditing(const CreateBlankService()),
+    act: (cubit) async {
+      form.name.setValue('خدمة ابتدائي');
+      outcome = await cubit.submit();
+    },
+    verify: (_) => expect(
+      outcome,
+      isA<ObjectSaved<Service>>().having(
+        (saved) => saved.object.defaultMeeting,
+        'defaultMeeting',
+        meetings.createdMeetings.single,
+      ),
+    ),
+  );
+
+  blocTest<DefaultMeetingSaveCubit<Group>, ObjectSaveProgress>(
+    'a new group is saved linked to its meeting',
+    build: () {
+      final groupForm = GroupFormController(
+        intent: const CreateGroupInService(
+          service: Service(id: 's', name: 'خدمة ابتدائي'),
+        ),
+        servicesDAO: services,
+        currentUserId: 'me',
+      );
+      addTearDown(groupForm.dispose);
+      groupForm.name.setValue('أسرة مارمرقس');
+
+      return DefaultMeetingSaveCubit<Group>(
+        meetingOwner: groupForm,
+        meetingsDAO: meetings,
+        form: groupForm,
+        dao: FakeGroupsDAO(),
+        photoUploader: FakePhotoUploader(),
+        analyticsService: AnalyticsService([analytics], FakeLoggingService()),
+      );
+    },
+    act: (cubit) async => groupOutcome = await cubit.submit(),
+    verify: (_) => expect(
+      groupOutcome,
+      isA<ObjectSaved<Group>>().having(
+        (saved) => saved.object.defaultMeeting,
+        'defaultMeeting',
+        meetings.createdMeetings.single,
+      ),
+    ),
   );
 
   blocTest<DefaultMeetingSaveCubit<Service>, ObjectSaveProgress>(
@@ -106,10 +158,8 @@ void main() {
         form.name.setValue('خدمة إعدادي');
         await cubit.submit();
       },
-      verify: (_) => expect(
-        services.updates.single.editedObject.name,
-        'خدمة إعدادي',
-      ),
+      verify: (_) =>
+          expect(services.updates.single.editedObject.name, 'خدمة إعدادي'),
     );
   });
 
