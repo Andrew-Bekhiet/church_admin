@@ -6,11 +6,14 @@ class FakeSignOutAuthRepository extends Fake implements AuthRepository {
       BeforeSignOutListeners();
 
   @override
-  void Function() addBeforeSignOutListener(
-    Future<void> Function() listener,
-  ) => _beforeSignOutListeners.add(listener);
+  void addBeforeSignOutListener(Future<void> Function() listener) =>
+      _beforeSignOutListeners.add(listener);
+
+  @override
+  void removeBeforeSignOutListener(Future<void> Function() listener) =>
+      _beforeSignOutListeners.remove(listener);
 
   @override
   Future<void> signOut() =>
-      _beforeSignOutListeners.runAllBestEffortWithinTimeout();
+      _beforeSignOutListeners.runAllLoggingFailuresWithinTimeout();
 }

@@ -200,11 +200,11 @@ void main() {
 
     test('a removed before-sign-out listener does not run', () async {
       var listenerRan = false;
-      final removeListener = repository.addBeforeSignOutListener(
-        () async => listenerRan = true,
-      );
+      Future<void> markListenerRan() async => listenerRan = true;
+      repository
+        ..addBeforeSignOutListener(markListenerRan)
+        ..removeBeforeSignOutListener(markListenerRan);
 
-      removeListener();
       await repository.signOut();
 
       expect(listenerRan, isFalse);

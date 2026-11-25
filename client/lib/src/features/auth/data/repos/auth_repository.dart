@@ -30,7 +30,9 @@ abstract interface class AuthRepository {
 
   Future<void> refreshToken();
 
-  void Function() addBeforeSignOutListener(Future<void> Function() listener);
+  void addBeforeSignOutListener(Future<void> Function() listener);
+
+  void removeBeforeSignOutListener(Future<void> Function() listener);
 
   Future<void> signOut();
 

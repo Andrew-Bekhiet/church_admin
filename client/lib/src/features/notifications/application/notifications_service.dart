@@ -96,7 +96,6 @@ class NotificationsService extends BlocObserver {
   String? _lastIssuedInstallationId;
   Future<void>? _latestInstallationRegistration;
   Future<void>? _latestStop;
-  late final void Function() _removeBeforeSignOutListener;
   int _pushLifecycleGeneration = 0;
   int _generationOfLatestRegistrationStart = -1;
   Future<void>? _inFlightUnregistration;
@@ -159,9 +158,7 @@ class NotificationsService extends BlocObserver {
         )
         .listen(addForegroundNotificationTap);
 
-    _removeBeforeSignOutListener = _authRepository.addBeforeSignOutListener(
-      stopPushNotificationsToThisDevice,
-    );
+    _authRepository.addBeforeSignOutListener(stopPushNotificationsToThisDevice);
   }
 
   Future<void> _onForegroundMessage(Notification notification) async {
@@ -322,9 +319,9 @@ class NotificationsService extends BlocObserver {
     _generationOfLatestRegistrationStart = _pushLifecycleGeneration;
     final inFlightUnregistration = _inFlightUnregistration;
     if (inFlightUnregistration != null) {
-      await (() => inFlightUnregistration).runBestEffort(
-        within: _stopPushNotificationsTimeout,
-      );
+      await inFlightUnregistration
+          .timeout(_stopPushNotificationsTimeout)
+          .logWarningInsteadOfThrowing();
     }
     if (stoppedSinceStart()) return;
 
@@ -337,14 +334,14 @@ class NotificationsService extends BlocObserver {
     await previousSubscription?.cancel();
     if (stoppedSinceStart()) return;
 
-    await _firebaseMessaging.register.runBestEffort();
+    await _firebaseMessaging.register().logWarningInsteadOfThrowing();
   }
 
   Future<void> stopPushNotificationsToThisDevice() {
     final stopGeneration = ++_pushLifecycleGeneration;
-    final stopping = (() => _cancelRegistrationDeleteRowAndMaybeUnregister(
+    final stopping = _cancelRegistrationDeleteRowAndMaybeUnregister(
       stopGeneration,
-    )).runBestEffort(within: _stopPushNotificationsTimeout);
+    ).timeout(_stopPushNotificationsTimeout).logWarningInsteadOfThrowing();
     _latestStop = stopping;
 
     return stopping;
@@ -369,15 +366,16 @@ class NotificationsService extends BlocObserver {
     }
 
     if (installationId != null && uid != null) {
-      await (() => _databaseService.fcmTokens.deleteByUidAndToken(
-        uid: uid,
-        token: installationId,
-      )).runBestEffort();
+      await _databaseService.fcmTokens
+          .deleteByUidAndToken(uid: uid, token: installationId)
+          .logWarningInsteadOfThrowing();
     }
 
     if (_laterSessionBeganSince(stopGeneration)) return;
 
-    final unregistration = _firebaseMessaging.unregister.runBestEffort();
+    final unregistration = _firebaseMessaging
+        .unregister()
+        .logWarningInsteadOfThrowing();
     _inFlightUnregistration = unregistration;
     await unregistration;
   }
@@ -400,9 +398,9 @@ class NotificationsService extends BlocObserver {
     Future<void>? earlierRegistrations,
   ) async {
     await earlierRegistrations;
-    await (() => _functionsService.registerFirebaseInstallation(
-      installationId,
-    )).runBestEffort();
+    await _functionsService
+        .registerFirebaseInstallation(installationId)
+        .logWarningInsteadOfThrowing();
   }
 
   Future<void> _logInstallationRegistrationError(
@@ -466,7 +464,9 @@ class NotificationsService extends BlocObserver {
   }
 
   Future<void> dispose() async {
-    _removeBeforeSignOutListener();
+    _authRepository.removeBeforeSignOutListener(
+      stopPushNotificationsToThisDevice,
+    );
     _pushLifecycleGeneration++;
     await _isPausedSubject.close();
     await _onMessageOpenedAppSubscription.cancel();

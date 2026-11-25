@@ -5,13 +5,12 @@ class BeforeSignOutListeners {
 
   final List<Future<void> Function()> _listeners = [];
 
-  void Function() add(Future<void> Function() listener) {
-    _listeners.add(listener);
+  void add(Future<void> Function() listener) => _listeners.add(listener);
 
-    return () => _listeners.remove(listener);
-  }
+  void remove(Future<void> Function() listener) => _listeners.remove(listener);
 
-  Future<void> runAllBestEffortWithinTimeout() => (() => Future.wait([
-    for (final listener in [..._listeners]) listener.runBestEffort(),
-  ])).runBestEffort(within: _timeoutForAllListeners);
+  Future<void> runAllLoggingFailuresWithinTimeout() => Future.wait([
+    for (final listener in [..._listeners])
+      Future.sync(listener).logWarningInsteadOfThrowing(),
+  ]).timeout(_timeoutForAllListeners).logWarningInsteadOfThrowing();
 }

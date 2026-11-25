@@ -396,13 +396,18 @@ class MockFirebaseAuthRepository extends _i1.Mock
   ) as _i7.Future<void>);
 
   @override
-  void Function() addBeforeSignOutListener(
-    _i7.Future<void> Function()? listener,
-  ) => (super.noSuchMethod(
-    Invocation.method(#addBeforeSignOutListener, [listener]),
-    returnValue: () {},
-    returnValueForMissingStub: () {},
-  ) as void Function());
+  void addBeforeSignOutListener(_i7.Future<void> Function()? listener) =>
+      super.noSuchMethod(
+        Invocation.method(#addBeforeSignOutListener, [listener]),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void removeBeforeSignOutListener(_i7.Future<void> Function()? listener) =>
+      super.noSuchMethod(
+        Invocation.method(#removeBeforeSignOutListener, [listener]),
+        returnValueForMissingStub: null,
+      );
 
   @override
   _i7.Future<void> signOut() => (super.noSuchMethod(

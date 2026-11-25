@@ -269,7 +269,9 @@ void main() {
             () => functionsService.registerFirebaseInstallation(
               rejectedInstallationId,
             ),
-          ).thenThrow(Exception('server rejected the installation id'));
+          ).thenAnswer(
+            (_) async => throw Exception('server rejected the installation id'),
+          );
           issueOnNextRegister(rejectedInstallationId);
           await unit.onTransition(authBloc, signIn);
           await pumpEventQueue();
@@ -596,7 +598,7 @@ void main() {
             uid: any(named: 'uid'),
             token: any(named: 'token'),
           ),
-        ).thenThrow(Exception('offline'));
+        ).thenAnswer((_) async => throw Exception('offline'));
         await unit.onTransition(authBloc, signIn);
 
         await expectLater(unit.stopPushNotificationsToThisDevice(), completes);
@@ -605,7 +607,9 @@ void main() {
       });
 
       test('a failing unregistration is contained', () async {
-        when(() => firebaseMessaging.unregister()).thenThrow(Exception());
+        when(
+          () => firebaseMessaging.unregister(),
+        ).thenAnswer((_) async => throw Exception());
         await unit.onTransition(authBloc, signIn);
 
         await expectLater(unit.stopPushNotificationsToThisDevice(), completes);
