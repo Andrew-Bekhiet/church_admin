@@ -42,6 +42,7 @@ describe("tryClaimFirebaseInstallationFromOlderSessionsReplacingRegistrationToke
       installationId,
       earlierSession,
     );
+    assert.deepEqual(await ownersOfInstallationId(installationId), [previousOwner]);
 
     const claimed = await tryClaimFirebaseInstallationFromOlderSessionsReplacingRegistrationTokens(
       newOwner,
