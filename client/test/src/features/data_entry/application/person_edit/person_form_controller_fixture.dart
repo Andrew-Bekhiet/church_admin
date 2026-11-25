@@ -27,6 +27,7 @@ class PersonFormControllerFixture {
   final FakePhotoUploader photos = FakePhotoUploader();
   final InMemoryFamiliesDAO families = InMemoryFamiliesDAO();
   final RecordingAnalyticsProvider analytics = RecordingAnalyticsProvider();
+  final FakeLoggingService logging = FakeLoggingService();
   late final AnalyticsService analyticsService = AnalyticsService([
     analytics,
   ], FakeLoggingService());
@@ -50,6 +51,7 @@ class PersonFormControllerFixture {
       photoUploader: photos,
       currentUser: currentUser,
       analyticsService: analyticsService,
+      loggingService: logging,
       addressServices: AddressFormServices(
         autofill: AddressAutofill(
           areas: effectiveAreas,

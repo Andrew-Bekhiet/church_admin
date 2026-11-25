@@ -122,6 +122,21 @@ void main() {
       );
     });
 
+    test('reports the load error with how long the load took', () async {
+      fixture.controllerOfUpdate(person);
+      final offline = Exception('offline');
+
+      fixture.persons.savedMembershipsResponse.completeError(offline);
+      await pumpEventQueue();
+
+      expect(
+        fixture.logging.reportedExceptions.single,
+        isA<LogRecord>()
+            .having((r) => r.error, 'error', offline)
+            .having((r) => r.data?['elapsedMs'], 'elapsedMs', isA<int>()),
+      );
+    });
+
     test('finishing after the form is disposed raises nothing', () async {
       fixture.controllerOfUpdate(person).dispose();
       fixture.persons.respondWithSavedMemberships(
