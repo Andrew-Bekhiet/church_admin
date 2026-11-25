@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../fakes/fake_logging_service.dart';
@@ -31,21 +32,21 @@ void main() {
       await expectLater(failingCallback.runBestEffort(), completes);
     });
 
-    test(
-      'a failure is contained even when reporting it never finishes',
-      () async {
+    test('a failure is contained even when reporting it never finishes', () {
+      fakeAsync((async) {
         initGlobalProviderContainer([
           loggingServiceProvider.overrideWithValue(
             _HangingWarningLoggingService(),
           ),
         ]);
         addTearDown(resetGlobalProviderContainer);
+        var finished = false;
 
-        await expectLater(
-          failingCallback.runBestEffort().timeout(const Duration(seconds: 1)),
-          completes,
-        );
-      },
-    );
+        unawaited(failingCallback.runBestEffort().then((_) => finished = true));
+        async.flushMicrotasks();
+
+        expect(finished, isTrue);
+      });
+    });
   });
 }
