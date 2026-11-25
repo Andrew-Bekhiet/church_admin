@@ -63,7 +63,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       : stream
             .firstWhere(_isSettled)
             .then<void>((_) => null)
-            .timeout(const Duration(seconds: 6), onTimeout: () => null);
+            .timeout(const Duration(seconds: 8), onTimeout: () => null);
 
   AuthBloc({
     required this._authRepository,
