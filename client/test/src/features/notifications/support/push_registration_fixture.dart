@@ -21,8 +21,20 @@ class _MockLocalNotificationsPlugin extends Mock
 
 class _MockNotificationsStorage extends Mock implements NotificationsStorage {}
 
-class _MockNotificationsSettingsStorage extends Mock
-    implements NotificationsSettingsStorage {}
+class _AcceptingNotificationsSettingsStorage extends Fake
+    implements NotificationsSettingsStorage {
+  @override
+  Future<void> setBirthDayTime(NotificationSetting setting) async {}
+
+  @override
+  Future<void> setKodasTime(NotificationSetting setting) async {}
+
+  @override
+  Future<void> setAttendanceTime(NotificationSetting setting) async {}
+
+  @override
+  Future<void> setConfessionTime(NotificationSetting setting) async {}
+}
 
 class PushRegistrationFixture {
   final MockFirebaseMessaging firebaseMessaging = MockFirebaseMessaging();
@@ -77,7 +89,7 @@ class PushRegistrationFixture {
       ),
       thisDevicePushRegistration: registration,
       storage: _MockNotificationsStorage(),
-      settings: _MockNotificationsSettingsStorage(),
+      settings: _AcceptingNotificationsSettingsStorage(),
     );
   }
 

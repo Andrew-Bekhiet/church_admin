@@ -339,8 +339,12 @@ class NotificationsService extends BlocObserver {
   Future<bool> _requestPermissionThenMaybeScheduleDefaults(
     AuthState currentState,
   ) async {
+    final notStoppedSincePrompting = _thisDevicePushRegistration
+        .notStoppedSinceNow();
     final isGranted = await _requestAndTrackNotificationsPermission();
-    if (isGranted && currentState is! AuthInitial) {
+    if (isGranted &&
+        currentState is! AuthInitial &&
+        notStoppedSincePrompting()) {
       await scheduleDefaultNotifications();
     }
 

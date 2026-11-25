@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -44,12 +46,16 @@ void main() {
     late PushRegistrationFixture fixture;
     late MockAuthBloc authBloc;
     late NotificationsService unit;
+    late List<MethodCall> scheduledAlarms;
 
     setUpAll(() => registerFallbackValue(<Permission>[]));
 
     setUp(() {
       initGlobalProviderContainer([
         loggingServiceProvider.overrideWithValue(FakeLoggingService()),
+        currentPlatformServiceProvider.overrideWithValue(
+          const CurrentPlatformService(PlatformValue.android),
+        ),
       ]);
       addTearDown(resetGlobalProviderContainer);
       fixture = PushRegistrationFixture();
@@ -57,7 +63,47 @@ void main() {
       authBloc = MockAuthBloc();
       unit = fixture.buildNotificationsService(fixture.buildRegistration());
       addTearDown(unit.dispose);
+      scheduledAlarms = _recordScheduledAlarms();
     });
+
+    test(
+      'a sign-in with the notifications permission schedules the default notifications',
+      () async {
+        await unit.onTransition(authBloc, signIn);
+
+        expect(scheduledAlarms, isNotEmpty);
+      },
+    );
+
+    test(
+      'signing out while a sign-in waits on the permission prompt schedules no default notifications',
+      () async {
+        final promptAnswered = fixture.holdTheNextPermissionPrompt();
+        final signingIn = unit.onTransition(authBloc, signIn);
+        await pumpEventQueue();
+
+        await fixture.authRepository.signOut();
+        promptAnswered.complete();
+        await signingIn;
+
+        expect(scheduledAlarms, isEmpty);
+      },
+    );
+
+    test(
+      'disposing while a sign-in waits on the permission prompt schedules no default notifications',
+      () async {
+        final promptAnswered = fixture.holdTheNextPermissionPrompt();
+        final signingIn = unit.onTransition(authBloc, signIn);
+        await pumpEventQueue();
+
+        await unit.dispose();
+        promptAnswered.complete();
+        await signingIn;
+
+        expect(scheduledAlarms, isEmpty);
+      },
+    );
 
     test(
       'the installation id issued at app start with a cached user reaches the server',
@@ -206,4 +252,20 @@ void main() {
       },
     );
   });
+}
+
+List<MethodCall> _recordScheduledAlarms() {
+  final scheduledAlarms = <MethodCall>[];
+  final messenger =
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        ..setMockMethodCallHandler(AndroidAlarmManager.channel, (call) async {
+          scheduledAlarms.add(call);
+
+          return true;
+        });
+  addTearDown(
+    () => messenger.setMockMethodCallHandler(AndroidAlarmManager.channel, null),
+  );
+
+  return scheduledAlarms;
 }
