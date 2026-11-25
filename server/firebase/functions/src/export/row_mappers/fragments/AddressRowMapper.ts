@@ -11,6 +11,7 @@ export class AddressRowMapper implements RowMapper {
         : null;
 
     return {
+      "address.fullAddressText": address?.fullAddressText ?? "",
       "address.area.name": address?.area?.name ?? "",
       "address.area.id": address?.area?.id ?? "",
       "address.houseCode": address?.houseCode,

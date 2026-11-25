@@ -42,6 +42,7 @@ export class LocalizationRowMapper implements RowMapper {
         line: "الموقع",
         areas: "المناطق",
         address: "العنوان",
+        fullAddressText: "العنوان بالكامل",
         geolocation: "الموقع",
         notes: "ملاحظات",
         adminFamily: "العائلة المسؤولة",
