@@ -90,6 +90,9 @@ class ServiceFormController extends ObjectFormController<Service>
   );
 
   @override
-  Service withDefaultMeeting(Service created, Meeting meeting) =>
-      created.copyWith(defaultMeeting: meeting);
+  Service withIdAndDefaultMeeting(
+    Service edited, {
+    required String id,
+    required Meeting? defaultMeeting,
+  }) => edited.copyWith(id: id, defaultMeeting: defaultMeeting);
 }

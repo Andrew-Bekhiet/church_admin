@@ -51,15 +51,13 @@ class DefaultMeetingSaveCubit<T extends ViewableWithIDAndImage>
       null => null,
       final meeting => await _createOrReviseMeeting(meeting),
     };
-    final edited = switch (savedMeeting) {
-      null => object,
-      final savedMeeting => _meetingOwner.withDefaultMeeting(
-        object,
-        savedMeeting,
-      ),
-    };
+    final editedUnderCreatedId = _meetingOwner.withIdAndDefaultMeeting(
+      object,
+      id: created.id,
+      defaultMeeting: savedMeeting,
+    );
 
-    return await update(created, edited) ??
+    return await update(created, editedUnderCreatedId) ??
         (throw ObjectUpdateNotSavedException(created.id));
   }
 

@@ -62,6 +62,9 @@ class GroupFormController extends ObjectFormController<Group>
   );
 
   @override
-  Group withDefaultMeeting(Group created, Meeting meeting) =>
-      created.copyWith(defaultMeeting: meeting);
+  Group withIdAndDefaultMeeting(
+    Group edited, {
+    required String id,
+    required Meeting? defaultMeeting,
+  }) => edited.copyWith(id: id, defaultMeeting: defaultMeeting);
 }
