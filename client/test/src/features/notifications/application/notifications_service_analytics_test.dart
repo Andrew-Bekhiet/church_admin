@@ -8,6 +8,7 @@ import 'package:permission_handler_platform_interface/permission_handler_platfor
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import '../../../fakes/fake_logging_service.dart';
+import '../../../fakes/fake_sign_out_auth_repository.dart';
 import '../../../fakes/recording_analytics_provider.dart';
 
 class _MockPermissionHandlerPlatform extends Mock
@@ -93,6 +94,7 @@ void main() {
         onForegroundMessageStream: const Stream.empty(),
         onMessageOpenedAppStream: const Stream.empty(),
         authBloc: authBloc,
+        authRepository: FakeSignOutAuthRepository(),
         analyticsService: AnalyticsService([analytics], FakeLoggingService()),
         databaseService: _MockDatabaseService(),
         functionsService: _MockFunctionsService(),

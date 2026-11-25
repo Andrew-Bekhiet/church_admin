@@ -80,6 +80,7 @@ class NotificationsService extends BlocObserver {
   final FlutterLocalNotificationsPlugin _localNotificationsPlugin;
 
   final AuthBloc _authBloc;
+  final AuthRepository _authRepository;
   final DatabaseService _databaseService;
   final FunctionsService _functionsService;
   final AnalyticsService _analyticsService;
@@ -95,6 +96,7 @@ class NotificationsService extends BlocObserver {
   String? _lastIssuedInstallationId;
   Future<void>? _latestInstallationRegistration;
   Future<void>? _latestStop;
+  late final void Function() _removeBeforeSignOutListener;
   int _pushLifecycleGeneration = 0;
   int _generationOfLatestRegistrationStart = -1;
   Future<void>? _inFlightUnregistration;
@@ -130,6 +132,7 @@ class NotificationsService extends BlocObserver {
     required Stream<RemoteMessage> onForegroundMessageStream,
     required Stream<RemoteMessage> onMessageOpenedAppStream,
     required this._authBloc,
+    required this._authRepository,
     required this._analyticsService,
     required this._functionsService,
     DatabaseService? databaseService,
@@ -155,6 +158,10 @@ class NotificationsService extends BlocObserver {
           ),
         )
         .listen(addForegroundNotificationTap);
+
+    _removeBeforeSignOutListener = _authRepository.addBeforeSignOutListener(
+      stopPushNotificationsToThisDevice,
+    );
   }
 
   Future<void> _onForegroundMessage(Notification notification) async {
@@ -453,6 +460,7 @@ class NotificationsService extends BlocObserver {
   }
 
   Future<void> dispose() async {
+    _removeBeforeSignOutListener();
     _pushLifecycleGeneration++;
     await _isPausedSubject.close();
     await _onMessageOpenedAppSubscription.cancel();

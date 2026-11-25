@@ -11,6 +11,7 @@ import 'package:permission_handler_platform_interface/permission_handler_platfor
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import '../../../fakes/fake_logging_service.dart';
+import '../../../fakes/fake_sign_out_auth_repository.dart';
 import '../../../fakes/mock_auth_bloc.dart';
 import '../../../fakes/mock_database_service.dart';
 import '../../../fakes/recording_analytics_provider.dart';
@@ -61,6 +62,7 @@ void main() {
     late _MockPermissionHandlerPlatform permissionHandler;
     late _MockFirebaseMessaging firebaseMessaging;
     late MockAuthBloc authBloc;
+    late FakeSignOutAuthRepository authRepository;
     late _MockFcmTokensDAO fcmTokens;
     late _MockFunctionsService functionsService;
     late StreamController<String> onRegistered;
@@ -96,6 +98,7 @@ void main() {
       permissionHandler = _MockPermissionHandlerPlatform();
       firebaseMessaging = _MockFirebaseMessaging();
       authBloc = MockAuthBloc();
+      authRepository = FakeSignOutAuthRepository();
       fcmTokens = _MockFcmTokensDAO();
       functionsService = _MockFunctionsService();
       onRegistered = StreamController<String>.broadcast();
@@ -147,6 +150,7 @@ void main() {
         onForegroundMessageStream: const Stream.empty(),
         onMessageOpenedAppStream: const Stream.empty(),
         authBloc: authBloc,
+        authRepository: authRepository,
         analyticsService: AnalyticsService(
           [RecordingAnalyticsProvider()],
           FakeLoggingService(),
@@ -512,6 +516,29 @@ void main() {
 
         verify(() => firebaseMessaging.unregister());
       });
+
+      test(
+        'signing out through the auth repository unregisters this device',
+        () async {
+          await unit.onTransition(authBloc, signIn);
+
+          await authRepository.signOut();
+
+          verify(() => firebaseMessaging.unregister());
+        },
+      );
+
+      test(
+        'signing out through the auth repository after disposing leaves this device registered',
+        () async {
+          await unit.onTransition(authBloc, signIn);
+          await unit.dispose();
+
+          await authRepository.signOut();
+
+          verifyNever(() => firebaseMessaging.unregister());
+        },
+      );
 
       test('a failing row deletion still unregisters this device', () async {
         issueOnNextRegister('installation-id');

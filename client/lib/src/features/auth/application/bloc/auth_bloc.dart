@@ -21,7 +21,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final FunctionsService _functionsService;
   final FeatureFlagsRepository _featureFlagsRepository;
   final AnalyticsService _analyticsService;
-  final Future<void> Function() _stopPushNotificationsBeforeSignOut;
 
   Timer? _refreshTokenTimer;
 
@@ -74,7 +73,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this._functionsService,
     required this._featureFlagsRepository,
     required this._analyticsService,
-    required this._stopPushNotificationsBeforeSignOut,
     bool loadCachedUser = true,
   }) : super(const AuthInitial()) {
     on<ListenToSubscriptions>(
@@ -315,9 +313,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthLoading(previousState: state));
 
       _analyticsService.track(SignOutRequest(event.source));
-      await _stopPushNotificationsBeforeSignOut.runBestEffort(
-        within: const Duration(seconds: 5),
-      );
       await _authRepository.signOut();
 
       emit(const AuthUnauthenticated());

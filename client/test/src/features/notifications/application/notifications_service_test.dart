@@ -17,6 +17,7 @@ import 'package:permission_handler_platform_interface/permission_handler_platfor
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import '../../../fakes/fake_logging_service.dart';
+import '../../../fakes/fake_sign_out_auth_repository.dart';
 import '../../../fakes/recording_analytics_provider.dart';
 import 'notifications_service_test.mocks.dart';
 
@@ -399,6 +400,7 @@ void main() {
 
               final unit = NotificationsService(
                 authBloc: MockAuthBloc(),
+                authRepository: FakeSignOutAuthRepository(),
                 analyticsService: AnalyticsService(
                   [RecordingAnalyticsProvider()],
                   FakeLoggingService(),
@@ -868,6 +870,7 @@ List<Object> _callArgumentsMatchFor({
 NotificationsService _createNewUnit() {
   return NotificationsService(
     authBloc: AuthBloc.I,
+    authRepository: FakeSignOutAuthRepository(),
     analyticsService: AnalyticsService(
       [RecordingAnalyticsProvider()],
       FakeLoggingService(),

@@ -1,7 +1,12 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
+import 'package:fake_async/fake_async.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../../../fakes/fake_logging_service.dart';
 
 class _MockFirebaseAuth extends Mock implements firebase_auth.FirebaseAuth {}
 
@@ -109,4 +114,100 @@ void main() {
       },
     );
   }
+
+  group('signing out', () {
+    setUp(() {
+      initGlobalProviderContainer([
+        loggingServiceProvider.overrideWithValue(FakeLoggingService()),
+      ]);
+      addTearDown(resetGlobalProviderContainer);
+
+      when(firebaseAuth.signOut).thenAnswer((_) async {});
+    });
+
+    test(
+      'the session ends only after a before-sign-out listener finishes',
+      () async {
+        final listenerFinishes = Completer<void>();
+        repository.addBeforeSignOutListener(() => listenerFinishes.future);
+
+        final signingOut = repository.signOut();
+        await pumpEventQueue();
+        verifyNever(firebaseAuth.signOut);
+
+        listenerFinishes.complete();
+        await signingOut;
+
+        verify(firebaseAuth.signOut);
+      },
+    );
+
+    test(
+      'every before-sign-out listener starts without waiting for the ones added before it',
+      () async {
+        final firstListenerFinishes = Completer<void>();
+        final startedListeners = <String>[];
+        repository
+          ..addBeforeSignOutListener(() {
+            startedListeners.add('first');
+
+            return firstListenerFinishes.future;
+          })
+          ..addBeforeSignOutListener(
+            () async => startedListeners.add('second'),
+          );
+
+        unawaited(repository.signOut());
+        await pumpEventQueue();
+
+        expect(startedListeners, unorderedEquals(['first', 'second']));
+        firstListenerFinishes.complete();
+      },
+    );
+
+    test(
+      'a failing before-sign-out listener still lets the session end',
+      () async {
+        repository.addBeforeSignOutListener(
+          () async => throw Exception('offline'),
+        );
+
+        await repository.signOut();
+
+        verify(firebaseAuth.signOut);
+      },
+    );
+
+    test(
+      'a before-sign-out listener that never finishes holds the session open for at most five seconds',
+      () {
+        fakeAsync((fakeTime) {
+          final listenerNeverFinishes = Completer<void>();
+          repository.addBeforeSignOutListener(
+            () => listenerNeverFinishes.future,
+          );
+
+          unawaited(repository.signOut());
+          fakeTime.elapse(const Duration(milliseconds: 4900));
+          verifyNever(firebaseAuth.signOut);
+
+          fakeTime.elapse(const Duration(milliseconds: 100));
+
+          verify(firebaseAuth.signOut);
+        });
+      },
+    );
+
+    test('a removed before-sign-out listener does not run', () async {
+      var listenerRan = false;
+      final removeListener = repository.addBeforeSignOutListener(
+        () async => listenerRan = true,
+      );
+
+      removeListener();
+      await repository.signOut();
+
+      expect(listenerRan, isFalse);
+    });
+  });
 }

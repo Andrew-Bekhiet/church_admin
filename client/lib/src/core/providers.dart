@@ -172,9 +172,6 @@ final Provider<AuthBloc> authBlocProvider = Provider<AuthBloc>((ref) {
     functionsService: ref.watch(functionsServiceProvider),
     featureFlagsRepository: ref.watch(featureFlagsRepoProvider),
     analyticsService: ref.watch(analyticsServiceProvider),
-    stopPushNotificationsBeforeSignOut: () => ref
-        .read(notificationsServiceProvider)
-        .stopPushNotificationsToThisDevice(),
   );
 
   ref.onDispose(authBloc.close);
@@ -288,6 +285,7 @@ final notificationsServiceProvider = Provider<NotificationsService>((ref) {
     localNotificationsPlugin: ref.watch(localNotificationsPluginProvider),
     firebaseMessaging: ref.watch(firebaseMessagingProvider),
     authBloc: ref.watch(authBlocProvider),
+    authRepository: ref.watch(authRepositoryProvider),
     analyticsService: ref.watch(analyticsServiceProvider),
     databaseService: ref.watch(databaseServiceProvider),
     functionsService: ref.watch(functionsServiceProvider),
