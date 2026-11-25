@@ -542,11 +542,10 @@ void main() {
     );
 
     blocTest<HomeCubit, HomeState>(
-      'signing out from the drawer asks the auth bloc to sign out',
+      'signing out ends the signed-in session',
       build: () => fixture.buildCubit(),
       act: (cubit) => cubit.signOut(),
-      verify: (_) =>
-          expect(fixture.signOutRequests, [SignOutSource.homeDrawer]),
+      verify: (_) => expect(fixture.authRepository.isSignedIn, isFalse),
     );
 
     blocTest<HomeCubit, HomeState>(

@@ -3,6 +3,7 @@ import 'package:church_admin/church_admin.dart';
 import '../../../fakes/fake_logging_service.dart';
 import '../../../fakes/recording_analytics_provider.dart';
 
+import 'fake_auth_repository.dart';
 import 'fake_home_daily_data_repository.dart';
 import 'fake_local_auth_service.dart';
 import 'home_database_fixture.dart';
@@ -14,7 +15,7 @@ class HomeCubitFixture {
   final FakeHomeDailyDataRepository dailyData;
   final HomeDatabaseFixture database;
   final Stream<User?> userDataStream;
-  final List<SignOutSource> signOutRequests = [];
+  final FakeAuthRepository authRepository = FakeAuthRepository();
   final FakeLocalAuthService localAuthService = FakeLocalAuthService();
   final RecordingAnalyticsProvider analytics = RecordingAnalyticsProvider();
 
@@ -35,7 +36,7 @@ class HomeCubitFixture {
     homeDailyDataRepository: dailyData,
     databaseService: database.service,
     userDataStream: userDataStream,
-    requestSignOut: signOutRequests.add,
+    authRepository: authRepository,
     localAuthService: localAuthService,
     userPersistenceService: RecordingUserPersistenceService(),
     analyticsService: AnalyticsService([analytics], FakeLoggingService()),

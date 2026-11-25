@@ -556,7 +556,7 @@ final homeCubitProvider = Provider<HomeCubit>(
       databaseService: ref.watch(databaseServiceProvider),
       homeDailyDataRepository: ref.watch(homeDailyDataRepositoryProvider),
       userDataStream: authBloc.userDataStream,
-      requestSignOut: (source) => authBloc.add(SignOut(source)),
+      authRepository: ref.watch(authRepositoryProvider),
       localAuthService: ref.watch(localAuthServiceProvider),
       userPersistenceService: ref.watch(userPersistenceServiceProvider),
       analyticsService: ref.watch(analyticsServiceProvider),
