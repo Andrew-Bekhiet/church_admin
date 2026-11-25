@@ -36,6 +36,7 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
       photoUploader: FunctionsPhotoUploader(FunctionsService.I),
       currentUser: AuthBloc.I.currentUserData,
       analyticsService: AnalyticsService.I,
+      loggingService: LoggingService.I,
       addressServices: AddressFormServices.backedBy(
         databaseService,
         geocoder: Geocoder.I,

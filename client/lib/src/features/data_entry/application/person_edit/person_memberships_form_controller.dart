@@ -9,6 +9,7 @@ class PersonMembershipsFormController extends AdvancedFormController
   final PersonsDAO _persons;
   final User? _currentUser;
   final AnalyticsService _analyticsService;
+  final LoggingService _loggingService;
   final ValueNotifier<MembershipsLoadState> _loadState;
   late final ValueListenable<MembershipsLoadState> loadState = _loadState;
 
@@ -34,6 +35,7 @@ class PersonMembershipsFormController extends AdvancedFormController
     required this._persons,
     required this._currentUser,
     required this._analyticsService,
+    required this._loggingService,
   }) : _loadedPerson = startingPerson,
        _savedMemberships = isCreate
            ? const PersonMemberships(services: {}, groups: {})
@@ -49,11 +51,23 @@ class PersonMembershipsFormController extends AdvancedFormController
 
   Future<void> loadSavedMemberships() async {
     final Person? saved;
+    final sinceLoadStarted = Stopwatch()..start();
     try {
       saved = await _persons.personServicesClassesGroups(
         personId: _loadedPerson.id,
       );
     } on Exception catch (error, stackTrace) {
+      unawaited(
+        _loggingService.exception(
+          LogRecord(
+            moduleName: '$PersonMembershipsFormController',
+            eventName: 'loadSavedMemberships',
+            error: error,
+            stackTrace: stackTrace,
+            data: {'elapsedMs': sinceLoadStarted.elapsedMilliseconds},
+          ),
+        ),
+      );
       if (!isDisposed) {
         _loadState.value = MembershipsLoadFailed(
           error: error,
