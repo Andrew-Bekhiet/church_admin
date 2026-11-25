@@ -87,6 +87,7 @@ export default defineRailway((ctx) => {
     build: {
       builder: "DOCKERFILE",
       dockerfilePath: "/server/postgres/Dockerfile",
+      watchPatterns: ["/server/postgres/**"],
     },
     replicas: { "europe-west4-drams3a": 1 },
     deploy: {
