@@ -80,6 +80,56 @@ void main() {
     );
 
     test(
+      'a stop overtaken by a second stop never unregisters once a newer registration has started',
+      () {
+        fakeAsync((async) {
+          final outcomes = <String>[];
+          final deletionFinishes = Completer<void>();
+          fixture
+            ..currentUid = hasuraUserId
+            ..issueOnNextRegister('installation-id');
+          unawaited(unit.maybeRegisterOnceGranted(Future.value(true)));
+          async.flushMicrotasks();
+          fixture.whenDeletingARow().thenAnswer((_) => deletionFinishes.future);
+          fixture.recordFirebaseOutcomesIn(outcomes);
+          unawaited(unit.stop());
+          async.elapse(pastTheStopTimeLimit);
+          unawaited(unit.stop());
+          async.flushMicrotasks();
+          unawaited(unit.maybeRegisterOnceGranted(Future.value(true)));
+          async.flushMicrotasks();
+
+          deletionFinishes.complete();
+          async.flushMicrotasks();
+
+          expect(outcomes, ['unregistered', 'registered']);
+        });
+      },
+    );
+
+    test('a stop overtaken by disposing never unregisters afterwards', () {
+      fakeAsync((async) {
+        final outcomes = <String>[];
+        final deletionFinishes = Completer<void>();
+        fixture
+          ..currentUid = hasuraUserId
+          ..issueOnNextRegister('installation-id');
+        unawaited(unit.maybeRegisterOnceGranted(Future.value(true)));
+        async.flushMicrotasks();
+        fixture.whenDeletingARow().thenAnswer((_) => deletionFinishes.future);
+        fixture.recordFirebaseOutcomesIn(outcomes);
+        unawaited(unit.stop());
+        async.elapse(pastTheStopTimeLimit);
+        unawaited(unit.dispose());
+
+        deletionFinishes.complete();
+        async.flushMicrotasks();
+
+        expect(outcomes, isEmpty);
+      });
+    });
+
+    test(
       'an unregistration still running at the time limit finishes before the next registration',
       () {
         fakeAsync((async) {
