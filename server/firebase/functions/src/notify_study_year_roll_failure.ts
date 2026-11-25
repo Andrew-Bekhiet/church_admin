@@ -72,7 +72,7 @@ export const notifyStudyYearRollFailure = https.onRequest(
       const { targetCount, deliveryErrors } =
         await sendPushToHoldersOfAnyPermissionAndPruneUnregistered({
           permissions: APP_MAINTENANCE_PERMISSION_NAMES,
-          payload: () => ({
+          buildPayload: () => ({
             notification: {
               title: "تنبيه صيانة",
               body: run.status === "failed"

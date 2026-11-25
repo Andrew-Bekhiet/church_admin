@@ -563,13 +563,13 @@ export async function deletePushTargetsOfAnyOwner(
   dataOrThrow(hasura_response);
 }
 
-export async function registerFirebaseInstallationReplacingRegistrationTokens(
+export async function registerFirebaseInstallationAsSoleOwnerReplacingRegistrationTokens(
   uid: string,
   installationId: string,
 ): Promise<void> {
   const hasura_response = await makeGraphqlRequest({
     query: `
-            mutation registerFirebaseInstallationReplacingRegistrationTokens($uid: uuid!, $installationId: String!) {
+            mutation registerFirebaseInstallationAsSoleOwnerReplacingRegistrationTokens($uid: uuid!, $installationId: String!) {
               deleteInstallationIdFromOtherUsers: deleteUsersFcmTokens(
                 where: {
                   kind: { _eq: "installation_id" }
@@ -593,7 +593,7 @@ export async function registerFirebaseInstallationReplacingRegistrationTokens(
             }
           `,
     variables: { uid, installationId },
-    operationName: "registerFirebaseInstallationReplacingRegistrationTokens",
+    operationName: "registerFirebaseInstallationAsSoleOwnerReplacingRegistrationTokens",
   });
 
   dataOrThrow(hasura_response);

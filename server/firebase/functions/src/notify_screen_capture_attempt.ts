@@ -71,7 +71,7 @@ export const notifyScreenCaptureAttempt = https.onRequest(
       const { deliveryErrors } =
         await sendPushToHoldersOfAnyPermissionAndPruneUnregistered({
           permissions: [SCREEN_CAPTURE_NOTIFICATIONS_PERMISSION],
-          payload: async () => {
+          buildPayload: async () => {
             const userName = (await getUserName(attempt.uid)) ??
               "مستخدم غير معروف";
 

@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import axios from "axios";
+import { PushTarget, PushTargetKind } from "../../src/push/push_target";
 
 process.env.HASURA_SERVER ??= "http://localhost:8080/v1/graphql";
 
@@ -234,13 +235,6 @@ export async function resetLastSyncedAt(): Promise<void> {
   await runSql("delete from operations.fingerprint_sync_status;");
 }
 
-export type PushTargetKind = "registration_token" | "installation_id";
-
-export interface SeededPushTarget {
-  kind: PushTargetKind;
-  token: string;
-}
-
 export async function seedPermission(): Promise<string> {
   const permission = `permission-${randomUUID()}`;
 
@@ -265,7 +259,7 @@ export function newPushToken(): string {
 
 export async function seedPushTarget(
   uid: string,
-  target: SeededPushTarget,
+  target: PushTarget,
 ): Promise<void> {
   await runSql(
     `insert into public.users_fcm_tokens (uid, token, kind)
@@ -273,13 +267,21 @@ export async function seedPushTarget(
   );
 }
 
-export async function pushTargetsOf(uid: string): Promise<SeededPushTarget[]> {
+export function sortedByKindThenToken(targets: PushTarget[]): PushTarget[] {
+  return [...targets].sort(
+    (a, b) => a.kind.localeCompare(b.kind) || a.token.localeCompare(b.token),
+  );
+}
+
+export async function pushTargetsOf(uid: string): Promise<PushTarget[]> {
   const rows = await runSql(
     `select kind, token from public.users_fcm_tokens
-     where uid = '${uid}' order by kind, token;`,
+     where uid = '${uid}';`,
   );
 
-  return rows.map(([kind, token]) => ({ kind: kind as PushTargetKind, token }));
+  return sortedByKindThenToken(
+    rows.map(([kind, token]) => ({ kind: kind as PushTargetKind, token })),
+  );
 }
 
 export async function ownersOfInstallationId(installationId: string): Promise<string[]> {

@@ -41,12 +41,14 @@ function unregisteredTargets(
 
 export async function sendPushToHoldersOfAnyPermissionAndPruneUnregistered({
   permissions,
-  payload,
+  buildPayload,
   send = sendWithFirebaseMessaging,
+  deleteTargets = deletePushTargetsOfAnyOwner,
 }: {
   permissions: string[];
-  payload: () => PushPayload | Promise<PushPayload>;
+  buildPayload: () => PushPayload | Promise<PushPayload>;
   send?: SendPushMessages;
+  deleteTargets?: (targets: PushTarget[]) => Promise<void>;
 }): Promise<{ targetCount: number; deliveryErrors: unknown[] }> {
   const targets = await getPushTargetsForAnyOfPermissions(permissions);
 
@@ -54,13 +56,13 @@ export async function sendPushToHoldersOfAnyPermissionAndPruneUnregistered({
     return { targetCount: 0, deliveryErrors: [] };
   }
 
-  const resolvedPayload = await payload();
+  const payload = await buildPayload();
   const response = await send(
-    targets.map((target) => messageFor(target, resolvedPayload)),
+    targets.map((target) => messageFor(target, payload)),
   );
 
   try {
-    await deletePushTargetsOfAnyOwner(
+    await deleteTargets(
       unregisteredTargets(targets, response.responses),
     );
   } catch (e) {

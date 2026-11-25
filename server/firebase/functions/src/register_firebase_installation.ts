@@ -1,7 +1,7 @@
 import { https } from "firebase-functions/v2";
 import * as z from "zod";
 import { assertUserAuthenticatedAndApproved } from "./common";
-import { registerFirebaseInstallationReplacingRegistrationTokens } from "./hasura_interface";
+import { registerFirebaseInstallationAsSoleOwnerReplacingRegistrationTokens } from "./hasura_interface";
 import { hasuraAdminSecret } from "./secrets";
 
 const RegisterFirebaseInstallationRequest = z.object({
@@ -22,7 +22,7 @@ export const registerFirebaseInstallation = https.onCall<
     );
   }
 
-  await registerFirebaseInstallationReplacingRegistrationTokens(
+  await registerFirebaseInstallationAsSoleOwnerReplacingRegistrationTokens(
     request.auth!.token["x-hasura-user-id"],
     requestData.data.installationId,
   );
