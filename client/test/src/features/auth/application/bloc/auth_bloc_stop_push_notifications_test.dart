@@ -51,18 +51,24 @@ void main() {
     });
 
     {
-      final steps = <String>[];
+      final stoppingFinishes = Completer<void>();
+      var sessionEnded = false;
 
       blocTest<AuthBloc, AuthState>(
-        'push notifications stop before the session ends',
+        'the session ends only after push notifications have stopped',
         setUp: () => when(() => authRepository.signOut()).thenAnswer((_) async {
-          steps.add('signOut');
+          sessionEnded = true;
         }),
-        build: () => createAuthBloc(() async {
-          steps.add('stopPush');
-        }),
-        act: (bloc) => bloc.add(const SignOut(SignOutSource.signOutButton)),
-        verify: (_) => expect(steps, ['stopPush', 'signOut']),
+        build: () => createAuthBloc(() => stoppingFinishes.future),
+        act: (bloc) async {
+          bloc.add(const SignOut(SignOutSource.signOutButton));
+          await pumpEventQueue();
+          expect(sessionEnded, isFalse);
+
+          stoppingFinishes.complete();
+          await pumpEventQueue();
+        },
+        verify: (_) => expect(sessionEnded, isTrue),
       );
     }
 
