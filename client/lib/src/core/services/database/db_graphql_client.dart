@@ -23,6 +23,7 @@ class DBGraphQLClient extends GraphQLClient {
     this.autoChangeFetchPolicy = true,
     super.alwaysRebroadcast,
     super.defaultPolicies,
+    super.queryRequestTimeout = const Duration(seconds: 30),
   }) : _connectivityStream = connectivityStream,
        _fetchPolicyStream = connectivityStream
            .map(
