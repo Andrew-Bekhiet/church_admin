@@ -436,6 +436,60 @@ void main() {
         },
       );
 
+      test(
+        'a stop that outlives its time limit leaves the next session registration for the next stop to wait on',
+        () async {
+          final stopTime = FakeAsync();
+          final backendOutcomes = <String>[];
+          final registrationFinishes = {
+            'first-installation-id': Completer<void>(),
+            'second-installation-id': Completer<void>(),
+          };
+          when(
+            () => functionsService.registerFirebaseInstallation(any()),
+          ).thenAnswer((invocation) async {
+            final installationId =
+                invocation.positionalArguments.single as String;
+            await registrationFinishes[installationId]?.future;
+            backendOutcomes.add('registered $installationId');
+          });
+          when(
+            () => fcmTokens.deleteByUidAndToken(
+              uid: any(named: 'uid'),
+              token: any(named: 'token'),
+            ),
+          ).thenAnswer((invocation) async {
+            backendOutcomes.add('deleted ${invocation.namedArguments[#token]}');
+          });
+          issueOnNextRegister('first-installation-id');
+          await unit.onTransition(authBloc, signIn);
+          await pumpEventQueue();
+          stopTime.run(
+            (_) => unawaited(unit.stopPushNotificationsToThisDevice()),
+          );
+          await drainRealAndFakeMicrotasks(stopTime);
+          stopTime.elapse(const Duration(seconds: 6));
+          issueOnNextRegister('second-installation-id');
+          unawaited(unit.onTransition(authBloc, signIn));
+          await drainRealAndFakeMicrotasks(stopTime);
+          registrationFinishes['first-installation-id']?.complete();
+          await drainRealAndFakeMicrotasks(stopTime);
+
+          final secondStop = unit.stopPushNotificationsToThisDevice();
+          await drainRealAndFakeMicrotasks(stopTime);
+          registrationFinishes['second-installation-id']?.complete();
+          await drainRealAndFakeMicrotasks(stopTime);
+          await secondStop;
+
+          expect(backendOutcomes, [
+            'registered first-installation-id',
+            'deleted first-installation-id',
+            'registered second-installation-id',
+            'deleted second-installation-id',
+          ]);
+        },
+      );
+
       test('signing out deletes this device installation id row', () async {
         const installationId = 'installation-id';
         issueOnNextRegister(installationId);

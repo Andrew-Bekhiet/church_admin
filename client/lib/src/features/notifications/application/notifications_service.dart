@@ -351,8 +351,15 @@ class NotificationsService extends BlocObserver {
     _lastIssuedInstallationId = null;
 
     await _stopListeningForInstallationIds();
-    await _latestInstallationRegistration;
-    _latestInstallationRegistration = null;
+    final awaitedRegistrations = _latestInstallationRegistration;
+    await awaitedRegistrations;
+    final noRegistrationStartedSinceAwaiting = identical(
+      _latestInstallationRegistration,
+      awaitedRegistrations,
+    );
+    if (noRegistrationStartedSinceAwaiting) {
+      _latestInstallationRegistration = null;
+    }
 
     if (installationId != null && uid != null) {
       await (() => _databaseService.fcmTokens.deleteByUidAndToken(
