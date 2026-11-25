@@ -138,7 +138,7 @@ void main() {
     );
 
     test(
-      'the registration in flight when stopping finishes before the row is deleted and the one queued behind it is dropped',
+      'the registration in flight when stopping finishes before its row is deleted and the one queued behind it is dropped',
       () async {
         const earlierInstallationId = 'earlier-installation-id';
         const laterInstallationId = 'later-installation-id';
@@ -172,7 +172,7 @@ void main() {
 
         expect(backendOutcomes, [
           'registered $earlierInstallationId',
-          'deleted $laterInstallationId',
+          'deleted $earlierInstallationId',
         ]);
       },
     );

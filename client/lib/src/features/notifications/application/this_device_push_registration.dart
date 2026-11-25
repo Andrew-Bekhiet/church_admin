@@ -12,7 +12,7 @@ class ThisDevicePushRegistration {
   final String? Function() _readCurrentUid;
 
   StreamSubscription<String>? _installationRegistrationSubscription;
-  String? _lastIssuedInstallationId;
+  String? _lastSubmittedInstallationId;
   Future<void>? _latestServerWrite;
   Future<void>? _latestStop;
   int _pushLifecycleGeneration = 0;
@@ -67,8 +67,6 @@ class ThisDevicePushRegistration {
   }
 
   void _registerInstallationIdWithServer(String installationId) {
-    _lastIssuedInstallationId = installationId;
-
     _latestServerWrite = _maybeRegisterAfterEarlierServerWritesSettle(
       installationId,
       _latestServerWrite,
@@ -92,6 +90,7 @@ class ThisDevicePushRegistration {
         notStoppedSinceIssued() && _readCurrentUid() == uidWhenIssued;
     if (!issuedForTheCurrentSession) return;
 
+    _lastSubmittedInstallationId = installationId;
     await _functionsService
         .registerFirebaseInstallation(installationId)
         .logWarningInsteadOfThrowing();
@@ -116,9 +115,9 @@ class ThisDevicePushRegistration {
   Future<void> _awaitRegistrationsThenMaybeDeleteRowAndUnregister(
     int stopGeneration,
   ) async {
-    final installationId = _lastIssuedInstallationId;
+    final installationId = _lastSubmittedInstallationId;
     final uid = _readCurrentUid();
-    _lastIssuedInstallationId = null;
+    _lastSubmittedInstallationId = null;
 
     await _stopListeningForInstallationIds();
     await _deleteRowAfterEarlierServerWritesSettle(uid, installationId);
