@@ -494,6 +494,55 @@ void main() {
         },
       );
 
+      test(
+        'a registration that outlives a timed-out stop reaches the server before the next session registration starts',
+        () async {
+          const signedOutInstallationId = 'signed-out-installation-id';
+          const nextSessionInstallationId = 'next-session-installation-id';
+          final stopTime = FakeAsync();
+          final serverCalls = <String>[];
+          final registrationFinishes = {
+            signedOutInstallationId: Completer<void>(),
+          };
+          when(
+            () => functionsService.registerFirebaseInstallation(any()),
+          ).thenAnswer((invocation) async {
+            final installationId =
+                invocation.positionalArguments.single as String;
+            serverCalls.add('started $installationId');
+            await registrationFinishes[installationId]?.future;
+            serverCalls.add('registered $installationId');
+          });
+          issueOnNextRegister(signedOutInstallationId);
+          await unit.onTransition(authBloc, signIn);
+          await pumpEventQueue();
+          stopTime.run(
+            (_) => unawaited(unit.stopPushNotificationsToThisDevice()),
+          );
+          await drainRealAndFakeMicrotasks(stopTime);
+          stopTime.elapse(const Duration(seconds: 6));
+          issueOnNextRegister(nextSessionInstallationId);
+          unawaited(unit.onTransition(authBloc, signIn));
+          await drainRealAndFakeMicrotasks(stopTime);
+          final serverCallsBeforeSignedOutRegistrationFinished = [
+            ...serverCalls,
+          ];
+
+          registrationFinishes[signedOutInstallationId]?.complete();
+          await drainRealAndFakeMicrotasks(stopTime);
+
+          expect(serverCallsBeforeSignedOutRegistrationFinished, [
+            'started $signedOutInstallationId',
+          ]);
+          expect(serverCalls, [
+            'started $signedOutInstallationId',
+            'registered $signedOutInstallationId',
+            'started $nextSessionInstallationId',
+            'registered $nextSessionInstallationId',
+          ]);
+        },
+      );
+
       test('signing out deletes this device installation id row', () async {
         const installationId = 'installation-id';
         issueOnNextRegister(installationId);
@@ -669,8 +718,8 @@ void main() {
           await stopping;
 
           expect(backendOutcomes, [
-            'registered $laterInstallationId',
             'registered $earlierInstallationId',
+            'registered $laterInstallationId',
             'deleted $laterInstallationId',
           ]);
         },

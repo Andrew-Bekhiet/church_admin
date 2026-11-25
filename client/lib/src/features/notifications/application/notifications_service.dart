@@ -389,14 +389,20 @@ class NotificationsService extends BlocObserver {
   void _registerInstallationIdWithServer(String installationId) {
     _lastIssuedInstallationId = installationId;
 
-    final earlierRegistrations = _latestInstallationRegistration;
-    final registration = (() => _functionsService.registerFirebaseInstallation(
+    _latestInstallationRegistration = _registerAfterEarlierRegistrationsSettle(
+      installationId,
+      _latestInstallationRegistration,
+    );
+  }
+
+  Future<void> _registerAfterEarlierRegistrationsSettle(
+    String installationId,
+    Future<void>? earlierRegistrations,
+  ) async {
+    await earlierRegistrations;
+    await (() => _functionsService.registerFirebaseInstallation(
       installationId,
     )).runBestEffort();
-    _latestInstallationRegistration = Future.wait([
-      ?earlierRegistrations,
-      registration,
-    ]);
   }
 
   Future<void> _logInstallationRegistrationError(
