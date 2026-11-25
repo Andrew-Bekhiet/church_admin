@@ -563,18 +563,39 @@ export async function deletePushTargetsOfAnyOwner(
   dataOrThrow(hasura_response);
 }
 
-export async function registerFirebaseInstallationAsSoleOwnerReplacingRegistrationTokens(
+export async function tryClaimFirebaseInstallationFromOlderSessionsReplacingRegistrationTokens(
   uid: string,
   installationId: string,
-): Promise<void> {
+  sessionStartedAt: Date,
+): Promise<boolean> {
+  const claimed = await tryClaimFirebaseInstallationOnce(uid, installationId, sessionStartedAt);
+
+  // A concurrent claim from an older session can hold the unique index while
+  // this one inserts; it has committed by the time a second attempt runs.
+  return claimed || tryClaimFirebaseInstallationOnce(uid, installationId, sessionStartedAt);
+}
+
+const ONE_OWNER_PER_INSTALLATION_ID_INDEX = "users_fcm_tokens_one_owner_per_installation_id_idx";
+
+async function tryClaimFirebaseInstallationOnce(
+  uid: string,
+  installationId: string,
+  sessionStartedAt: Date,
+): Promise<boolean> {
   const hasura_response = await makeGraphqlRequest({
     query: `
-            mutation registerFirebaseInstallationAsSoleOwnerReplacingRegistrationTokens($uid: uuid!, $installationId: String!) {
-              deleteInstallationIdFromOtherUsers: deleteUsersFcmTokens(
+            mutation tryClaimFirebaseInstallationFromOlderSessionsReplacingRegistrationTokens(
+              $uid: uuid!
+              $installationId: String!
+              $sessionStartedAt: timestamptz!
+              $ownedByAnOlderSession: UsersFcmTokensBoolExp!
+            ) {
+              deleteInstallationIdFromOlderSessionsOfOtherUsers: deleteUsersFcmTokens(
                 where: {
                   kind: { _eq: "installation_id" }
                   token: { _eq: $installationId }
                   uid: { _neq: $uid }
+                  _and: [$ownedByAnOlderSession]
                 }
               ) {
                 affectedRows
@@ -585,18 +606,46 @@ export async function registerFirebaseInstallationAsSoleOwnerReplacingRegistrati
                 affectedRows
               }
               insertUsersFcmTokensOne(
-                object: { uid: $uid, token: $installationId, kind: "installation_id" }
-                onConflict: { constraint: users_fcm_tokens_pkey, updateColumns: [kind] }
+                object: {
+                  uid: $uid
+                  token: $installationId
+                  kind: "installation_id"
+                  ownerSessionStartedAt: $sessionStartedAt
+                }
+                onConflict: {
+                  constraint: users_fcm_tokens_pkey
+                  updateColumns: [kind, ownerSessionStartedAt]
+                  where: $ownedByAnOlderSession
+                }
               ) {
                 uid
               }
             }
           `,
-    variables: { uid, installationId },
-    operationName: "registerFirebaseInstallationAsSoleOwnerReplacingRegistrationTokens",
+    variables: {
+      uid,
+      installationId,
+      sessionStartedAt: sessionStartedAt.toISOString(),
+      ownedByAnOlderSession: {
+        _or: [
+          { ownerSessionStartedAt: { _isNull: true } },
+          { ownerSessionStartedAt: { _lte: sessionStartedAt.toISOString() } },
+        ],
+      },
+    },
+    operationName: "tryClaimFirebaseInstallationFromOlderSessionsReplacingRegistrationTokens",
   });
 
+  const aNewerSessionOwnsTheInstallationId = JSON.stringify(
+    hasura_response.data?.["errors"] ?? [],
+  ).includes(ONE_OWNER_PER_INSTALLATION_ID_INDEX);
+  if (aNewerSessionOwnsTheInstallationId) {
+    return false;
+  }
+
   dataOrThrow(hasura_response);
+
+  return true;
 }
 
 export async function getUserName(uid: string): Promise<string | null> {
