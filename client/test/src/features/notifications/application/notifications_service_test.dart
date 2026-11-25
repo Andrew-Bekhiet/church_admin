@@ -399,14 +399,13 @@ void main() {
                   StreamController<RemoteMessage>();
 
               final unit = NotificationsService(
-                authBloc: MockAuthBloc(),
                 authRepository: FakeSignOutAuthRepository(),
                 analyticsService: AnalyticsService(
                   [RecordingAnalyticsProvider()],
                   FakeLoggingService(),
                 ),
-                functionsService: globalProviderContainer.read(
-                  functionsServiceProvider,
+                thisDevicePushRegistration: globalProviderContainer.read(
+                  thisDevicePushRegistrationProvider,
                 ),
                 settings: MockNotificationsSettingsStorage(),
                 localNotificationsPlugin: globalProviderContainer.read(
@@ -869,14 +868,14 @@ List<Object> _callArgumentsMatchFor({
 
 NotificationsService _createNewUnit() {
   return NotificationsService(
-    authBloc: AuthBloc.I,
     authRepository: FakeSignOutAuthRepository(),
     analyticsService: AnalyticsService(
       [RecordingAnalyticsProvider()],
       FakeLoggingService(),
     ),
-    databaseService: globalProviderContainer.read(databaseServiceProvider),
-    functionsService: globalProviderContainer.read(functionsServiceProvider),
+    thisDevicePushRegistration: globalProviderContainer.read(
+      thisDevicePushRegistrationProvider,
+    ),
     localNotificationsPlugin: globalProviderContainer.read(
       localNotificationsPluginProvider,
     ),

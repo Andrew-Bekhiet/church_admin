@@ -16,8 +16,6 @@ class NotificationsService extends BlocObserver {
   static const String localNotificationSenderUID =
       'LOCAL_NOTIFICATION_SENDER_UID';
 
-  static const Duration _stopPushNotificationsTimeout = Duration(seconds: 5);
-
   static const NotificationDetails defaultRemoteNotificationsDetails =
       NotificationDetails(
         android: AndroidNotificationDetails(
@@ -79,11 +77,9 @@ class NotificationsService extends BlocObserver {
   final FirebaseMessaging _firebaseMessaging;
   final FlutterLocalNotificationsPlugin _localNotificationsPlugin;
 
-  final AuthBloc _authBloc;
   final AuthRepository _authRepository;
-  final DatabaseService _databaseService;
-  final FunctionsService _functionsService;
   final AnalyticsService _analyticsService;
+  final ThisDevicePushRegistration _thisDevicePushRegistration;
 
   final BehaviorSubject<bool> _isPausedSubject = BehaviorSubject.seeded(true);
 
@@ -92,13 +88,6 @@ class NotificationsService extends BlocObserver {
 
   late final StreamSubscription<Notification> _onMessageOpenedAppSubscription;
   late final StreamSubscription<Notification> _onForegroundMessageSubscription;
-  StreamSubscription<String>? _installationRegistrationSubscription;
-  String? _lastIssuedInstallationId;
-  Future<void>? _latestInstallationRegistration;
-  Future<void>? _latestStop;
-  int _pushLifecycleGeneration = 0;
-  int _generationOfLatestRegistrationStart = -1;
-  Future<void>? _latestUnregistration;
 
   late final Stream<Notification> onNotificationTapStream =
       getInitialNotification()
@@ -130,16 +119,13 @@ class NotificationsService extends BlocObserver {
     required this._localNotificationsPlugin,
     required Stream<RemoteMessage> onForegroundMessageStream,
     required Stream<RemoteMessage> onMessageOpenedAppStream,
-    required this._authBloc,
     required this._authRepository,
     required this._analyticsService,
-    required this._functionsService,
-    DatabaseService? databaseService,
+    required this._thisDevicePushRegistration,
     NotificationsStorage? storage,
     NotificationsSettingsStorage? settings,
   }) : _storage = storage ?? NotificationsStorage.I,
-       _settings = settings ?? NotificationsSettingsStorage.I,
-       _databaseService = databaseService ?? DatabaseService.I {
+       _settings = settings ?? NotificationsSettingsStorage.I {
     //
     _onForegroundMessageSubscription = onForegroundMessageStream
         .map(Notification.fromRemoteMessage)
@@ -158,7 +144,7 @@ class NotificationsService extends BlocObserver {
         )
         .listen(addForegroundNotificationTap);
 
-    _authRepository.addBeforeSignOutListener(stopPushNotificationsToThisDevice);
+    _authRepository.addBeforeSignOutListener(_thisDevicePushRegistration.stop);
   }
 
   Future<void> _onForegroundMessage(Notification notification) async {
@@ -302,120 +288,6 @@ class NotificationsService extends BlocObserver {
     );
   }
 
-  Future<void> maybeRegisterThisDeviceForPushNotifications() =>
-      _maybeRegisterUnlessStoppedSince(_pushLifecycleGeneration);
-
-  Future<void> _maybeRegisterUnlessStoppedSince(int startGeneration) async {
-    if (!await _firebaseMessaging.isSupported() ||
-        !await requestNotificationsPermission()) {
-      return;
-    }
-
-    await _latestStop;
-    if (_stoppedSince(startGeneration)) return;
-
-    _generationOfLatestRegistrationStart = _pushLifecycleGeneration;
-    final latestUnregistration = _latestUnregistration;
-    if (latestUnregistration != null) {
-      await latestUnregistration
-          .timeout(_stopPushNotificationsTimeout)
-          .logWarningInsteadOfThrowing();
-    }
-    if (_stoppedSince(startGeneration)) return;
-
-    final previousSubscription = _installationRegistrationSubscription;
-    _installationRegistrationSubscription = _firebaseMessaging.onRegistered
-        .listen(
-          _registerInstallationIdWithServer,
-          onError: _logInstallationRegistrationError,
-        );
-    await previousSubscription?.cancel();
-    if (_stoppedSince(startGeneration)) return;
-
-    await _firebaseMessaging.register().logWarningInsteadOfThrowing();
-  }
-
-  bool _stoppedSince(int startGeneration) =>
-      startGeneration != _pushLifecycleGeneration;
-
-  Future<void> stopPushNotificationsToThisDevice() {
-    final stopGeneration = ++_pushLifecycleGeneration;
-    final stopping = _awaitRegistrationsThenMaybeDeleteRowAndUnregister(
-      stopGeneration,
-    ).timeout(_stopPushNotificationsTimeout).logWarningInsteadOfThrowing();
-    _latestStop = stopping;
-
-    return stopping;
-  }
-
-  Future<void> _awaitRegistrationsThenMaybeDeleteRowAndUnregister(
-    int stopGeneration,
-  ) async {
-    final installationId = _lastIssuedInstallationId;
-    final uid = _authBloc.currentUser?.hasuraUserId;
-    _lastIssuedInstallationId = null;
-
-    await _stopListeningForInstallationIds();
-    final awaitedRegistrations = _latestInstallationRegistration;
-    await awaitedRegistrations;
-    final noRegistrationStartedSinceAwaiting = identical(
-      _latestInstallationRegistration,
-      awaitedRegistrations,
-    );
-    if (noRegistrationStartedSinceAwaiting) {
-      _latestInstallationRegistration = null;
-    }
-
-    if (installationId != null && uid != null) {
-      await _databaseService.fcmTokens
-          .deleteByUidAndToken(uid: uid, token: installationId)
-          .logWarningInsteadOfThrowing();
-    }
-
-    if (_newerStopOrRegistrationStartedSince(stopGeneration)) return;
-
-    final unregistration = _firebaseMessaging
-        .unregister()
-        .logWarningInsteadOfThrowing();
-    _latestUnregistration = unregistration;
-    await unregistration;
-  }
-
-  bool _newerStopOrRegistrationStartedSince(int stopGeneration) =>
-      stopGeneration != _pushLifecycleGeneration ||
-      _generationOfLatestRegistrationStart == stopGeneration;
-
-  void _registerInstallationIdWithServer(String installationId) {
-    _lastIssuedInstallationId = installationId;
-
-    _latestInstallationRegistration = _registerAfterEarlierRegistrationsSettle(
-      installationId,
-      _latestInstallationRegistration,
-    );
-  }
-
-  Future<void> _registerAfterEarlierRegistrationsSettle(
-    String installationId,
-    Future<void>? earlierRegistrations,
-  ) async {
-    await earlierRegistrations;
-    await _functionsService
-        .registerFirebaseInstallation(installationId)
-        .logWarningInsteadOfThrowing();
-  }
-
-  Future<void> _logInstallationRegistrationError(
-    Object error,
-    StackTrace stackTrace,
-  ) =>
-      LoggingService.I.warning(LogRecord(error: error, stackTrace: stackTrace));
-
-  Future<void> _stopListeningForInstallationIds() async {
-    final subscription = _installationRegistrationSubscription;
-    _installationRegistrationSubscription = null;
-    await subscription?.cancel();
-  }
-
   Future<bool> requestNotificationsPermission() async {
     final notificationPermissionStatus = await Permission.notification
         .request();
@@ -451,27 +323,32 @@ class NotificationsService extends BlocObserver {
 
     final nextState = transition.nextState.unwrapped;
     final currentState = transition.currentState.unwrapped;
-    final generationAtTransition = _pushLifecycleGeneration;
 
-    if (currentState is! AuthAuthenticated &&
-        nextState is AuthAuthenticated &&
-        await _requestAndTrackNotificationsPermission()) {
-      if (currentState is! AuthInitial) {
-        await scheduleDefaultNotifications();
-      }
-
-      await _maybeRegisterUnlessStoppedSince(generationAtTransition);
+    if (currentState is! AuthAuthenticated && nextState is AuthAuthenticated) {
+      await _thisDevicePushRegistration.maybeRegisterOnceGranted(
+        _requestPermissionThenMaybeScheduleDefaults(currentState),
+      );
     }
+  }
+
+  Future<bool> _requestPermissionThenMaybeScheduleDefaults(
+    AuthState currentState,
+  ) async {
+    final isGranted = await _requestAndTrackNotificationsPermission();
+    if (isGranted && currentState is! AuthInitial) {
+      await scheduleDefaultNotifications();
+    }
+
+    return isGranted;
   }
 
   Future<void> dispose() async {
     _authRepository.removeBeforeSignOutListener(
-      stopPushNotificationsToThisDevice,
+      _thisDevicePushRegistration.stop,
     );
-    _pushLifecycleGeneration++;
+    await _thisDevicePushRegistration.dispose();
     await _isPausedSubject.close();
     await _onMessageOpenedAppSubscription.cancel();
     await _onForegroundMessageSubscription.cancel();
-    await _installationRegistrationSubscription?.cancel();
   }
 }

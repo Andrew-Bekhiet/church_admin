@@ -5,17 +5,14 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler_platform_interface/permission_handler_platform_interface.dart';
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import '../../../fakes/fake_logging_service.dart';
 import '../../../fakes/fake_sign_out_auth_repository.dart';
+import '../../../fakes/mock_fcm_tokens_dao.dart';
+import '../../../fakes/mock_firebase_messaging.dart';
+import '../../../fakes/mock_functions_service.dart';
+import '../../../fakes/mock_permission_handler_platform.dart';
 import '../../../fakes/recording_analytics_provider.dart';
-
-class _MockPermissionHandlerPlatform extends Mock
-    with MockPlatformInterfaceMixin
-    implements PermissionHandlerPlatform {}
-
-class _MockFirebaseMessaging extends Mock implements FirebaseMessaging {}
 
 class _MockNotificationSettings extends Mock implements NotificationSettings {}
 
@@ -23,10 +20,6 @@ class _MockLocalNotificationsPlugin extends Mock
     implements FlutterLocalNotificationsPlugin {}
 
 class _MockAuthBloc extends Mock implements AuthBloc {}
-
-class _MockDatabaseService extends Mock implements DatabaseService {}
-
-class _MockFunctionsService extends Mock implements FunctionsService {}
 
 class _MockNotificationsStorage extends Mock implements NotificationsStorage {}
 
@@ -51,8 +44,8 @@ void main() {
     );
 
     late RecordingAnalyticsProvider analytics;
-    late _MockPermissionHandlerPlatform permissionHandler;
-    late _MockFirebaseMessaging firebaseMessaging;
+    late MockPermissionHandlerPlatform permissionHandler;
+    late MockFirebaseMessaging firebaseMessaging;
     late _MockAuthBloc authBloc;
     late NotificationsService unit;
 
@@ -60,8 +53,8 @@ void main() {
 
     setUp(() {
       analytics = RecordingAnalyticsProvider();
-      permissionHandler = _MockPermissionHandlerPlatform();
-      firebaseMessaging = _MockFirebaseMessaging();
+      permissionHandler = MockPermissionHandlerPlatform();
+      firebaseMessaging = MockFirebaseMessaging();
       authBloc = _MockAuthBloc();
 
       final fcmSettings = _MockNotificationSettings();
@@ -93,11 +86,14 @@ void main() {
         localNotificationsPlugin: _MockLocalNotificationsPlugin(),
         onForegroundMessageStream: const Stream.empty(),
         onMessageOpenedAppStream: const Stream.empty(),
-        authBloc: authBloc,
         authRepository: FakeSignOutAuthRepository(),
         analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-        databaseService: _MockDatabaseService(),
-        functionsService: _MockFunctionsService(),
+        thisDevicePushRegistration: ThisDevicePushRegistration(
+          firebaseMessaging: firebaseMessaging,
+          functionsService: MockFunctionsService(),
+          fcmTokens: MockFcmTokensDAO(),
+          readCurrentUid: () => null,
+        ),
         storage: _MockNotificationsStorage(),
         settings: _MockNotificationsSettingsStorage(),
       );

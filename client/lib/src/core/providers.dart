@@ -280,15 +280,26 @@ final localNotificationsPluginProvider =
       (ref) => FlutterLocalNotificationsPlugin(),
     );
 
+final thisDevicePushRegistrationProvider = Provider<ThisDevicePushRegistration>(
+  (ref) {
+    final authBloc = ref.watch(authBlocProvider);
+
+    return ThisDevicePushRegistration(
+      firebaseMessaging: ref.watch(firebaseMessagingProvider),
+      functionsService: ref.watch(functionsServiceProvider),
+      fcmTokens: ref.watch(databaseServiceProvider).fcmTokens,
+      readCurrentUid: () => authBloc.currentUser?.hasuraUserId,
+    );
+  },
+);
+
 final notificationsServiceProvider = Provider<NotificationsService>((ref) {
   final notificationsService = NotificationsService(
     localNotificationsPlugin: ref.watch(localNotificationsPluginProvider),
     firebaseMessaging: ref.watch(firebaseMessagingProvider),
-    authBloc: ref.watch(authBlocProvider),
     authRepository: ref.watch(authRepositoryProvider),
     analyticsService: ref.watch(analyticsServiceProvider),
-    databaseService: ref.watch(databaseServiceProvider),
-    functionsService: ref.watch(functionsServiceProvider),
+    thisDevicePushRegistration: ref.watch(thisDevicePushRegistrationProvider),
     storage: ref.watch(notificationsStorageProvider),
     onForegroundMessageStream: FirebaseMessaging.onMessage,
     onMessageOpenedAppStream: FirebaseMessaging.onMessageOpenedApp,
