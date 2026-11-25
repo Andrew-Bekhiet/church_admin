@@ -140,10 +140,17 @@ describe("sendPushToHoldersOfAnyPermissionAndPruneUnregistered", () => {
     const unregisteredToken = newPushToken();
     await seedPushTarget(holder, { kind: "registration_token", token: unregisteredToken });
     const fake = fakeSend({ [unregisteredToken]: "messaging/registration-token-not-registered" });
+    const pruneAttempts: PushTarget[][] = [];
 
-    const result = await sendToHoldersOf(permission, fake.send, () =>
-      Promise.reject(new Error("delete rejected")));
+    const result = await sendToHoldersOf(permission, fake.send, (targets) => {
+      pruneAttempts.push(targets);
 
+      return Promise.reject(new Error("delete rejected"));
+    });
+
+    assert.deepEqual(pruneAttempts, [
+      [{ kind: "registration_token", token: unregisteredToken }],
+    ]);
     assert.equal(result.targetCount, 1);
     assert.deepEqual(result.deliveryErrors, [
       { code: "messaging/registration-token-not-registered" },
