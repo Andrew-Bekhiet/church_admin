@@ -8,9 +8,11 @@ extension BestEffortCallback on Future<void> Function() {
       final run = Future.sync(this);
       await (within == null ? run : run.timeout(within));
     } catch (error, stackTrace) {
-      await LoggingService.I.warning(
-        LogRecord(error: error, stackTrace: stackTrace),
-      );
+      _reportWithoutWaiting(LogRecord(error: error, stackTrace: stackTrace));
     }
   }
+}
+
+void _reportWithoutWaiting(LogRecord record) {
+  Future.sync(() => LoggingService.I.warning(record)).ignore();
 }
