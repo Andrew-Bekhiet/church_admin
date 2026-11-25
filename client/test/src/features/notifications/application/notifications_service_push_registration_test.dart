@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -23,10 +25,20 @@ void main() {
       event: ListenToSubscriptions(),
       nextState: AuthAuthenticated(authUser: signedInUser),
     );
+    const appStartSignedOut = Transition<AuthEvent, AuthState>(
+      currentState: AuthInitial(),
+      event: ListenToSubscriptions(),
+      nextState: AuthUnauthenticated(),
+    );
     const signIn = Transition<AuthEvent, AuthState>(
       currentState: AuthUnauthenticated(),
       event: SignInWithEmailPassword(email: 'email', password: 'password'),
       nextState: AuthAuthenticated(authUser: signedInUser),
+    );
+    const sessionEnd = Transition<AuthEvent, AuthState>(
+      currentState: AuthAuthenticated(authUser: signedInUser),
+      event: ListenToSubscriptions(),
+      nextState: AuthUnauthenticated(),
     );
 
     late PushRegistrationFixture fixture;
@@ -147,6 +159,50 @@ void main() {
         await fixture.authRepository.signOut();
 
         verifyNever(() => fixture.firebaseMessaging.unregister());
+      },
+    );
+
+    test(
+      'a session that ends without a repository sign-out unregisters this device',
+      () async {
+        await unit.onTransition(authBloc, signIn);
+
+        await unit.onTransition(authBloc, sessionEnd);
+
+        verify(() => fixture.firebaseMessaging.unregister());
+      },
+    );
+
+    test('launching the app signed out unregisters this device', () async {
+      await unit.onTransition(authBloc, appStartSignedOut);
+
+      verify(() => fixture.firebaseMessaging.unregister());
+    });
+
+    test(
+      'a sign-in right after a repository sign-out and its session end is never unregistered',
+      () async {
+        await unit.onTransition(authBloc, signIn);
+        await fixture.authRepository.signOut();
+        final outcomes = <String>[];
+        final unregistrationFinishes = Completer<void>();
+        when(() => fixture.firebaseMessaging.unregister()).thenAnswer((
+          _,
+        ) async {
+          await unregistrationFinishes.future;
+          outcomes.add('unregistered');
+        });
+        when(() => fixture.firebaseMessaging.register()).thenAnswer((_) async {
+          outcomes.add('registered');
+        });
+
+        final sessionEnding = unit.onTransition(authBloc, sessionEnd);
+        final signingIn = unit.onTransition(authBloc, signIn);
+        await pumpEventQueue();
+        unregistrationFinishes.complete();
+        await Future.wait([sessionEnding, signingIn]);
+
+        expect(outcomes, ['unregistered', 'registered']);
       },
     );
   });

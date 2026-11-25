@@ -323,6 +323,11 @@ class NotificationsService extends BlocObserver {
 
     final nextState = transition.nextState.unwrapped;
     final currentState = transition.currentState.unwrapped;
+    final enteredUnauthenticated =
+        currentState is! AuthUnauthenticated &&
+        nextState is AuthUnauthenticated;
+
+    if (enteredUnauthenticated) await _thisDevicePushRegistration.stop();
 
     if (currentState is! AuthAuthenticated && nextState is AuthAuthenticated) {
       await _thisDevicePushRegistration.maybeRegisterOnceGranted(
