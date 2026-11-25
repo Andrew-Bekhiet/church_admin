@@ -1,3 +1,5 @@
+lock table public.users_fcm_tokens in share mode;
+
 do $$
 begin
   if exists (select 1 from public.users_fcm_tokens where owner_session_started_at is not null) then
