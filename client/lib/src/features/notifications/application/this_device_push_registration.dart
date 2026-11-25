@@ -13,7 +13,7 @@ class ThisDevicePushRegistration {
 
   StreamSubscription<String>? _installationRegistrationSubscription;
   String? _lastIssuedInstallationId;
-  Future<void>? _latestInstallationRegistration;
+  Future<void>? _latestServerWrite;
   Future<void>? _latestStop;
   int _pushLifecycleGeneration = 0;
   int _generationOfLatestRegistrationStart = -1;
@@ -63,17 +63,19 @@ class ThisDevicePushRegistration {
   void _registerInstallationIdWithServer(String installationId) {
     _lastIssuedInstallationId = installationId;
 
-    _latestInstallationRegistration = _registerAfterEarlierRegistrationsSettle(
+    _latestServerWrite = _registerAfterEarlierServerWritesSettle(
       installationId,
-      _latestInstallationRegistration,
+      _latestServerWrite,
     );
   }
 
-  Future<void> _registerAfterEarlierRegistrationsSettle(
+  Future<void> _registerAfterEarlierServerWritesSettle(
     String installationId,
-    Future<void>? earlierRegistrations,
+    Future<void>? earlierServerWrites,
   ) async {
-    await earlierRegistrations;
+    await earlierServerWrites
+        ?.timeout(stopTimeLimit)
+        .logWarningInsteadOfThrowing();
     await _functionsService
         .registerFirebaseInstallation(installationId)
         .logWarningInsteadOfThrowing();
@@ -103,21 +105,7 @@ class ThisDevicePushRegistration {
     _lastIssuedInstallationId = null;
 
     await _stopListeningForInstallationIds();
-    final awaitedRegistrations = _latestInstallationRegistration;
-    await awaitedRegistrations;
-    final noRegistrationStartedSinceAwaiting = identical(
-      _latestInstallationRegistration,
-      awaitedRegistrations,
-    );
-    if (noRegistrationStartedSinceAwaiting) {
-      _latestInstallationRegistration = null;
-    }
-
-    if (installationId != null && uid != null) {
-      await _fcmTokens
-          .deleteByUidAndToken(uid: uid, token: installationId)
-          .logWarningInsteadOfThrowing();
-    }
+    await _deleteRowAfterEarlierServerWritesSettle(uid, installationId);
 
     if (_newerStopOrRegistrationStartedSince(stopGeneration)) return;
 
@@ -126,6 +114,40 @@ class ThisDevicePushRegistration {
         .logWarningInsteadOfThrowing();
     _latestUnregistration = unregistration;
     await unregistration;
+  }
+
+  Future<void> _deleteRowAfterEarlierServerWritesSettle(
+    String? uid,
+    String? installationId,
+  ) async {
+    final rowDeletion = _maybeDeleteRowOnceEarlierServerWritesSettle(
+      uid,
+      installationId,
+      _latestServerWrite,
+    );
+    _latestServerWrite = rowDeletion;
+    await rowDeletion;
+
+    final noServerWriteStartedSinceDeleting = identical(
+      _latestServerWrite,
+      rowDeletion,
+    );
+    if (noServerWriteStartedSinceDeleting) {
+      _latestServerWrite = null;
+    }
+  }
+
+  Future<void> _maybeDeleteRowOnceEarlierServerWritesSettle(
+    String? uid,
+    String? installationId,
+    Future<void>? earlierServerWrites,
+  ) async {
+    await earlierServerWrites;
+    if (installationId == null || uid == null) return;
+
+    await _fcmTokens
+        .deleteByUidAndToken(uid: uid, token: installationId)
+        .logWarningInsteadOfThrowing();
   }
 
   Future<void> _stopListeningForInstallationIds() async {

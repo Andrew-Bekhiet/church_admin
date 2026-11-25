@@ -210,6 +210,65 @@ void main() {
     );
 
     test(
+      'a stale stop deletes its row before the next session registers the same installation id again',
+      () {
+        fakeAsync((async) {
+          const installationId = 'reissued-installation-id';
+          final backendOutcomes = <String>[];
+          final deletionFinishes = Completer<void>();
+          fixture
+            ..currentUid = hasuraUserId
+            ..whenRegisteringWithServer().thenAnswer((_) async {
+              backendOutcomes.add('registered');
+            })
+            ..whenDeletingARow().thenAnswer((_) async {
+              await deletionFinishes.future;
+              backendOutcomes.add('deleted');
+            })
+            ..issueOnNextRegister(installationId);
+          unawaited(unit.maybeRegisterOnceGranted(Future.value(true)));
+          async.flushMicrotasks();
+          backendOutcomes.clear();
+          unawaited(unit.stop());
+          async.elapse(pastTheStopTimeLimit);
+          unawaited(unit.maybeRegisterOnceGranted(Future.value(true)));
+          async.flushMicrotasks();
+
+          deletionFinishes.complete();
+          async.flushMicrotasks();
+
+          expect(backendOutcomes, ['deleted', 'registered']);
+        });
+      },
+    );
+
+    test(
+      'a stale stop whose row deletion never finishes stops holding back the next registration',
+      () {
+        fakeAsync((async) {
+          const installationId = 'reissued-installation-id';
+          var registrations = 0;
+          fixture
+            ..currentUid = hasuraUserId
+            ..whenRegisteringWithServer().thenAnswer((_) async {
+              registrations++;
+            })
+            ..whenDeletingARow().thenAnswer((_) => Completer<void>().future)
+            ..issueOnNextRegister(installationId);
+          unawaited(unit.maybeRegisterOnceGranted(Future.value(true)));
+          async.flushMicrotasks();
+          registrations = 0;
+          unawaited(unit.stop());
+          async.elapse(pastTheStopTimeLimit);
+          unawaited(unit.maybeRegisterOnceGranted(Future.value(true)));
+          async.elapse(stopTimeLimit * 2 + const Duration(seconds: 1));
+
+          expect(registrations, 1);
+        });
+      },
+    );
+
+    test(
       'a registration that outlives a timed-out stop reaches the server before the newer registration starts',
       () {
         fakeAsync((async) {
