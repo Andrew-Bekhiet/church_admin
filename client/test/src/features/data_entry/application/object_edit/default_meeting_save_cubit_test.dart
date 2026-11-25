@@ -66,11 +66,17 @@ void main() {
     },
     verify: (_) => expect(
       outcome,
-      isA<ObjectSaved<Service>>().having(
-        (saved) => saved.object.defaultMeeting,
-        'defaultMeeting',
-        meetings.createdMeetings.single,
-      ),
+      isA<ObjectSaved<Service>>()
+          .having(
+            (saved) => saved.object.id,
+            'id',
+            services.createdObjects.single.id,
+          )
+          .having(
+            (saved) => saved.object.defaultMeeting,
+            'defaultMeeting',
+            meetings.createdMeetings.single,
+          ),
     ),
   );
 
@@ -158,8 +164,10 @@ void main() {
         form.name.setValue('خدمة إعدادي');
         await cubit.submit();
       },
-      verify: (_) =>
-          expect(services.updates.single.editedObject.name, 'خدمة إعدادي'),
+      verify: (_) => expect(
+        services.updates.single.editedObject.name,
+        'خدمة إعدادي',
+      ),
     );
   });
 

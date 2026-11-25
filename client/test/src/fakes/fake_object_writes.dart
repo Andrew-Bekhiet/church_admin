@@ -32,9 +32,9 @@ mixin FakeObjectWrites<T extends ViewableWithID> on Fake {
     await saveGate?.future;
     if (saveError case final error?) throw error;
     updates.add((savedObject: oldObject, editedObject: newObject));
-    final updatesSavedRow = newObject.id == oldObject.id;
+    final editTargetsSavedRow = newObject.id == oldObject.id;
 
-    return updatesFindNothing || !updatesSavedRow ? null : newObject;
+    return updatesFindNothing || !editTargetsSavedRow ? null : newObject;
   }
 
   Future<T?> deleteById({required String id}) async {
