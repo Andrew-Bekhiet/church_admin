@@ -93,6 +93,7 @@ class NotificationsService extends BlocObserver {
   String? _lastIssuedInstallationId;
   Future<void>? _latestInstallationRegistration;
   Future<void>? _latestStop;
+  int _pushLifecycleGeneration = 0;
 
   late final Stream<Notification> onNotificationTapStream =
       getInitialNotification()
@@ -293,13 +294,19 @@ class NotificationsService extends BlocObserver {
     );
   }
 
-  Future<void> maybeRegisterThisDeviceForPushNotifications() async {
+  Future<void> maybeRegisterThisDeviceForPushNotifications() =>
+      _maybeRegisterUnlessStoppedSince(_pushLifecycleGeneration);
+
+  Future<void> _maybeRegisterUnlessStoppedSince(int startGeneration) async {
+    bool stoppedSinceStart() => startGeneration != _pushLifecycleGeneration;
+
     if (!await _firebaseMessaging.isSupported() ||
         !await requestNotificationsPermission()) {
       return;
     }
 
     await _latestStop;
+    if (stoppedSinceStart()) return;
 
     final previousSubscription = _installationRegistrationSubscription;
     _installationRegistrationSubscription = _firebaseMessaging.onRegistered
@@ -308,11 +315,13 @@ class NotificationsService extends BlocObserver {
           onError: _logInstallationRegistrationError,
         );
     await previousSubscription?.cancel();
+    if (stoppedSinceStart()) return;
 
     await _firebaseMessaging.register.runBestEffort();
   }
 
   Future<void> stopPushNotificationsToThisDevice() {
+    _pushLifecycleGeneration++;
     final stopping = _cancelRegistrationDeleteRowAndUnregister.runBestEffort();
     _latestStop = stopping;
 
@@ -398,6 +407,7 @@ class NotificationsService extends BlocObserver {
 
     final nextState = transition.nextState.unwrapped;
     final currentState = transition.currentState.unwrapped;
+    final generationAtTransition = _pushLifecycleGeneration;
 
     if (currentState is! AuthAuthenticated &&
         nextState is AuthAuthenticated &&
@@ -406,11 +416,12 @@ class NotificationsService extends BlocObserver {
         await scheduleDefaultNotifications();
       }
 
-      await maybeRegisterThisDeviceForPushNotifications();
+      await _maybeRegisterUnlessStoppedSince(generationAtTransition);
     }
   }
 
   Future<void> dispose() async {
+    _pushLifecycleGeneration++;
     await _isPausedSubject.close();
     await _onMessageOpenedAppSubscription.cancel();
     await _onForegroundMessageSubscription.cancel();

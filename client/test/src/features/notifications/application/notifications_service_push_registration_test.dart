@@ -299,6 +299,49 @@ void main() {
     });
 
     group('stopping', () {
+      Completer<void> holdTheNextPermissionPrompt() {
+        final promptAnswered = Completer<void>();
+        when(() => permissionHandler.requestPermissions(any())).thenAnswer((
+          _,
+        ) async {
+          await promptAnswered.future;
+
+          return {Permission.notification: PermissionStatus.granted};
+        });
+
+        return promptAnswered;
+      }
+
+      test(
+        'signing out while a sign-in waits on the permission prompt leaves the device unregistered',
+        () async {
+          final promptAnswered = holdTheNextPermissionPrompt();
+          final signingIn = unit.onTransition(authBloc, signIn);
+          await pumpEventQueue();
+
+          await unit.stopPushNotificationsToThisDevice();
+          promptAnswered.complete();
+          await signingIn;
+
+          verifyNever(() => firebaseMessaging.register());
+        },
+      );
+
+      test(
+        'disposing while a sign-in waits on the permission prompt leaves the device unregistered',
+        () async {
+          final promptAnswered = holdTheNextPermissionPrompt();
+          final signingIn = unit.onTransition(authBloc, signIn);
+          await pumpEventQueue();
+
+          await unit.dispose();
+          promptAnswered.complete();
+          await signingIn;
+
+          verifyNever(() => firebaseMessaging.register());
+        },
+      );
+
       test('signing out deletes this device installation id row', () async {
         const installationId = 'installation-id';
         issueOnNextRegister(installationId);
