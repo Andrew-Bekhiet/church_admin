@@ -16,6 +16,8 @@ class NotificationsService extends BlocObserver {
   static const String localNotificationSenderUID =
       'LOCAL_NOTIFICATION_SENDER_UID';
 
+  static const Duration _stopPushNotificationsTimeout = Duration(seconds: 5);
+
   static const NotificationDetails defaultRemoteNotificationsDetails =
       NotificationDetails(
         android: AndroidNotificationDetails(
@@ -322,7 +324,9 @@ class NotificationsService extends BlocObserver {
 
   Future<void> stopPushNotificationsToThisDevice() {
     _pushLifecycleGeneration++;
-    final stopping = _cancelRegistrationDeleteRowAndUnregister.runBestEffort();
+    final stopping = _cancelRegistrationDeleteRowAndUnregister.runBestEffort(
+      within: _stopPushNotificationsTimeout,
+    );
     _latestStop = stopping;
 
     return stopping;

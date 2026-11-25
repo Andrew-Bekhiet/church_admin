@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:fake_async/fake_async.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -339,6 +340,28 @@ void main() {
           await signingIn;
 
           verifyNever(() => firebaseMessaging.register());
+        },
+      );
+
+      test(
+        'a stop that never finishes stops holding back the next sign-in',
+        () {
+          fakeAsync((async) {
+            var registered = false;
+            when(
+              () => firebaseMessaging.unregister(),
+            ).thenAnswer((_) => Completer<void>().future);
+            when(() => firebaseMessaging.register()).thenAnswer((_) async {
+              registered = true;
+            });
+            unawaited(unit.stopPushNotificationsToThisDevice());
+            async.flushMicrotasks();
+
+            unawaited(unit.onTransition(authBloc, signIn));
+            async.elapse(const Duration(seconds: 6));
+
+            expect(registered, isTrue);
+          });
         },
       );
 
