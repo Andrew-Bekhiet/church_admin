@@ -146,6 +146,11 @@ Assert-Match 'ascending id order' (Get-ErrorOf { Invoke-PollAndCountWarnings $Co
 Assert-Equal 0 $script:AcceptedBodies.Count 'nothing is sent from a page out of id order'
 Assert-Equal 1 (Read-Cursor).highestSentId 'the cursor stays with a page out of id order'
 
+Reset-FakesAndCursor @((New-Transaction 1), (New-Transaction 2))
+Save-Cursor ([pscustomobject]@{ highestSentId = 9 })
+Assert-Match 'below the cursor' (Get-ErrorOf { Invoke-PollAndCountWarnings $Config $Secrets }) 'a cursor above the newest transaction stops the poll'
+Assert-Equal 0 $script:AcceptedBodies.Count 'no batch marks a sync while the cursor is above the newest transaction'
+
 Reset-FakesAndCursor @(@(1..30 | ForEach-Object { New-Transaction $_ -UploadedDaysAgo 30 }) + @(31..34 | ForEach-Object { New-Transaction $_ }))
 Save-Cursor ([pscustomobject]@{ highestSentId = 2 })
 Invoke-PollAndCountWarnings $Config $Secrets | Out-Null

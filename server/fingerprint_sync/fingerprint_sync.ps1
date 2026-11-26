@@ -145,8 +145,15 @@ function Read-TransactionsWorthSendingAfter($Config, $Secrets, [long]$AfterId) {
     $oldestUploadWorthSending = (Get-Date).AddDays(-$OldestUploadWorthSendingDays).ToString($BiotimeTimeFormat, $Invariant)
     $byId = @{}
     $page = Get-LastTransactionsPageNumber $Config $Secrets
+    $newestId = $null
     do {
         $rows = @((Read-TransactionsPage $Config $Secrets $page $PageSize).Rows)
+        if ($null -eq $newestId -and $rows.Count -gt 0) {
+            $newestId = [long]$rows[$rows.Count - 1].id
+            if ($newestId -lt $AfterId) {
+                throw "BioTime's newest transaction id $newestId is below the cursor $AfterId, so new punches would never be sent; if BioTime was restored or replaced, follow the README to reset cursor.json"
+            }
+        }
         foreach ($row in $rows) {
             if ([long]$row.id -gt $AfterId) { $byId[[long]$row.id] = $row }
         }
@@ -204,26 +211,31 @@ function Invoke-PollAndCountWarnings($Config, $Secrets) {
     $totals = [ordered]@{}
     foreach ($field in $ReportFields) { $totals[$field] = 0 }
     $sent = 0
-    do {
-        # An empty batch still goes out, so the app's last sync time shows the poller is alive.
-        $batch = @($unsent | Select-Object -Skip $sent -First $MaxPunchesPerRequest)
-        $report = Send-Punches $Config $Secrets $batch
-        if ($batch.Count -gt 0) {
-            $cursor = [pscustomobject]@{ highestSentId = [long]$batch[$batch.Count - 1].id }
-            Save-Cursor $cursor
-        }
-        $sent += $batch.Count
-        foreach ($field in $ReportFields) { $totals[$field] += [int]$report.$field }
-    } while ($sent -lt $unsent.Count)
-    $counts = ($ReportFields | ForEach-Object { "$_=$($totals[$_])" }) -join ' '
-    Write-Log 'INFO' "sent=$sent $counts cursor=$($cursor.highestSentId)"
-    $warnings = @(
-        if ($totals.ignoredUnlinkedEmployeeCode -gt 0) { "$($totals.ignoredUnlinkedEmployeeCode) punches have a fingerprint ID linked to no person; the function's log names each one" }
-        if ($totals.ignoredMalformed -gt 0) { "$($totals.ignoredMalformed) punches were rejected by the function as malformed" }
-        if ($totals.ignoredTooOld -gt 0) { "$($totals.ignoredTooOld) punches were older than the function accepts" }
-        if ($totals.ignoredInFuture -gt 0) { "$($totals.ignoredInFuture) punches were in the future; check the BioTime server and device clocks" }
-    )
-    foreach ($warning in $warnings) { Write-Log 'WARN' $warning }
+    $warnings = @()
+    try {
+        do {
+            # An empty batch still goes out, so the app's last sync time shows the poller is alive.
+            $batch = @($unsent | Select-Object -Skip $sent -First $MaxPunchesPerRequest)
+            $report = Send-Punches $Config $Secrets $batch
+            if ($batch.Count -gt 0) {
+                $cursor = [pscustomobject]@{ highestSentId = [long]$batch[$batch.Count - 1].id }
+                Save-Cursor $cursor
+            }
+            $sent += $batch.Count
+            foreach ($field in $ReportFields) { $totals[$field] += [int]$report.$field }
+        } while ($sent -lt $unsent.Count)
+    } finally {
+        # Also after a failed batch, because the punches of the batches before it are not sent again.
+        $counts = ($ReportFields | ForEach-Object { "$_=$($totals[$_])" }) -join ' '
+        Write-Log 'INFO' "sent=$sent of $($unsent.Count) $counts cursor=$($cursor.highestSentId)"
+        $warnings = @(
+            if ($totals.ignoredUnlinkedEmployeeCode -gt 0) { "$($totals.ignoredUnlinkedEmployeeCode) punches have a fingerprint ID linked to no person; the function's log names each one" }
+            if ($totals.ignoredMalformed -gt 0) { "$($totals.ignoredMalformed) punches were rejected by the function as malformed" }
+            if ($totals.ignoredTooOld -gt 0) { "$($totals.ignoredTooOld) punches were older than the function accepts" }
+            if ($totals.ignoredInFuture -gt 0) { "$($totals.ignoredInFuture) punches were in the future; check the BioTime server and device clocks" }
+        )
+        foreach ($warning in $warnings) { Write-Log 'WARN' $warning }
+    }
     return $warnings.Count
 }
 

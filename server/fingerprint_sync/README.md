@@ -40,7 +40,7 @@ It logs in to BioTime, reads one transaction, and sends the function a request t
 
 Copy the new scripts over the old ones and run setup again. It offers the saved values; press Enter to keep each one. It keeps `cursor.json`, so on the same BioTime database the poller carries on after the last batch the function reported. A batch whose response is lost is sent again; the function upserts attendance, so a resent punch records nothing twice. After an outage the poller sends the punches uploaded since, oldest first, and saves the cursor after every batch. It reads back no further than uploads from the last 11 days, because the function ignores a punch older than 10 days.
 
-The cursor is a transaction id from one BioTime database, so a new address for the same server keeps it. When BioTime moves to a different database, do this before running setup with the new address: disable the `Fingerprint sync` task, wait for its current run to end so that run cannot write the old cursor back, and delete `cursor.json`. Setup then starts the task again, and the poller starts from the newest punch in the new database without sending the punches already there. With the old cursor left in place, the poller would send only the new database's transactions whose ids are above it.
+The cursor is a transaction id from one BioTime database, so a new address for the same server keeps it. When BioTime moves to a different database, do this before running setup with the new address: disable the `Fingerprint sync` task, wait for its current run to end so that run cannot write the old cursor back, and delete `cursor.json`. Setup then starts the task again, and the poller starts from the newest punch in the new database without sending the punches already there. With the old cursor left in place, the poller stops with `below the cursor` while the new database's ids are lower, and otherwise sends only its transactions whose ids are above the cursor. The same steps apply after BioTime is restored from a backup.
 
 ## Uninstall
 
@@ -52,12 +52,13 @@ This removes the task. Delete `C:\fingerprint_sync` afterwards to remove the set
 
 ## Logs
 
-`C:\fingerprint_sync\logs\fingerprint_sync.log`, rolled at 1 MB, with the last three kept as `.1` to `.3`. Each poll writes one line of counts: transactions sent, the function's answer, and the cursor. Task Scheduler's *Last Run Result* is `0` when all went well, `1` after an error, and `2` after a warning.
+`C:\fingerprint_sync\logs\fingerprint_sync.log`, rolled at 1 MB, with the last three kept as `.1` to `.3`. Each poll writes one line of counts: transactions sent out of those waiting, the function's answer, and the cursor. Task Scheduler's *Last Run Result* is `0` when all went well, `1` after an error, and `2` after a warning.
 
 | Line | Meaning |
 | -- | -- |
 | `ERROR ... skipping the rest of this run` | BioTime or the function failed or timed out. Batches already sent stay sent; the next minute retries the rest. |
 | `ERROR ... not in ascending id order` | BioTime listed transactions out of id order, so the poller cannot tell which are new. It sends nothing and keeps its cursor until the order is restored. |
+| `ERROR ... below the cursor` | BioTime's newest transaction has a lower id than the last one sent, as after a restore from a backup or a move to another database. The poller sends nothing, because new punches would get ids it treats as sent. Reset the cursor as under "Update or change a setting". |
 | `ERROR ... not yyyy-MM-dd HH:mm:ss` | BioTime returned a punch time in a layout the function cannot read. The poller sends nothing from the batch of up to 500 transactions that holds it, or after it, until that transaction is corrected or deleted in BioTime. |
 | `WARN ... linked to no person` | A punch's fingerprint ID matches no person in the app. The line says how many; the function's own log in the Firebase console names each ID. These punches are not recorded and are not sent again. Set the fingerprint ID on each person so their later punches are recorded. |
 | `WARN ... rejected by the function as malformed` | The function could not read a punch, for example one with no fingerprint ID. It is not recorded. |
