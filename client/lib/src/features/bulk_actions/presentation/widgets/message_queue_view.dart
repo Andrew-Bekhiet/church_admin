@@ -1,24 +1,36 @@
-import 'dart:async';
-
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
 class MessageQueueView extends StatelessWidget {
   final MessageRunSending state;
   final Widget channelIcon;
+  final ValueChanged<Person> onMarkNotSent;
+  final VoidCallback onCancelNextChatCountdown;
+  final ValueChanged<PhoneContact> onSelectPhone;
+  final ValueChanged<String> onEditMessage;
+  final VoidCallback onStop;
+  final VoidCallback onSkip;
+  final VoidCallback onOpenChat;
+  final VoidCallback onReturnFromChat;
 
   const MessageQueueView({
     required this.state,
     required this.channelIcon,
+    required this.onMarkNotSent,
+    required this.onCancelNextChatCountdown,
+    required this.onSelectPhone,
+    required this.onEditMessage,
+    required this.onStop,
+    required this.onSkip,
+    required this.onOpenChat,
+    required this.onReturnFromChat,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final cubit = context.read<MessageRunCubit>();
     final current = state.current;
     final withPhoneCount = state.withPhone.length;
 
@@ -62,7 +74,7 @@ class MessageQueueView extends StatelessWidget {
             actions: [
               TextButton(
                 key: MessageQueueViewKeys.markNotSent,
-                onPressed: () => cubit.markNotSentIfSent(person),
+                onPressed: () => onMarkNotSent(person),
                 child: const Text('لم يتم الإرسال'),
               ),
             ],
@@ -108,9 +120,9 @@ class MessageQueueView extends StatelessWidget {
                           ),
                         ),
                     ],
-                    onTap: cubit.cancelNextChatCountdown,
+                    onTap: onCancelNextChatCountdown,
                     onChanged: (phone) =>
-                        phone != null ? cubit.selectPhone(phone) : null,
+                        phone != null ? onSelectPhone(phone) : null,
                   )
                 else if (current.selectedPhone case final phone?)
                   Text(
@@ -125,8 +137,8 @@ class MessageQueueView extends StatelessWidget {
                   readOnly: state.isAwaitingReturn,
                   maxLines: null,
                   decoration: const InputDecoration(labelText: 'الرسالة'),
-                  onTap: cubit.cancelNextChatCountdown,
-                  onChanged: cubit.editCurrentMessageUnlessChatOpened,
+                  onTap: onCancelNextChatCountdown,
+                  onChanged: onEditMessage,
                 ),
               ],
             ),
@@ -146,26 +158,26 @@ class MessageQueueView extends StatelessWidget {
           children: [
             TextButton(
               key: MessageQueueViewKeys.stopButton,
-              onPressed: cubit.stop,
+              onPressed: onStop,
               child: const Text('إيقاف'),
             ),
             TextButton(
               key: MessageQueueViewKeys.skipButton,
-              onPressed: state.isAwaitingReturn ? null : cubit.skipCurrent,
+              onPressed: state.isAwaitingReturn ? null : onSkip,
               child: const Text('تخطي'),
             ),
             Expanded(
               child: state.isAwaitingReturn
                   ? FilledButton(
                       key: MessageQueueViewKeys.nextButton,
-                      onPressed: cubit.returnFromChat,
+                      onPressed: onReturnFromChat,
                       child: const Text('التالي'),
                     )
                   : FilledButton.icon(
                       key: MessageQueueViewKeys.openChatButton,
                       icon: channelIcon,
                       label: const Text('فتح المحادثة'),
-                      onPressed: () => unawaited(cubit.openCurrentChat()),
+                      onPressed: onOpenChat,
                     ),
             ),
           ],

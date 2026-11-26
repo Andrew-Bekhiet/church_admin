@@ -89,6 +89,14 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
             final MessageRunSending sending => MessageQueueView(
               state: sending,
               channelIcon: widget.action.icon,
+              onMarkNotSent: _cubit.markNotSentIfSent,
+              onCancelNextChatCountdown: _cubit.cancelNextChatCountdown,
+              onSelectPhone: _cubit.selectPhone,
+              onEditMessage: _cubit.editCurrentMessageUnlessChatOpened,
+              onStop: _cubit.stop,
+              onSkip: _cubit.skipCurrent,
+              onOpenChat: () => unawaited(_cubit.openCurrentChat()),
+              onReturnFromChat: _cubit.returnFromChat,
             ),
 
             final MessageRunPassEnded passEnded => MessageSummaryView(
