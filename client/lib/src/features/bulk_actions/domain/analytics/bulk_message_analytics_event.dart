@@ -22,11 +22,13 @@ final class BulkMessageRunFinish extends BulkMessageAnalyticsEvent {
       WhatsappMessageChannel() => 'whatsapp',
     },
     'recipient_count': recipients.length,
-    'sent_count': _withPhoneCountOf(RecipientStatus.sent),
-    'not_sent_count': _withPhoneCountOf(RecipientStatus.notSent),
-    'open_failed_count': _withPhoneCountOf(RecipientStatus.openFailed),
-    'skipped_count': _withPhoneCountOf(RecipientStatus.skipped),
-    'remaining_count': _withPhoneCountOf(RecipientStatus.pending),
+    'sent_count': _countOf(RecipientStatus.sent),
+    'not_sent_count': _countOf(RecipientStatus.notSent),
+    'open_failed_count': _countOf(RecipientStatus.openFailed),
+    'skipped_count': _countOf(RecipientStatus.skipped),
+    'remaining_count': recipients
+        .where((recipient) => recipient.isRemaining)
+        .length,
     'without_phone_count': recipients
         .whereNot((recipient) => recipient.hasPhone)
         .length,
@@ -41,7 +43,6 @@ final class BulkMessageRunFinish extends BulkMessageAnalyticsEvent {
     required this.opensNextChatOnReturn,
   });
 
-  int _withPhoneCountOf(RecipientStatus status) => recipients
-      .where((recipient) => recipient.hasPhone && recipient.status == status)
-      .length;
+  int _countOf(RecipientStatus status) =>
+      recipients.where((recipient) => recipient.status == status).length;
 }
