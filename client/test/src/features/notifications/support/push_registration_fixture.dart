@@ -125,6 +125,9 @@ class PushRegistrationFixture {
   void issueInstallationId(String installationId) =>
       _onRegisteredControllers.lastOrNull?.add(installationId);
 
+  void failIssuingAnInstallationId(Object error) =>
+      _onRegisteredControllers.lastOrNull?.addError(error);
+
   When<Future<void>> whenRegisteringWithServer() =>
       when(() => functionsService.registerFirebaseInstallation(any()));
 

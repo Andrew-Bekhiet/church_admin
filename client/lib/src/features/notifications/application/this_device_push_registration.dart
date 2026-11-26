@@ -51,11 +51,11 @@ class ThisDevicePushRegistration {
         _functionsService.registerFirebaseInstallation(installationId),
       );
 
-  Future<void> _logInstallationRegistrationError(
-    Object error,
-    StackTrace stackTrace,
-  ) =>
-      LoggingService.I.warning(LogRecord(error: error, stackTrace: stackTrace));
+  void _logInstallationRegistrationError(Object error, StackTrace stackTrace) {
+    unawaited(
+      Future<void>.error(error, stackTrace).logWarningInsteadOfThrowing(),
+    );
+  }
 
   Future<void> stop() {
     _stopsAndDisposals++;

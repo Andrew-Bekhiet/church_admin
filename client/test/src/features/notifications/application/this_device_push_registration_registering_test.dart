@@ -105,6 +105,25 @@ void main() {
     );
 
     test(
+      'a failure to issue an installation id does not stop later ones from registering',
+      () async {
+        const installationId = 'installation-id';
+        await unit.maybeRegisterOnceGranted(Future.value(true));
+
+        fixture
+          ..failIssuingAnInstallationId(Exception('no installation id'))
+          ..issueInstallationId(installationId);
+        await pumpEventQueue();
+
+        verify(
+          () => fixture.functionsService.registerFirebaseInstallation(
+            installationId,
+          ),
+        );
+      },
+    );
+
+    test(
       'a server rejection does not stop later installation ids from registering',
       () async {
         const rejectedInstallationId = 'rejected-installation-id';
