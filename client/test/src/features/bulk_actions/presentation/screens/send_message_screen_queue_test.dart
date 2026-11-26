@@ -233,15 +233,10 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      tester
-          .widget<EditableText>(
-            find.descendant(
-              of: find.byKey(MessageQueueViewKeys.messageFieldFor(mina)),
-              matching: find.byType(EditableText),
-            ),
-          )
-          .readOnly,
-      isTrue,
+      tester.getSemantics(
+        find.byKey(MessageQueueViewKeys.messageFieldFor(mina)),
+      ),
+      isSemantics(isTextField: true, isReadOnly: true),
     );
   });
 }
