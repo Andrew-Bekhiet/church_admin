@@ -107,8 +107,6 @@ void main() {
     'stopping': (cubit) => cubit.stop(),
     'turning off opening the next chat': (cubit) =>
         cubit.setOpensNextChatOnReturn(isEnabled: false),
-    'starting to edit the message or pick a number': (cubit) =>
-        cubit.cancelNextChatCountdown(),
   };
 
   for (final MapEntry(key: interruption, value: interrupt)

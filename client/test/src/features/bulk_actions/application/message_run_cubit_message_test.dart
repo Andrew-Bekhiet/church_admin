@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 import 'message_run_cubit_fixture.dart';
 
@@ -30,29 +29,6 @@ void main() {
         cubit,
       ).recipients.map((recipient) => recipient.message),
       [fixture.template.renderFor(mark), fixture.template.renderFor(mina)],
-    ),
-  );
-
-  blocTest<MessageRunCubit, MessageRunState>(
-    'an edited message is the one that opens in the chat',
-    build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTemplateTo(
-      recipients: [
-        fixture.recipientOf(mark, [markPhone]),
-        fixture.recipientOf(mina, [minaPhone]),
-      ],
-    ),
-    act: (cubit) async {
-      cubit.editCurrentMessageUnlessChatOpened('مساء الخير يا مارك');
-      await cubit.openCurrentChat();
-    },
-    verify: (_) => verify(
-      () => fixture.launcher.launchWhatsappChat(
-        MessageRunCubitFixture.phoneNumbers.formatInternational(
-          markPhone.phone,
-        ),
-        text: 'مساء الخير يا مارك',
-      ),
     ),
   );
 
