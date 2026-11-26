@@ -123,7 +123,8 @@ class MessageRunCubit extends Cubit<MessageRunState> {
   }
 
   void editCurrentMessage(String message) {
-    if (state case MessageRunSending(isAwaitingReturn: false) && final sending) {
+    if (state
+        case MessageRunSending(isAwaitingReturn: false) && final sending) {
       emit(sending.withCurrent(sending.current.copyWith(message: message)));
     }
   }
@@ -167,7 +168,8 @@ class MessageRunCubit extends Cubit<MessageRunState> {
             .nextRemainingOrFinished(fromIndex: sending.currentIndex + 1),
       );
 
-      if (state case MessageRunSending(opensNextChatOnReturn: true) && final next) {
+      if (state
+          case MessageRunSending(opensNextChatOnReturn: true) && final next) {
         _countDownToOpeningCurrentChat(next);
       }
     }
@@ -176,7 +178,8 @@ class MessageRunCubit extends Cubit<MessageRunState> {
   void cancelNextChatCountdown() {
     _nextChatCountdown?.cancel();
     _nextChatCountdown = null;
-    if (state case MessageRunSending(secondsBeforeNextChat: _?) && final sending) {
+    if (state
+        case MessageRunSending(secondsBeforeNextChat: _?) && final sending) {
       emit(sending.copyWith(secondsBeforeNextChat: () => null));
     }
   }
@@ -249,7 +252,8 @@ class MessageRunCubit extends Cubit<MessageRunState> {
 
   void _tickNextChatCountdown() {
     if (state
-        case MessageRunSending(:final secondsBeforeNextChat?) && final sending) {
+        case MessageRunSending(:final secondsBeforeNextChat?) &&
+            final sending) {
       final secondsLeft = secondsBeforeNextChat - 1;
       if (secondsLeft > 0) {
         emit(sending.copyWith(secondsBeforeNextChat: () => secondsLeft));

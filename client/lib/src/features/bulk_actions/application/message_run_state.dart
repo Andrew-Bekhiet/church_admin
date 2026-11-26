@@ -92,10 +92,10 @@ final class MessageRunSending extends MessageRunLoaded {
   const MessageRunSending({
     required this.currentIndex,
     required super.recipients,
-    super.opensNextChatOnReturn,
     this.isAwaitingReturn = false,
     this.sentToConfirm,
     this.secondsBeforeNextChat,
+    super.opensNextChatOnReturn,
   });
 
   MessageRunSending copyWith({

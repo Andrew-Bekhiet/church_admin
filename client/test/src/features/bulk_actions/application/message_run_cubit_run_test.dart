@@ -11,7 +11,6 @@ void main() {
   final peter = MessageRunCubitFixture.peter;
   const minaPhone = MessageRunCubitFixture.minaPhone;
   const minaOtherPhone = MessageRunCubitFixture.minaOtherPhone;
-  const markPhone = MessageRunCubitFixture.markPhone;
 
   late MessageRunCubitFixture fixture;
 
@@ -77,8 +76,9 @@ void main() {
         fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
     act: (cubit) async {
       await cubit.openCurrentChat();
-      cubit.askIfSentAndShowNextIfChatWasOpened();
-      cubit.askIfSentAndShowNextIfChatWasOpened();
+      cubit
+        ..askIfSentAndShowNextIfChatWasOpened()
+        ..askIfSentAndShowNextIfChatWasOpened();
     },
     verify: (cubit) {
       expect(
