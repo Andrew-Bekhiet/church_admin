@@ -142,7 +142,7 @@ void main() {
     );
 
     test(
-      'installation ids queued before stopping reach the server before the row of the last one is deleted',
+      'installation ids queued before stopping reach the server before their rows are deleted',
       () async {
         const earlierInstallationId = 'earlier-installation-id';
         const laterInstallationId = 'later-installation-id';
@@ -177,6 +177,7 @@ void main() {
         expect(backendOutcomes, [
           'registered $earlierInstallationId',
           'registered $laterInstallationId',
+          'deleted $earlierInstallationId',
           'deleted $laterInstallationId',
         ]);
       },

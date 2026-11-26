@@ -13,7 +13,7 @@ class ThisDevicePushRegistration {
 
   Future<void> _latestQueuedStep = Future<void>.value();
   StreamSubscription<String>? _installationIdsSubscription;
-  String? _lastSubmittedInstallationId;
+  final Set<String> _submittedInstallationIds = {};
   int _stopsAndDisposals = 0;
 
   ThisDevicePushRegistration({
@@ -52,7 +52,7 @@ class ThisDevicePushRegistration {
   }
 
   Future<void> _submit(String installationId) {
-    _lastSubmittedInstallationId = installationId;
+    _submittedInstallationIds.add(installationId);
 
     return _waitWithinTimeLimitLoggingFailure(
       _functionsService.registerFirebaseInstallation(installationId),
@@ -68,23 +68,24 @@ class ThisDevicePushRegistration {
   Future<void> stop() {
     _stopsAndDisposals++;
     final uid = _readCurrentUid();
-    final listeningStopped = _stopListeningForInstallationIds();
+    unawaited(_stopListeningForInstallationIds());
 
     return _runAfterQueuedSteps(() async {
-      await listeningStopped;
-      await _maybeDeleteSubmittedRow(uid);
+      await _maybeDeleteSubmittedRows(uid);
       await _waitWithinTimeLimitLoggingFailure(_firebaseMessaging.unregister());
     });
   }
 
-  Future<void> _maybeDeleteSubmittedRow(String? uid) async {
-    final installationId = _lastSubmittedInstallationId;
-    _lastSubmittedInstallationId = null;
-    if (installationId == null || uid == null) return;
+  Future<void> _maybeDeleteSubmittedRows(String? uid) async {
+    final installationIds = [..._submittedInstallationIds];
+    _submittedInstallationIds.clear();
+    if (uid == null) return;
 
-    await _waitWithinTimeLimitLoggingFailure(
-      _fcmTokens.deleteByUidAndToken(uid: uid, token: installationId),
-    );
+    for (final installationId in installationIds) {
+      await _waitWithinTimeLimitLoggingFailure(
+        _fcmTokens.deleteByUidAndToken(uid: uid, token: installationId),
+      );
+    }
   }
 
   Future<void> _stopListeningForInstallationIds() {
