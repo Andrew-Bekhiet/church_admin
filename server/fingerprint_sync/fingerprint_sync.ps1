@@ -69,7 +69,7 @@ function Read-Secrets {
     return [Text.Encoding]::UTF8.GetString($bytes) | ConvertFrom-Json
 }
 
-function Invoke-JsonRequest([string]$Method, [string]$Uri, [hashtable]$Headers, $Body) {
+function Invoke-JsonRequestBeforeRunDeadline([string]$Method, [string]$Uri, [hashtable]$Headers, $Body) {
     if ($RunClock.Elapsed.TotalSeconds -ge $LastRequestStartSeconds) {
         throw 'Out of time for this run; batches already sent stay sent'
     }
@@ -91,17 +91,17 @@ function Invoke-JsonRequest([string]$Method, [string]$Uri, [hashtable]$Headers, 
 
 function Connect-Biotime($Config, $Secrets) {
     $login = @{ username = $Config.biotimeUsername; password = $Secrets.biotimePassword }
-    $response = Invoke-JsonRequest 'POST' "$($Config.biotimeBaseUrl)/api-token-auth/" @{} $login
+    $response = Invoke-JsonRequestBeforeRunDeadline 'POST' "$($Config.biotimeBaseUrl)/api-token-auth/" @{} $login
     if (-not $response.Ok) { throw "BioTime refused the login with HTTP $($response.Status): $($response.Error)" }
     $script:BiotimeToken = $response.Json.token
 }
 
 function Invoke-BiotimeGetLoggingInAgainOn401($Config, $Secrets, [string]$Uri) {
     if ($null -eq $script:BiotimeToken) { Connect-Biotime $Config $Secrets }
-    $response = Invoke-JsonRequest 'GET' $Uri @{ Authorization = "Token $script:BiotimeToken" } $null
+    $response = Invoke-JsonRequestBeforeRunDeadline 'GET' $Uri @{ Authorization = "Token $script:BiotimeToken" } $null
     if ($response.Status -eq 401) {
         Connect-Biotime $Config $Secrets
-        $response = Invoke-JsonRequest 'GET' $Uri @{ Authorization = "Token $script:BiotimeToken" } $null
+        $response = Invoke-JsonRequestBeforeRunDeadline 'GET' $Uri @{ Authorization = "Token $script:BiotimeToken" } $null
     }
     if (-not $response.Ok) { throw "BioTime answered HTTP $($response.Status) to a transactions request: $($response.Error)" }
     return $response.Json
@@ -133,7 +133,7 @@ function Read-HighestTransactionId($Config, $Secrets) {
     return [long]$rows[$rows.Count - 1].id
 }
 
-function Test-UploadedBefore($Transaction, [string]$BiotimeTime) {
+function Test-UploadTimeReadableAndBefore($Transaction, [string]$BiotimeTime) {
     $uploadTime = [string]$Transaction.upload_time
     return ($uploadTime -match $BiotimeTimePattern) -and ([string]::CompareOrdinal($uploadTime, $BiotimeTime) -lt 0)
 }
@@ -151,7 +151,7 @@ function Read-TransactionsWorthSendingAfter($Config, $Secrets, [long]$AfterId) {
             if ([long]$row.id -gt $AfterId) { $byId[[long]$row.id] = $row }
         }
         $reachedCursor = ($rows.Count -gt 0) -and ([long]$rows[0].id -le $AfterId)
-        $reachedUploadsTooOldToSend = ($rows.Count -gt 0) -and (Test-UploadedBefore $rows[0] $oldestUploadWorthSending)
+        $reachedUploadsTooOldToSend = ($rows.Count -gt 0) -and (Test-UploadTimeReadableAndBefore $rows[0] $oldestUploadWorthSending)
         $page--
     } while (-not $reachedCursor -and -not $reachedUploadsTooOldToSend -and $page -ge 1)
     return @($byId.Values | Sort-Object { [long]$_.id })
@@ -173,7 +173,7 @@ function Save-Cursor($Cursor) {
 function Send-Punches($Config, $Secrets, $Transactions) {
     $punches = @(foreach ($transaction in $Transactions) {
         if ([string]$transaction.punch_time -notmatch $BiotimeTimePattern) {
-            throw "BioTime transaction $($transaction.id) has punch_time '$($transaction.punch_time)', not $BiotimeTimeFormat; the cursor stays before it"
+            throw "BioTime transaction $($transaction.id) has punch_time '$($transaction.punch_time)', not $BiotimeTimeFormat; nothing of its batch is sent and the cursor stays before the batch"
         }
         [ordered]@{
             employeeCode = [string]$transaction.emp_code
@@ -185,7 +185,7 @@ function Send-Punches($Config, $Secrets, $Transactions) {
         biotimeServerLocalTime = (Get-Date).ToString("yyyy-MM-dd'T'HH:mm:ss", $Invariant)
         punches = $punches
     }
-    $response = Invoke-JsonRequest 'POST' $Config.functionUrl @{ 'X-Fingerprint-Sync-Secret' = $Secrets.syncSecret } $body
+    $response = Invoke-JsonRequestBeforeRunDeadline 'POST' $Config.functionUrl @{ 'X-Fingerprint-Sync-Secret' = $Secrets.syncSecret } $body
     if (-not $response.Ok) { throw "recordFingerprintPunches answered HTTP $($response.Status) to a batch of $($punches.Count): $($response.Error)" }
     foreach ($field in $ReportFields) {
         if ($null -eq $response.Json.$field) { throw "recordFingerprintPunches answered without $field, so it may not have recorded the batch; deploy the current function" }
@@ -193,7 +193,7 @@ function Send-Punches($Config, $Secrets, $Transactions) {
     return $response.Json
 }
 
-function Invoke-Poll($Config, $Secrets) {
+function Invoke-PollAndCountWarnings($Config, $Secrets) {
     $cursor = Read-Cursor
     if ($null -eq $cursor) {
         $cursor = [pscustomobject]@{ highestSentId = (Read-HighestTransactionId $Config $Secrets) }
@@ -227,34 +227,34 @@ function Invoke-Poll($Config, $Secrets) {
     return $warnings.Count
 }
 
-function Invoke-Check($Config, $Secrets) {
+function Test-BiotimeAndFunctionAccess($Config, $Secrets) {
     Connect-Biotime $Config $Secrets
     Write-Log 'INFO' "check: logged in to BioTime at $($Config.biotimeBaseUrl)"
     Read-TransactionsPage $Config $Secrets 1 1 | Out-Null
     Write-Log 'INFO' 'check: read BioTime transactions'
     # The function checks the secret before the body, so an empty object proves the secret without marking a sync.
-    $response = Invoke-JsonRequest 'POST' $Config.functionUrl @{ 'X-Fingerprint-Sync-Secret' = $Secrets.syncSecret } @{}
+    $response = Invoke-JsonRequestBeforeRunDeadline 'POST' $Config.functionUrl @{ 'X-Fingerprint-Sync-Secret' = $Secrets.syncSecret } @{}
     if ($response.Status -eq 400) {
         Write-Log 'INFO' 'check: recordFingerprintPunches accepted the sync secret'
-        return 0
+        return $true
     }
     if ($response.Status -eq 401) { Write-Log 'ERROR' 'check: recordFingerprintPunches rejected the sync secret' } else {
         Write-Log 'ERROR' "check: recordFingerprintPunches answered HTTP $($response.Status), expected 400: $($response.Error)"
     }
-    return 1
+    return $false
 }
 
 try {
     $config = Read-Config
     $config.biotimeBaseUrl = $config.biotimeBaseUrl.TrimEnd('/')
     $secrets = Read-Secrets
-    if ($Command -eq 'check') { exit (Invoke-Check $config $secrets) }
+    if ($Command -eq 'check') { exit ([int](-not (Test-BiotimeAndFunctionAccess $config $secrets))) }
     $warningCount = 0
     foreach ($offset in $PollOffsetsSeconds) {
         $wait = $offset - $RunClock.Elapsed.TotalSeconds
         if ($wait -gt 0) { Start-Sleep -Milliseconds ([int]($wait * 1000)) }
         if ($RunClock.Elapsed.TotalSeconds -ge $LastRequestStartSeconds) { break }
-        $warningCount += Invoke-Poll $config $secrets
+        $warningCount += Invoke-PollAndCountWarnings $config $secrets
     }
     if ($warningCount -gt 0) { exit 2 }
     exit 0

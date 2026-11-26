@@ -1,6 +1,3 @@
-# Runs the poller's functions against a fake BioTime and a fake recordFingerprintPunches, both behind Invoke-JsonRequest.
-# Works in Windows PowerShell 5.1 and in PowerShell 7: powershell -ExecutionPolicy Bypass -File test_fingerprint_sync.ps1
-
 $ErrorActionPreference = 'Stop'
 
 $pollerPath = Join-Path $PSScriptRoot 'fingerprint_sync.ps1'
@@ -21,51 +18,57 @@ $Secrets = [pscustomobject]@{ biotimePassword = 'password'; syncSecret = 'secret
 
 function New-Transaction([long]$Id, [int]$UploadedDaysAgo = 0, [string]$PunchTime = '2026-11-20 08:00:00') {
     $uploadTime = (Get-Date).AddDays(-$UploadedDaysAgo).ToString($BiotimeTimeFormat, $Invariant)
-    return [pscustomobject]@{ id = $Id; emp_code = "code$Id"; punch_time = $PunchTime; upload_time = $uploadTime; terminal_sn = 'SN1' }
+    return [pscustomobject]@{ id = $Id; emp_code = "code$Id"; punch_time = $PunchTime; upload_time = $uploadTime; terminal_sn = "SN$Id" }
 }
 
-$ReportOfEveryPunchMatchingAWindow = { param([int]$PunchCount) [pscustomobject]@{ Ok = $true; Status = 200; Json = (New-Report $PunchCount); Error = '' } }
-
-function Reset-Fakes($Transactions) {
-    $script:BiotimeTransactions = [Collections.Generic.List[object]]@($Transactions)
-    $script:PostedBatches = [Collections.Generic.List[object]]::new()
-    $script:PagesRead = 0
-    $script:AfterEachPageRead = {}
-    $script:AnswerOfFunction = $ReportOfEveryPunchMatchingAWindow
-    $script:BiotimeToken = $null
-    $script:ValidBiotimeToken = 'token1'
-    if (Test-Path $CursorPath) { Remove-Item $CursorPath }
-}
-
-function New-Report([int]$MatchedAWindow) {
+function New-Report([hashtable]$Counts = @{}) {
     $report = [ordered]@{}
-    foreach ($field in $ReportFields) { $report[$field] = 0 }
-    $report.matchedAWindow = $MatchedAWindow
+    foreach ($field in $ReportFields) { $report[$field] = [int]$Counts[$field] }
     return [pscustomobject]$report
 }
 
-function Invoke-JsonRequest([string]$Method, [string]$Uri, [hashtable]$Headers, $Body) {
+function New-Answer([int]$Status, $Json) {
+    return [pscustomobject]@{ Ok = ($Status -eq 200); Status = $Status; Json = $Json; Error = '' }
+}
+
+function Reset-FakesAndCursor($Transactions) {
+    $script:BiotimeTransactions = [Collections.Generic.List[object]]@($Transactions)
+    $script:RowsWithinAPageAreReversed = $false
+    $script:AfterEachPageRead = {}
+    $script:PagesRead = New-Object Collections.Generic.List[long]
+    $script:AnswerOfFunction = { New-Answer 200 (New-Report) }
+    $script:AcceptedBodies = New-Object Collections.Generic.List[object]
+    $script:ValidBiotimeToken = 'valid'
+    $script:BiotimeToken = $null
+    if (Test-Path $CursorPath) { Remove-Item $CursorPath }
+}
+
+function Invoke-JsonRequestBeforeRunDeadline([string]$Method, [string]$Uri, [hashtable]$Headers, $Body) {
     if ($Uri -eq 'https://function') {
-        $answer = & $script:AnswerOfFunction @($Body.punches).Count
-        if ($answer.Ok) { $script:PostedBatches.Add(@($Body.punches | ForEach-Object { $_.employeeCode })) }
+        if ($Headers['X-Fingerprint-Sync-Secret'] -ne 'secret') { return New-Answer 401 $null }
+        if ($null -eq $Body.punches) { return New-Answer 400 $null }
+        $answer = & $script:AnswerOfFunction
+        if ($answer.Ok) { $script:AcceptedBodies.Add($Body) }
         return $answer
     }
-    if ($Uri -like '*/api-token-auth/') { return [pscustomobject]@{ Ok = $true; Status = 200; Json = [pscustomobject]@{ token = $script:ValidBiotimeToken }; Error = '' } }
-    if ($Headers.Authorization -ne "Token $script:ValidBiotimeToken") { return [pscustomobject]@{ Ok = $false; Status = 401; Json = $null; Error = '' } }
+    if ($Uri -like '*/api-token-auth/') { return New-Answer 200 ([pscustomobject]@{ token = $script:ValidBiotimeToken }) }
+    if ($Headers.Authorization -ne "Token $script:ValidBiotimeToken") { return New-Answer 401 $null }
     if ($Uri -notmatch '/iclock/api/transactions/\?page=(\d+)&page_size=(\d+)$') { throw "The fake BioTime has no $Uri" }
     $page, $size = [int]$Matches[1], [int]$Matches[2]
-    $rows = @($script:BiotimeTransactions | Sort-Object { [long]$_.id } | Select-Object -Skip (($page - 1) * $size) -First $size)
-    if ($page -gt 1 -and $rows.Count -eq 0) { return [pscustomobject]@{ Ok = $false; Status = 404; Json = $null; Error = 'Invalid page.' } }
-    $response = [pscustomobject]@{ Ok = $true; Status = 200; Json = [pscustomobject]@{ count = $script:BiotimeTransactions.Count; data = $rows }; Error = '' }
-    if ($size -eq $PageSize) { $script:PagesRead++; & $script:AfterEachPageRead }
-    return $response
+    $rows = @($script:BiotimeTransactions | Sort-Object { [long]$_.id } -Descending:$script:RowsWithinAPageAreReversed | Select-Object -Skip (($page - 1) * $size) -First $size)
+    if ($page -gt 1 -and $rows.Count -eq 0) { return New-Answer 404 $null }
+    $answer = New-Answer 200 ([pscustomobject]@{ count = $script:BiotimeTransactions.Count; data = $rows })
+    if ($size -gt 1) { $script:PagesRead.Add($page); & $script:AfterEachPageRead }
+    return $answer
 }
 
 function Remove-BiotimeTransaction([long]$Id) {
     $script:BiotimeTransactions.RemoveAll([Predicate[object]] { param($transaction) $transaction.id -eq $Id }) | Out-Null
 }
 
-function Get-PostedCodes { return (@($script:PostedBatches | ForEach-Object { $_ -join ',' }) -join ' | ') }
+function Get-AcceptedCodesByBatch {
+    return (@($script:AcceptedBodies | ForEach-Object { @($_.punches | ForEach-Object { $_.employeeCode }) -join ',' }) -join ' | ')
+}
 
 $script:Failures = 0
 function Assert-Equal($Expected, $Actual, [string]$What) {
@@ -74,75 +77,102 @@ function Assert-Equal($Expected, $Actual, [string]$What) {
     Write-Host "FAIL $What`n     expected: $Expected`n     actual:   $Actual"
 }
 
+function Assert-Match([string]$Pattern, [string]$Actual, [string]$What) {
+    if ($Actual -match $Pattern) { Write-Host "ok   $What"; return }
+    $script:Failures++
+    Write-Host "FAIL $What`n     expected to match: $Pattern`n     actual:            $Actual"
+}
+
 function Get-ErrorOf([scriptblock]$Action) {
     try { & $Action | Out-Null } catch { return $_.Exception.Message }
     return ''
 }
 
-Reset-Fakes @((New-Transaction 1), (New-Transaction 2))
-Invoke-Poll $Config $Secrets | Out-Null
-Assert-Equal '' (Get-PostedCodes) 'with no cursor, the punches already in BioTime are not sent, only an empty batch'
-Assert-Equal 1 $script:PostedBatches.Count 'with no cursor, the empty batch still marks a sync'
-Assert-Equal 2 (Read-Cursor).highestSentId 'with no cursor, the cursor starts at the newest transaction'
+Reset-FakesAndCursor @(11..18 | ForEach-Object { New-Transaction $_ })
+Invoke-PollAndCountWarnings $Config $Secrets | Out-Null
+Assert-Equal 1 $script:AcceptedBodies.Count 'with no cursor, one batch still marks a sync'
+Assert-Equal '' (Get-AcceptedCodesByBatch) 'with no cursor, the punches already in BioTime are not sent'
+Assert-Equal 18 (Read-Cursor).highestSentId 'with no cursor, the cursor starts at the newest transaction'
 
-Reset-Fakes @(1..8 | ForEach-Object { New-Transaction $_ })
+Reset-FakesAndCursor @(1..8 | ForEach-Object { New-Transaction $_ })
 Save-Cursor ([pscustomobject]@{ highestSentId = 3 })
-Invoke-Poll $Config $Secrets | Out-Null
-Assert-Equal 'code4,code5 | code6,code7 | code8' (Get-PostedCodes) 'punches after the cursor on several pages are sent oldest first in full batches'
+Invoke-PollAndCountWarnings $Config $Secrets | Out-Null
+Assert-Equal 'code4,code5 | code6,code7 | code8' (Get-AcceptedCodesByBatch) 'punches after the cursor on several pages are sent oldest first in full batches'
 Assert-Equal 8 (Read-Cursor).highestSentId 'the cursor ends at the highest id sent'
-Invoke-Poll $Config $Secrets | Out-Null
-Assert-Equal 'code4,code5 | code6,code7 | code8 | ' (Get-PostedCodes) 'the next poll sends nothing again, only an empty batch'
+$script:AcceptedBodies.Clear()
+Invoke-PollAndCountWarnings $Config $Secrets | Out-Null
+Assert-Equal 1 $script:AcceptedBodies.Count 'a poll with nothing new still sends one batch'
+Assert-Equal '' (Get-AcceptedCodesByBatch) 'a poll with nothing new sends no punch again'
 
-Reset-Fakes @(1..8 | ForEach-Object { New-Transaction $_ })
+Reset-FakesAndCursor @((New-Transaction 1), (New-Transaction 2 -PunchTime '2026-11-21 09:30:15'))
+Save-Cursor ([pscustomobject]@{ highestSentId = 1 })
+Invoke-PollAndCountWarnings $Config $Secrets | Out-Null
+$sentPunch = $script:AcceptedBodies[0].punches[0]
+Assert-Equal 'code2 2026-11-21 09:30:15 SN2' "$($sentPunch.employeeCode) $($sentPunch.punchedAtCairoTime) $($sentPunch.terminalSerial)" 'a punch carries the employee code, the raw punch time and the terminal serial'
+Assert-Match "^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$" $script:AcceptedBodies[0].biotimeServerLocalTime 'a batch carries the server local time without a zone'
+
+Reset-FakesAndCursor @(1..8 | ForEach-Object { New-Transaction $_ })
 Save-Cursor ([pscustomobject]@{ highestSentId = 2 })
 $script:AfterEachPageRead = { Remove-BiotimeTransaction 1 }
-Invoke-Poll $Config $Secrets | Out-Null
-Assert-Equal 'code3,code4 | code5,code6 | code7,code8' (Get-PostedCodes) 'a row deleted between page reads makes no unsent punch skipped or sent twice'
+Invoke-PollAndCountWarnings $Config $Secrets | Out-Null
+Assert-Equal 'code3,code4 | code5,code6 | code7,code8' (Get-AcceptedCodesByBatch) 'a row deleted between page reads makes no unsent punch skipped or sent twice'
 
-Reset-Fakes @(1..5 | ForEach-Object { New-Transaction $_ })
+Reset-FakesAndCursor @(1..5 | ForEach-Object { New-Transaction $_ })
 Save-Cursor ([pscustomobject]@{ highestSentId = 1 })
-$script:AnswerOfFunction = {
-    param([int]$PunchCount)
-    if ($script:PostedBatches.Count -eq 1) { return [pscustomobject]@{ Ok = $false; Status = 500; Json = $null; Error = 'down' } }
-    & $ReportOfEveryPunchMatchingAWindow $PunchCount
-}
-$failedPollError = Get-ErrorOf { Invoke-Poll $Config $Secrets }
-Assert-Equal 'recordFingerprintPunches answered HTTP 500 to a batch of 2: down' $failedPollError 'a batch the function refuses stops the poll'
+$script:AnswerOfFunction = { if ($script:AcceptedBodies.Count -eq 1) { New-Answer 500 $null } else { New-Answer 200 (New-Report) } }
+Assert-Match 'HTTP 500' (Get-ErrorOf { Invoke-PollAndCountWarnings $Config $Secrets }) 'a batch the function refuses stops the poll'
 Assert-Equal 3 (Read-Cursor).highestSentId 'the cursor stays after the last batch the function reported'
-$script:AnswerOfFunction = $ReportOfEveryPunchMatchingAWindow
-Invoke-Poll $Config $Secrets | Out-Null
-Assert-Equal 'code2,code3 | code4,code5' (Get-PostedCodes) 'the next poll sends the batches that were refused'
+$script:AnswerOfFunction = { New-Answer 200 (New-Report) }
+$script:AcceptedBodies.Clear()
+Invoke-PollAndCountWarnings $Config $Secrets | Out-Null
+Assert-Equal 'code4,code5' (Get-AcceptedCodesByBatch) 'the next poll sends only the batch that was refused'
 
-Reset-Fakes @((New-Transaction 1), (New-Transaction 2))
+Reset-FakesAndCursor @((New-Transaction 1), (New-Transaction 2))
 Save-Cursor ([pscustomobject]@{ highestSentId = 1 })
-$script:AnswerOfFunction = { [pscustomobject]@{ Ok = $true; Status = 200; Json = ''; Error = '' } }
-$olderFunctionError = Get-ErrorOf { Invoke-Poll $Config $Secrets }
-Assert-Equal 'recordFingerprintPunches answered without matchedAWindow, so it may not have recorded the batch; deploy the current function' $olderFunctionError 'an answer without the report stops the poll'
+$script:AnswerOfFunction = { New-Answer 200 '' }
+Assert-Match 'answered without' (Get-ErrorOf { Invoke-PollAndCountWarnings $Config $Secrets }) 'an answer without the report stops the poll'
 Assert-Equal 1 (Read-Cursor).highestSentId 'the cursor stays when the function answers without the report'
 
-Reset-Fakes @((New-Transaction 1), (New-Transaction 2 -PunchTime '20/11/2026 08:00'))
+Reset-FakesAndCursor @((New-Transaction 1), (New-Transaction 2 -PunchTime '20/11/2026 08:00'))
 Save-Cursor ([pscustomobject]@{ highestSentId = 1 })
-$unreadablePunchTimeError = Get-ErrorOf { Invoke-Poll $Config $Secrets }
-Assert-Equal "BioTime transaction 2 has punch_time '20/11/2026 08:00', not yyyy-MM-dd HH:mm:ss; the cursor stays before it" $unreadablePunchTimeError 'a punch time in another layout stops the poll'
-Assert-Equal 0 $script:PostedBatches.Count 'nothing is sent with a punch time in another layout'
+Assert-Match 'punch_time' (Get-ErrorOf { Invoke-PollAndCountWarnings $Config $Secrets }) 'a punch time in another layout stops the poll'
+Assert-Equal 0 $script:AcceptedBodies.Count 'nothing is sent with a punch time in another layout'
+Assert-Equal 1 (Read-Cursor).highestSentId 'the cursor stays with a punch time in another layout'
 
-Reset-Fakes @(@(1..30 | ForEach-Object { New-Transaction $_ -UploadedDaysAgo 30 }) + @(31..34 | ForEach-Object { New-Transaction $_ }))
+Reset-FakesAndCursor @((New-Transaction 1), (New-Transaction 2), (New-Transaction 3))
+Save-Cursor ([pscustomobject]@{ highestSentId = 1 })
+$script:RowsWithinAPageAreReversed = $true
+Assert-Match 'ascending id order' (Get-ErrorOf { Invoke-PollAndCountWarnings $Config $Secrets }) 'a page out of id order stops the poll'
+Assert-Equal 0 $script:AcceptedBodies.Count 'nothing is sent from a page out of id order'
+Assert-Equal 1 (Read-Cursor).highestSentId 'the cursor stays with a page out of id order'
+
+Reset-FakesAndCursor @(@(1..30 | ForEach-Object { New-Transaction $_ -UploadedDaysAgo 30 }) + @(31..34 | ForEach-Object { New-Transaction $_ }))
 Save-Cursor ([pscustomobject]@{ highestSentId = 2 })
-Invoke-Poll $Config $Secrets | Out-Null
-Assert-Equal 3 $script:PagesRead 'after a long outage the read stops at the first page of uploads too old for the function'
-Assert-Equal 'code28,code29 | code30,code31 | code32,code33 | code34' (Get-PostedCodes) 'after a long outage the recent uploads are sent'
+Invoke-PollAndCountWarnings $Config $Secrets | Out-Null
+Assert-Equal $false $script:PagesRead.Contains([long]1) 'after a long outage the read stops before the oldest uploads'
+Assert-Equal 'code28,code29 | code30,code31 | code32,code33 | code34' (Get-AcceptedCodesByBatch) 'after a long outage the recent uploads are sent'
 Assert-Equal 34 (Read-Cursor).highestSentId 'after a long outage the cursor moves past the uploads that were too old to read'
 
-Reset-Fakes @((New-Transaction 1), (New-Transaction 2))
+Reset-FakesAndCursor @((New-Transaction 1), (New-Transaction 2))
 Save-Cursor ([pscustomobject]@{ highestSentId = 1 })
+$script:ValidBiotimeToken = 'fresh'
 $script:BiotimeToken = 'expired'
-Invoke-Poll $Config $Secrets | Out-Null
-Assert-Equal 'code2' (Get-PostedCodes) 'an expired BioTime token is replaced by logging in again'
+Invoke-PollAndCountWarnings $Config $Secrets | Out-Null
+Assert-Equal 'code2' (Get-AcceptedCodesByBatch) 'an expired BioTime token is replaced by logging in again'
 
-$unorderedPage = [pscustomobject]@{ count = 2; data = @([pscustomobject]@{ id = 5 }, [pscustomobject]@{ id = 4 }) }
-function Invoke-BiotimeGetLoggingInAgainOn401 { return $unorderedPage }
-$unorderedError = Get-ErrorOf { Read-TransactionsPage $Config $Secrets 1 3 }
-Assert-Equal 'BioTime page 1 of transactions is not in ascending id order, so new punches cannot be found by id; nothing was sent and the cursor is unchanged' $unorderedError 'a page out of id order stops the read'
+Reset-FakesAndCursor @(1..4 | ForEach-Object { New-Transaction $_ })
+Save-Cursor ([pscustomobject]@{ highestSentId = 1 })
+$script:AnswerOfFunction = { New-Answer 200 (New-Report @{ ignoredInFuture = 1; ignoredTooOld = 1 }) }
+Assert-Equal 2 (Invoke-PollAndCountWarnings $Config $Secrets) 'a poll counts one warning for each kind of ignored punch, however many batches report it'
+Reset-FakesAndCursor @((New-Transaction 1))
+Save-Cursor ([pscustomobject]@{ highestSentId = 1 })
+Assert-Equal 0 (Invoke-PollAndCountWarnings $Config $Secrets) 'a poll with nothing ignored counts no warning'
+
+Reset-FakesAndCursor @((New-Transaction 1))
+Assert-Equal $true (Test-BiotimeAndFunctionAccess $Config $Secrets) 'check passes when the function accepts the sync secret'
+Assert-Equal 0 $script:AcceptedBodies.Count 'check marks no sync'
+$secretsWithAWrongSyncSecret = [pscustomobject]@{ biotimePassword = 'password'; syncSecret = 'wrong' }
+Assert-Equal $false (Test-BiotimeAndFunctionAccess $Config $secretsWithAWrongSyncSecret) 'check fails when the function rejects the sync secret'
 
 Remove-Item -Recurse -Force $installFolder
 if ($script:Failures -gt 0) { Write-Host "$script:Failures failed"; exit 1 }

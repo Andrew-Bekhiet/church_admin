@@ -1,6 +1,6 @@
 # Fingerprint sync
 
-Two Windows PowerShell 5.1 scripts for the fingerprint server (BioTime, Windows 10). A scheduled task runs `fingerprint_sync.ps1` every minute as SYSTEM. Each run polls BioTime three times, at 0, 20 and 40 seconds, and posts new punches to the `recordFingerprintPunches` function, at most 500 per request. A poll with no new punches still posts an empty batch, so the app's last fingerprint attendance sync time shows the poller is alive. Every run ends within about 55 seconds.
+Two Windows PowerShell 5.1 scripts for the fingerprint server (BioTime, Windows 10). A scheduled task runs `fingerprint_sync.ps1` every minute as SYSTEM. Each run polls BioTime three times, at 0, 20 and 40 seconds, and posts new punches to the `recordFingerprintPunches` function, at most 500 per request. A poll with no new punches still posts an empty batch, so the app's last fingerprint attendance sync time shows the poller is alive. Every run ends within about 54 seconds.
 
 ## What you need
 
@@ -23,7 +23,7 @@ Setup then:
 
 - makes Administrators the owner of `C:\fingerprint_sync` and everything in it, and resets their access to Administrators and SYSTEM, with read access for other users and none for anyone granted more before, because SYSTEM runs the script from there;
 - saves the settings in `config.json`, and the password and secret in `secrets.bin`, encrypted for this machine with DPAPI and recreated on every run so that only Administrators and SYSTEM can read it;
-- runs the check below, and stops if it fails;
+- runs the check below, and stops if it fails. The new settings stay saved, so a task registered earlier fails with them, keeping its cursor, until setup is run again with working ones;
 - registers the `Fingerprint sync` task: every minute, as SYSTEM, whether or not anyone is logged on, never two runs at once, stopped after 2 minutes if it hangs. Then it starts the task.
 
 On its first run the poller sends nothing already in BioTime. It saves the highest BioTime transaction id it found in `cursor.json` and from then on sends only transactions with a higher id.
@@ -58,9 +58,9 @@ This removes the task. Delete `C:\fingerprint_sync` afterwards to remove the set
 | -- | -- |
 | `ERROR ... skipping the rest of this run` | BioTime or the function failed or timed out. Batches already sent stay sent; the next minute retries the rest. |
 | `ERROR ... not in ascending id order` | BioTime listed transactions out of id order, so the poller cannot tell which are new. It sends nothing and keeps its cursor until the order is restored. |
-| `ERROR ... not yyyy-MM-dd HH:mm:ss` | BioTime returned a punch time in a layout the function cannot read. The poller stops before that transaction, so nothing after it is sent until that transaction is corrected or deleted in BioTime. |
+| `ERROR ... not yyyy-MM-dd HH:mm:ss` | BioTime returned a punch time in a layout the function cannot read. The poller sends nothing from the batch of up to 500 transactions that holds it, or after it, until that transaction is corrected or deleted in BioTime. |
 | `WARN ... linked to no person` | A punch's fingerprint ID matches no person in the app. The line says how many; the function's own log in the Firebase console names each ID. These punches are not recorded and are not sent again. Set the fingerprint ID on each person so their later punches are recorded. |
-| `WARN ... rejected by the function as malformed` | The function could not read a punch, for example one with no employee code. It is not recorded. |
+| `WARN ... rejected by the function as malformed` | The function could not read a punch, for example one with no fingerprint ID. It is not recorded. |
 | `WARN ... older than the function accepts` | The punches were more than 10 days old, usually from a device that was offline. They are not recorded. |
 | `WARN ... in the future` | The fingerprint server's or a device's clock is ahead of Cairo time. These punches are not recorded and are not sent again. Fix the clock so later punches are recorded. |
 
