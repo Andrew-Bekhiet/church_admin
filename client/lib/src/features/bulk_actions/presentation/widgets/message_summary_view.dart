@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -38,6 +40,12 @@ class MessageSummaryView extends StatelessWidget {
               ),
               contentPadding: EdgeInsets.zero,
               title: Text(recipient.person.name),
+              onTap: () => unawaited(
+                ViewPersonRoute(
+                  id: recipient.person.id,
+                  person: recipient.person,
+                ).push(context),
+              ),
             ),
         ],
         Padding(

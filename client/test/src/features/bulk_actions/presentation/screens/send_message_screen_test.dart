@@ -3,14 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../fakes/fake_box.dart';
-import '../../../../fakes/fake_logging_service.dart';
-import '../../../../fakes/fake_persons_dao.dart';
-import '../../../../fakes/mock_auth_bloc.dart';
-import '../../../../fakes/mock_database_service.dart';
-import '../../../../fakes/mock_launcher_service.dart';
-import '../../../../fakes/recording_analytics_provider.dart';
 import '../../../../utils.dart';
+import 'send_message_screen_harness.dart';
 
 void main() {
   const markPhone = PhoneContact(id: 'c2', phone: '01000000002');
@@ -24,40 +18,16 @@ void main() {
     PersonMessageFields.firstName,
   );
 
-  late MockLauncherService launcher;
-  late UserPreferencesService userPreferences;
+  late SendMessageScreenHarness harness;
 
   setUp(() {
-    launcher = MockLauncherService();
-    when(
-      () => launcher.launchWhatsappChat(any(), text: any(named: 'text')),
-    ).thenAnswer((_) async => true);
-    final database = MockDatabaseService();
-    when(() => database.persons).thenReturn(
-      FakePersonsDAO()
-        ..personsWithPhoneContacts = [
-          mark.copyWith(contacts: [markPhone]),
-          mina.copyWith(contacts: [minaPhone]),
-          john.copyWith(contacts: [johnPhone]),
-          peterWithoutPhone,
-        ],
-    );
-
-    userPreferences = UserPreferencesService(
-      box: FakeSyncKVStore(),
-      databaseService: database,
-      authBloc: MockAuthBloc(),
-    );
-
-    initGlobalProviderContainer([
-      databaseServiceProvider.overrideWithValue(database),
-      userPreferencesServiceProvider.overrideWithValue(userPreferences),
-      launcherServiceProvider.overrideWithValue(launcher),
-      loggingServiceProvider.overrideWithValue(FakeLoggingService()),
-      analyticsServiceProvider.overrideWithValue(
-        AnalyticsService([RecordingAnalyticsProvider()], FakeLoggingService()),
-      ),
-    ]);
+    harness = SendMessageScreenHarness()..install();
+    harness.personsDAO.personsWithPhoneContacts = [
+      mark.copyWith(contacts: [markPhone]),
+      mina.copyWith(contacts: [minaPhone]),
+      john.copyWith(contacts: [johnPhone]),
+      peterWithoutPhone,
+    ];
   });
 
   tearDown(defaultTearDown);
@@ -65,21 +35,7 @@ void main() {
   Future<void> pumpScreen(
     WidgetTester tester, {
     required Set<Person> persons,
-  }) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        theme: ThemingService.getDefault(
-          isDarkOverride: false,
-          greatFeastThemeOverride: false,
-        ),
-        home: SendMessageScreen(
-          persons: persons,
-          action: const SendWhatsappMessageBulkAction(),
-        ),
-      ),
-    );
-    await tester.pumpAndSettle();
-  }
+  }) => harness.open(tester, persons: persons);
 
   Future<void> startAndOpenFirstChat(WidgetTester tester) async {
     await tester.ensureVisible(
@@ -107,7 +63,7 @@ void main() {
     tester,
   ) async {
     final lastText = 'اهلا $firstNameToken';
-    await userPreferences.setLastWhatsappMessageText(lastText);
+    await harness.userPreferences.setLastWhatsappMessageText(lastText);
 
     await pumpScreen(tester, persons: {mina, mark});
 
@@ -160,7 +116,7 @@ void main() {
     await startAndOpenFirstChat(tester);
 
     verify(
-      () => launcher.launchWhatsappChat(
+      () => harness.launcher.launchWhatsappChat(
         PhoneNumberService.I.formatInternational(minaPhone.phone),
         text: MessageTemplate(
           text: editedText,
@@ -284,4 +240,31 @@ void main() {
       findsOneWidget,
     );
   });
+
+  testWidgets(
+    'tapping a person without a phone in the summary opens that person',
+    (tester) async {
+      await pumpScreen(tester, persons: {mina, mark, peterWithoutPhone});
+      await openFirstChatThenSkipTheNext(tester);
+
+      await tester.tap(
+        find.byKey(MessageSummaryViewKeys.withoutPhoneFor(peterWithoutPhone)),
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        find
+            .byKey(
+              SendMessageScreenHarnessKeys.pageFor(
+                ViewPersonRoute(
+                  id: peterWithoutPhone.id,
+                  person: peterWithoutPhone,
+                ),
+              ),
+            )
+            .hitTestable(),
+        findsOneWidget,
+      );
+    },
+  );
 }
