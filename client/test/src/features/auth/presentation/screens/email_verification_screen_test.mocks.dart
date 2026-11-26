@@ -136,51 +136,46 @@ class _FakeDataChecksDAO_18 extends _i1.SmartFake implements _i3.DataChecksDAO {
     : super(parent, parentInvocation);
 }
 
-class _FakeFcmTokensDAO_19 extends _i1.SmartFake implements _i3.FcmTokensDAO {
-  _FakeFcmTokensDAO_19(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeFingerprintIdsDAO_20 extends _i1.SmartFake
+class _FakeFingerprintIdsDAO_19 extends _i1.SmartFake
     implements _i3.FingerprintIdsDAO {
-  _FakeFingerprintIdsDAO_20(Object parent, Invocation parentInvocation)
+  _FakeFingerprintIdsDAO_19(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeFingerprintSyncStatusDAO_21 extends _i1.SmartFake
+class _FakeFingerprintSyncStatusDAO_20 extends _i1.SmartFake
     implements _i3.FingerprintSyncStatusDAO {
-  _FakeFingerprintSyncStatusDAO_21(Object parent, Invocation parentInvocation)
+  _FakeFingerprintSyncStatusDAO_20(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeScreenCaptureAttemptsDAO_22 extends _i1.SmartFake
+class _FakeScreenCaptureAttemptsDAO_21 extends _i1.SmartFake
     implements _i3.ScreenCaptureAttemptsDAO {
-  _FakeScreenCaptureAttemptsDAO_22(Object parent, Invocation parentInvocation)
+  _FakeScreenCaptureAttemptsDAO_21(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeMetadataDAO_23 extends _i1.SmartFake implements _i3.MetadataDAO {
-  _FakeMetadataDAO_23(Object parent, Invocation parentInvocation)
+class _FakeMetadataDAO_22 extends _i1.SmartFake implements _i3.MetadataDAO {
+  _FakeMetadataDAO_22(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeHistoryDAO_24 extends _i1.SmartFake implements _i3.HistoryDAO {
-  _FakeHistoryDAO_24(Object parent, Invocation parentInvocation)
+class _FakeHistoryDAO_23 extends _i1.SmartFake implements _i3.HistoryDAO {
+  _FakeHistoryDAO_23(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeMeetingsDAO_25 extends _i1.SmartFake implements _i3.MeetingsDAO {
-  _FakeMeetingsDAO_25(Object parent, Invocation parentInvocation)
+class _FakeMeetingsDAO_24 extends _i1.SmartFake implements _i3.MeetingsDAO {
+  _FakeMeetingsDAO_24(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeInterceptor_26 extends _i1.SmartFake implements _i4.Interceptor {
-  _FakeInterceptor_26(Object parent, Invocation parentInvocation)
+class _FakeInterceptor_25 extends _i1.SmartFake implements _i4.Interceptor {
+  _FakeInterceptor_25(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeLink_27 extends _i1.SmartFake implements _i5.Link {
-  _FakeLink_27(Object parent, Invocation parentInvocation)
+class _FakeLink_26 extends _i1.SmartFake implements _i5.Link {
+  _FakeLink_26(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -638,23 +633,13 @@ class MockDatabaseService extends _i1.Mock implements _i3.DatabaseService {
   ) as _i3.DataChecksDAO);
 
   @override
-  _i3.FcmTokensDAO get fcmTokens => (super.noSuchMethod(
-    Invocation.getter(#fcmTokens),
-    returnValue: _FakeFcmTokensDAO_19(this, Invocation.getter(#fcmTokens)),
-    returnValueForMissingStub: _FakeFcmTokensDAO_19(
-      this,
-      Invocation.getter(#fcmTokens),
-    ),
-  ) as _i3.FcmTokensDAO);
-
-  @override
   _i3.FingerprintIdsDAO get fingerprintIds => (super.noSuchMethod(
     Invocation.getter(#fingerprintIds),
-    returnValue: _FakeFingerprintIdsDAO_20(
+    returnValue: _FakeFingerprintIdsDAO_19(
       this,
       Invocation.getter(#fingerprintIds),
     ),
-    returnValueForMissingStub: _FakeFingerprintIdsDAO_20(
+    returnValueForMissingStub: _FakeFingerprintIdsDAO_19(
       this,
       Invocation.getter(#fingerprintIds),
     ),
@@ -663,11 +648,11 @@ class MockDatabaseService extends _i1.Mock implements _i3.DatabaseService {
   @override
   _i3.FingerprintSyncStatusDAO get fingerprintSyncStatus => (super.noSuchMethod(
     Invocation.getter(#fingerprintSyncStatus),
-    returnValue: _FakeFingerprintSyncStatusDAO_21(
+    returnValue: _FakeFingerprintSyncStatusDAO_20(
       this,
       Invocation.getter(#fingerprintSyncStatus),
     ),
-    returnValueForMissingStub: _FakeFingerprintSyncStatusDAO_21(
+    returnValueForMissingStub: _FakeFingerprintSyncStatusDAO_20(
       this,
       Invocation.getter(#fingerprintSyncStatus),
     ),
@@ -676,11 +661,11 @@ class MockDatabaseService extends _i1.Mock implements _i3.DatabaseService {
   @override
   _i3.ScreenCaptureAttemptsDAO get screenCaptureAttempts => (super.noSuchMethod(
     Invocation.getter(#screenCaptureAttempts),
-    returnValue: _FakeScreenCaptureAttemptsDAO_22(
+    returnValue: _FakeScreenCaptureAttemptsDAO_21(
       this,
       Invocation.getter(#screenCaptureAttempts),
     ),
-    returnValueForMissingStub: _FakeScreenCaptureAttemptsDAO_22(
+    returnValueForMissingStub: _FakeScreenCaptureAttemptsDAO_21(
       this,
       Invocation.getter(#screenCaptureAttempts),
     ),
@@ -689,8 +674,8 @@ class MockDatabaseService extends _i1.Mock implements _i3.DatabaseService {
   @override
   _i3.MetadataDAO get metadata => (super.noSuchMethod(
     Invocation.getter(#metadata),
-    returnValue: _FakeMetadataDAO_23(this, Invocation.getter(#metadata)),
-    returnValueForMissingStub: _FakeMetadataDAO_23(
+    returnValue: _FakeMetadataDAO_22(this, Invocation.getter(#metadata)),
+    returnValueForMissingStub: _FakeMetadataDAO_22(
       this,
       Invocation.getter(#metadata),
     ),
@@ -699,8 +684,8 @@ class MockDatabaseService extends _i1.Mock implements _i3.DatabaseService {
   @override
   _i3.HistoryDAO get history => (super.noSuchMethod(
     Invocation.getter(#history),
-    returnValue: _FakeHistoryDAO_24(this, Invocation.getter(#history)),
-    returnValueForMissingStub: _FakeHistoryDAO_24(
+    returnValue: _FakeHistoryDAO_23(this, Invocation.getter(#history)),
+    returnValueForMissingStub: _FakeHistoryDAO_23(
       this,
       Invocation.getter(#history),
     ),
@@ -709,8 +694,8 @@ class MockDatabaseService extends _i1.Mock implements _i3.DatabaseService {
   @override
   _i3.MeetingsDAO get meetings => (super.noSuchMethod(
     Invocation.getter(#meetings),
-    returnValue: _FakeMeetingsDAO_25(this, Invocation.getter(#meetings)),
-    returnValueForMissingStub: _FakeMeetingsDAO_25(
+    returnValue: _FakeMeetingsDAO_24(this, Invocation.getter(#meetings)),
+    returnValueForMissingStub: _FakeMeetingsDAO_24(
       this,
       Invocation.getter(#meetings),
     ),
@@ -1071,8 +1056,8 @@ class MockLoggingService extends _i1.Mock implements _i3.LoggingService {
   @override
   _i4.Interceptor get dioInterceptor => (super.noSuchMethod(
     Invocation.getter(#dioInterceptor),
-    returnValue: _FakeInterceptor_26(this, Invocation.getter(#dioInterceptor)),
-    returnValueForMissingStub: _FakeInterceptor_26(
+    returnValue: _FakeInterceptor_25(this, Invocation.getter(#dioInterceptor)),
+    returnValueForMissingStub: _FakeInterceptor_25(
       this,
       Invocation.getter(#dioInterceptor),
     ),
@@ -1081,8 +1066,8 @@ class MockLoggingService extends _i1.Mock implements _i3.LoggingService {
   @override
   _i5.Link get loggingLink => (super.noSuchMethod(
     Invocation.getter(#loggingLink),
-    returnValue: _FakeLink_27(this, Invocation.getter(#loggingLink)),
-    returnValueForMissingStub: _FakeLink_27(
+    returnValue: _FakeLink_26(this, Invocation.getter(#loggingLink)),
+    returnValueForMissingStub: _FakeLink_26(
       this,
       Invocation.getter(#loggingLink),
     ),

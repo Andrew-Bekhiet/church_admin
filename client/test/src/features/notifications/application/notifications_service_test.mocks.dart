@@ -153,109 +153,104 @@ class _FakeDataChecksDAO_19 extends _i1.SmartFake implements _i4.DataChecksDAO {
     : super(parent, parentInvocation);
 }
 
-class _FakeFcmTokensDAO_20 extends _i1.SmartFake implements _i4.FcmTokensDAO {
-  _FakeFcmTokensDAO_20(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeFingerprintIdsDAO_21 extends _i1.SmartFake
+class _FakeFingerprintIdsDAO_20 extends _i1.SmartFake
     implements _i4.FingerprintIdsDAO {
-  _FakeFingerprintIdsDAO_21(Object parent, Invocation parentInvocation)
+  _FakeFingerprintIdsDAO_20(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeFingerprintSyncStatusDAO_22 extends _i1.SmartFake
+class _FakeFingerprintSyncStatusDAO_21 extends _i1.SmartFake
     implements _i4.FingerprintSyncStatusDAO {
-  _FakeFingerprintSyncStatusDAO_22(Object parent, Invocation parentInvocation)
+  _FakeFingerprintSyncStatusDAO_21(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeScreenCaptureAttemptsDAO_23 extends _i1.SmartFake
+class _FakeScreenCaptureAttemptsDAO_22 extends _i1.SmartFake
     implements _i4.ScreenCaptureAttemptsDAO {
-  _FakeScreenCaptureAttemptsDAO_23(Object parent, Invocation parentInvocation)
+  _FakeScreenCaptureAttemptsDAO_22(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeMetadataDAO_24 extends _i1.SmartFake implements _i4.MetadataDAO {
-  _FakeMetadataDAO_24(Object parent, Invocation parentInvocation)
+class _FakeMetadataDAO_23 extends _i1.SmartFake implements _i4.MetadataDAO {
+  _FakeMetadataDAO_23(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeHistoryDAO_25 extends _i1.SmartFake implements _i4.HistoryDAO {
-  _FakeHistoryDAO_25(Object parent, Invocation parentInvocation)
+class _FakeHistoryDAO_24 extends _i1.SmartFake implements _i4.HistoryDAO {
+  _FakeHistoryDAO_24(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeMeetingsDAO_26 extends _i1.SmartFake implements _i4.MeetingsDAO {
-  _FakeMeetingsDAO_26(Object parent, Invocation parentInvocation)
+class _FakeMeetingsDAO_25 extends _i1.SmartFake implements _i4.MeetingsDAO {
+  _FakeMeetingsDAO_25(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeHttpsCallable_27 extends _i1.SmartFake implements _i5.HttpsCallable {
-  _FakeHttpsCallable_27(Object parent, Invocation parentInvocation)
+class _FakeHttpsCallable_26 extends _i1.SmartFake implements _i5.HttpsCallable {
+  _FakeHttpsCallable_26(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeResponse_28<T> extends _i1.SmartFake implements _i6.Response<T> {
-  _FakeResponse_28(Object parent, Invocation parentInvocation)
+class _FakeResponse_27<T> extends _i1.SmartFake implements _i6.Response<T> {
+  _FakeResponse_27(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeNotificationSetting_29 extends _i1.SmartFake
+class _FakeNotificationSetting_28 extends _i1.SmartFake
     implements _i4.NotificationSetting {
-  _FakeNotificationSetting_29(Object parent, Invocation parentInvocation)
+  _FakeNotificationSetting_28(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeFile_30 extends _i1.SmartFake implements _i7.File {
-  _FakeFile_30(Object parent, Invocation parentInvocation)
+class _FakeFile_29 extends _i1.SmartFake implements _i7.File {
+  _FakeFile_29(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeFileInfo_31 extends _i1.SmartFake implements _i8.FileInfo {
-  _FakeFileInfo_31(Object parent, Invocation parentInvocation)
+class _FakeFileInfo_30 extends _i1.SmartFake implements _i8.FileInfo {
+  _FakeFileInfo_30(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeFileSystem_32 extends _i1.SmartFake implements _i7.FileSystem {
-  _FakeFileSystem_32(Object parent, Invocation parentInvocation)
+class _FakeFileSystem_31 extends _i1.SmartFake implements _i7.FileSystem {
+  _FakeFileSystem_31(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeDirectory_33 extends _i1.SmartFake implements _i7.Directory {
-  _FakeDirectory_33(Object parent, Invocation parentInvocation)
+class _FakeDirectory_32 extends _i1.SmartFake implements _i7.Directory {
+  _FakeDirectory_32(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeUri_34 extends _i1.SmartFake implements Uri {
-  _FakeUri_34(Object parent, Invocation parentInvocation)
+class _FakeUri_33 extends _i1.SmartFake implements Uri {
+  _FakeUri_33(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeFileSystemEntity_35 extends _i1.SmartFake
+class _FakeFileSystemEntity_34 extends _i1.SmartFake
     implements _i7.FileSystemEntity {
-  _FakeFileSystemEntity_35(Object parent, Invocation parentInvocation)
+  _FakeFileSystemEntity_34(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeFileStat_36 extends _i1.SmartFake implements _i9.FileStat {
-  _FakeFileStat_36(Object parent, Invocation parentInvocation)
+class _FakeFileStat_35 extends _i1.SmartFake implements _i9.FileStat {
+  _FakeFileStat_35(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeDateTime_37 extends _i1.SmartFake implements DateTime {
-  _FakeDateTime_37(Object parent, Invocation parentInvocation)
+class _FakeDateTime_36 extends _i1.SmartFake implements DateTime {
+  _FakeDateTime_36(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeRandomAccessFile_38 extends _i1.SmartFake
+class _FakeRandomAccessFile_37 extends _i1.SmartFake
     implements _i9.RandomAccessFile {
-  _FakeRandomAccessFile_38(Object parent, Invocation parentInvocation)
+  _FakeRandomAccessFile_37(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeIOSink_39 extends _i1.SmartFake implements _i9.IOSink {
-  _FakeIOSink_39(Object parent, Invocation parentInvocation)
+class _FakeIOSink_38 extends _i1.SmartFake implements _i9.IOSink {
+  _FakeIOSink_38(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -1165,23 +1160,13 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
   ) as _i4.DataChecksDAO);
 
   @override
-  _i4.FcmTokensDAO get fcmTokens => (super.noSuchMethod(
-    Invocation.getter(#fcmTokens),
-    returnValue: _FakeFcmTokensDAO_20(this, Invocation.getter(#fcmTokens)),
-    returnValueForMissingStub: _FakeFcmTokensDAO_20(
-      this,
-      Invocation.getter(#fcmTokens),
-    ),
-  ) as _i4.FcmTokensDAO);
-
-  @override
   _i4.FingerprintIdsDAO get fingerprintIds => (super.noSuchMethod(
     Invocation.getter(#fingerprintIds),
-    returnValue: _FakeFingerprintIdsDAO_21(
+    returnValue: _FakeFingerprintIdsDAO_20(
       this,
       Invocation.getter(#fingerprintIds),
     ),
-    returnValueForMissingStub: _FakeFingerprintIdsDAO_21(
+    returnValueForMissingStub: _FakeFingerprintIdsDAO_20(
       this,
       Invocation.getter(#fingerprintIds),
     ),
@@ -1190,11 +1175,11 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
   @override
   _i4.FingerprintSyncStatusDAO get fingerprintSyncStatus => (super.noSuchMethod(
     Invocation.getter(#fingerprintSyncStatus),
-    returnValue: _FakeFingerprintSyncStatusDAO_22(
+    returnValue: _FakeFingerprintSyncStatusDAO_21(
       this,
       Invocation.getter(#fingerprintSyncStatus),
     ),
-    returnValueForMissingStub: _FakeFingerprintSyncStatusDAO_22(
+    returnValueForMissingStub: _FakeFingerprintSyncStatusDAO_21(
       this,
       Invocation.getter(#fingerprintSyncStatus),
     ),
@@ -1203,11 +1188,11 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
   @override
   _i4.ScreenCaptureAttemptsDAO get screenCaptureAttempts => (super.noSuchMethod(
     Invocation.getter(#screenCaptureAttempts),
-    returnValue: _FakeScreenCaptureAttemptsDAO_23(
+    returnValue: _FakeScreenCaptureAttemptsDAO_22(
       this,
       Invocation.getter(#screenCaptureAttempts),
     ),
-    returnValueForMissingStub: _FakeScreenCaptureAttemptsDAO_23(
+    returnValueForMissingStub: _FakeScreenCaptureAttemptsDAO_22(
       this,
       Invocation.getter(#screenCaptureAttempts),
     ),
@@ -1216,8 +1201,8 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
   @override
   _i4.MetadataDAO get metadata => (super.noSuchMethod(
     Invocation.getter(#metadata),
-    returnValue: _FakeMetadataDAO_24(this, Invocation.getter(#metadata)),
-    returnValueForMissingStub: _FakeMetadataDAO_24(
+    returnValue: _FakeMetadataDAO_23(this, Invocation.getter(#metadata)),
+    returnValueForMissingStub: _FakeMetadataDAO_23(
       this,
       Invocation.getter(#metadata),
     ),
@@ -1226,8 +1211,8 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
   @override
   _i4.HistoryDAO get history => (super.noSuchMethod(
     Invocation.getter(#history),
-    returnValue: _FakeHistoryDAO_25(this, Invocation.getter(#history)),
-    returnValueForMissingStub: _FakeHistoryDAO_25(
+    returnValue: _FakeHistoryDAO_24(this, Invocation.getter(#history)),
+    returnValueForMissingStub: _FakeHistoryDAO_24(
       this,
       Invocation.getter(#history),
     ),
@@ -1236,8 +1221,8 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
   @override
   _i4.MeetingsDAO get meetings => (super.noSuchMethod(
     Invocation.getter(#meetings),
-    returnValue: _FakeMeetingsDAO_26(this, Invocation.getter(#meetings)),
-    returnValueForMissingStub: _FakeMeetingsDAO_26(
+    returnValue: _FakeMeetingsDAO_25(this, Invocation.getter(#meetings)),
+    returnValueForMissingStub: _FakeMeetingsDAO_25(
       this,
       Invocation.getter(#meetings),
     ),
@@ -1252,34 +1237,6 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
       ) as Map<Type, _i4.DAOBase<_i4.ViewableWithID>>);
 }
 
-/// A class which mocks [FcmTokensDAO].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockFcmTokensDAO extends _i1.Mock implements _i4.FcmTokensDAO {
-  @override
-  _i4.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
-    Invocation.getter(#graphQLClient),
-    returnValue: _FakeDBGraphQLClient_2(
-      this,
-      Invocation.getter(#graphQLClient),
-    ),
-    returnValueForMissingStub: _FakeDBGraphQLClient_2(
-      this,
-      Invocation.getter(#graphQLClient),
-    ),
-  ) as _i4.DBGraphQLClient);
-
-  @override
-  _i11.Future<void> deleteByUidAndToken({
-    required String? uid,
-    required String? token,
-  }) => (super.noSuchMethod(
-    Invocation.method(#deleteByUidAndToken, [], {#uid: uid, #token: token}),
-    returnValue: _i11.Future<void>.value(),
-    returnValueForMissingStub: _i11.Future<void>.value(),
-  ) as _i11.Future<void>);
-}
-
 /// A class which mocks [FunctionsService].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -1290,11 +1247,11 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
     _i5.HttpsCallableOptions? options,
   }) => (super.noSuchMethod(
     Invocation.method(#httpsCallable, [functionName], {#options: options}),
-    returnValue: _FakeHttpsCallable_27(
+    returnValue: _FakeHttpsCallable_26(
       this,
       Invocation.method(#httpsCallable, [functionName], {#options: options}),
     ),
-    returnValueForMissingStub: _FakeHttpsCallable_27(
+    returnValueForMissingStub: _FakeHttpsCallable_26(
       this,
       Invocation.method(#httpsCallable, [functionName], {#options: options}),
     ),
@@ -1393,7 +1350,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
       #onSendProgress: onSendProgress,
     }),
     returnValue: _i11.Future<_i6.Response<dynamic>>.value(
-      _FakeResponse_28<dynamic>(
+      _FakeResponse_27<dynamic>(
         this,
         Invocation.method(#uploadPhoto, [], {
           #url: url,
@@ -1405,7 +1362,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
       ),
     ),
     returnValueForMissingStub: _i11.Future<_i6.Response<dynamic>>.value(
-      _FakeResponse_28<dynamic>(
+      _FakeResponse_27<dynamic>(
         this,
         Invocation.method(#uploadPhoto, [], {
           #url: url,
@@ -1574,11 +1531,11 @@ class MockNotificationsSettingsStorage extends _i1.Mock
   @override
   _i4.NotificationSetting get birthDayTimeSetting => (super.noSuchMethod(
     Invocation.getter(#birthDayTimeSetting),
-    returnValue: _FakeNotificationSetting_29(
+    returnValue: _FakeNotificationSetting_28(
       this,
       Invocation.getter(#birthDayTimeSetting),
     ),
-    returnValueForMissingStub: _FakeNotificationSetting_29(
+    returnValueForMissingStub: _FakeNotificationSetting_28(
       this,
       Invocation.getter(#birthDayTimeSetting),
     ),
@@ -1587,11 +1544,11 @@ class MockNotificationsSettingsStorage extends _i1.Mock
   @override
   _i4.NotificationSetting get kodasTimeSetting => (super.noSuchMethod(
     Invocation.getter(#kodasTimeSetting),
-    returnValue: _FakeNotificationSetting_29(
+    returnValue: _FakeNotificationSetting_28(
       this,
       Invocation.getter(#kodasTimeSetting),
     ),
-    returnValueForMissingStub: _FakeNotificationSetting_29(
+    returnValueForMissingStub: _FakeNotificationSetting_28(
       this,
       Invocation.getter(#kodasTimeSetting),
     ),
@@ -1600,11 +1557,11 @@ class MockNotificationsSettingsStorage extends _i1.Mock
   @override
   _i4.NotificationSetting get attendanceTimeSetting => (super.noSuchMethod(
     Invocation.getter(#attendanceTimeSetting),
-    returnValue: _FakeNotificationSetting_29(
+    returnValue: _FakeNotificationSetting_28(
       this,
       Invocation.getter(#attendanceTimeSetting),
     ),
-    returnValueForMissingStub: _FakeNotificationSetting_29(
+    returnValueForMissingStub: _FakeNotificationSetting_28(
       this,
       Invocation.getter(#attendanceTimeSetting),
     ),
@@ -1613,11 +1570,11 @@ class MockNotificationsSettingsStorage extends _i1.Mock
   @override
   _i4.NotificationSetting get confessionTimeSetting => (super.noSuchMethod(
     Invocation.getter(#confessionTimeSetting),
-    returnValue: _FakeNotificationSetting_29(
+    returnValue: _FakeNotificationSetting_28(
       this,
       Invocation.getter(#confessionTimeSetting),
     ),
-    returnValueForMissingStub: _FakeNotificationSetting_29(
+    returnValueForMissingStub: _FakeNotificationSetting_28(
       this,
       Invocation.getter(#confessionTimeSetting),
     ),
@@ -1845,7 +1802,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i17.BaseCacheManager {
   }) => (super.noSuchMethod(
     Invocation.method(#getSingleFile, [url], {#key: key, #headers: headers}),
     returnValue: _i11.Future<_i7.File>.value(
-      _FakeFile_30(
+      _FakeFile_29(
         this,
         Invocation.method(
           #getSingleFile,
@@ -1855,7 +1812,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i17.BaseCacheManager {
       ),
     ),
     returnValueForMissingStub: _i11.Future<_i7.File>.value(
-      _FakeFile_30(
+      _FakeFile_29(
         this,
         Invocation.method(
           #getSingleFile,
@@ -1906,7 +1863,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i17.BaseCacheManager {
       {#key: key, #authHeaders: authHeaders, #force: force},
     ),
     returnValue: _i11.Future<_i8.FileInfo>.value(
-      _FakeFileInfo_31(
+      _FakeFileInfo_30(
         this,
         Invocation.method(
           #downloadFile,
@@ -1916,7 +1873,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i17.BaseCacheManager {
       ),
     ),
     returnValueForMissingStub: _i11.Future<_i8.FileInfo>.value(
-      _FakeFileInfo_31(
+      _FakeFileInfo_30(
         this,
         Invocation.method(
           #downloadFile,
@@ -1964,7 +1921,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i17.BaseCacheManager {
       {#key: key, #eTag: eTag, #maxAge: maxAge, #fileExtension: fileExtension},
     ),
     returnValue: _i11.Future<_i7.File>.value(
-      _FakeFile_30(
+      _FakeFile_29(
         this,
         Invocation.method(
           #putFile,
@@ -1979,7 +1936,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i17.BaseCacheManager {
       ),
     ),
     returnValueForMissingStub: _i11.Future<_i7.File>.value(
-      _FakeFile_30(
+      _FakeFile_29(
         this,
         Invocation.method(
           #putFile,
@@ -2010,7 +1967,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i17.BaseCacheManager {
       {#key: key, #eTag: eTag, #maxAge: maxAge, #fileExtension: fileExtension},
     ),
     returnValue: _i11.Future<_i7.File>.value(
-      _FakeFile_30(
+      _FakeFile_29(
         this,
         Invocation.method(
           #putFileStream,
@@ -2025,7 +1982,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i17.BaseCacheManager {
       ),
     ),
     returnValueForMissingStub: _i11.Future<_i7.File>.value(
-      _FakeFile_30(
+      _FakeFile_29(
         this,
         Invocation.method(
           #putFileStream,
@@ -2070,15 +2027,15 @@ class MockFile extends _i1.Mock implements _i7.File {
   @override
   _i7.File get absolute => (super.noSuchMethod(
     Invocation.getter(#absolute),
-    returnValue: _FakeFile_30(this, Invocation.getter(#absolute)),
-    returnValueForMissingStub: _FakeFile_30(this, Invocation.getter(#absolute)),
+    returnValue: _FakeFile_29(this, Invocation.getter(#absolute)),
+    returnValueForMissingStub: _FakeFile_29(this, Invocation.getter(#absolute)),
   ) as _i7.File);
 
   @override
   _i7.FileSystem get fileSystem => (super.noSuchMethod(
     Invocation.getter(#fileSystem),
-    returnValue: _FakeFileSystem_32(this, Invocation.getter(#fileSystem)),
-    returnValueForMissingStub: _FakeFileSystem_32(
+    returnValue: _FakeFileSystem_31(this, Invocation.getter(#fileSystem)),
+    returnValueForMissingStub: _FakeFileSystem_31(
       this,
       Invocation.getter(#fileSystem),
     ),
@@ -2107,8 +2064,8 @@ class MockFile extends _i1.Mock implements _i7.File {
   @override
   _i7.Directory get parent => (super.noSuchMethod(
     Invocation.getter(#parent),
-    returnValue: _FakeDirectory_33(this, Invocation.getter(#parent)),
-    returnValueForMissingStub: _FakeDirectory_33(
+    returnValue: _FakeDirectory_32(this, Invocation.getter(#parent)),
+    returnValueForMissingStub: _FakeDirectory_32(
       this,
       Invocation.getter(#parent),
     ),
@@ -2127,8 +2084,8 @@ class MockFile extends _i1.Mock implements _i7.File {
   @override
   Uri get uri => (super.noSuchMethod(
     Invocation.getter(#uri),
-    returnValue: _FakeUri_34(this, Invocation.getter(#uri)),
-    returnValueForMissingStub: _FakeUri_34(this, Invocation.getter(#uri)),
+    returnValue: _FakeUri_33(this, Invocation.getter(#uri)),
+    returnValueForMissingStub: _FakeUri_33(this, Invocation.getter(#uri)),
   ) as Uri);
 
   @override
@@ -2148,7 +2105,7 @@ class MockFile extends _i1.Mock implements _i7.File {
       #exclusive: exclusive,
     }),
     returnValue: _i11.Future<_i7.File>.value(
-      _FakeFile_30(
+      _FakeFile_29(
         this,
         Invocation.method(#create, [], {
           #recursive: recursive,
@@ -2157,7 +2114,7 @@ class MockFile extends _i1.Mock implements _i7.File {
       ),
     ),
     returnValueForMissingStub: _i11.Future<_i7.File>.value(
-      _FakeFile_30(
+      _FakeFile_29(
         this,
         Invocation.method(#create, [], {
           #recursive: recursive,
@@ -2171,18 +2128,18 @@ class MockFile extends _i1.Mock implements _i7.File {
   _i11.Future<_i7.File> rename(String? newPath) => (super.noSuchMethod(
     Invocation.method(#rename, [newPath]),
     returnValue: _i11.Future<_i7.File>.value(
-      _FakeFile_30(this, Invocation.method(#rename, [newPath])),
+      _FakeFile_29(this, Invocation.method(#rename, [newPath])),
     ),
     returnValueForMissingStub: _i11.Future<_i7.File>.value(
-      _FakeFile_30(this, Invocation.method(#rename, [newPath])),
+      _FakeFile_29(this, Invocation.method(#rename, [newPath])),
     ),
   ) as _i11.Future<_i7.File>);
 
   @override
   _i7.File renameSync(String? newPath) => (super.noSuchMethod(
     Invocation.method(#renameSync, [newPath]),
-    returnValue: _FakeFile_30(this, Invocation.method(#renameSync, [newPath])),
-    returnValueForMissingStub: _FakeFile_30(
+    returnValue: _FakeFile_29(this, Invocation.method(#renameSync, [newPath])),
+    returnValueForMissingStub: _FakeFile_29(
       this,
       Invocation.method(#renameSync, [newPath]),
     ),
@@ -2192,18 +2149,18 @@ class MockFile extends _i1.Mock implements _i7.File {
   _i11.Future<_i7.File> copy(String? newPath) => (super.noSuchMethod(
     Invocation.method(#copy, [newPath]),
     returnValue: _i11.Future<_i7.File>.value(
-      _FakeFile_30(this, Invocation.method(#copy, [newPath])),
+      _FakeFile_29(this, Invocation.method(#copy, [newPath])),
     ),
     returnValueForMissingStub: _i11.Future<_i7.File>.value(
-      _FakeFile_30(this, Invocation.method(#copy, [newPath])),
+      _FakeFile_29(this, Invocation.method(#copy, [newPath])),
     ),
   ) as _i11.Future<_i7.File>);
 
   @override
   _i7.File copySync(String? newPath) => (super.noSuchMethod(
     Invocation.method(#copySync, [newPath]),
-    returnValue: _FakeFile_30(this, Invocation.method(#copySync, [newPath])),
-    returnValueForMissingStub: _FakeFile_30(
+    returnValue: _FakeFile_29(this, Invocation.method(#copySync, [newPath])),
+    returnValueForMissingStub: _FakeFile_29(
       this,
       Invocation.method(#copySync, [newPath]),
     ),
@@ -2217,13 +2174,13 @@ class MockFile extends _i1.Mock implements _i7.File {
   }) => (super.noSuchMethod(
     Invocation.method(#writeAsBytes, [bytes], {#mode: mode, #flush: flush}),
     returnValue: _i11.Future<_i7.File>.value(
-      _FakeFile_30(
+      _FakeFile_29(
         this,
         Invocation.method(#writeAsBytes, [bytes], {#mode: mode, #flush: flush}),
       ),
     ),
     returnValueForMissingStub: _i11.Future<_i7.File>.value(
-      _FakeFile_30(
+      _FakeFile_29(
         this,
         Invocation.method(#writeAsBytes, [bytes], {#mode: mode, #flush: flush}),
       ),
@@ -2243,7 +2200,7 @@ class MockFile extends _i1.Mock implements _i7.File {
       {#mode: mode, #encoding: encoding, #flush: flush},
     ),
     returnValue: _i11.Future<_i7.File>.value(
-      _FakeFile_30(
+      _FakeFile_29(
         this,
         Invocation.method(
           #writeAsString,
@@ -2253,7 +2210,7 @@ class MockFile extends _i1.Mock implements _i7.File {
       ),
     ),
     returnValueForMissingStub: _i11.Future<_i7.File>.value(
-      _FakeFile_30(
+      _FakeFile_29(
         this,
         Invocation.method(
           #writeAsString,
@@ -2269,13 +2226,13 @@ class MockFile extends _i1.Mock implements _i7.File {
       (super.noSuchMethod(
         Invocation.method(#delete, [], {#recursive: recursive}),
         returnValue: _i11.Future<_i7.FileSystemEntity>.value(
-          _FakeFileSystemEntity_35(
+          _FakeFileSystemEntity_34(
             this,
             Invocation.method(#delete, [], {#recursive: recursive}),
           ),
         ),
         returnValueForMissingStub: _i11.Future<_i7.FileSystemEntity>.value(
-          _FakeFileSystemEntity_35(
+          _FakeFileSystemEntity_34(
             this,
             Invocation.method(#delete, [], {#recursive: recursive}),
           ),
@@ -2330,18 +2287,18 @@ class MockFile extends _i1.Mock implements _i7.File {
   _i11.Future<_i9.FileStat> stat() => (super.noSuchMethod(
     Invocation.method(#stat, []),
     returnValue: _i11.Future<_i9.FileStat>.value(
-      _FakeFileStat_36(this, Invocation.method(#stat, [])),
+      _FakeFileStat_35(this, Invocation.method(#stat, [])),
     ),
     returnValueForMissingStub: _i11.Future<_i9.FileStat>.value(
-      _FakeFileStat_36(this, Invocation.method(#stat, [])),
+      _FakeFileStat_35(this, Invocation.method(#stat, [])),
     ),
   ) as _i11.Future<_i9.FileStat>);
 
   @override
   _i9.FileStat statSync() => (super.noSuchMethod(
     Invocation.method(#statSync, []),
-    returnValue: _FakeFileStat_36(this, Invocation.method(#statSync, [])),
-    returnValueForMissingStub: _FakeFileStat_36(
+    returnValue: _FakeFileStat_35(this, Invocation.method(#statSync, [])),
+    returnValueForMissingStub: _FakeFileStat_35(
       this,
       Invocation.method(#statSync, []),
     ),
@@ -2391,21 +2348,21 @@ class MockFile extends _i1.Mock implements _i7.File {
   _i11.Future<DateTime> lastAccessed() => (super.noSuchMethod(
     Invocation.method(#lastAccessed, []),
     returnValue: _i11.Future<DateTime>.value(
-      _FakeDateTime_37(this, Invocation.method(#lastAccessed, [])),
+      _FakeDateTime_36(this, Invocation.method(#lastAccessed, [])),
     ),
     returnValueForMissingStub: _i11.Future<DateTime>.value(
-      _FakeDateTime_37(this, Invocation.method(#lastAccessed, [])),
+      _FakeDateTime_36(this, Invocation.method(#lastAccessed, [])),
     ),
   ) as _i11.Future<DateTime>);
 
   @override
   DateTime lastAccessedSync() => (super.noSuchMethod(
     Invocation.method(#lastAccessedSync, []),
-    returnValue: _FakeDateTime_37(
+    returnValue: _FakeDateTime_36(
       this,
       Invocation.method(#lastAccessedSync, []),
     ),
-    returnValueForMissingStub: _FakeDateTime_37(
+    returnValueForMissingStub: _FakeDateTime_36(
       this,
       Invocation.method(#lastAccessedSync, []),
     ),
@@ -2428,21 +2385,21 @@ class MockFile extends _i1.Mock implements _i7.File {
   _i11.Future<DateTime> lastModified() => (super.noSuchMethod(
     Invocation.method(#lastModified, []),
     returnValue: _i11.Future<DateTime>.value(
-      _FakeDateTime_37(this, Invocation.method(#lastModified, [])),
+      _FakeDateTime_36(this, Invocation.method(#lastModified, [])),
     ),
     returnValueForMissingStub: _i11.Future<DateTime>.value(
-      _FakeDateTime_37(this, Invocation.method(#lastModified, [])),
+      _FakeDateTime_36(this, Invocation.method(#lastModified, [])),
     ),
   ) as _i11.Future<DateTime>);
 
   @override
   DateTime lastModifiedSync() => (super.noSuchMethod(
     Invocation.method(#lastModifiedSync, []),
-    returnValue: _FakeDateTime_37(
+    returnValue: _FakeDateTime_36(
       this,
       Invocation.method(#lastModifiedSync, []),
     ),
-    returnValueForMissingStub: _FakeDateTime_37(
+    returnValueForMissingStub: _FakeDateTime_36(
       this,
       Invocation.method(#lastModifiedSync, []),
     ),
@@ -2467,13 +2424,13 @@ class MockFile extends _i1.Mock implements _i7.File {
   }) => (super.noSuchMethod(
     Invocation.method(#open, [], {#mode: mode}),
     returnValue: _i11.Future<_i9.RandomAccessFile>.value(
-      _FakeRandomAccessFile_38(
+      _FakeRandomAccessFile_37(
         this,
         Invocation.method(#open, [], {#mode: mode}),
       ),
     ),
     returnValueForMissingStub: _i11.Future<_i9.RandomAccessFile>.value(
-      _FakeRandomAccessFile_38(
+      _FakeRandomAccessFile_37(
         this,
         Invocation.method(#open, [], {#mode: mode}),
       ),
@@ -2484,11 +2441,11 @@ class MockFile extends _i1.Mock implements _i7.File {
   _i9.RandomAccessFile openSync({_i9.FileMode? mode = _i9.FileMode.read}) =>
       (super.noSuchMethod(
         Invocation.method(#openSync, [], {#mode: mode}),
-        returnValue: _FakeRandomAccessFile_38(
+        returnValue: _FakeRandomAccessFile_37(
           this,
           Invocation.method(#openSync, [], {#mode: mode}),
         ),
-        returnValueForMissingStub: _FakeRandomAccessFile_38(
+        returnValueForMissingStub: _FakeRandomAccessFile_37(
           this,
           Invocation.method(#openSync, [], {#mode: mode}),
         ),
@@ -2508,11 +2465,11 @@ class MockFile extends _i1.Mock implements _i7.File {
     _i20.Encoding? encoding = const _i20.Utf8Codec(),
   }) => (super.noSuchMethod(
     Invocation.method(#openWrite, [], {#mode: mode, #encoding: encoding}),
-    returnValue: _FakeIOSink_39(
+    returnValue: _FakeIOSink_38(
       this,
       Invocation.method(#openWrite, [], {#mode: mode, #encoding: encoding}),
     ),
-    returnValueForMissingStub: _FakeIOSink_39(
+    returnValueForMissingStub: _FakeIOSink_38(
       this,
       Invocation.method(#openWrite, [], {#mode: mode, #encoding: encoding}),
     ),
