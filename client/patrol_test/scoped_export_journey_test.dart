@@ -2,17 +2,17 @@ import 'package:church_admin/church_admin.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:patrol/patrol.dart';
 
 import 'support/data_export_robot.dart';
 import 'support/e2e_admin_scope.dart';
 import 'support/e2e_app.dart';
 import 'support/e2e_backend.dart';
+import 'support/e2e_journey.dart';
 import 'support/e2e_users.dart';
 import 'support/exported_workbook.dart';
 
 void main() {
-  patrolTest(
+  E2eJourney.test(
     'a scoped user exports only the areas and services their scope lets them export',
     ($) async {
       final tester = $.tester;

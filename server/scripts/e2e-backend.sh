@@ -53,11 +53,22 @@ sign_up() {
     -d "{\"email\":\"$1\",\"password\":\"$2\",\"returnSecureToken\":true}"
 }
 
+hasura_admin_secret() {
+  grep '^HASURA_GRAPHQL_ADMIN_SECRET=' "$server_dir/e2e/backend.env" | cut -d= -f2-
+}
+
 hasura_admin_query() {
   curl -fsS "$hasura_url/v1/graphql" \
     -H 'Content-Type: application/json' \
-    -H "x-hasura-admin-secret: $(grep '^HASURA_GRAPHQL_ADMIN_SECRET=' "$server_dir/e2e/backend.env" | cut -d= -f2-)" \
+    -H "x-hasura-admin-secret: $(hasura_admin_secret)" \
     -d "$(jq -n --arg q "$1" '{query: $q}')"
+}
+
+hasura_run_sql_file() {
+  curl -fsS "$hasura_url/v2/query" \
+    -H 'Content-Type: application/json' \
+    -H "x-hasura-admin-secret: $(hasura_admin_secret)" \
+    -d "$(jq -n --rawfile sql "$1" '{type: "run_sql", args: {source: "default", sql: $sql}}')"
 }
 
 up() {
@@ -78,6 +89,8 @@ up() {
 
   hasura_admin_query '{ authUsersData { uid email authId } }' | jq -e '.data.authUsersData | length == 1' >/dev/null ||
     { echo "The blocking function did not create the admin user" >&2; exit 1; }
+
+  hasura_run_sql_file "$server_dir/e2e/snapshot_seeded_state.sql" >/dev/null
 
   echo "Backend ready. Admin: $admin_email / $admin_password (project $project_id)"
 }

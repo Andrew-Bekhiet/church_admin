@@ -41,15 +41,17 @@ class UserManagementRobot {
     await tester.waitFor(_saveButton);
   }
 
-  Future<void> fillNewPerson({
-    required String name,
-    required String email,
-  }) async {
+  Future<void> fillNewPerson({required String name, String? email}) async {
     await tester.tapOn(
       find.byKey(UserPersonLinkFieldKeys.createNewPersonSegment),
     );
     await tester.typeInto(find.byKey(UserIdentityFieldsKeys.nameField), name);
-    await tester.typeInto(find.byKey(UserIdentityFieldsKeys.emailField), email);
+    if (email != null) {
+      await tester.typeInto(
+        find.byKey(UserIdentityFieldsKeys.emailField),
+        email,
+      );
+    }
   }
 
   Future<void> fillExistingPerson({

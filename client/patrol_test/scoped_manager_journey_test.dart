@@ -1,15 +1,15 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:patrol/patrol.dart';
 
 import 'support/e2e_app.dart';
 import 'support/e2e_backend.dart';
+import 'support/e2e_journey.dart';
 import 'support/e2e_widget_tester.dart';
 import 'support/user_management_robot.dart';
 
 void main() {
-  patrolTest(
+  E2eJourney.test(
     'a service manager invites and edits only the users in their service',
     ($) async {
       final tester = $.tester;
@@ -42,13 +42,7 @@ void main() {
 
       step('admin invites a manager of one service');
       await E2eApp.launchSignedOut($);
-      await E2eApp.signIn(
-        tester,
-        email: E2eBackend.adminEmail,
-        password: password,
-      );
-      await E2eApp.completeSpiritualData(tester);
-      await E2eApp.enterHome(tester, password);
+      await E2eApp.signInToHome(tester, email: E2eBackend.adminEmail);
 
       final admin = UserManagementRobot(tester, password: password);
       await admin.openManageUsers();
