@@ -4,6 +4,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MessageRunCubit extends Cubit<MessageRunState> {
+  static const Duration nextChatDelay = Duration(seconds: 3);
+  static const Duration _countdownTick = Duration(seconds: 1);
+
   final Set<Person> _persons;
   final PersonsDAO _personsDAO;
   final MessageChannel _channel;
@@ -13,6 +16,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
 
   int _runId = 0;
   ChatOpening? _chatBeingOpened;
+  Timer? _nextChatCountdown;
 
   MessageRunCubit({
     required this._persons,
@@ -62,18 +66,27 @@ class MessageRunCubit extends Cubit<MessageRunState> {
     }
   }
 
-  void setOpensNextChatOnReturn({required bool isEnabled}) => switch (state) {
-    final MessageRunComposing composing => emit(
-      MessageRunComposing(
-        recipients: composing.recipients,
-        opensNextChatOnReturn: isEnabled,
-      ),
-    ),
-    final MessageRunSending sending => emit(
-      sending.copyWith(opensNextChatOnReturn: isEnabled),
-    ),
-    _ => null,
-  };
+  void setOpensNextChatOnReturn({required bool isEnabled}) {
+    if (!isEnabled) cancelNextChatCountdown();
+
+    switch (state) {
+      case final MessageRunComposing composing:
+        emit(
+          MessageRunComposing(
+            recipients: composing.recipients,
+            opensNextChatOnReturn: isEnabled,
+          ),
+        );
+
+      case final MessageRunSending sending:
+        emit(sending.copyWith(opensNextChatOnReturn: isEnabled));
+
+      case MessageRunLoading() ||
+          MessageRunLoadFailure() ||
+          MessageRunFinished():
+        break;
+    }
+  }
 
   MessageTemplate withLastSentTextOr(MessageTemplate defaults) =>
       switch (_userPreferencesService.lastWhatsappMessageText) {
@@ -114,6 +127,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
               current: Recipient(:final selectedPhone?),
             ) &&
             final sending) {
+      cancelNextChatCountdown();
       final chat = ChatOpening(
         runId: _runId,
         index: sending.currentIndex,
@@ -138,20 +152,29 @@ class MessageRunCubit extends Cubit<MessageRunState> {
     }
   }
 
-  Future<void> askIfSentAndShowNextIfChatWasOpened() async {
+  void askIfSentAndShowNextIfChatWasOpened() {
     if (state case MessageRunSending(isAwaitingReturn: true) && final sending) {
       _showNextWithPhoneOrFinishAndTrackRun(
         sending.copyWith(sentToConfirm: () => sending.current.person),
         fromIndex: sending.currentIndex + 1,
       );
 
-      if (state case MessageRunSending(opensNextChatOnReturn: true)) {
-        await openCurrentChat();
+      if (state case MessageRunSending(opensNextChatOnReturn: true) && final next) {
+        _countDownToOpeningCurrentChat(next);
       }
     }
   }
 
+  void cancelNextChatCountdown() {
+    _nextChatCountdown?.cancel();
+    _nextChatCountdown = null;
+    if (state case MessageRunSending(secondsBeforeNextChat: _?) && final sending) {
+      emit(sending.copyWith(secondsBeforeNextChat: () => null));
+    }
+  }
+
   void skipCurrent() {
+    cancelNextChatCountdown();
     if (state case final MessageRunSending sending) {
       _showNextWithPhoneOrFinishAndTrackRun(
         sending.withCurrent(sending.current.asSkippedUnlessOpenFailed()),
@@ -160,26 +183,61 @@ class MessageRunCubit extends Cubit<MessageRunState> {
     }
   }
 
-  void markNotSentIfSent(Person person) => switch (state) {
-    final MessageRunSending sending => emit(
-      sending.copyWith(
-        recipients: sending.recipientsWithNotSentIfSent(person),
-        sentToConfirm: () => null,
-      ),
-    ),
-    final MessageRunFinished finished => emit(
-      MessageRunFinished(
-        recipients: finished.recipientsWithNotSentIfSent(person),
-        isStopped: finished.isStopped,
-      ),
-    ),
-    MessageRunLoading() || MessageRunLoadFailure() || MessageRunComposing() =>
-      null,
-  };
+  void markNotSentIfSent(Person person) {
+    cancelNextChatCountdown();
+
+    switch (state) {
+      case final MessageRunSending sending:
+        emit(
+          sending.copyWith(
+            recipients: sending.recipientsWithNotSentIfSent(person),
+            sentToConfirm: () => null,
+          ),
+        );
+
+      case final MessageRunFinished finished:
+        emit(
+          MessageRunFinished(
+            recipients: finished.recipientsWithNotSentIfSent(person),
+            isStopped: finished.isStopped,
+          ),
+        );
+
+      case MessageRunLoading() ||
+          MessageRunLoadFailure() ||
+          MessageRunComposing():
+        break;
+    }
+  }
 
   void stop() {
+    cancelNextChatCountdown();
     if (state case final MessageRunSending sending) {
       _finishAndTrackRun(sending, isStopped: true);
+    }
+  }
+
+  void _countDownToOpeningCurrentChat(MessageRunSending sending) {
+    emit(
+      sending.copyWith(secondsBeforeNextChat: () => nextChatDelay.inSeconds),
+    );
+    _nextChatCountdown = Timer.periodic(
+      _countdownTick,
+      (_) => _tickNextChatCountdown(),
+    );
+  }
+
+  void _tickNextChatCountdown() {
+    if (state
+        case MessageRunSending(:final secondsBeforeNextChat?) && final sending) {
+      final secondsLeft = secondsBeforeNextChat - 1;
+      if (secondsLeft > 0) {
+        emit(sending.copyWith(secondsBeforeNextChat: () => secondsLeft));
+
+        return;
+      }
+
+      unawaited(openCurrentChat());
     }
   }
 
@@ -273,5 +331,12 @@ class MessageRunCubit extends Cubit<MessageRunState> {
         isStopped: isStopped,
       ),
     );
+  }
+
+  @override
+  Future<void> close() {
+    _nextChatCountdown?.cancel();
+
+    return super.close();
   }
 }

@@ -106,8 +106,7 @@ class MessageQueueView extends StatelessWidget {
               child: state.isAwaitingReturn
                   ? FilledButton(
                       key: MessageQueueViewKeys.nextButton,
-                      onPressed: () =>
-                          unawaited(cubit.askIfSentAndShowNextIfChatWasOpened()),
+                      onPressed: cubit.askIfSentAndShowNextIfChatWasOpened,
                       child: const Text('التالي'),
                     )
                   : FilledButton.icon(

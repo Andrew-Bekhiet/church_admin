@@ -66,6 +66,7 @@ final class MessageRunSending extends MessageRunLoaded {
   final bool opensNextChatOnReturn;
   final bool isAwaitingReturn;
   final Person? sentToConfirm;
+  final int? secondsBeforeNextChat;
 
   Recipient get current => recipients[currentIndex];
 
@@ -86,6 +87,7 @@ final class MessageRunSending extends MessageRunLoaded {
     opensNextChatOnReturn,
     isAwaitingReturn,
     sentToConfirm,
+    secondsBeforeNextChat,
   ];
 
   const MessageRunSending({
@@ -95,6 +97,7 @@ final class MessageRunSending extends MessageRunLoaded {
     this.opensNextChatOnReturn = false,
     this.isAwaitingReturn = false,
     this.sentToConfirm,
+    this.secondsBeforeNextChat,
   });
 
   MessageRunSending copyWith({
@@ -103,6 +106,7 @@ final class MessageRunSending extends MessageRunLoaded {
     bool? opensNextChatOnReturn,
     bool? isAwaitingReturn,
     Person? Function()? sentToConfirm,
+    int? Function()? secondsBeforeNextChat,
   }) => MessageRunSending(
     recipients: recipients ?? this.recipients,
     template: template,
@@ -110,6 +114,9 @@ final class MessageRunSending extends MessageRunLoaded {
     opensNextChatOnReturn: opensNextChatOnReturn ?? this.opensNextChatOnReturn,
     isAwaitingReturn: isAwaitingReturn ?? this.isAwaitingReturn,
     sentToConfirm: sentToConfirm != null ? sentToConfirm() : this.sentToConfirm,
+    secondsBeforeNextChat: secondsBeforeNextChat != null
+        ? secondsBeforeNextChat()
+        : this.secondsBeforeNextChat,
   );
 
   MessageRunSending withCurrent(Recipient current) => copyWith(

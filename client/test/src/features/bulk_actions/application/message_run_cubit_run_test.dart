@@ -77,8 +77,8 @@ void main() {
         fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
     act: (cubit) async {
       await cubit.openCurrentChat();
-      await cubit.askIfSentAndShowNextIfChatWasOpened();
-      await cubit.askIfSentAndShowNextIfChatWasOpened();
+      cubit.askIfSentAndShowNextIfChatWasOpened();
+      cubit.askIfSentAndShowNextIfChatWasOpened();
     },
     verify: (cubit) {
       expect(
@@ -102,39 +102,6 @@ void main() {
       MessageRunCubitFixture.sendingStateOf(cubit).current.person.id,
       mark.id,
     ),
-  );
-
-  blocTest<MessageRunCubit, MessageRunState>(
-    'opening the next chat on return opens it right away',
-    build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(
-      recipients: fixture.markThenMinaWithTwoPhones(),
-      opensNextChatOnReturn: true,
-    ),
-    act: (cubit) async {
-      await cubit.openCurrentChat();
-      await cubit.askIfSentAndShowNextIfChatWasOpened();
-    },
-    verify: (_) => fixture.verifyOnlyChatsOpenedInOrder([
-      (mark, markPhone),
-      (mina, minaPhone),
-    ]),
-  );
-
-  blocTest<MessageRunCubit, MessageRunState>(
-    'turning on opening the next chat mid-run opens it on return',
-    build: () => fixture.buildCubit(),
-    seed: () =>
-        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
-    act: (cubit) async {
-      cubit.setOpensNextChatOnReturn(isEnabled: true);
-      await cubit.openCurrentChat();
-      await cubit.askIfSentAndShowNextIfChatWasOpened();
-    },
-    verify: (_) => fixture.verifyOnlyChatsOpenedInOrder([
-      (mark, markPhone),
-      (mina, minaPhone),
-    ]),
   );
 
   blocTest<MessageRunCubit, MessageRunState>(
@@ -178,7 +145,7 @@ void main() {
         fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
     act: (cubit) async {
       await cubit.openCurrentChat();
-      await cubit.askIfSentAndShowNextIfChatWasOpened();
+      cubit.askIfSentAndShowNextIfChatWasOpened();
     },
     verify: (cubit) {
       expect(

@@ -28,7 +28,7 @@ void main() {
     seed: () => fixture.sendingTo(recipients: markMinaAndPeter()),
     act: (cubit) async {
       await cubit.openCurrentChat();
-      await cubit.askIfSentAndShowNextIfChatWasOpened();
+      cubit.askIfSentAndShowNextIfChatWasOpened();
     },
     verify: (cubit) {
       final state = MessageRunCubitFixture.sendingStateOf(cubit);
@@ -43,9 +43,9 @@ void main() {
     seed: () => fixture.sendingTo(recipients: markMinaAndPeter()),
     act: (cubit) async {
       await cubit.openCurrentChat();
-      await cubit.askIfSentAndShowNextIfChatWasOpened();
+      cubit.askIfSentAndShowNextIfChatWasOpened();
       await cubit.openCurrentChat();
-      await cubit.askIfSentAndShowNextIfChatWasOpened();
+      cubit.askIfSentAndShowNextIfChatWasOpened();
     },
     verify: (cubit) => expect(
       MessageRunCubitFixture.sendingStateOf(cubit).sentToConfirm?.id,
@@ -59,7 +59,7 @@ void main() {
     seed: () => fixture.sendingTo(recipients: markMinaAndPeter()),
     act: (cubit) async {
       await cubit.openCurrentChat();
-      await cubit.askIfSentAndShowNextIfChatWasOpened();
+      cubit.askIfSentAndShowNextIfChatWasOpened();
       cubit.skipCurrent();
     },
     verify: (cubit) {
@@ -76,9 +76,9 @@ void main() {
     seed: () => fixture.sendingTo(recipients: markMinaAndPeter()),
     act: (cubit) async {
       await cubit.openCurrentChat();
-      await cubit.askIfSentAndShowNextIfChatWasOpened();
+      cubit.askIfSentAndShowNextIfChatWasOpened();
       await cubit.openCurrentChat();
-      await cubit.askIfSentAndShowNextIfChatWasOpened();
+      cubit.askIfSentAndShowNextIfChatWasOpened();
       cubit.markNotSentIfSent(mina);
     },
     verify: (cubit) {

@@ -32,7 +32,7 @@ void main() {
     seed: () => fixture.sendingTo(recipients: markMinaAndPeterWithoutPhone()),
     act: (cubit) async {
       await cubit.openCurrentChat();
-      await cubit.askIfSentAndShowNextIfChatWasOpened();
+      cubit.askIfSentAndShowNextIfChatWasOpened();
       cubit.skipCurrent();
     },
     verify: (cubit) {
@@ -52,7 +52,7 @@ void main() {
     seed: () => fixture.sendingTo(recipients: markMinaAndPeterWithoutPhone()),
     act: (cubit) async {
       await cubit.openCurrentChat();
-      await cubit.askIfSentAndShowNextIfChatWasOpened();
+      cubit.askIfSentAndShowNextIfChatWasOpened();
       cubit.skipCurrent();
     },
     verify: (_) => expect(trackedRunFinish(), {
