@@ -42,6 +42,9 @@ class MessageQueueView extends StatelessWidget {
             key: MessageQueueViewKeys.sentConfirmation,
             margin: const EdgeInsetsDirectional.only(bottom: 16),
             backgroundColor: theme.colorScheme.tertiaryContainer,
+            contentTextStyle: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onTertiaryContainer,
+            ),
             forceActionsBelow: true,
             leading: Icon(
               Symbols.mark_chat_read,
@@ -55,7 +58,9 @@ class MessageQueueView extends StatelessWidget {
                 Text(
                   person.name,
                   key: MessageQueueViewKeys.sentConfirmationName,
-                  style: theme.textTheme.titleMedium,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: theme.colorScheme.onTertiaryContainer,
+                  ),
                 ),
                 const Text('هل تم إرسال الرسالة؟'),
                 if (state.secondsBeforeNextChat case final seconds?)

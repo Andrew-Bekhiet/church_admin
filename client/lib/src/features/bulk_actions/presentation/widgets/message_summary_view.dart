@@ -27,7 +27,7 @@ class MessageSummaryView extends StatelessWidget {
           style: theme.textTheme.titleLarge,
         ),
         MessageSummaryGroup(
-          title: 'لم يتم الإرسال',
+          title: 'لم يتم الإرسال أو تعذر الفتح',
           titleKey: MessageSummaryViewKeys.notSentOrOpenFailedTitle,
           rows: [
             for (final recipient in state.notSentOrOpenFailed)
