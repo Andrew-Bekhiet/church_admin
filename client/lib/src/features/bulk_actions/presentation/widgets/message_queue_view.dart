@@ -41,14 +41,14 @@ class MessageQueueView extends StatelessWidget {
           MaterialBanner(
             key: MessageQueueViewKeys.sentConfirmation,
             margin: const EdgeInsetsDirectional.only(bottom: 16),
-            backgroundColor: theme.colorScheme.tertiaryContainer,
+            backgroundColor: theme.colorScheme.secondaryContainer,
             contentTextStyle: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onTertiaryContainer,
+              color: theme.colorScheme.onSecondaryContainer,
             ),
             forceActionsBelow: true,
             leading: Icon(
               Symbols.mark_chat_read,
-              color: theme.colorScheme.onTertiaryContainer,
+              color: theme.colorScheme.onSecondaryContainer,
             ),
             content: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +59,7 @@ class MessageQueueView extends StatelessWidget {
                   person.name,
                   key: MessageQueueViewKeys.sentConfirmationName,
                   style: theme.textTheme.titleMedium?.copyWith(
-                    color: theme.colorScheme.onTertiaryContainer,
+                    color: theme.colorScheme.onSecondaryContainer,
                   ),
                 ),
                 const Text('هل تم إرسال الرسالة؟'),
@@ -79,6 +79,9 @@ class MessageQueueView extends StatelessWidget {
             actions: [
               TextButton(
                 key: MessageQueueViewKeys.markNotSent,
+                style: TextButton.styleFrom(
+                  foregroundColor: theme.colorScheme.onSecondaryContainer,
+                ),
                 onPressed: () {
                   onCancelNextChatCountdown();
                   onMarkNotSent(person);
