@@ -57,9 +57,10 @@ final class MessageRunSending extends MessageRunLoaded {
   final int currentIndex;
   final bool opensNextChatOnReturn;
   final bool isAwaitingReturn;
-  final bool hasOpenFailed;
 
   Recipient get current => recipients[currentIndex];
+
+  bool get hasOpenFailed => current.status == RecipientStatus.openFailed;
 
   String get currentMessage => template.renderFor(current.person);
 
@@ -75,7 +76,6 @@ final class MessageRunSending extends MessageRunLoaded {
     currentIndex,
     opensNextChatOnReturn,
     isAwaitingReturn,
-    hasOpenFailed,
   ];
 
   const MessageRunSending({
@@ -84,7 +84,6 @@ final class MessageRunSending extends MessageRunLoaded {
     required super.recipients,
     this.opensNextChatOnReturn = false,
     this.isAwaitingReturn = false,
-    this.hasOpenFailed = false,
   });
 
   MessageRunSending copyWith({
@@ -92,14 +91,12 @@ final class MessageRunSending extends MessageRunLoaded {
     int? currentIndex,
     bool? opensNextChatOnReturn,
     bool? isAwaitingReturn,
-    bool? hasOpenFailed,
   }) => MessageRunSending(
     recipients: recipients ?? this.recipients,
     template: template,
     currentIndex: currentIndex ?? this.currentIndex,
     opensNextChatOnReturn: opensNextChatOnReturn ?? this.opensNextChatOnReturn,
     isAwaitingReturn: isAwaitingReturn ?? this.isAwaitingReturn,
-    hasOpenFailed: hasOpenFailed ?? this.hasOpenFailed,
   );
 
   MessageRunSending withCurrent(Recipient current) => copyWith(

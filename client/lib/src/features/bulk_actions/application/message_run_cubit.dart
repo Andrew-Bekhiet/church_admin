@@ -154,9 +154,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
   void skipCurrent() {
     if (state case final MessageRunSending sending) {
       _showNextWithPhoneOrFinishAndTrackRun(
-        sending.withCurrent(
-          sending.current.copyWith(status: RecipientStatus.skipped),
-        ),
+        sending.withCurrent(sending.current.asSkippedUnlessOpenFailed()),
         fromIndex: sending.currentIndex + 1,
       );
     }
@@ -209,13 +207,9 @@ class MessageRunCubit extends Cubit<MessageRunState> {
   }) => emit(
     isOpened
         ? sending
-              .withCurrent(
-                sending.current.copyWith(
-                  status: RecipientStatus.sent,
-                ),
-              )
-              .copyWith(isAwaitingReturn: true, hasOpenFailed: false)
-        : sending.copyWith(hasOpenFailed: true),
+              .withCurrent(sending.current.asSent())
+              .copyWith(isAwaitingReturn: true)
+        : sending.withCurrent(sending.current.asOpenFailed()),
   );
 
   void _showNextWithPhoneOrFinishAndTrackRun(
@@ -238,7 +232,6 @@ class MessageRunCubit extends Cubit<MessageRunState> {
       sending.copyWith(
         currentIndex: nextIndex,
         isAwaitingReturn: false,
-        hasOpenFailed: false,
       ),
     );
   }

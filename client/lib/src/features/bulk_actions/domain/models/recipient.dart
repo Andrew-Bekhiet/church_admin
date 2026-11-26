@@ -51,6 +51,15 @@ class Recipient with Equatable {
     selectedPhone: selectedPhone ?? this.selectedPhone,
     status: status ?? this.status,
   );
+
+  Recipient asSent() => copyWith(status: RecipientStatus.sent);
+
+  Recipient asOpenFailed() => copyWith(status: RecipientStatus.openFailed);
+
+  Recipient asSkippedUnlessOpenFailed() => switch (status) {
+    RecipientStatus.openFailed => this,
+    _ => copyWith(status: RecipientStatus.skipped),
+  };
 }
 
-enum RecipientStatus { pending, sent, skipped }
+enum RecipientStatus { pending, sent, openFailed, skipped }
