@@ -13,6 +13,7 @@ import '../../../../fakes/mock_auth_bloc.dart';
 import '../../../../fakes/mock_database_service.dart';
 import '../../../../fakes/mock_launcher_service.dart';
 import '../../../../fakes/recording_analytics_provider.dart';
+import '../../../../utils.dart';
 
 class SendMessageScreenHarness {
   static const Size _phoneSize = Size(720, 1600);
@@ -45,6 +46,7 @@ class SendMessageScreenHarness {
         AnalyticsService([analytics], FakeLoggingService()),
       ),
     ]);
+    addTearDown(defaultTearDown);
   }
 
   Future<void> open(WidgetTester tester, {required Set<Person> persons}) async {

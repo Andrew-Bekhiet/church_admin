@@ -1,13 +1,19 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
 class MessageSummaryView extends StatelessWidget {
   final MessageRunFinished state;
+  final VoidCallback onResume;
+  final ValueChanged<Person> onMarkNotSent;
 
-  const MessageSummaryView({required this.state, super.key});
+  const MessageSummaryView({
+    required this.state,
+    required this.onResume,
+    required this.onMarkNotSent,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +69,7 @@ class MessageSummaryView extends StatelessWidget {
           action: state.isStopped
               ? FilledButton.tonal(
                   key: MessageSummaryViewKeys.resumeButton,
-                  onPressed: () => context.read<MessageRunCubit>().resume(),
+                  onPressed: onResume,
                   child: const Text('استكمال'),
                 )
               : null,
@@ -105,9 +111,7 @@ class MessageSummaryView extends StatelessWidget {
                 title: Text(recipient.person.name),
                 trailing: TextButton(
                   key: MessageSummaryViewKeys.markNotSentFor(recipient.person),
-                  onPressed: () => context
-                      .read<MessageRunCubit>()
-                      .markNotSentIfSent(recipient.person),
+                  onPressed: () => onMarkNotSent(recipient.person),
                   child: const Text('لم يتم الإرسال'),
                 ),
               ),

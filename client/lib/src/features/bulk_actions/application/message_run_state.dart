@@ -165,4 +165,9 @@ final class MessageRunFinished extends MessageRunLoaded {
     required super.recipients,
     super.opensNextChatOnReturn,
   });
+
+  MessageRunFinished withNotSentIfSent(Person person) => MessageRunFinished(
+    recipients: recipientsWithNotSentIfSent(person),
+    opensNextChatOnReturn: opensNextChatOnReturn,
+  );
 }

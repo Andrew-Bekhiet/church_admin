@@ -49,7 +49,7 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
     super.initState();
 
     _appLifecycleListener = AppLifecycleListener(
-      onShow: _cubit.askIfSentAndShowNextIfChatWasOpened,
+      onShow: _cubit.askIfSentShowNextAndMaybeCountDownToItsChatIfChatWasOpened,
       onHide: _cubit.cancelNextChatCountdown,
     );
     unawaited(_cubit.load());
@@ -93,6 +93,8 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
 
             final MessageRunFinished finished => MessageSummaryView(
               state: finished,
+              onResume: _cubit.resume,
+              onMarkNotSent: _cubit.markNotSentIfSent,
             ),
           },
         ),

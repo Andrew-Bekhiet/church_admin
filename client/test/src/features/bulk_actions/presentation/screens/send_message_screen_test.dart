@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../utils.dart';
 import 'send_message_screen_harness.dart';
 
 void main() {
@@ -29,8 +28,6 @@ void main() {
       peterWithoutPhone,
     ];
   });
-
-  tearDown(defaultTearDown);
 
   Future<void> pumpScreen(
     WidgetTester tester, {

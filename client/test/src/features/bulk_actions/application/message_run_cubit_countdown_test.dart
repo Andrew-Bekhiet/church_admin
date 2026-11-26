@@ -29,7 +29,7 @@ void main() {
   void openMarkAndReturn(MessageRunCubit cubit, FakeAsync async) {
     unawaited(cubit.openCurrentChat());
     async.flushMicrotasks();
-    cubit.askIfSentAndShowNextIfChatWasOpened();
+    cubit.askIfSentShowNextAndMaybeCountDownToItsChatIfChatWasOpened();
     async.flushMicrotasks();
   }
 

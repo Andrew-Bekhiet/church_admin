@@ -27,6 +27,8 @@ void main() {
       MaterialUiTestApp.withThemeAndLocale(
         child: MessageSummaryView(
           state: MessageRunFinished(recipients: recipients),
+          onResume: () {},
+          onMarkNotSent: (_) {},
         ),
       ),
     );

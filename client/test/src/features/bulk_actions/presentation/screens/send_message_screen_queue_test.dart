@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../utils.dart';
 import 'send_message_screen_harness.dart';
 
 void main() {
@@ -16,8 +15,6 @@ void main() {
   late SendMessageScreenHarness harness;
 
   setUp(() => harness = SendMessageScreenHarness()..install());
-
-  tearDown(defaultTearDown);
 
   Future<void> start(WidgetTester tester, {bool opensNextChat = false}) async {
     if (opensNextChat) {

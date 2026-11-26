@@ -61,7 +61,7 @@ void main() {
     act: (cubit) async {
       await cubit.openCurrentChat();
       cubit
-        ..askIfSentAndShowNextIfChatWasOpened()
+        ..askIfSentShowNextAndMaybeCountDownToItsChatIfChatWasOpened()
         ..stop()
         ..resume();
     },

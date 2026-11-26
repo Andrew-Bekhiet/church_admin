@@ -32,7 +32,7 @@ void main() {
     act: (cubit) async {
       await cubit.openCurrentChat();
       cubit
-        ..askIfSentAndShowNextIfChatWasOpened()
+        ..askIfSentShowNextAndMaybeCountDownToItsChatIfChatWasOpened()
         ..skipCurrent();
     },
     verify: (cubit) {

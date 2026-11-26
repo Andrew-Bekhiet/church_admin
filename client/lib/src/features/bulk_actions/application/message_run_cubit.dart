@@ -160,7 +160,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
     }
   }
 
-  void askIfSentAndShowNextIfChatWasOpened() {
+  void askIfSentShowNextAndMaybeCountDownToItsChatIfChatWasOpened() {
     if (state case MessageRunSending(isAwaitingReturn: true) && final sending) {
       emit(
         sending
@@ -208,12 +208,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
         );
 
       case final MessageRunFinished finished:
-        emit(
-          MessageRunFinished(
-            recipients: finished.recipientsWithNotSentIfSent(person),
-            opensNextChatOnReturn: finished.opensNextChatOnReturn,
-          ),
-        );
+        emit(finished.withNotSentIfSent(person));
 
       case MessageRunLoading() ||
           MessageRunLoadFailure() ||
