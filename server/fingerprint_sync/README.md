@@ -4,7 +4,7 @@ Two Windows PowerShell 5.1 scripts for the fingerprint server (BioTime, Windows 
 
 ## What you need
 
-1. A BioTime user that can read transactions, used only for this.
+1. A BioTime superuser, since BioTime gives API tokens to no other account. Create a dedicated one for this.
 2. The function's URL, from the Firebase console under Functions, `recordFingerprintPunches`, deployed from the same commit as these scripts. An older function records nothing these scripts send, so the poller stops with `answered without` and keeps its cursor. It must be `https`, unless it points at localhost or a private network address.
 3. The function's `FINGERPRINT_SYNC_SECRET`.
 
@@ -38,7 +38,7 @@ It logs in to BioTime, reads one transaction, and sends the function a request t
 
 ## Update or change a setting
 
-Copy the new scripts over the old ones and run setup again. It offers the saved values; press Enter to keep each one. It keeps `cursor.json`, so on the same BioTime database no punch is sent twice. The poller reads only punches from the last 48 hours, so after an outage longer than that, older punches are never sent.
+Copy the new scripts over the old ones and run setup again. It offers the saved values; press Enter to keep each one. It keeps `cursor.json`, so on the same BioTime database no punch is sent twice. After an outage the poller sends every punch uploaded since, however late it was uploaded. Each poll rereads the whole backlog before sending, so a backlog too large to read within one poll logs `Out of time` on every run; delete `cursor.json` to start again from the newest punch.
 
 The cursor is a transaction id from one BioTime database, so a new address for the same server keeps it. When BioTime moves to a different database, delete `cursor.json`. Until then the poller sends nothing from the new database whose ids are below the cursor. After the deletion it starts from the newest punch on the new server and does not send punches that were already there.
 
@@ -52,17 +52,14 @@ This removes the task. Delete `C:\fingerprint_sync` afterwards to remove the set
 
 ## Logs
 
-`C:\fingerprint_sync\logs\fingerprint_sync.log`, rolled at 1 MB, with the last three kept as `.1` to `.3`. Each poll writes one line of counts: transactions read, unsent and sent, the function's answer, and the cursor. Task Scheduler's *Last Run Result* is `0` when all went well, `1` after an error, and `2` after a warning.
+`C:\fingerprint_sync\logs\fingerprint_sync.log`, rolled at 1 MB, with the last three kept as `.1` to `.3`. Each poll writes one line of counts: transactions unsent and sent, the function's answer, and the cursor. Task Scheduler's *Last Run Result* is `0` when all went well, `1` after an error, and `2` after a warning.
 
 | Line | Meaning |
 | -- | -- |
 | `ERROR ... skipping the rest of this run` | BioTime or the function failed or timed out. Batches already sent stay sent; the next minute retries the rest. |
-| `ERROR ... not yyyy-MM-dd HH:mm:ss` | BioTime returned a punch time in a layout the function cannot read. The poller stops before that transaction, so nothing after it is sent until BioTime returns the expected layout or the transaction is older than 48 hours. |
+| `ERROR ... not in ascending id order` | BioTime listed transactions out of id order, so the poller cannot tell which are new. It sends nothing and keeps its cursor until the order is restored. |
+| `ERROR ... not yyyy-MM-dd HH:mm:ss` | BioTime returned a punch time in a layout the function cannot read. The poller stops before that transaction, so nothing after it is sent until that transaction is corrected or deleted in BioTime. |
 | `WARN ... linked to no person` | A punch's fingerprint ID matches no person in the app. The function reports only how many, so the line lists the batch's employee codes, which include the unlinked ones. These punches are not recorded and are not sent again. Set the fingerprint ID on each person so their later punches are recorded. |
 | `WARN ... rejected by the function as malformed` | The function could not read a punch, for example one with no employee code. It is not recorded. |
 | `WARN ... older than the function accepts` | The punches were more than 10 days old, usually from a device that was offline. They are not recorded. |
 | `WARN ... in the future` | The fingerprint server's or a device's clock is ahead of Cairo time. Fix the clock. |
-
-## Not yet confirmed on the real server
-
-The top of `fingerprint_sync.ps1` states two assumptions, pending a probe of the BioTime server: transaction ids rise in upload order, and BioTime's `start_time` filter is on punch time. Each poll rereads the last 48 hours, so a punch uploaded more than 48 hours after it happened is never sent.
