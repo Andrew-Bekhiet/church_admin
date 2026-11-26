@@ -52,6 +52,8 @@ if (Test-Path $TemporarySecretsPath) { Remove-Item -LiteralPath $TemporarySecret
 
 # SYSTEM runs the poller, so anyone who can edit it, or the config it trusts, runs code as SYSTEM.
 # /grant:r replaces only the named accounts' grants, so a reset first drops what anyone else was granted.
+# An owner can always rewrite an ACL, so Administrators take ownership first.
+Invoke-Icacls $PSScriptRoot /setowner $Administrators /T
 Invoke-Icacls $PSScriptRoot /reset
 Invoke-Icacls $PSScriptRoot /inheritance:r /grant:r "${Administrators}:(OI)(CI)F" "${System}:(OI)(CI)F" "${Users}:(OI)(CI)RX"
 Get-ChildItem -LiteralPath $PSScriptRoot -Force | Where-Object { $_.FullName -ne $SecretsPath -and $_.FullName -ne $TemporarySecretsPath } | ForEach-Object {
