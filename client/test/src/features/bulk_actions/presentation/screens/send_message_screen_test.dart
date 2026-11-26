@@ -200,10 +200,10 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('the summary counts the opened and skipped chats', (
+  testWidgets('the summary counts the sent and skipped people', (
     tester,
   ) async {
-    const openedCount = 2;
+    const sentCount = 2;
     const skippedCount = 1;
     await pumpScreen(tester, persons: {mina, mark, john});
 
@@ -217,12 +217,16 @@ void main() {
     await tester.tap(find.byKey(MessageQueueViewKeys.skipButton));
     await tester.pumpAndSettle();
 
-    final counts = tester
-        .widget<Text>(find.byKey(MessageSummaryViewKeys.counts))
-        .data;
     expect(
-      RegExp(r'\d+').allMatches(counts ?? '').map((match) => match[0]),
-      ['$openedCount', '$skippedCount'],
+      [
+        MessageSummaryViewKeys.sentTitle,
+        MessageSummaryViewKeys.skippedTitle,
+      ].map(
+        (key) => RegExp(
+          r'\d+',
+        ).firstMatch(tester.widget<Text>(find.byKey(key)).data ?? '')?[0],
+      ),
+      ['$sentCount', '$skippedCount'],
     );
   });
 

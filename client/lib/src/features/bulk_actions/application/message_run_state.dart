@@ -43,9 +43,6 @@ sealed class MessageRunLoaded extends MessageRunState {
     this.opensNextChatOnReturn = false,
   });
 
-  int withPhoneCountOf(RecipientStatus status) =>
-      withPhone.where((recipient) => recipient.status == status).length;
-
   List<Recipient> recipientsWithNotSentIfSent(Person person) => recipients
       .map(
         (recipient) => recipient.person.id == person.id
@@ -147,6 +144,22 @@ final class MessageRunSending extends MessageRunLoaded {
 
 final class MessageRunFinished extends MessageRunLoaded {
   bool get isStopped => remaining.isNotEmpty;
+
+  Iterable<Recipient> get notSentOrOpenFailed => recipients.where(
+    (recipient) => switch (recipient.status) {
+      RecipientStatus.notSent || RecipientStatus.openFailed => true,
+      RecipientStatus.pending ||
+      RecipientStatus.sent ||
+      RecipientStatus.skipped => false,
+    },
+  );
+
+  Iterable<Recipient> get skipped => recipients.where(
+    (recipient) => recipient.status == RecipientStatus.skipped,
+  );
+
+  Iterable<Recipient> get sent =>
+      recipients.where((recipient) => recipient.status == RecipientStatus.sent);
 
   const MessageRunFinished({
     required super.recipients,
