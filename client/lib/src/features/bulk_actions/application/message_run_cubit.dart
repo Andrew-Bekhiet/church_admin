@@ -138,10 +138,10 @@ class MessageRunCubit extends Cubit<MessageRunState> {
     }
   }
 
-  Future<void> showNextAndMaybeOpenItsChat() async {
+  Future<void> askIfSentAndShowNextIfChatWasOpened() async {
     if (state case MessageRunSending(isAwaitingReturn: true) && final sending) {
       _showNextWithPhoneOrFinishAndTrackRun(
-        sending,
+        sending.copyWith(sentToConfirm: () => sending.current.person),
         fromIndex: sending.currentIndex + 1,
       );
 
@@ -159,6 +159,23 @@ class MessageRunCubit extends Cubit<MessageRunState> {
       );
     }
   }
+
+  void markNotSentIfSent(Person person) => switch (state) {
+    final MessageRunSending sending => emit(
+      sending.copyWith(
+        recipients: sending.recipientsWithNotSentIfSent(person),
+        sentToConfirm: () => null,
+      ),
+    ),
+    final MessageRunFinished finished => emit(
+      MessageRunFinished(
+        recipients: finished.recipientsWithNotSentIfSent(person),
+        isStopped: finished.isStopped,
+      ),
+    ),
+    MessageRunLoading() || MessageRunLoadFailure() || MessageRunComposing() =>
+      null,
+  };
 
   void stop() {
     if (state case final MessageRunSending sending) {

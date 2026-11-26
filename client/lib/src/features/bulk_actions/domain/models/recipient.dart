@@ -54,6 +54,11 @@ class Recipient with Equatable {
 
   Recipient asSent() => copyWith(status: RecipientStatus.sent);
 
+  Recipient asNotSentIfSent() => switch (status) {
+    RecipientStatus.sent => copyWith(status: RecipientStatus.notSent),
+    _ => this,
+  };
+
   Recipient asOpenFailed() => copyWith(status: RecipientStatus.openFailed);
 
   Recipient asSkippedUnlessOpenFailed() => switch (status) {
@@ -62,4 +67,4 @@ class Recipient with Equatable {
   };
 }
 
-enum RecipientStatus { pending, sent, openFailed, skipped }
+enum RecipientStatus { pending, sent, notSent, openFailed, skipped }

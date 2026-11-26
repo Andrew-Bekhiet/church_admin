@@ -49,7 +49,7 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
     super.initState();
 
     _appLifecycleListener = AppLifecycleListener(
-      onShow: () => unawaited(_cubit.showNextAndMaybeOpenItsChat()),
+      onShow: () => unawaited(_cubit.askIfSentAndShowNextIfChatWasOpened()),
     );
     unawaited(_cubit.load());
   }

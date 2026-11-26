@@ -77,8 +77,8 @@ void main() {
         fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
     act: (cubit) async {
       await cubit.openCurrentChat();
-      await cubit.showNextAndMaybeOpenItsChat();
-      await cubit.showNextAndMaybeOpenItsChat();
+      await cubit.askIfSentAndShowNextIfChatWasOpened();
+      await cubit.askIfSentAndShowNextIfChatWasOpened();
     },
     verify: (cubit) {
       expect(
@@ -97,7 +97,7 @@ void main() {
     build: () => fixture.buildCubit(),
     seed: () =>
         fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
-    act: (cubit) => cubit.showNextAndMaybeOpenItsChat(),
+    act: (cubit) => cubit.askIfSentAndShowNextIfChatWasOpened(),
     verify: (cubit) => expect(
       MessageRunCubitFixture.sendingStateOf(cubit).current.person.id,
       mark.id,
@@ -113,7 +113,7 @@ void main() {
     ),
     act: (cubit) async {
       await cubit.openCurrentChat();
-      await cubit.showNextAndMaybeOpenItsChat();
+      await cubit.askIfSentAndShowNextIfChatWasOpened();
     },
     verify: (_) => fixture.verifyOnlyChatsOpenedInOrder([
       (mark, markPhone),
@@ -129,7 +129,7 @@ void main() {
     act: (cubit) async {
       cubit.setOpensNextChatOnReturn(isEnabled: true);
       await cubit.openCurrentChat();
-      await cubit.showNextAndMaybeOpenItsChat();
+      await cubit.askIfSentAndShowNextIfChatWasOpened();
     },
     verify: (_) => fixture.verifyOnlyChatsOpenedInOrder([
       (mark, markPhone),
@@ -178,7 +178,7 @@ void main() {
         fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
     act: (cubit) async {
       await cubit.openCurrentChat();
-      await cubit.showNextAndMaybeOpenItsChat();
+      await cubit.askIfSentAndShowNextIfChatWasOpened();
     },
     verify: (cubit) {
       expect(

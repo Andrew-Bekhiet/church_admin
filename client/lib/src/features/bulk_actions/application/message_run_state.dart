@@ -38,6 +38,14 @@ sealed class MessageRunLoaded extends MessageRunState {
 
   int withPhoneCountOf(RecipientStatus status) =>
       withPhone.where((recipient) => recipient.status == status).length;
+
+  List<Recipient> recipientsWithNotSentIfSent(Person person) => recipients
+      .map(
+        (recipient) => recipient.person.id == person.id
+            ? recipient.asNotSentIfSent()
+            : recipient,
+      )
+      .toList();
 }
 
 final class MessageRunComposing extends MessageRunLoaded {
@@ -57,6 +65,7 @@ final class MessageRunSending extends MessageRunLoaded {
   final int currentIndex;
   final bool opensNextChatOnReturn;
   final bool isAwaitingReturn;
+  final Person? sentToConfirm;
 
   Recipient get current => recipients[currentIndex];
 
@@ -76,6 +85,7 @@ final class MessageRunSending extends MessageRunLoaded {
     currentIndex,
     opensNextChatOnReturn,
     isAwaitingReturn,
+    sentToConfirm,
   ];
 
   const MessageRunSending({
@@ -84,6 +94,7 @@ final class MessageRunSending extends MessageRunLoaded {
     required super.recipients,
     this.opensNextChatOnReturn = false,
     this.isAwaitingReturn = false,
+    this.sentToConfirm,
   });
 
   MessageRunSending copyWith({
@@ -91,12 +102,14 @@ final class MessageRunSending extends MessageRunLoaded {
     int? currentIndex,
     bool? opensNextChatOnReturn,
     bool? isAwaitingReturn,
+    Person? Function()? sentToConfirm,
   }) => MessageRunSending(
     recipients: recipients ?? this.recipients,
     template: template,
     currentIndex: currentIndex ?? this.currentIndex,
     opensNextChatOnReturn: opensNextChatOnReturn ?? this.opensNextChatOnReturn,
     isAwaitingReturn: isAwaitingReturn ?? this.isAwaitingReturn,
+    sentToConfirm: sentToConfirm != null ? sentToConfirm() : this.sentToConfirm,
   );
 
   MessageRunSending withCurrent(Recipient current) => copyWith(
