@@ -21,8 +21,6 @@ class FirebaseAuthRepository implements AuthRepository {
   };
 
   final firebase_auth.FirebaseAuth _auth;
-  final BeforeSignOutListeners _beforeSignOutListeners =
-      BeforeSignOutListeners();
 
   @override
   bool get isSignedIn => _auth.currentUser != null;
@@ -137,16 +135,7 @@ class FirebaseAuthRepository implements AuthRepository {
   }
 
   @override
-  void addBeforeSignOutListener(Future<void> Function() listener) =>
-      _beforeSignOutListeners.add(listener);
-
-  @override
-  void removeBeforeSignOutListener(Future<void> Function() listener) =>
-      _beforeSignOutListeners.remove(listener);
-
-  @override
   Future<void> signOut() async {
-    await _beforeSignOutListeners.runAllLoggingFailuresWithinTimeout();
     await _auth.signOut();
   }
 
