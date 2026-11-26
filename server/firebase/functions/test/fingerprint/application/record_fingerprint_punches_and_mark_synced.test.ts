@@ -890,9 +890,14 @@ describe("recordFingerprintPunches warnings", () => {
   });
 
   it("warns about a punch from the future", async () => {
+    const { serviceId } = await seedScheduledMeeting(
+      { isoWeekday: FRIDAY, attendance: ["14:00", "15:00"] },
+    );
+    const mina = await seedMemberWithEmployeeCode(serviceId);
+
     assert.equal(
       await warningCountWhileSyncing(
-        [punch("code-nobody-holds", "2026-11-13 14:06:00")],
+        [punch(mina.employeeCode, "2026-11-13 14:06:00")],
         biotimeClockMatchingCairo,
       ),
       1,

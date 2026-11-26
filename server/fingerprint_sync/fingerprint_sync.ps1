@@ -151,7 +151,7 @@ function Read-TransactionsWorthSendingAfter($Config, $Secrets, [long]$AfterId) {
         if ($null -eq $newestId -and $rows.Count -gt 0) {
             $newestId = [long]$rows[$rows.Count - 1].id
             if ($newestId -lt $AfterId) {
-                throw "BioTime's newest transaction id $newestId is below the cursor $AfterId, so new punches would never be sent; if BioTime was restored or replaced, follow the README to reset cursor.json"
+                throw "BioTime's newest transaction id $newestId is below the cursor $AfterId, so new punches would never be sent; this clears with the next punch if BioTime's newest transaction was deleted, and if BioTime was restored or replaced, follow the README to reset cursor.json"
             }
         }
         foreach ($row in $rows) {
