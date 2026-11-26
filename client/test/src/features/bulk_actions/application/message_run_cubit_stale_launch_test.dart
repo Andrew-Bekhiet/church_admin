@@ -20,7 +20,10 @@ void main() {
     'a second tap while WhatsApp is opening does not open the chat again',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTemplateTo(
-      recipients: fixture.markThenMinaWithTwoPhones(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
     ),
     act: (cubit) async {
       final gate = fixture.holdWhatsappLaunches();
@@ -66,7 +69,10 @@ void main() {
     'choosing another phone while WhatsApp is opening keeps the person pending',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTemplateTo(
-      recipients: fixture.markThenMinaWithTwoPhones(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
       currentIndex: 1,
     ),
     act: (cubit) async {
@@ -92,7 +98,10 @@ void main() {
     "skipping while WhatsApp is opening lets the next person's chat open",
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTemplateTo(
-      recipients: fixture.markThenMinaWithTwoPhones(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
     ),
     act: (cubit) async {
       final gate = fixture.holdWhatsappLaunches();
@@ -113,7 +122,10 @@ void main() {
     'stopping while WhatsApp is opening keeps the pass ended',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTemplateTo(
-      recipients: fixture.markThenMinaWithTwoPhones(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
     ),
     act: (cubit) async {
       final gate = fixture.holdWhatsappLaunches();
@@ -160,7 +172,10 @@ void main() {
     'closing while WhatsApp is opening ends quietly',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTemplateTo(
-      recipients: fixture.markThenMinaWithTwoPhones(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
     ),
     act: (cubit) async {
       final gate = fixture.holdWhatsappLaunches();

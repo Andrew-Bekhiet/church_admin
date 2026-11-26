@@ -16,20 +16,19 @@ void main() {
 
   setUp(() => fixture = MessageRunCubitFixture());
 
-  List<Recipient> markMinaAndPeterWithoutPhone() => [
-    fixture.recipientOf(mark, [markPhone]),
-    fixture.recipientOf(mina, [minaPhone]),
-    fixture.recipientOf(peter, []),
-  ];
-
   Iterable<BulkMessageRunFinish> trackedRunFinishes() =>
       fixture.analytics.trackedEventsOf<BulkMessageRunFinish>();
 
   blocTest<MessageRunCubit, MessageRunState>(
     'after the last person with a phone the pass ends with each outcome',
     build: () => fixture.buildCubit(),
-    seed: () =>
-        fixture.sendingTemplateTo(recipients: markMinaAndPeterWithoutPhone()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, []),
+      ],
+    ),
     act: (cubit) async {
       await cubit.openCurrentChat();
       cubit
@@ -50,8 +49,13 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'stopping ends the pass early',
     build: () => fixture.buildCubit(),
-    seed: () =>
-        fixture.sendingTemplateTo(recipients: markMinaAndPeterWithoutPhone()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, []),
+      ],
+    ),
     act: (cubit) => cubit.stop(),
     verify: (cubit) =>
         expect((cubit.state as MessageRunPassEnded).hasRemaining, isTrue),
@@ -60,7 +64,13 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'leaving tracks the run once',
     build: () => fixture.buildCubit(),
-    seed: () => MessageRunComposing(recipients: markMinaAndPeterWithoutPhone()),
+    seed: () => MessageRunComposing(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, []),
+      ],
+    ),
     act: (cubit) async {
       cubit
         ..saveTextAndStart(fixture.template)
@@ -95,7 +105,13 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'leaving a resumed run tracks both passes',
     build: () => fixture.buildCubit(),
-    seed: () => MessageRunComposing(recipients: markMinaAndPeterWithoutPhone()),
+    seed: () => MessageRunComposing(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, []),
+      ],
+    ),
     act: (cubit) async {
       cubit
         ..saveTextAndStart(fixture.template)
@@ -111,7 +127,11 @@ void main() {
     'leaving tracks that the next chat opened on return',
     build: () => fixture.buildCubit(),
     seed: () => MessageRunComposing(
-      recipients: markMinaAndPeterWithoutPhone(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, []),
+      ],
       opensNextChatOnReturn: true,
     ),
     act: (cubit) async {
@@ -129,7 +149,13 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'leaving before sending starts tracks no run',
     build: () => fixture.buildCubit(),
-    seed: () => MessageRunComposing(recipients: markMinaAndPeterWithoutPhone()),
+    seed: () => MessageRunComposing(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, []),
+      ],
+    ),
     act: (cubit) => cubit.close(),
     verify: (_) => expect(trackedRunFinishes(), isEmpty),
   );

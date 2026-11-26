@@ -16,16 +16,16 @@ void main() {
 
   setUp(() => fixture = MessageRunCubitFixture());
 
-  List<Recipient> markMinaAndPeter() => [
-    fixture.recipientOf(mark, [markPhone]),
-    fixture.recipientOf(mina, [minaPhone]),
-    fixture.recipientOf(peter, [minaOtherPhone]),
-  ];
-
   blocTest<MessageRunCubit, MessageRunState>(
     'returning from a chat asks whether the message to that person was sent',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTemplateTo(recipients: markMinaAndPeter()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, [minaOtherPhone]),
+      ],
+    ),
     act: (cubit) async {
       await cubit.openCurrentChat();
       cubit.returnFromChat();
@@ -40,7 +40,13 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'the next return asks about the person whose chat was opened last',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTemplateTo(recipients: markMinaAndPeter()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, [minaOtherPhone]),
+      ],
+    ),
     act: (cubit) async {
       await cubit.openCurrentChat();
       cubit.returnFromChat();
@@ -56,7 +62,13 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'the question about a person survives skipping the next one',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTemplateTo(recipients: markMinaAndPeter()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, [minaOtherPhone]),
+      ],
+    ),
     act: (cubit) async {
       await cubit.openCurrentChat();
       cubit
@@ -74,7 +86,13 @@ void main() {
     'answering not sent marks only the person asked about and ends the '
     'question',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTemplateTo(recipients: markMinaAndPeter()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, [minaOtherPhone]),
+      ],
+    ),
     act: (cubit) async {
       await cubit.openCurrentChat();
       cubit.returnFromChat();
@@ -97,7 +115,13 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'marking a person who was not sent changes nothing',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTemplateTo(recipients: markMinaAndPeter()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, [minaOtherPhone]),
+      ],
+    ),
     act: (cubit) {
       cubit
         ..skipCurrent()

@@ -20,12 +20,6 @@ void main() {
 
   setUp(() => fixture = MessageRunCubitFixture());
 
-  List<Recipient> markMinaAndPeter() => [
-    fixture.recipientOf(mark, [markPhone]),
-    fixture.recipientOf(mina, [minaPhone]),
-    fixture.recipientOf(peter, [minaOtherPhone]),
-  ];
-
   void openMarkAndReturn(MessageRunCubit cubit, FakeAsync async) {
     unawaited(cubit.openCurrentChat());
     async.flushMicrotasks();
@@ -37,7 +31,11 @@ void main() {
     'returning counts down the seconds before the next chat opens',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTemplateTo(
-      recipients: markMinaAndPeter(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, [minaOtherPhone]),
+      ],
       opensNextChatOnReturn: true,
     ),
     act: (cubit) => fakeAsync((async) {
@@ -54,7 +52,11 @@ void main() {
     'the next chat does not open before the countdown ends',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTemplateTo(
-      recipients: markMinaAndPeter(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, [minaOtherPhone]),
+      ],
       opensNextChatOnReturn: true,
     ),
     act: (cubit) => fakeAsync((async) {
@@ -68,7 +70,11 @@ void main() {
     'the next chat opens when the countdown ends',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTemplateTo(
-      recipients: markMinaAndPeter(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, [minaOtherPhone]),
+      ],
       opensNextChatOnReturn: true,
     ),
     act: (cubit) => fakeAsync((async) {
@@ -90,7 +96,13 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'turning on opening the next chat mid-run counts down to it on return',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTemplateTo(recipients: markMinaAndPeter()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, [minaOtherPhone]),
+      ],
+    ),
     act: (cubit) => fakeAsync((async) {
       cubit.setOpensNextChatOnReturn(isEnabled: true);
       openMarkAndReturn(cubit, async);
@@ -115,7 +127,11 @@ void main() {
       '$interruption during the countdown keeps the next chat closed',
       build: () => fixture.buildCubit(),
       seed: () => fixture.sendingTemplateTo(
-        recipients: markMinaAndPeter(),
+        recipients: [
+          fixture.recipientOf(mark, [markPhone]),
+          fixture.recipientOf(mina, [minaPhone]),
+          fixture.recipientOf(peter, [minaOtherPhone]),
+        ],
         opensNextChatOnReturn: true,
       ),
       act: (cubit) => fakeAsync((async) {
@@ -131,7 +147,11 @@ void main() {
     'opening the next chat by hand during the countdown opens it once',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTemplateTo(
-      recipients: markMinaAndPeter(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, [minaOtherPhone]),
+      ],
       opensNextChatOnReturn: true,
     ),
     act: (cubit) => fakeAsync((async) {
@@ -149,7 +169,11 @@ void main() {
     'closing during the countdown keeps the next chat closed',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTemplateTo(
-      recipients: markMinaAndPeter(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, [minaOtherPhone]),
+      ],
       opensNextChatOnReturn: true,
     ),
     act: (cubit) async {

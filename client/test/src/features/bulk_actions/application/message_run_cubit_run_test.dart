@@ -11,6 +11,7 @@ void main() {
   final peter = MessageRunCubitFixture.peter;
   const minaPhone = MessageRunCubitFixture.minaPhone;
   const minaOtherPhone = MessageRunCubitFixture.minaOtherPhone;
+  const markPhone = MessageRunCubitFixture.markPhone;
 
   late MessageRunCubitFixture fixture;
 
@@ -35,8 +36,12 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'starting keeps the open-next-chat-on-return choice made while composing',
     build: () => fixture.buildCubit(),
-    seed: () =>
-        MessageRunComposing(recipients: fixture.markThenMinaWithTwoPhones()),
+    seed: () => MessageRunComposing(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
+    ),
     act: (cubit) => cubit
       ..setOpensNextChatOnReturn(isEnabled: true)
       ..saveTextAndStart(fixture.template),
@@ -59,7 +64,10 @@ void main() {
     "opening the chat opens WhatsApp on the person's phone with their message",
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTemplateTo(
-      recipients: fixture.markThenMinaWithTwoPhones(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
     ),
     act: (cubit) => cubit.openCurrentChat(),
     verify: (_) => verify(
@@ -74,7 +82,10 @@ void main() {
     'returning to the app twice after one chat moves on only once',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTemplateTo(
-      recipients: fixture.markThenMinaWithTwoPhones(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
     ),
     act: (cubit) async {
       await cubit.openCurrentChat();
@@ -98,7 +109,10 @@ void main() {
     'returning to the app without opening a chat stays on the same person',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTemplateTo(
-      recipients: fixture.markThenMinaWithTwoPhones(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
     ),
     act: (cubit) => cubit.returnFromChat(),
     verify: (cubit) => expect(
@@ -111,7 +125,10 @@ void main() {
     'skipping moves to the next person without opening a chat',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTemplateTo(
-      recipients: fixture.markThenMinaWithTwoPhones(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
     ),
     act: (cubit) => cubit.skipCurrent(),
     verify: (cubit) {
@@ -127,7 +144,10 @@ void main() {
     'choosing another phone opens WhatsApp on that phone',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTemplateTo(
-      recipients: fixture.markThenMinaWithTwoPhones(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
       currentIndex: 1,
     ),
     act: (cubit) async {
@@ -146,7 +166,10 @@ void main() {
       return fixture.buildCubit();
     },
     seed: () => fixture.sendingTemplateTo(
-      recipients: fixture.markThenMinaWithTwoPhones(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
     ),
     act: (cubit) async {
       await cubit.openCurrentChat();
@@ -174,7 +197,10 @@ void main() {
       return fixture.buildCubit();
     },
     seed: () => fixture.sendingTemplateTo(
-      recipients: fixture.markThenMinaWithTwoPhones(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
     ),
     act: (cubit) => cubit.openCurrentChat(),
     verify: (cubit) {
@@ -199,7 +225,10 @@ void main() {
       return fixture.buildCubit();
     },
     seed: () => fixture.sendingTemplateTo(
-      recipients: fixture.markThenMinaWithTwoPhones(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
     ),
     act: (cubit) async {
       await cubit.openCurrentChat();
@@ -226,7 +255,10 @@ void main() {
       return fixture.buildCubit();
     },
     seed: () => fixture.sendingTemplateTo(
-      recipients: fixture.markThenMinaWithTwoPhones(),
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
     ),
     act: (cubit) async {
       await cubit.openCurrentChat();

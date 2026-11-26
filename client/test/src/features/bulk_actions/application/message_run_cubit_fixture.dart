@@ -56,11 +56,6 @@ class MessageRunCubitFixture {
   Recipient recipientOf(Person person, List<PhoneContact> contacts) =>
       Recipient.of(person.copyWith(contacts: contacts));
 
-  List<Recipient> markThenMinaWithTwoPhones() => [
-    recipientOf(mark, [markPhone]),
-    recipientOf(mina, [minaPhone, minaOtherPhone]),
-  ];
-
   void stubWhatsappLaunch(Future<bool> Function() launch) => when(
     () => launcher.launchWhatsappChat(any(), text: any(named: 'text')),
   ).thenAnswer((_) => launch());

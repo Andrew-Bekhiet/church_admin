@@ -17,16 +17,16 @@ void main() {
 
   setUp(() => fixture = MessageRunCubitFixture());
 
-  List<Recipient> markMinaAndPeter() => [
-    fixture.recipientOf(mark, [markPhone]),
-    fixture.recipientOf(mina, [minaPhone]),
-    fixture.recipientOf(peter, [minaOtherPhone]),
-  ];
-
   blocTest<MessageRunCubit, MessageRunState>(
     'stopping leaves the current person and the ones after them remaining',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTemplateTo(recipients: markMinaAndPeter()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, [minaOtherPhone]),
+      ],
+    ),
     act: (cubit) => cubit
       ..skipCurrent()
       ..stop(),
@@ -43,7 +43,13 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'resuming starts with the first person remaining, not one skipped before',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTemplateTo(recipients: markMinaAndPeter()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, [minaOtherPhone]),
+      ],
+    ),
     act: (cubit) => cubit
       ..skipCurrent()
       ..stop()
@@ -57,7 +63,13 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'a resumed pass passes over the people already sent',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTemplateTo(recipients: markMinaAndPeter()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, [minaOtherPhone]),
+      ],
+    ),
     act: (cubit) async {
       await cubit.openCurrentChat();
       cubit
@@ -74,7 +86,13 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'resuming opens the chat with the message edited before the stop',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTemplateTo(recipients: markMinaAndPeter()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, [minaOtherPhone]),
+      ],
+    ),
     act: (cubit) async {
       cubit
         ..editCurrentMessageUnlessChatOpened('مساء الخير يا مارك')
@@ -96,7 +114,13 @@ void main() {
     'a chat that opens after its pass was stopped does not count in the '
     'resumed pass',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTemplateTo(recipients: markMinaAndPeter()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, [minaOtherPhone]),
+      ],
+    ),
     act: (cubit) async {
       final gate = fixture.holdWhatsappLaunches();
       final opening = cubit.openCurrentChat();

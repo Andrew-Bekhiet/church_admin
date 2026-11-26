@@ -13,6 +13,12 @@ class _RejectingWritesBox extends FakeSyncKVStore<Object?> {
 }
 
 void main() {
+  final mina = MessageRunCubitFixture.mina;
+  final mark = MessageRunCubitFixture.mark;
+  const minaPhone = MessageRunCubitFixture.minaPhone;
+  const minaOtherPhone = MessageRunCubitFixture.minaOtherPhone;
+  const markPhone = MessageRunCubitFixture.markPhone;
+
   late MessageRunCubitFixture fixture;
 
   setUp(() => fixture = MessageRunCubitFixture());
@@ -20,8 +26,12 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'starting saves the message for the next time',
     build: () => fixture.buildCubit(),
-    seed: () =>
-        MessageRunComposing(recipients: fixture.markThenMinaWithTwoPhones()),
+    seed: () => MessageRunComposing(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
+    ),
     act: (cubit) => cubit.saveTextAndStart(fixture.template),
     verify: (_) => expect(
       fixture.userPreferences.lastWhatsappMessageText,
@@ -35,8 +45,12 @@ void main() {
       preferencesBox: _RejectingWritesBox(),
     ),
     build: () => fixture.buildCubit(),
-    seed: () =>
-        MessageRunComposing(recipients: fixture.markThenMinaWithTwoPhones()),
+    seed: () => MessageRunComposing(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
+    ),
     act: (cubit) => cubit.saveTextAndStart(fixture.template),
     wait: Duration.zero,
     verify: (cubit) {
