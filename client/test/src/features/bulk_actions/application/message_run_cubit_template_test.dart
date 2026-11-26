@@ -18,6 +18,7 @@ void main() {
   const minaPhone = MessageRunCubitFixture.minaPhone;
   const minaOtherPhone = MessageRunCubitFixture.minaOtherPhone;
   const markPhone = MessageRunCubitFixture.markPhone;
+  const textSavedAfterStarting = 'مساء الخير';
 
   late MessageRunCubitFixture fixture;
 
@@ -36,6 +37,30 @@ void main() {
     verify: (_) => expect(
       fixture.userPreferences.lastWhatsappMessageText,
       fixture.template.text,
+    ),
+  );
+
+  blocTest<MessageRunCubit, MessageRunState>(
+    'resuming does not save the message again',
+    build: () => fixture.buildCubit(),
+    seed: () => MessageRunComposing(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+      ],
+    ),
+    act: (cubit) async {
+      cubit.saveTextAndStart(fixture.template);
+      await fixture.userPreferences.setLastWhatsappMessageText(
+        textSavedAfterStarting,
+      );
+      cubit
+        ..stop()
+        ..resume();
+    },
+    verify: (_) => expect(
+      fixture.userPreferences.lastWhatsappMessageText,
+      textSavedAfterStarting,
     ),
   );
 
