@@ -34,9 +34,9 @@ export async function recordFingerprintPunchesAndMarkSynced(
 
   const wellFormedPunches = wellFormedPunchesOf(request.punches);
   const punchesByAge = punchesByAgeAt(wellFormedPunches, now);
-  const presenceRecords = await presencesOfLinkedPunches(punchesByAge.accepted);
+  const linkedPresences = await presencesOfLinkedPunches(punchesByAge.accepted);
   const windowMatches = await recordPresencesInCandidateWindows(
-    presenceRecords,
+    linkedPresences,
   );
 
   try {
@@ -51,7 +51,7 @@ export async function recordFingerprintPunchesAndMarkSynced(
     ignoredTooOld: punchesByAge.tooOld.length,
     ignoredInFuture: punchesByAge.inFuture.length,
     ignoredUnlinkedEmployeeCode:
-      punchesByAge.accepted.length - presenceRecords.length,
+      punchesByAge.accepted.length - linkedPresences.length,
   };
 }
 

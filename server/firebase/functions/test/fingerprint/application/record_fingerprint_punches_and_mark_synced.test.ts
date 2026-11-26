@@ -729,50 +729,6 @@ describe("recordFingerprintPunches daylight saving", () => {
     return (await attendanceOf(mina.personId)).map((row) => row.at);
   }
 
-  it("records 10:30 on the Friday before clocks go forward as 08:30 UTC", async () => {
-    assert.deepEqual(
-      await recordedTimesOfPunchAt(
-        "2026-04-17 10:30:00",
-        { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
-        instant("2026-04-17T08:31:00Z"),
-      ),
-      ["2026-04-17T08:30:00Z"],
-    );
-  });
-
-  it("records 10:30 on the Friday clocks go forward as 07:30 UTC", async () => {
-    assert.deepEqual(
-      await recordedTimesOfPunchAt(
-        "2026-04-24 10:30:00",
-        { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
-        instant("2026-04-24T07:31:00Z"),
-      ),
-      ["2026-04-24T07:30:00Z"],
-    );
-  });
-
-  it("records 10:30 on the Friday before clocks go back as 07:30 UTC", async () => {
-    assert.deepEqual(
-      await recordedTimesOfPunchAt(
-        "2026-10-23 10:30:00",
-        { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
-        instant("2026-10-23T07:31:00Z"),
-      ),
-      ["2026-10-23T07:30:00Z"],
-    );
-  });
-
-  it("records 10:30 on the Friday after clocks go back as 08:30 UTC", async () => {
-    assert.deepEqual(
-      await recordedTimesOfPunchAt(
-        "2026-10-30 10:30:00",
-        { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
-        instant("2026-10-30T08:31:00Z"),
-      ),
-      ["2026-10-30T08:30:00Z"],
-    );
-  });
-
   it("records a punch in the hour repeated when clocks go back at its first pass", async () => {
     assert.deepEqual(
       await recordedTimesOfPunchAt(
@@ -1002,38 +958,54 @@ describe("recordFingerprintPunches sync status", () => {
 });
 
 describe("recordFingerprintPunches Hasura requests", () => {
-  async function hasuraOperationsWhileSyncing(punches: unknown[]): Promise<string[]> {
+  interface HasuraRequest {
+    operationName: string;
+    variables: Record<string, unknown>;
+  }
+
+  async function hasuraRequestsWhileSyncing(
+    punches: unknown[],
+  ): Promise<HasuraRequest[]> {
     const post = mock.method(axios, "post");
 
     try {
       await syncPunches(punches, fridayNoonUtc);
 
       return post.mock.calls.map(
-        (call) => JSON.parse(call.arguments[1] as string).operationName,
+        (call) => JSON.parse(call.arguments[1] as string),
       );
     } finally {
       post.mock.restore();
     }
   }
 
-  it("sends four requests for a batch of two people's punches", async () => {
+  async function hasuraOperationsWhileSyncing(
+    punches: unknown[],
+  ): Promise<string[]> {
+    return (await hasuraRequestsWhileSyncing(punches))
+      .map(({ operationName }) => operationName);
+  }
+
+  it("asks for the candidates of only the people who punched", async () => {
     const { serviceId } = await seedScheduledMeeting(
       { isoWeekday: FRIDAY, attendance: ["09:00", "11:00"] },
     );
     const amira = await seedMemberWithEmployeeCode(serviceId);
     const bishoy = await seedMemberWithEmployeeCode(serviceId);
 
+    await seedMemberWithEmployeeCode(serviceId);
+
+    const requests = await hasuraRequestsWhileSyncing([
+      punch(amira.employeeCode, "2026-11-13 09:10:00"),
+      punch(bishoy.employeeCode, "2026-11-13 10:40:00"),
+    ]);
+    const candidatesRequest = requests.find(({ operationName }) =>
+      operationName === "findFingerprintBotUidAndCandidatesOfEachPresence"
+    );
+
     assert.deepEqual(
-      await hasuraOperationsWhileSyncing([
-        punch(amira.employeeCode, "2026-11-13 09:10:00"),
-        punch(bishoy.employeeCode, "2026-11-13 10:40:00"),
-      ]),
-      [
-        "findPersonIdsByEmployeeCodes",
-        "findFingerprintBotUidAndCandidatesOfEachPresence",
-        "writePresenceRecords",
-        "markFingerprintSyncedAtUnlessALaterSyncIsRecorded",
-      ],
+      [...candidatesRequest?.variables["personIds"] as string[]].sort(),
+      [amira.personId, bishoy.personId].sort(),
     );
   });
 

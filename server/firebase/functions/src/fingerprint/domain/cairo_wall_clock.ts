@@ -31,10 +31,10 @@ export function cairoTimeAt(instant: DateTime<true>): DateTime<true> {
 }
 
 export function earliestInstantAtCairoWallClock(
-  cairoWallClock: string,
+  zonelessCairoTime: string,
   format: string,
 ): DateTimeMaybeValid {
-  const firstReading = DateTime.fromFormat(cairoWallClock, format, {
+  const firstReading = DateTime.fromFormat(zonelessCairoTime, format, {
     zone: CAIRO_TIME_ZONE,
   });
 

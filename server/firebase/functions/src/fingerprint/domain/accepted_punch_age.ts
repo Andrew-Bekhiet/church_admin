@@ -9,10 +9,10 @@ export function punchAgeAt(
   punchedAt: DateTime<true>,
   now: DateTime<true>,
 ): PunchAge {
-  const punchAge = now.diff(punchedAt);
+  const timeSincePunch = now.diff(punchedAt);
 
-  if (punchAge < FUTURE_PUNCH_TOLERANCE.negate()) return "inFuture";
-  if (punchAge > OLDEST_ACCEPTED_PUNCH_AGE) return "tooOld";
+  if (timeSincePunch < FUTURE_PUNCH_TOLERANCE.negate()) return "inFuture";
+  if (timeSincePunch > OLDEST_ACCEPTED_PUNCH_AGE) return "tooOld";
 
   return "accepted";
 }

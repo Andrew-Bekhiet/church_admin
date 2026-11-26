@@ -66,7 +66,7 @@ async function unusedLocalhostUrl(): Promise<string> {
   return `http://127.0.0.1:${port}/v1/graphql`;
 }
 
-const nothingIgnored = {
+const emptyReport = {
   matchedAWindow: 0,
   matchedNoWindow: 0,
   ignoredMalformed: 0,
@@ -135,7 +135,7 @@ describe("recordFingerprintPunches endpoint", () => {
 
     assert.deepEqual(reply, {
       status: 200,
-      body: { ...nothingIgnored, matchedAWindow: 1 },
+      body: { ...emptyReport, matchedAWindow: 1 },
     });
     assert.deepEqual(
       (await attendanceOf(mina.personId)).map((row) => row.meetingId),
@@ -166,14 +166,26 @@ describe("recordFingerprintPunches endpoint", () => {
 
     assert.deepEqual(reply, {
       status: 200,
-      body: { ...nothingIgnored, ignoredMalformed: 1 },
+      body: { ...emptyReport, ignoredMalformed: 1 },
     });
   });
 
   it("answers 200 with nothing counted to an empty batch", async () => {
     assert.deepEqual(await post(emptyBatch, CONFIGURED_SECRET), {
       status: 200,
-      body: nothingIgnored,
+      body: emptyReport,
+    });
+  });
+
+  it("accepts as many punches as the poller sends in one request", async () => {
+    const reply = await post(
+      { ...emptyBatch, punches: Array.from({ length: 500 }, () => ({})) },
+      CONFIGURED_SECRET,
+    );
+
+    assert.deepEqual(reply, {
+      status: 200,
+      body: { ...emptyReport, ignoredMalformed: 500 },
     });
   });
 

@@ -12,9 +12,9 @@ export type FingerprintPunchesRequest = z.infer<
 
 const fingerprintPunch = z.object({
   employeeCode: z.string().trim().min(1),
-  punchedAtCairoTime: z.string().transform((cairoWallClock, context) => {
+  punchedAtCairoTime: z.string().transform((zonelessCairoTime, context) => {
     const punchedAt = earliestInstantAtCairoWallClock(
-      cairoWallClock,
+      zonelessCairoTime,
       BIOTIME_PUNCH_TIME_FORMAT,
     );
 
@@ -30,9 +30,11 @@ const fingerprintPunch = z.object({
     return punchedAt;
   }),
   terminalSerial: z.string(),
-}).transform(({ employeeCode, punchedAtCairoTime, terminalSerial }) => ({
+}).transform((
+  { employeeCode, punchedAtCairoTime: punchedAt, terminalSerial },
+) => ({
   fingerprintId: employeeCode,
-  punchedAt: punchedAtCairoTime,
+  punchedAt,
   terminalSerial,
 }));
 
