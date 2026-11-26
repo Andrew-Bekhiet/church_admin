@@ -108,6 +108,25 @@ void main() {
   );
 
   blocTest<MessageRunCubit, MessageRunState>(
+    'leaving tracks that the next chat opened on return',
+    build: () => fixture.buildCubit(),
+    seed: () => MessageRunComposing(
+      recipients: markMinaAndPeterWithoutPhone(),
+      opensNextChatOnReturn: true,
+    ),
+    act: (cubit) async {
+      cubit
+        ..saveTextAndStart(fixture.template)
+        ..stop();
+      await cubit.close();
+    },
+    verify: (_) => expect(
+      trackedRunFinishes().single.properties['opens_next_chat_on_return'],
+      isTrue,
+    ),
+  );
+
+  blocTest<MessageRunCubit, MessageRunState>(
     'leaving before sending starts tracks no run',
     build: () => fixture.buildCubit(),
     seed: () => MessageRunComposing(recipients: markMinaAndPeterWithoutPhone()),
