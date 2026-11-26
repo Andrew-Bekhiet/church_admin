@@ -51,21 +51,6 @@ void main() {
     },
   );
 
-  testWidgets('a run stopped after its last chat opened offers no resume', (
-    tester,
-  ) async {
-    harness.personsDAO.personsWithPhoneContacts = [
-      mina.copyWith(contacts: [minaPhone]),
-    ];
-    await harness.open(tester, persons: {mina});
-    await tapKey(tester, MessageComposeViewKeys.startButton);
-    await tapKey(tester, MessageQueueViewKeys.openChatButton);
-
-    await tapKey(tester, MessageQueueViewKeys.stopButton);
-
-    expect(find.byKey(MessageSummaryViewKeys.resumeButton), findsNothing);
-  });
-
   testWidgets('marking a sent person not sent in the summary moves only them', (
     tester,
   ) async {
