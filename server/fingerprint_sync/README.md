@@ -38,7 +38,7 @@ It logs in to BioTime, reads one transaction, and sends the function a request t
 
 ## Update or change a setting
 
-Copy the new scripts over the old ones and run setup again. It offers the saved values; press Enter to keep each one. It keeps `cursor.json`, so on the same BioTime database the poller carries on after the last batch the function reported. A batch whose response is lost is sent again; the function upserts, so each punch is still stored once. After an outage the poller sends every punch uploaded since, however late it was uploaded. Each poll rereads the whole backlog before sending, so a backlog too large to read within one poll logs `Out of time` on every run; delete `cursor.json` to start again from the newest punch.
+Copy the new scripts over the old ones and run setup again. It offers the saved values; press Enter to keep each one. It keeps `cursor.json`, so on the same BioTime database the poller carries on after the last batch the function reported. A batch whose response is lost is sent again; the function upserts, so each punch is still stored once. After an outage the poller sends every punch uploaded since, however late it was uploaded, oldest first. Each poll sends what it can read in its time and saves the cursor after every batch, so a large backlog drains over several runs; `left=` in the log counts what is still waiting.
 
 The cursor is a transaction id from one BioTime database, so a new address for the same server keeps it. When BioTime moves to a different database, delete `cursor.json`. Until then the poller sends nothing from the new database whose ids are below the cursor. After the deletion it starts from the newest punch on the new server and does not send punches that were already there.
 
@@ -52,12 +52,12 @@ This removes the task. Delete `C:\fingerprint_sync` afterwards to remove the set
 
 ## Logs
 
-`C:\fingerprint_sync\logs\fingerprint_sync.log`, rolled at 1 MB, with the last three kept as `.1` to `.3`. Each poll writes one line of counts: transactions unsent and sent, the function's answer, and the cursor. Task Scheduler's *Last Run Result* is `0` when all went well, `1` after an error, and `2` after a warning.
+`C:\fingerprint_sync\logs\fingerprint_sync.log`, rolled at 1 MB, with the last three kept as `.1` to `.3`. Each poll writes one line of counts: transactions sent and left for later polls, the function's answer, and the cursor. Task Scheduler's *Last Run Result* is `0` when all went well, `1` after an error, and `2` after a warning.
 
 | Line | Meaning |
 | -- | -- |
 | `ERROR ... skipping the rest of this run` | BioTime or the function failed or timed out. Batches already sent stay sent; the next minute retries the rest. |
-| `ERROR ... not in ascending id order` | BioTime listed transactions out of id order, so the poller cannot tell which are new. It sends nothing and keeps its cursor until the order is restored. |
+| `ERROR ... not in ascending id order` | BioTime listed transactions out of id order, so the poller cannot tell which are new. It stops sending and keeps its cursor until the order is restored. |
 | `ERROR ... not yyyy-MM-dd HH:mm:ss` | BioTime returned a punch time in a layout the function cannot read. The poller stops before that transaction, so nothing after it is sent until that transaction is corrected or deleted in BioTime. |
 | `WARN ... linked to no person` | A punch's fingerprint ID matches no person in the app. The function reports only how many, so the line lists the batch's employee codes, which include the unlinked ones. These punches are not recorded and are not sent again. Set the fingerprint ID on each person so their later punches are recorded. |
 | `WARN ... rejected by the function as malformed` | The function could not read a punch, for example one with no employee code. It is not recorded. |
