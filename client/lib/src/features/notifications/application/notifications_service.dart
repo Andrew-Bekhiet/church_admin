@@ -82,6 +82,7 @@ class NotificationsService extends BlocObserver {
   final ThisDevicePushRegistration _thisDevicePushRegistration;
 
   final BehaviorSubject<bool> _isPausedSubject = BehaviorSubject.seeded(true);
+  bool _isDisposed = false;
 
   final BehaviorSubject<Notification> _foregroundNotificationsStreamController =
       BehaviorSubject();
@@ -339,12 +340,9 @@ class NotificationsService extends BlocObserver {
   Future<bool> _requestPermissionThenMaybeScheduleDefaults(
     AuthState currentState,
   ) async {
-    final notStoppedSincePrompting = _thisDevicePushRegistration
-        .notStoppedSinceNow();
     final isGranted = await _requestAndTrackNotificationsPermission();
-    if (isGranted &&
-        currentState is! AuthInitial &&
-        notStoppedSincePrompting()) {
+    final sessionOutlivedThePrompt = _authRepository.isSignedIn && !_isDisposed;
+    if (isGranted && currentState is! AuthInitial && sessionOutlivedThePrompt) {
       await scheduleDefaultNotifications();
     }
 
@@ -352,6 +350,7 @@ class NotificationsService extends BlocObserver {
   }
 
   Future<void> dispose() async {
+    _isDisposed = true;
     _authRepository.removeBeforeSignOutListener(
       _thisDevicePushRegistration.stop,
     );

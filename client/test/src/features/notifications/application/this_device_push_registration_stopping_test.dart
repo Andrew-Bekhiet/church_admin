@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -12,6 +13,9 @@ void main() {
 
   group('ThisDevicePushRegistration stopping', () {
     const hasuraUserId = 'hasura-user-id';
+    final pastTheTimeLimitPerCall =
+        ThisDevicePushRegistration.timeLimitPerCall +
+        const Duration(seconds: 1);
 
     late PushRegistrationFixture fixture;
     late ThisDevicePushRegistration unit;
@@ -138,7 +142,7 @@ void main() {
     );
 
     test(
-      'the registration in flight when stopping finishes before its row is deleted and the one queued behind it is dropped',
+      'installation ids queued before stopping reach the server before the row of the last one is deleted',
       () async {
         const earlierInstallationId = 'earlier-installation-id';
         const laterInstallationId = 'later-installation-id';
@@ -172,8 +176,89 @@ void main() {
 
         expect(backendOutcomes, [
           'registered $earlierInstallationId',
-          'deleted $earlierInstallationId',
+          'registered $laterInstallationId',
+          'deleted $laterInstallationId',
         ]);
+      },
+    );
+
+    test(
+      'stopping while a registration waits on the permission leaves the device unregistered',
+      () async {
+        final permissionGranted = Completer<bool>();
+        final registering = unit.maybeRegisterOnceGranted(
+          permissionGranted.future,
+        );
+
+        await unit.stop();
+        permissionGranted.complete(true);
+        await registering;
+
+        verifyNever(() => fixture.firebaseMessaging.register());
+      },
+    );
+
+    test(
+      'disposing while a registration waits on the permission leaves the device unregistered',
+      () async {
+        final permissionGranted = Completer<bool>();
+        final registering = unit.maybeRegisterOnceGranted(
+          permissionGranted.future,
+        );
+
+        unit.dispose();
+        permissionGranted.complete(true);
+        await registering;
+
+        verifyNever(() => fixture.firebaseMessaging.register());
+      },
+    );
+
+    test(
+      'an unregistration that never finishes stops holding back the next registration',
+      () {
+        fakeAsync((async) {
+          final registration = fixture.buildRegistration();
+          final outcomes = <String>[];
+          when(
+            () => fixture.firebaseMessaging.unregister(),
+          ).thenAnswer((_) => Completer<void>().future);
+          when(() => fixture.firebaseMessaging.register()).thenAnswer((
+            _,
+          ) async {
+            outcomes.add('registered');
+          });
+          unawaited(registration.stop());
+          unawaited(registration.maybeRegisterOnceGranted(Future.value(true)));
+
+          async.elapse(pastTheTimeLimitPerCall);
+
+          expect(outcomes, ['registered']);
+        });
+      },
+    );
+
+    test(
+      'a row deletion that never finishes stops holding back the unregistration and the next registration',
+      () {
+        fakeAsync((async) {
+          final registration = fixture.buildRegistration();
+          final outcomes = <String>[];
+          fixture
+            ..currentUid = hasuraUserId
+            ..issueOnNextRegister('installation-id');
+          unawaited(registration.maybeRegisterOnceGranted(Future.value(true)));
+          async.flushMicrotasks();
+          fixture
+            ..whenDeletingARow().thenAnswer((_) => Completer<void>().future)
+            ..recordFirebaseOutcomesIn(outcomes);
+          unawaited(registration.stop());
+          unawaited(registration.maybeRegisterOnceGranted(Future.value(true)));
+
+          async.elapse(pastTheTimeLimitPerCall);
+
+          expect(outcomes, ['unregistered', 'registered']);
+        });
       },
     );
   });

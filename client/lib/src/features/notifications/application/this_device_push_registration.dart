@@ -4,20 +4,17 @@ import 'package:church_admin/church_admin.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class ThisDevicePushRegistration {
-  static const Duration stopTimeLimit = Duration(seconds: 5);
+  static const Duration timeLimitPerCall = Duration(seconds: 5);
 
   final FirebaseMessaging _firebaseMessaging;
   final FunctionsService _functionsService;
   final FcmTokensDAO _fcmTokens;
   final String? Function() _readCurrentUid;
 
-  StreamSubscription<String>? _installationRegistrationSubscription;
+  Future<void> _latestQueuedStep = Future<void>.value();
+  StreamSubscription<String>? _installationIdsSubscription;
   String? _lastSubmittedInstallationId;
-  Future<void>? _latestServerWrite;
-  Future<void>? _latestStop;
-  int _pushLifecycleGeneration = 0;
-  int _generationOfLatestRegistrationStart = -1;
-  Future<void>? _latestUnregistration;
+  int _stopsAndDisposals = 0;
 
   ThisDevicePushRegistration({
     required this._firebaseMessaging,
@@ -27,73 +24,39 @@ class ThisDevicePushRegistration {
   });
 
   Future<void> maybeRegisterOnceGranted(Future<bool> permissionGranted) async {
-    final startGeneration = _pushLifecycleGeneration;
+    final stopsAndDisposalsAtStart = _stopsAndDisposals;
 
     if (!await permissionGranted || !await _firebaseMessaging.isSupported()) {
       return;
     }
 
-    await _latestStop;
-    if (_stoppedSince(startGeneration)) return;
-
-    _generationOfLatestRegistrationStart = _pushLifecycleGeneration;
-    final latestUnregistration = _latestUnregistration;
-    if (latestUnregistration != null) {
-      await latestUnregistration
-          .timeout(stopTimeLimit)
-          .logWarningInsteadOfThrowing();
-    }
-    if (_stoppedSince(startGeneration)) return;
-
-    final previousSubscription = _installationRegistrationSubscription;
-    _installationRegistrationSubscription = _firebaseMessaging.onRegistered
-        .listen(
-          _registerInstallationIdWithServer,
-          onError: _logInstallationRegistrationError,
-        );
-    await previousSubscription?.cancel();
-    if (_stoppedSince(startGeneration)) return;
-
-    await _firebaseMessaging.register().logWarningInsteadOfThrowing();
-  }
-
-  bool _stoppedSince(int startGeneration) =>
-      startGeneration != _pushLifecycleGeneration;
-
-  bool Function() notStoppedSinceNow() {
-    final generationNow = _pushLifecycleGeneration;
-
-    return () => !_stoppedSince(generationNow);
-  }
-
-  void _registerInstallationIdWithServer(String installationId) {
-    _latestServerWrite = _maybeRegisterAfterEarlierServerWritesSettle(
-      installationId,
-      _latestServerWrite,
+    await _runAfterQueuedSteps(
+      () => _maybeListenAndRegister(stopsAndDisposalsAtStart),
     );
   }
 
-  Future<void> _maybeRegisterAfterEarlierServerWritesSettle(
-    String installationId,
-    Future<void>? earlierServerWrites,
-  ) async {
-    final notStoppedSinceIssued = notStoppedSinceNow();
-    final uidWhenIssued = _readCurrentUid();
+  Future<void> _maybeListenAndRegister(int stopsAndDisposalsAtStart) async {
+    final stoppedOrDisposedSinceStart =
+        stopsAndDisposalsAtStart != _stopsAndDisposals;
+    if (stoppedOrDisposedSinceStart) return;
 
-    if (earlierServerWrites != null) {
-      await earlierServerWrites
-          .timeout(stopTimeLimit)
-          .logWarningInsteadOfThrowing();
-    }
+    _installationIdsSubscription ??= _firebaseMessaging.onRegistered.listen(
+      _queueSubmittingInstallationId,
+      onError: _logInstallationRegistrationError,
+    );
+    await _waitWithinTimeLimitLoggingFailure(_firebaseMessaging.register());
+  }
 
-    final issuedForTheCurrentSession =
-        notStoppedSinceIssued() && _readCurrentUid() == uidWhenIssued;
-    if (!issuedForTheCurrentSession) return;
+  void _queueSubmittingInstallationId(String installationId) {
+    unawaited(_runAfterQueuedSteps(() => _submit(installationId)));
+  }
 
+  Future<void> _submit(String installationId) {
     _lastSubmittedInstallationId = installationId;
-    await _functionsService
-        .registerFirebaseInstallation(installationId)
-        .logWarningInsteadOfThrowing();
+
+    return _waitWithinTimeLimitLoggingFailure(
+      _functionsService.registerFirebaseInstallation(installationId),
+    );
   }
 
   Future<void> _logInstallationRegistrationError(
@@ -103,84 +66,49 @@ class ThisDevicePushRegistration {
       LoggingService.I.warning(LogRecord(error: error, stackTrace: stackTrace));
 
   Future<void> stop() {
-    final stopGeneration = ++_pushLifecycleGeneration;
-    final stopping = _awaitRegistrationsThenMaybeDeleteRowAndUnregister(
-      stopGeneration,
-    ).timeout(stopTimeLimit).logWarningInsteadOfThrowing();
-    _latestStop = stopping;
-
-    return stopping;
-  }
-
-  Future<void> _awaitRegistrationsThenMaybeDeleteRowAndUnregister(
-    int stopGeneration,
-  ) async {
-    final installationId = _lastSubmittedInstallationId;
+    _stopsAndDisposals++;
     final uid = _readCurrentUid();
+    final listeningStopped = _stopListeningForInstallationIds();
+
+    return _runAfterQueuedSteps(() async {
+      await listeningStopped;
+      await _maybeDeleteSubmittedRow(uid);
+      await _waitWithinTimeLimitLoggingFailure(_firebaseMessaging.unregister());
+    });
+  }
+
+  Future<void> _maybeDeleteSubmittedRow(String? uid) async {
+    final installationId = _lastSubmittedInstallationId;
     _lastSubmittedInstallationId = null;
-
-    await _stopListeningForInstallationIds();
-    await _deleteRowAfterEarlierServerWritesSettle(uid, installationId);
-
-    if (_newerStopOrRegistrationStartedSince(stopGeneration)) return;
-
-    final unregistration = _firebaseMessaging
-        .unregister()
-        .logWarningInsteadOfThrowing();
-    _latestUnregistration = unregistration;
-    await unregistration;
-  }
-
-  Future<void> _deleteRowAfterEarlierServerWritesSettle(
-    String? uid,
-    String? installationId,
-  ) async {
-    final rowDeletion = _maybeDeleteRowOnceEarlierServerWritesSettle(
-      uid,
-      installationId,
-      _latestServerWrite,
-    );
-    _latestServerWrite = rowDeletion;
-    await rowDeletion;
-
-    final noServerWriteStartedSinceDeleting = identical(
-      _latestServerWrite,
-      rowDeletion,
-    );
-    if (noServerWriteStartedSinceDeleting) {
-      _latestServerWrite = null;
-    }
-  }
-
-  Future<void> _maybeDeleteRowOnceEarlierServerWritesSettle(
-    String? uid,
-    String? installationId,
-    Future<void>? earlierServerWrites,
-  ) async {
-    await earlierServerWrites;
     if (installationId == null || uid == null) return;
 
-    await _fcmTokens
-        .deleteByUidAndToken(uid: uid, token: installationId)
+    await _waitWithinTimeLimitLoggingFailure(
+      _fcmTokens.deleteByUidAndToken(uid: uid, token: installationId),
+    );
+  }
+
+  Future<void> _stopListeningForInstallationIds() {
+    final cancellation =
+        _installationIdsSubscription?.cancel() ?? Future<void>.value();
+    _installationIdsSubscription = null;
+
+    return cancellation.logWarningInsteadOfThrowing();
+  }
+
+  Future<void> _runAfterQueuedSteps(Future<void> Function() step) {
+    final queuedStep = _latestQueuedStep
+        .then((_) => step())
         .logWarningInsteadOfThrowing();
+    _latestQueuedStep = queuedStep;
+
+    return queuedStep;
   }
 
-  Future<void> _stopListeningForInstallationIds() async {
-    final subscription = _installationRegistrationSubscription;
-    _installationRegistrationSubscription = null;
-    await subscription?.cancel();
-  }
-
-  bool _newerStopOrRegistrationStartedSince(int stopGeneration) =>
-      stopGeneration != _pushLifecycleGeneration ||
-      _generationOfLatestRegistrationStart == stopGeneration;
+  Future<void> _waitWithinTimeLimitLoggingFailure(Future<void> call) =>
+      call.timeout(timeLimitPerCall).logWarningInsteadOfThrowing();
 
   void dispose() {
-    _pushLifecycleGeneration++;
-    unawaited(
-      _installationRegistrationSubscription
-          ?.cancel()
-          .logWarningInsteadOfThrowing(),
-    );
+    _stopsAndDisposals++;
+    unawaited(_stopListeningForInstallationIds());
   }
 }

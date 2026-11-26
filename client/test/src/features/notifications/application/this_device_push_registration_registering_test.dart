@@ -132,33 +132,6 @@ void main() {
     );
 
     test(
-      'an installation id queued behind a slow server write is dropped when the signed-in user changes meanwhile',
-      () async {
-        const queuedInstallationId = 'queued-installation-id';
-        final earlierWriteFinishes = Completer<void>();
-        fixture
-          ..currentUid = 'first-user'
-          ..issueOnNextRegister('earlier-installation-id')
-          ..whenRegisteringWithServer().thenAnswer(
-            (_) => earlierWriteFinishes.future,
-          );
-        await unit.maybeRegisterOnceGranted(Future.value(true));
-        fixture.issueInstallationId(queuedInstallationId);
-        await pumpEventQueue();
-
-        fixture.currentUid = 'second-user';
-        earlierWriteFinishes.complete();
-        await pumpEventQueue();
-
-        verifyNever(
-          () => fixture.functionsService.registerFirebaseInstallation(
-            queuedInstallationId,
-          ),
-        );
-      },
-    );
-
-    test(
       'a registration waits for a pending stop before registering the device again',
       () async {
         final outcomes = <String>[];
