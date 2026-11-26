@@ -8,6 +8,7 @@ $TaskName = 'Fingerprint sync'
 $PollerPath = Join-Path $PSScriptRoot 'fingerprint_sync.ps1'
 $ConfigPath = Join-Path $PSScriptRoot 'config.json'
 $SecretsPath = Join-Path $PSScriptRoot 'secrets.bin'
+$TemporarySecretsPath = "$SecretsPath.tmp"
 $CursorPath = Join-Path $PSScriptRoot 'cursor.json'
 $Administrators = '*S-1-5-32-544'
 $System = '*S-1-5-18'
@@ -46,11 +47,14 @@ function Read-SecretSetting([string]$Prompt, [string]$Current) {
     }
 }
 
+# A failed run can leave the encrypted secrets in the temporary file, which the reset below would open to Users.
+if (Test-Path $TemporarySecretsPath) { Remove-Item -LiteralPath $TemporarySecretsPath -Force }
+
 # SYSTEM runs the poller, so anyone who can edit it, or the config it trusts, runs code as SYSTEM.
 # /grant:r replaces only the named accounts' grants, so a reset first drops what anyone else was granted.
 Invoke-Icacls $PSScriptRoot /reset
 Invoke-Icacls $PSScriptRoot /inheritance:r /grant:r "${Administrators}:(OI)(CI)F" "${System}:(OI)(CI)F" "${Users}:(OI)(CI)RX"
-Get-ChildItem -LiteralPath $PSScriptRoot -Force | Where-Object { $_.FullName -ne $SecretsPath } | ForEach-Object {
+Get-ChildItem -LiteralPath $PSScriptRoot -Force | Where-Object { $_.FullName -ne $SecretsPath -and $_.FullName -ne $TemporarySecretsPath } | ForEach-Object {
     if ($_.PSIsContainer) { Invoke-Icacls $_.FullName /reset /T } else { Invoke-Icacls $_.FullName /reset }
 }
 
@@ -79,14 +83,12 @@ if ((Test-Path $CursorPath) -and $newConfig.biotimeBaseUrl -ne ([string]$config.
 
 # A new file rather than a reset, because a reset would give it the folder's read access for Users.
 # Moved rather than [IO.File]::Replace'd, because Replace keeps the old file's ACL.
-$temporarySecretsPath = "$SecretsPath.tmp"
-if (Test-Path $temporarySecretsPath) { Remove-Item -LiteralPath $temporarySecretsPath -Force }
-New-Item -ItemType File -Path $temporarySecretsPath | Out-Null
-Invoke-Icacls $temporarySecretsPath /inheritance:r /grant:r "${Administrators}:F" "${System}:F"
+New-Item -ItemType File -Path $TemporarySecretsPath | Out-Null
+Invoke-Icacls $TemporarySecretsPath /inheritance:r /grant:r "${Administrators}:F" "${System}:F"
 $plain = [Text.Encoding]::UTF8.GetBytes((ConvertTo-Json -InputObject $newSecrets -Compress))
-[IO.File]::WriteAllBytes($temporarySecretsPath, [Security.Cryptography.ProtectedData]::Protect($plain, $null, [Security.Cryptography.DataProtectionScope]::LocalMachine))
+[IO.File]::WriteAllBytes($TemporarySecretsPath, [Security.Cryptography.ProtectedData]::Protect($plain, $null, [Security.Cryptography.DataProtectionScope]::LocalMachine))
 if (Test-Path $SecretsPath) { Remove-Item -LiteralPath $SecretsPath -Force }
-[IO.File]::Move($temporarySecretsPath, $SecretsPath)
+[IO.File]::Move($TemporarySecretsPath, $SecretsPath)
 Write-Host "Saved $ConfigPath and the encrypted $SecretsPath"
 
 & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $PollerPath check
