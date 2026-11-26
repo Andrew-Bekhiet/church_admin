@@ -62,4 +62,4 @@ This removes the task. Delete `C:\fingerprint_sync` afterwards to remove the set
 | `WARN ... linked to no person` | A punch's fingerprint ID matches no person in the app. The function reports only how many, so the line lists the batch's employee codes, which include the unlinked ones. These punches are not recorded and are not sent again. Set the fingerprint ID on each person so their later punches are recorded. |
 | `WARN ... rejected by the function as malformed` | The function could not read a punch, for example one with no employee code. It is not recorded. |
 | `WARN ... older than the function accepts` | The punches were more than 10 days old, usually from a device that was offline. They are not recorded. |
-| `WARN ... in the future` | The fingerprint server's or a device's clock is ahead of Cairo time. Fix the clock. |
+| `WARN ... in the future` | The fingerprint server's or a device's clock is ahead of Cairo time. These punches are not recorded and are not sent again. Fix the clock so later punches are recorded. |
