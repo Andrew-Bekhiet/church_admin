@@ -84,6 +84,21 @@ void main() {
     expect(find.byKey(MessageQueueViewKeys.sentConfirmation), findsNothing);
   });
 
+  testWidgets('answering not sent stops the countdown', (tester) async {
+    harness.personsDAO.personsWithPhoneContacts = [
+      mina.copyWith(contacts: [minaPhone]),
+      mark.copyWith(contacts: [markPhone]),
+    ];
+    await harness.open(tester, persons: {mina, mark});
+    await start(tester, opensNextChat: true);
+    await openChatAndReturn(tester);
+
+    await tester.tap(find.byKey(MessageQueueViewKeys.markNotSent));
+    await tester.pump(MessageRunCubit.nextChatDelay);
+
+    verifyChatNeverOpenedWith(markPhone);
+  });
+
   testWidgets('the question counts down the seconds to the next chat', (
     tester,
   ) async {

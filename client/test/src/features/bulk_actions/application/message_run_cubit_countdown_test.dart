@@ -105,7 +105,6 @@ void main() {
   final interruptions = <String, void Function(MessageRunCubit cubit)>{
     'skipping': (cubit) => cubit.skipCurrent(),
     'stopping': (cubit) => cubit.stop(),
-    'answering not sent': (cubit) => cubit.markNotSentIfSent(mark),
     'turning off opening the next chat': (cubit) =>
         cubit.setOpensNextChatOnReturn(isEnabled: false),
     'starting to edit the message or pick a number': (cubit) =>

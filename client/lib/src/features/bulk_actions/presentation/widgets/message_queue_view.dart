@@ -74,7 +74,10 @@ class MessageQueueView extends StatelessWidget {
             actions: [
               TextButton(
                 key: MessageQueueViewKeys.markNotSent,
-                onPressed: () => onMarkNotSent(person),
+                onPressed: () {
+                  onCancelNextChatCountdown();
+                  onMarkNotSent(person);
+                },
                 child: const Text('لم يتم الإرسال'),
               ),
             ],

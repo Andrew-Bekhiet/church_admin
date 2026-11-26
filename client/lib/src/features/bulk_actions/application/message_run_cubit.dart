@@ -196,8 +196,6 @@ class MessageRunCubit extends Cubit<MessageRunState> {
   }
 
   void markNotSentIfSent(Person person) {
-    cancelNextChatCountdown();
-
     switch (state) {
       case final MessageRunSending sending:
         emit(
