@@ -63,6 +63,15 @@ final class MessageRunComposing extends MessageRunLoaded {
     required super.recipients,
     super.opensNextChatOnReturn,
   });
+
+  MessageRunComposing withMessagesFrom(MessageTemplate template) =>
+      MessageRunComposing(
+        recipients: [
+          for (final recipient in recipients)
+            recipient.withMessageFrom(template),
+        ],
+        opensNextChatOnReturn: opensNextChatOnReturn,
+      );
 }
 
 final class MessageRunSending extends MessageRunLoaded {
@@ -122,6 +131,11 @@ final class MessageRunSending extends MessageRunLoaded {
           (index, recipient) => index == currentIndex ? current : recipient,
         )
         .toList(),
+  );
+
+  MessageRunSending withNotSentIfSent(Person person) => copyWith(
+    recipients: recipientsWithNotSentIfSent(person),
+    sentToConfirm: () => null,
   );
 
   MessageRunLoaded nextRemainingOrPassEnded({required int fromIndex}) {

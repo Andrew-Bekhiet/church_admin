@@ -102,15 +102,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
             .catchError(_logException),
       );
 
-      _startPass(
-        MessageRunComposing(
-          recipients: [
-            for (final recipient in composing.recipients)
-              recipient.withMessageFrom(template),
-          ],
-          opensNextChatOnReturn: composing.opensNextChatOnReturn,
-        ),
-      );
+      _startPass(composing.withMessagesFrom(template));
     }
   }
 
@@ -198,12 +190,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
   void markNotSentIfSent(Person person) {
     switch (state) {
       case final MessageRunSending sending:
-        emit(
-          sending.copyWith(
-            recipients: sending.recipientsWithNotSentIfSent(person),
-            sentToConfirm: () => null,
-          ),
-        );
+        emit(sending.withNotSentIfSent(person));
 
       case final MessageRunPassEnded passEnded:
         emit(passEnded.withNotSentIfSent(person));
