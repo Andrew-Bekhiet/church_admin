@@ -24,7 +24,7 @@ void main() {
   );
 
   test('without a main phone the first own phone is chosen', () {
-    final recipient = WhatsappRecipient.of(
+    final recipient = Recipient.of(
       personWith(contacts: [otherPhone, anotherPhone]),
     );
 
@@ -32,7 +32,7 @@ void main() {
   });
 
   test('a person without own phones falls back to a family phone', () {
-    final recipient = WhatsappRecipient.of(
+    final recipient = Recipient.of(
       personWith(
         familyContacts: [
           const FamilyPhoneContact(contact: familyPhone, role: fatherType),
@@ -44,7 +44,7 @@ void main() {
   });
 
   test('the main phone comes first and is chosen, before family phones', () {
-    final recipient = WhatsappRecipient.of(
+    final recipient = Recipient.of(
       personWith(
         contacts: [otherPhone, mainPhone],
         familyContacts: [
@@ -58,7 +58,7 @@ void main() {
   });
 
   test('a family phone that is the same number is offered once', () {
-    final recipient = WhatsappRecipient.of(
+    final recipient = Recipient.of(
       personWith(
         contacts: [mainPhone],
         familyContacts: [
@@ -74,7 +74,7 @@ void main() {
   });
 
   test('a person with no phone at all has none chosen', () {
-    final recipient = WhatsappRecipient.of(personWith());
+    final recipient = Recipient.of(personWith());
 
     expect(recipient.selectedPhone, isNull);
   });

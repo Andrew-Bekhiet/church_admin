@@ -21,7 +21,7 @@ void main() {
   final peterWithoutPhone = Person(id: 'p3', name: 'بيتر');
   final john = Person(id: 'p4', name: 'يوحنا');
   final firstNameToken = MessageTemplate.tokenOf(
-    WhatsappMessageFields.firstName,
+    PersonMessageFields.firstName,
   );
 
   late MockLauncherService launcher;
@@ -72,7 +72,10 @@ void main() {
           isDarkOverride: false,
           greatFeastThemeOverride: false,
         ),
-        home: BulkWhatsappMessageScreen(persons: persons),
+        home: SendMessageScreen(
+          persons: persons,
+          action: const SendWhatsappMessageBulkAction(),
+        ),
       ),
     );
     await tester.pumpAndSettle();
@@ -80,11 +83,11 @@ void main() {
 
   Future<void> startAndOpenFirstChat(WidgetTester tester) async {
     await tester.ensureVisible(
-      find.byKey(BulkWhatsappComposeViewKeys.startButton),
+      find.byKey(MessageComposeViewKeys.startButton),
     );
-    await tester.tap(find.byKey(BulkWhatsappComposeViewKeys.startButton));
+    await tester.tap(find.byKey(MessageComposeViewKeys.startButton));
     await tester.pumpAndSettle();
-    await tester.tap(find.byKey(BulkWhatsappQueueViewKeys.openChatButton));
+    await tester.tap(find.byKey(MessageQueueViewKeys.openChatButton));
     await tester.pumpAndSettle();
   }
 
@@ -94,10 +97,8 @@ void main() {
       await pumpScreen(tester, persons: {peterWithoutPhone, mina, mark});
 
       expect(
-        tester
-            .widget<Text>(find.byKey(BulkWhatsappComposeViewKeys.preview))
-            .data,
-        BulkWhatsappMessageScreen.defaultTemplate.renderFor(mina),
+        tester.widget<Text>(find.byKey(MessageComposeViewKeys.preview)).data,
+        SendMessageScreen.defaultTemplate.renderFor(mina),
       );
     },
   );
@@ -111,10 +112,10 @@ void main() {
     await pumpScreen(tester, persons: {mina, mark});
 
     expect(
-      tester.widget<Text>(find.byKey(BulkWhatsappComposeViewKeys.preview)).data,
+      tester.widget<Text>(find.byKey(MessageComposeViewKeys.preview)).data,
       MessageTemplate(
         text: lastText,
-        fields: BulkWhatsappMessageScreen.defaultTemplate.fields,
+        fields: SendMessageScreen.defaultTemplate.fields,
       ).renderFor(mina),
     );
   });
@@ -122,7 +123,7 @@ void main() {
   test('the message greets a person by their first name only', () {
     const firstName = 'مينا';
     const familyName = 'عادل';
-    final message = BulkWhatsappMessageScreen.defaultTemplate.renderFor(
+    final message = SendMessageScreen.defaultTemplate.renderFor(
       Person(id: 'p4', name: ' $firstName $familyName '),
     );
 
@@ -140,7 +141,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      tester.widget<Text>(find.byKey(BulkWhatsappComposeViewKeys.preview)).data,
+      tester.widget<Text>(find.byKey(MessageComposeViewKeys.preview)).data,
       'اهلا ${mina.name}',
     );
   });
@@ -163,7 +164,7 @@ void main() {
         PhoneNumberService.I.formatInternational(minaPhone.phone),
         text: MessageTemplate(
           text: editedText,
-          fields: BulkWhatsappMessageScreen.defaultTemplate.fields,
+          fields: SendMessageScreen.defaultTemplate.fields,
         ).renderFor(mina),
       ),
     ).called(1);
@@ -175,7 +176,7 @@ void main() {
 
     expect(
       tester
-          .widget<TextButton>(find.byKey(BulkWhatsappQueueViewKeys.skipButton))
+          .widget<TextButton>(find.byKey(MessageQueueViewKeys.skipButton))
           .onPressed,
       isNull,
     );
@@ -197,9 +198,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      tester
-          .widget<Text>(find.byKey(BulkWhatsappQueueViewKeys.currentName))
-          .data,
+      tester.widget<Text>(find.byKey(MessageQueueViewKeys.currentName)).data,
       mark.name,
     );
   });
@@ -216,9 +215,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      tester
-          .widget<Text>(find.byKey(BulkWhatsappQueueViewKeys.currentName))
-          .data,
+      tester.widget<Text>(find.byKey(MessageQueueViewKeys.currentName)).data,
       mina.name,
     );
   });
@@ -232,7 +229,7 @@ void main() {
     expect(
       tester
           .widget<ButtonStyleButton>(
-            find.byKey(BulkWhatsappComposeViewKeys.startButton),
+            find.byKey(MessageComposeViewKeys.startButton),
           )
           .onPressed,
       isNull,
@@ -241,9 +238,9 @@ void main() {
 
   Future<void> openFirstChatThenSkipTheNext(WidgetTester tester) async {
     await startAndOpenFirstChat(tester);
-    await tester.tap(find.byKey(BulkWhatsappQueueViewKeys.nextButton));
+    await tester.tap(find.byKey(MessageQueueViewKeys.nextButton));
     await tester.pumpAndSettle();
-    await tester.tap(find.byKey(BulkWhatsappQueueViewKeys.skipButton));
+    await tester.tap(find.byKey(MessageQueueViewKeys.skipButton));
     await tester.pumpAndSettle();
   }
 
@@ -255,17 +252,17 @@ void main() {
     await pumpScreen(tester, persons: {mina, mark, john});
 
     await startAndOpenFirstChat(tester);
-    await tester.tap(find.byKey(BulkWhatsappQueueViewKeys.nextButton));
+    await tester.tap(find.byKey(MessageQueueViewKeys.nextButton));
     await tester.pumpAndSettle();
-    await tester.tap(find.byKey(BulkWhatsappQueueViewKeys.openChatButton));
+    await tester.tap(find.byKey(MessageQueueViewKeys.openChatButton));
     await tester.pumpAndSettle();
-    await tester.tap(find.byKey(BulkWhatsappQueueViewKeys.nextButton));
+    await tester.tap(find.byKey(MessageQueueViewKeys.nextButton));
     await tester.pumpAndSettle();
-    await tester.tap(find.byKey(BulkWhatsappQueueViewKeys.skipButton));
+    await tester.tap(find.byKey(MessageQueueViewKeys.skipButton));
     await tester.pumpAndSettle();
 
     final counts = tester
-        .widget<Text>(find.byKey(BulkWhatsappSummaryViewKeys.counts))
+        .widget<Text>(find.byKey(MessageSummaryViewKeys.counts))
         .data;
     expect(
       RegExp(r'\d+').allMatches(counts ?? '').map((match) => match[0]),
@@ -282,7 +279,7 @@ void main() {
 
     expect(
       find.byKey(
-        BulkWhatsappSummaryViewKeys.withoutPhoneFor(peterWithoutPhone),
+        MessageSummaryViewKeys.withoutPhoneFor(peterWithoutPhone),
       ),
       findsOneWidget,
     );

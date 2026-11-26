@@ -2,21 +2,21 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'bulk_whatsapp_message_cubit_fixture.dart';
+import 'message_run_cubit_fixture.dart';
 
 void main() {
-  final mina = BulkWhatsappMessageCubitFixture.mina;
-  final mark = BulkWhatsappMessageCubitFixture.mark;
-  final peter = BulkWhatsappMessageCubitFixture.peter;
-  const minaPhone = BulkWhatsappMessageCubitFixture.minaPhone;
-  const minaOtherPhone = BulkWhatsappMessageCubitFixture.minaOtherPhone;
-  const markPhone = BulkWhatsappMessageCubitFixture.markPhone;
+  final mina = MessageRunCubitFixture.mina;
+  final mark = MessageRunCubitFixture.mark;
+  final peter = MessageRunCubitFixture.peter;
+  const minaPhone = MessageRunCubitFixture.minaPhone;
+  const minaOtherPhone = MessageRunCubitFixture.minaOtherPhone;
+  const markPhone = MessageRunCubitFixture.markPhone;
 
-  late BulkWhatsappMessageCubitFixture fixture;
+  late MessageRunCubitFixture fixture;
 
-  setUp(() => fixture = BulkWhatsappMessageCubitFixture());
+  setUp(() => fixture = MessageRunCubitFixture());
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'a second tap while WhatsApp is opening does not open the chat again',
     build: () => fixture.buildCubit(),
     seed: () =>
@@ -31,7 +31,7 @@ void main() {
     verify: (_) => fixture.verifyOnlyChatsOpenedInOrder([(mark, markPhone)]),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'skipping while WhatsApp is opening keeps the next person current '
     'even on the same phone',
     build: () => fixture.buildCubit(),
@@ -53,15 +53,15 @@ void main() {
       await opening;
     },
     verify: (cubit) {
-      final state = BulkWhatsappMessageCubitFixture.sendingStateOf(cubit);
+      final state = MessageRunCubitFixture.sendingStateOf(cubit);
       expect(state.current.person.id, peter.id);
-      expect(state.current.status, WhatsappRecipientStatus.pending);
+      expect(state.current.status, RecipientStatus.pending);
       expect(state.isAwaitingReturn, isFalse);
-      expect(state.recipients.first.status, WhatsappRecipientStatus.skipped);
+      expect(state.recipients.first.status, RecipientStatus.skipped);
     },
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'choosing another phone while WhatsApp is opening keeps the person pending',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTo(
@@ -77,17 +77,17 @@ void main() {
     },
     verify: (cubit) {
       expect(
-        BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).current.status,
-        WhatsappRecipientStatus.pending,
+        MessageRunCubitFixture.sendingStateOf(cubit).current.status,
+        RecipientStatus.pending,
       );
       expect(
-        BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).isAwaitingReturn,
+        MessageRunCubitFixture.sendingStateOf(cubit).isAwaitingReturn,
         isFalse,
       );
     },
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     "skipping while WhatsApp is opening lets the next person's chat open",
     build: () => fixture.buildCubit(),
     seed: () =>
@@ -107,7 +107,7 @@ void main() {
     ]),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'stopping while WhatsApp is opening keeps the run finished',
     build: () => fixture.buildCubit(),
     seed: () =>
@@ -119,10 +119,10 @@ void main() {
       gate.complete(true);
       await opening;
     },
-    verify: (cubit) => expect(cubit.state, isA<BulkWhatsappFinished>()),
+    verify: (cubit) => expect(cubit.state, isA<MessageRunFinished>()),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'a chat opened by a stopped run does not count in the next run',
     build: () {
       fixture.personsDAO.personsWithPhoneContacts = [
@@ -146,14 +146,14 @@ void main() {
       await opening;
     },
     verify: (cubit) {
-      final state = BulkWhatsappMessageCubitFixture.sendingStateOf(cubit);
+      final state = MessageRunCubitFixture.sendingStateOf(cubit);
       expect(state.current.person.id, mark.id);
-      expect(state.current.status, WhatsappRecipientStatus.pending);
+      expect(state.current.status, RecipientStatus.pending);
       expect(state.isAwaitingReturn, isFalse);
     },
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'closing while WhatsApp is opening ends quietly',
     build: () => fixture.buildCubit(),
     seed: () =>
@@ -165,6 +165,6 @@ void main() {
       gate.complete(true);
       await opening;
     },
-    expect: () => <BulkWhatsappMessageState>[],
+    expect: () => <MessageRunState>[],
   );
 }

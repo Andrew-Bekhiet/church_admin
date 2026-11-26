@@ -1,17 +1,17 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
-class BulkWhatsappSummaryView extends StatelessWidget {
-  final BulkWhatsappFinished state;
+class MessageSummaryView extends StatelessWidget {
+  final MessageRunFinished state;
 
-  const BulkWhatsappSummaryView({required this.state, super.key});
+  const MessageSummaryView({required this.state, super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final openedCount = state.withPhoneCountOf(WhatsappRecipientStatus.opened);
+    final openedCount = state.withPhoneCountOf(RecipientStatus.sent);
     final skippedCount = state.withPhoneCountOf(
-      WhatsappRecipientStatus.skipped,
+      RecipientStatus.skipped,
     );
     final withoutPhone = state.withoutPhone.toList();
 
@@ -24,7 +24,7 @@ class BulkWhatsappSummaryView extends StatelessWidget {
         ),
         Text(
           'تم فتح $openedCount محادثة وتخطي $skippedCount',
-          key: BulkWhatsappSummaryViewKeys.counts,
+          key: MessageSummaryViewKeys.counts,
         ),
         if (withoutPhone.isNotEmpty) ...[
           Padding(
@@ -33,7 +33,7 @@ class BulkWhatsappSummaryView extends StatelessWidget {
           ),
           for (final recipient in withoutPhone)
             ListTile(
-              key: BulkWhatsappSummaryViewKeys.withoutPhoneFor(
+              key: MessageSummaryViewKeys.withoutPhoneFor(
                 recipient.person,
               ),
               contentPadding: EdgeInsets.zero,
@@ -52,7 +52,7 @@ class BulkWhatsappSummaryView extends StatelessWidget {
   }
 }
 
-abstract final class BulkWhatsappSummaryViewKeys {
+abstract final class MessageSummaryViewKeys {
   static const Key counts = ValueKey('Bulk Whatsapp Summary Counts Key');
 
   static Key withoutPhoneFor(Person person) =>

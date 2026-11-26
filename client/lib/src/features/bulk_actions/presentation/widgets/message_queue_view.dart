@@ -4,15 +4,20 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
-class BulkWhatsappQueueView extends StatelessWidget {
-  final BulkWhatsappSending state;
+class MessageQueueView extends StatelessWidget {
+  final MessageRunSending state;
+  final Widget channelIcon;
 
-  const BulkWhatsappQueueView({required this.state, super.key});
+  const MessageQueueView({
+    required this.state,
+    required this.channelIcon,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final cubit = context.read<BulkWhatsappMessageCubit>();
+    final cubit = context.read<MessageRunCubit>();
     final current = state.current;
     final withPhoneCount = state.withPhone.length;
 
@@ -21,7 +26,7 @@ class BulkWhatsappQueueView extends StatelessWidget {
       children: [
         Text(
           '${state.currentPositionAmongWithPhone} / $withPhoneCount',
-          key: BulkWhatsappQueueViewKeys.progress,
+          key: MessageQueueViewKeys.progress,
           style: theme.textTheme.titleMedium,
           textAlign: TextAlign.center,
         ),
@@ -39,12 +44,12 @@ class BulkWhatsappQueueView extends StatelessWidget {
               children: [
                 Text(
                   current.person.name,
-                  key: BulkWhatsappQueueViewKeys.currentName,
+                  key: MessageQueueViewKeys.currentName,
                   style: theme.textTheme.titleLarge,
                 ),
                 if (current.phones.length > 1)
                   DropdownButtonFormField<PhoneContact>(
-                    key: BulkWhatsappQueueViewKeys.phonePickerFor(
+                    key: MessageQueueViewKeys.phonePickerFor(
                       current.person,
                     ),
                     initialValue: current.selectedPhone,
@@ -78,7 +83,7 @@ class BulkWhatsappQueueView extends StatelessWidget {
         if (state.hasOpenFailed)
           Text(
             'تعذر فتح واتساب',
-            key: BulkWhatsappQueueViewKeys.openFailed,
+            key: MessageQueueViewKeys.openFailed,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: theme.colorScheme.error,
             ),
@@ -88,26 +93,26 @@ class BulkWhatsappQueueView extends StatelessWidget {
           spacing: 8,
           children: [
             TextButton(
-              key: BulkWhatsappQueueViewKeys.stopButton,
+              key: MessageQueueViewKeys.stopButton,
               onPressed: cubit.stop,
               child: const Text('إيقاف'),
             ),
             TextButton(
-              key: BulkWhatsappQueueViewKeys.skipButton,
+              key: MessageQueueViewKeys.skipButton,
               onPressed: state.isAwaitingReturn ? null : cubit.skipCurrent,
               child: const Text('تخطي'),
             ),
             Expanded(
               child: state.isAwaitingReturn
                   ? FilledButton(
-                      key: BulkWhatsappQueueViewKeys.nextButton,
+                      key: MessageQueueViewKeys.nextButton,
                       onPressed: () =>
                           unawaited(cubit.showNextAndMaybeOpenItsChat()),
                       child: const Text('التالي'),
                     )
                   : FilledButton.icon(
-                      key: BulkWhatsappQueueViewKeys.openChatButton,
-                      icon: const ImageIcon(AssetImage('assets/whatsapp.png')),
+                      key: MessageQueueViewKeys.openChatButton,
+                      icon: channelIcon,
                       label: const Text('فتح المحادثة'),
                       onPressed: () => unawaited(cubit.openCurrentChat()),
                     ),
@@ -119,7 +124,7 @@ class BulkWhatsappQueueView extends StatelessWidget {
   }
 }
 
-abstract final class BulkWhatsappQueueViewKeys {
+abstract final class MessageQueueViewKeys {
   static const Key progress = ValueKey('Bulk Whatsapp Progress Key');
   static const Key currentName = ValueKey('Bulk Whatsapp Current Name Key');
   static const Key openFailed = ValueKey('Bulk Whatsapp Open Failed Key');

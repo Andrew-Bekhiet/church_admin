@@ -3,24 +3,24 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import 'bulk_whatsapp_message_cubit_fixture.dart';
+import 'message_run_cubit_fixture.dart';
 
 void main() {
-  final mina = BulkWhatsappMessageCubitFixture.mina;
-  final mark = BulkWhatsappMessageCubitFixture.mark;
-  final peter = BulkWhatsappMessageCubitFixture.peter;
-  const minaPhone = BulkWhatsappMessageCubitFixture.minaPhone;
-  const minaOtherPhone = BulkWhatsappMessageCubitFixture.minaOtherPhone;
-  const markPhone = BulkWhatsappMessageCubitFixture.markPhone;
+  final mina = MessageRunCubitFixture.mina;
+  final mark = MessageRunCubitFixture.mark;
+  final peter = MessageRunCubitFixture.peter;
+  const minaPhone = MessageRunCubitFixture.minaPhone;
+  const minaOtherPhone = MessageRunCubitFixture.minaOtherPhone;
+  const markPhone = MessageRunCubitFixture.markPhone;
 
-  late BulkWhatsappMessageCubitFixture fixture;
+  late MessageRunCubitFixture fixture;
 
-  setUp(() => fixture = BulkWhatsappMessageCubitFixture());
+  setUp(() => fixture = MessageRunCubitFixture());
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'starting passes over people without a phone at the front',
     build: () => fixture.buildCubit(),
-    seed: () => BulkWhatsappComposing(
+    seed: () => MessageRunComposing(
       recipients: [
         fixture.recipientOf(peter, []),
         fixture.recipientOf(mina, [minaPhone]),
@@ -28,36 +28,35 @@ void main() {
     ),
     act: (cubit) => cubit.saveTextAndStart(fixture.template),
     verify: (cubit) => expect(
-      BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).current.person.id,
+      MessageRunCubitFixture.sendingStateOf(cubit).current.person.id,
       mina.id,
     ),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'starting keeps the open-next-chat-on-return choice made while composing',
     build: () => fixture.buildCubit(),
     seed: () =>
-        BulkWhatsappComposing(recipients: fixture.markThenMinaWithTwoPhones()),
+        MessageRunComposing(recipients: fixture.markThenMinaWithTwoPhones()),
     act: (cubit) => cubit
       ..setOpensNextChatOnReturn(isEnabled: true)
       ..saveTextAndStart(fixture.template),
     verify: (cubit) => expect(
-      BulkWhatsappMessageCubitFixture.sendingStateOf(cubit)
-          .opensNextChatOnReturn,
+      MessageRunCubitFixture.sendingStateOf(cubit).opensNextChatOnReturn,
       isTrue,
     ),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'starting with nobody who has a phone finishes right away',
     build: () => fixture.buildCubit(),
     seed: () =>
-        BulkWhatsappComposing(recipients: [fixture.recipientOf(peter, [])]),
+        MessageRunComposing(recipients: [fixture.recipientOf(peter, [])]),
     act: (cubit) => cubit.saveTextAndStart(fixture.template),
-    verify: (cubit) => expect(cubit.state, isA<BulkWhatsappFinished>()),
+    verify: (cubit) => expect(cubit.state, isA<MessageRunFinished>()),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     "opening the chat opens WhatsApp on the person's phone with their message",
     build: () => fixture.buildCubit(),
     seed: () =>
@@ -71,7 +70,7 @@ void main() {
     ),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'returning to the app twice after one chat moves on only once',
     build: () => fixture.buildCubit(),
     seed: () =>
@@ -83,29 +82,29 @@ void main() {
     },
     verify: (cubit) {
       expect(
-        BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).current.person.id,
+        MessageRunCubitFixture.sendingStateOf(cubit).current.person.id,
         mina.id,
       );
       expect(
-        BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).current.status,
-        WhatsappRecipientStatus.pending,
+        MessageRunCubitFixture.sendingStateOf(cubit).current.status,
+        RecipientStatus.pending,
       );
     },
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'returning to the app without opening a chat stays on the same person',
     build: () => fixture.buildCubit(),
     seed: () =>
         fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
     act: (cubit) => cubit.showNextAndMaybeOpenItsChat(),
     verify: (cubit) => expect(
-      BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).current.person.id,
+      MessageRunCubitFixture.sendingStateOf(cubit).current.person.id,
       mark.id,
     ),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'opening the next chat on return opens it right away',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTo(
@@ -122,7 +121,7 @@ void main() {
     ]),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'turning on opening the next chat mid-run opens it on return',
     build: () => fixture.buildCubit(),
     seed: () =>
@@ -138,7 +137,7 @@ void main() {
     ]),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'skipping moves to the next person without opening a chat',
     build: () => fixture.buildCubit(),
     seed: () =>
@@ -146,14 +145,14 @@ void main() {
     act: (cubit) => cubit.skipCurrent(),
     verify: (cubit) {
       expect(
-        BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).current.person.id,
+        MessageRunCubitFixture.sendingStateOf(cubit).current.person.id,
         mina.id,
       );
       verifyZeroInteractions(fixture.launcher);
     },
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'choosing another phone opens WhatsApp on that phone',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTo(
@@ -168,7 +167,7 @@ void main() {
         fixture.verifyOnlyChatsOpenedInOrder([(mina, minaOtherPhone)]),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'when WhatsApp cannot be opened the person stays current with the failure',
     build: () {
       fixture.stubWhatsappLaunch(() async => false);
@@ -183,17 +182,17 @@ void main() {
     },
     verify: (cubit) {
       expect(
-        BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).current.person.id,
+        MessageRunCubitFixture.sendingStateOf(cubit).current.person.id,
         mark.id,
       );
       expect(
-        BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).hasOpenFailed,
+        MessageRunCubitFixture.sendingStateOf(cubit).hasOpenFailed,
         isTrue,
       );
     },
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'a launcher error counts as a failed open',
     build: () {
       fixture.stubWhatsappLaunchThrowing(
@@ -207,17 +206,17 @@ void main() {
     act: (cubit) => cubit.openCurrentChat(),
     verify: (cubit) {
       expect(
-        BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).hasOpenFailed,
+        MessageRunCubitFixture.sendingStateOf(cubit).hasOpenFailed,
         isTrue,
       );
       expect(
-        BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).isAwaitingReturn,
+        MessageRunCubitFixture.sendingStateOf(cubit).isAwaitingReturn,
         isFalse,
       );
     },
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'opening the chat again after a failed launch clears the failure',
     build: () {
       fixture.stubWhatsappLaunchThrowing(
@@ -235,17 +234,17 @@ void main() {
     },
     verify: (cubit) {
       expect(
-        BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).hasOpenFailed,
+        MessageRunCubitFixture.sendingStateOf(cubit).hasOpenFailed,
         isFalse,
       );
       expect(
-        BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).isAwaitingReturn,
+        MessageRunCubitFixture.sendingStateOf(cubit).isAwaitingReturn,
         isTrue,
       );
     },
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     "skipping after a failed open does not carry the failure to the next person",
     build: () {
       fixture.stubWhatsappLaunch(() async => false);
@@ -260,11 +259,11 @@ void main() {
     },
     verify: (cubit) {
       expect(
-        BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).current.person.id,
+        MessageRunCubitFixture.sendingStateOf(cubit).current.person.id,
         mina.id,
       );
       expect(
-        BulkWhatsappMessageCubitFixture.sendingStateOf(cubit).hasOpenFailed,
+        MessageRunCubitFixture.sendingStateOf(cubit).hasOpenFailed,
         isFalse,
       );
     },

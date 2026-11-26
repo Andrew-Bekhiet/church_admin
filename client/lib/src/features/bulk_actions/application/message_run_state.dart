@@ -2,64 +2,64 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 
-sealed class BulkWhatsappMessageState with Equatable {
+sealed class MessageRunState with Equatable {
   @override
   List<Object?> get props => [];
 
-  const BulkWhatsappMessageState();
+  const MessageRunState();
 }
 
-final class BulkWhatsappLoading extends BulkWhatsappMessageState {
-  const BulkWhatsappLoading();
+final class MessageRunLoading extends MessageRunState {
+  const MessageRunLoading();
 }
 
-final class BulkWhatsappLoadFailure extends BulkWhatsappMessageState {
+final class MessageRunLoadFailure extends MessageRunState {
   final Object error;
 
   @override
   List<Object?> get props => [error];
 
-  const BulkWhatsappLoadFailure(this.error);
+  const MessageRunLoadFailure(this.error);
 }
 
-sealed class BulkWhatsappLoaded extends BulkWhatsappMessageState {
-  final List<WhatsappRecipient> recipients;
+sealed class MessageRunLoaded extends MessageRunState {
+  final List<Recipient> recipients;
 
-  Iterable<WhatsappRecipient> get withPhone =>
+  Iterable<Recipient> get withPhone =>
       recipients.where((recipient) => recipient.hasPhone);
 
-  Iterable<WhatsappRecipient> get withoutPhone =>
+  Iterable<Recipient> get withoutPhone =>
       recipients.whereNot((recipient) => recipient.hasPhone);
 
   @override
   List<Object?> get props => [recipients];
 
-  const BulkWhatsappLoaded({required this.recipients});
+  const MessageRunLoaded({required this.recipients});
 
-  int withPhoneCountOf(WhatsappRecipientStatus status) =>
+  int withPhoneCountOf(RecipientStatus status) =>
       withPhone.where((recipient) => recipient.status == status).length;
 }
 
-final class BulkWhatsappComposing extends BulkWhatsappLoaded {
+final class MessageRunComposing extends MessageRunLoaded {
   final bool opensNextChatOnReturn;
 
   @override
   List<Object?> get props => [...super.props, opensNextChatOnReturn];
 
-  const BulkWhatsappComposing({
+  const MessageRunComposing({
     required super.recipients,
     this.opensNextChatOnReturn = false,
   });
 }
 
-final class BulkWhatsappSending extends BulkWhatsappLoaded {
+final class MessageRunSending extends MessageRunLoaded {
   final MessageTemplate template;
   final int currentIndex;
   final bool opensNextChatOnReturn;
   final bool isAwaitingReturn;
   final bool hasOpenFailed;
 
-  WhatsappRecipient get current => recipients[currentIndex];
+  Recipient get current => recipients[currentIndex];
 
   String get currentMessage => template.renderFor(current.person);
 
@@ -78,7 +78,7 @@ final class BulkWhatsappSending extends BulkWhatsappLoaded {
     hasOpenFailed,
   ];
 
-  const BulkWhatsappSending({
+  const MessageRunSending({
     required this.template,
     required this.currentIndex,
     required super.recipients,
@@ -87,13 +87,13 @@ final class BulkWhatsappSending extends BulkWhatsappLoaded {
     this.hasOpenFailed = false,
   });
 
-  BulkWhatsappSending copyWith({
-    List<WhatsappRecipient>? recipients,
+  MessageRunSending copyWith({
+    List<Recipient>? recipients,
     int? currentIndex,
     bool? opensNextChatOnReturn,
     bool? isAwaitingReturn,
     bool? hasOpenFailed,
-  }) => BulkWhatsappSending(
+  }) => MessageRunSending(
     recipients: recipients ?? this.recipients,
     template: template,
     currentIndex: currentIndex ?? this.currentIndex,
@@ -102,7 +102,7 @@ final class BulkWhatsappSending extends BulkWhatsappLoaded {
     hasOpenFailed: hasOpenFailed ?? this.hasOpenFailed,
   );
 
-  BulkWhatsappSending withCurrent(WhatsappRecipient current) => copyWith(
+  MessageRunSending withCurrent(Recipient current) => copyWith(
     recipients: recipients
         .mapIndexed(
           (index, recipient) => index == currentIndex ? current : recipient,
@@ -111,13 +111,13 @@ final class BulkWhatsappSending extends BulkWhatsappLoaded {
   );
 }
 
-final class BulkWhatsappFinished extends BulkWhatsappLoaded {
+final class MessageRunFinished extends MessageRunLoaded {
   final bool isStopped;
 
   @override
   List<Object?> get props => [...super.props, isStopped];
 
-  const BulkWhatsappFinished({
+  const MessageRunFinished({
     required super.recipients,
     this.isStopped = false,
   });

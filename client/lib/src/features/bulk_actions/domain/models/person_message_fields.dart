@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 
-abstract final class WhatsappMessageFields {
+abstract final class PersonMessageFields {
   static final RegExp _whitespace = RegExp(r'\s+');
 
   static final FieldMetadata<String> firstName = FieldMetadata<String>(
