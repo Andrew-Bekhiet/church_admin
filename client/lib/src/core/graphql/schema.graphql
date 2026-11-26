@@ -8347,8 +8347,6 @@ type mutation_root {
   deleteTagsByPk(id: uuid!): Tags
   deleteUniversities(where: UniversitiesBoolExp!): UniversitiesMutationResponse
   deleteUniversitiesByPk(id: uuid!): Universities
-  deleteUsersFcmTokens(where: UsersFcmTokensBoolExp!): UsersFcmTokensMutationResponse
-  deleteUsersFcmTokensByPk(token: String!, uid: uuid!): UsersFcmTokens
   insertAddresses(objects: [AddressesInsertInput!]!, onConflict: AddressesOnConflict): AddressesMutationResponse
   insertAddressesOne(object: AddressesInsertInput!, onConflict: AddressesOnConflict): Addresses
   insertAreas(objects: [AreasInsertInput!]!, onConflict: AreasOnConflict): AreasMutationResponse

@@ -24,9 +24,3 @@ select_permissions:
       filter:
         uid:
           _eq: X-Hasura-User-Id
-delete_permissions:
-  - role: user
-    permission:
-      filter:
-        uid:
-          _eq: X-Hasura-User-Id
