@@ -53,6 +53,12 @@ sealed class MessageRunLoaded extends MessageRunState {
             : recipient,
       )
       .toList();
+
+  MessageRunLoaded startingPass() => MessageRunSending(
+    recipients: recipients,
+    currentIndex: 0,
+    opensNextChatOnReturn: opensNextChatOnReturn,
+  ).nextRemainingOrFinished(fromIndex: 0);
 }
 
 final class MessageRunComposing extends MessageRunLoaded {
@@ -119,6 +125,23 @@ final class MessageRunSending extends MessageRunLoaded {
           (index, recipient) => index == currentIndex ? current : recipient,
         )
         .toList(),
+  );
+
+  MessageRunLoaded nextRemainingOrFinished({required int fromIndex}) {
+    final nextIndex = recipients.indexWhere(
+      (recipient) => recipient.isRemaining,
+      fromIndex,
+    );
+    final hasNoneRemaining = nextIndex == -1;
+
+    return hasNoneRemaining
+        ? asFinished()
+        : copyWith(currentIndex: nextIndex, isAwaitingReturn: false);
+  }
+
+  MessageRunFinished asFinished() => MessageRunFinished(
+    recipients: recipients,
+    opensNextChatOnReturn: opensNextChatOnReturn,
   );
 }
 

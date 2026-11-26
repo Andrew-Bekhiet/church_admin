@@ -161,9 +161,10 @@ class MessageRunCubit extends Cubit<MessageRunState> {
 
   void askIfSentAndShowNextIfChatWasOpened() {
     if (state case MessageRunSending(isAwaitingReturn: true) && final sending) {
-      _showNextRemainingOrFinish(
-        sending.copyWith(sentToConfirm: () => sending.current.person),
-        fromIndex: sending.currentIndex + 1,
+      emit(
+        sending
+            .copyWith(sentToConfirm: () => sending.current.person)
+            .nextRemainingOrFinished(fromIndex: sending.currentIndex + 1),
       );
 
       if (state case MessageRunSending(opensNextChatOnReturn: true) && final next) {
@@ -183,9 +184,10 @@ class MessageRunCubit extends Cubit<MessageRunState> {
   void skipCurrent() {
     cancelNextChatCountdown();
     if (state case final MessageRunSending sending) {
-      _showNextRemainingOrFinish(
-        sending.withCurrent(sending.current.asSkippedUnlessOpenFailed()),
-        fromIndex: sending.currentIndex + 1,
+      emit(
+        sending
+            .withCurrent(sending.current.asSkippedUnlessOpenFailed())
+            .nextRemainingOrFinished(fromIndex: sending.currentIndex + 1),
       );
     }
   }
@@ -226,20 +228,13 @@ class MessageRunCubit extends Cubit<MessageRunState> {
   void stop() {
     cancelNextChatCountdown();
     if (state case final MessageRunSending sending) {
-      _finish(sending);
+      emit(sending.asFinished());
     }
   }
 
   void _startPass(MessageRunLoaded run) {
     _passCount++;
-    _showNextRemainingOrFinish(
-      MessageRunSending(
-        recipients: run.recipients,
-        currentIndex: 0,
-        opensNextChatOnReturn: run.opensNextChatOnReturn,
-      ),
-      fromIndex: 0,
-    );
+    emit(run.startingPass());
   }
 
   void _countDownToOpeningCurrentChat(MessageRunSending sending) {
@@ -310,37 +305,6 @@ class MessageRunCubit extends Cubit<MessageRunState> {
               .withCurrent(sending.current.asSent())
               .copyWith(isAwaitingReturn: true)
         : sending.withCurrent(sending.current.asOpenFailed()),
-  );
-
-  void _showNextRemainingOrFinish(
-    MessageRunSending sending, {
-    required int fromIndex,
-  }) {
-    final nextIndex = sending.recipients.indexWhere(
-      (recipient) => recipient.isRemaining,
-      fromIndex,
-    );
-    final hasNoneRemaining = nextIndex == -1;
-
-    if (hasNoneRemaining) {
-      _finish(sending);
-
-      return;
-    }
-
-    emit(
-      sending.copyWith(
-        currentIndex: nextIndex,
-        isAwaitingReturn: false,
-      ),
-    );
-  }
-
-  void _finish(MessageRunSending sending) => emit(
-    MessageRunFinished(
-      recipients: sending.recipients,
-      opensNextChatOnReturn: sending.opensNextChatOnReturn,
-    ),
   );
 
   @override
