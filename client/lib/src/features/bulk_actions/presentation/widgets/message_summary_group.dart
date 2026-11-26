@@ -1,13 +1,13 @@
 import 'package:material_ui/material_ui.dart';
 
 class MessageSummaryGroup extends StatelessWidget {
-  final String label;
+  final String title;
   final Key titleKey;
   final List<Widget> rows;
   final Widget? action;
 
   const MessageSummaryGroup({
-    required this.label,
+    required this.title,
     required this.titleKey,
     required this.rows,
     this.action,
@@ -29,7 +29,7 @@ class MessageSummaryGroup extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  '$label (${rows.length})',
+                  '$title (${rows.length})',
                   key: titleKey,
                   style: TextTheme.of(context).titleMedium,
                 ),

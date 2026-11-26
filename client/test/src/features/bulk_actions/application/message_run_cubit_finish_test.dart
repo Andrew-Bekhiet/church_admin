@@ -26,37 +26,39 @@ void main() {
       fixture.analytics.trackedEventsOf<BulkMessageRunFinish>();
 
   blocTest<MessageRunCubit, MessageRunState>(
-    'after the last person with a phone the run finishes with each outcome',
+    'after the last person with a phone the pass ends with each outcome',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(recipients: markMinaAndPeterWithoutPhone()),
+    seed: () =>
+        fixture.sendingTemplateTo(recipients: markMinaAndPeterWithoutPhone()),
     act: (cubit) async {
       await cubit.openCurrentChat();
       cubit
-        ..askIfSentShowNextAndMaybeCountDownToItsChatIfChatWasOpened()
+        ..returnFromChat()
         ..skipCurrent();
     },
     verify: (cubit) {
-      final finished = cubit.state as MessageRunFinished;
-      expect(finished.recipients.map((recipient) => recipient.status), [
+      final passEnded = cubit.state as MessageRunPassEnded;
+      expect(passEnded.recipients.map((recipient) => recipient.status), [
         RecipientStatus.sent,
         RecipientStatus.skipped,
         RecipientStatus.pending,
       ]);
-      expect(finished.isStopped, isFalse);
+      expect(passEnded.hasRemaining, isFalse);
     },
   );
 
   blocTest<MessageRunCubit, MessageRunState>(
-    'stopping finishes the run early',
+    'stopping ends the pass early',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(recipients: markMinaAndPeterWithoutPhone()),
+    seed: () =>
+        fixture.sendingTemplateTo(recipients: markMinaAndPeterWithoutPhone()),
     act: (cubit) => cubit.stop(),
     verify: (cubit) =>
-        expect((cubit.state as MessageRunFinished).isStopped, isTrue),
+        expect((cubit.state as MessageRunPassEnded).hasRemaining, isTrue),
   );
 
   blocTest<MessageRunCubit, MessageRunState>(
-    'leaving a finished run tracks it once',
+    'leaving tracks the run once',
     build: () => fixture.buildCubit(),
     seed: () => MessageRunComposing(recipients: markMinaAndPeterWithoutPhone()),
     act: (cubit) async {

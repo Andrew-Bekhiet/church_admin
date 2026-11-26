@@ -51,11 +51,11 @@ sealed class MessageRunLoaded extends MessageRunState {
       )
       .toList();
 
-  MessageRunLoaded startingPass() => MessageRunSending(
+  MessageRunLoaded firstRemainingOrPassEnded() => MessageRunSending(
     recipients: recipients,
     currentIndex: 0,
     opensNextChatOnReturn: opensNextChatOnReturn,
-  ).nextRemainingOrFinished(fromIndex: 0);
+  ).nextRemainingOrPassEnded(fromIndex: 0);
 }
 
 final class MessageRunComposing extends MessageRunLoaded {
@@ -73,7 +73,7 @@ final class MessageRunSending extends MessageRunLoaded {
 
   Recipient get current => recipients[currentIndex];
 
-  bool get hasOpenFailed => current.status == RecipientStatus.openFailed;
+  bool get hasCurrentOpenFailed => current.status == RecipientStatus.openFailed;
 
   int get currentPositionAmongWithPhone => recipients
       .take(currentIndex + 1)
@@ -124,7 +124,7 @@ final class MessageRunSending extends MessageRunLoaded {
         .toList(),
   );
 
-  MessageRunLoaded nextRemainingOrFinished({required int fromIndex}) {
+  MessageRunLoaded nextRemainingOrPassEnded({required int fromIndex}) {
     final nextIndex = recipients.indexWhere(
       (recipient) => recipient.isRemaining,
       fromIndex,
@@ -132,18 +132,18 @@ final class MessageRunSending extends MessageRunLoaded {
     final hasNoneRemaining = nextIndex == -1;
 
     return hasNoneRemaining
-        ? asFinished()
+        ? asPassEnded()
         : copyWith(currentIndex: nextIndex, isAwaitingReturn: false);
   }
 
-  MessageRunFinished asFinished() => MessageRunFinished(
+  MessageRunPassEnded asPassEnded() => MessageRunPassEnded(
     recipients: recipients,
     opensNextChatOnReturn: opensNextChatOnReturn,
   );
 }
 
-final class MessageRunFinished extends MessageRunLoaded {
-  bool get isStopped => remaining.isNotEmpty;
+final class MessageRunPassEnded extends MessageRunLoaded {
+  bool get hasRemaining => remaining.isNotEmpty;
 
   Iterable<Recipient> get notSentOrOpenFailed => recipients.where(
     (recipient) => switch (recipient.status) {
@@ -161,12 +161,12 @@ final class MessageRunFinished extends MessageRunLoaded {
   Iterable<Recipient> get sent =>
       recipients.where((recipient) => recipient.status == RecipientStatus.sent);
 
-  const MessageRunFinished({
+  const MessageRunPassEnded({
     required super.recipients,
     super.opensNextChatOnReturn,
   });
 
-  MessageRunFinished withNotSentIfSent(Person person) => MessageRunFinished(
+  MessageRunPassEnded withNotSentIfSent(Person person) => MessageRunPassEnded(
     recipients: recipientsWithNotSentIfSent(person),
     opensNextChatOnReturn: opensNextChatOnReturn,
   );

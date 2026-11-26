@@ -36,14 +36,14 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'an edited message is the one that opens in the chat',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(
+    seed: () => fixture.sendingTemplateTo(
       recipients: [
         fixture.recipientOf(mark, [markPhone]),
         fixture.recipientOf(mina, [minaPhone]),
       ],
     ),
     act: (cubit) async {
-      cubit.editCurrentMessage('مساء الخير يا مارك');
+      cubit.editCurrentMessageUnlessChatOpened('مساء الخير يا مارك');
       await cubit.openCurrentChat();
     },
     verify: (_) => verify(
@@ -59,13 +59,14 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     "editing the message leaves the other people's messages as they were",
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(
+    seed: () => fixture.sendingTemplateTo(
       recipients: [
         fixture.recipientOf(mark, [markPhone]),
         fixture.recipientOf(mina, [minaPhone]),
       ],
     ),
-    act: (cubit) => cubit.editCurrentMessage('مساء الخير يا مارك'),
+    act: (cubit) =>
+        cubit.editCurrentMessageUnlessChatOpened('مساء الخير يا مارك'),
     verify: (cubit) => expect(
       MessageRunCubitFixture.sendingStateOf(
         cubit,
@@ -77,7 +78,7 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'the message of an opened chat cannot be edited',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(
+    seed: () => fixture.sendingTemplateTo(
       recipients: [
         fixture.recipientOf(mark, [markPhone]),
         fixture.recipientOf(mina, [minaPhone]),
@@ -85,7 +86,7 @@ void main() {
     ),
     act: (cubit) async {
       await cubit.openCurrentChat();
-      cubit.editCurrentMessage('مساء الخير يا مارك');
+      cubit.editCurrentMessageUnlessChatOpened('مساء الخير يا مارك');
     },
     verify: (cubit) => expect(
       MessageRunCubitFixture.sendingStateOf(cubit).current.message,

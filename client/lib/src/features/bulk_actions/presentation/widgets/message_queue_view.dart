@@ -126,13 +126,13 @@ class MessageQueueView extends StatelessWidget {
                   maxLines: null,
                   decoration: const InputDecoration(labelText: 'الرسالة'),
                   onTap: cubit.cancelNextChatCountdown,
-                  onChanged: cubit.editCurrentMessage,
+                  onChanged: cubit.editCurrentMessageUnlessChatOpened,
                 ),
               ],
             ),
           ),
         ),
-        if (state.hasOpenFailed)
+        if (state.hasCurrentOpenFailed)
           Text(
             'تعذر فتح واتساب',
             key: MessageQueueViewKeys.openFailed,
@@ -158,8 +158,7 @@ class MessageQueueView extends StatelessWidget {
               child: state.isAwaitingReturn
                   ? FilledButton(
                       key: MessageQueueViewKeys.nextButton,
-                      onPressed: cubit
-                          .askIfSentShowNextAndMaybeCountDownToItsChatIfChatWasOpened,
+                      onPressed: cubit.returnFromChat,
                       child: const Text('التالي'),
                     )
                   : FilledButton.icon(

@@ -47,19 +47,20 @@ void main() {
   );
 
   blocTest<MessageRunCubit, MessageRunState>(
-    'starting with nobody who has a phone finishes right away',
+    'starting with nobody who has a phone ends the pass right away',
     build: () => fixture.buildCubit(),
     seed: () =>
         MessageRunComposing(recipients: [fixture.recipientOf(peter, [])]),
     act: (cubit) => cubit.saveTextAndStart(fixture.template),
-    verify: (cubit) => expect(cubit.state, isA<MessageRunFinished>()),
+    verify: (cubit) => expect(cubit.state, isA<MessageRunPassEnded>()),
   );
 
   blocTest<MessageRunCubit, MessageRunState>(
     "opening the chat opens WhatsApp on the person's phone with their message",
     build: () => fixture.buildCubit(),
-    seed: () =>
-        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: fixture.markThenMinaWithTwoPhones(),
+    ),
     act: (cubit) => cubit.openCurrentChat(),
     verify: (_) => verify(
       () => fixture.launcher.launchWhatsappChat(
@@ -72,13 +73,14 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'returning to the app twice after one chat moves on only once',
     build: () => fixture.buildCubit(),
-    seed: () =>
-        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: fixture.markThenMinaWithTwoPhones(),
+    ),
     act: (cubit) async {
       await cubit.openCurrentChat();
       cubit
-        ..askIfSentShowNextAndMaybeCountDownToItsChatIfChatWasOpened()
-        ..askIfSentShowNextAndMaybeCountDownToItsChatIfChatWasOpened();
+        ..returnFromChat()
+        ..returnFromChat();
     },
     verify: (cubit) {
       expect(
@@ -95,10 +97,10 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'returning to the app without opening a chat stays on the same person',
     build: () => fixture.buildCubit(),
-    seed: () =>
-        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
-    act: (cubit) =>
-        cubit.askIfSentShowNextAndMaybeCountDownToItsChatIfChatWasOpened(),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: fixture.markThenMinaWithTwoPhones(),
+    ),
+    act: (cubit) => cubit.returnFromChat(),
     verify: (cubit) => expect(
       MessageRunCubitFixture.sendingStateOf(cubit).current.person.id,
       mark.id,
@@ -108,8 +110,9 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'skipping moves to the next person without opening a chat',
     build: () => fixture.buildCubit(),
-    seed: () =>
-        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: fixture.markThenMinaWithTwoPhones(),
+    ),
     act: (cubit) => cubit.skipCurrent(),
     verify: (cubit) {
       expect(
@@ -123,7 +126,7 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'choosing another phone opens WhatsApp on that phone',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(
+    seed: () => fixture.sendingTemplateTo(
       recipients: fixture.markThenMinaWithTwoPhones(),
       currentIndex: 1,
     ),
@@ -142,11 +145,12 @@ void main() {
 
       return fixture.buildCubit();
     },
-    seed: () =>
-        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: fixture.markThenMinaWithTwoPhones(),
+    ),
     act: (cubit) async {
       await cubit.openCurrentChat();
-      cubit.askIfSentShowNextAndMaybeCountDownToItsChatIfChatWasOpened();
+      cubit.returnFromChat();
     },
     verify: (cubit) {
       expect(
@@ -154,7 +158,7 @@ void main() {
         mark.id,
       );
       expect(
-        MessageRunCubitFixture.sendingStateOf(cubit).hasOpenFailed,
+        MessageRunCubitFixture.sendingStateOf(cubit).hasCurrentOpenFailed,
         isTrue,
       );
     },
@@ -169,12 +173,13 @@ void main() {
 
       return fixture.buildCubit();
     },
-    seed: () =>
-        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: fixture.markThenMinaWithTwoPhones(),
+    ),
     act: (cubit) => cubit.openCurrentChat(),
     verify: (cubit) {
       expect(
-        MessageRunCubitFixture.sendingStateOf(cubit).hasOpenFailed,
+        MessageRunCubitFixture.sendingStateOf(cubit).hasCurrentOpenFailed,
         isTrue,
       );
       expect(
@@ -193,8 +198,9 @@ void main() {
 
       return fixture.buildCubit();
     },
-    seed: () =>
-        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: fixture.markThenMinaWithTwoPhones(),
+    ),
     act: (cubit) async {
       await cubit.openCurrentChat();
       fixture.stubWhatsappLaunch(() async => true);
@@ -202,7 +208,7 @@ void main() {
     },
     verify: (cubit) {
       expect(
-        MessageRunCubitFixture.sendingStateOf(cubit).hasOpenFailed,
+        MessageRunCubitFixture.sendingStateOf(cubit).hasCurrentOpenFailed,
         isFalse,
       );
       expect(
@@ -219,8 +225,9 @@ void main() {
 
       return fixture.buildCubit();
     },
-    seed: () =>
-        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: fixture.markThenMinaWithTwoPhones(),
+    ),
     act: (cubit) async {
       await cubit.openCurrentChat();
       cubit.skipCurrent();
@@ -231,7 +238,7 @@ void main() {
         mina.id,
       );
       expect(
-        MessageRunCubitFixture.sendingStateOf(cubit).hasOpenFailed,
+        MessageRunCubitFixture.sendingStateOf(cubit).hasCurrentOpenFailed,
         isFalse,
       );
     },

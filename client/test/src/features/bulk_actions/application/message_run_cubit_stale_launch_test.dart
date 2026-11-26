@@ -19,8 +19,9 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'a second tap while WhatsApp is opening does not open the chat again',
     build: () => fixture.buildCubit(),
-    seed: () =>
-        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: fixture.markThenMinaWithTwoPhones(),
+    ),
     act: (cubit) async {
       final gate = fixture.holdWhatsappLaunches();
       final opening = cubit.openCurrentChat();
@@ -38,7 +39,7 @@ void main() {
     seed: () {
       const sharedPhone = markPhone;
 
-      return fixture.sendingTo(
+      return fixture.sendingTemplateTo(
         recipients: [
           fixture.recipientOf(mark, [sharedPhone]),
           fixture.recipientOf(peter, [sharedPhone]),
@@ -64,7 +65,7 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'choosing another phone while WhatsApp is opening keeps the person pending',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(
+    seed: () => fixture.sendingTemplateTo(
       recipients: fixture.markThenMinaWithTwoPhones(),
       currentIndex: 1,
     ),
@@ -90,8 +91,9 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     "skipping while WhatsApp is opening lets the next person's chat open",
     build: () => fixture.buildCubit(),
-    seed: () =>
-        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: fixture.markThenMinaWithTwoPhones(),
+    ),
     act: (cubit) async {
       final gate = fixture.holdWhatsappLaunches();
       final opening = cubit.openCurrentChat();
@@ -108,10 +110,11 @@ void main() {
   );
 
   blocTest<MessageRunCubit, MessageRunState>(
-    'stopping while WhatsApp is opening keeps the run finished',
+    'stopping while WhatsApp is opening keeps the pass ended',
     build: () => fixture.buildCubit(),
-    seed: () =>
-        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: fixture.markThenMinaWithTwoPhones(),
+    ),
     act: (cubit) async {
       final gate = fixture.holdWhatsappLaunches();
       final opening = cubit.openCurrentChat();
@@ -119,11 +122,11 @@ void main() {
       gate.complete(true);
       await opening;
     },
-    verify: (cubit) => expect(cubit.state, isA<MessageRunFinished>()),
+    verify: (cubit) => expect(cubit.state, isA<MessageRunPassEnded>()),
   );
 
   blocTest<MessageRunCubit, MessageRunState>(
-    'a chat opened by a stopped run does not count in the next run',
+    'a chat opened by a stopped run does not count in the next pass',
     build: () {
       fixture.personsDAO.personsWithPhoneContacts = [
         mark.copyWith(contacts: [markPhone]),
@@ -131,7 +134,7 @@ void main() {
 
       return fixture.buildCubit(persons: {mark});
     },
-    seed: () => fixture.sendingTo(
+    seed: () => fixture.sendingTemplateTo(
       recipients: [
         fixture.recipientOf(mark, [markPhone]),
       ],
@@ -156,8 +159,9 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'closing while WhatsApp is opening ends quietly',
     build: () => fixture.buildCubit(),
-    seed: () =>
-        fixture.sendingTo(recipients: fixture.markThenMinaWithTwoPhones()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: fixture.markThenMinaWithTwoPhones(),
+    ),
     act: (cubit) async {
       final gate = fixture.holdWhatsappLaunches();
       final opening = cubit.openCurrentChat();

@@ -4,7 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
 class MessageSummaryView extends StatelessWidget {
-  final MessageRunFinished state;
+  final MessageRunPassEnded state;
   final VoidCallback onResume;
   final ValueChanged<Person> onMarkNotSent;
 
@@ -23,11 +23,11 @@ class MessageSummaryView extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: [
         Text(
-          state.isStopped ? 'تم إيقاف الإرسال' : 'تم الانتهاء',
+          state.hasRemaining ? 'تم إيقاف الإرسال' : 'تم الانتهاء',
           style: theme.textTheme.titleLarge,
         ),
         MessageSummaryGroup(
-          label: 'لم يتم الإرسال',
+          title: 'لم يتم الإرسال',
           titleKey: MessageSummaryViewKeys.notSentOrOpenFailedTitle,
           rows: [
             for (final recipient in state.notSentOrOpenFailed)
@@ -52,7 +52,7 @@ class MessageSummaryView extends StatelessWidget {
           ],
         ),
         MessageSummaryGroup(
-          label: 'تم التخطي',
+          title: 'تم التخطي',
           titleKey: MessageSummaryViewKeys.skippedTitle,
           rows: [
             for (final recipient in state.skipped)
@@ -64,9 +64,9 @@ class MessageSummaryView extends StatelessWidget {
           ],
         ),
         MessageSummaryGroup(
-          label: 'المتبقون',
+          title: 'المتبقون',
           titleKey: MessageSummaryViewKeys.remainingTitle,
-          action: state.isStopped
+          action: state.hasRemaining
               ? FilledButton.tonal(
                   key: MessageSummaryViewKeys.resumeButton,
                   onPressed: onResume,
@@ -83,7 +83,7 @@ class MessageSummaryView extends StatelessWidget {
           ],
         ),
         MessageSummaryGroup(
-          label: 'بدون رقم هاتف',
+          title: 'بدون رقم هاتف',
           titleKey: MessageSummaryViewKeys.withoutPhoneTitle,
           rows: [
             for (final recipient in state.withoutPhone)
@@ -101,7 +101,7 @@ class MessageSummaryView extends StatelessWidget {
           ],
         ),
         MessageSummaryGroup(
-          label: 'تم الإرسال',
+          title: 'تم الإرسال',
           titleKey: MessageSummaryViewKeys.sentTitle,
           rows: [
             for (final recipient in state.sent)

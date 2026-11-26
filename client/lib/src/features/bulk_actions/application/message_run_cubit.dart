@@ -83,7 +83,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
 
       case MessageRunLoading() ||
           MessageRunLoadFailure() ||
-          MessageRunFinished():
+          MessageRunPassEnded():
         break;
     }
   }
@@ -122,7 +122,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
     }
   }
 
-  void editCurrentMessage(String message) {
+  void editCurrentMessageUnlessChatOpened(String message) {
     if (state
         case MessageRunSending(isAwaitingReturn: false) && final sending) {
       emit(sending.withCurrent(sending.current.copyWith(message: message)));
@@ -160,17 +160,17 @@ class MessageRunCubit extends Cubit<MessageRunState> {
     }
   }
 
-  void askIfSentShowNextAndMaybeCountDownToItsChatIfChatWasOpened() {
+  void returnFromChat() {
     if (state case MessageRunSending(isAwaitingReturn: true) && final sending) {
       emit(
         sending
             .copyWith(sentToConfirm: () => sending.current.person)
-            .nextRemainingOrFinished(fromIndex: sending.currentIndex + 1),
+            .nextRemainingOrPassEnded(fromIndex: sending.currentIndex + 1),
       );
 
       if (state
           case MessageRunSending(opensNextChatOnReturn: true) && final next) {
-        _countDownToOpeningCurrentChat(next);
+        _startNextChatCountdown(next);
       }
     }
   }
@@ -190,7 +190,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
       emit(
         sending
             .withCurrent(sending.current.asSkippedUnlessOpenFailed())
-            .nextRemainingOrFinished(fromIndex: sending.currentIndex + 1),
+            .nextRemainingOrPassEnded(fromIndex: sending.currentIndex + 1),
       );
     }
   }
@@ -207,8 +207,8 @@ class MessageRunCubit extends Cubit<MessageRunState> {
           ),
         );
 
-      case final MessageRunFinished finished:
-        emit(finished.withNotSentIfSent(person));
+      case final MessageRunPassEnded passEnded:
+        emit(passEnded.withNotSentIfSent(person));
 
       case MessageRunLoading() ||
           MessageRunLoadFailure() ||
@@ -218,24 +218,24 @@ class MessageRunCubit extends Cubit<MessageRunState> {
   }
 
   void resume() {
-    if (state case final MessageRunFinished finished) {
-      _startPass(finished);
+    if (state case final MessageRunPassEnded passEnded) {
+      _startPass(passEnded);
     }
   }
 
   void stop() {
     cancelNextChatCountdown();
     if (state case final MessageRunSending sending) {
-      emit(sending.asFinished());
+      emit(sending.asPassEnded());
     }
   }
 
   void _startPass(MessageRunLoaded run) {
     _passCount++;
-    emit(run.startingPass());
+    emit(run.firstRemainingOrPassEnded());
   }
 
-  void _countDownToOpeningCurrentChat(MessageRunSending sending) {
+  void _startNextChatCountdown(MessageRunSending sending) {
     emit(
       sending.copyWith(secondsBeforeNextChat: () => nextChatDelay.inSeconds),
     );
@@ -309,8 +309,9 @@ class MessageRunCubit extends Cubit<MessageRunState> {
   @override
   Future<void> close() {
     _nextChatCountdown?.cancel();
+    final hasStartedAPass = _passCount > 0;
     if (state case final MessageRunLoaded run
-        when !isClosed && _passCount > 0) {
+        when !isClosed && hasStartedAPass) {
       _analyticsService.track(
         BulkMessageRunFinish(
           channel: _channel,

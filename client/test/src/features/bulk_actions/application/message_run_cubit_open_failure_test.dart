@@ -21,7 +21,7 @@ void main() {
 
       return fixture.buildCubit();
     },
-    seed: () => fixture.sendingTo(
+    seed: () => fixture.sendingTemplateTo(
       recipients: [
         fixture.recipientOf(mark, [markPhone]),
         fixture.recipientOf(mina, [minaPhone]),
@@ -41,7 +41,7 @@ void main() {
 
       return fixture.buildCubit();
     },
-    seed: () => fixture.sendingTo(
+    seed: () => fixture.sendingTemplateTo(
       recipients: [
         fixture.recipientOf(mark, [markPhone]),
         fixture.recipientOf(mina, [minaPhone]),
@@ -64,7 +64,7 @@ void main() {
 
       return fixture.buildCubit();
     },
-    seed: () => fixture.sendingTo(
+    seed: () => fixture.sendingTemplateTo(
       recipients: [
         fixture.recipientOf(mark, [markPhone]),
         fixture.recipientOf(mina, [minaPhone]),

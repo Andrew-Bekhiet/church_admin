@@ -89,7 +89,7 @@ class MessageRunCubitFixture {
         userPreferencesService: userPreferences,
       );
 
-  MessageRunSending sendingTo({
+  MessageRunSending sendingTemplateTo({
     required List<Recipient> recipients,
     int currentIndex = 0,
     bool opensNextChatOnReturn = false,
