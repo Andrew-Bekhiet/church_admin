@@ -50,6 +50,7 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
 
     _appLifecycleListener = AppLifecycleListener(
       onShow: _cubit.askIfSentAndShowNextIfChatWasOpened,
+      onHide: _cubit.cancelNextChatCountdown,
     );
     unawaited(_cubit.load());
   }

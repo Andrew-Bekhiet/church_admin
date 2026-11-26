@@ -22,7 +22,6 @@ class SendMessageScreenHarness {
   final FakePersonsDAO personsDAO = FakePersonsDAO();
   final RecordingAnalyticsProvider analytics = RecordingAnalyticsProvider();
   late final UserPreferencesService userPreferences;
-  late KaiselRouter<AppRoute> router;
 
   void install() {
     when(
@@ -70,7 +69,6 @@ class SendMessageScreenHarness {
       },
     );
     addTearDown(routerConfig.dispose);
-    router = routerConfig.router;
 
     await tester.pumpWidget(
       MaterialApp.router(
@@ -87,6 +85,16 @@ class SendMessageScreenHarness {
     await tester.tap(find.byKey(SendMessageScreenHarnessKeys.runAction));
     await tester.pumpAndSettle();
   }
+
+  void leaveApp(WidgetTester tester) => tester.binding
+    ..handleAppLifecycleStateChanged(AppLifecycleState.inactive)
+    ..handleAppLifecycleStateChanged(AppLifecycleState.hidden)
+    ..handleAppLifecycleStateChanged(AppLifecycleState.paused);
+
+  void returnToApp(WidgetTester tester) => tester.binding
+    ..handleAppLifecycleStateChanged(AppLifecycleState.hidden)
+    ..handleAppLifecycleStateChanged(AppLifecycleState.inactive)
+    ..handleAppLifecycleStateChanged(AppLifecycleState.resumed);
 }
 
 abstract final class SendMessageScreenHarnessKeys extends WidgetKeys {
