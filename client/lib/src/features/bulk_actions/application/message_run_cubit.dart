@@ -12,7 +12,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
   final UserPreferencesService _userPreferencesService;
 
   int _runId = 0;
-  MessageLaunch? _chatBeingOpened;
+  ChatOpening? _chatBeingOpened;
 
   MessageRunCubit({
     required this._persons,
@@ -114,7 +114,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
               current: Recipient(:final selectedPhone?),
             ) &&
             final sending) {
-      final chat = MessageLaunch(
+      final chat = ChatOpening(
         runId: _runId,
         index: sending.currentIndex,
       );
@@ -124,7 +124,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
 
       _chatBeingOpened = chat;
       try {
-        isOpened = await _tryOpen(
+        isOpened = await _tryOpenChatLoggingErrors(
           selectedPhone,
           sending.currentMessage,
         );
@@ -169,7 +169,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
   }
 
   MessageRunSending? _sendingIfChatStillCurrent(
-    MessageLaunch chat,
+    ChatOpening chat,
     PhoneContact contact,
   ) => switch (state) {
     final MessageRunSending latest
@@ -190,12 +190,12 @@ class MessageRunCubit extends Cubit<MessageRunState> {
     ),
   );
 
-  Future<bool> _tryOpen(
+  Future<bool> _tryOpenChatLoggingErrors(
     PhoneContact contact,
     String message,
   ) async {
     try {
-      return await _channel.tryOpen(contact, message);
+      return await _channel.tryOpenChat(contact, message);
     } on Exception catch (error, stackTrace) {
       _logException(error, stackTrace);
 

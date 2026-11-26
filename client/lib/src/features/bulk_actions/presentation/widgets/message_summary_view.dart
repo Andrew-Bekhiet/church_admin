@@ -9,7 +9,7 @@ class MessageSummaryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final openedCount = state.withPhoneCountOf(RecipientStatus.sent);
+    final sentCount = state.withPhoneCountOf(RecipientStatus.sent);
     final skippedCount = state.withPhoneCountOf(
       RecipientStatus.skipped,
     );
@@ -23,7 +23,7 @@ class MessageSummaryView extends StatelessWidget {
           style: theme.textTheme.titleLarge,
         ),
         Text(
-          'تم فتح $openedCount محادثة وتخطي $skippedCount',
+          'تم فتح $sentCount محادثة وتخطي $skippedCount',
           key: MessageSummaryViewKeys.counts,
         ),
         if (withoutPhone.isNotEmpty) ...[

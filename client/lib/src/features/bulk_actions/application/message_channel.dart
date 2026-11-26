@@ -3,7 +3,7 @@ import 'package:church_admin/church_admin.dart';
 sealed class MessageChannel {
   const MessageChannel();
 
-  Future<bool> tryOpen(PhoneContact contact, String message);
+  Future<bool> tryOpenChat(PhoneContact contact, String message);
 }
 
 final class WhatsappMessageChannel extends MessageChannel {
@@ -16,7 +16,7 @@ final class WhatsappMessageChannel extends MessageChannel {
   });
 
   @override
-  Future<bool> tryOpen(PhoneContact contact, String message) =>
+  Future<bool> tryOpenChat(PhoneContact contact, String message) =>
       _launcherService.launchWhatsappChat(
         _phoneNumberService.formatInternational(contact.phone),
         text: message,
