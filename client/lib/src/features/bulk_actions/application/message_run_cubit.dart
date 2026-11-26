@@ -104,8 +104,10 @@ class MessageRunCubit extends Cubit<MessageRunState> {
       );
 
       final sendingState = MessageRunSending(
-        recipients: composing.recipients,
-        template: template,
+        recipients: [
+          for (final recipient in composing.recipients)
+            recipient.withMessageFrom(template),
+        ],
         currentIndex: 0,
         opensNextChatOnReturn: composing.opensNextChatOnReturn,
       );
@@ -118,6 +120,12 @@ class MessageRunCubit extends Cubit<MessageRunState> {
       emit(
         sending.withCurrent(sending.current.copyWith(selectedPhone: contact)),
       );
+    }
+  }
+
+  void editCurrentMessage(String message) {
+    if (state case MessageRunSending(isAwaitingReturn: false) && final sending) {
+      emit(sending.withCurrent(sending.current.copyWith(message: message)));
     }
   }
 
@@ -140,7 +148,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
       try {
         isOpened = await _tryOpenChatLoggingErrors(
           selectedPhone,
-          sending.currentMessage,
+          sending.current.message,
         );
       } finally {
         if (_chatBeingOpened == chat) _chatBeingOpened = null;

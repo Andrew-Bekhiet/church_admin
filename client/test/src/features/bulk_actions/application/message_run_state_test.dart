@@ -13,7 +13,6 @@ void main() {
         recipientOf('peter', []),
         recipientOf('mina', [phone]),
       ],
-      template: const MessageTemplate(text: '', fields: []),
       currentIndex: 2,
     );
 

@@ -61,7 +61,6 @@ final class MessageRunComposing extends MessageRunLoaded {
 }
 
 final class MessageRunSending extends MessageRunLoaded {
-  final MessageTemplate template;
   final int currentIndex;
   final bool opensNextChatOnReturn;
   final bool isAwaitingReturn;
@@ -72,8 +71,6 @@ final class MessageRunSending extends MessageRunLoaded {
 
   bool get hasOpenFailed => current.status == RecipientStatus.openFailed;
 
-  String get currentMessage => template.renderFor(current.person);
-
   int get currentPositionAmongWithPhone => recipients
       .take(currentIndex + 1)
       .where((recipient) => recipient.hasPhone)
@@ -82,7 +79,6 @@ final class MessageRunSending extends MessageRunLoaded {
   @override
   List<Object?> get props => [
     ...super.props,
-    template,
     currentIndex,
     opensNextChatOnReturn,
     isAwaitingReturn,
@@ -91,7 +87,6 @@ final class MessageRunSending extends MessageRunLoaded {
   ];
 
   const MessageRunSending({
-    required this.template,
     required this.currentIndex,
     required super.recipients,
     this.opensNextChatOnReturn = false,
@@ -109,7 +104,6 @@ final class MessageRunSending extends MessageRunLoaded {
     int? Function()? secondsBeforeNextChat,
   }) => MessageRunSending(
     recipients: recipients ?? this.recipients,
-    template: template,
     currentIndex: currentIndex ?? this.currentIndex,
     opensNextChatOnReturn: opensNextChatOnReturn ?? this.opensNextChatOnReturn,
     isAwaitingReturn: isAwaitingReturn ?? this.isAwaitingReturn,

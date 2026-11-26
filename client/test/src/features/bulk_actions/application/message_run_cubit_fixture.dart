@@ -94,8 +94,9 @@ class MessageRunCubitFixture {
     int currentIndex = 0,
     bool opensNextChatOnReturn = false,
   }) => MessageRunSending(
-    recipients: recipients,
-    template: template,
+    recipients: [
+      for (final recipient in recipients) recipient.withMessageFrom(template),
+    ],
     currentIndex: currentIndex,
     opensNextChatOnReturn: opensNextChatOnReturn,
   );

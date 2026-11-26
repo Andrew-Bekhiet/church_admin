@@ -75,7 +75,7 @@ class MessageQueueView extends StatelessWidget {
                     textAlign: TextAlign.end,
                     style: theme.textTheme.bodyLarge,
                   ),
-                MessageBubble(child: Text(state.currentMessage)),
+                MessageBubble(child: Text(state.current.message)),
               ],
             ),
           ),
