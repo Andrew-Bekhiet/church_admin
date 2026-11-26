@@ -111,14 +111,20 @@ void main() {
 
     await openChatAndReturn(tester);
     final atStart = countdownText(tester);
+    await tester.pump(
+      MessageRunCubit.nextChatDelay - const Duration(seconds: 2),
+    );
+    final twoSecondsLeft = countdownText(tester);
     await tester.pump(const Duration(seconds: 1));
-    final afterOneSecond = countdownText(tester);
-    await tester.pump(const Duration(seconds: 1));
-    final afterTwoSeconds = countdownText(tester);
+    final oneSecondLeft = countdownText(tester);
 
     expect(
-      [atStart, afterOneSecond, afterTwoSeconds],
-      ['خلال 3 ثوانٍ', 'خلال ثانيتين', 'خلال ثانية'],
+      [atStart, twoSecondsLeft, oneSecondLeft],
+      [
+        'خلال ${MessageRunCubit.nextChatDelay.inSeconds} ثوانٍ',
+        'خلال ثانيتين',
+        'خلال ثانية',
+      ],
     );
   });
 
