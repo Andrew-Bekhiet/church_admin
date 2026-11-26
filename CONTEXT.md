@@ -103,8 +103,11 @@ An operation a servant applies to several selected items at once, such as messag
 A bulk action that sends each selected person a message on one channel. WhatsApp message and SMS message are two message bulk actions.
 
 **Run**:
-One pass of a message bulk action over a selection, from composing to the final summary, including any retries on another number or channel. It ends when the servant leaves it.
+One use of a message bulk action over a selection, from composing to the final summary, including any retries on another number or channel. It ends when the servant leaves it. A run has one or more passes.
 _Avoid_: Session, batch
+
+**Pass**:
+One walk over the recipients still pending in a run. Starting the run and resuming each start a pass.
 
 **Channel**:
 The app a message is handed to for sending: WhatsApp or SMS.
