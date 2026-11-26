@@ -20,5 +20,6 @@ export * from "./export/export";
 export * from "./fingerprint/record_fingerprint_punches";
 export * from "./notify_screen_capture_attempt";
 export * from "./notify_study_year_roll_failure";
+export * from "./register_firebase_installation";
 export * from "./storage_proxy";
 export * from "./storage_triggers";

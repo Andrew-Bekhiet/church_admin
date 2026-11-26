@@ -2,7 +2,6 @@ export 'gql_definintions/areas_dao.dart';
 export 'gql_definintions/classes_dao.dart';
 export 'gql_definintions/data_checks_dao.dart';
 export 'gql_definintions/families_dao.dart';
-export 'gql_definintions/fcm_tokens_dao.dart';
 export 'gql_definintions/fingerprint_ids_dao.dart';
 export 'gql_definintions/fingerprint_sync_status_dao.dart';
 export 'gql_definintions/groups_dao.dart';

@@ -11,6 +11,9 @@ class FakeLoggingService extends Fake implements LoggingService {
       reportedExceptions.add(record);
 
   @override
+  Future<void> warning(LogRecord record) async {}
+
+  @override
   Future<void> error(LogRecord record) async => reportedErrors.add(record);
 
   @override

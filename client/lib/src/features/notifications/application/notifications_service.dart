@@ -77,18 +77,18 @@ class NotificationsService extends BlocObserver {
   final FirebaseMessaging _firebaseMessaging;
   final FlutterLocalNotificationsPlugin _localNotificationsPlugin;
 
-  final AuthBloc _authBloc;
-  final DatabaseService _databaseService;
+  final AuthRepository _authRepository;
   final AnalyticsService _analyticsService;
+  final ThisDevicePushRegistration _thisDevicePushRegistration;
 
   final BehaviorSubject<bool> _isPausedSubject = BehaviorSubject.seeded(true);
+  bool _isDisposed = false;
 
   final BehaviorSubject<Notification> _foregroundNotificationsStreamController =
       BehaviorSubject();
 
   late final StreamSubscription<Notification> _onMessageOpenedAppSubscription;
   late final StreamSubscription<Notification> _onForegroundMessageSubscription;
-  StreamSubscription<String?>? _onFCMTokenRefresh;
 
   late final Stream<Notification> onNotificationTapStream =
       getInitialNotification()
@@ -120,14 +120,13 @@ class NotificationsService extends BlocObserver {
     required this._localNotificationsPlugin,
     required Stream<RemoteMessage> onForegroundMessageStream,
     required Stream<RemoteMessage> onMessageOpenedAppStream,
-    required this._authBloc,
+    required this._authRepository,
     required this._analyticsService,
-    DatabaseService? databaseService,
+    required this._thisDevicePushRegistration,
     NotificationsStorage? storage,
     NotificationsSettingsStorage? settings,
   }) : _storage = storage ?? NotificationsStorage.I,
-       _settings = settings ?? NotificationsSettingsStorage.I,
-       _databaseService = databaseService ?? DatabaseService.I {
+       _settings = settings ?? NotificationsSettingsStorage.I {
     //
     _onForegroundMessageSubscription = onForegroundMessageStream
         .map(Notification.fromRemoteMessage)
@@ -288,48 +287,6 @@ class NotificationsService extends BlocObserver {
     );
   }
 
-  Future<bool> registerFCMTokenAndListenForChanges({
-    String? cachedToken,
-  }) async {
-    if (!_authBloc.isSignedIn || !await _firebaseMessaging.isSupported()) {
-      return false;
-    }
-
-    final permissionGranted = await requestNotificationsPermission();
-
-    if (!permissionGranted) {
-      return false;
-    }
-
-    final uid = _authBloc.currentUserData?.uid;
-    // The functions send to FCM tokens; register() yields installation IDs
-    // for direct send, which the backend does not support yet
-    // ignore: deprecated_member_use
-    final token = cachedToken ?? await _firebaseMessaging.getToken();
-
-    if (uid == null || token == null) {
-      return false;
-    }
-
-    final alreadyRegistered =
-        _authBloc.currentUserData?.fcmTokens.any((t) => t.token == token) ??
-        false;
-    if (!alreadyRegistered) {
-      await _databaseService.fcmTokens.registerToken(uid: uid, token: token);
-    }
-
-    // The functions send to FCM tokens; register() yields installation IDs
-    // for direct send, which the backend does not support yet
-    // ignore: deprecated_member_use
-    _onFCMTokenRefresh ??= _firebaseMessaging.onTokenRefresh
-        .delayWhen((_) => _isPausedSubject.where((isPaused) => !isPaused))
-        .listen(
-          (t) => registerFCMTokenAndListenForChanges(cachedToken: t),
-        );
-
-    return true;
-  }
-
   Future<bool> requestNotificationsPermission() async {
     final notificationPermissionStatus = await Permission.notification
         .request();
@@ -365,22 +322,36 @@ class NotificationsService extends BlocObserver {
 
     final nextState = transition.nextState.unwrapped;
     final currentState = transition.currentState.unwrapped;
+    final enteredUnauthenticated =
+        currentState is! AuthUnauthenticated &&
+        nextState is AuthUnauthenticated;
 
-    if (currentState is! AuthAuthenticated &&
-        nextState is AuthAuthenticated &&
-        await _requestAndTrackNotificationsPermission()) {
-      if (currentState is! AuthInitial) {
-        await scheduleDefaultNotifications();
-      }
+    if (enteredUnauthenticated) await _thisDevicePushRegistration.stop();
 
-      await registerFCMTokenAndListenForChanges();
+    if (currentState is! AuthAuthenticated && nextState is AuthAuthenticated) {
+      await _thisDevicePushRegistration.maybeRegisterOnceGranted(
+        _requestPermissionThenMaybeScheduleDefaults(currentState),
+      );
     }
   }
 
+  Future<bool> _requestPermissionThenMaybeScheduleDefaults(
+    AuthState currentState,
+  ) async {
+    final isGranted = await _requestAndTrackNotificationsPermission();
+    final sessionOutlivedThePrompt = _authRepository.isSignedIn && !_isDisposed;
+    if (isGranted && currentState is! AuthInitial && sessionOutlivedThePrompt) {
+      await scheduleDefaultNotifications();
+    }
+
+    return isGranted;
+  }
+
   Future<void> dispose() async {
+    _isDisposed = true;
+    _thisDevicePushRegistration.dispose();
     await _isPausedSubject.close();
     await _onMessageOpenedAppSubscription.cancel();
     await _onForegroundMessageSubscription.cancel();
-    await _onFCMTokenRefresh?.cancel();
   }
 }

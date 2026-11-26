@@ -113,6 +113,12 @@ class FunctionsService {
     await httpsCallable('applyInvitationCode').call({'code': invitationCode});
   }
 
+  Future<void> registerFirebaseInstallation(String installationId) async {
+    await httpsCallable(
+      'registerFirebaseInstallation',
+    ).call({'installationId': installationId});
+  }
+
   Future<String> getAppDownloadLink(String platform) async {
     final response = await httpsCallable(
       'getAppDownloadLink',

@@ -1014,6 +1014,7 @@ Enum_UniversitiesUpdateColumn fromJson_Enum_UniversitiesUpdateColumn(
 }
 
 enum Enum_UsersFcmTokensConstraint {
+  users_fcm_tokens_one_owner_per_installation_id_idx,
   users_fcm_tokens_pkey,
   $unknown;
 
@@ -1025,6 +1026,9 @@ enum Enum_UsersFcmTokensConstraint {
 
 String toJson_Enum_UsersFcmTokensConstraint(Enum_UsersFcmTokensConstraint e) {
   switch (e) {
+    case Enum_UsersFcmTokensConstraint
+        .users_fcm_tokens_one_owner_per_installation_id_idx:
+      return r'users_fcm_tokens_one_owner_per_installation_id_idx';
     case Enum_UsersFcmTokensConstraint.users_fcm_tokens_pkey:
       return r'users_fcm_tokens_pkey';
     case Enum_UsersFcmTokensConstraint.$unknown:
@@ -1036,6 +1040,9 @@ Enum_UsersFcmTokensConstraint fromJson_Enum_UsersFcmTokensConstraint(
   String value,
 ) {
   switch (value) {
+    case r'users_fcm_tokens_one_owner_per_installation_id_idx':
+      return Enum_UsersFcmTokensConstraint
+          .users_fcm_tokens_one_owner_per_installation_id_idx;
     case r'users_fcm_tokens_pkey':
       return Enum_UsersFcmTokensConstraint.users_fcm_tokens_pkey;
     default:

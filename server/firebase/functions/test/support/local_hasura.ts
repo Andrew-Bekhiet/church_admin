@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import axios from "axios";
+import { PushTarget, PushTargetKind } from "../../src/push/push_target";
 
 process.env.HASURA_SERVER ??= "http://localhost:8080/v1/graphql";
 
@@ -233,4 +234,62 @@ export async function lastSyncedAt(): Promise<string | undefined> {
 
 export async function resetLastSyncedAt(): Promise<void> {
   await runSql("delete from operations.fingerprint_sync_status;");
+}
+
+export async function seedPermission(): Promise<string> {
+  const permission = `permission-${randomUUID()}`;
+
+  await runSql(`insert into auth.permissions (name) values ('${permission}');`);
+
+  return permission;
+}
+
+export async function seedHumanUserHolding(permission: string): Promise<string> {
+  const uid = await seedHumanUser();
+
+  await runSql(
+    `insert into auth.users_permissions (uid, permission) values ('${uid}', '${permission}');`,
+  );
+
+  return uid;
+}
+
+export function newPushToken(): string {
+  return `token-${randomUUID()}`;
+}
+
+export async function seedPushTarget(
+  uid: string,
+  target: PushTarget,
+): Promise<void> {
+  await runSql(
+    `insert into public.users_fcm_tokens (uid, token, kind)
+     values ('${uid}', '${target.token}', '${target.kind}');`,
+  );
+}
+
+export async function pushTargetsOf(uid: string): Promise<PushTarget[]> {
+  const rows = await runSql(
+    `select kind, token from public.users_fcm_tokens
+     where uid = '${uid}';`,
+  );
+
+  return sortedByKindThenToken(
+    rows.map(([kind, token]) => ({ kind: kind as PushTargetKind, token })),
+  );
+}
+
+export function sortedByKindThenToken(targets: PushTarget[]): PushTarget[] {
+  return [...targets].sort(
+    (a, b) => a.kind.localeCompare(b.kind) || a.token.localeCompare(b.token),
+  );
+}
+
+export async function ownersOfInstallationId(installationId: string): Promise<string[]> {
+  const rows = await runSql(
+    `select uid from public.users_fcm_tokens
+     where kind = 'installation_id' and token = '${installationId}' order by uid;`,
+  );
+
+  return rows.map(([uid]) => uid);
 }

@@ -17,6 +17,7 @@ import 'package:permission_handler_platform_interface/permission_handler_platfor
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import '../../../fakes/fake_logging_service.dart';
+import '../../../fakes/fake_signed_in_auth_repository.dart';
 import '../../../fakes/recording_analytics_provider.dart';
 import 'notifications_service_test.mocks.dart';
 
@@ -29,7 +30,6 @@ import 'notifications_service_test.mocks.dart';
   MockSpec<FlutterLocalNotificationsPlugin>(),
   MockSpec<AuthBloc>(),
   MockSpec<DatabaseService>(),
-  MockSpec<FcmTokensDAO>(),
   MockSpec<FunctionsService>(),
   MockSpec<InitializationService>(),
   MockSpec<NotificationsStorage>(),
@@ -398,10 +398,13 @@ void main() {
                   StreamController<RemoteMessage>();
 
               final unit = NotificationsService(
-                authBloc: MockAuthBloc(),
+                authRepository: FakeSignedInAuthRepository(isSignedIn: true),
                 analyticsService: AnalyticsService(
                   [RecordingAnalyticsProvider()],
                   FakeLoggingService(),
+                ),
+                thisDevicePushRegistration: globalProviderContainer.read(
+                  thisDevicePushRegistrationProvider,
                 ),
                 settings: MockNotificationsSettingsStorage(),
                 localNotificationsPlugin: globalProviderContainer.read(
@@ -540,61 +543,6 @@ void main() {
                   ),
                 ],
               );
-            },
-          );
-
-          test(
-            'registerFCMTokenAndListenForChanges',
-            () async {
-              final unit = _createNewUnit();
-              addTearDown(unit.dispose);
-
-              const expectedToken = '_token_';
-              const expectedUid = '_uid_';
-
-              when(
-                globalProviderContainer
-                    .read(firebaseMessagingProvider)
-                    .isSupported(),
-              ).thenAnswer((_) async => true);
-              when(
-                globalProviderContainer
-                    .read(firebaseMessagingProvider)
-                    // The service still reads FCM tokens rather than installation IDs
-                    // ignore: deprecated_member_use
-                    .getToken(),
-              ).thenAnswer((_) async => expectedToken);
-
-              final authBloc = globalProviderContainer.read(authBlocProvider);
-              when(authBloc.currentUserData).thenReturn(
-                const User(
-                  uid: expectedUid,
-                  name: 'n',
-                  email: 'e',
-                ),
-              );
-
-              final fcmTokens = globalProviderContainer
-                  .read(databaseServiceProvider)
-                  .fcmTokens;
-              when(
-                fcmTokens.registerToken(
-                  uid: expectedUid,
-                  token: expectedToken,
-                ),
-              ).thenAnswer((_) async => null);
-
-              await expectLater(
-                unit.registerFCMTokenAndListenForChanges(),
-                completion(isTrue),
-              );
-
-              verify(
-                fcmTokens.registerToken(
-                  uid: expectedUid,
-                  token: expectedToken,
-                ),
-              ).called(1);
             },
           );
         },
@@ -919,12 +867,14 @@ List<Object> _callArgumentsMatchFor({
 
 NotificationsService _createNewUnit() {
   return NotificationsService(
-    authBloc: AuthBloc.I,
+    authRepository: FakeSignedInAuthRepository(isSignedIn: true),
     analyticsService: AnalyticsService(
       [RecordingAnalyticsProvider()],
       FakeLoggingService(),
     ),
-    databaseService: globalProviderContainer.read(databaseServiceProvider),
+    thisDevicePushRegistration: globalProviderContainer.read(
+      thisDevicePushRegistrationProvider,
+    ),
     localNotificationsPlugin: globalProviderContainer.read(
       localNotificationsPluginProvider,
     ),
@@ -971,10 +921,7 @@ Override _setUpFunctionsService() {
 }
 
 Override _setUpDatabaseService() {
-  final mockDatabaseService = MockDatabaseService();
-  final mockFcmTokens = MockFcmTokensDAO();
-  when(mockDatabaseService.fcmTokens).thenReturn(mockFcmTokens);
-  return databaseServiceProvider.overrideWithValue(mockDatabaseService);
+  return databaseServiceProvider.overrideWithValue(MockDatabaseService());
 }
 
 Override _setUpAuthBloc() {

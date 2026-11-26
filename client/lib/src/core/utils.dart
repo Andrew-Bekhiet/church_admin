@@ -4,6 +4,7 @@ export 'utils/globals.dart';
 export 'utils/json_non_null_pairs.dart';
 export 'utils/list_max_frequency_or_null.dart';
 export 'utils/liturgy_season.dart';
+export 'utils/log_warning_instead_of_throwing.dart';
 export 'utils/operation_definition_node_first_selection_node.dart';
 export 'utils/snackbar_icons.dart';
 export 'utils/stream_extensions.dart';

@@ -126,58 +126,53 @@ class _FakeDataChecksDAO_17 extends _i1.SmartFake implements _i2.DataChecksDAO {
     : super(parent, parentInvocation);
 }
 
-class _FakeFcmTokensDAO_18 extends _i1.SmartFake implements _i2.FcmTokensDAO {
-  _FakeFcmTokensDAO_18(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeFingerprintIdsDAO_19 extends _i1.SmartFake
+class _FakeFingerprintIdsDAO_18 extends _i1.SmartFake
     implements _i2.FingerprintIdsDAO {
-  _FakeFingerprintIdsDAO_19(Object parent, Invocation parentInvocation)
+  _FakeFingerprintIdsDAO_18(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeFingerprintSyncStatusDAO_20 extends _i1.SmartFake
+class _FakeFingerprintSyncStatusDAO_19 extends _i1.SmartFake
     implements _i2.FingerprintSyncStatusDAO {
-  _FakeFingerprintSyncStatusDAO_20(Object parent, Invocation parentInvocation)
+  _FakeFingerprintSyncStatusDAO_19(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeScreenCaptureAttemptsDAO_21 extends _i1.SmartFake
+class _FakeScreenCaptureAttemptsDAO_20 extends _i1.SmartFake
     implements _i2.ScreenCaptureAttemptsDAO {
-  _FakeScreenCaptureAttemptsDAO_21(Object parent, Invocation parentInvocation)
+  _FakeScreenCaptureAttemptsDAO_20(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeMetadataDAO_22 extends _i1.SmartFake implements _i2.MetadataDAO {
-  _FakeMetadataDAO_22(Object parent, Invocation parentInvocation)
+class _FakeMetadataDAO_21 extends _i1.SmartFake implements _i2.MetadataDAO {
+  _FakeMetadataDAO_21(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeHistoryDAO_23 extends _i1.SmartFake implements _i2.HistoryDAO {
-  _FakeHistoryDAO_23(Object parent, Invocation parentInvocation)
+class _FakeHistoryDAO_22 extends _i1.SmartFake implements _i2.HistoryDAO {
+  _FakeHistoryDAO_22(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeMeetingsDAO_24 extends _i1.SmartFake implements _i2.MeetingsDAO {
-  _FakeMeetingsDAO_24(Object parent, Invocation parentInvocation)
+class _FakeMeetingsDAO_23 extends _i1.SmartFake implements _i2.MeetingsDAO {
+  _FakeMeetingsDAO_23(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakePaginatableStreamBase_25<T> extends _i1.SmartFake
+class _FakePaginatableStreamBase_24<T> extends _i1.SmartFake
     implements _i2.PaginatableStreamBase<T> {
-  _FakePaginatableStreamBase_25(Object parent, Invocation parentInvocation)
+  _FakePaginatableStreamBase_24(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeStreamSubscription_26<T1> extends _i1.SmartFake
+class _FakeStreamSubscription_25<T1> extends _i1.SmartFake
     implements _i3.StreamSubscription<T1> {
-  _FakeStreamSubscription_26(Object parent, Invocation parentInvocation)
+  _FakeStreamSubscription_25(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeFuture_27<T1> extends _i1.SmartFake implements _i3.Future<T1> {
-  _FakeFuture_27(Object parent, Invocation parentInvocation)
+class _FakeFuture_26<T1> extends _i1.SmartFake implements _i3.Future<T1> {
+  _FakeFuture_26(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -479,16 +474,6 @@ class MockNotificationsService extends _i1.Mock
   ) as _i3.Future<void>);
 
   @override
-  _i3.Future<bool> registerFCMTokenAndListenForChanges({String? cachedToken}) =>
-      (super.noSuchMethod(
-        Invocation.method(#registerFCMTokenAndListenForChanges, [], {
-          #cachedToken: cachedToken,
-        }),
-        returnValue: _i3.Future<bool>.value(false),
-        returnValueForMissingStub: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
-
-  @override
   _i3.Future<bool> requestNotificationsPermission() => (super.noSuchMethod(
     Invocation.method(#requestNotificationsPermission, []),
     returnValue: _i3.Future<bool>.value(false),
@@ -754,23 +739,13 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   ) as _i2.DataChecksDAO);
 
   @override
-  _i2.FcmTokensDAO get fcmTokens => (super.noSuchMethod(
-    Invocation.getter(#fcmTokens),
-    returnValue: _FakeFcmTokensDAO_18(this, Invocation.getter(#fcmTokens)),
-    returnValueForMissingStub: _FakeFcmTokensDAO_18(
-      this,
-      Invocation.getter(#fcmTokens),
-    ),
-  ) as _i2.FcmTokensDAO);
-
-  @override
   _i2.FingerprintIdsDAO get fingerprintIds => (super.noSuchMethod(
     Invocation.getter(#fingerprintIds),
-    returnValue: _FakeFingerprintIdsDAO_19(
+    returnValue: _FakeFingerprintIdsDAO_18(
       this,
       Invocation.getter(#fingerprintIds),
     ),
-    returnValueForMissingStub: _FakeFingerprintIdsDAO_19(
+    returnValueForMissingStub: _FakeFingerprintIdsDAO_18(
       this,
       Invocation.getter(#fingerprintIds),
     ),
@@ -779,11 +754,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.FingerprintSyncStatusDAO get fingerprintSyncStatus => (super.noSuchMethod(
     Invocation.getter(#fingerprintSyncStatus),
-    returnValue: _FakeFingerprintSyncStatusDAO_20(
+    returnValue: _FakeFingerprintSyncStatusDAO_19(
       this,
       Invocation.getter(#fingerprintSyncStatus),
     ),
-    returnValueForMissingStub: _FakeFingerprintSyncStatusDAO_20(
+    returnValueForMissingStub: _FakeFingerprintSyncStatusDAO_19(
       this,
       Invocation.getter(#fingerprintSyncStatus),
     ),
@@ -792,11 +767,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.ScreenCaptureAttemptsDAO get screenCaptureAttempts => (super.noSuchMethod(
     Invocation.getter(#screenCaptureAttempts),
-    returnValue: _FakeScreenCaptureAttemptsDAO_21(
+    returnValue: _FakeScreenCaptureAttemptsDAO_20(
       this,
       Invocation.getter(#screenCaptureAttempts),
     ),
-    returnValueForMissingStub: _FakeScreenCaptureAttemptsDAO_21(
+    returnValueForMissingStub: _FakeScreenCaptureAttemptsDAO_20(
       this,
       Invocation.getter(#screenCaptureAttempts),
     ),
@@ -805,8 +780,8 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.MetadataDAO get metadata => (super.noSuchMethod(
     Invocation.getter(#metadata),
-    returnValue: _FakeMetadataDAO_22(this, Invocation.getter(#metadata)),
-    returnValueForMissingStub: _FakeMetadataDAO_22(
+    returnValue: _FakeMetadataDAO_21(this, Invocation.getter(#metadata)),
+    returnValueForMissingStub: _FakeMetadataDAO_21(
       this,
       Invocation.getter(#metadata),
     ),
@@ -815,8 +790,8 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.HistoryDAO get history => (super.noSuchMethod(
     Invocation.getter(#history),
-    returnValue: _FakeHistoryDAO_23(this, Invocation.getter(#history)),
-    returnValueForMissingStub: _FakeHistoryDAO_23(
+    returnValue: _FakeHistoryDAO_22(this, Invocation.getter(#history)),
+    returnValueForMissingStub: _FakeHistoryDAO_22(
       this,
       Invocation.getter(#history),
     ),
@@ -825,8 +800,8 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.MeetingsDAO get meetings => (super.noSuchMethod(
     Invocation.getter(#meetings),
-    returnValue: _FakeMeetingsDAO_24(this, Invocation.getter(#meetings)),
-    returnValueForMissingStub: _FakeMeetingsDAO_24(
+    returnValue: _FakeMeetingsDAO_23(this, Invocation.getter(#meetings)),
+    returnValueForMissingStub: _FakeMeetingsDAO_23(
       this,
       Invocation.getter(#meetings),
     ),
@@ -852,12 +827,12 @@ class MockAdvancedQueryParser extends _i1.Mock
     _i3.Stream<String?>? searchStream,
   ]) => (super.noSuchMethod(
     Invocation.method(#createPaginatableStream, [query, searchStream]),
-    returnValue: _FakePaginatableStreamBase_25<_i2.ViewableWithID>(
+    returnValue: _FakePaginatableStreamBase_24<_i2.ViewableWithID>(
       this,
       Invocation.method(#createPaginatableStream, [query, searchStream]),
     ),
     returnValueForMissingStub:
-        _FakePaginatableStreamBase_25<_i2.ViewableWithID>(
+        _FakePaginatableStreamBase_24<_i2.ViewableWithID>(
           this,
           Invocation.method(#createPaginatableStream, [query, searchStream]),
         ),
@@ -1006,7 +981,7 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
       [onData],
       {#onError: onError, #onDone: onDone, #cancelOnError: cancelOnError},
     ),
-    returnValue: _FakeStreamSubscription_26<List<T>>(
+    returnValue: _FakeStreamSubscription_25<List<T>>(
       this,
       Invocation.method(
         #listen,
@@ -1014,7 +989,7 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
         {#onError: onError, #onDone: onDone, #cancelOnError: cancelOnError},
       ),
     ),
-    returnValueForMissingStub: _FakeStreamSubscription_26<List<T>>(
+    returnValueForMissingStub: _FakeStreamSubscription_25<List<T>>(
       this,
       Invocation.method(
         #listen,
@@ -1110,7 +1085,7 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
               ),
               (S v) => _i3.Future<S>.value(v),
             ) ??
-            _FakeFuture_27<S>(
+            _FakeFuture_26<S>(
               this,
               Invocation.method(#fold, [initialValue, combine]),
             ),
@@ -1122,7 +1097,7 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
               ),
               (S v) => _i3.Future<S>.value(v),
             ) ??
-            _FakeFuture_27<S>(
+            _FakeFuture_26<S>(
               this,
               Invocation.method(#fold, [initialValue, combine]),
             ),
@@ -1200,7 +1175,7 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
           ),
           (E v) => _i3.Future<E>.value(v),
         ) ??
-        _FakeFuture_27<E>(this, Invocation.method(#drain, [futureValue])),
+        _FakeFuture_26<E>(this, Invocation.method(#drain, [futureValue])),
     returnValueForMissingStub:
         _i4.ifNotNull(
           _i4.dummyValueOrNull<E>(
@@ -1209,7 +1184,7 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
           ),
           (E v) => _i3.Future<E>.value(v),
         ) ??
-        _FakeFuture_27<E>(this, Invocation.method(#drain, [futureValue])),
+        _FakeFuture_26<E>(this, Invocation.method(#drain, [futureValue])),
   ) as _i3.Future<E>);
 
   @override

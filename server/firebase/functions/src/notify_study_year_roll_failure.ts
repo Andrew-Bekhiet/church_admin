@@ -1,7 +1,6 @@
-import { getMessaging, SendResponse } from "firebase-admin/messaging";
 import { defineSecret } from "firebase-functions/params";
 import { https } from "firebase-functions/v2";
-import { getFcmTokensForAnyOfPermissions } from "./hasura_interface";
+import { sendPushToHoldersOfAnyPermissionAndPruneUnregistered } from "./push/send_push_to_holders_of_any_permission_and_prune_unregistered";
 import { hasuraAdminSecret } from "./secrets";
 
 const studyYearRollWebhookSecret = defineSecret(
@@ -66,48 +65,40 @@ export const notifyStudyYearRollFailure = https.onRequest(
     }
 
     try {
-      const tokens = await getFcmTokensForAnyOfPermissions(
-        APP_MAINTENANCE_PERMISSION_NAMES,
-      );
-
-      if (tokens.length === 0) {
-        console.error(
-          "No app maintenance recipients for study year roll run",
-          run.id,
-        );
-
-        res.status(200).send();
-        return;
-      }
-
       const errorCode = run.status === "failed"
         ? "studyYearRollFailed"
         : "studyYearRollMissed";
 
-      const response = await getMessaging().sendEach(
-        tokens.map((token) => ({
-          token,
-          notification: {
-            title: "تنبيه صيانة",
-            body: run.status === "failed"
-              ? "فشلت عملية ترحيل السنة الدراسية، يرجى المراجعة"
-              : "لم يتم تنفيذ عملية ترحيل السنة الدراسية في موعدها، يرجى المراجعة",
-          },
-          data: {
-            senderUID: NON_USER_SENDER_UID,
-            code: errorCode,
-            seasonYear: String(run.season_year),
-            status: run.status,
-          },
-        })),
-      );
+      const { targetCount, deliveryErrors } =
+        await sendPushToHoldersOfAnyPermissionAndPruneUnregistered({
+          permissions: APP_MAINTENANCE_PERMISSION_NAMES,
+          buildPayload: () => ({
+            notification: {
+              title: "تنبيه صيانة",
+              body: run.status === "failed"
+                ? "فشلت عملية ترحيل السنة الدراسية، يرجى المراجعة"
+                : "لم يتم تنفيذ عملية ترحيل السنة الدراسية في موعدها، يرجى المراجعة",
+            },
+            data: {
+              senderUID: NON_USER_SENDER_UID,
+              code: errorCode,
+              seasonYear: String(run.season_year),
+              status: run.status,
+            },
+          }),
+        });
 
-      if (response.failureCount > 0) {
+      if (targetCount === 0) {
+        console.error(
+          "No app maintenance recipients for study year roll run",
+          run.id,
+        );
+      }
+
+      if (deliveryErrors.length > 0) {
         console.error(
           "Failed to deliver some study year roll notifications",
-          response.responses
-            .filter((r: SendResponse) => !r.success)
-            .map((r: SendResponse) => r.error),
+          deliveryErrors,
         );
       }
     } catch (e) {
