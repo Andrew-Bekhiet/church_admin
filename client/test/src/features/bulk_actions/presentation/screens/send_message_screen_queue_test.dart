@@ -142,6 +142,23 @@ void main() {
     verifyChatNeverOpenedWith(markPhone);
   });
 
+  testWidgets('long-pressing the message stops the countdown', (tester) async {
+    harness.personsDAO.personsWithPhoneContacts = [
+      mina.copyWith(contacts: [minaPhone]),
+      mark.copyWith(contacts: [markPhone]),
+    ];
+    await harness.open(tester, persons: {mina, mark});
+    await start(tester, opensNextChat: true);
+    await openChatAndReturn(tester);
+
+    await tester.longPress(
+      find.byKey(MessageQueueViewKeys.messageFieldFor(mark)),
+    );
+    await tester.pump(MessageRunCubit.nextChatDelay);
+
+    verifyChatNeverOpenedWith(markPhone);
+  });
+
   testWidgets('opening the number picker stops the countdown', (tester) async {
     harness.personsDAO.personsWithPhoneContacts = [
       mina.copyWith(contacts: [minaPhone]),
