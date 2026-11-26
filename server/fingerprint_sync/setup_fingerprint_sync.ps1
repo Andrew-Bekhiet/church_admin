@@ -95,7 +95,7 @@ Write-Host "Saved $ConfigPath and the encrypted $SecretsPath"
 
 & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $PollerPath check
 if ($LASTEXITCODE -ne 0) {
-    Write-Host 'The check failed, so the task was not registered. Fix the setting above and run this script again.'
+    Write-Host 'The check failed, so the task was not registered or updated. The settings above are saved, so a task registered earlier fails with them, and keeps its cursor, until this script is run again with working ones.'
     exit 1
 }
 
