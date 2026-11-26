@@ -14,7 +14,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
   final LoggingService _loggingService;
   final UserPreferencesService _userPreferencesService;
 
-  int _runId = 0;
+  int _passCount = 0;
   ChatOpening? _chatBeingOpened;
   Timer? _nextChatCountdown;
 
@@ -96,22 +96,21 @@ class MessageRunCubit extends Cubit<MessageRunState> {
 
   void saveTextAndStart(MessageTemplate template) {
     if (state case final MessageRunComposing composing) {
-      _runId++;
       unawaited(
         _userPreferencesService
             .setLastWhatsappMessageText(template.text)
             .catchError(_logException),
       );
 
-      final sendingState = MessageRunSending(
-        recipients: [
-          for (final recipient in composing.recipients)
-            recipient.withMessageFrom(template),
-        ],
-        currentIndex: 0,
-        opensNextChatOnReturn: composing.opensNextChatOnReturn,
+      _startPass(
+        MessageRunComposing(
+          recipients: [
+            for (final recipient in composing.recipients)
+              recipient.withMessageFrom(template),
+          ],
+          opensNextChatOnReturn: composing.opensNextChatOnReturn,
+        ),
       );
-      _showNextWithPhoneOrFinishAndTrackRun(sendingState, fromIndex: 0);
     }
   }
 
@@ -137,7 +136,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
             final sending) {
       cancelNextChatCountdown();
       final chat = ChatOpening(
-        runId: _runId,
+        pass: _passCount,
         index: sending.currentIndex,
       );
       if (_chatBeingOpened == chat) return;
@@ -162,7 +161,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
 
   void askIfSentAndShowNextIfChatWasOpened() {
     if (state case MessageRunSending(isAwaitingReturn: true) && final sending) {
-      _showNextWithPhoneOrFinishAndTrackRun(
+      _showNextRemainingOrFinishAndTrackRun(
         sending.copyWith(sentToConfirm: () => sending.current.person),
         fromIndex: sending.currentIndex + 1,
       );
@@ -184,7 +183,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
   void skipCurrent() {
     cancelNextChatCountdown();
     if (state case final MessageRunSending sending) {
-      _showNextWithPhoneOrFinishAndTrackRun(
+      _showNextRemainingOrFinishAndTrackRun(
         sending.withCurrent(sending.current.asSkippedUnlessOpenFailed()),
         fromIndex: sending.currentIndex + 1,
       );
@@ -207,7 +206,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
         emit(
           MessageRunFinished(
             recipients: finished.recipientsWithNotSentIfSent(person),
-            isStopped: finished.isStopped,
+            opensNextChatOnReturn: finished.opensNextChatOnReturn,
           ),
         );
 
@@ -218,11 +217,29 @@ class MessageRunCubit extends Cubit<MessageRunState> {
     }
   }
 
+  void resume() {
+    if (state case final MessageRunFinished finished) {
+      _startPass(finished);
+    }
+  }
+
   void stop() {
     cancelNextChatCountdown();
     if (state case final MessageRunSending sending) {
-      _finishAndTrackRun(sending, isStopped: true);
+      _finishAndTrackRun(sending);
     }
+  }
+
+  void _startPass(MessageRunLoaded run) {
+    _passCount++;
+    _showNextRemainingOrFinishAndTrackRun(
+      MessageRunSending(
+        recipients: run.recipients,
+        currentIndex: 0,
+        opensNextChatOnReturn: run.opensNextChatOnReturn,
+      ),
+      fromIndex: 0,
+    );
   }
 
   void _countDownToOpeningCurrentChat(MessageRunSending sending) {
@@ -255,7 +272,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
   ) => switch (state) {
     final MessageRunSending latest
         when !isClosed &&
-            chat.isStillCurrentIn(latest, currentRunId: _runId) &&
+            chat.isStillCurrentIn(latest, currentPass: _passCount) &&
             latest.current.selectedPhone == contact =>
       latest,
     _ => null,
@@ -295,18 +312,18 @@ class MessageRunCubit extends Cubit<MessageRunState> {
         : sending.withCurrent(sending.current.asOpenFailed()),
   );
 
-  void _showNextWithPhoneOrFinishAndTrackRun(
+  void _showNextRemainingOrFinishAndTrackRun(
     MessageRunSending sending, {
     required int fromIndex,
   }) {
     final nextIndex = sending.recipients.indexWhere(
-      (recipient) => recipient.hasPhone,
+      (recipient) => recipient.isRemaining,
       fromIndex,
     );
-    final hasNoneLeftWithPhone = nextIndex == -1;
+    final hasNoneRemaining = nextIndex == -1;
 
-    if (hasNoneLeftWithPhone) {
-      _finishAndTrackRun(sending, isStopped: false);
+    if (hasNoneRemaining) {
+      _finishAndTrackRun(sending);
 
       return;
     }
@@ -319,10 +336,11 @@ class MessageRunCubit extends Cubit<MessageRunState> {
     );
   }
 
-  void _finishAndTrackRun(
-    MessageRunSending sending, {
-    required bool isStopped,
-  }) {
+  void _finishAndTrackRun(MessageRunSending sending) {
+    final finished = MessageRunFinished(
+      recipients: sending.recipients,
+      opensNextChatOnReturn: sending.opensNextChatOnReturn,
+    );
     _analyticsService.track(
       BulkWhatsappRunFinish(
         recipientCount: sending.recipients.length,
@@ -330,15 +348,10 @@ class MessageRunCubit extends Cubit<MessageRunState> {
         skippedCount: sending.withPhoneCountOf(RecipientStatus.skipped),
         withoutPhoneCount: sending.withoutPhone.length,
         opensNextChatOnReturn: sending.opensNextChatOnReturn,
-        isStopped: isStopped,
+        isStopped: finished.isStopped,
       ),
     );
-    emit(
-      MessageRunFinished(
-        recipients: sending.recipients,
-        isStopped: isStopped,
-      ),
-    );
+    emit(finished);
   }
 
   @override

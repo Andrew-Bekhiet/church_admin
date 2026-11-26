@@ -11,6 +11,8 @@ class Recipient with Equatable {
 
   bool get hasPhone => selectedPhone != null;
 
+  bool get isRemaining => hasPhone && status == RecipientStatus.pending;
+
   @override
   List<Object?> get props => [person, phones, selectedPhone, status, message];
 

@@ -24,17 +24,24 @@ final class MessageRunLoadFailure extends MessageRunState {
 
 sealed class MessageRunLoaded extends MessageRunState {
   final List<Recipient> recipients;
+  final bool opensNextChatOnReturn;
 
   Iterable<Recipient> get withPhone =>
       recipients.where((recipient) => recipient.hasPhone);
+
+  Iterable<Recipient> get remaining =>
+      recipients.where((recipient) => recipient.isRemaining);
 
   Iterable<Recipient> get withoutPhone =>
       recipients.whereNot((recipient) => recipient.hasPhone);
 
   @override
-  List<Object?> get props => [recipients];
+  List<Object?> get props => [recipients, opensNextChatOnReturn];
 
-  const MessageRunLoaded({required this.recipients});
+  const MessageRunLoaded({
+    required this.recipients,
+    this.opensNextChatOnReturn = false,
+  });
 
   int withPhoneCountOf(RecipientStatus status) =>
       withPhone.where((recipient) => recipient.status == status).length;
@@ -49,20 +56,14 @@ sealed class MessageRunLoaded extends MessageRunState {
 }
 
 final class MessageRunComposing extends MessageRunLoaded {
-  final bool opensNextChatOnReturn;
-
-  @override
-  List<Object?> get props => [...super.props, opensNextChatOnReturn];
-
   const MessageRunComposing({
     required super.recipients,
-    this.opensNextChatOnReturn = false,
+    super.opensNextChatOnReturn,
   });
 }
 
 final class MessageRunSending extends MessageRunLoaded {
   final int currentIndex;
-  final bool opensNextChatOnReturn;
   final bool isAwaitingReturn;
   final Person? sentToConfirm;
   final int? secondsBeforeNextChat;
@@ -80,7 +81,6 @@ final class MessageRunSending extends MessageRunLoaded {
   List<Object?> get props => [
     ...super.props,
     currentIndex,
-    opensNextChatOnReturn,
     isAwaitingReturn,
     sentToConfirm,
     secondsBeforeNextChat,
@@ -89,7 +89,7 @@ final class MessageRunSending extends MessageRunLoaded {
   const MessageRunSending({
     required this.currentIndex,
     required super.recipients,
-    this.opensNextChatOnReturn = false,
+    super.opensNextChatOnReturn,
     this.isAwaitingReturn = false,
     this.sentToConfirm,
     this.secondsBeforeNextChat,
@@ -123,13 +123,10 @@ final class MessageRunSending extends MessageRunLoaded {
 }
 
 final class MessageRunFinished extends MessageRunLoaded {
-  final bool isStopped;
-
-  @override
-  List<Object?> get props => [...super.props, isStopped];
+  bool get isStopped => remaining.isNotEmpty;
 
   const MessageRunFinished({
     required super.recipients,
-    this.isStopped = false,
+    super.opensNextChatOnReturn,
   });
 }

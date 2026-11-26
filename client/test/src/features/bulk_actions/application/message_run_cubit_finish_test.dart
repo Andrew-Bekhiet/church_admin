@@ -75,7 +75,7 @@ void main() {
   );
 
   blocTest<MessageRunCubit, MessageRunState>(
-    'a stopped run is tracked with how far it got',
+    'stopping after the last chat opened is tracked as not stopped',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTo(
       recipients: [
@@ -99,7 +99,7 @@ void main() {
         'skipped_count': 0,
         'without_phone_count': 1,
         'opens_next_chat_on_return': true,
-        'is_stopped': true,
+        'is_stopped': false,
       });
     },
   );
