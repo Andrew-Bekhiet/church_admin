@@ -5,7 +5,7 @@ Two Windows PowerShell 5.1 scripts for the fingerprint server (BioTime, Windows 
 ## What you need
 
 1. A BioTime superuser, since BioTime gives API tokens to no other account. Create a dedicated one for this.
-2. The function's URL, from the Firebase console under Functions, `recordFingerprintPunches`, deployed from the same commit as these scripts. An older function records nothing these scripts send, so the poller stops with `answered without` and keeps its cursor. It must be `https`, unless it points at localhost or a private network address.
+2. The function's URL, from the Firebase console under Functions, `recordFingerprintPunches`, deployed from the same commit as these scripts. An older function records nothing these scripts send, so the poller stops with `answered without` and keeps its cursor. It must be an `https` URL.
 3. The function's `FINGERPRINT_SYNC_SECRET`.
 
 ## Install
@@ -38,9 +38,9 @@ It logs in to BioTime, reads one transaction, and sends the function a request t
 
 ## Update or change a setting
 
-Copy the new scripts over the old ones and run setup again. It offers the saved values; press Enter to keep each one. It keeps `cursor.json`, so on the same BioTime database the poller carries on after the last batch the function reported. A batch whose response is lost is sent again; the function upserts attendance, so a resent punch records nothing twice. After an outage the poller sends every punch uploaded since, however late it was uploaded, oldest first. Each poll sends what it can read in its time and saves the cursor after every batch, so a large backlog drains over several runs; `left=` in the log counts what is still waiting.
+Copy the new scripts over the old ones and run setup again. It offers the saved values; press Enter to keep each one. It keeps `cursor.json`, so on the same BioTime database the poller carries on after the last batch the function reported. A batch whose response is lost is sent again; the function upserts attendance, so a resent punch records nothing twice. After an outage the poller sends the punches uploaded since, oldest first, and saves the cursor after every batch. It reads back no further than uploads from the last 11 days, because the function ignores a punch older than 10 days.
 
-The cursor is a transaction id from one BioTime database, so a new address for the same server keeps it. When BioTime moves to a different database, disable the `Fingerprint sync` task and wait for its current run to end, so that run cannot write the old cursor back, then delete `cursor.json` and enable the task. Until then the poller sends nothing from the new database whose ids are below the cursor. After the deletion it starts from the newest punch on the new server and does not send punches that were already there.
+The cursor is a transaction id from one BioTime database, so a new address for the same server keeps it. When BioTime moves to a different database, do this before running setup with the new address: disable the `Fingerprint sync` task, wait for its current run to end so that run cannot write the old cursor back, and delete `cursor.json`. Setup then starts the task again, and the poller starts from the newest punch in the new database without sending the punches already there. With the old cursor left in place, the poller would send only the new database's transactions whose ids are above it.
 
 ## Uninstall
 
@@ -52,14 +52,22 @@ This removes the task. Delete `C:\fingerprint_sync` afterwards to remove the set
 
 ## Logs
 
-`C:\fingerprint_sync\logs\fingerprint_sync.log`, rolled at 1 MB, with the last three kept as `.1` to `.3`. Each poll writes one line of counts: transactions sent and left for later polls, the function's answer, and the cursor. Task Scheduler's *Last Run Result* is `0` when all went well, `1` after an error, and `2` after a warning.
+`C:\fingerprint_sync\logs\fingerprint_sync.log`, rolled at 1 MB, with the last three kept as `.1` to `.3`. Each poll writes one line of counts: transactions sent, the function's answer, and the cursor. Task Scheduler's *Last Run Result* is `0` when all went well, `1` after an error, and `2` after a warning.
 
 | Line | Meaning |
 | -- | -- |
 | `ERROR ... skipping the rest of this run` | BioTime or the function failed or timed out. Batches already sent stay sent; the next minute retries the rest. |
-| `ERROR ... not in ascending id order` | BioTime listed transactions out of id order, so the poller cannot tell which are new. It stops sending and keeps its cursor until the order is restored. |
+| `ERROR ... not in ascending id order` | BioTime listed transactions out of id order, so the poller cannot tell which are new. It sends nothing and keeps its cursor until the order is restored. |
 | `ERROR ... not yyyy-MM-dd HH:mm:ss` | BioTime returned a punch time in a layout the function cannot read. The poller stops before that transaction, so nothing after it is sent until that transaction is corrected or deleted in BioTime. |
-| `WARN ... linked to no person` | A punch's fingerprint ID matches no person in the app. The function reports only how many, so the line lists the batch's employee codes, which include the unlinked ones. These punches are not recorded and are not sent again. Set the fingerprint ID on each person so their later punches are recorded. |
+| `WARN ... linked to no person` | A punch's fingerprint ID matches no person in the app. The line says how many; the function's own log in the Firebase console names each ID. These punches are not recorded and are not sent again. Set the fingerprint ID on each person so their later punches are recorded. |
 | `WARN ... rejected by the function as malformed` | The function could not read a punch, for example one with no employee code. It is not recorded. |
 | `WARN ... older than the function accepts` | The punches were more than 10 days old, usually from a device that was offline. They are not recorded. |
 | `WARN ... in the future` | The fingerprint server's or a device's clock is ahead of Cairo time. These punches are not recorded and are not sent again. Fix the clock so later punches are recorded. |
+
+## Tests
+
+`test_fingerprint_sync.ps1` runs the poller against a fake BioTime and a fake function, in Windows PowerShell 5.1 or PowerShell 7. It needs no install and touches nothing in `C:\fingerprint_sync`:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File test_fingerprint_sync.ps1
+```
