@@ -282,10 +282,15 @@ function Invoke-Poll($Config, $Secrets) {
     foreach ($field in $ReportFields) { $poll.Totals[$field] = 0 }
     try {
         $first = Find-FirstPositionAfter $Config $Secrets ([long]$cursor.highestSentId) ([long]$cursor.position)
+        if ($first.Position - 1 -ne [long]$cursor.position) {
+            $poll.Cursor = [pscustomobject]@{ highestSentId = [long]$cursor.highestSentId; position = $first.Position - 1 }
+            Save-Cursor $poll.Cursor
+        }
         $poll.Left = $first.Count - $first.Position + 1
         if ($poll.Left -gt 0) { Send-TransactionsFromWhileTimeLeft $Config $Secrets $poll $first.Position }
         $functionMarkedThisPollSynced = $poll.Batches -gt 0
-        if (-not $functionMarkedThisPollSynced) { Send-BatchAndRecordInPoll $Config $Secrets $poll @() 0 }
+        $timeLeft = $RunClock.Elapsed.TotalSeconds -lt $script:PollDeadlineSeconds
+        if (-not $functionMarkedThisPollSynced -and $timeLeft) { Send-BatchAndRecordInPoll $Config $Secrets $poll @() 0 }
     } finally {
         $totals, $warnings = $poll.Totals, $poll.Warnings
         $counts = ($ReportFields | ForEach-Object { "$_=$($totals[$_])" }) -join ' '
