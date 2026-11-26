@@ -161,7 +161,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
 
   void askIfSentAndShowNextIfChatWasOpened() {
     if (state case MessageRunSending(isAwaitingReturn: true) && final sending) {
-      _showNextRemainingOrFinishAndTrackRun(
+      _showNextRemainingOrFinish(
         sending.copyWith(sentToConfirm: () => sending.current.person),
         fromIndex: sending.currentIndex + 1,
       );
@@ -183,7 +183,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
   void skipCurrent() {
     cancelNextChatCountdown();
     if (state case final MessageRunSending sending) {
-      _showNextRemainingOrFinishAndTrackRun(
+      _showNextRemainingOrFinish(
         sending.withCurrent(sending.current.asSkippedUnlessOpenFailed()),
         fromIndex: sending.currentIndex + 1,
       );
@@ -226,13 +226,13 @@ class MessageRunCubit extends Cubit<MessageRunState> {
   void stop() {
     cancelNextChatCountdown();
     if (state case final MessageRunSending sending) {
-      _finishAndTrackRun(sending);
+      _finish(sending);
     }
   }
 
   void _startPass(MessageRunLoaded run) {
     _passCount++;
-    _showNextRemainingOrFinishAndTrackRun(
+    _showNextRemainingOrFinish(
       MessageRunSending(
         recipients: run.recipients,
         currentIndex: 0,
@@ -312,7 +312,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
         : sending.withCurrent(sending.current.asOpenFailed()),
   );
 
-  void _showNextRemainingOrFinishAndTrackRun(
+  void _showNextRemainingOrFinish(
     MessageRunSending sending, {
     required int fromIndex,
   }) {
@@ -323,7 +323,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
     final hasNoneRemaining = nextIndex == -1;
 
     if (hasNoneRemaining) {
-      _finishAndTrackRun(sending);
+      _finish(sending);
 
       return;
     }
@@ -336,27 +336,27 @@ class MessageRunCubit extends Cubit<MessageRunState> {
     );
   }
 
-  void _finishAndTrackRun(MessageRunSending sending) {
-    final finished = MessageRunFinished(
+  void _finish(MessageRunSending sending) => emit(
+    MessageRunFinished(
       recipients: sending.recipients,
       opensNextChatOnReturn: sending.opensNextChatOnReturn,
-    );
-    _analyticsService.track(
-      BulkWhatsappRunFinish(
-        recipientCount: sending.recipients.length,
-        openedCount: sending.withPhoneCountOf(RecipientStatus.sent),
-        skippedCount: sending.withPhoneCountOf(RecipientStatus.skipped),
-        withoutPhoneCount: sending.withoutPhone.length,
-        opensNextChatOnReturn: sending.opensNextChatOnReturn,
-        isStopped: finished.isStopped,
-      ),
-    );
-    emit(finished);
-  }
+    ),
+  );
 
   @override
   Future<void> close() {
     _nextChatCountdown?.cancel();
+    if (state case final MessageRunLoaded run
+        when !isClosed && _passCount > 0) {
+      _analyticsService.track(
+        BulkMessageRunFinish(
+          channel: _channel,
+          recipients: run.recipients,
+          passCount: _passCount,
+          opensNextChatOnReturn: run.opensNextChatOnReturn,
+        ),
+      );
+    }
 
     return super.close();
   }
