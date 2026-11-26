@@ -21,7 +21,7 @@ Two Windows PowerShell 5.1 scripts for the fingerprint server (BioTime, Windows 
 
 Setup then:
 
-- resets the access of `C:\fingerprint_sync` and everything in it to Administrators and SYSTEM, with read access for other users and none for anyone granted more before, because SYSTEM runs the script from there;
+- makes Administrators the owner of `C:\fingerprint_sync` and everything in it, and resets their access to Administrators and SYSTEM, with read access for other users and none for anyone granted more before, because SYSTEM runs the script from there;
 - saves the settings in `config.json`, and the password and secret in `secrets.bin`, encrypted for this machine with DPAPI and recreated on every run so that only Administrators and SYSTEM can read it;
 - runs the check below, and stops if it fails;
 - registers the `Fingerprint sync` task: every minute, as SYSTEM, whether or not anyone is logged on, never two runs at once, stopped after 2 minutes if it hangs. Then it starts the task.
@@ -38,9 +38,9 @@ It logs in to BioTime, reads one transaction, and sends the function a request t
 
 ## Update or change a setting
 
-Copy the new scripts over the old ones and run setup again. It offers the saved values; press Enter to keep each one. It keeps `cursor.json`, so on the same BioTime database the poller carries on after the last batch the function reported. A batch whose response is lost is sent again; the function upserts, so each punch is still stored once. After an outage the poller sends every punch uploaded since, however late it was uploaded, oldest first. Each poll sends what it can read in its time and saves the cursor after every batch, so a large backlog drains over several runs; `left=` in the log counts what is still waiting.
+Copy the new scripts over the old ones and run setup again. It offers the saved values; press Enter to keep each one. It keeps `cursor.json`, so on the same BioTime database the poller carries on after the last batch the function reported. A batch whose response is lost is sent again; the function upserts attendance, so a resent punch records nothing twice. After an outage the poller sends every punch uploaded since, however late it was uploaded, oldest first. Each poll sends what it can read in its time and saves the cursor after every batch, so a large backlog drains over several runs; `left=` in the log counts what is still waiting.
 
-The cursor is a transaction id from one BioTime database, so a new address for the same server keeps it. When BioTime moves to a different database, delete `cursor.json`. Until then the poller sends nothing from the new database whose ids are below the cursor. After the deletion it starts from the newest punch on the new server and does not send punches that were already there.
+The cursor is a transaction id from one BioTime database, so a new address for the same server keeps it. When BioTime moves to a different database, disable the `Fingerprint sync` task and wait for its current run to end, so that run cannot write the old cursor back, then delete `cursor.json` and enable the task. Until then the poller sends nothing from the new database whose ids are below the cursor. After the deletion it starts from the newest punch on the new server and does not send punches that were already there.
 
 ## Uninstall
 
