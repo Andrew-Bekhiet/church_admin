@@ -15,8 +15,8 @@ $HttpTimeoutSeconds = 6
 
 # A page of 1000 takes about 3 s and one of 100 well under 1 s; a poll starts a page only with its reserve left,
 # and reads a short tail in small pages so the 8-second last poll still sends it.
-$PageSize, $PageReserveSeconds = 1000, 5
-$TailPageSize, $TailPageReserveSeconds = 100, 2
+$FullPages = [pscustomobject]@{ Size = 1000; ReserveSeconds = 5 }
+$TailPages = [pscustomobject]@{ Size = 100; ReserveSeconds = 2 }
 $MaxPunchesPerRequest = 500
 $BiotimeTimeFormat = 'yyyy-MM-dd HH:mm:ss'
 $Invariant = [Globalization.CultureInfo]::InvariantCulture
@@ -94,7 +94,7 @@ function Read-Secrets {
 
 function Invoke-JsonRequest([string]$Method, [string]$Uri, [hashtable]$Headers, $Body) {
     if ($RunClock.Elapsed.TotalSeconds -ge $script:PollDeadlineSeconds) {
-        throw 'Out of time for this poll; the next poll rereads what this one did not send'
+        throw 'Out of time for this poll; the next poll resumes from the saved cursor'
     }
     $request = @{ Method = $Method; Uri = $Uri; Headers = $Headers; TimeoutSec = $HttpTimeoutSeconds; UseBasicParsing = $true }
     if ($null -ne $Body) {
@@ -145,35 +145,37 @@ function Read-TransactionsPage($Config, $Secrets, [long]$Page, [int]$Size) {
     return [pscustomobject]@{ Count = $count; Rows = $rows }
 }
 
-function Read-TransactionIdAt($Config, $Secrets, [long]$Position) {
-    $page = Read-TransactionsPage $Config $Secrets $Position 1
+function Read-TransactionIdAndCountAt($Config, $Secrets, [long]$Position) {
+    $pageRead = Read-TransactionsPage $Config $Secrets $Position 1
     $id = $null
-    if ($page.Rows.Count -gt 0) { $id = [long]$page.Rows[0].id }
-    return [pscustomobject]@{ Count = $page.Count; Id = $id }
+    if ($pageRead.Rows.Count -gt 0) { $id = [long]$pageRead.Rows[0].id }
+    return [pscustomobject]@{ Count = $pageRead.Count; Id = $id }
 }
 
-function Read-HighestTransactionId($Config, $Secrets) {
-    $count = (Read-TransactionIdAt $Config $Secrets 1).Count
-    if ($count -eq 0) { return [long]0 }
-    $id = (Read-TransactionIdAt $Config $Secrets $count).Id
+function New-CursorAtNewestTransaction($Config, $Secrets) {
+    $count = (Read-TransactionIdAndCountAt $Config $Secrets 1).Count
+    if ($count -eq 0) { return [pscustomobject]@{ highestSentId = [long]0; position = [long]0 } }
+    $id = (Read-TransactionIdAndCountAt $Config $Secrets $count).Id
     if ($null -eq $id) { throw 'BioTime dropped its newest transaction while the poller read it; the next run retries' }
-    return $id
+    return [pscustomobject]@{ highestSentId = $id; position = $count }
 }
 
-# Binary search over row positions, since page_size=1 makes page k the k-th row. The first probe is
-# the last row, so a poll with nothing new costs two small requests.
-function Find-FirstPositionAfter($Config, $Secrets, [long]$AfterId) {
-    $first = Read-TransactionIdAt $Config $Secrets 1
+# page_size=1 makes page k the k-th row. A deletion only moves rows left, so the first unsent row is at most
+# one past the position saved with the cursor; probing there first keeps the search to a few requests.
+function Find-FirstPositionAfter($Config, $Secrets, [long]$AfterId, [long]$SavedPosition) {
+    $first = Read-TransactionIdAndCountAt $Config $Secrets 1
     $count = $first.Count
     if ($null -eq $first.Id -or $first.Id -gt $AfterId) { return [pscustomobject]@{ Position = [long]1; Count = $count } }
-    $low, $lowId, $high, $highId, $middle = [long]1, $first.Id, ($count + 1), [long]::MaxValue, $count
+    $low, $lowId, $high, $middle = [long]1, $first.Id, ($count + 1), $count
+    if ($SavedPosition -gt 1 -and $SavedPosition -lt $count) { $middle = $SavedPosition }
     while ($high - $low -gt 1) {
-        $id = (Read-TransactionIdAt $Config $Secrets $middle).Id
-        if ($null -ne $id -and ($id -le $lowId -or $id -ge $highId)) {
-            throw "BioTime transactions are not in ascending id order around row $middle, so new punches cannot be found by id; nothing was sent and the cursor is unchanged"
+        $id = (Read-TransactionIdAndCountAt $Config $Secrets $middle).Id
+        if ($null -ne $id -and $id -le $lowId) {
+            throw "BioTime transactions are not in ascending id order around row $middle, so new punches cannot be found by id; nothing more is sent and the cursor stays"
         }
-        if ($null -eq $id) { $high = $middle } elseif ($id -gt $AfterId) { $high, $highId = $middle, $id } else { $low, $lowId = $middle, $id }
+        if ($null -eq $id -or $id -gt $AfterId) { $high = $middle } else { $low, $lowId = $middle, $id }
         $middle = [long][Math]::Floor(($low + $high) / 2)
+        if ($low -eq $SavedPosition) { $middle = $SavedPosition + 1 }
     }
     return [pscustomobject]@{ Position = $high; Count = $count }
 }
@@ -183,10 +185,10 @@ function Read-Cursor {
     return Get-Content -Raw -Path $CursorPath | ConvertFrom-Json
 }
 
-function Get-CursorAfterSentBatch($Cursor, $Batch) {
+function Get-CursorAfterSentBatch($Cursor, $Batch, [long]$LastPosition) {
     $highestId = [long]$Batch[$Batch.Count - 1].id
     if ($highestId -lt [long]$Cursor.highestSentId) { return $Cursor }
-    return [pscustomobject]@{ highestSentId = $highestId }
+    return [pscustomobject]@{ highestSentId = $highestId; position = $LastPosition }
 }
 
 function Save-Cursor($Cursor) {
@@ -222,10 +224,10 @@ function Send-Punches($Config, $Secrets, $Transactions) {
 
 $ReportFields = 'matchedAWindow', 'matchedNoWindow', 'ignoredMalformed', 'ignoredTooOld', 'ignoredInFuture', 'ignoredUnlinkedEmployeeCode'
 
-function Send-BatchAndAdvanceCursor($Config, $Secrets, $Poll, $Batch) {
+function Send-BatchAndRecordInPoll($Config, $Secrets, $Poll, $Batch, [long]$LastPosition) {
     $report = Send-Punches $Config $Secrets $Batch
     if ($Batch.Count -gt 0) {
-        $Poll.Cursor = Get-CursorAfterSentBatch $Poll.Cursor $Batch
+        $Poll.Cursor = Get-CursorAfterSentBatch $Poll.Cursor $Batch $LastPosition
         Save-Cursor $Poll.Cursor
     }
     $Poll.Sent += $Batch.Count
@@ -240,25 +242,31 @@ function Send-BatchAndAdvanceCursor($Config, $Secrets, $Poll, $Batch) {
 # A deleted row shifts every later row one position left, which can move an unsent row in front of the
 # page being read. So a page that starts with an unsent row is sent only while the row before it is
 # still one already sent; otherwise the read steps back a page.
-function Send-TransactionsFrom($Config, $Secrets, $Poll, [long]$Position) {
-    $size, $reserve = $PageSize, $PageReserveSeconds
-    if ($Poll.Left -le $TailPageSize) { $size, $reserve = $TailPageSize, $TailPageReserveSeconds }
+function Send-TransactionsFromWhileTimeLeft($Config, $Secrets, $Poll, [long]$Position) {
+    $pages = $FullPages
+    if ($Poll.Left -le $TailPages.Size) { $pages = $TailPages }
+    $size = $pages.Size
     $page = [long][Math]::Floor(($Position - 1) / $size) + 1
-    while ($RunClock.Elapsed.TotalSeconds + $reserve -lt $script:PollDeadlineSeconds) {
-        $sentId = [long]$Poll.Cursor.highestSentId
-        $read = Read-TransactionsPage $Config $Secrets $page $size
-        $startsUnsent = ($read.Rows.Count -eq 0) -or ([long]$read.Rows[0].id -gt $sentId)
-        if ($page -gt 1 -and $startsUnsent) {
-            $before = (Read-TransactionIdAt $Config $Secrets (($page - 1) * $size)).Id
-            if ($null -eq $before -or $before -gt $sentId) { $page--; continue }
+    while ($RunClock.Elapsed.TotalSeconds + $pages.ReserveSeconds -lt $script:PollDeadlineSeconds) {
+        $highestSentId = [long]$Poll.Cursor.highestSentId
+        $pageRead = Read-TransactionsPage $Config $Secrets $page $size
+        $pageStartsUnsentOrIsEmpty = ($pageRead.Rows.Count -eq 0) -or ([long]$pageRead.Rows[0].id -gt $highestSentId)
+        if ($page -gt 1 -and $pageStartsUnsentOrIsEmpty) {
+            $idBeforePage = (Read-TransactionIdAndCountAt $Config $Secrets (($page - 1) * $size)).Id
+            $unsentRowMayPrecedePage = ($null -eq $idBeforePage) -or ($idBeforePage -gt $highestSentId)
+            if ($unsentRowMayPrecedePage) { $page--; continue }
         }
-        $unsent = @($read.Rows | Where-Object { [long]$_.id -gt $sentId })
+        $unsent = @($pageRead.Rows | Where-Object { [long]$_.id -gt $highestSentId })
+        $firstUnsentPosition = ($page - 1) * $size + $pageRead.Rows.Count - $unsent.Count + 1
+        $rowsAfterPage = [Math]::Max([long]0, [long]($pageRead.Count - $page * $size))
         for ($start = 0; $start -lt $unsent.Count; $start += $MaxPunchesPerRequest) {
+            $Poll.Left = $unsent.Count - $start + $rowsAfterPage
+            if ($RunClock.Elapsed.TotalSeconds -ge $script:PollDeadlineSeconds) { return }
             $batch = @($unsent | Select-Object -Skip $start -First $MaxPunchesPerRequest)
-            Send-BatchAndAdvanceCursor $Config $Secrets $Poll $batch
+            Send-BatchAndRecordInPoll $Config $Secrets $Poll $batch ($firstUnsentPosition + $start + $batch.Count - 1)
         }
-        $Poll.Left = [Math]::Max([long]0, [long]($read.Count - $page * $size))
-        if ($Poll.Left -eq 0) { return }
+        $Poll.Left = $rowsAfterPage
+        if ($rowsAfterPage -eq 0) { return }
         $page++
     }
 }
@@ -266,24 +274,28 @@ function Send-TransactionsFrom($Config, $Secrets, $Poll, [long]$Position) {
 function Invoke-Poll($Config, $Secrets) {
     $cursor = Read-Cursor
     if ($null -eq $cursor) {
-        $cursor = [pscustomobject]@{ highestSentId = (Read-HighestTransactionId $Config $Secrets) }
+        $cursor = New-CursorAtNewestTransaction $Config $Secrets
         Save-Cursor $cursor
         Write-Log 'INFO' "No cursor yet: skipping the punches already in BioTime, sending punches after transaction id $($cursor.highestSentId)"
     }
-    $poll = @{ Cursor = $cursor; Sent = 0; Batches = 0; Totals = [ordered]@{}; Warnings = (New-Object System.Collections.Generic.List[string]) }
+    $poll = @{ Cursor = $cursor; Sent = 0; Batches = 0; Left = '?'; Totals = [ordered]@{}; Warnings = (New-Object System.Collections.Generic.List[string]) }
     foreach ($field in $ReportFields) { $poll.Totals[$field] = 0 }
-    $first = Find-FirstPositionAfter $Config $Secrets ([long]$cursor.highestSentId)
-    $poll.Left = $first.Count - $first.Position + 1
-    if ($poll.Left -gt 0) { Send-TransactionsFrom $Config $Secrets $poll $first.Position }
-    if ($poll.Batches -eq 0) { Send-BatchAndAdvanceCursor $Config $Secrets $poll @() }
-    $totals, $warnings = $poll.Totals, $poll.Warnings
-    $counts = ($ReportFields | ForEach-Object { "$_=$($totals[$_])" }) -join ' '
-    Write-Log 'INFO' "sent=$($poll.Sent) left=$($poll.Left) $counts cursor=$($poll.Cursor.highestSentId)"
-    if ($totals.ignoredMalformed -gt 0) { $warnings.Add("$($totals.ignoredMalformed) punches were rejected by the function as malformed") }
-    if ($totals.ignoredTooOld -gt 0) { $warnings.Add("$($totals.ignoredTooOld) punches were older than the function accepts") }
-    if ($totals.ignoredInFuture -gt 0) { $warnings.Add("$($totals.ignoredInFuture) punches were in the future; check the BioTime server and device clocks") }
-    foreach ($warning in $warnings) { Write-Log 'WARN' $warning }
-    return $warnings.Count
+    try {
+        $first = Find-FirstPositionAfter $Config $Secrets ([long]$cursor.highestSentId) ([long]$cursor.position)
+        $poll.Left = $first.Count - $first.Position + 1
+        if ($poll.Left -gt 0) { Send-TransactionsFromWhileTimeLeft $Config $Secrets $poll $first.Position }
+        $functionMarkedThisPollSynced = $poll.Batches -gt 0
+        if (-not $functionMarkedThisPollSynced) { Send-BatchAndRecordInPoll $Config $Secrets $poll @() 0 }
+    } finally {
+        $totals, $warnings = $poll.Totals, $poll.Warnings
+        $counts = ($ReportFields | ForEach-Object { "$_=$($totals[$_])" }) -join ' '
+        Write-Log 'INFO' "sent=$($poll.Sent) left=$($poll.Left) $counts cursor=$($poll.Cursor.highestSentId)"
+        if ($totals.ignoredMalformed -gt 0) { $warnings.Add("$($totals.ignoredMalformed) punches were rejected by the function as malformed") }
+        if ($totals.ignoredTooOld -gt 0) { $warnings.Add("$($totals.ignoredTooOld) punches were older than the function accepts") }
+        if ($totals.ignoredInFuture -gt 0) { $warnings.Add("$($totals.ignoredInFuture) punches were in the future; check the BioTime server and device clocks") }
+        foreach ($warning in $warnings) { Write-Log 'WARN' $warning }
+    }
+    return $poll.Warnings.Count
 }
 
 function Invoke-Check($Config, $Secrets) {
