@@ -82,7 +82,7 @@ void main() {
         final signingIn = unit.onTransition(authBloc, signIn);
         await pumpEventQueue();
 
-        await fixture.authRepository.signOut();
+        fixture.authRepository.isSignedIn = false;
         promptAnswered.complete();
         await signingIn;
 
@@ -156,13 +156,13 @@ void main() {
     );
 
     test(
-      'signing out while a sign-in waits on the permission prompt leaves the device unregistered',
+      'a session end while a sign-in waits on the permission prompt leaves the device unregistered',
       () async {
         final promptAnswered = fixture.holdTheNextPermissionPrompt();
         final signingIn = unit.onTransition(authBloc, signIn);
         await pumpEventQueue();
 
-        await fixture.authRepository.signOut();
+        await unit.onTransition(authBloc, sessionEnd);
         promptAnswered.complete();
         await signingIn;
 
@@ -186,30 +186,7 @@ void main() {
     );
 
     test(
-      'signing out through the auth repository unregisters this device',
-      () async {
-        await unit.onTransition(authBloc, signIn);
-
-        await fixture.authRepository.signOut();
-
-        verify(() => fixture.firebaseMessaging.unregister());
-      },
-    );
-
-    test(
-      'signing out through the auth repository after disposing leaves this device registered',
-      () async {
-        await unit.onTransition(authBloc, signIn);
-        await unit.dispose();
-
-        await fixture.authRepository.signOut();
-
-        verifyNever(() => fixture.firebaseMessaging.unregister());
-      },
-    );
-
-    test(
-      'a session that ends without a repository sign-out unregisters this device',
+      'a session end unregisters this device',
       () async {
         await unit.onTransition(authBloc, signIn);
 
@@ -226,10 +203,9 @@ void main() {
     });
 
     test(
-      'a sign-in right after a repository sign-out and its session end is never unregistered',
+      'a sign-in right after a session end is never unregistered',
       () async {
         await unit.onTransition(authBloc, signIn);
-        await fixture.authRepository.signOut();
         final outcomes = <String>[];
         final unregistrationFinishes = Completer<void>();
         when(() => fixture.firebaseMessaging.unregister()).thenAnswer((

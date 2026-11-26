@@ -161,7 +161,7 @@ final secretsServiceProvider = Provider<SecretsService>(
   (ref) => const SecretsService(),
 );
 
-final Provider<AuthBloc> authBlocProvider = Provider<AuthBloc>((ref) {
+final authBlocProvider = Provider<AuthBloc>((ref) {
   final authBloc = AuthBloc(
     authRepository: ref.watch(authRepositoryProvider),
     authStorage: ref.watch(authStorageProvider),
@@ -281,16 +281,10 @@ final localNotificationsPluginProvider =
     );
 
 final thisDevicePushRegistrationProvider = Provider<ThisDevicePushRegistration>(
-  (ref) {
-    final authBloc = ref.watch(authBlocProvider);
-
-    return ThisDevicePushRegistration(
-      firebaseMessaging: ref.watch(firebaseMessagingProvider),
-      functionsService: ref.watch(functionsServiceProvider),
-      fcmTokens: ref.watch(databaseServiceProvider).fcmTokens,
-      readCurrentUid: () => authBloc.currentUser?.hasuraUserId,
-    );
-  },
+  (ref) => ThisDevicePushRegistration(
+    firebaseMessaging: ref.watch(firebaseMessagingProvider),
+    functionsService: ref.watch(functionsServiceProvider),
+  ),
 );
 
 final notificationsServiceProvider = Provider<NotificationsService>((ref) {

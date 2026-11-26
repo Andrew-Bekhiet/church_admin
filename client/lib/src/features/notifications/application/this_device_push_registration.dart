@@ -8,19 +8,14 @@ class ThisDevicePushRegistration {
 
   final FirebaseMessaging _firebaseMessaging;
   final FunctionsService _functionsService;
-  final FcmTokensDAO _fcmTokens;
-  final String? Function() _readCurrentUid;
 
   Future<void> _latestQueuedStep = Future<void>.value();
   StreamSubscription<String>? _installationIdsSubscription;
-  final Set<String> _submittedInstallationIds = {};
   int _stopsAndDisposals = 0;
 
   ThisDevicePushRegistration({
     required this._firebaseMessaging,
     required this._functionsService,
-    required this._fcmTokens,
-    required this._readCurrentUid,
   });
 
   Future<void> maybeRegisterOnceGranted(Future<bool> permissionGranted) async {
@@ -51,13 +46,10 @@ class ThisDevicePushRegistration {
     unawaited(_runAfterQueuedSteps(() => _submit(installationId)));
   }
 
-  Future<void> _submit(String installationId) {
-    _submittedInstallationIds.add(installationId);
-
-    return _waitWithinTimeLimitLoggingFailure(
-      _functionsService.registerFirebaseInstallation(installationId),
-    );
-  }
+  Future<void> _submit(String installationId) =>
+      _waitWithinTimeLimitLoggingFailure(
+        _functionsService.registerFirebaseInstallation(installationId),
+      );
 
   Future<void> _logInstallationRegistrationError(
     Object error,
@@ -67,26 +59,13 @@ class ThisDevicePushRegistration {
 
   Future<void> stop() {
     _stopsAndDisposals++;
-    final uid = _readCurrentUid();
     unawaited(_stopListeningForInstallationIds());
 
-    return _runAfterQueuedSteps(() async {
-      await _maybeDeleteSubmittedRows(uid);
-      await _waitWithinTimeLimitLoggingFailure(_firebaseMessaging.unregister());
-    });
+    return _runAfterQueuedSteps(_unregister);
   }
 
-  Future<void> _maybeDeleteSubmittedRows(String? uid) async {
-    final installationIds = [..._submittedInstallationIds];
-    _submittedInstallationIds.clear();
-    if (uid == null) return;
-
-    for (final installationId in installationIds) {
-      await _waitWithinTimeLimitLoggingFailure(
-        _fcmTokens.deleteByUidAndToken(uid: uid, token: installationId),
-      );
-    }
-  }
+  Future<void> _unregister() =>
+      _waitWithinTimeLimitLoggingFailure(_firebaseMessaging.unregister());
 
   Future<void> _stopListeningForInstallationIds() {
     final cancellation =

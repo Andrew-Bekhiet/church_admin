@@ -7,8 +7,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler_platform_interface/permission_handler_platform_interface.dart';
 
 import '../../../fakes/fake_logging_service.dart';
-import '../../../fakes/fake_sign_out_auth_repository.dart';
-import '../../../fakes/mock_fcm_tokens_dao.dart';
+import '../../../fakes/fake_signed_in_auth_repository.dart';
 import '../../../fakes/mock_firebase_messaging.dart';
 import '../../../fakes/mock_functions_service.dart';
 import '../../../fakes/mock_permission_handler_platform.dart';
@@ -39,12 +38,12 @@ class _AcceptingNotificationsSettingsStorage extends Fake
 class PushRegistrationFixture {
   final MockFirebaseMessaging firebaseMessaging = MockFirebaseMessaging();
   final MockFunctionsService functionsService = MockFunctionsService();
-  final MockFcmTokensDAO fcmTokens = MockFcmTokensDAO();
   final MockPermissionHandlerPlatform permissionHandler =
       MockPermissionHandlerPlatform();
-  final FakeSignOutAuthRepository authRepository = FakeSignOutAuthRepository();
+  final FakeSignedInAuthRepository authRepository = FakeSignedInAuthRepository(
+    isSignedIn: true,
+  );
   final List<StreamController<String>> _onRegisteredControllers = [];
-  String? currentUid;
 
   PushRegistrationFixture() {
     when(firebaseMessaging.isSupported).thenAnswer((_) async => true);
@@ -54,7 +53,6 @@ class PushRegistrationFixture {
     when(firebaseMessaging.register).thenAnswer((_) async {});
     when(firebaseMessaging.unregister).thenAnswer((_) async {});
     whenRegisteringWithServer().thenAnswer((_) async {});
-    whenDeletingARow().thenAnswer((_) async {});
   }
 
   Stream<String> _openOnRegistered() {
@@ -68,8 +66,6 @@ class PushRegistrationFixture {
   ThisDevicePushRegistration buildRegistration() => ThisDevicePushRegistration(
     firebaseMessaging: firebaseMessaging,
     functionsService: functionsService,
-    fcmTokens: fcmTokens,
-    readCurrentUid: () => currentUid,
   );
 
   NotificationsService buildNotificationsService(
@@ -129,24 +125,8 @@ class PushRegistrationFixture {
   void issueInstallationId(String installationId) =>
       _onRegisteredControllers.lastOrNull?.add(installationId);
 
-  void recordFirebaseOutcomesIn(List<String> outcomes) {
-    when(firebaseMessaging.unregister).thenAnswer((_) async {
-      outcomes.add('unregistered');
-    });
-    when(firebaseMessaging.register).thenAnswer((_) async {
-      outcomes.add('registered');
-    });
-  }
-
   When<Future<void>> whenRegisteringWithServer() =>
       when(() => functionsService.registerFirebaseInstallation(any()));
-
-  When<Future<void>> whenDeletingARow() => when(
-    () => fcmTokens.deleteByUidAndToken(
-      uid: any(named: 'uid'),
-      token: any(named: 'token'),
-    ),
-  );
 
   When<Future<Map<Permission, PermissionStatus>>> whenRequestingPermissions() =>
       when(() => permissionHandler.requestPermissions(any()));

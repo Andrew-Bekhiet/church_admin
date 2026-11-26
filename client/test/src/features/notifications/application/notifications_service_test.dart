@@ -17,7 +17,7 @@ import 'package:permission_handler_platform_interface/permission_handler_platfor
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import '../../../fakes/fake_logging_service.dart';
-import '../../../fakes/fake_sign_out_auth_repository.dart';
+import '../../../fakes/fake_signed_in_auth_repository.dart';
 import '../../../fakes/recording_analytics_provider.dart';
 import 'notifications_service_test.mocks.dart';
 
@@ -30,7 +30,6 @@ import 'notifications_service_test.mocks.dart';
   MockSpec<FlutterLocalNotificationsPlugin>(),
   MockSpec<AuthBloc>(),
   MockSpec<DatabaseService>(),
-  MockSpec<FcmTokensDAO>(),
   MockSpec<FunctionsService>(),
   MockSpec<InitializationService>(),
   MockSpec<NotificationsStorage>(),
@@ -399,7 +398,7 @@ void main() {
                   StreamController<RemoteMessage>();
 
               final unit = NotificationsService(
-                authRepository: FakeSignOutAuthRepository(),
+                authRepository: FakeSignedInAuthRepository(isSignedIn: true),
                 analyticsService: AnalyticsService(
                   [RecordingAnalyticsProvider()],
                   FakeLoggingService(),
@@ -868,7 +867,7 @@ List<Object> _callArgumentsMatchFor({
 
 NotificationsService _createNewUnit() {
   return NotificationsService(
-    authRepository: FakeSignOutAuthRepository(),
+    authRepository: FakeSignedInAuthRepository(isSignedIn: true),
     analyticsService: AnalyticsService(
       [RecordingAnalyticsProvider()],
       FakeLoggingService(),
@@ -922,10 +921,7 @@ Override _setUpFunctionsService() {
 }
 
 Override _setUpDatabaseService() {
-  final mockDatabaseService = MockDatabaseService();
-  final mockFcmTokens = MockFcmTokensDAO();
-  when(mockDatabaseService.fcmTokens).thenReturn(mockFcmTokens);
-  return databaseServiceProvider.overrideWithValue(mockDatabaseService);
+  return databaseServiceProvider.overrideWithValue(MockDatabaseService());
 }
 
 Override _setUpAuthBloc() {

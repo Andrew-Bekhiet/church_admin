@@ -1,5 +1,0 @@
-mutation deleteFcmTokenByUidAndToken($uid: uuid!, $token: String!) {
-  deleteUsersFcmTokensByPk(uid: $uid, token: $token) {
-    ...FcmToken
-  }
-}

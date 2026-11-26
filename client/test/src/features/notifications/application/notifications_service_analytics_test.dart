@@ -7,8 +7,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler_platform_interface/permission_handler_platform_interface.dart';
 
 import '../../../fakes/fake_logging_service.dart';
-import '../../../fakes/fake_sign_out_auth_repository.dart';
-import '../../../fakes/mock_fcm_tokens_dao.dart';
+import '../../../fakes/fake_signed_in_auth_repository.dart';
 import '../../../fakes/mock_firebase_messaging.dart';
 import '../../../fakes/mock_functions_service.dart';
 import '../../../fakes/mock_permission_handler_platform.dart';
@@ -86,13 +85,11 @@ void main() {
         localNotificationsPlugin: _MockLocalNotificationsPlugin(),
         onForegroundMessageStream: const Stream.empty(),
         onMessageOpenedAppStream: const Stream.empty(),
-        authRepository: FakeSignOutAuthRepository(),
+        authRepository: FakeSignedInAuthRepository(isSignedIn: true),
         analyticsService: AnalyticsService([analytics], FakeLoggingService()),
         thisDevicePushRegistration: ThisDevicePushRegistration(
           firebaseMessaging: firebaseMessaging,
           functionsService: MockFunctionsService(),
-          fcmTokens: MockFcmTokensDAO(),
-          readCurrentUid: () => null,
         ),
         storage: _MockNotificationsStorage(),
         settings: _MockNotificationsSettingsStorage(),

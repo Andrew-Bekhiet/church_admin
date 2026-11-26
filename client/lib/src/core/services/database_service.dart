@@ -36,7 +36,6 @@ class DatabaseService {
   late final invitations = InvitationsDAO(db: this);
   late final userPreferences = UserPreferencesDAO(db: this);
   late final dataChecks = DataChecksDAO(db: this);
-  late final fcmTokens = FcmTokensDAO(db: this);
   late final fingerprintIds = FingerprintIdsDAO(db: this);
   late final fingerprintSyncStatus = FingerprintSyncStatusDAO(db: this);
   late final screenCaptureAttempts = ScreenCaptureAttemptsDAO(db: this);

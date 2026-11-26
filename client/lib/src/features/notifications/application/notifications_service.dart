@@ -144,8 +144,6 @@ class NotificationsService extends BlocObserver {
           ),
         )
         .listen(addForegroundNotificationTap);
-
-    _authRepository.addBeforeSignOutListener(_thisDevicePushRegistration.stop);
   }
 
   Future<void> _onForegroundMessage(Notification notification) async {
@@ -351,9 +349,6 @@ class NotificationsService extends BlocObserver {
 
   Future<void> dispose() async {
     _isDisposed = true;
-    _authRepository.removeBeforeSignOutListener(
-      _thisDevicePushRegistration.stop,
-    );
     _thisDevicePushRegistration.dispose();
     await _isPausedSubject.close();
     await _onMessageOpenedAppSubscription.cancel();
