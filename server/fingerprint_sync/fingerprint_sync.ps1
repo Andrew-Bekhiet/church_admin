@@ -3,11 +3,8 @@ param(
     [string]$Command = 'poll'
 )
 
-# TENTATIVE until the BioTime probe confirms them:
-# 1. BioTime transaction ids rise in upload order, so the cursor is the highest id already sent.
-# 2. start_time filters on punch time, so every poll rereads the last $LookbackHours hours
-#    and a late upload is still found while its punch is younger than that.
-$LookbackHours = 48
+# BioTime assigns transaction ids in upload order and lists unfiltered transactions by ascending id,
+# while punch times arrive up to days late, so polls read from the end of the list back to the cursor.
 
 # Every request starts before $LastRequestStartSeconds and is cut off after $HttpTimeoutSeconds,
 # so a run ends by about 54 s and never overlaps the next minute's run.
@@ -131,17 +128,45 @@ function Invoke-BiotimeGetLoggingInAgainOn401($Config, $Secrets, [string]$Uri) {
 }
 
 # Pages by number rather than following "next", whose links carry BioTime's internal host name.
-function Read-TransactionsInLookback($Config, $Secrets) {
-    $startTime = (Get-Date).AddHours(-$LookbackHours).ToString($BiotimeTimeFormat, $Invariant)
-    $transactions = New-Object System.Collections.Generic.List[object]
-    for ($page = 1; ; $page++) {
-        $uri = '{0}/iclock/api/transactions/?start_time={1}&page={2}&page_size={3}' -f $Config.biotimeBaseUrl, [Uri]::EscapeDataString($startTime), $page, $PageSize
-        $response = Invoke-BiotimeGetLoggingInAgainOn401 $Config $Secrets $uri
-        foreach ($transaction in @($response.data)) {
-            if ($null -ne $transaction.id) { $transactions.Add($transaction) }
+function Read-TransactionsPage($Config, $Secrets, [long]$Page, [int]$Size) {
+    $uri = '{0}/iclock/api/transactions/?page={1}&page_size={2}' -f $Config.biotimeBaseUrl, $Page, $Size
+    $response = Invoke-BiotimeGetLoggingInAgainOn401 $Config $Secrets $uri
+    $count = [long]0
+    if (-not [long]::TryParse([string]$response.count, [ref]$count)) { throw "BioTime answered a transactions request without a count: '$($response.count)'" }
+    $rows = @(@($response.data) | Where-Object { $null -ne $_.id })
+    for ($i = 1; $i -lt $rows.Count; $i++) {
+        if ([long]$rows[$i].id -le [long]$rows[$i - 1].id) {
+            throw "BioTime page $Page of transactions is not in ascending id order, so new punches cannot be found by id; nothing was sent and the cursor is unchanged"
         }
-        if ($null -eq $response.next) { return $transactions }
     }
+    return [pscustomobject]@{ Count = $count; Rows = $rows }
+}
+
+function Get-LastTransactionsPageNumber($Config, $Secrets) {
+    $count = (Read-TransactionsPage $Config $Secrets 1 1).Count
+    return [long][Math]::Max(1, [Math]::Ceiling($count / $PageSize))
+}
+
+function Read-HighestTransactionId($Config, $Secrets) {
+    $rows = @((Read-TransactionsPage $Config $Secrets (Get-LastTransactionsPageNumber $Config $Secrets) $PageSize).Rows)
+    if ($rows.Count -eq 0) { return [long]0 }
+    return [long]$rows[$rows.Count - 1].id
+}
+
+# Reading back from the end means a deleted row can only shift later rows into pages not read yet,
+# so a row may be read twice but never skipped; rows appended meanwhile wait for the next poll.
+function Read-TransactionsAfter($Config, $Secrets, [long]$AfterId) {
+    $byId = @{}
+    $page = Get-LastTransactionsPageNumber $Config $Secrets
+    do {
+        $rows = @((Read-TransactionsPage $Config $Secrets $page $PageSize).Rows)
+        foreach ($row in $rows) {
+            if ([long]$row.id -gt $AfterId) { $byId[[long]$row.id] = $row }
+        }
+        $reachedCursor = ($rows.Count -gt 0) -and ([long]$rows[0].id -le $AfterId)
+        $page--
+    } while (-not $reachedCursor -and $page -ge 1)
+    return @($byId.Values | Sort-Object { [long]$_.id })
 }
 
 function Read-Cursor {
@@ -149,23 +174,10 @@ function Read-Cursor {
     return Get-Content -Raw -Path $CursorPath | ConvertFrom-Json
 }
 
-function New-CursorSkippingTransactions($Transactions) {
-    $highestId = [long]0
-    foreach ($transaction in $Transactions) {
-        if ([long]$transaction.id -gt $highestId) { $highestId = [long]$transaction.id }
-    }
-    return [pscustomobject]@{ highestSentId = $highestId }
-}
-
-function Select-UnsentTransactions($Transactions, $Cursor) {
-    $highestSentId = [long]$Cursor.highestSentId
-    return @($Transactions | Where-Object { [long]$_.id -gt $highestSentId } | Sort-Object { [long]$_.id })
-}
-
 function Get-CursorAfterSentBatch($Cursor, $Batch) {
-    $next = New-CursorSkippingTransactions $Batch
-    if ([long]$next.highestSentId -lt [long]$Cursor.highestSentId) { return $Cursor }
-    return $next
+    $highestId = [long]$Batch[$Batch.Count - 1].id
+    if ($highestId -lt [long]$Cursor.highestSentId) { return $Cursor }
+    return [pscustomobject]@{ highestSentId = $highestId }
 }
 
 function Save-Cursor($Cursor) {
@@ -202,14 +214,13 @@ function Send-Punches($Config, $Secrets, $Transactions) {
 $ReportFields = 'matchedAWindow', 'matchedNoWindow', 'ignoredMalformed', 'ignoredTooOld', 'ignoredInFuture', 'ignoredUnlinkedEmployeeCode'
 
 function Invoke-Poll($Config, $Secrets) {
-    $transactions = @(Read-TransactionsInLookback $Config $Secrets)
     $cursor = Read-Cursor
     if ($null -eq $cursor) {
-        $cursor = New-CursorSkippingTransactions $transactions
+        $cursor = [pscustomobject]@{ highestSentId = (Read-HighestTransactionId $Config $Secrets) }
         Save-Cursor $cursor
-        Write-Log 'INFO' "No cursor yet: skipping the $($transactions.Count) punches already in BioTime, sending punches after transaction id $($cursor.highestSentId)"
+        Write-Log 'INFO' "No cursor yet: skipping the punches already in BioTime, sending punches after transaction id $($cursor.highestSentId)"
     }
-    $unsent = @(Select-UnsentTransactions $transactions $cursor)
+    $unsent = @(Read-TransactionsAfter $Config $Secrets ([long]$cursor.highestSentId))
     $totals = [ordered]@{}
     foreach ($field in $ReportFields) { $totals[$field] = 0 }
     $sent = 0
@@ -231,7 +242,7 @@ function Invoke-Poll($Config, $Secrets) {
         $start += $MaxPunchesPerRequest
     } while ($start -lt $unsent.Count)
     $counts = ($ReportFields | ForEach-Object { "$_=$($totals[$_])" }) -join ' '
-    Write-Log 'INFO' "read=$($transactions.Count) unsent=$($unsent.Count) sent=$sent $counts cursor=$($cursor.highestSentId)"
+    Write-Log 'INFO' "unsent=$($unsent.Count) sent=$sent $counts cursor=$($cursor.highestSentId)"
     if ($totals.ignoredMalformed -gt 0) { $warnings.Add("$($totals.ignoredMalformed) punches were rejected by the function as malformed") }
     if ($totals.ignoredTooOld -gt 0) { $warnings.Add("$($totals.ignoredTooOld) punches were older than the function accepts") }
     if ($totals.ignoredInFuture -gt 0) { $warnings.Add("$($totals.ignoredInFuture) punches were in the future; check the BioTime server and device clocks") }
