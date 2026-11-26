@@ -9,6 +9,7 @@ void main() {
   final mark = MessageRunCubitFixture.mark;
   const minaPhone = MessageRunCubitFixture.minaPhone;
   const markPhone = MessageRunCubitFixture.markPhone;
+  final nameField = PersonFields().name;
 
   late MessageRunCubitFixture fixture;
 
@@ -23,50 +24,67 @@ void main() {
         fixture.recipientOf(mina, [minaPhone]),
       ],
     ),
-    act: (cubit) => cubit.saveTextAndStart(fixture.template),
+    act: (cubit) => cubit.saveTextAndStart(
+      MessageTemplate(
+        text: 'اهلا ${MessageTemplate.tokenOf(nameField)}',
+        fields: [nameField],
+      ),
+    ),
     verify: (cubit) => expect(
       MessageRunCubitFixture.sendingStateOf(
         cubit,
       ).recipients.map((recipient) => recipient.message),
-      [fixture.template.renderFor(mark), fixture.template.renderFor(mina)],
+      ['اهلا ${mark.name}', 'اهلا ${mina.name}'],
     ),
   );
 
   blocTest<MessageRunCubit, MessageRunState>(
     "editing the message leaves the other people's messages as they were",
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTemplateTo(
+    seed: () => MessageRunComposing(
       recipients: [
         fixture.recipientOf(mark, [markPhone]),
         fixture.recipientOf(mina, [minaPhone]),
       ],
     ),
-    act: (cubit) =>
-        cubit.editCurrentMessageUnlessChatOpened('مساء الخير يا مارك'),
+    act: (cubit) => cubit
+      ..saveTextAndStart(
+        MessageTemplate(
+          text: 'اهلا ${MessageTemplate.tokenOf(nameField)}',
+          fields: [nameField],
+        ),
+      )
+      ..editCurrentMessageUnlessChatOpened('مساء الخير يا مارك'),
     verify: (cubit) => expect(
       MessageRunCubitFixture.sendingStateOf(
         cubit,
       ).recipients.map((recipient) => recipient.message),
-      ['مساء الخير يا مارك', fixture.template.renderFor(mina)],
+      ['مساء الخير يا مارك', 'اهلا ${mina.name}'],
     ),
   );
 
   blocTest<MessageRunCubit, MessageRunState>(
     'the message of an opened chat cannot be edited',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTemplateTo(
+    seed: () => MessageRunComposing(
       recipients: [
         fixture.recipientOf(mark, [markPhone]),
         fixture.recipientOf(mina, [minaPhone]),
       ],
     ),
     act: (cubit) async {
+      cubit.saveTextAndStart(
+        MessageTemplate(
+          text: 'اهلا ${MessageTemplate.tokenOf(nameField)}',
+          fields: [nameField],
+        ),
+      );
       await cubit.openCurrentChat();
       cubit.editCurrentMessageUnlessChatOpened('مساء الخير يا مارك');
     },
     verify: (cubit) => expect(
       MessageRunCubitFixture.sendingStateOf(cubit).current.message,
-      fixture.template.renderFor(mark),
+      'اهلا ${mark.name}',
     ),
   );
 }
