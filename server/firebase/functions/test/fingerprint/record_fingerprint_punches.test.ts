@@ -37,6 +37,11 @@ async function post(
 
         return response;
       },
+      json(sentBody: unknown) {
+        resolve({ status, body: sentBody });
+
+        return response;
+      },
     };
 
     void recordFingerprintPunches(
@@ -60,6 +65,15 @@ async function unusedLocalhostUrl(): Promise<string> {
 
   return `http://127.0.0.1:${port}/v1/graphql`;
 }
+
+const emptyReport = {
+  matchedAWindow: 0,
+  matchedNoWindow: 0,
+  ignoredMalformed: 0,
+  ignoredTooOld: 0,
+  ignoredInFuture: 0,
+  ignoredUnlinkedEmployeeCode: 0,
+};
 
 const emptyBatch = {
   biotimeServerLocalTime: "2026-11-13T14:00:00",
@@ -92,7 +106,7 @@ describe("recordFingerprintPunches endpoint", () => {
     }
   });
 
-  it("answers 204 with no body and records the punch it was sent", async () => {
+  it("answers 200 with what it did with the punch and records it", async () => {
     const fridayHalfPastNineInCairo = instant("2026-11-13T07:30:00Z");
     mock.timers.enable({
       apis: ["Date"],
@@ -111,7 +125,7 @@ describe("recordFingerprintPunches endpoint", () => {
         punches: [
           {
             employeeCode: mina.employeeCode,
-            punchedAt: "2026-11-13T09:28:30+02:00",
+            punchedAtCairoTime: "2026-11-13 09:28:30",
             terminalSerial: "t",
           },
         ],
@@ -119,7 +133,10 @@ describe("recordFingerprintPunches endpoint", () => {
       CONFIGURED_SECRET,
     );
 
-    assert.deepEqual(reply, { status: 204, body: undefined });
+    assert.deepEqual(reply, {
+      status: 200,
+      body: { ...emptyReport, matchedAWindow: 1 },
+    });
     assert.deepEqual(
       (await attendanceOf(mina.personId)).map((row) => row.meetingId),
       [meetingId],
@@ -141,13 +158,35 @@ describe("recordFingerprintPunches endpoint", () => {
     assert.equal((await post(emptyBatch, "")).status, 401);
   });
 
-  it("answers 204 to a batch that holds a malformed punch", async () => {
+  it("answers 200 and counts a malformed punch in a batch", async () => {
     const reply = await post(
       { ...emptyBatch, punches: [{ employeeCode: "1042" }] },
       CONFIGURED_SECRET,
     );
 
-    assert.equal(reply.status, 204);
+    assert.deepEqual(reply, {
+      status: 200,
+      body: { ...emptyReport, ignoredMalformed: 1 },
+    });
+  });
+
+  it("answers 200 with nothing counted to an empty batch", async () => {
+    assert.deepEqual(await post(emptyBatch, CONFIGURED_SECRET), {
+      status: 200,
+      body: emptyReport,
+    });
+  });
+
+  it("accepts as many punches as the poller sends in one request", async () => {
+    const reply = await post(
+      { ...emptyBatch, punches: Array.from({ length: 500 }, () => ({})) },
+      CONFIGURED_SECRET,
+    );
+
+    assert.deepEqual(reply, {
+      status: 200,
+      body: { ...emptyReport, ignoredMalformed: 500 },
+    });
   });
 
   it("answers 400 to more punches than one request may carry", async () => {
@@ -156,7 +195,7 @@ describe("recordFingerprintPunches endpoint", () => {
         ...emptyBatch,
         punches: Array.from({ length: 501 }, () => ({
           employeeCode: "1042",
-          punchedAt: "2026-11-13T09:30:00+02:00",
+          punchedAtCairoTime: "2026-11-13 09:30:00",
           terminalSerial: "t",
         })),
       },
@@ -187,7 +226,7 @@ describe("recordFingerprintPunches endpoint", () => {
         punches: [
           {
             employeeCode: "1042",
-            punchedAt: "2026-11-13T09:29:00+02:00",
+            punchedAtCairoTime: "2026-11-13 09:29:00",
             terminalSerial: "t",
           },
         ],

@@ -3,7 +3,10 @@ import { https } from "firebase-functions/v2";
 import { DateTime } from "luxon";
 import { createHash, timingSafeEqual } from "node:crypto";
 import { hasuraAdminSecret } from "../secrets";
-import { recordFingerprintPunchesAndMarkSynced } from "./application/record_fingerprint_punches_and_mark_synced";
+import {
+  FingerprintPunchesReport,
+  recordFingerprintPunchesAndMarkSynced,
+} from "./application/record_fingerprint_punches_and_mark_synced";
 import { fingerprintPunchesRequest } from "./domain/fingerprint_punches_request";
 
 const fingerprintSyncSecret = defineSecret("FINGERPRINT_SYNC_SECRET");
@@ -40,8 +43,10 @@ export const recordFingerprintPunches = https.onRequest(
       return;
     }
 
+    let report: FingerprintPunchesReport;
+
     try {
-      await recordFingerprintPunchesAndMarkSynced(
+      report = await recordFingerprintPunchesAndMarkSynced(
         requestData.data,
         DateTime.now(),
       );
@@ -52,7 +57,7 @@ export const recordFingerprintPunches = https.onRequest(
       return;
     }
 
-    res.status(204).send();
+    res.status(200).json(report);
   },
 );
 

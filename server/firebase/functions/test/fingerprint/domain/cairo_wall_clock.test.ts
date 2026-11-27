@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cairoWallClockAt } from "../../../src/fingerprint/domain/cairo_wall_clock";
+import {
+  cairoWallClockAt,
+  earliestInstantAtCairoWallClock,
+} from "../../../src/fingerprint/domain/cairo_wall_clock";
 import { instant } from "../../support/instant";
 
 describe("cairoWallClockAt", () => {
@@ -70,6 +73,68 @@ describe("cairoWallClockAt", () => {
     assert.equal(
       cairoWallClockAt(instant("2026-11-15T10:00:00Z")).isoWeekday,
       7,
+    );
+  });
+});
+
+describe("earliestInstantAtCairoWallClock", () => {
+  const biotimePunchTimeFormat = "yyyy-MM-dd HH:mm:ss";
+
+  function utcInstantAt(cairoWallClock: string): string | null {
+    return earliestInstantAtCairoWallClock(
+      cairoWallClock,
+      biotimePunchTimeFormat,
+    ).toUTC().toISO();
+  }
+
+  it("reads a winter wall clock two hours ahead of UTC", () => {
+    assert.equal(
+      utcInstantAt("2026-11-13 09:30:00"),
+      "2026-11-13T07:30:00.000Z",
+    );
+  });
+
+  it("reads a summer wall clock three hours ahead of UTC", () => {
+    assert.equal(
+      utcInstantAt("2026-07-10 09:30:00"),
+      "2026-07-10T06:30:00.000Z",
+    );
+  });
+
+  it("reads a time in the hour repeated when clocks go back as its first pass", () => {
+    assert.equal(
+      utcInstantAt("2026-10-29 23:30:00"),
+      "2026-10-29T20:30:00.000Z",
+    );
+  });
+
+  it("reads the second before the repeated hour as summer time and the hour after it as winter time", () => {
+    assert.deepEqual(
+      [utcInstantAt("2026-10-29 22:59:59"), utcInstantAt("2026-10-30 00:00:00")],
+      ["2026-10-29T19:59:59.000Z", "2026-10-29T22:00:00.000Z"],
+    );
+  });
+
+  it("moves a time in the hour skipped when clocks go forward an hour later", () => {
+    assert.deepEqual(
+      [utcInstantAt("2026-04-24 00:30:00"), utcInstantAt("2026-04-24 01:30:00")],
+      ["2026-04-23T22:30:00.000Z", "2026-04-23T22:30:00.000Z"],
+    );
+  });
+
+  it("rejects a time with a T separator, an offset or unpadded digits", () => {
+    assert.deepEqual(
+      [
+        "2026-11-13T09:30:00",
+        "2026-11-13 09:30:00Z",
+        "2026-11-13 09:30:00+02:00",
+        "2026-11-3 9:30:00",
+        "nine thirty",
+      ].map((wallClock) =>
+        earliestInstantAtCairoWallClock(wallClock, biotimePunchTimeFormat)
+          .isValid
+      ),
+      [false, false, false, false, false],
     );
   });
 });

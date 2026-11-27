@@ -1,0 +1,6 @@
+config.json
+secrets.bin
+secrets.bin.tmp
+cursor.json
+cursor.json.tmp
+logs/

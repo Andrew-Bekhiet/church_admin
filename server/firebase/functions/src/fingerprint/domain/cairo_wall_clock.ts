@@ -1,4 +1,4 @@
-import { DateTime } from "luxon";
+import { DateTime, DateTimeMaybeValid } from "luxon";
 
 export const CAIRO_TIME_ZONE = "Africa/Cairo";
 
@@ -28,4 +28,17 @@ export function cairoTimeAt(instant: DateTime<true>): DateTime<true> {
   }
 
   return cairoTime;
+}
+
+export function earliestInstantAtCairoWallClock(
+  zonelessCairoTime: string,
+  format: string,
+): DateTimeMaybeValid {
+  const firstReading = DateTime.fromFormat(zonelessCairoTime, format, {
+    zone: CAIRO_TIME_ZONE,
+  });
+
+  if (!firstReading.isValid) return firstReading;
+
+  return DateTime.min(...firstReading.getPossibleOffsets()) ?? firstReading;
 }

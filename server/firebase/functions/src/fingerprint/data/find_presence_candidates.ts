@@ -12,13 +12,6 @@ export interface FingerprintBotAndPresencesWithCandidates {
   presencesWithCandidates: PresenceWithCandidates[];
 }
 
-interface WindowHoldingOnePresenceBoolExp {
-  personId: { _eq: string };
-  isoWeekday: { _eq: number };
-  windowStartTime: { _lte: string };
-  windowEndTime: { _gt: string };
-}
-
 interface CandidateWindowRow extends PresenceCandidate {
   personId: string;
   isoWeekday: number;
@@ -38,13 +31,13 @@ export async function findFingerprintBotUidAndCandidatesOfEachPresence(
 ): Promise<FingerprintBotAndPresencesWithCandidates> {
   const data = await requestAsFingerprintSync(
     `
-  query findFingerprintBotUidAndCandidatesOfEachPresence(
-    $where: HistoryMeetingAutoPresenceCandidatesBoolExp!
-  ) {
+  query findFingerprintBotUidAndCandidatesOfEachPresence($personIds: [uuid!]!) {
     authUsersData {
       uid
     }
-    historyMeetingAutoPresenceCandidates(where: $where) {
+    historyMeetingAutoPresenceCandidates(
+      where: { personId: { _in: $personIds } }
+    ) {
       personId
       isoWeekday
       windowStartTime
@@ -55,7 +48,7 @@ export async function findFingerprintBotUidAndCandidatesOfEachPresence(
     }
   }
 `,
-    { where: { _or: oneWindowFilterPerDistinctPersonAndCairoTime(presences) } },
+    { personIds: [...new Set(presences.map(({ personId }) => personId))] },
     "findFingerprintBotUidAndCandidatesOfEachPresence",
   );
   const fingerprintBots: { uid: string }[] = data["authUsersData"];
@@ -80,31 +73,6 @@ export async function findFingerprintBotUidAndCandidatesOfEachPresence(
       ),
     })),
   };
-}
-
-function oneWindowFilterPerDistinctPersonAndCairoTime(
-  presences: PersonPresence[],
-): WindowHoldingOnePresenceBoolExp[] {
-  const filtersByPersonAndCairoTime = new Map<
-    string,
-    WindowHoldingOnePresenceBoolExp
-  >();
-
-  for (const { personId, at } of presences) {
-    const { isoWeekday, timeOfDay } = cairoWallClockAt(at);
-
-    filtersByPersonAndCairoTime.set(
-      [personId, isoWeekday, timeOfDay].join("|"),
-      {
-        personId: { _eq: personId },
-        isoWeekday: { _eq: isoWeekday },
-        windowStartTime: { _lte: timeOfDay },
-        windowEndTime: { _gt: timeOfDay },
-      },
-    );
-  }
-
-  return [...filtersByPersonAndCairoTime.values()];
 }
 
 function candidateWindowsByPersonIdOf(
