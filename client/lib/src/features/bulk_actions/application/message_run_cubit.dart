@@ -157,7 +157,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
       emit(
         sending
             .copyWith(sentToConfirm: () => sending.current.person)
-            .nextRemainingOrPassEnded(fromIndex: sending.currentIndex + 1),
+            .nextRemainingOrPassEnded(),
       );
 
       if (state
@@ -182,7 +182,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
       emit(
         sending
             .withCurrent(sending.current.asSkippedUnlessOpenFailed())
-            .nextRemainingOrPassEnded(fromIndex: sending.currentIndex + 1),
+            .nextRemainingOrPassEnded(),
       );
     }
   }

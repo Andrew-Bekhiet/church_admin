@@ -55,7 +55,7 @@ sealed class MessageRunLoaded extends MessageRunState {
     recipients: recipients,
     currentIndex: 0,
     opensNextChatOnReturn: opensNextChatOnReturn,
-  ).nextRemainingOrPassEnded(fromIndex: 0);
+  ).nextRemainingOrPassEnded();
 }
 
 final class MessageRunComposing extends MessageRunLoaded {
@@ -138,10 +138,9 @@ final class MessageRunSending extends MessageRunLoaded {
     sentToConfirm: () => null,
   );
 
-  MessageRunLoaded nextRemainingOrPassEnded({required int fromIndex}) {
+  MessageRunLoaded nextRemainingOrPassEnded() {
     final nextIndex = recipients.indexWhere(
       (recipient) => recipient.isRemaining,
-      fromIndex,
     );
     final hasNoneRemaining = nextIndex == -1;
 
