@@ -1,1 +1,1 @@
-export 'screens/bulk_whatsapp_message_screen.dart';
+export 'screens/send_message_screen.dart';

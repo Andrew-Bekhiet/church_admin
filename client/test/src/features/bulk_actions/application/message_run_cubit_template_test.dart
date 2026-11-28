@@ -3,7 +3,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../fakes/fake_box.dart';
-import 'bulk_whatsapp_message_cubit_fixture.dart';
+import 'message_run_cubit_fixture.dart';
 
 class _RejectingWritesBox extends FakeSyncKVStore<Object?> {
   static final StateError rejection = StateError('disk full');
@@ -13,15 +13,15 @@ class _RejectingWritesBox extends FakeSyncKVStore<Object?> {
 }
 
 void main() {
-  late BulkWhatsappMessageCubitFixture fixture;
+  late MessageRunCubitFixture fixture;
 
-  setUp(() => fixture = BulkWhatsappMessageCubitFixture());
+  setUp(() => fixture = MessageRunCubitFixture());
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'starting saves the message for the next time',
     build: () => fixture.buildCubit(),
     seed: () =>
-        BulkWhatsappComposing(recipients: fixture.markThenMinaWithTwoPhones()),
+        MessageRunComposing(recipients: fixture.markThenMinaWithTwoPhones()),
     act: (cubit) => cubit.saveTextAndStart(fixture.template),
     verify: (_) => expect(
       fixture.userPreferences.lastWhatsappMessageText,
@@ -29,18 +29,18 @@ void main() {
     ),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'a rejected save is logged and sending still starts',
-    setUp: () => fixture = BulkWhatsappMessageCubitFixture(
+    setUp: () => fixture = MessageRunCubitFixture(
       preferencesBox: _RejectingWritesBox(),
     ),
     build: () => fixture.buildCubit(),
     seed: () =>
-        BulkWhatsappComposing(recipients: fixture.markThenMinaWithTwoPhones()),
+        MessageRunComposing(recipients: fixture.markThenMinaWithTwoPhones()),
     act: (cubit) => cubit.saveTextAndStart(fixture.template),
     wait: Duration.zero,
     verify: (cubit) {
-      expect(cubit.state, isA<BulkWhatsappSending>());
+      expect(cubit.state, isA<MessageRunSending>());
       expect(
         fixture.logging.reportedExceptions.map((record) => record.error),
         [_RejectingWritesBox.rejection],
@@ -48,7 +48,7 @@ void main() {
     },
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'starting before the recipients load saves nothing',
     build: () => fixture.buildCubit(),
     act: (cubit) => cubit.saveTextAndStart(fixture.template),

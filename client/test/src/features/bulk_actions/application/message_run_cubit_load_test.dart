@@ -4,20 +4,20 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'bulk_whatsapp_message_cubit_fixture.dart';
+import 'message_run_cubit_fixture.dart';
 
 void main() {
-  final mina = BulkWhatsappMessageCubitFixture.mina;
-  final mark = BulkWhatsappMessageCubitFixture.mark;
-  final peter = BulkWhatsappMessageCubitFixture.peter;
-  const minaPhone = BulkWhatsappMessageCubitFixture.minaPhone;
-  const markPhone = BulkWhatsappMessageCubitFixture.markPhone;
+  final mina = MessageRunCubitFixture.mina;
+  final mark = MessageRunCubitFixture.mark;
+  final peter = MessageRunCubitFixture.peter;
+  const minaPhone = MessageRunCubitFixture.minaPhone;
+  const markPhone = MessageRunCubitFixture.markPhone;
 
-  late BulkWhatsappMessageCubitFixture fixture;
+  late MessageRunCubitFixture fixture;
 
-  setUp(() => fixture = BulkWhatsappMessageCubitFixture());
+  setUp(() => fixture = MessageRunCubitFixture());
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'loading keeps the selected order, takes the fetched phones and keeps '
     'the phones of a person the fetch left out',
     build: () {
@@ -36,14 +36,14 @@ void main() {
     },
     act: (cubit) => cubit.load(),
     verify: (cubit) => expect(
-      (cubit.state as BulkWhatsappComposing).recipients.map(
+      (cubit.state as MessageRunComposing).recipients.map(
         (recipient) => (recipient.person.id, recipient.selectedPhone),
       ),
       [(mina.id, minaPhone), (mark.id, markPhone), (peter.id, null)],
     ),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     "a person without a phone of their own is reached on their family's phone",
     build: () {
       fixture.personsDAO.personsWithPhoneContacts = [
@@ -61,12 +61,12 @@ void main() {
     },
     act: (cubit) => cubit.load(),
     verify: (cubit) => expect(
-      (cubit.state as BulkWhatsappComposing).recipients.single.selectedPhone,
+      (cubit.state as MessageRunComposing).recipients.single.selectedPhone,
       markPhone,
     ),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     "loading keeps the selected persons' other details",
     build: () {
       fixture.personsDAO.personsWithPhoneContacts = [
@@ -79,14 +79,14 @@ void main() {
     },
     act: (cubit) => cubit.load(),
     verify: (cubit) => expect(
-      (cubit.state as BulkWhatsappComposing).recipients.single.person.birthdate,
+      (cubit.state as MessageRunComposing).recipients.single.person.birthdate,
       DateTime(2000, 1, 2),
     ),
   );
 
   final loadError = Exception('offline');
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'a failed load shows and logs the error',
     build: () {
       fixture.personsDAO.phoneContactsError = loadError;
@@ -95,8 +95,8 @@ void main() {
     },
     act: (cubit) => cubit.load(),
     expect: () => [
-      const BulkWhatsappLoading(),
-      BulkWhatsappLoadFailure(loadError),
+      const MessageRunLoading(),
+      MessageRunLoadFailure(loadError),
     ],
     verify: (_) => expect(
       fixture.logging.reportedExceptions.map((record) => record.error),
@@ -104,7 +104,7 @@ void main() {
     ),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'closing while the phones load ends quietly',
     build: () {
       fixture.personsDAO.phoneContactsGate = Completer();
@@ -117,10 +117,10 @@ void main() {
       fixture.personsDAO.phoneContactsGate?.complete();
       await loading;
     },
-    verify: (cubit) => expect(cubit.state, isA<BulkWhatsappLoading>()),
+    verify: (cubit) => expect(cubit.state, isA<MessageRunLoading>()),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'closing while a failing phone load is pending ends quietly',
     build: () {
       fixture.personsDAO
@@ -135,6 +135,6 @@ void main() {
       fixture.personsDAO.phoneContactsGate?.complete();
       await loading;
     },
-    verify: (cubit) => expect(cubit.state, isA<BulkWhatsappLoading>()),
+    verify: (cubit) => expect(cubit.state, isA<MessageRunLoading>()),
   );
 }

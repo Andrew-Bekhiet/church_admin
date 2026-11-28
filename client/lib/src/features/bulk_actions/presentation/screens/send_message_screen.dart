@@ -4,29 +4,32 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
-class BulkWhatsappMessageScreen extends StatefulWidget {
+class SendMessageScreen extends StatefulWidget {
   static final MessageTemplate defaultTemplate = MessageTemplate(
     text:
         'كل سنة وانت طيب يا '
-        '${MessageTemplate.tokenOf(WhatsappMessageFields.firstName)} 🎂',
-    fields: [WhatsappMessageFields.firstName],
+        '${MessageTemplate.tokenOf(PersonMessageFields.firstName)} 🎂',
+    fields: [PersonMessageFields.firstName],
   );
 
   final Set<Person> persons;
+  final SendMessageBulkAction action;
 
-  const BulkWhatsappMessageScreen({required this.persons, super.key});
+  const SendMessageScreen({
+    required this.persons,
+    required this.action,
+    super.key,
+  });
 
   @override
-  State<BulkWhatsappMessageScreen> createState() =>
-      _BulkWhatsappMessageScreenState();
+  State<SendMessageScreen> createState() => _SendMessageScreenState();
 }
 
-class _BulkWhatsappMessageScreenState extends State<BulkWhatsappMessageScreen> {
-  late final BulkWhatsappMessageCubit _cubit = BulkWhatsappMessageCubit(
+class _SendMessageScreenState extends State<SendMessageScreen> {
+  late final MessageRunCubit _cubit = MessageRunCubit(
     persons: widget.persons,
     personsDAO: DatabaseService.I.persons,
-    launcherService: LauncherService.I,
-    phoneNumberService: PhoneNumberService.I,
+    channel: widget.action.createChannel(),
     analyticsService: AnalyticsService.I,
     loggingService: LoggingService.I,
     userPreferencesService: UserPreferencesService.I,
@@ -35,7 +38,7 @@ class _BulkWhatsappMessageScreenState extends State<BulkWhatsappMessageScreen> {
   late final MessageTemplateEditingController _templateController =
       MessageTemplateEditingController(
         template: _cubit.withLastSentTextOr(
-          BulkWhatsappMessageScreen.defaultTemplate,
+          SendMessageScreen.defaultTemplate,
         ),
       );
 
@@ -56,14 +59,14 @@ class _BulkWhatsappMessageScreenState extends State<BulkWhatsappMessageScreen> {
     return BlocProvider.value(
       value: _cubit,
       child: Scaffold(
-        appBar: AppBar(title: const Text('رسالة واتساب')),
-        body: BlocBuilder<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+        appBar: AppBar(title: Text(widget.action.label)),
+        body: BlocBuilder<MessageRunCubit, MessageRunState>(
           builder: (context, state) => switch (state) {
-            BulkWhatsappLoading() => const Center(
+            MessageRunLoading() => const Center(
               child: CircularProgressIndicator(),
             ),
 
-            BulkWhatsappLoadFailure() => Center(
+            MessageRunLoadFailure() => Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 spacing: 8,
@@ -77,16 +80,17 @@ class _BulkWhatsappMessageScreenState extends State<BulkWhatsappMessageScreen> {
               ),
             ),
 
-            final BulkWhatsappComposing composing => BulkWhatsappComposeView(
+            final MessageRunComposing composing => MessageComposeView(
               state: composing,
               templateController: _templateController,
             ),
 
-            final BulkWhatsappSending sending => BulkWhatsappQueueView(
+            final MessageRunSending sending => MessageQueueView(
               state: sending,
+              channelIcon: widget.action.icon,
             ),
 
-            final BulkWhatsappFinished finished => BulkWhatsappSummaryView(
+            final MessageRunFinished finished => MessageSummaryView(
               state: finished,
             ),
           },

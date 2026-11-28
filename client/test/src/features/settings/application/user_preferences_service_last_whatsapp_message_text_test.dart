@@ -15,7 +15,7 @@ void main() {
 
   const uid = 'uid';
   final sentText =
-      'اهلا ${MessageTemplate.tokenOf(WhatsappMessageFields.firstName)}';
+      'اهلا ${MessageTemplate.tokenOf(PersonMessageFields.firstName)}';
 
   setUpAll(() {
     registerFallbackValue(Input_UsersPreferencesSetInput());

@@ -11,7 +11,7 @@ import '../../../fakes/mock_database_service.dart';
 import '../../../fakes/mock_launcher_service.dart';
 import '../../../fakes/recording_analytics_provider.dart';
 
-class BulkWhatsappMessageCubitFixture {
+class MessageRunCubitFixture {
   static const PhoneNumberService phoneNumbers = PhoneNumberService();
   static const PhoneContact minaPhone = PhoneContact(
     id: 'c1',
@@ -41,7 +41,7 @@ class BulkWhatsappMessageCubitFixture {
   final FakeLoggingService logging = FakeLoggingService();
   final UserPreferencesService userPreferences;
 
-  BulkWhatsappMessageCubitFixture({SyncKVStore? preferencesBox})
+  MessageRunCubitFixture({SyncKVStore? preferencesBox})
     : userPreferences = UserPreferencesService(
         box: preferencesBox ?? FakeSyncKVStore(),
         databaseService: MockDatabaseService(),
@@ -50,13 +50,13 @@ class BulkWhatsappMessageCubitFixture {
     stubWhatsappLaunch(() async => true);
   }
 
-  static BulkWhatsappSending sendingStateOf(BulkWhatsappMessageCubit cubit) =>
-      cubit.state as BulkWhatsappSending;
+  static MessageRunSending sendingStateOf(MessageRunCubit cubit) =>
+      cubit.state as MessageRunSending;
 
-  WhatsappRecipient recipientOf(Person person, List<PhoneContact> contacts) =>
-      WhatsappRecipient.of(person.copyWith(contacts: contacts));
+  Recipient recipientOf(Person person, List<PhoneContact> contacts) =>
+      Recipient.of(person.copyWith(contacts: contacts));
 
-  List<WhatsappRecipient> markThenMinaWithTwoPhones() => [
+  List<Recipient> markThenMinaWithTwoPhones() => [
     recipientOf(mark, [markPhone]),
     recipientOf(mina, [minaPhone, minaOtherPhone]),
   ];
@@ -76,22 +76,24 @@ class BulkWhatsappMessageCubitFixture {
     return gate;
   }
 
-  BulkWhatsappMessageCubit buildCubit({Set<Person> persons = const {}}) =>
-      BulkWhatsappMessageCubit(
+  MessageRunCubit buildCubit({Set<Person> persons = const {}}) =>
+      MessageRunCubit(
         persons: persons,
         personsDAO: personsDAO,
-        launcherService: launcher,
-        phoneNumberService: phoneNumbers,
+        channel: WhatsappMessageChannel(
+          launcherService: launcher,
+          phoneNumberService: phoneNumbers,
+        ),
         analyticsService: AnalyticsService([analytics], FakeLoggingService()),
         loggingService: logging,
         userPreferencesService: userPreferences,
       );
 
-  BulkWhatsappSending sendingTo({
-    required List<WhatsappRecipient> recipients,
+  MessageRunSending sendingTo({
+    required List<Recipient> recipients,
     int currentIndex = 0,
     bool opensNextChatOnReturn = false,
-  }) => BulkWhatsappSending(
+  }) => MessageRunSending(
     recipients: recipients,
     template: template,
     currentIndex: currentIndex,

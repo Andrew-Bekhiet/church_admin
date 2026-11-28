@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
-class BulkWhatsappComposeView extends StatelessWidget {
-  final BulkWhatsappComposing state;
+class MessageComposeView extends StatelessWidget {
+  final MessageRunComposing state;
   final MessageTemplateEditingController templateController;
 
-  const BulkWhatsappComposeView({
+  const MessageComposeView({
     required this.state,
     required this.templateController,
     super.key,
@@ -45,7 +45,7 @@ class BulkWhatsappComposeView extends StatelessWidget {
                         templateController.template.renderFor(
                           previewRecipient.person,
                         ),
-                        key: BulkWhatsappComposeViewKeys.preview,
+                        key: MessageComposeViewKeys.preview,
                       ),
                     ),
                   ),
@@ -73,16 +73,14 @@ class BulkWhatsappComposeView extends StatelessWidget {
                 templateController.template.text.trim().isNotEmpty;
 
             return FilledButton.icon(
-              key: BulkWhatsappComposeViewKeys.startButton,
+              key: MessageComposeViewKeys.startButton,
               style: theme.largeFilledButtonStyle,
               icon: const Icon(Symbols.send),
               label: const Text('ابدأ'),
               onPressed: canStart
-                  ? () => context
-                        .read<BulkWhatsappMessageCubit>()
-                        .saveTextAndStart(
-                          templateController.template,
-                        )
+                  ? () => context.read<MessageRunCubit>().saveTextAndStart(
+                      templateController.template,
+                    )
                   : null,
             );
           },
@@ -92,7 +90,7 @@ class BulkWhatsappComposeView extends StatelessWidget {
   }
 }
 
-abstract final class BulkWhatsappComposeViewKeys {
+abstract final class MessageComposeViewKeys {
   static const Key preview = ValueKey('Bulk Whatsapp Preview Key');
   static const Key startButton = ValueKey('Bulk Whatsapp Start Key');
 }

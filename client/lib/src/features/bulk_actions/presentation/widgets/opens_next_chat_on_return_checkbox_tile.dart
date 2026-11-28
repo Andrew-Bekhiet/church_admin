@@ -15,7 +15,7 @@ class OpensNextChatOnReturnCheckboxTile extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       title: const Text('فتح المحادثة التالية تلقائيًا عند الرجوع للتطبيق'),
       onChanged: (isEnabled) => context
-          .read<BulkWhatsappMessageCubit>()
+          .read<MessageRunCubit>()
           .setOpensNextChatOnReturn(isEnabled: isEnabled ?? false),
     );
   }

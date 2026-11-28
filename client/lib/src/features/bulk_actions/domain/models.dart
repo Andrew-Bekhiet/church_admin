@@ -1,2 +1,2 @@
-export 'models/whatsapp_message_fields.dart';
-export 'models/whatsapp_recipient.dart';
+export 'models/person_message_fields.dart';
+export 'models/recipient.dart';

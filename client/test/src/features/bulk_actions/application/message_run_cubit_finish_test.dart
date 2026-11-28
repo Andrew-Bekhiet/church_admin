@@ -2,20 +2,20 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'bulk_whatsapp_message_cubit_fixture.dart';
+import 'message_run_cubit_fixture.dart';
 
 void main() {
-  final mina = BulkWhatsappMessageCubitFixture.mina;
-  final mark = BulkWhatsappMessageCubitFixture.mark;
-  final peter = BulkWhatsappMessageCubitFixture.peter;
-  const minaPhone = BulkWhatsappMessageCubitFixture.minaPhone;
-  const markPhone = BulkWhatsappMessageCubitFixture.markPhone;
+  final mina = MessageRunCubitFixture.mina;
+  final mark = MessageRunCubitFixture.mark;
+  final peter = MessageRunCubitFixture.peter;
+  const minaPhone = MessageRunCubitFixture.minaPhone;
+  const markPhone = MessageRunCubitFixture.markPhone;
 
-  late BulkWhatsappMessageCubitFixture fixture;
+  late MessageRunCubitFixture fixture;
 
-  setUp(() => fixture = BulkWhatsappMessageCubitFixture());
+  setUp(() => fixture = MessageRunCubitFixture());
 
-  List<WhatsappRecipient> markMinaAndPeterWithoutPhone() => [
+  List<Recipient> markMinaAndPeterWithoutPhone() => [
     fixture.recipientOf(mark, [markPhone]),
     fixture.recipientOf(mina, [minaPhone]),
     fixture.recipientOf(peter, []),
@@ -26,7 +26,7 @@ void main() {
       .single
       .properties;
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'after the last person with a phone the run finishes with each outcome',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTo(recipients: markMinaAndPeterWithoutPhone()),
@@ -36,17 +36,17 @@ void main() {
       cubit.skipCurrent();
     },
     verify: (cubit) {
-      final finished = cubit.state as BulkWhatsappFinished;
+      final finished = cubit.state as MessageRunFinished;
       expect(finished.recipients.map((recipient) => recipient.status), [
-        WhatsappRecipientStatus.opened,
-        WhatsappRecipientStatus.skipped,
-        WhatsappRecipientStatus.pending,
+        RecipientStatus.sent,
+        RecipientStatus.skipped,
+        RecipientStatus.pending,
       ]);
       expect(finished.isStopped, isFalse);
     },
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'a run that reaches its end is tracked as not stopped',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTo(recipients: markMinaAndPeterWithoutPhone()),
@@ -65,16 +65,16 @@ void main() {
     }),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'stopping finishes the run early',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTo(recipients: markMinaAndPeterWithoutPhone()),
     act: (cubit) => cubit.stop(),
     verify: (cubit) =>
-        expect((cubit.state as BulkWhatsappFinished).isStopped, isTrue),
+        expect((cubit.state as MessageRunFinished).isStopped, isTrue),
   );
 
-  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+  blocTest<MessageRunCubit, MessageRunState>(
     'a stopped run is tracked with how far it got',
     build: () => fixture.buildCubit(),
     seed: () => fixture.sendingTo(

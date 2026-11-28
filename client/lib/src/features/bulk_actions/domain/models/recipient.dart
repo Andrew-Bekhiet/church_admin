@@ -2,25 +2,25 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 
-class WhatsappRecipient with Equatable {
+class Recipient with Equatable {
   final Person person;
   final List<PhoneContact> phones;
   final PhoneContact? selectedPhone;
-  final WhatsappRecipientStatus status;
+  final RecipientStatus status;
 
   bool get hasPhone => selectedPhone != null;
 
   @override
   List<Object?> get props => [person, phones, selectedPhone, status];
 
-  const WhatsappRecipient({
+  const Recipient({
     required this.person,
     required this.phones,
     required this.selectedPhone,
-    this.status = WhatsappRecipientStatus.pending,
+    this.status = RecipientStatus.pending,
   });
 
-  factory WhatsappRecipient.of(Person person) {
+  factory Recipient.of(Person person) {
     final phones = EqualitySet<PhoneContact>.from(
       EqualityBy((contact) => contact.phone),
       [
@@ -35,17 +35,17 @@ class WhatsappRecipient with Equatable {
       ],
     ).toList();
 
-    return WhatsappRecipient(
+    return Recipient(
       person: person,
       phones: phones,
       selectedPhone: phones.firstOrNull,
     );
   }
 
-  WhatsappRecipient copyWith({
+  Recipient copyWith({
     PhoneContact? selectedPhone,
-    WhatsappRecipientStatus? status,
-  }) => WhatsappRecipient(
+    RecipientStatus? status,
+  }) => Recipient(
     person: person,
     phones: phones,
     selectedPhone: selectedPhone ?? this.selectedPhone,
@@ -53,4 +53,4 @@ class WhatsappRecipient with Equatable {
   );
 }
 
-enum WhatsappRecipientStatus { pending, opened, skipped }
+enum RecipientStatus { pending, sent, skipped }

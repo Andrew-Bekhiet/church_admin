@@ -93,3 +93,37 @@ The weekly period of a meeting in which a punch counts as attending it.
 
 **Auto communion window**:
 The weekly period in which a punch counts as taking communion.
+
+### Bulk actions and messaging
+
+**Bulk action**:
+An operation a servant applies to several selected items at once, such as messaging or deleting them.
+
+**Message bulk action**:
+A bulk action that sends each selected person a message on one channel. WhatsApp message and SMS message are two message bulk actions.
+
+**Run**:
+One pass of a message bulk action over a selection, from composing to the final summary, including any retries on another number or channel. It ends when the servant leaves it.
+_Avoid_: Session, batch
+
+**Channel**:
+The app a message is handed to for sending: WhatsApp or SMS.
+_Avoid_: Method, provider
+
+**Message template**:
+Text with placeholders for person fields, written once per run and remembered for the next run.
+
+**Message**:
+The text for one person in a run, rendered from the message template and optionally edited by the servant.
+_Avoid_: Draft, body
+
+**Recipient**:
+One person in a run, with one of their phone numbers chosen at a time. The numbers offered are the person's own and their family's.
+
+**Sent**:
+A recipient whose chat was opened in the channel's app and who was not then marked as not sent. It reflects what the servant did, never a delivery receipt.
+_Avoid_: Opened, delivered, done
+
+**Unreached**:
+A recipient of a run who is not sent, for any reason: no phone number, skipped, the app could not be opened, or the servant marked them as not sent.
+_Avoid_: Failed
