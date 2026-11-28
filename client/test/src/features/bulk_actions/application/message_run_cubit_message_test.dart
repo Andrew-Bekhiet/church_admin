@@ -23,6 +23,7 @@ void main() {
         fixture.recipientOf(mark, [markPhone]),
         fixture.recipientOf(mina, [minaPhone]),
       ],
+      opensNextChatOnReturn: false,
     ),
     act: (cubit) => cubit.saveTextAndStart(
       MessageTemplate(
@@ -46,6 +47,7 @@ void main() {
         fixture.recipientOf(mark, [markPhone]),
         fixture.recipientOf(mina, [minaPhone]),
       ],
+      opensNextChatOnReturn: false,
     ),
     act: (cubit) => cubit
       ..saveTextAndStart(
@@ -71,6 +73,7 @@ void main() {
         fixture.recipientOf(mark, [markPhone]),
         fixture.recipientOf(mina, [minaPhone]),
       ],
+      opensNextChatOnReturn: false,
     ),
     act: (cubit) async {
       cubit.saveTextAndStart(

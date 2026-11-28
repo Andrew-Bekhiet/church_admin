@@ -40,7 +40,7 @@ sealed class MessageRunLoaded extends MessageRunState {
 
   const MessageRunLoaded({
     required this.recipients,
-    this.opensNextChatOnReturn = false,
+    required this.opensNextChatOnReturn,
   });
 
   List<Recipient> recipientsWithNotSentIfSent(Person person) => recipients
@@ -61,7 +61,7 @@ sealed class MessageRunLoaded extends MessageRunState {
 final class MessageRunComposing extends MessageRunLoaded {
   const MessageRunComposing({
     required super.recipients,
-    super.opensNextChatOnReturn,
+    required super.opensNextChatOnReturn,
   });
 
   MessageRunComposing withMessagesFrom(MessageTemplate template) =>
@@ -101,10 +101,10 @@ final class MessageRunSending extends MessageRunLoaded {
   const MessageRunSending({
     required this.currentIndex,
     required super.recipients,
+    required super.opensNextChatOnReturn,
     this.isAwaitingReturn = false,
     this.sentToConfirm,
     this.secondsBeforeNextChat,
-    super.opensNextChatOnReturn,
   });
 
   MessageRunSending copyWith({
@@ -176,7 +176,7 @@ final class MessageRunPassEnded extends MessageRunLoaded {
 
   const MessageRunPassEnded({
     required super.recipients,
-    super.opensNextChatOnReturn,
+    required super.opensNextChatOnReturn,
   });
 
   MessageRunPassEnded withNotSentIfSent(Person person) => MessageRunPassEnded(

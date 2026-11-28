@@ -70,6 +70,7 @@ void main() {
         fixture.recipientOf(mina, [minaPhone]),
         fixture.recipientOf(peter, []),
       ],
+      opensNextChatOnReturn: false,
     ),
     act: (cubit) async {
       cubit
@@ -89,6 +90,7 @@ void main() {
         fixture.recipientOf(mina, [minaPhone]),
         fixture.recipientOf(peter, [minaOtherPhone]),
       ],
+      opensNextChatOnReturn: false,
     ),
     act: (cubit) async {
       cubit.saveTextAndStart(fixture.template);
@@ -111,6 +113,7 @@ void main() {
         fixture.recipientOf(mina, [minaPhone]),
         fixture.recipientOf(peter, []),
       ],
+      opensNextChatOnReturn: false,
     ),
     act: (cubit) async {
       cubit
@@ -155,6 +158,7 @@ void main() {
         fixture.recipientOf(mina, [minaPhone]),
         fixture.recipientOf(peter, []),
       ],
+      opensNextChatOnReturn: false,
     ),
     act: (cubit) => cubit.close(),
     verify: (_) => expect(trackedRunFinishes(), isEmpty),

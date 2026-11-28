@@ -26,7 +26,10 @@ void main() {
     await tester.pumpWidget(
       MaterialUiTestApp.withThemeAndLocale(
         child: MessageSummaryView(
-          state: MessageRunPassEnded(recipients: recipients),
+          state: MessageRunPassEnded(
+            recipients: recipients,
+            opensNextChatOnReturn: false,
+          ),
           onResume: () {},
           onMarkNotSent: (_) {},
         ),

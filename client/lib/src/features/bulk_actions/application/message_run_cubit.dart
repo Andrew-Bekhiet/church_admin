@@ -56,6 +56,7 @@ class MessageRunCubit extends Cubit<MessageRunState> {
               );
             },
           ).toList(),
+          opensNextChatOnReturn: false,
         ),
       );
     } on Exception catch (error, stackTrace) {

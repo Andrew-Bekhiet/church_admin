@@ -32,6 +32,7 @@ void main() {
         fixture.recipientOf(mark, [markPhone]),
         fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
       ],
+      opensNextChatOnReturn: false,
     ),
     act: (cubit) => cubit.saveTextAndStart(fixture.template),
     verify: (_) => expect(
@@ -48,6 +49,7 @@ void main() {
         fixture.recipientOf(mark, [markPhone]),
         fixture.recipientOf(mina, [minaPhone]),
       ],
+      opensNextChatOnReturn: false,
     ),
     act: (cubit) async {
       cubit.saveTextAndStart(fixture.template);
@@ -75,6 +77,7 @@ void main() {
         fixture.recipientOf(mark, [markPhone]),
         fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
       ],
+      opensNextChatOnReturn: false,
     ),
     act: (cubit) => cubit.saveTextAndStart(fixture.template),
     wait: Duration.zero,

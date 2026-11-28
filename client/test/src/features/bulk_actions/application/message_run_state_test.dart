@@ -14,6 +14,7 @@ void main() {
         recipientOf('mina', [phone]),
       ],
       currentIndex: 2,
+      opensNextChatOnReturn: false,
     );
 
     expect(sending.currentPositionAmongWithPhone, 2);

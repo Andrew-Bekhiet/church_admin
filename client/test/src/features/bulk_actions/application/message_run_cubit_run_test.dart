@@ -25,6 +25,7 @@ void main() {
         fixture.recipientOf(peter, []),
         fixture.recipientOf(mina, [minaPhone]),
       ],
+      opensNextChatOnReturn: false,
     ),
     act: (cubit) => cubit.saveTextAndStart(fixture.template),
     verify: (cubit) => expect(
@@ -41,6 +42,7 @@ void main() {
         fixture.recipientOf(mark, [markPhone]),
         fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
       ],
+      opensNextChatOnReturn: false,
     ),
     act: (cubit) => cubit
       ..setOpensNextChatOnReturn(isEnabled: true)
@@ -54,8 +56,10 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'starting with nobody who has a phone ends the pass right away',
     build: () => fixture.buildCubit(),
-    seed: () =>
-        MessageRunComposing(recipients: [fixture.recipientOf(peter, [])]),
+    seed: () => MessageRunComposing(
+      recipients: [fixture.recipientOf(peter, [])],
+      opensNextChatOnReturn: false,
+    ),
     act: (cubit) => cubit.saveTextAndStart(fixture.template),
     verify: (cubit) => expect(cubit.state, isA<MessageRunPassEnded>()),
   );
