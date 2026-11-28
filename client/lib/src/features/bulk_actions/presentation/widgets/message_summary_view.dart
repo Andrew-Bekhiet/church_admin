@@ -66,13 +66,11 @@ class MessageSummaryView extends StatelessWidget {
         MessageSummaryGroup(
           title: 'المتبقون',
           titleKey: MessageSummaryViewKeys.remainingTitle,
-          action: state.hasRemaining
-              ? FilledButton.tonal(
-                  key: MessageSummaryViewKeys.resumeButton,
-                  onPressed: onResume,
-                  child: const Text('استكمال'),
-                )
-              : null,
+          action: FilledButton.tonal(
+            key: MessageSummaryViewKeys.resumeButton,
+            onPressed: onResume,
+            child: const Text('استكمال'),
+          ),
           rows: [
             for (final recipient in state.remaining)
               ListTile(
