@@ -27,16 +27,18 @@ void main() {
         launcherService: MockLauncherService(),
         phoneNumberService: const PhoneNumberService(),
       ),
-      recipients: [
-        ...recipientsWith(RecipientStatus.sent, count: 1),
-        ...recipientsWith(RecipientStatus.notSent, count: 2),
-        ...recipientsWith(RecipientStatus.openFailed, count: 3),
-        ...recipientsWith(RecipientStatus.skipped, count: 4),
-        ...recipientsWith(RecipientStatus.pending, count: 5),
-        ...recipientsWith(RecipientStatus.pending, count: 6, hasPhone: false),
-      ],
+      run: MessageRunPassEnded(
+        recipients: [
+          ...recipientsWith(RecipientStatus.sent, count: 1),
+          ...recipientsWith(RecipientStatus.notSent, count: 2),
+          ...recipientsWith(RecipientStatus.openFailed, count: 3),
+          ...recipientsWith(RecipientStatus.skipped, count: 4),
+          ...recipientsWith(RecipientStatus.pending, count: 5),
+          ...recipientsWith(RecipientStatus.pending, count: 6, hasPhone: false),
+        ],
+        opensNextChatOnReturn: true,
+      ),
       passCount: 2,
-      opensNextChatOnReturn: true,
     );
 
     final contracts = <(AnalyticsEvent, String, Json)>[

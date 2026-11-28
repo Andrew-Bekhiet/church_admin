@@ -35,6 +35,13 @@ sealed class MessageRunLoaded extends MessageRunState {
   Iterable<Recipient> get withoutPhone =>
       recipients.whereNot((recipient) => recipient.hasPhone);
 
+  Iterable<Recipient> get skipped => recipients.where(
+    (recipient) => recipient.status == RecipientStatus.skipped,
+  );
+
+  Iterable<Recipient> get sent =>
+      recipients.where((recipient) => recipient.status == RecipientStatus.sent);
+
   @override
   List<Object?> get props => [recipients, opensNextChatOnReturn];
 
@@ -166,13 +173,6 @@ final class MessageRunPassEnded extends MessageRunLoaded {
       RecipientStatus.skipped => false,
     },
   );
-
-  Iterable<Recipient> get skipped => recipients.where(
-    (recipient) => recipient.status == RecipientStatus.skipped,
-  );
-
-  Iterable<Recipient> get sent =>
-      recipients.where((recipient) => recipient.status == RecipientStatus.sent);
 
   const MessageRunPassEnded({
     required super.recipients,

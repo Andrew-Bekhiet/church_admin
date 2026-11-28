@@ -301,9 +301,8 @@ class MessageRunCubit extends Cubit<MessageRunState> {
       _analyticsService.track(
         BulkMessageRunFinish(
           channel: _channel,
-          recipients: run.recipients,
+          run: run,
           passCount: _passCount,
-          opensNextChatOnReturn: run.opensNextChatOnReturn,
         ),
       );
     }
