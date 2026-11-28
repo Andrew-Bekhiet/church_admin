@@ -57,7 +57,6 @@ class MessageSummaryView extends StatelessWidget {
           rows: [
             for (final recipient in state.skipped)
               ListTile(
-                key: MessageSummaryViewKeys.skippedFor(recipient.person),
                 contentPadding: EdgeInsets.zero,
                 title: Text(recipient.person.name),
               ),
@@ -74,7 +73,6 @@ class MessageSummaryView extends StatelessWidget {
           rows: [
             for (final recipient in state.remaining)
               ListTile(
-                key: MessageSummaryViewKeys.remainingFor(recipient.person),
                 contentPadding: EdgeInsets.zero,
                 title: Text(recipient.person.name),
               ),
@@ -155,12 +153,6 @@ abstract final class MessageSummaryViewKeys extends WidgetKeys {
 
   static Key openFailedFor(Person person) =>
       ValueKey((MessageSummaryViewKeys, #openFailedFor, person.id));
-
-  static Key skippedFor(Person person) =>
-      ValueKey((MessageSummaryViewKeys, #skippedFor, person.id));
-
-  static Key remainingFor(Person person) =>
-      ValueKey((MessageSummaryViewKeys, #remainingFor, person.id));
 
   static Key withoutPhoneFor(Person person) =>
       ValueKey((MessageSummaryViewKeys, #withoutPhoneFor, person.id));
