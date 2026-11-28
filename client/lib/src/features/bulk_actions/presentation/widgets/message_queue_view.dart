@@ -1,29 +1,95 @@
-import 'dart:async';
-
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
 class MessageQueueView extends StatelessWidget {
   final MessageRunSending state;
   final Widget channelIcon;
+  final ValueChanged<Person> onMarkNotSent;
+  final VoidCallback onCancelNextChatCountdown;
+  final ValueChanged<PhoneContact> onSelectPhone;
+  final ValueChanged<String> onEditMessage;
+  final VoidCallback onStop;
+  final VoidCallback onSkip;
+  final VoidCallback onOpenChat;
+  final VoidCallback onReturnFromChat;
 
   const MessageQueueView({
     required this.state,
     required this.channelIcon,
+    required this.onMarkNotSent,
+    required this.onCancelNextChatCountdown,
+    required this.onSelectPhone,
+    required this.onEditMessage,
+    required this.onStop,
+    required this.onSkip,
+    required this.onOpenChat,
+    required this.onReturnFromChat,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final cubit = context.read<MessageRunCubit>();
     final current = state.current;
     final withPhoneCount = state.withPhone.length;
 
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
+        if (state.sentToConfirm case final person?)
+          MaterialBanner(
+            key: MessageQueueViewKeys.sentConfirmation,
+            margin: const EdgeInsetsDirectional.only(bottom: 16),
+            backgroundColor: theme.colorScheme.secondaryContainer,
+            contentTextStyle: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSecondaryContainer,
+            ),
+            forceActionsBelow: true,
+            leading: Icon(
+              Symbols.mark_chat_read,
+              color: theme.colorScheme.onSecondaryContainer,
+            ),
+            content: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              spacing: 4,
+              children: [
+                Text(
+                  person.name,
+                  key: MessageQueueViewKeys.sentConfirmationName,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: theme.colorScheme.onSecondaryContainer,
+                  ),
+                ),
+                const Text('هل تم إرسال الرسالة؟'),
+                if (state.secondsBeforeNextChat case final seconds?)
+                  Wrap(
+                    spacing: 4,
+                    children: [
+                      const Text('فتح المحادثة التالية'),
+                      Text(
+                        _nextChatCountdownLabel(seconds),
+                        key: MessageQueueViewKeys.sentConfirmationCountdown,
+                      ),
+                    ],
+                  ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                key: MessageQueueViewKeys.markNotSent,
+                style: TextButton.styleFrom(
+                  foregroundColor: theme.colorScheme.onSecondaryContainer,
+                ),
+                onPressed: () {
+                  onCancelNextChatCountdown();
+                  onMarkNotSent(person);
+                },
+                child: const Text('لم يتم الإرسال'),
+              ),
+            ],
+          ),
         Text(
           '${state.currentPositionAmongWithPhone} / $withPhoneCount',
           key: MessageQueueViewKeys.progress,
@@ -65,8 +131,9 @@ class MessageQueueView extends StatelessWidget {
                           ),
                         ),
                     ],
+                    onTap: onCancelNextChatCountdown,
                     onChanged: (phone) =>
-                        phone != null ? cubit.selectPhone(phone) : null,
+                        phone != null ? onSelectPhone(phone) : null,
                   )
                 else if (current.selectedPhone case final phone?)
                   Text(
@@ -75,12 +142,22 @@ class MessageQueueView extends StatelessWidget {
                     textAlign: TextAlign.end,
                     style: theme.textTheme.bodyLarge,
                   ),
-                MessageBubble(child: Text(state.currentMessage)),
+                Listener(
+                  onPointerDown: (_) => onCancelNextChatCountdown(),
+                  child: TextFormField(
+                    key: MessageQueueViewKeys.messageFieldFor(current.person),
+                    initialValue: current.message,
+                    readOnly: state.isAwaitingReturn,
+                    maxLines: null,
+                    decoration: const InputDecoration(labelText: 'الرسالة'),
+                    onChanged: onEditMessage,
+                  ),
+                ),
               ],
             ),
           ),
         ),
-        if (state.hasOpenFailed)
+        if (state.hasCurrentOpenFailed)
           Text(
             'تعذر فتح واتساب',
             key: MessageQueueViewKeys.openFailed,
@@ -94,27 +171,26 @@ class MessageQueueView extends StatelessWidget {
           children: [
             TextButton(
               key: MessageQueueViewKeys.stopButton,
-              onPressed: cubit.stop,
+              onPressed: onStop,
               child: const Text('إيقاف'),
             ),
             TextButton(
               key: MessageQueueViewKeys.skipButton,
-              onPressed: state.isAwaitingReturn ? null : cubit.skipCurrent,
+              onPressed: state.isAwaitingReturn ? null : onSkip,
               child: const Text('تخطي'),
             ),
             Expanded(
               child: state.isAwaitingReturn
                   ? FilledButton(
                       key: MessageQueueViewKeys.nextButton,
-                      onPressed: () =>
-                          unawaited(cubit.showNextAndMaybeOpenItsChat()),
+                      onPressed: onReturnFromChat,
                       child: const Text('التالي'),
                     )
                   : FilledButton.icon(
                       key: MessageQueueViewKeys.openChatButton,
                       icon: channelIcon,
                       label: const Text('فتح المحادثة'),
-                      onPressed: () => unawaited(cubit.openCurrentChat()),
+                      onPressed: onOpenChat,
                     ),
             ),
           ],
@@ -122,17 +198,42 @@ class MessageQueueView extends StatelessWidget {
       ],
     );
   }
+
+  String _nextChatCountdownLabel(int seconds) => switch (seconds) {
+    1 => 'خلال ثانية',
+    2 => 'خلال ثانيتين',
+    _ => 'خلال $seconds ثوانٍ',
+  };
 }
 
-abstract final class MessageQueueViewKeys {
-  static const Key progress = ValueKey('Bulk Whatsapp Progress Key');
-  static const Key currentName = ValueKey('Bulk Whatsapp Current Name Key');
-  static const Key openFailed = ValueKey('Bulk Whatsapp Open Failed Key');
-  static const Key stopButton = ValueKey('Bulk Whatsapp Stop Key');
-  static const Key skipButton = ValueKey('Bulk Whatsapp Skip Key');
-  static const Key nextButton = ValueKey('Bulk Whatsapp Next Key');
-  static const Key openChatButton = ValueKey('Bulk Whatsapp Open Chat Key');
+abstract final class MessageQueueViewKeys extends WidgetKeys {
+  static const Key progress = ValueKey((MessageQueueViewKeys, #progress));
+  static const Key currentName = ValueKey((MessageQueueViewKeys, #currentName));
+  static const Key openFailed = ValueKey((MessageQueueViewKeys, #openFailed));
+  static const Key stopButton = ValueKey((MessageQueueViewKeys, #stopButton));
+  static const Key skipButton = ValueKey((MessageQueueViewKeys, #skipButton));
+  static const Key nextButton = ValueKey((MessageQueueViewKeys, #nextButton));
+  static const Key openChatButton = ValueKey((
+    MessageQueueViewKeys,
+    #openChatButton,
+  ));
+  static const Key sentConfirmation = ValueKey((
+    MessageQueueViewKeys,
+    #sentConfirmation,
+  ));
+  static const Key sentConfirmationName = ValueKey((
+    MessageQueueViewKeys,
+    #sentConfirmationName,
+  ));
+  static const Key sentConfirmationCountdown = ValueKey((
+    MessageQueueViewKeys,
+    #sentConfirmationCountdown,
+  ));
+  static const Key markNotSent = ValueKey((MessageQueueViewKeys, #markNotSent));
 
   static Key phonePickerFor(Person person) =>
-      ValueKey('Bulk Whatsapp Phone Picker Key ${person.id}');
+      ValueKey((MessageQueueViewKeys, #phonePickerFor, person.id));
+
+  static Key messageFieldFor(Person person) =>
+      ValueKey((MessageQueueViewKeys, #messageFieldFor, person.id));
 }

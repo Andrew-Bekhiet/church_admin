@@ -56,11 +56,6 @@ class MessageRunCubitFixture {
   Recipient recipientOf(Person person, List<PhoneContact> contacts) =>
       Recipient.of(person.copyWith(contacts: contacts));
 
-  List<Recipient> markThenMinaWithTwoPhones() => [
-    recipientOf(mark, [markPhone]),
-    recipientOf(mina, [minaPhone, minaOtherPhone]),
-  ];
-
   void stubWhatsappLaunch(Future<bool> Function() launch) => when(
     () => launcher.launchWhatsappChat(any(), text: any(named: 'text')),
   ).thenAnswer((_) => launch());
@@ -89,13 +84,14 @@ class MessageRunCubitFixture {
         userPreferencesService: userPreferences,
       );
 
-  MessageRunSending sendingTo({
+  MessageRunSending sendingTemplateTo({
     required List<Recipient> recipients,
     int currentIndex = 0,
     bool opensNextChatOnReturn = false,
   }) => MessageRunSending(
-    recipients: recipients,
-    template: template,
+    recipients: [
+      for (final recipient in recipients) recipient.withMessageFrom(template),
+    ],
     currentIndex: currentIndex,
     opensNextChatOnReturn: opensNextChatOnReturn,
   );

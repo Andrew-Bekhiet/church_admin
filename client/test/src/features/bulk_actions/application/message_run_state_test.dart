@@ -13,8 +13,8 @@ void main() {
         recipientOf('peter', []),
         recipientOf('mina', [phone]),
       ],
-      template: const MessageTemplate(text: '', fields: []),
       currentIndex: 2,
+      opensNextChatOnReturn: false,
     );
 
     expect(sending.currentPositionAmongWithPhone, 2);

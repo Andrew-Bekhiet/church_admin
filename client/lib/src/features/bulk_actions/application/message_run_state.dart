@@ -24,44 +24,72 @@ final class MessageRunLoadFailure extends MessageRunState {
 
 sealed class MessageRunLoaded extends MessageRunState {
   final List<Recipient> recipients;
+  final bool opensNextChatOnReturn;
 
   Iterable<Recipient> get withPhone =>
       recipients.where((recipient) => recipient.hasPhone);
 
+  Iterable<Recipient> get remaining =>
+      recipients.where((recipient) => recipient.isRemaining);
+
   Iterable<Recipient> get withoutPhone =>
       recipients.whereNot((recipient) => recipient.hasPhone);
 
+  Iterable<Recipient> get skipped => recipients.where(
+    (recipient) => recipient.status == RecipientStatus.skipped,
+  );
+
+  Iterable<Recipient> get sent =>
+      recipients.where((recipient) => recipient.status == RecipientStatus.sent);
+
   @override
-  List<Object?> get props => [recipients];
+  List<Object?> get props => [recipients, opensNextChatOnReturn];
 
-  const MessageRunLoaded({required this.recipients});
+  const MessageRunLoaded({
+    required this.recipients,
+    required this.opensNextChatOnReturn,
+  });
 
-  int withPhoneCountOf(RecipientStatus status) =>
-      withPhone.where((recipient) => recipient.status == status).length;
+  List<Recipient> recipientsWithNotSentIfSent(Person person) => recipients
+      .map(
+        (recipient) => recipient.person.id == person.id
+            ? recipient.asNotSentIfSent()
+            : recipient,
+      )
+      .toList();
+
+  MessageRunLoaded firstRemainingOrPassEnded() => MessageRunSending(
+    recipients: recipients,
+    currentIndex: 0,
+    opensNextChatOnReturn: opensNextChatOnReturn,
+  ).nextRemainingOrPassEnded();
 }
 
 final class MessageRunComposing extends MessageRunLoaded {
-  final bool opensNextChatOnReturn;
-
-  @override
-  List<Object?> get props => [...super.props, opensNextChatOnReturn];
-
   const MessageRunComposing({
     required super.recipients,
-    this.opensNextChatOnReturn = false,
+    required super.opensNextChatOnReturn,
   });
+
+  MessageRunComposing withMessagesFrom(MessageTemplate template) =>
+      MessageRunComposing(
+        recipients: [
+          for (final recipient in recipients)
+            recipient.withMessageFrom(template),
+        ],
+        opensNextChatOnReturn: opensNextChatOnReturn,
+      );
 }
 
 final class MessageRunSending extends MessageRunLoaded {
-  final MessageTemplate template;
   final int currentIndex;
-  final bool opensNextChatOnReturn;
   final bool isAwaitingReturn;
-  final bool hasOpenFailed;
+  final Person? sentToConfirm;
+  final int? secondsBeforeNextChat;
 
   Recipient get current => recipients[currentIndex];
 
-  String get currentMessage => template.renderFor(current.person);
+  bool get hasCurrentOpenFailed => current.status == RecipientStatus.openFailed;
 
   int get currentPositionAmongWithPhone => recipients
       .take(currentIndex + 1)
@@ -71,20 +99,19 @@ final class MessageRunSending extends MessageRunLoaded {
   @override
   List<Object?> get props => [
     ...super.props,
-    template,
     currentIndex,
-    opensNextChatOnReturn,
     isAwaitingReturn,
-    hasOpenFailed,
+    sentToConfirm,
+    secondsBeforeNextChat,
   ];
 
   const MessageRunSending({
-    required this.template,
     required this.currentIndex,
     required super.recipients,
-    this.opensNextChatOnReturn = false,
+    required super.opensNextChatOnReturn,
     this.isAwaitingReturn = false,
-    this.hasOpenFailed = false,
+    this.sentToConfirm,
+    this.secondsBeforeNextChat,
   });
 
   MessageRunSending copyWith({
@@ -92,14 +119,17 @@ final class MessageRunSending extends MessageRunLoaded {
     int? currentIndex,
     bool? opensNextChatOnReturn,
     bool? isAwaitingReturn,
-    bool? hasOpenFailed,
+    Person? Function()? sentToConfirm,
+    int? Function()? secondsBeforeNextChat,
   }) => MessageRunSending(
     recipients: recipients ?? this.recipients,
-    template: template,
     currentIndex: currentIndex ?? this.currentIndex,
     opensNextChatOnReturn: opensNextChatOnReturn ?? this.opensNextChatOnReturn,
     isAwaitingReturn: isAwaitingReturn ?? this.isAwaitingReturn,
-    hasOpenFailed: hasOpenFailed ?? this.hasOpenFailed,
+    sentToConfirm: sentToConfirm != null ? sentToConfirm() : this.sentToConfirm,
+    secondsBeforeNextChat: secondsBeforeNextChat != null
+        ? secondsBeforeNextChat()
+        : this.secondsBeforeNextChat,
   );
 
   MessageRunSending withCurrent(Recipient current) => copyWith(
@@ -109,16 +139,48 @@ final class MessageRunSending extends MessageRunLoaded {
         )
         .toList(),
   );
+
+  MessageRunSending withNotSentIfSent(Person person) => copyWith(
+    recipients: recipientsWithNotSentIfSent(person),
+    sentToConfirm: () => null,
+  );
+
+  MessageRunLoaded nextRemainingOrPassEnded() {
+    final nextIndex = recipients.indexWhere(
+      (recipient) => recipient.isRemaining,
+    );
+    final hasNoneRemaining = nextIndex == -1;
+
+    return hasNoneRemaining
+        ? asPassEnded()
+        : copyWith(currentIndex: nextIndex, isAwaitingReturn: false);
+  }
+
+  MessageRunPassEnded asPassEnded() => MessageRunPassEnded(
+    recipients: recipients,
+    opensNextChatOnReturn: opensNextChatOnReturn,
+  );
 }
 
-final class MessageRunFinished extends MessageRunLoaded {
-  final bool isStopped;
+final class MessageRunPassEnded extends MessageRunLoaded {
+  bool get hasRemaining => remaining.isNotEmpty;
 
-  @override
-  List<Object?> get props => [...super.props, isStopped];
+  Iterable<Recipient> get notSentOrOpenFailed => recipients.where(
+    (recipient) => switch (recipient.status) {
+      RecipientStatus.notSent || RecipientStatus.openFailed => true,
+      RecipientStatus.pending ||
+      RecipientStatus.sent ||
+      RecipientStatus.skipped => false,
+    },
+  );
 
-  const MessageRunFinished({
+  const MessageRunPassEnded({
     required super.recipients,
-    this.isStopped = false,
+    required super.opensNextChatOnReturn,
   });
+
+  MessageRunPassEnded withNotSentIfSent(Person person) => MessageRunPassEnded(
+    recipients: recipientsWithNotSentIfSent(person),
+    opensNextChatOnReturn: opensNextChatOnReturn,
+  );
 }

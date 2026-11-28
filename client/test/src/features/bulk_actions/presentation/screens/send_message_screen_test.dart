@@ -3,14 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../fakes/fake_box.dart';
-import '../../../../fakes/fake_logging_service.dart';
-import '../../../../fakes/fake_persons_dao.dart';
-import '../../../../fakes/mock_auth_bloc.dart';
-import '../../../../fakes/mock_database_service.dart';
-import '../../../../fakes/mock_launcher_service.dart';
-import '../../../../fakes/recording_analytics_provider.dart';
-import '../../../../utils.dart';
+import 'send_message_screen_harness.dart';
 
 void main() {
   const markPhone = PhoneContact(id: 'c2', phone: '01000000002');
@@ -24,62 +17,14 @@ void main() {
     PersonMessageFields.firstName,
   );
 
-  late MockLauncherService launcher;
-  late UserPreferencesService userPreferences;
+  late SendMessageScreenHarness harness;
 
-  setUp(() {
-    launcher = MockLauncherService();
-    when(
-      () => launcher.launchWhatsappChat(any(), text: any(named: 'text')),
-    ).thenAnswer((_) async => true);
-    final database = MockDatabaseService();
-    when(() => database.persons).thenReturn(
-      FakePersonsDAO()
-        ..personsWithPhoneContacts = [
-          mark.copyWith(contacts: [markPhone]),
-          mina.copyWith(contacts: [minaPhone]),
-          john.copyWith(contacts: [johnPhone]),
-          peterWithoutPhone,
-        ],
-    );
-
-    userPreferences = UserPreferencesService(
-      box: FakeSyncKVStore(),
-      databaseService: database,
-      authBloc: MockAuthBloc(),
-    );
-
-    initGlobalProviderContainer([
-      databaseServiceProvider.overrideWithValue(database),
-      userPreferencesServiceProvider.overrideWithValue(userPreferences),
-      launcherServiceProvider.overrideWithValue(launcher),
-      loggingServiceProvider.overrideWithValue(FakeLoggingService()),
-      analyticsServiceProvider.overrideWithValue(
-        AnalyticsService([RecordingAnalyticsProvider()], FakeLoggingService()),
-      ),
-    ]);
-  });
-
-  tearDown(defaultTearDown);
+  setUp(() => harness = SendMessageScreenHarness()..install());
 
   Future<void> pumpScreen(
     WidgetTester tester, {
     required Set<Person> persons,
-  }) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        theme: ThemingService.getDefault(
-          isDarkOverride: false,
-          greatFeastThemeOverride: false,
-        ),
-        home: SendMessageScreen(
-          persons: persons,
-          action: const SendWhatsappMessageBulkAction(),
-        ),
-      ),
-    );
-    await tester.pumpAndSettle();
-  }
+  }) => harness.open(tester, persons: persons);
 
   Future<void> startAndOpenFirstChat(WidgetTester tester) async {
     await tester.ensureVisible(
@@ -94,6 +39,11 @@ void main() {
   testWidgets(
     'the preview fills the template for the first selected person with a phone',
     (tester) async {
+      harness.personsDAO.personsWithPhoneContacts = [
+        peterWithoutPhone,
+        mina.copyWith(contacts: [minaPhone]),
+        mark.copyWith(contacts: [markPhone]),
+      ];
       await pumpScreen(tester, persons: {peterWithoutPhone, mina, mark});
 
       expect(
@@ -107,7 +57,11 @@ void main() {
     tester,
   ) async {
     final lastText = 'اهلا $firstNameToken';
-    await userPreferences.setLastWhatsappMessageText(lastText);
+    await harness.userPreferences.setLastWhatsappMessageText(lastText);
+    harness.personsDAO.personsWithPhoneContacts = [
+      mina.copyWith(contacts: [minaPhone]),
+      mark.copyWith(contacts: [markPhone]),
+    ];
 
     await pumpScreen(tester, persons: {mina, mark});
 
@@ -132,6 +86,10 @@ void main() {
   });
 
   testWidgets('the preview follows edits to the template', (tester) async {
+    harness.personsDAO.personsWithPhoneContacts = [
+      mina.copyWith(contacts: [minaPhone]),
+      mark.copyWith(contacts: [markPhone]),
+    ];
     await pumpScreen(tester, persons: {mina, mark});
 
     await tester.enterText(
@@ -150,6 +108,10 @@ void main() {
     tester,
   ) async {
     final editedText = 'اهلا $firstNameToken';
+    harness.personsDAO.personsWithPhoneContacts = [
+      mina.copyWith(contacts: [minaPhone]),
+      mark.copyWith(contacts: [markPhone]),
+    ];
     await pumpScreen(tester, persons: {mina, mark});
     await tester.enterText(
       find.byKey(MessageTemplateFieldKeys.textField),
@@ -160,7 +122,7 @@ void main() {
     await startAndOpenFirstChat(tester);
 
     verify(
-      () => launcher.launchWhatsappChat(
+      () => harness.launcher.launchWhatsappChat(
         PhoneNumberService.I.formatInternational(minaPhone.phone),
         text: MessageTemplate(
           text: editedText,
@@ -171,6 +133,11 @@ void main() {
   });
 
   testWidgets('an opened chat cannot be skipped', (tester) async {
+    harness.personsDAO.personsWithPhoneContacts = [
+      mina.copyWith(contacts: [minaPhone]),
+      mark.copyWith(contacts: [markPhone]),
+      peterWithoutPhone,
+    ];
     await pumpScreen(tester, persons: {mina, mark, peterWithoutPhone});
     await startAndOpenFirstChat(tester);
 
@@ -185,6 +152,11 @@ void main() {
   testWidgets('returning to the app after a chat shows the next person', (
     tester,
   ) async {
+    harness.personsDAO.personsWithPhoneContacts = [
+      mina.copyWith(contacts: [minaPhone]),
+      mark.copyWith(contacts: [markPhone]),
+      peterWithoutPhone,
+    ];
     await pumpScreen(tester, persons: {mina, mark, peterWithoutPhone});
     await startAndOpenFirstChat(tester);
 
@@ -206,6 +178,11 @@ void main() {
   testWidgets('a dialog over the app does not count as returning from a chat', (
     tester,
   ) async {
+    harness.personsDAO.personsWithPhoneContacts = [
+      mina.copyWith(contacts: [minaPhone]),
+      mark.copyWith(contacts: [markPhone]),
+      peterWithoutPhone,
+    ];
     await pumpScreen(tester, persons: {mina, mark, peterWithoutPhone});
     await startAndOpenFirstChat(tester);
 
@@ -221,6 +198,11 @@ void main() {
   });
 
   testWidgets('an empty message cannot be started', (tester) async {
+    harness.personsDAO.personsWithPhoneContacts = [
+      mina.copyWith(contacts: [minaPhone]),
+      mark.copyWith(contacts: [markPhone]),
+      peterWithoutPhone,
+    ];
     await pumpScreen(tester, persons: {mina, mark, peterWithoutPhone});
 
     await tester.enterText(find.byKey(MessageTemplateFieldKeys.textField), ' ');
@@ -244,11 +226,16 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('the summary counts the opened and skipped chats', (
+  testWidgets('the summary counts the sent and skipped people', (
     tester,
   ) async {
-    const openedCount = 2;
+    const sentCount = 2;
     const skippedCount = 1;
+    harness.personsDAO.personsWithPhoneContacts = [
+      mina.copyWith(contacts: [minaPhone]),
+      mark.copyWith(contacts: [markPhone]),
+      john.copyWith(contacts: [johnPhone]),
+    ];
     await pumpScreen(tester, persons: {mina, mark, john});
 
     await startAndOpenFirstChat(tester);
@@ -261,18 +248,27 @@ void main() {
     await tester.tap(find.byKey(MessageQueueViewKeys.skipButton));
     await tester.pumpAndSettle();
 
-    final counts = tester
-        .widget<Text>(find.byKey(MessageSummaryViewKeys.counts))
-        .data;
     expect(
-      RegExp(r'\d+').allMatches(counts ?? '').map((match) => match[0]),
-      ['$openedCount', '$skippedCount'],
+      [
+        MessageSummaryViewKeys.sentTitle,
+        MessageSummaryViewKeys.skippedTitle,
+      ].map(
+        (key) => RegExp(
+          r'\d+',
+        ).firstMatch(tester.widget<Text>(find.byKey(key)).data ?? '')?[0],
+      ),
+      ['$sentCount', '$skippedCount'],
     );
   });
 
   testWidgets('the summary lists the people who have no phone', (
     tester,
   ) async {
+    harness.personsDAO.personsWithPhoneContacts = [
+      mina.copyWith(contacts: [minaPhone]),
+      mark.copyWith(contacts: [markPhone]),
+      peterWithoutPhone,
+    ];
     await pumpScreen(tester, persons: {mina, mark, peterWithoutPhone});
 
     await openFirstChatThenSkipTheNext(tester);
@@ -284,4 +280,36 @@ void main() {
       findsOneWidget,
     );
   });
+
+  testWidgets(
+    'tapping a person without a phone in the summary opens that person',
+    (tester) async {
+      harness.personsDAO.personsWithPhoneContacts = [
+        mina.copyWith(contacts: [minaPhone]),
+        mark.copyWith(contacts: [markPhone]),
+        peterWithoutPhone,
+      ];
+      await pumpScreen(tester, persons: {mina, mark, peterWithoutPhone});
+      await openFirstChatThenSkipTheNext(tester);
+
+      await tester.tap(
+        find.byKey(MessageSummaryViewKeys.withoutPhoneFor(peterWithoutPhone)),
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        find
+            .byKey(
+              SendMessageScreenHarnessKeys.pageFor(
+                ViewPersonRoute(
+                  id: peterWithoutPhone.id,
+                  person: peterWithoutPhone,
+                ),
+              ),
+            )
+            .hitTestable(),
+        findsOneWidget,
+      );
+    },
+  );
 }

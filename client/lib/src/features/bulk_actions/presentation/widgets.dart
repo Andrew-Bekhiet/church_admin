@@ -2,6 +2,7 @@ export 'widgets/list_selection_bar.dart';
 export 'widgets/message_bubble.dart';
 export 'widgets/message_compose_view.dart';
 export 'widgets/message_queue_view.dart';
+export 'widgets/message_summary_group.dart';
 export 'widgets/message_summary_view.dart';
 export 'widgets/opens_next_chat_on_return_checkbox_tile.dart';
 export 'widgets/selection_aware_app_bar.dart';

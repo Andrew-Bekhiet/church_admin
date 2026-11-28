@@ -9,98 +9,158 @@ void main() {
   final mark = MessageRunCubitFixture.mark;
   final peter = MessageRunCubitFixture.peter;
   const minaPhone = MessageRunCubitFixture.minaPhone;
+  const minaOtherPhone = MessageRunCubitFixture.minaOtherPhone;
   const markPhone = MessageRunCubitFixture.markPhone;
 
   late MessageRunCubitFixture fixture;
 
   setUp(() => fixture = MessageRunCubitFixture());
 
-  List<Recipient> markMinaAndPeterWithoutPhone() => [
-    fixture.recipientOf(mark, [markPhone]),
-    fixture.recipientOf(mina, [minaPhone]),
-    fixture.recipientOf(peter, []),
-  ];
-
-  Json trackedRunFinish() => fixture.analytics
-      .trackedEventsOf<BulkWhatsappRunFinish>()
-      .single
-      .properties;
+  Iterable<BulkMessageRunFinish> trackedRunFinishes() =>
+      fixture.analytics.trackedEventsOf<BulkMessageRunFinish>();
 
   blocTest<MessageRunCubit, MessageRunState>(
-    'after the last person with a phone the run finishes with each outcome',
+    'after the last person with a phone the pass ends with each outcome',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(recipients: markMinaAndPeterWithoutPhone()),
+    seed: () => fixture.sendingTemplateTo(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, []),
+      ],
+    ),
     act: (cubit) async {
       await cubit.openCurrentChat();
-      await cubit.showNextAndMaybeOpenItsChat();
-      cubit.skipCurrent();
+      cubit
+        ..returnFromChat()
+        ..skipCurrent();
     },
     verify: (cubit) {
-      final finished = cubit.state as MessageRunFinished;
-      expect(finished.recipients.map((recipient) => recipient.status), [
+      final passEnded = cubit.state as MessageRunPassEnded;
+      expect(passEnded.recipients.map((recipient) => recipient.status), [
         RecipientStatus.sent,
         RecipientStatus.skipped,
         RecipientStatus.pending,
       ]);
-      expect(finished.isStopped, isFalse);
+      expect(passEnded.hasRemaining, isFalse);
     },
   );
 
   blocTest<MessageRunCubit, MessageRunState>(
-    'a run that reaches its end is tracked as not stopped',
+    'stopping ends the pass early',
     build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(recipients: markMinaAndPeterWithoutPhone()),
-    act: (cubit) async {
-      await cubit.openCurrentChat();
-      await cubit.showNextAndMaybeOpenItsChat();
-      cubit.skipCurrent();
-    },
-    verify: (_) => expect(trackedRunFinish(), {
-      'recipient_count': 3,
-      'opened_count': 1,
-      'skipped_count': 1,
-      'without_phone_count': 1,
-      'opens_next_chat_on_return': false,
-      'is_stopped': false,
-    }),
-  );
-
-  blocTest<MessageRunCubit, MessageRunState>(
-    'stopping finishes the run early',
-    build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(recipients: markMinaAndPeterWithoutPhone()),
-    act: (cubit) => cubit.stop(),
-    verify: (cubit) =>
-        expect((cubit.state as MessageRunFinished).isStopped, isTrue),
-  );
-
-  blocTest<MessageRunCubit, MessageRunState>(
-    'a stopped run is tracked with how far it got',
-    build: () => fixture.buildCubit(),
-    seed: () => fixture.sendingTo(
+    seed: () => fixture.sendingTemplateTo(
       recipients: [
         fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, []),
+      ],
+    ),
+    act: (cubit) => cubit.stop(),
+    verify: (cubit) =>
+        expect((cubit.state as MessageRunPassEnded).hasRemaining, isTrue),
+  );
+
+  blocTest<MessageRunCubit, MessageRunState>(
+    'leaving tracks the run once',
+    build: () => fixture.buildCubit(),
+    seed: () => MessageRunComposing(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, []),
+      ],
+      opensNextChatOnReturn: false,
+    ),
+    act: (cubit) async {
+      cubit
+        ..saveTextAndStart(fixture.template)
+        ..stop();
+      await cubit.close();
+    },
+    verify: (_) => expect(trackedRunFinishes(), hasLength(1)),
+  );
+
+  blocTest<MessageRunCubit, MessageRunState>(
+    'leaving in the middle of a pass tracks who was sent and who remained',
+    build: () => fixture.buildCubit(),
+    seed: () => MessageRunComposing(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, [minaOtherPhone]),
+      ],
+      opensNextChatOnReturn: false,
+    ),
+    act: (cubit) async {
+      cubit.saveTextAndStart(fixture.template);
+      await cubit.openCurrentChat();
+      await cubit.close();
+    },
+    verify: (_) {
+      final properties = trackedRunFinishes().single.properties;
+      expect(properties['sent_count'], 1);
+      expect(properties['remaining_count'], 2);
+    },
+  );
+
+  blocTest<MessageRunCubit, MessageRunState>(
+    'leaving a resumed run tracks both passes',
+    build: () => fixture.buildCubit(),
+    seed: () => MessageRunComposing(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, []),
+      ],
+      opensNextChatOnReturn: false,
+    ),
+    act: (cubit) async {
+      cubit
+        ..saveTextAndStart(fixture.template)
+        ..stop()
+        ..resume();
+      await cubit.close();
+    },
+    verify: (_) =>
+        expect(trackedRunFinishes().single.properties['pass_count'], 2),
+  );
+
+  blocTest<MessageRunCubit, MessageRunState>(
+    'leaving tracks that the next chat opened on return',
+    build: () => fixture.buildCubit(),
+    seed: () => MessageRunComposing(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
         fixture.recipientOf(peter, []),
       ],
       opensNextChatOnReturn: true,
     ),
     act: (cubit) async {
-      await cubit.openCurrentChat();
-      cubit.stop();
+      cubit
+        ..saveTextAndStart(fixture.template)
+        ..stop();
+      await cubit.close();
     },
-    verify: (_) {
-      expect(
-        fixture.analytics.trackedEventsOf<BulkWhatsappRunFinish>().single.name,
-        'bulk_whatsapp:run_finish',
-      );
-      expect(trackedRunFinish(), {
-        'recipient_count': 2,
-        'opened_count': 1,
-        'skipped_count': 0,
-        'without_phone_count': 1,
-        'opens_next_chat_on_return': true,
-        'is_stopped': true,
-      });
-    },
+    verify: (_) => expect(
+      trackedRunFinishes().single.properties['opens_next_chat_on_return'],
+      isTrue,
+    ),
+  );
+
+  blocTest<MessageRunCubit, MessageRunState>(
+    'leaving before sending starts tracks no run',
+    build: () => fixture.buildCubit(),
+    seed: () => MessageRunComposing(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+        fixture.recipientOf(peter, []),
+      ],
+      opensNextChatOnReturn: false,
+    ),
+    act: (cubit) => cubit.close(),
+    verify: (_) => expect(trackedRunFinishes(), isEmpty),
   );
 }

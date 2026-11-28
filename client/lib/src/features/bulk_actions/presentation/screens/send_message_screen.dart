@@ -49,7 +49,8 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
     super.initState();
 
     _appLifecycleListener = AppLifecycleListener(
-      onShow: () => unawaited(_cubit.showNextAndMaybeOpenItsChat()),
+      onShow: _cubit.returnFromChat,
+      onHide: _cubit.cancelNextChatCountdown,
     );
     unawaited(_cubit.load());
   }
@@ -88,10 +89,20 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
             final MessageRunSending sending => MessageQueueView(
               state: sending,
               channelIcon: widget.action.icon,
+              onMarkNotSent: _cubit.markNotSentIfSent,
+              onCancelNextChatCountdown: _cubit.cancelNextChatCountdown,
+              onSelectPhone: _cubit.selectPhone,
+              onEditMessage: _cubit.editCurrentMessageUnlessChatOpened,
+              onStop: _cubit.stop,
+              onSkip: _cubit.skipCurrent,
+              onOpenChat: () => unawaited(_cubit.openCurrentChat()),
+              onReturnFromChat: _cubit.returnFromChat,
             ),
 
-            final MessageRunFinished finished => MessageSummaryView(
-              state: finished,
+            final MessageRunPassEnded passEnded => MessageSummaryView(
+              state: passEnded,
+              onResume: _cubit.resume,
+              onMarkNotSent: _cubit.markNotSentIfSent,
             ),
           },
         ),

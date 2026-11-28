@@ -13,6 +13,13 @@ class _RejectingWritesBox extends FakeSyncKVStore<Object?> {
 }
 
 void main() {
+  final mina = MessageRunCubitFixture.mina;
+  final mark = MessageRunCubitFixture.mark;
+  const minaPhone = MessageRunCubitFixture.minaPhone;
+  const minaOtherPhone = MessageRunCubitFixture.minaOtherPhone;
+  const markPhone = MessageRunCubitFixture.markPhone;
+  const textSavedAfterStarting = 'مساء الخير';
+
   late MessageRunCubitFixture fixture;
 
   setUp(() => fixture = MessageRunCubitFixture());
@@ -20,12 +27,42 @@ void main() {
   blocTest<MessageRunCubit, MessageRunState>(
     'starting saves the message for the next time',
     build: () => fixture.buildCubit(),
-    seed: () =>
-        MessageRunComposing(recipients: fixture.markThenMinaWithTwoPhones()),
+    seed: () => MessageRunComposing(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
+      opensNextChatOnReturn: false,
+    ),
     act: (cubit) => cubit.saveTextAndStart(fixture.template),
     verify: (_) => expect(
       fixture.userPreferences.lastWhatsappMessageText,
       fixture.template.text,
+    ),
+  );
+
+  blocTest<MessageRunCubit, MessageRunState>(
+    'resuming does not save the message again',
+    build: () => fixture.buildCubit(),
+    seed: () => MessageRunComposing(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone]),
+      ],
+      opensNextChatOnReturn: false,
+    ),
+    act: (cubit) async {
+      cubit.saveTextAndStart(fixture.template);
+      await fixture.userPreferences.setLastWhatsappMessageText(
+        textSavedAfterStarting,
+      );
+      cubit
+        ..stop()
+        ..resume();
+    },
+    verify: (_) => expect(
+      fixture.userPreferences.lastWhatsappMessageText,
+      textSavedAfterStarting,
     ),
   );
 
@@ -35,8 +72,13 @@ void main() {
       preferencesBox: _RejectingWritesBox(),
     ),
     build: () => fixture.buildCubit(),
-    seed: () =>
-        MessageRunComposing(recipients: fixture.markThenMinaWithTwoPhones()),
+    seed: () => MessageRunComposing(
+      recipients: [
+        fixture.recipientOf(mark, [markPhone]),
+        fixture.recipientOf(mina, [minaPhone, minaOtherPhone]),
+      ],
+      opensNextChatOnReturn: false,
+    ),
     act: (cubit) => cubit.saveTextAndStart(fixture.template),
     wait: Duration.zero,
     verify: (cubit) {
